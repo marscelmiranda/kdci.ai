@@ -1,0 +1,5 @@
+
+/* 
+  All styles have been migrated to the Tailwind configuration and custom CSS block in index.html.
+  This ensures compatibility with the runtime Tailwind CDN engine without requiring a build step.
+*/
