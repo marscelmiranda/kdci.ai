@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { 
-  LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, 
-  Image as ImageIcon, Bell, Search, Plus, LogOut, Settings,
-  ChevronLeft, Edit2, Trash2, Eye, Save, X, Calendar, User, Clock, Check,
-  ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2,
-  Quote, AppWindow, Minus, ExternalLink, Activity
+  ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
+  Save, Eye, Check, ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2, Quote, AppWindow, Minus, ExternalLink, Activity, User
 } from 'lucide-react';
 
-interface BlogPost {
+interface Resource {
   id: string;
   title: string;
-  category: string;
+  type: 'ebooks' | 'cases' | 'webinars';
   author: string;
   status: 'Published' | 'Draft' | 'Archived';
   date: string;
@@ -28,14 +25,16 @@ interface Block {
   content: any;
 }
 
-const MOCK_POSTS: BlogPost[] = [
-  { id: '1', title: "Why the Philippines is the New Epicenter for AI Engineering", category: "Engineering", author: "Sarah Chen", status: 'Published', date: 'Oct 12, 2024', views: 2450 },
-  { id: '2', title: "Scaling to 500+ Agents: A Case Study in Fintech Support", category: "Case Studies", author: "Michael Ross", status: 'Published', date: 'Sep 28, 2024', views: 1890 },
+const MOCK_RESOURCES: Resource[] = [
+  { id: '1', title: "The 2024 AI Engineering Handbook", type: "ebooks", author: "Sarah Chen", status: 'Published', date: 'Oct 15, 2024', views: 1250 },
+  { id: '2', title: "Fintech Support Scaling: 0 to 500+", type: "cases", author: "Michael Ross", status: 'Published', date: 'Sep 20, 2024', views: 890 },
+  { id: '3', title: "Future of Customer Ops (Live Session)", type: "webinars", author: "KDCI Events", status: 'Draft', date: '-', views: 0 },
 ];
 
-export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [activeTab, setActiveTab] = useState<'ebooks' | 'cases' | 'webinars'>('ebooks');
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
-  const [posts, setPosts] = useState<BlogPost[]>(MOCK_POSTS);
+  const [resources, setResources] = useState<Resource[]>(MOCK_RESOURCES);
   const [editingId, setEditingId] = useState<string | null>(null);
   
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
@@ -43,9 +42,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
-    category: 'AI Operations',
+    type: 'ebooks',
     author: '',
-    readTime: '5 min read',
+    readTime: '10 min',
+    resourceUrl: '', // Additional field for download link or webinar link
     tags: '',
     featured: false,
     imageUrl: '',
@@ -86,20 +86,20 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const handleCreateNew = () => {
     setEditingId(null);
     setFormData({
-      title: '', slug: '', category: 'AI Operations', author: '', readTime: '5 min read', tags: '', featured: false, imageUrl: '', status: 'Draft',
+      title: '', slug: '', type: activeTab, author: '', readTime: '', resourceUrl: '', tags: '', featured: false, imageUrl: '', status: 'Draft',
       blocks: [], metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
     });
     setViewState('editor');
     setEditorTab('content');
   };
 
-  const handleEdit = (post: BlogPost) => {
-    setEditingId(post.id);
+  const handleEdit = (resource: Resource) => {
+    setEditingId(resource.id);
     setFormData({
-      title: post.title, slug: post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
-      category: post.category, author: post.author, readTime: '5 min read', tags: '', featured: false, imageUrl: '', status: post.status,
+      title: resource.title, slug: resource.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
+      type: resource.type, author: resource.author, readTime: '', resourceUrl: '', tags: '', featured: false, imageUrl: '', status: resource.status,
       blocks: [{ id: '1', type: 'rich_text', isCollapsed: false, content: { text: "Sample content..." } }], 
-      metaTitle: post.title, metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
+      metaTitle: resource.title, metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
     });
     setViewState('editor');
     setEditorTab('content');
@@ -110,21 +110,21 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     
     if (editingId) {
-      setPosts(prev => prev.map(p => p.id === editingId ? { 
-        ...p, title: formData.title, category: formData.category, author: formData.author, status: formData.status as any,
+      setResources(prev => prev.map(p => p.id === editingId ? { 
+        ...p, title: formData.title, type: formData.type as any, author: formData.author, status: formData.status as any,
         date: formData.status === 'Published' && p.status !== 'Published' ? currentDate : p.date
       } : p));
     } else {
-      const newPost: BlogPost = {
-        id: Math.random().toString(36).substr(2, 9), title: formData.title, category: formData.category, author: formData.author, status: formData.status as any, date: formData.status === 'Published' ? currentDate : '-', views: 0
+      const newResource: Resource = {
+        id: Math.random().toString(36).substr(2, 9), title: formData.title, type: formData.type as any, author: formData.author, status: formData.status as any, date: formData.status === 'Published' ? currentDate : '-', views: 0
       };
-      setPosts([newPost, ...posts]);
+      setResources([newResource, ...resources]);
     }
     setViewState('list');
   };
 
   const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this article?")) setPosts(prev => prev.filter(p => p.id !== id));
+    if (confirm("Are you sure you want to delete this resource?")) setResources(prev => prev.filter(p => p.id !== id));
   };
 
   const handleNavClick = (id: string) => {
@@ -287,6 +287,8 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const titleColor = formData.metaTitle.length === 0 ? 'text-white/40' : formData.metaTitle.length <= 60 ? 'text-green-500' : 'text-red-500';
   const descColor = formData.metaDescription.length === 0 ? 'text-white/40' : formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160 ? 'text-green-500' : formData.metaDescription.length < 120 ? 'text-yellow-500' : 'text-red-500';
 
+  const filteredResources = resources.filter(r => r.type === activeTab);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
       
@@ -311,7 +313,9 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               key={item.id}
               onClick={() => handleNavClick(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                item.id === 'blog' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white hover:bg-white/5'
+                item.id === 'resources' 
+                  ? 'bg-white/10 text-white shadow-sm' 
+                  : 'text-white/40 hover:text-white hover:bg-white/5'
               }`}
             >
               <item.icon size={18} />
@@ -324,7 +328,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-white/40 hover:text-white hover:bg-white/5 transition-all mb-2">
             <Settings size={18} /> Settings
           </button>
-          <button onClick={() => setView('home')} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all">
+          <button 
+            onClick={() => setView('home')} 
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
+          >
             <LogOut size={18} /> Sign Out
           </button>
         </div>
@@ -342,51 +349,80 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                   <ChevronLeft size={10} className="rotate-180" />
                   <span className="text-[#E61739]">Content Ops</span>
                 </div>
-                <h1 className="text-3xl font-heading font-bold text-white">Blogs & Insights</h1>
+                <h1 className="text-3xl font-heading font-bold text-white">Resources Library</h1>
               </div>
               <button onClick={handleCreateNew} className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
-                <Plus size={16} /> Write Article
+                <Plus size={16} /> Create Resource
               </button>
+            </div>
+
+            {/* Tab Navigation */}
+            <div className="flex gap-4 mb-8 border-b border-white/5">
+              {[
+                { id: 'ebooks', label: 'Ebooks', icon: BookOpen },
+                { id: 'cases', label: 'Case Studies', icon: TrendingUp },
+                { id: 'webinars', label: 'Webinars', icon: Presentation },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`flex items-center gap-2 px-6 py-4 text-sm font-bold border-b-2 transition-all ${
+                    activeTab === tab.id
+                      ? 'border-[#E61739] text-[#E61739]'
+                      : 'border-transparent text-white/40 hover:text-white/80'
+                  }`}
+                >
+                  <tab.icon size={18} />
+                  {tab.label}
+                </button>
+              ))}
             </div>
 
             <div className="flex items-center gap-4 mb-8">
               <div className="relative flex-grow max-w-md">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="text" placeholder="Search articles by title or author..." className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
+                <input type="text" placeholder={`Search ${activeTab}...`} className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
               </div>
             </div>
 
             <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
-                    <th className="px-8 py-5">Article Title</th>
-                    <th className="px-8 py-5">Category</th>
-                    <th className="px-8 py-5">Author</th>
-                    <th className="px-8 py-5">Status</th>
-                    <th className="px-8 py-5">Published</th>
-                    <th className="px-8 py-5 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {posts.map((post) => (
-                    <tr key={post.id} className="hover:bg-white/5 transition-colors group">
-                      <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{post.title}</div></td>
-                      <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{post.category}</span></td>
-                      <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" /> {post.author}</div></td>
-                      <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${post.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : post.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{post.status}</span></td>
-                      <td className="px-8 py-5 text-sm text-white/40 font-mono">{post.date}</td>
-                      <td className="px-8 py-5 text-right">
-                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white" title="View"><Eye size={16} /></button>
-                          <button onClick={() => handleEdit(post)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
-                          <button onClick={() => handleDelete(post.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
-                        </div>
-                      </td>
+              {filteredResources.length > 0 ? (
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
+                      <th className="px-8 py-5">Title</th>
+                      <th className="px-8 py-5">Author</th>
+                      <th className="px-8 py-5">Status</th>
+                      <th className="px-8 py-5">Published</th>
+                      <th className="px-8 py-5 text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {filteredResources.map((resource) => (
+                      <tr key={resource.id} className="hover:bg-white/5 transition-colors group">
+                        <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{resource.title}</div></td>
+                        <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" /> {resource.author}</div></td>
+                        <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${resource.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : resource.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{resource.status}</span></td>
+                        <td className="px-8 py-5 text-sm text-white/40 font-mono">{resource.date}</td>
+                        <td className="px-8 py-5 text-right">
+                          <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={() => handleEdit(resource)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
+                            <button onClick={() => handleDelete(resource.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-center py-20 px-4">
+                  <h2 className="text-xl font-bold text-white mb-2">No {activeTab} defined yet!</h2>
+                  <p className="text-white/40 mb-6 text-sm">Publishing options for {activeTab} will appear here.</p>
+                  <button onClick={handleCreateNew} className="px-4 py-2 border border-white/10 rounded-lg text-sm font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
+                    Create your first entry
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -398,7 +434,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                <div className="flex items-center gap-4">
                  <button type="button" onClick={() => setViewState('list')} className="p-2 text-white/40 hover:text-white hover:bg-white/5 rounded-lg"><ChevronLeft size={20} /></button>
                  <div className="px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-sm text-white/70 font-mono min-w-[200px] truncate">
-                   {formData.title || 'Untitled Article'}
+                   {formData.title || 'Untitled Resource'}
                  </div>
                  <div className="flex gap-2">
                    {['content', 'seo', 'hubspot'].map((tab) => (
@@ -429,7 +465,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                      {editorTab === 'content' && (
                         <div className="space-y-8">
                            <div className="space-y-2">
-                              <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Article Headline</label>
+                              <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Resource Headline</label>
                               <input 
                                 required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})}
                                 placeholder="Enter an engaging title..." 
@@ -498,7 +534,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                            <div className="bg-white rounded-2xl p-6 text-black border border-gray-200">
                              <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2"><ExternalLink size={14}/> Live Google SERP Preview</div>
                              <div className="space-y-1">
-                               <div className="text-sm text-gray-800">https://kdci.co/blog/{formData.slug || 'your-url-slug'}</div>
+                               <div className="text-sm text-gray-800">https://kdci.co/resources/{formData.slug || 'your-url-slug'}</div>
                                <h3 className="text-xl text-[#1a0dab] font-sans hover:underline cursor-pointer break-words">{formData.metaTitle || formData.title || 'Your Meta Title Will Appear Here'}</h3>
                                <p className="text-sm text-[#4d5156] leading-snug break-words">{formData.metaDescription || 'Your meta description will appear here. Make it compelling and between 120-160 characters.'}</p>
                              </div>
@@ -575,7 +611,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                                <div className="space-y-4">
                                   <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Custom Event Name (_hsq.push)</label>
-                                    <input type="text" value={formData.hubspotEventName} onChange={e => setFormData({...formData, hubspotEventName: e.target.value})} placeholder="e.g. read_agile_article_cta_click" className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
+                                    <input type="text" value={formData.hubspotEventName} onChange={e => setFormData({...formData, hubspotEventName: e.target.value})} placeholder="e.g. download_ebook_cta_click" className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
                                   </div>
                                   <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">HubSpot Form GUID (Triggered via CTA)</label>
@@ -607,7 +643,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                                   <div className="p-4 bg-black/40 rounded-xl border border-white/10">
                                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">Live Generated URL</div>
                                     <div className="text-xs font-mono text-green-400 break-all">
-                                      https://kdci.co/blog/{formData.slug || 'slug'}?utm_source={formData.utmSource}&utm_medium={formData.utmMedium}&utm_campaign={formData.utmCampaign}
+                                      https://kdci.co/resources/{formData.slug || 'slug'}?utm_source={formData.utmSource}&utm_medium={formData.utmMedium}&utm_campaign={formData.utmCampaign}
                                     </div>
                                   </div>
                                </div>
@@ -624,30 +660,32 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                   <div className="p-6 space-y-8">
                     {/* Post Settings */}
                     <div className="space-y-4">
-                      <h4 className="text-xs font-black uppercase tracking-widest text-white/40 mb-4 border-b border-white/5 pb-2">Post Details</h4>
+                      <h4 className="text-xs font-black uppercase tracking-widest text-white/40 mb-4 border-b border-white/5 pb-2">Resource Details</h4>
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-white/40 ml-1">URL Slug</label>
                         <input type="text" value={formData.slug} onChange={e => setFormData({...formData, slug: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-white/40 ml-1">Author</label>
+                        <label className="text-[10px] font-bold text-white/40 ml-1">Author / Host</label>
                         <input type="text" value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-white/40 ml-1">Category</label>
-                        <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white">
-                           <option>AI Operations</option>
-                           <option>Engineering</option>
-                           <option>Case Studies</option>
+                        <label className="text-[10px] font-bold text-white/40 ml-1">Type</label>
+                        <select value={formData.type} onChange={e => setFormData({...formData, type: e.target.value as any})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white">
+                           <option value="ebooks">Ebooks</option>
+                           <option value="cases">Case Studies</option>
+                           <option value="webinars">Webinars</option>
                         </select>
                       </div>
+                      
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-white/40 ml-1">Resource Link / Download URL</label>
+                        <input type="text" value={formData.resourceUrl} onChange={e => setFormData({...formData, resourceUrl: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" placeholder="https://..." />
+                      </div>
+
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-white/40 ml-1">Tags (comma separated)</label>
                         <input type="text" value={formData.tags} onChange={e => setFormData({...formData, tags: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-white/40 ml-1">Read Time</label>
-                        <input type="text" value={formData.readTime} onChange={e => setFormData({...formData, readTime: e.target.value})} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" />
                       </div>
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-white/40 ml-1">Cover Image</label>
@@ -656,7 +694,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       </div>
                       <div className="pt-2 flex items-center gap-2">
                         <input type="checkbox" id="featured" checked={formData.featured} onChange={e => setFormData({...formData, featured: e.target.checked})} className="accent-[#E61739]" />
-                        <label htmlFor="featured" className="text-xs font-bold text-white">Mark as Featured Post</label>
+                        <label htmlFor="featured" className="text-xs font-bold text-white">Mark as Featured</label>
                       </div>
                     </div>
 
@@ -700,3 +738,4 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     </div>
   );
 };
+

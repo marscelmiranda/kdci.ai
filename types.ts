@@ -40,6 +40,8 @@ export type ViewType =
   | 'publisher-dashboard'
   | 'cms-career-ops'
   | 'cms-blog-ops'
+  | 'cms-resources-ops'
+  | 'cms-portfolio-ops'
   | 'careers'
   | 'job-prompt-engineer'
   | 'job-full-stack-dev'

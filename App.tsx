@@ -1,5 +1,3 @@
-import { onAuthChange } from './authStore';
-import type { User } from '@supabase/supabase-js';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
@@ -18,6 +16,8 @@ import { LoginPage } from './pages/LoginPage';
 import { PublisherDashboardPage } from './pages/PublisherDashboardPage';
 import { CareerOpsPage } from './pages/CareerOpsPage';
 import { BlogOpsPage } from './pages/BlogOpsPage';
+import { ResourcesOpsPage } from './pages/ResourcesOpsPage';
+import { PortfolioOpsPage } from './pages/PortfolioOpsPage';
 import { CareersPage } from './pages/CareersPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
@@ -67,47 +67,36 @@ import { GlossaryPage } from './pages/GlossaryPage';
 
 const App = () => {
   const [activeView, setView] = useState<ViewType>('home');
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeView]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthChange((user) => {
-      setCurrentUser(user);
-      setAuthLoading(false);
-    });
-    return unsubscribe;
-  }, []);
-
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-[#020202] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#E61739] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
+  // If viewing the login page, render it without Navbar/Footer for a clean auth experience
   if (activeView === 'login') {
     return <LoginPage setView={setView} />;
   }
 
-  if (['publisher-dashboard', 'cms-career-ops', 'cms-blog-ops'].includes(activeView) && !currentUser) {
-    return <LoginPage setView={setView} />;
-  }
-
+  // If viewing the publisher dashboard, also render without public Navbar/Footer
   if (activeView === 'publisher-dashboard') {
     return <PublisherDashboardPage setView={setView} />;
   }
 
+  // CMS Views
   if (activeView === 'cms-career-ops') {
     return <CareerOpsPage setView={setView} />;
   }
-
+  
   if (activeView === 'cms-blog-ops') {
     return <BlogOpsPage setView={setView} />;
+  }
+
+  if (activeView === 'cms-resources-ops') {
+    return <ResourcesOpsPage setView={setView} />;
+  }
+
+  if (activeView === 'cms-portfolio-ops') {
+    return <PortfolioOpsPage setView={setView} />;
   }
 
   return (
