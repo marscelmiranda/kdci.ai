@@ -225,7 +225,7 @@ export async function deleteJob(id: number): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const { data, error } = await supabase
-    .from('blog_posts').select('*').eq('status', 'Published').order('created_at', { ascending: false });
+    .from('blog_posts').select('*').in('status', ['Published', 'published']).order('created_at', { ascending: false });
   if (error || !data?.length) return SEED_BLOG;
   return data;
 }
@@ -258,7 +258,7 @@ export async function deleteBlogPost(id: number): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   const { data, error } = await supabase
-    .from('case_studies').select('*').eq('status', 'published').order('created_at', { ascending: false });
+    .from('case_studies').select('*').in('status', ['published', 'Published']).order('created_at', { ascending: false });
   if (error || !data?.length) return SEED_CASE_STUDIES;
   return data;
 }
@@ -291,7 +291,7 @@ export async function deleteCaseStudy(id: number): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 export async function getEbooks(): Promise<Ebook[]> {
   const { data, error } = await supabase
-    .from('ebooks').select('*').eq('status', 'published').order('created_at', { ascending: false });
+    .from('ebooks').select('*').in('status', ['published', 'Published']).order('created_at', { ascending: false });
   if (error || !data?.length) return SEED_EBOOKS;
   return data;
 }
@@ -324,7 +324,7 @@ export async function deleteEbook(id: number): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 export async function getGuides(): Promise<Guide[]> {
   const { data, error } = await supabase
-    .from('guides').select('*').eq('status', 'published').order('created_at', { ascending: false });
+    .from('guides').select('*').in('status', ['published', 'Published']).order('created_at', { ascending: false });
   if (error || !data?.length) return SEED_GUIDES;
   return data;
 }
@@ -357,7 +357,7 @@ export async function deleteGuide(id: number): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 export async function getWebinars(): Promise<Webinar[]> {
   const { data, error } = await supabase
-    .from('webinars').select('*').eq('status', 'published').order('created_at', { ascending: false });
+    .from('webinars').select('*').in('status', ['published', 'Published']).order('created_at', { ascending: false });
   if (error || !data?.length) return SEED_WEBINARS;
   return data;
 }
