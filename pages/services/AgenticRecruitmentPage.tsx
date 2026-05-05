@@ -42,10 +42,10 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             Full-cycle recruitment from job brief to signed offer — powered by AI tools and expert Philippine sourcers who deliver 3× faster than traditional agencies.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-[2rem] font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
               Request Pricing
             </button>
           </div>
@@ -91,11 +91,11 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-[4rem] overflow-hidden aspect-[4/5] shadow-2xl">
+              <div className="rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
                 <img src={IMG_REC_HERO} alt="Recruitment team at work" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
               </div>
-              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-[2.5rem] shadow-2xl border border-black/5">
+              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
                     <Star size={22} className="text-white" />
@@ -150,7 +150,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 highlight: false,
               },
             ].map((item, i) => (
-              <div key={i} className={`p-10 rounded-[3rem] border transition-all ${item.highlight ? 'bg-[#E61739] border-[#E61739]' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+              <div key={i} className={`p-10 rounded-3xl border transition-all ${item.highlight ? 'bg-[#E61739] border-[#E61739]' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${item.highlight ? 'bg-white/20' : 'bg-white/10'}`}>
                   <item.icon size={28} className="text-white" />
                 </div>
@@ -188,11 +188,11 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-b-[4rem] overflow-hidden shadow-2xl h-full">
+              <div className="rounded-b-3xl overflow-hidden shadow-2xl h-full">
                 <img src={IMG_REC_VETTING} alt="Candidate vetting process" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               </div>
-              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-[2.5rem] shadow-2xl border border-black/5">
+              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
                 <div className="text-3xl font-black text-slate-900 mb-1">3× Faster</div>
                 <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Than traditional recruitment agencies</p>
               </div>
@@ -241,7 +241,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 highlight: false,
               },
             ].map((plan, i) => (
-              <div key={i} className={`p-10 rounded-[3.5rem] relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
+              <div key={i} className={`p-10 rounded-3xl relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
                 {plan.badge && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">
                     {plan.badge}
@@ -267,7 +267,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                     </li>
                   ))}
                 </ul>
-                <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-base transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
+                <button onClick={() => setView('contact')} className={`w-full py-4 rounded-3xl font-bold text-base transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
                   Get a Quote
                 </button>
               </div>
@@ -335,10 +335,10 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
-              <div className="bg-slate-100 rounded-[4rem] aspect-[4/5] overflow-hidden relative shadow-2xl">
+              <div className="bg-slate-100 rounded-3xl aspect-[4/5] overflow-hidden relative shadow-2xl">
                 <img src={IMG_REC_VETTING} alt="Agent vetting" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-[3rem] shadow-2xl border border-white/5">
+                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
                   <div className="text-3xl font-black text-slate-900 mb-1">70%</div>
                   <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Typical OpEx Reduction</p>
                 </div>
@@ -370,7 +370,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
 
       {/* CTA */}
       <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-3xl overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
           <div className="absolute inset-0 z-0">
             <img src={IMG_REC_HERO} alt="Recruitment Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
           </div>
@@ -380,7 +380,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="relative z-10 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Build your <br/><span className="text-shine-red">dream team.</span></h2>
             <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Book a strategy session with our talent leads and get a customized sourcing plan.</p>
-            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
               Book Recruitment Strategy <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
