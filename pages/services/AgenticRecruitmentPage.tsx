@@ -188,7 +188,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-[4rem] overflow-hidden shadow-2xl h-full">
+              <div className="rounded-b-[4rem] overflow-hidden shadow-2xl h-full">
                 <img src={IMG_REC_VETTING} alt="Candidate vetting process" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               </div>
@@ -197,6 +197,71 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Than traditional recruitment agencies</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Simple, Transparent Pricing.</h2>
+            <p className="text-slate-500 text-lg font-medium">Structured for every stage of your hiring needs.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {[
+              {
+                name: "Per Placement",
+                badge: null,
+                tagline: "Per successful hire · No monthly commitment",
+                details: ["No setup fee", "Pay on hire"],
+                features: ["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"],
+                highlight: false,
+              },
+              {
+                name: "RPO Retainer",
+                badge: "Best Value",
+                tagline: "Dedicated recruiter · up to 5 active roles/mo",
+                details: ["Priority sourcing · ATS management", "Setup fee: $1,000 · 3-month minimum"],
+                features: ["Everything in Per Placement", "Dedicated Recruiter", "ATS Management", "Talent Market Reports", "Interview Scheduling & Offer Management"],
+                highlight: true,
+              },
+              {
+                name: "Enterprise RPO",
+                badge: null,
+                tagline: "Full embedded talent function · unlimited roles",
+                details: ["Team of recruiters · employer branding support", "Setup fee: Waived · 6-month minimum"],
+                features: ["Everything in RPO Retainer", "Team of Recruiters", "Employer Branding Support", "Unlimited Active Roles", "Executive & Volume Hiring"],
+                highlight: false,
+              },
+            ].map((plan, i) => (
+              <div key={i} className={`p-10 rounded-[3.5rem] relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
+                {plan.badge && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">
+                    {plan.badge}
+                  </div>
+                )}
+                <h4 className={`text-2xl font-bold mb-3 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
+                <p className={`text-sm font-semibold mb-4 ${plan.highlight ? 'text-white/60' : 'text-slate-500'}`}>{plan.tagline}</p>
+                <div className="mb-6 space-y-1">
+                  {plan.details.map((d, idx) => (
+                    <p key={idx} className={`text-xs font-bold ${plan.highlight ? 'text-white/40' : 'text-slate-400'}`}>{d}</p>
+                  ))}
+                </div>
+                <div className={`border-t mb-6 ${plan.highlight ? 'border-white/10' : 'border-slate-100'}`}></div>
+                <ul className="space-y-3 mb-10">
+                  {plan.features.map((f, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-sm font-bold">
+                      <CheckCircle2 size={15} className="text-[#E61739] shrink-0" />
+                      <span className={plan.highlight ? 'text-white/80' : 'text-slate-600'}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-base transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
+                  Get a Quote
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
