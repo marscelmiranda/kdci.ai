@@ -7,6 +7,7 @@ import {
   Image as ImageIcon, Bell, Search, LogOut,
   ChevronRight, Mail, Phone, Key, Edit3
 } from 'lucide-react';
+import { signOut } from '../authStore';
 
 interface DashboardCardProps {
   title: string;
@@ -135,7 +136,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
 
         <div className="p-4 border-t border-white/5">
           <button 
-            onClick={() => setView('home')} 
+            onClick={async () => { await signOut(); setView('login'); }} 
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
           >
             <LogOut size={18} /> Sign Out

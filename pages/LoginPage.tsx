@@ -2,46 +2,48 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
-import { Lock, Mail, ArrowRight, Loader2, ShieldCheck, ChevronLeft } from 'lucide-react';
+import { Lock, Mail, ArrowRight, Loader2, ShieldCheck, ChevronLeft, AlertCircle } from 'lucide-react';
+import { signIn } from '../authStore';
 
 export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Effect to isolate this page's background style from the global app theme
   useEffect(() => {
-    // Store original body style
     const originalBg = document.body.style.backgroundColor;
-    
-    // Apply dark theme specific to this page
     document.body.style.backgroundColor = '#020202';
-    
-    // Cleanup: Revert to global theme when leaving this page
     return () => {
       document.body.style.backgroundColor = originalBg;
     };
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate login delay
-    setTimeout(() => {
-        setLoading(false);
-        // Redirect to the Publisher Dashboard
-        setView('publisher-dashboard');
-    }, 1500);
+    setError(null);
+
+    const { user, error: authError } = await signIn(email, password);
+
+    if (authError || !user) {
+      setError(authError ?? 'Invalid email or password.');
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+    setView('publisher-dashboard');
   };
 
   return (
     <div className="min-h-screen w-full bg-[#020202] flex items-center justify-center relative overflow-hidden px-6">
-       {/* Background Mesh - Localized to this component */}
        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
           <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[100px] animate-blob-float"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-pink-600/30 rounded-full blur-[100px] animate-blob-float animation-delay-2000"></div>
        </div>
 
        <div className="relative z-10 w-full max-w-md">
-          {/* Card */}
           <div className="bg-white rounded-[2.5rem] p-10 shadow-2xl border border-white/10 animate-in fade-in zoom-in duration-500">
              <div className="text-center mb-10">
                 <div className="flex justify-center mb-6 scale-90">
@@ -51,6 +53,13 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                 <p className="text-slate-500 text-sm mt-2 font-medium">Secure access for KDCI team members.</p>
              </div>
 
+             {error && (
+               <div className="mb-5 flex items-center gap-2.5 bg-red-50 border border-red-200 text-red-700 text-sm font-medium rounded-xl px-4 py-3">
+                 <AlertCircle size={16} className="shrink-0" />
+                 {error}
+               </div>
+             )}
+
              <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-1.5">
                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Work Email</label>
@@ -59,6 +68,8 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                       <input 
                         type="email" 
                         required 
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         placeholder="name@kdci.co" 
                         className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:border-[#E61739] focus:ring-4 focus:ring-[#E61739]/10 transition-all placeholder:text-slate-400"
                       />
@@ -72,6 +83,8 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                       <input 
                         type="password" 
                         required 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         placeholder="••••••••" 
                         className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:border-[#E61739] focus:ring-4 focus:ring-[#E61739]/10 transition-all placeholder:text-slate-400"
                       />
