@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
+import recHeroNew from '@/attached_assets/Gemini_Generated_Image_qc07v9qc07v9qc07_1777971501463.png';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
@@ -64,40 +65,63 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
     <div className="min-h-screen bg-white">
 
       {/* Hero */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-40">
-        <div className="absolute inset-0 z-0">
-          <img src={IMG_REC_HERO} alt="KDCI Recruitment Hub" className="w-full h-full object-cover opacity-20 object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
-        </div>
-        <div className="mesh-container opacity-40">
-          <div className="blob blob-magenta opacity-30"></div>
-          <div className="blob blob-purple opacity-40"></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Smarter, Faster</span><br/>
-            <span className="text-[#E61739]">Recruitment.</span>
-          </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
-            Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
-              Request Pricing
-            </button>
+      <section className="relative bg-[#020202] overflow-hidden min-h-[92vh] flex flex-col">
+        <div className="flex-1 grid lg:grid-cols-2 min-h-[92vh]">
+
+          {/* Left — dark text panel */}
+          <div className="relative z-10 flex flex-col justify-center px-8 md:px-16 pt-36 pb-16 lg:pb-24">
+            <div className="mesh-container opacity-30 pointer-events-none">
+              <div className="blob blob-magenta opacity-20"></div>
+            </div>
+            <div className="relative z-10">
+              <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 mt-4">
+                <Globe2 size={11} /> Global Recruitment Services
+              </div>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 tracking-tight leading-[0.92]">
+                Smarter,<br/>Faster<br/><span className="text-[#E61739]">Recruitment.</span>
+              </h1>
+              <p className="text-white/55 text-base md:text-lg font-medium leading-relaxed mb-10 max-w-md" style={{ textWrap: 'balance' }}>
+                Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button onClick={() => setView('contact')} className="px-10 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group">
+                  Start Hiring <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button onClick={() => setView('contact')} className="px-10 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-base hover:bg-white/10 transition-all">
+                  Request Pricing
+                </button>
+              </div>
+              {/* Inline stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/[0.08]">
+                {[
+                  { val: '5,000+', label: 'Hires Sourced' },
+                  { val: '14 Days', label: 'Avg. Time-to-Fill' },
+                  { val: '70%', label: 'Cost Savings' },
+                  { val: '90-Day', label: 'Guarantee' },
+                ].map((s, i) => (
+                  <div key={i}>
+                    <div className="text-lg md:text-xl font-black text-white">{s.val}</div>
+                    <div className="text-[9px] text-white/30 font-black uppercase tracking-widest mt-0.5">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div><div className="text-xl md:text-2xl font-black">5,000+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Hires Sourced</p></div>
-            <div><div className="text-xl md:text-2xl font-black">14 Days</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Avg. Time-to-Fill</p></div>
-            <div><div className="text-xl md:text-2xl font-black">70%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Typical Cost Savings</p></div>
-            <div><div className="text-xl md:text-2xl font-black">90-Day</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Replacement Guarantee</p></div>
+
+          {/* Right — image panel */}
+          <div className="relative hidden lg:block">
+            <img
+              src={recHeroNew}
+              alt="KDCI Recruitment team presenting to clients"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            {/* Left fade into dark panel */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent"></div>
+            {/* Bottom fade */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-[#020202]/30"></div>
           </div>
+
         </div>
       </section>
 
