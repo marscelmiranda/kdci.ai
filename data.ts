@@ -149,7 +149,7 @@ export const RESOURCES = [
 export const TOP_SERVICES = [
   { 
     id: 'agentic-recruitment',
-    name: 'Recruitment & Talent Services', 
+    name: 'Global Recruitment Services', 
     tag: 'Talent Sourcing',
     icon: Target, 
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
@@ -173,7 +173,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'staff-aug',
-    name: 'Staff Augmentation', 
+    name: 'Philippine Staffing', 
     tag: 'On-Demand Talent',
     icon: Rocket, 
     desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',

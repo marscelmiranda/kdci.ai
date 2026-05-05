@@ -21,7 +21,7 @@ const SEARCH_ITEMS = [
 
 const POPULAR_SEARCHES = [
   { label: 'Generative AI', view: 'solutions-hub' },
-  { label: 'Staff Augmentation', view: 'staff-aug' },
+  { label: 'Philippine Staffing', view: 'staff-aug' },
   { label: 'Customer Support', view: 'customer-support' },
   { label: 'Software Engineers', view: 'software-dev' },
   { label: 'Data Entry', view: 'property-mgmt' },
