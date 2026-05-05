@@ -504,20 +504,72 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-3xl overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
+          {/* Background image */}
           <div className="absolute inset-0 z-0">
-            <img src={IMG_REC_HERO} alt="Recruitment Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
+            <img src={IMG_REC_HERO} alt="Recruitment Team" className="w-full h-full object-cover opacity-[0.07]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]/60"></div>
           </div>
-          <div className="mesh-container opacity-20 pointer-events-none">
-            <div className="blob blob-magenta opacity-30"></div>
-          </div>
-          <div className="reveal relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Build your <br/><span className="text-shine-red">dream team.</span></h2>
-            <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Book a strategy session with our talent leads and get a customized sourcing plan.</p>
-            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-              Book Recruitment Strategy <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+          {/* Glow accent */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
+
+            {/* Left — headline + stats */}
+            <div className="reveal p-12 md:p-16 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                  <Star size={11} /> Ready When You Are
+                </div>
+                <h2 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                  Build your<br/><span className="text-[#E61739]">dream team.</span>
+                </h2>
+                <p className="text-white/50 text-lg font-medium leading-relaxed max-w-md" style={{ textWrap: 'balance' }}>
+                  Book a strategy session with our talent leads and get a customised sourcing plan within 24 hours.
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-white/[0.07]">
+                {[
+                  { val: '5,000+', label: 'Hires Sourced' },
+                  { val: '14 Days', label: 'Avg. Time-to-Fill' },
+                  { val: '90-Day', label: 'Guarantee' },
+                ].map((s, i) => (
+                  <div key={i}>
+                    <div className="text-2xl font-black text-white mb-0.5">{s.val}</div>
+                    <div className="text-[10px] text-white/30 font-black uppercase tracking-widest">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — booking card */}
+            <div className="reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center gap-8">
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-5">
+                <h3 className="text-xl font-black text-white">What happens next</h3>
+                {[
+                  { step: '01', text: 'We review your role brief & ideal candidate profile' },
+                  { step: '02', text: 'AI sourcing begins — 100k+ profiles scanned in 48 hrs' },
+                  { step: '03', text: 'You receive a curated shortlist of 3–5 vetted candidates' },
+                ].map((item) => (
+                  <div key={item.step} className="flex items-start gap-4">
+                    <div className="w-7 h-7 rounded-lg bg-[#E61739]/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="text-[#E61739] text-xs font-black">{item.step}</span>
+                    </div>
+                    <p className="text-white/60 text-sm font-medium leading-snug">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => setView('contact')}
+                className="w-full py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all shadow-2xl flex items-center justify-center gap-3 group"
+              >
+                Book Recruitment Strategy
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <p className="text-white/20 text-xs text-center font-medium">No commitment required · Response within 24 hours</p>
+            </div>
+
           </div>
         </div>
       </section>
