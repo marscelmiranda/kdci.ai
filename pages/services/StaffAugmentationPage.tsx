@@ -1,13 +1,12 @@
 
-import React, { useState } from 'react';
-import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, BrainCircuit, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
 
   const capabilities = [
     { title: "Customer Service Agents", icon: Headphones, roles: "Support, Tech Support, Chat" },
@@ -20,88 +19,6 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
     { title: "Data & Back-Office", icon: Database, roles: "Data Entry, Verification" }
   ];
 
-  const pricingCategories = [
-    {
-      name: 'Customer Service',
-      roles: [
-        { title: 'Support Specialist', junior: '$1,800', mid: '$2,300', senior: '$2,800', desc: 'Handles high-volume voice, chat, and email tickets with high empathy.' },
-        { title: 'Technical Support', junior: '$2,000', mid: '$2,600', senior: '$3,200', desc: 'Troubleshooting and software guidance for SaaS/Tech platforms.' },
-        { title: 'CS Team Lead', junior: '$2,400', mid: '$3,000', senior: '$3,800', desc: 'Manages agent performance, QA scores, and shift scheduling.' }
-      ]
-    },
-    {
-      name: 'Software Development',
-      roles: [
-        { title: 'Full-Stack Developer', junior: '$2,200', mid: '$3,500', senior: '$4,500', desc: 'React/Node or Laravel/Vue engineering in your native stack.' },
-        { title: 'QA Engineer', junior: '$1,800', mid: '$2,800', senior: '$3,800', desc: 'Manual and automated testing with deep documentation focus.' },
-        { title: 'DevOps Engineer', junior: '$2,500', mid: '$3,800', senior: '$5,000', desc: 'CI/CD pipeline management, cloud infrastructure, and security.' }
-      ]
-    },
-    {
-      name: 'Creative & Design',
-      roles: [
-        { title: 'Graphic Designer', junior: '$1,800', mid: '$2,400', senior: '$3,000', desc: 'Marketing collateral, social kits, and digital brand assets.' },
-        { title: 'Video Editor', junior: '$2,000', mid: '$2,800', senior: '$3,600', desc: 'Short-form social ads and high-end brand storytelling.' },
-        { title: 'UI/UX Designer', junior: '$2,200', mid: '$3,200', senior: '$4,200', desc: 'Wireframing, prototyping, and high-fidelity product design.' }
-      ]
-    },
-    {
-      name: 'Admin & VA',
-      roles: [
-        { title: 'Executive Assistant', junior: '$1,800', mid: '$2,300', senior: '$2,800', desc: 'Calendar management, travel, and high-level project sync.' },
-        { title: 'Virtual Assistant', junior: '$1,500', mid: '$1,900', senior: '$2,400', desc: 'General operational support and back-office management.' },
-        { title: 'Project Coordinator', junior: '$1,900', mid: '$2,500', senior: '$3,200', desc: 'Managing timelines, resources, and stakeholder communication.' }
-      ]
-    },
-    {
-      name: 'Accounting & Finance',
-      roles: [
-        { title: 'Bookkeeper', junior: '$1,800', mid: '$2,300', senior: '$2,900', desc: 'AP/AR, reconciliations, and monthly financial reporting.' },
-        { title: 'Financial Analyst', junior: '$2,200', mid: '$3,000', senior: '$4,000', desc: 'Forecasting, budget tracking, and KPI monitoring.' },
-        { title: 'Payroll Specialist', junior: '$1,900', mid: '$2,400', senior: '$3,000', desc: 'Processing global payroll, compliance, and benefits admin.' }
-      ]
-    },
-    {
-      name: 'HR & Recruitment',
-      roles: [
-        { title: 'Talent Sourcer', junior: '$1,800', mid: '$2,300', senior: '$2,800', desc: 'LinkedIn sourcing and initial candidate vetting pipelines.' },
-        { title: 'HR Administrator', junior: '$1,700', mid: '$2,100', senior: '$2,600', desc: 'Onboarding, payroll sync, and employee record management.' },
-        { title: 'Recruiter (Full Cycle)', junior: '$2,000', mid: '$2,800', senior: '$3,500', desc: 'Managing end-to-end hiring from screening to offer negotiation.' }
-      ]
-    },
-    {
-      name: 'Real Estate Support',
-      roles: [
-        { title: 'Property Assistant', junior: '$1,800', mid: '$2,300', senior: '$2,800', desc: 'Leasing admin, tenant queries, and maintenance dispatch.' },
-        { title: 'TC (Transaction Coord)', junior: '$1,900', mid: '$2,500', senior: '$3,200', desc: 'Escrow paperwork, compliance, and real estate documents.' },
-        { title: 'Inside Sales Agent (ISA)', junior: '$1,800', mid: '$2,400', senior: '$3,000', desc: 'Lead qualification, cold calling, and appointment setting.' }
-      ]
-    },
-    {
-      name: 'eCommerce Support',
-      roles: [
-        { title: 'Listing Specialist', junior: '$1,700', mid: '$2,100', senior: '$2,600', desc: 'Amazon/Shopify product descriptions and catalog sync.' },
-        { title: 'Order Coordinator', junior: '$1,600', mid: '$2,000', senior: '$2,500', desc: 'Shipping exceptions and warehouse communication.' },
-        { title: 'Inventory Planner', junior: '$2,000', mid: '$2,700', senior: '$3,500', desc: 'Demand forecasting, stock balancing, and supplier liaison.' }
-      ]
-    },
-    {
-      name: 'Marketing & Content',
-      roles: [
-        { title: 'Digital Ad Specialist', junior: '$2,200', mid: '$3,000', senior: '$4,200', desc: 'FB/Google ad management and ROI tracking.' },
-        { title: 'Content Writer', junior: '$1,800', mid: '$2,300', senior: '$2,800', desc: 'SEO blogs, whitepapers, and high-conversion landing page copy.' },
-        { title: 'SEO Specialist', junior: '$1,900', mid: '$2,600', senior: '$3,400', desc: 'Keyword strategy, on-page optimization, and backlink building.' }
-      ]
-    },
-    {
-      name: 'Data & Back Office',
-      roles: [
-        { title: 'Data Entry Operator', junior: '$1,400', mid: '$1,700', senior: '$2,000', desc: 'High-speed data digitization and database maintenance.' },
-        { title: 'Verification Agent', junior: '$1,500', mid: '$1,800', senior: '$2,200', desc: 'Doc verification, background checks, and KYC workflows.' },
-        { title: 'Data Analyst', junior: '$2,100', mid: '$2,900', senior: '$3,800', desc: 'Cleaning data, creating dashboards, and generating insights.' }
-      ]
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -272,89 +189,70 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 4. Interactive Pricing Section */}
-      <section className="py-32 bg-[#F5F5F7] rounded-t-[5rem]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Transparent Offshore Pricing.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">All-inclusive monthly rates for full-time Philippine professionals — no hidden fees, no surprise markups.</p>
-          </div>
+      {/* 4. Salary Comparison Table */}
+      <section className="py-24 bg-[#F5F5F7] rounded-t-[5rem]">
+        <div className="max-w-6xl mx-auto px-6">
 
-          {/* Category Selector */}
-          <div className="mb-12">
-            <div className="flex flex-wrap justify-center gap-2">
-              {pricingCategories.map((cat, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedCategory(idx)}
-                  className={`px-6 py-3 rounded-full text-[11px] font-black uppercase tracking-widest transition-all border ${
-                    selectedCategory === idx 
-                      ? 'bg-slate-900 text-white border-slate-900 shadow-xl scale-105' 
-                      : 'bg-white text-slate-400 border-slate-100 hover:border-slate-300'
-                  }`}
-                >
-                  {cat.name}
-                </button>
-              ))}
+          {/* Header */}
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Cost Comparison
             </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">See the Savings.</h2>
+            <p className="text-slate-500 text-lg font-medium max-w-2xl mx-auto">Full-time Philippine professionals at a fraction of US, UK, or AU equivalent salaries — all-in, no hidden fees.</p>
           </div>
 
-          {/* Dynamic Role Cards */}
-          <div className="grid grid-cols-1 gap-6 mb-20">
-            {pricingCategories[selectedCategory].roles.map((role, idx) => (
-              <div key={idx} className="bg-white rounded-[2.5rem] border border-black/[0.04] p-8 md:p-12 hover:shadow-2xl transition-all group overflow-hidden">
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-                  <div className="lg:w-1/3">
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#1D1D1F] mb-4 group-hover:text-[#E61739] transition-colors">{role.title}</h3>
-                    <p className="text-slate-500 font-medium leading-relaxed">{role.desc}</p>
-                    <button onClick={() => setView('contact')} className="mt-8 px-8 py-3 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-black transition-all">Request This Role</button>
-                  </div>
-                  <div className="lg:w-2/3">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {[
-                        { level: 'Junior', price: role.junior },
-                        { level: 'Mid-Level', price: role.mid, best: true },
-                        { level: 'Senior', price: role.senior }
-                      ].map((tier, i) => (
-                        <div key={i} className={`p-8 rounded-3xl text-center relative overflow-hidden transition-all ${tier.best ? 'bg-white border-2 border-slate-900 shadow-lg scale-105' : 'bg-slate-50 border border-slate-100 opacity-60 hover:opacity-100'}`}>
-                          {tier.best && <div className="absolute top-0 left-0 right-0 h-1 bg-[#E61739]"></div>}
-                          <div className={`text-[10px] font-black uppercase tracking-widest mb-2 ${tier.best ? 'text-[#E61739]' : 'text-slate-400'}`}>{tier.level} (From)</div>
-                          <div className="text-3xl font-black text-[#1D1D1F] mb-1">{tier.price}</div>
-                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">/ MONTH</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+          {/* Table */}
+          <div className="bg-white rounded-3xl border border-black/[0.05] overflow-hidden shadow-sm">
+
+            {/* Column headers */}
+            <div className="grid grid-cols-6 bg-slate-900 text-white px-6 py-4">
+              <div className="col-span-2 text-xs font-black uppercase tracking-widest text-white/60">Role</div>
+              <div className="text-xs font-black uppercase tracking-widest text-[#E61739] text-center">KDCI / PH</div>
+              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">🇺🇸 US</div>
+              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">🇬🇧 UK</div>
+              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">Savings</div>
+            </div>
+
+            {/* Rows */}
+            {[
+              { role: 'Customer Support Specialist', cat: 'Customer Service', ph: '$1,800',  us: '$4,500',  uk: '$3,800',  save: '60%' },
+              { role: 'Full-Stack Developer',         cat: 'Engineering',      ph: '$2,800',  us: '$10,000', uk: '$7,500',  save: '72%' },
+              { role: 'UI/UX Designer',               cat: 'Creative',         ph: '$2,200',  us: '$7,500',  uk: '$5,500',  save: '71%' },
+              { role: 'Executive Assistant',          cat: 'Admin & VA',       ph: '$1,800',  us: '$5,000',  uk: '$3,800',  save: '64%' },
+              { role: 'Digital Marketing Specialist', cat: 'Marketing',        ph: '$2,000',  us: '$6,000',  uk: '$4,500',  save: '67%' },
+              { role: 'Data Analyst',                 cat: 'Data & Analytics', ph: '$2,500',  us: '$7,500',  uk: '$5,500',  save: '67%' },
+              { role: 'Bookkeeper',                   cat: 'Finance',          ph: '$1,800',  us: '$4,800',  uk: '$3,600',  save: '63%' },
+              { role: 'Project Manager',              cat: 'Operations',       ph: '$2,800',  us: '$9,000',  uk: '$7,000',  save: '69%' },
+            ].map((row, i) => (
+              <div key={i} className={`grid grid-cols-6 px-6 py-4 items-center border-t border-slate-100 group hover:bg-slate-50 transition-colors ${i % 2 === 0 ? '' : 'bg-slate-50/40'}`}>
+                <div className="col-span-2">
+                  <div className="text-sm font-bold text-slate-900">{row.role}</div>
+                  <div className="text-[10px] text-slate-400 font-medium uppercase tracking-wide mt-0.5">{row.cat}</div>
+                </div>
+                <div className="text-center">
+                  <span className="inline-block px-3 py-1 bg-[#E61739]/8 rounded-lg text-[#E61739] text-sm font-black">{row.ph}</span>
+                  <div className="text-[9px] text-slate-400 font-medium mt-0.5">/ mo</div>
+                </div>
+                <div className="text-center text-sm font-semibold text-slate-400">{row.us}<div className="text-[9px] font-medium text-slate-300">/ mo</div></div>
+                <div className="text-center text-sm font-semibold text-slate-400">{row.uk}<div className="text-[9px] font-medium text-slate-300">/ mo</div></div>
+                <div className="text-center">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 border border-emerald-100 rounded-lg text-emerald-600 text-xs font-black">
+                    <TrendingDown size={11} /> {row.save}
+                  </span>
                 </div>
               </div>
             ))}
+
+            {/* Footer note */}
+            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <p className="text-[11px] text-slate-400 font-medium">Rates shown are indicative mid-level monthly all-in costs in USD. US/UK figures based on market averages.</p>
+              <button onClick={() => setView('contact')} className="shrink-0 flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs hover:bg-black transition-all group">
+                Get an Exact Quote <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
           </div>
 
-          {/* Add-ons */}
-          <div className="pt-20 border-t border-slate-200">
-             <div className="text-center mb-12">
-                <h3 className="text-2xl font-bold text-[#1D1D1F] mb-2">Operational Multipliers</h3>
-                <p className="text-slate-400 font-medium">Standard add-ons to boost your team's output.</p>
-             </div>
-             <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  { title: "Team Lead Oversight", price: "+$700/mo", desc: "Local performance management and SOP adherence.", icon: Users },
-                  { title: "AI Workflow Layer", price: "+$500/mo", desc: "Reporting, automated QA, and sentiment tools.", icon: BrainCircuit },
-                  { title: "Dedicated PM", price: "+$900/mo", desc: "Strategic roadmap planning and resource sync.", icon: Workflow }
-                ].map((addon, i) => (
-                  <div key={i} className="p-8 rounded-[2.5rem] bg-white border border-dashed border-slate-300 flex items-center gap-6 group hover:border-[#E61739]/50 transition-colors shadow-sm">
-                     <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-colors"><addon.icon size={24} /></div>
-                     <div className="text-left">
-                        <div className="flex items-center justify-between gap-4">
-                           <h4 className="text-sm font-bold text-[#1D1D1F]">{addon.title}</h4>
-                           <span className="text-xs font-black text-[#E61739]">{addon.price}</span>
-                        </div>
-                        <p className="text-[10px] text-slate-500 font-medium">{addon.desc}</p>
-                     </div>
-                  </div>
-                ))}
-             </div>
-          </div>
         </div>
       </section>
 
