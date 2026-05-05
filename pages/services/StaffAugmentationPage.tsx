@@ -39,6 +39,50 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const [showSticky, setShowSticky] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // SEO: update document head when this page is active
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'Philippine Offshore Staffing | Hire Dedicated Remote Staff | KDCI';
+
+    const setMeta = (name: string, content: string, attr = 'name') => {
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
+      el.setAttribute('content', content);
+      return el;
+    };
+
+    const desc = 'Hire dedicated, full-time offshore staff from the Philippines. Expert-vetted talent across 200+ roles — customer service, engineers, designers, accountants — all-in pricing, onboarded in 14–30 days.';
+    setMeta('description', desc);
+    setMeta('og:title', 'Philippine Offshore Staffing | KDCI Outsourcing', 'property');
+    setMeta('og:description', 'Build a dedicated offshore team in the Philippines. 200+ roles, all-in monthly pricing, 14–30 day onboarding. 500+ clients across North America, Australia & Europe.', 'property');
+
+    // JSON-LD for this specific page
+    const ldId = 'ld-staff-aug';
+    let ld = document.getElementById(ldId);
+    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Philippine Offshore Staffing',
+      description: desc,
+      url: 'https://kdci.co',
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kdci.co' },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://kdci.co/services' },
+          { '@type': 'ListItem', position: 3, name: 'Philippine Offshore Staffing', item: 'https://kdci.co/services/offshore-staffing' },
+        ],
+      },
+    });
+
+    return () => {
+      document.title = prevTitle;
+      document.getElementById(ldId)?.remove();
+    };
+  }, []);
+
   useEffect(() => {
     const onScroll = () => setShowSticky(window.scrollY > 600);
     window.addEventListener('scroll', onScroll, { passive: true });
