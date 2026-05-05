@@ -684,30 +684,6 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* Logo strip — dark full-width */}
-      <div className="bg-[#0A0A0A] py-10 w-full">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-[10px] font-black uppercase tracking-widest text-white/30 mb-8">Trusted by companies across North America, Europe &amp; Australia</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:gap-x-16">
-            {[
-              { name: 'Cedar Management', sub: ' Group' },
-              { name: 'Kole Imports',      sub: '' },
-              { name: 'YogaClub',          sub: '' },
-              { name: 'CPO Commerce',      sub: '' },
-              { name: 'Softonic',          sub: '.com' },
-              { name: 'QUANTIQ',           sub: '' },
-              { name: 'Cyvatar',           sub: '' },
-            ].map((logo, i) => (
-              <div key={i} className="opacity-35 hover:opacity-70 transition-opacity cursor-default select-none">
-                <span className="text-sm md:text-base font-black text-white tracking-tight whitespace-nowrap">
-                  {logo.name}<span className="text-[#E61739]">{logo.sub}</span>
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* 5. How We Compare */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
