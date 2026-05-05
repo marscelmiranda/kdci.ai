@@ -325,7 +325,93 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 5. How It Works */}
+      {/* 5. Why the Philippines */}
+      <section className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Why the Philippines
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
+              The world's preferred<br/>offshore staffing destination.
+            </h2>
+            <p className="text-slate-500 text-base font-medium max-w-xl mx-auto leading-relaxed">
+              Not every offshore market is equal. The Philippines consistently outperforms on the factors that matter most for long-term team success.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                icon: '🏆',
+                stat: '#2 in Asia',
+                title: 'English Proficiency',
+                body: 'The Philippines ranks 2nd in English proficiency across Asia (EF EPI 2024) — ahead of India, China, Japan, and South Korea. Neutral accents and strong written English reduce miscommunication with US, AU, and UK clients.',
+              },
+              {
+                icon: '🤝',
+                stat: '100+ years',
+                title: 'Western Cultural Alignment',
+                body: 'A century of American-influenced education, media, and business culture means Filipino professionals share communication norms, work ethics, and professional expectations with Western teams. Minimal culture-gap friction.',
+              },
+              {
+                icon: '🕐',
+                stat: 'UTC+8',
+                title: 'Flexible Time Zone Coverage',
+                body: 'Philippine Standard Time overlaps with Australian business hours (1–4 hrs behind AEST) and can flex into US evening hours. Many KDCI teams split shifts to cover US East / West Coast business hours directly.',
+              },
+              {
+                icon: '🎓',
+                stat: '750,000+',
+                title: 'Graduates Per Year',
+                body: 'The Philippine higher education system produces over 750,000 graduates annually. Strong STEM output, plus nursing, accounting, and IT programs that consistently meet global professional certification standards.',
+              },
+              {
+                icon: '🏛️',
+                stat: 'PEZA-backed',
+                title: 'Government BPO Support',
+                body: 'The IT-BPM industry is a national priority. PEZA-registered business parks, government training programs, and stable infrastructure investment all support a reliable, growing offshore workforce.',
+              },
+              {
+                icon: '💰',
+                stat: '50–70% savings',
+                title: 'Structural Cost Advantage',
+                body: 'Lower cost of living means competitive salaries for local staff at a fraction of US equivalent costs — without compromising on skill or commitment. A $1,800/mo offshore role often replaces a $6,500/mo US equivalent.',
+              },
+            ].map((card, i) => (
+              <div key={i} className="bg-white rounded-3xl p-7 border border-slate-100 hover:shadow-md transition-all group">
+                <div className="flex items-start justify-between mb-5">
+                  <span className="text-3xl">{card.icon}</span>
+                  <span className="text-[11px] font-black text-[#E61739] uppercase tracking-wider bg-[#E61739]/8 px-2.5 py-1 rounded-full">{card.stat}</span>
+                </div>
+                <h4 className="text-base font-bold text-[#1D1D1F] mb-3">{card.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed font-medium">{card.body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Comparison footnote */}
+          <div className="mt-10 grid sm:grid-cols-3 gap-4">
+            {[
+              { label: 'vs. India', note: 'Stronger English accent neutrality, closer cultural alignment with AU/US clients' },
+              { label: 'vs. Eastern Europe', note: 'Lower all-in cost, larger English-speaking talent pool for voice-based roles' },
+              { label: 'vs. Latin America', note: 'Better time zone overlap with APAC, deeper IT-BPM infrastructure and government support' },
+            ].map((c, i) => (
+              <div key={i} className="bg-white border border-slate-100 rounded-2xl px-5 py-4 flex items-start gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#E61739] shrink-0 mt-1.5" />
+                <div>
+                  <div className="text-xs font-black text-[#1D1D1F] mb-1">{c.label}</div>
+                  <div className="text-xs text-slate-500 font-medium leading-relaxed">{c.note}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. How It Works */}
       <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         {/* subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
