@@ -147,7 +147,13 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
         </div>
 
-        <div className="p-4 border-t border-white/5">
+        <div className="p-4 border-t border-white/5 space-y-2">
+          <button 
+            onClick={() => setActiveTab(activeTab === 'settings' ? 'overview' : 'settings')}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-white/70 hover:text-white hover:bg-white/5 transition-all"
+          >
+            <Settings2 size={18} /> Settings
+          </button>
           <button 
             onClick={async () => { await signOut(); setView('login'); }} 
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
@@ -182,6 +188,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
         </header>
 
+        {activeTab === 'settings' && (
         <section className={`rounded-[2rem] p-6 mb-12 border ${resolvedTheme === 'dark' ? 'bg-[#121212] border-white/5' : 'bg-white border-slate-200 shadow-sm'}`}>
           <div className="flex items-center gap-3 mb-5">
             <Settings2 size={18} className="text-[#E61739]" />
@@ -207,6 +214,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             ))}
           </div>
         </section>
+        )}
 
         {/* Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
