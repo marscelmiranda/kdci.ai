@@ -211,11 +211,9 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 </div>
               </div>
             </div>
-            <div className="relative h-full">
-              <div className="shadow-2xl h-full rounded-b-3xl" style={{ overflow: 'hidden' }}>
-                <img src={recIncludedImg} alt="Candidate vetting process" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent rounded-b-3xl"></div>
-              </div>
+            <div className="relative h-full rounded-3xl shadow-2xl" style={{ overflow: 'hidden' }}>
+              <img src={recIncludedImg} alt="Candidate vetting process" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
                 <div className="text-3xl font-black text-slate-900 mb-1">3× Faster</div>
                 <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Than traditional recruitment agencies</p>
