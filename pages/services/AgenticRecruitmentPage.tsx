@@ -176,11 +176,11 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10">
                 Every engagement includes our complete recruitment suite — from AI sourcing to offer management and beyond.
               </p>
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-1.5">
                 {INCLUDED.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-black/5 group hover:bg-white hover:shadow-md hover:border-black/10 transition-all">
-                    <CheckCircle2 size={18} className="text-[#E61739] shrink-0" />
-                    <span className="text-sm font-bold text-slate-700">{item}</span>
+                  <div key={i} className="flex items-center gap-3 py-1.5">
+                    <CheckCircle2 size={15} className="text-[#E61739] shrink-0" />
+                    <span className="text-sm font-semibold text-slate-600">{item}</span>
                   </div>
                 ))}
               </div>
