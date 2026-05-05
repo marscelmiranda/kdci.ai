@@ -1,12 +1,36 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { IMG_STAFF_AUG_HERO } from '../../data';
+import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 
+const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
+  'ecommerce':     [{ role: 'E-commerce Analyst',       ph: '$2,000', save: '65%' }, { role: 'Catalog Manager',         ph: '$1,800', save: '63%' }, { role: 'SEO Specialist',          ph: '$2,000', save: '67%' }, { role: 'CX Lead',                 ph: '$1,800', save: '62%' }, { role: 'Visual Merchandiser',     ph: '$1,900', save: '64%' }],
+  'software-dev':  [{ role: 'Full-Stack Developer',     ph: '$2,800', save: '72%' }, { role: 'QA Engineer',             ph: '$2,200', save: '68%' }, { role: 'DevOps Engineer',         ph: '$3,000', save: '70%' }, { role: 'UI/UX Designer',          ph: '$2,200', save: '71%' }, { role: 'Technical Writer',        ph: '$1,800', save: '63%' }],
+  'property-mgmt': [{ role: 'Property Manager',         ph: '$2,000', save: '60%' }, { role: 'Transaction Coordinator', ph: '$1,900', save: '62%' }, { role: 'Listings Coordinator',    ph: '$1,800', save: '62%' }, { role: 'CRM Specialist',          ph: '$2,000', save: '63%' }, { role: 'Real Estate VA',          ph: '$1,600', save: '65%' }],
+  'fintech':       [{ role: 'Compliance Analyst',       ph: '$2,200', save: '66%' }, { role: 'Financial Analyst',       ph: '$2,500', save: '67%' }, { role: 'Data Analyst',            ph: '$2,500', save: '67%' }, { role: 'KYC Specialist',          ph: '$2,000', save: '63%' }, { role: 'Fraud Detection Spec.',   ph: '$2,200', save: '65%' }],
+  'healthcare':    [{ role: 'Medical VA',               ph: '$1,800', save: '65%' }, { role: 'Medical Biller/Coder',    ph: '$1,900', save: '63%' }, { role: 'Patient Coordinator',     ph: '$1,800', save: '62%' }, { role: 'Claims Processor',        ph: '$1,700', save: '61%' }, { role: 'Prior Auth Specialist',   ph: '$1,900', save: '62%' }],
+  'marketing-ad':  [{ role: 'Digital Marketing Manager',ph: '$2,200', save: '67%' }, { role: 'Content Strategist',      ph: '$2,000', save: '66%' }, { role: 'PPC Specialist',          ph: '$2,200', save: '67%' }, { role: 'Social Media Manager',    ph: '$1,900', save: '65%' }, { role: 'Brand Designer',          ph: '$2,000', save: '65%' }],
+  'retail':        [{ role: 'Inventory Manager',        ph: '$1,900', save: '62%' }, { role: 'Customer Service Rep',    ph: '$1,800', save: '60%' }, { role: 'E-commerce Coordinator',  ph: '$2,000', save: '63%' }, { role: 'Supply Chain Analyst',    ph: '$2,200', save: '65%' }, { role: 'Merchandiser',            ph: '$1,800', save: '62%' }],
+  'logistics':     [{ role: 'Logistics Coordinator',    ph: '$1,900', save: '63%' }, { role: 'Supply Chain Analyst',    ph: '$2,200', save: '65%' }, { role: 'Dispatch Coordinator',    ph: '$1,800', save: '61%' }, { role: 'Data Entry Specialist',   ph: '$1,500', save: '64%' }, { role: 'Operations Manager',      ph: '$2,500', save: '67%' }],
+  'travel':        [{ role: 'Booking Coordinator',      ph: '$1,800', save: '62%' }, { role: 'Customer Support Agent',  ph: '$1,800', save: '61%' }, { role: 'Travel Consultant',       ph: '$2,000', save: '63%' }, { role: 'Reservations Manager',    ph: '$2,000', save: '63%' }, { role: 'Content Writer',          ph: '$1,800', save: '63%' }],
+  'edtech':        [{ role: 'Curriculum Developer',     ph: '$2,000', save: '65%' }, { role: 'Instructional Designer',  ph: '$2,200', save: '66%' }, { role: 'LMS Administrator',       ph: '$1,900', save: '63%' }, { role: 'Student Support Rep',     ph: '$1,700', save: '61%' }, { role: 'Content Creator',         ph: '$1,900', save: '64%' }],
+  'legal':         [{ role: 'Legal VA',                 ph: '$1,800', save: '65%' }, { role: 'Paralegal',               ph: '$2,000', save: '63%' }, { role: 'Contract Reviewer',       ph: '$2,200', save: '64%' }, { role: 'Legal Researcher',        ph: '$1,900', save: '63%' }, { role: 'Compliance Coordinator',  ph: '$2,000', save: '62%' }],
+  'insurance':     [{ role: 'Claims Processor',         ph: '$1,800', save: '62%' }, { role: 'Underwriting Assistant',  ph: '$2,000', save: '63%' }, { role: 'Policy Administrator',    ph: '$1,800', save: '61%' }, { role: 'Insurance Analyst',       ph: '$2,200', save: '64%' }, { role: 'Loss Control Specialist', ph: '$2,000', save: '62%' }],
+  'media':         [{ role: 'Content Writer',           ph: '$1,800', save: '63%' }, { role: 'Video Editor',            ph: '$2,200', save: '67%' }, { role: 'SEO Content Specialist',  ph: '$2,000', save: '66%' }, { role: 'Social Media Manager',    ph: '$1,900', save: '65%' }, { role: 'Copy Editor',             ph: '$1,700', save: '62%' }],
+  'consumer-tech': [{ role: 'Product Support Spec.',    ph: '$1,900', save: '62%' }, { role: 'Technical Writer',        ph: '$1,800', save: '63%' }, { role: 'Customer Success Manager',ph: '$2,200', save: '65%' }, { role: 'QA Tester',               ph: '$2,000', save: '65%' }, { role: 'Community Manager',       ph: '$1,900', save: '63%' }],
+  'telecom':       [{ role: 'Technical Support Agent',  ph: '$1,800', save: '61%' }, { role: 'Billing Specialist',      ph: '$1,700', save: '60%' }, { role: 'Customer Service Rep',    ph: '$1,700', save: '60%' }, { role: 'Sales Support Rep',       ph: '$1,900', save: '63%' }, { role: 'NOC Analyst',             ph: '$2,200', save: '65%' }],
+  'auto':          [{ role: 'Parts Coordinator',        ph: '$1,800', save: '61%' }, { role: 'Customer Service Rep',    ph: '$1,700', save: '60%' }, { role: 'Inventory Manager',       ph: '$1,900', save: '62%' }, { role: 'Digital Marketing Spec.', ph: '$2,000', save: '65%' }, { role: 'Warranty Claims Processor',ph: '$1,700', save: '60%' }],
+  'fashion':       [{ role: 'Product Listing Specialist',ph: '$1,700', save: '62%' }, { role: 'Customer Service Rep',   ph: '$1,700', save: '61%' }, { role: 'Social Media Manager',    ph: '$1,900', save: '65%' }, { role: 'E-commerce Coordinator',  ph: '$2,000', save: '63%' }, { role: 'Influencer Outreach Coord.',ph: '$1,800', save: '63%' }],
+  'energy':        [{ role: 'Data Analyst',             ph: '$2,500', save: '67%' }, { role: 'Operations Coordinator',  ph: '$2,000', save: '63%' }, { role: 'Compliance Specialist',   ph: '$2,200', save: '64%' }, { role: 'Billing Analyst',         ph: '$1,800', save: '62%' }, { role: 'Customer Support Rep',    ph: '$1,700', save: '60%' }],
+  'prof-services': [{ role: 'Executive VA',             ph: '$1,800', save: '65%' }, { role: 'Research Analyst',        ph: '$2,200', save: '66%' }, { role: 'Project Coordinator',     ph: '$2,000', save: '63%' }, { role: 'Business Development Rep',ph: '$2,000', save: '64%' }, { role: 'Proposal Writer',         ph: '$1,900', save: '64%' }],
+  'gov':           [{ role: 'Data Entry Specialist',    ph: '$1,500', save: '62%' }, { role: 'Records Mgmt. Specialist',ph: '$1,700', save: '61%' }, { role: 'Administrative Assistant',ph: '$1,600', save: '60%' }, { role: 'Research Analyst',        ph: '$2,000', save: '64%' }, { role: 'Compliance Coordinator',  ph: '$1,900', save: '63%' }],
+};
+
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
 
   const capabilities = [
     { title: "Customer Service Agents", icon: Headphones, roles: "Support, Tech Support, Chat" },
@@ -189,67 +213,92 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 4. Salary Comparison Table */}
-      <section className="py-24 bg-[#F5F5F7] rounded-t-[5rem]">
-        <div className="max-w-6xl mx-auto px-6">
+      {/* 4. Industry Savings */}
+      <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
 
           {/* Header */}
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Cost Comparison
-            </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">See the Savings.</h2>
-            <p className="text-slate-500 text-lg font-medium max-w-2xl mx-auto">Full-time Philippine professionals at a fraction of US, UK, or AU equivalent salaries — all-in, no hidden fees.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">See the Savings.</h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              Pick your industry and see the top 5 offshore roles — with KDCI's all-in monthly rate and how much you save vs US market equivalents.
+            </p>
           </div>
 
-          {/* Table */}
-          <div className="bg-white rounded-3xl border border-black/[0.05] overflow-hidden shadow-sm">
+          <div className="grid lg:grid-cols-3 gap-6 items-start">
 
-            {/* Column headers */}
-            <div className="grid grid-cols-6 bg-slate-900 text-white px-6 py-4">
-              <div className="col-span-2 text-xs font-black uppercase tracking-widest text-white/60">Role</div>
-              <div className="text-xs font-black uppercase tracking-widest text-[#E61739] text-center">KDCI / PH</div>
-              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">🇺🇸 US</div>
-              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">🇬🇧 UK</div>
-              <div className="text-xs font-black uppercase tracking-widest text-white/40 text-center">Savings</div>
+            {/* Left: industry list */}
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+              <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
+                {INDUSTRIES.map((ind, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedInd(ind)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
+                      selectedInd.id === ind.id
+                        ? 'bg-[#E61739] text-white shadow-sm'
+                        : 'hover:bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    <ind.icon size={15} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
+                    <span className="text-sm font-semibold leading-tight">{ind.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Rows */}
-            {[
-              { role: 'Customer Support Specialist', cat: 'Customer Service', ph: '$1,800',  us: '$4,500',  uk: '$3,800',  save: '60%' },
-              { role: 'Full-Stack Developer',         cat: 'Engineering',      ph: '$2,800',  us: '$10,000', uk: '$7,500',  save: '72%' },
-              { role: 'UI/UX Designer',               cat: 'Creative',         ph: '$2,200',  us: '$7,500',  uk: '$5,500',  save: '71%' },
-              { role: 'Executive Assistant',          cat: 'Admin & VA',       ph: '$1,800',  us: '$5,000',  uk: '$3,800',  save: '64%' },
-              { role: 'Digital Marketing Specialist', cat: 'Marketing',        ph: '$2,000',  us: '$6,000',  uk: '$4,500',  save: '67%' },
-              { role: 'Data Analyst',                 cat: 'Data & Analytics', ph: '$2,500',  us: '$7,500',  uk: '$5,500',  save: '67%' },
-              { role: 'Bookkeeper',                   cat: 'Finance',          ph: '$1,800',  us: '$4,800',  uk: '$3,600',  save: '63%' },
-              { role: 'Project Manager',              cat: 'Operations',       ph: '$2,800',  us: '$9,000',  uk: '$7,000',  save: '69%' },
-            ].map((row, i) => (
-              <div key={i} className={`grid grid-cols-6 px-6 py-4 items-center border-t border-slate-100 group hover:bg-slate-50 transition-colors ${i % 2 === 0 ? '' : 'bg-slate-50/40'}`}>
-                <div className="col-span-2">
-                  <div className="text-sm font-bold text-slate-900">{row.role}</div>
-                  <div className="text-[10px] text-slate-400 font-medium uppercase tracking-wide mt-0.5">{row.cat}</div>
+            {/* Right: savings panel */}
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+
+              {/* Panel header */}
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                  <selectedInd.icon size={30} className="text-white" />
                 </div>
-                <div className="text-center">
-                  <span className="inline-block px-3 py-1 bg-[#E61739]/8 rounded-lg text-[#E61739] text-sm font-black">{row.ph}</span>
-                  <div className="text-[9px] text-slate-400 font-medium mt-0.5">/ mo</div>
-                </div>
-                <div className="text-center text-sm font-semibold text-slate-400">{row.us}<div className="text-[9px] font-medium text-slate-300">/ mo</div></div>
-                <div className="text-center text-sm font-semibold text-slate-400">{row.uk}<div className="text-[9px] font-medium text-slate-300">/ mo</div></div>
-                <div className="text-center">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 border border-emerald-100 rounded-lg text-emerald-600 text-xs font-black">
-                    <TrendingDown size={11} /> {row.save}
-                  </span>
+                <div>
+                  <h3 className="text-2xl font-black leading-tight">{selectedInd.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Top 5 Roles · KDCI Offshore Rate</p>
                 </div>
               </div>
-            ))}
 
-            {/* Footer note */}
-            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <p className="text-[11px] text-slate-400 font-medium">Rates shown are indicative mid-level monthly all-in costs in USD. US/UK figures based on market averages.</p>
-              <button onClick={() => setView('contact')} className="shrink-0 flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs hover:bg-black transition-all group">
-                Get an Exact Quote <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
-              </button>
+              {/* Role rows */}
+              <div className="flex flex-col gap-2 flex-grow">
+                {/* Column labels */}
+                <div className="grid grid-cols-12 px-5 mb-1">
+                  <span className="col-span-6 text-[10px] font-black uppercase tracking-widest text-white/25">Role</span>
+                  <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 text-center">KDCI / mo</span>
+                  <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-white/25 text-center">vs US</span>
+                </div>
+                {(INDUSTRY_SAVINGS[selectedInd.id] ?? []).map((row, idx) => (
+                  <div key={idx} className="grid grid-cols-12 items-center bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
+                    <div className="col-span-6 flex items-center gap-3">
+                      <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                        <span className="text-[#E61739] text-[10px] font-black">0{idx + 1}</span>
+                      </div>
+                      <span className="text-sm font-semibold text-white leading-tight">{row.role}</span>
+                    </div>
+                    <div className="col-span-3 text-center">
+                      <span className="text-sm font-black text-white">{row.ph}</span>
+                    </div>
+                    <div className="col-span-3 flex justify-center">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-500/15 border border-emerald-400/20 rounded-lg text-emerald-400 text-xs font-black">
+                        <TrendingDown size={10} /> {row.save}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                <p className="text-white/30 text-xs font-medium">Indicative mid-level monthly rates · all-in, no hidden fees</p>
+                <button
+                  onClick={() => setView('contact')}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                >
+                  Hire in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
             </div>
           </div>
 
