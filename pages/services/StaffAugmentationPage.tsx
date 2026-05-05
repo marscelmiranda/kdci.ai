@@ -180,40 +180,108 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 3. How It Works */}
-      <section className="py-12 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        {/* subtle grid texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
 
-            {/* Left: title block */}
-            <div className="shrink-0">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold whitespace-nowrap">How It Works.</h2>
-              <p className="text-white/40 text-sm font-medium mt-2 max-w-[200px]" style={{ textWrap: 'balance' }}>From brief to embedded team in 14 days.</p>
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Onboarding Timeline
+              </div>
+              <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14 days.</h2>
             </div>
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">We handle every step — you just approve the candidates and show up on Day 1.</p>
+          </div>
 
-            {/* Vertical divider */}
-            <div className="w-px bg-white/10 self-stretch hidden md:block shrink-0"></div>
+          {/* Timeline */}
+          <div className="relative">
+            {/* connecting line */}
+            <div className="hidden lg:block absolute top-8 left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-            {/* Right: steps */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1 relative">
-              <div className="hidden md:block absolute top-[1.35rem] left-[5%] right-[5%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { step: '01', title: 'Define Needs',        desc: 'Roles, seniority & team size.', icon: Target },
-                { step: '02', title: 'Source & Vet',        desc: 'Top 1% of PH talent selected.', icon: Search },
-                { step: '03', title: 'Onboard & Integrate', desc: 'Embed into your tools & timezone.', icon: Handshake },
-                { step: '04', title: 'AI Management',       desc: 'QA, reporting & optimisation.', icon: Activity },
+                {
+                  day: 'Day 1',
+                  icon: Target,
+                  title: 'Discovery Call',
+                  bullets: ['Define roles & seniority', 'Set team size & budget', 'Agree on KPIs & SLAs'],
+                  color: 'from-[#E61739]/20 to-transparent',
+                },
+                {
+                  day: 'Day 2–5',
+                  icon: Search,
+                  title: 'Source & Screen',
+                  bullets: ['AI-assisted talent search', 'Skills & culture fit vetting', 'Top 3 candidates presented'],
+                  color: 'from-white/5 to-transparent',
+                },
+                {
+                  day: 'Day 6–10',
+                  icon: Handshake,
+                  title: 'You Approve',
+                  bullets: ['Interview shortlist', 'Select your hire(s)', 'Contracts & NDAs signed'],
+                  color: 'from-white/5 to-transparent',
+                },
+                {
+                  day: 'Day 11–14',
+                  icon: Activity,
+                  title: 'Go Live',
+                  bullets: ['Equipment & access set up', 'Integrated into your tools', 'AI monitoring activated'],
+                  color: 'from-[#E61739]/10 to-transparent',
+                },
               ].map((s, idx) => (
-                <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                  <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-4 group-hover:border-[#E61739] transition-all">
-                    <s.icon size={18} />
+                <div key={idx} className="relative group">
+                  {/* card */}
+                  <div className="bg-white/[0.03] border border-white/8 rounded-3xl p-7 h-full hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300">
+                    {/* day pill */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/20 mb-6">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#E61739]" />
+                      <span className="text-[#E61739] text-[10px] font-black uppercase tracking-widest">{s.day}</span>
+                    </div>
+
+                    {/* icon */}
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-5 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all">
+                      <s.icon size={22} />
+                    </div>
+
+                    <h4 className="text-lg font-bold text-white mb-4">{s.title}</h4>
+
+                    <ul className="space-y-2.5">
+                      {s.bullets.map((b, bi) => (
+                        <li key={bi} className="flex items-start gap-2.5 text-sm text-white/45 font-medium">
+                          <CheckCircle2 size={14} className="text-[#E61739]/60 mt-0.5 shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                  <h4 className="text-sm font-bold mb-1">{s.title}</h4>
-                  <p className="text-[11px] text-white/40 leading-relaxed font-medium">{s.desc}</p>
+
+                  {/* step number — bottom right */}
+                  <div className="absolute bottom-5 right-6 text-5xl font-black text-white/[0.04] select-none leading-none">
+                    {String(idx + 1).padStart(2, '0')}
+                  </div>
                 </div>
               ))}
             </div>
-
           </div>
+
+          {/* Bottom promise bar */}
+          <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 py-6 border-t border-white/8">
+            {[
+              { icon: CheckCircle2, text: 'First candidate presented in 5 days' },
+              { icon: CheckCircle2, text: 'Team live within 14 days, guaranteed' },
+              { icon: CheckCircle2, text: 'Free replacement within 90 days' },
+            ].map((p, i) => (
+              <div key={i} className="flex items-center gap-2.5 text-sm text-white/50 font-medium">
+                <p.icon size={15} className="text-[#E61739] shrink-0" />
+                {p.text}
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
