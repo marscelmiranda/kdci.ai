@@ -46,6 +46,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -608,6 +609,71 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               )}
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="reveal text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="reveal d1 space-y-3">
+            {[
+              {
+                q: "How quickly can you fill a role?",
+                a: "Our average time-to-fill is 14 business days from brief to signed offer. For senior or highly specialised roles it can extend to 21 days, but you'll have a vetted shortlist within 5–7 days in most cases."
+              },
+              {
+                q: "What does the 90-day guarantee actually mean?",
+                a: "If a placed candidate leaves or doesn't work out within 90 days of their start date, we re-source and deliver a replacement shortlist at zero additional cost — no conditions, no fine print."
+              },
+              {
+                q: "Do you only hire in the Philippines?",
+                a: "No. While we specialise in Philippine talent, our AI sourcing platform scans 100k+ profiles across 40+ countries. We match the right talent to your role regardless of geography."
+              },
+              {
+                q: "What's the difference between Per Placement and the RPO Retainer?",
+                a: "Per Placement is pay-per-hire with no ongoing commitment — ideal for one-off or occasional hires. The RPO Retainer gives you a dedicated recruiter managing up to 5 active roles per month with priority sourcing, ATS management, and market reports."
+              },
+              {
+                q: "What industries do you specialise in?",
+                a: "We cover 20+ verticals including Software & Tech, E-commerce, Healthcare, FinTech, Legal, Marketing & Media, Logistics, and more. Each engagement is handled by a recruiter with direct experience in your sector."
+              },
+              {
+                q: "How do you screen candidates before presenting them?",
+                a: "Every candidate goes through AI-powered resume scoring, a skills assessment, a structured competency interview with our recruiters, and a cultural-fit review against your brief. You only see the top 3–5 who clear all stages."
+              },
+              {
+                q: "Is there a setup fee?",
+                a: "Per Placement has no setup fee — you pay only on a successful hire. The RPO Retainer has a one-time $1,000 setup fee. Enterprise RPO waives the setup fee entirely."
+              },
+              {
+                q: "Can we switch plans after we start?",
+                a: "Yes. If your hiring volume grows, you can upgrade from Per Placement to the RPO Retainer at any time. Our team will prorate any fees and ensure a smooth handover of active roles."
+              },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
