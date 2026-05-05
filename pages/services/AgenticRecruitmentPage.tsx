@@ -394,12 +394,13 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Recruitment <br/><span className="text-[#E61739]">Advantage.</span></h2>
-              <div className="space-y-10">
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Global Recruitment <br/><span className="text-[#E61739]">Advantage.</span></h2>
+              <div className="space-y-8">
                 {[
-                  { title: "AI + Human Hybrid", desc: "Algorithmic speed meets deep talent intuition for perfect cultural fit.", icon: BrainCircuit },
-                  { title: "Offshore Efficiency", desc: "Access the Philippines' top 1% at high-velocity local market rates.", icon: Globe2 },
-                  { title: "High-Caliber Vetting", desc: "We test for technical mastery, EQ, and alignment with your goals.", icon: ShieldCheck },
+                  { title: "Worldwide Talent Access", desc: "We source from 100k+ profiles across 40+ countries — surfacing the best candidate regardless of geography.", icon: Globe2 },
+                  { title: "AI + Human Hybrid", desc: "Algorithmic speed meets deep recruiter intuition to deliver shortlists of only 3–5 fully-vetted candidates.", icon: BrainCircuit },
+                  { title: "Cross-Border Compliance", desc: "We handle visa readiness, timezone alignment, and local labour law nuances so you don't have to.", icon: ShieldCheck },
+                  { title: "90-Day Placement Guarantee", desc: "If a hire doesn't work out within 90 days, we replace them at no additional cost — zero risk to you.", icon: Award },
                 ].map((item, idx) => (
                   <div key={idx} className="flex gap-6 group">
                     <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
