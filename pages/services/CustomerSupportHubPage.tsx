@@ -1,48 +1,52 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles, Briefcase, UserCheck, ClipboardCheck, Cpu, Workflow, CheckCircle2, Star, Target, Zap, FileSearch, Calendar, Shield, Users, BarChart3 } from 'lucide-react';
+import { ArrowRight, Sparkles, UserCheck, ClipboardCheck, Cpu, Workflow, CheckCircle2, Star, Target, Zap, Shield, BrainCircuit, Globe2, ShieldCheck, Award, TrendingDown, FileSearch, Calendar, BarChart3 } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { IMG_CX_HERO, IMG_CX_TEAM, INDUSTRIES } from '../../data';
+import { IMG_CX_HERO, IMG_CX_TEAM } from '../../data';
 
 const INCLUDED = [
-  'AI-Powered Sourcing',
-  'Resume Screening & Scoring',
-  'Skills Assessment',
-  '3–5 Vetted Shortlist',
-  'Background Check Coordination',
-  'Interview Scheduling',
-  'Offer Management',
-  '90-Day Replacement Guarantee',
-  'ATS Management (RPO)',
-  'Talent Market Reports',
+  'AI Agent Build & Config',
+  'Email Automation',
+  'Live Chat AI',
+  'Voice Agent (Growth+)',
+  'Escalation Routing Logic',
+  'Human Backup CX Agent',
+  'Brand Voice Training',
+  'Knowledge Base Setup',
+  'CSAT Reporting',
+  'Monthly Optimization',
 ];
 
-const INDUSTRY_ROLES: Record<string, string[]> = {
-  'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
-  'software-dev':   ['Product Manager', 'Full-Stack Developer', 'QA Engineer', 'DevOps Engineer', 'Technical Writer', 'UI/UX Designer'],
-  'property-mgmt':  ['Property Manager', 'Listings Coordinator', 'Transaction Coordinator', 'CRM Specialist', 'Real Estate VA', 'Leasing Admin'],
-  'fintech':        ['Compliance Analyst', 'Fraud Detection Specialist', 'Financial Analyst', 'Data Analyst', 'CX Lead', 'KYC Specialist'],
-  'healthcare':     ['Medical VA', 'Healthcare Administrator', 'Medical Biller/Coder', 'Patient Coordinator', 'Claims Processor', 'Prior Auth Specialist'],
-  'marketing-ad':   ['Digital Marketing Manager', 'Content Strategist', 'Social Media Manager', 'PPC Specialist', 'Brand Designer', 'Email Marketing Specialist'],
-  'retail':         ['Inventory Manager', 'Customer Service Rep', 'E-commerce Coordinator', 'Supply Chain Analyst', 'Merchandiser', 'Returns & Refunds Specialist'],
-  'logistics':      ['Logistics Coordinator', 'Supply Chain Analyst', 'Operations Manager', 'Data Entry Specialist', 'Freight Broker VA', 'Dispatch Coordinator'],
-  'travel':         ['Booking Coordinator', 'Customer Support Agent', 'Travel Consultant', 'Reservations Manager', 'Content Writer', 'Itinerary Planner'],
-  'edtech':         ['Curriculum Developer', 'Instructional Designer', 'LMS Administrator', 'Student Support Rep', 'Content Creator', 'Academic Researcher'],
-  'legal':          ['Legal VA', 'Paralegal', 'Contract Reviewer', 'Legal Researcher', 'Compliance Coordinator', 'Litigation Support Specialist'],
-  'insurance':      ['Claims Processor', 'Underwriting Assistant', 'Policy Administrator', 'Insurance Analyst', 'Customer Support Rep', 'Loss Control Specialist'],
-  'media':          ['Content Writer', 'Copy Editor', 'Social Media Manager', 'Video Editor', 'SEO Content Specialist', 'Podcast Producer'],
-  'consumer-tech':  ['Product Support Specialist', 'Technical Writer', 'QA Tester', 'Customer Success Manager', 'Community Manager', 'App Onboarding Specialist'],
-  'telecom':        ['Technical Support Agent', 'Network Documentation Specialist', 'Billing Specialist', 'Sales Support Rep', 'Customer Service Rep', 'NOC Analyst'],
-  'auto':           ['Parts Coordinator', 'Customer Service Rep', 'Inventory Manager', 'Digital Marketing Specialist', 'Data Entry Specialist', 'Warranty Claims Processor'],
-  'fashion':        ['Product Listing Specialist', 'Visual Merchandiser', 'Customer Service Rep', 'Social Media Manager', 'E-commerce Coordinator', 'Influencer Outreach Coordinator'],
-  'energy':         ['Data Analyst', 'Operations Coordinator', 'Compliance Specialist', 'Billing Analyst', 'Customer Support Rep', 'Regulatory Affairs Assistant'],
-  'prof-services':  ['Executive VA', 'Research Analyst', 'Project Coordinator', 'Business Development Rep', 'Client Success Manager', 'Proposal Writer'],
-  'gov':            ['Data Entry Specialist', 'Records Management Specialist', 'Administrative Assistant', 'Research Analyst', 'Compliance Coordinator', 'Public Affairs Writer'],
-};
-
 export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
+  const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = 'Customer Experience Operations | AI CX | KDCI';
+
+    const setMeta = (name: string, content: string, attr = 'name') => {
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
+      el.setAttribute('content', content);
+      return el;
+    };
+
+    const desc = 'We design, build, and manage AI-powered customer experience across email, chat, and voice with intelligent human escalation handled by Philippine CX specialists.';
+    setMeta('description', desc);
+    setMeta('og:title', 'Customer Experience Operations | KDCI', 'property');
+    setMeta('og:description', desc, 'property');
+
+    const ldId = 'ld-cx-ops';
+    let ld = document.getElementById(ldId);
+    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Customer Experience Operations', description: desc, url: 'https://kdci.co' });
+
+    return () => { document.title = prevTitle; document.getElementById(ldId)?.remove(); };
+  }, []);
 
   useEffect(() => {
     const els = document.querySelectorAll('.rec-reveal');
@@ -72,10 +76,9 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         .rec-reveal.d3 { transition-delay: 0.3s; }
       `}</style>
 
-      {/* ── Hero ── */}
       <section className="relative bg-[#020202] overflow-hidden pt-36 pb-40">
         <div className="absolute inset-0 z-0">
-          <img src={IMG_CX_HERO} alt="KDCI Recruitment" className="w-full h-full object-cover opacity-20 object-center" />
+          <img src={IMG_CX_HERO} alt="Customer experience operations" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black" />
         </div>
         <div className="mesh-container opacity-40">
@@ -84,17 +87,17 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Recruitment & Talent" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+          <Breadcrumbs setView={setView} currentName="Customer Experience Operations" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">AI-Accelerated</span><br/>
-            <span className="text-[#E61739]">Recruitment.</span>
+            <span className="text-shine-white">Customer Experience</span><br/>
+            <span className="text-[#E61739]">Operations.</span>
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-14 px-4">
-            Full-cycle sourcing, screening, and shortlisting for US companies hiring in the Philippines or building blended teams — faster and more cost-effective than any domestic recruiter.
+            We design, build, and manage your AI-powered customer experience — across email, chat, and voice — with intelligent human escalation handled by our Philippine CX specialists. You get enterprise-grade CX without an enterprise headcount.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+              Start CX Build <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button onClick={() => setView('customer-support-v2')} className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-base hover:bg-white/10 transition-all backdrop-blur-md">
               View CX Hub →
@@ -104,22 +107,14 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
 
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            {[
-              { v: '5,000+', l: 'Hires Sourced' },
-              { v: '14 Days', l: 'Avg. Time-to-Fill' },
-              { v: '70%',     l: 'Typical Cost Savings' },
-              { v: '90-Day', l: 'Replacement Guarantee' },
-            ].map((s, i) => (
-              <div key={i}>
-                <div className="text-xl md:text-2xl font-black">{s.v}</div>
-                <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">{s.l}</p>
-              </div>
-            ))}
+            <div><div className="text-xl md:text-2xl font-black">Omnichannel</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Email · Chat · Voice</p></div>
+            <div><div className="text-xl md:text-2xl font-black">AI + Human</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Escalation Layer</p></div>
+            <div><div className="text-xl md:text-2xl font-black">Monthly</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Optimization Included</p></div>
+            <div><div className="text-xl md:text-2xl font-black">Philippine</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">CX Specialists</p></div>
           </div>
         </div>
       </section>
 
-      {/* ── What We Deliver ── */}
       <section className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -128,22 +123,20 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                 <Sparkles size={12} /> What We Deliver
               </div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight tracking-tight">
-                From job brief<br/>to <span className="text-[#E61739]">signed offer.</span>
+                AI agents built to <span className="text-[#E61739]">sound like you.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10" style={{ textWrap: 'balance' }}>
-                Full-cycle recruitment using AI tools to source, screen, and score candidates at 3× the speed of traditional methods. Our recruiters are specialists in the Philippine talent market, with deep networks across design, tech, marketing, finance, and operations roles. Shortlists of 3–5 fully vetted candidates only.
+                End-to-end AI agent deployment configured to your brand voice, workflows, and escalation rules. We handle the technical build (agent training, API integrations, knowledge base setup), ongoing optimization, and staff the human escalation layer with trained CX agents who know your product cold. Monthly performance reviews included.
               </p>
               <div className="space-y-3">
                 {[
-                  { icon: Cpu,          text: 'AI-powered sourcing across 100k+ candidate profiles' },
-                  { icon: UserCheck,    text: 'Specialists in Philippine talent market depth' },
-                  { icon: Briefcase,    text: 'Deep networks in design, tech, marketing, finance & ops' },
-                  { icon: ClipboardCheck, text: 'Shortlists of 3–5 fully vetted candidates, no filler' },
+                  { icon: Cpu, text: 'AI agent training, prompt tuning, and deployment' },
+                  { icon: Workflow, text: 'Brand voice, workflow, and escalation rule configuration' },
+                  { icon: UserCheck, text: 'Human backup CX agents for seamless escalation' },
+                  { icon: BarChart3, text: 'Monthly performance reviews and optimization' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-black/5 hover:border-black/10 hover:bg-white hover:shadow-sm transition-all">
-                    <div className="w-10 h-10 shrink-0 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#E61739]">
-                      <item.icon size={20} />
-                    </div>
+                    <div className="w-10 h-10 shrink-0 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#E61739]"><item.icon size={20} /></div>
                     <span className="text-sm font-semibold text-slate-700">{item.text}</span>
                   </div>
                 ))}
@@ -152,17 +145,15 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
 
             <div className="rec-reveal d2 relative">
               <div className="relative rounded-3xl aspect-[4/5] shadow-2xl" style={{ overflow: 'hidden' }}>
-                <img src={IMG_CX_HERO} alt="Recruitment team at work" className="w-full h-full object-cover" />
+                <img src={IMG_CX_TEAM} alt="CX specialists" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               </div>
               <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
-                    <Star size={22} className="text-white" />
-                  </div>
+                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0"><Star size={22} className="text-white" /></div>
                   <div>
-                    <div className="text-xl font-black text-slate-900">Top 1% Only</div>
-                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Every candidate fully vetted</p>
+                    <div className="text-xl font-black text-slate-900">Enterprise-Grade CX</div>
+                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Without enterprise headcount</p>
                   </div>
                 </div>
               </div>
@@ -171,50 +162,42 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      {/* ── Why It Commands a Premium ── */}
       <section className="py-12 bg-[#020202] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-3 gap-4">
-
             <div className="rec-reveal bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRingRec 2.8s ease-in-out 2s infinite' }}>
               <div className="shrink-0">
-                <div className="text-[4.5rem] font-black text-white leading-none">90</div>
-                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Day Guarantee</div>
+                <div className="text-[4.5rem] font-black text-white leading-none">AI</div>
+                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Integrated</div>
               </div>
               <div className="border-l border-white/20 pl-6">
                 <p className="text-white/80 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-                  We have skin in the game — re-sourced at zero cost if a hire doesn't work out. No fine print.
+                  Competitors offer either the technology or the people — we offer both, fully integrated and managed.
                 </p>
               </div>
             </div>
 
             <div className="rec-reveal d1 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
-                <Target size={20} className="text-[#E61739]" />
-              </div>
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0"><BrainCircuit size={20} className="text-[#E61739]" /></div>
               <div>
-                <div className="text-2xl font-black text-[#E61739] mb-0.5">Flat Fee</div>
-                <h4 className="text-sm font-black text-white mb-1">Not 15–25% of Salary</h4>
-                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Skip the agency markup. One flat fee, backed by a placement guarantee.</p>
+                <div className="text-2xl font-black text-[#E61739] mb-0.5">Faster Iteration</div>
+                <h4 className="text-sm font-black text-white mb-1">In-house AI build capability</h4>
+                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Zero third-party markups, tighter customization, and quicker improvements than vanilla BPO or SaaS-only models.</p>
               </div>
             </div>
 
             <div className="rec-reveal d2 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
-                <Workflow size={20} className="text-[#E61739]" />
-              </div>
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0"><ShieldCheck size={20} className="text-[#E61739]" /></div>
               <div>
-                <div className="text-2xl font-black text-[#E61739] mb-0.5">Embedded</div>
-                <h4 className="text-sm font-black text-white mb-1">RPO Function</h4>
-                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>For RPO retainer clients, we become an embedded talent function that knows your culture and hiring bar intimately.</p>
+                <div className="text-2xl font-black text-[#E61739] mb-0.5">Human Escalation</div>
+                <h4 className="text-sm font-black text-white mb-1">Philippine CX specialists</h4>
+                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Intelligent escalation handled by trained specialists who know your product and your customers cold.</p>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ── What's Included ── */}
       <section className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-stretch">
@@ -226,7 +209,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                 Everything you need.<br/><span className="text-[#E61739]">Nothing you don't.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
-                Every engagement includes our complete recruitment suite — from AI sourcing to offer management and beyond.
+                Everything needed to launch and run AI-powered CX — from build and deployment to reporting and continuous optimization.
               </p>
               <div className="bg-slate-50 border border-black/5 rounded-3xl p-8 flex-grow">
                 <div className="grid grid-cols-2 gap-x-6 gap-y-4 h-full content-start">
@@ -241,16 +224,14 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             <div className="rec-reveal d2 relative h-full rounded-3xl shadow-2xl" style={{ overflow: 'hidden', minHeight: '480px' }}>
-              <img src={IMG_CX_TEAM} alt="Recruitment vetting process" className="w-full h-full object-cover" />
+              <img src={IMG_CX_HERO} alt="CX operations process" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
               <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
-                    <Zap size={22} className="text-white" />
-                  </div>
+                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0"><Zap size={22} className="text-white" /></div>
                   <div>
-                    <div className="text-3xl font-black text-slate-900 mb-1">3× Faster</div>
-                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Than traditional recruitment agencies</p>
+                    <div className="text-3xl font-black text-slate-900 mb-1">24/7</div>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Always-on CX coverage available</p>
                   </div>
                 </div>
               </div>
@@ -259,37 +240,32 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      {/* ── Pricing ── */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="rec-reveal text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Simple, Transparent Pricing.</h2>
-            <p className="text-slate-500 text-lg font-medium">Structured for every stage of your hiring needs.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Pricing Tiers.</h2>
+            <p className="text-slate-500 text-lg font-medium">Structured for every stage of your CX needs.</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-
-            {/* Featured — RPO Retainer */}
             <div className="rec-reveal d1 bg-slate-900 rounded-3xl p-12 flex flex-col justify-between relative" style={{ animation: 'pulseRingRec 2.8s ease-in-out 2s infinite' }}>
               <div className="absolute top-8 right-8 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                ★ Best Value
+                Core
               </div>
               <div>
-                <p className="text-white/40 text-xs font-black uppercase tracking-widest mb-3">RPO Retainer</p>
+                <p className="text-white/40 text-xs font-black uppercase tracking-widest mb-3">Core</p>
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-6xl font-black text-white">$3,500</span>
                   <span className="text-white/40 text-sm font-black uppercase tracking-widest">/ mo</span>
                 </div>
-                <p className="text-white/50 text-sm font-medium mb-8">Dedicated recruiter · up to 5 active roles/mo · priority sourcing · ATS management</p>
+                <p className="text-white/50 text-sm font-medium mb-8">1 channel (email or chat) · up to 1,500 tickets/mo · AI-led with email escalation</p>
                 <div className="border-t border-white/10 pt-8">
                   <ul className="space-y-3 mb-8">
                     {[
-                      { icon: Users,       text: 'Dedicated recruiter, fully embedded' },
-                      { icon: FileSearch,  text: 'Up to 5 active roles per month' },
-                      { icon: Zap,         text: 'Priority sourcing & AI-accelerated pipeline' },
-                      { icon: BarChart3,   text: 'ATS management & talent market reports' },
-                      { icon: Calendar,    text: 'Interview scheduling & offer management' },
-                      { icon: Shield,      text: '90-day replacement guarantee on every hire' },
+                      { icon: Cpu, text: 'AI agent build & configuration' },
+                      { icon: FileSearch, text: 'Email automation and live chat AI' },
+                      { icon: ShieldCheck, text: 'Escalation routing logic' },
+                      { icon: BarChart3, text: 'CSAT reporting and monthly optimization' },
                     ].map((f, i) => (
                       <li key={i} className="flex items-center gap-3 text-sm text-white/70 font-medium">
                         <f.icon size={14} className="text-[#E61739] shrink-0" />
@@ -298,119 +274,103 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                     ))}
                   </ul>
                   <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-3 flex justify-between text-xs font-semibold text-white/40">
-                    <span>Setup fee: $1,000</span>
+                    <span>Setup fee: $2,000</span>
                     <span>3-month minimum</span>
                   </div>
                 </div>
               </div>
               <button onClick={() => setView('contact')} className="mt-10 w-full py-5 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all flex items-center justify-center gap-2 group">
-                Start RPO Engagement <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                Start Core Plan <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
-            {/* Right — stacked: Per Placement + Enterprise */}
             <div className="flex flex-col gap-6">
-
-              {/* Per Placement */}
               <div className="rec-reveal d2 bg-white border border-black/[0.06] rounded-3xl p-10 flex flex-col flex-1 hover:shadow-xl transition-all">
-                <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-3">Per Placement</p>
+                <div className="absolute top-0 right-0 m-6 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">★ Most Popular</div>
+                <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-3">Growth</p>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-black text-slate-900">$1,800</span>
-                  <span className="text-slate-400 text-sm font-black">–$3,500</span>
+                  <span className="text-5xl font-black text-slate-900">$7,500</span>
+                  <span className="text-slate-400 text-sm font-black uppercase tracking-widest">/ mo</span>
                 </div>
-                <p className="text-slate-500 text-sm font-medium mb-6 leading-relaxed">Per successful hire · Junior to mid-level: $1,800 · Senior / specialist: $3,500 · No monthly commitment</p>
+                <p className="text-slate-500 text-sm font-medium mb-6 leading-relaxed">Email + chat + voice · up to 5,000 interactions/mo · 1 dedicated CX agent · full escalation layer</p>
                 <ul className="space-y-2.5 mb-8 flex-grow">
                   {[
-                    'No setup fee — pay on successful hire only',
-                    'Full sourcing, screening & shortlist of 3–5',
-                    'Background check coordination included',
-                    '90-day replacement guarantee',
+                    'Email, chat, and voice channels',
+                    'Dedicated CX agent included',
+                    'Human escalation layer and optimized workflows',
+                    'Monthly performance reviews',
                   ].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
                       <CheckCircle2 size={14} className="text-[#E61739] shrink-0" /> {f}
                     </li>
                   ))}
                 </ul>
+                <div className="text-xs text-slate-400 font-semibold mb-4">Setup fee: $3,500 · 3-month minimum</div>
                 <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all">
                   Get a Quote
                 </button>
               </div>
 
-              {/* Enterprise RPO */}
               <div className="rec-reveal d3 bg-white border border-black/[0.06] rounded-3xl p-10 flex flex-col flex-1 hover:shadow-xl transition-all">
-                <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-3">Enterprise RPO</p>
+                <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-3">Enterprise</p>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-black text-slate-900">$6,000<span className="text-3xl">+</span></span>
+                  <span className="text-5xl font-black text-slate-900">$14,000<span className="text-3xl">+</span></span>
                   <span className="text-slate-400 text-sm font-black uppercase tracking-widest">/ mo</span>
                 </div>
-                <p className="text-slate-500 text-sm font-medium mb-6 leading-relaxed">Full embedded talent function · unlimited roles · team of recruiters · employer branding support</p>
+                <p className="text-slate-500 text-sm font-medium mb-6 leading-relaxed">Omnichannel · unlimited volume · dedicated team (2–4 agents) · custom SLA · CX manager</p>
                 <ul className="space-y-2.5 mb-8 flex-grow">
                   {[
-                    'Unlimited active roles, no cap',
-                    'Dedicated team of recruiters',
-                    'Employer branding & candidate experience',
-                    'Setup fee waived · 6-month minimum',
+                    'Omnichannel support and custom SLAs',
+                    'Dedicated CX manager and 2–4 agents',
+                    'Unlimited volume handling',
+                    'Advanced optimization and reporting',
                   ].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
                       <CheckCircle2 size={14} className="text-[#E61739] shrink-0" /> {f}
                     </li>
                   ))}
                 </ul>
+                <div className="text-xs text-slate-400 font-semibold mb-4">Setup fee: Waived · 6-month minimum</div>
                 <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all">
                   Talk to Sales
                 </button>
               </div>
-
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Industry Specialization ── */}
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="rec-reveal text-center mb-14">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
+              Our CX operations team supports customer experience programs across a wide range of industries — with playbooks built around your product, your customers, and your channel mix.
             </p>
           </div>
-
           <div className="grid lg:grid-cols-3 gap-6 items-start">
-            {/* Industry list */}
             <div className="rec-reveal d1 bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
               <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
-                {INDUSTRIES.map((ind, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedInd(ind)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
-                      selectedInd.id === ind.id
-                        ? 'bg-[#E61739] text-white shadow-sm'
-                        : 'hover:bg-slate-50 text-slate-600'
-                    }`}
-                  >
-                    <ind.icon size={15} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
-                    <span className="text-sm font-semibold leading-tight">{ind.name}</span>
+                {[
+                  'E-commerce', 'Software Dev', 'Property Mgmt', 'FinTech', 'Healthcare', 'Marketing', 'Retail', 'Logistics', 'Travel', 'EdTech', 'Legal', 'Insurance', 'Media', 'Consumer Tech', 'Telecom', 'Auto', 'Fashion', 'Energy', 'Professional Services', 'Government'
+                ].map((ind, i) => (
+                  <button key={i} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 hover:bg-slate-50 text-slate-600">
+                    <span className="w-3 h-3 rounded-full bg-[#E61739]" />
+                    <span className="text-sm font-semibold leading-tight">{ind}</span>
                   </button>
                 ))}
               </div>
             </div>
-
-            {/* Detail panel */}
             <div className="rec-reveal d2 lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
-                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                  <selectedInd.icon size={30} className="text-white" />
-                </div>
+                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg"><Target size={30} className="text-white" /></div>
                 <div>
-                  <h3 className="text-2xl font-black leading-tight">{selectedInd.name}</h3>
-                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Top In-Demand Roles</p>
+                  <h3 className="text-2xl font-black leading-tight">Channel + Vertical CX</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Built for your support flow</p>
                 </div>
               </div>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
-                {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
+                {['Email deflection', 'Chat automation', 'Voice containment', 'Escalation playbooks', 'Knowledge base tuning', 'QA & reporting'].map((role, idx) => (
                   <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
                     <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
                       <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
@@ -419,14 +379,10 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                   </div>
                 ))}
               </div>
-
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-                <p className="text-white/30 text-xs font-medium">Select any industry to explore its top roles</p>
-                <button
-                  onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
-                >
-                  Hire in this vertical <ArrowRight size={14} />
+                <p className="text-white/30 text-xs font-medium">Select a vertical to tailor the CX model</p>
+                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                  Build My CX <ArrowRight size={14} />
                 </button>
               </div>
             </div>
@@ -434,30 +390,179 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      {/* ── Final CTA ── */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
-          <div className="absolute inset-0 z-0">
-            <img src={IMG_CX_TEAM} alt="KDCI Recruitment Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
-          </div>
-          <div className="mesh-container opacity-20 pointer-events-none">
-            <div className="blob blob-magenta opacity-30" />
-            <div className="blob blob-purple opacity-30" />
-          </div>
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">
-              Build your team<br/><span className="text-shine-red">the smarter way.</span>
-            </h2>
-            <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">
-              Book a discovery call with our recruitment leads and get your first shortlist in 5 business days.
-            </p>
-            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-              Start Hiring Now <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="rec-reveal relative">
+              <div className="bg-slate-100 rounded-3xl aspect-[4/5] relative shadow-2xl" style={{ overflow: 'hidden' }}>
+                <img src={IMG_CX_TEAM} alt="CX operations advantage" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0"><TrendingDown size={22} className="text-white" /></div>
+                    <div>
+                      <div className="text-3xl font-black text-slate-900 mb-1">Faster</div>
+                      <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Iterate in-house, not through vendors</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rec-reveal d2">
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The CX Operations<br/><span className="text-[#E61739]">Advantage.</span></h2>
+              <div className="space-y-8">
+                {[
+                  { title: 'Built and managed in-house', desc: 'Zero third-party markups, faster iteration, and tighter customization than outsourced-only solutions.', icon: BrainCircuit },
+                  { title: 'AI + human escalation', desc: 'Automation where it wins, skilled CX specialists where empathy and judgment matter.', icon: ShieldCheck },
+                  { title: 'Brand-accurate CX', desc: 'We tune the system to your voice, workflows, and escalation rules — not a generic script.', icon: Workflow },
+                  { title: 'Monthly optimization', desc: 'We keep improving the model with reporting, reviews, and ongoing refinement.', icon: BarChart3 },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-6 group">
+                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h4>
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium" style={{ textWrap: 'balance' }}>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl relative border border-white/[0.07]" style={{ overflow: 'hidden' }}>
+          <div className="absolute inset-0 z-0">
+            <img src={IMG_CX_HERO} alt="CX team" className="w-full h-full object-cover opacity-[0.06]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80" />
+          </div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
+            <div className="rec-reveal p-12 md:p-16 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                  <Star size={11} /> Let’s Build Your CX
+                </div>
+                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                  Launch with<br/><span className="text-[#E61739]">confidence.</span>
+                </h2>
+                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm" style={{ textWrap: 'balance' }}>
+                  Tell us your channels, workflows, and ticket volume — we’ll design the right CX model for you.
+                </p>
+              </div>
+              <div className="space-y-4 mt-12">
+                {[
+                  { icon: CheckCircle2, text: 'AI agent deployment configured to your brand' },
+                  { icon: CheckCircle2, text: 'Human escalation handled by Philippine CX specialists' },
+                  { icon: CheckCircle2, text: 'Monthly optimization and performance reviews included' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <item.icon size={14} className="text-[#E61739] shrink-0" />
+                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
+                  </div>
+                ))}
+                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
+                  {[{ val: '24/7', label: 'Coverage' }, { val: '3', label: 'Tiers' }, { val: '1', label: 'Partner' }].map((s, i) => (
+                    <div key={i}>
+                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
+                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="rec-reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl"><CheckCircle2 size={30} className="text-white" /></div>
+                  <h3 className="text-2xl font-black text-white">Message received!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
+                    Our CX team will review your brief and get back to you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleForm} className="space-y-4">
+                  <h3 className="text-lg font-black text-white mb-6">Send us your CX brief</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Channels / Requirements</label>
+                    <input required className={inp} placeholder="Email, chat, voice, SLA, ticket volume..." />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + ' resize-none'} placeholder="Brand voice, workflows, escalation rules, timeline..." />
+                  </div>
+                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="rec-reveal text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="rec-reveal d1 space-y-3">
+            {[
+              { q: 'Do you build the AI agents or just manage them?', a: 'We do both. KDCI designs, builds, configures, and manages the AI layer, then pairs it with trained CX specialists for human escalation and continuous optimization.' },
+              { q: 'What channels do you support?', a: 'Email, live chat, and voice are available, with voice included in Growth and Enterprise plans.' },
+              { q: 'What does the setup fee cover?', a: 'It covers agent build/configuration, brand voice training, knowledge base setup, integrations, routing logic, and launch support.' },
+              { q: 'Can you work with our existing tools?', a: 'Yes — we integrate with your current CRM, help desk, knowledge base, and support stack.' },
+              { q: 'How do you handle escalations?', a: 'AI handles first response and triage, then routes to a human backup CX agent when the issue needs empathy, judgment, or exception handling.' },
+              { q: 'Do you offer monthly optimization?', a: 'Yes, monthly performance reviews and optimization are included in every plan.' },
+              { q: 'Can Enterprise be customized?', a: 'Absolutely. We can tailor SLA, staffing levels, channel coverage, and reporting around your requirements.' },
+              { q: 'How quickly can you launch?', a: 'Timing depends on scope, but smaller deployments can be launched quickly once your workflows and knowledge base are ready.' },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl" style={{ overflow: 'hidden' }}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors">
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
