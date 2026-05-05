@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
@@ -287,37 +287,43 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
-                icon: '🏆',
+                icon: MessageSquare,
+                color: '#E61739',
                 stat: '#2 in Asia',
                 title: 'English Proficiency',
                 body: 'The Philippines ranks 2nd in English proficiency across Asia (EF EPI 2024) — ahead of India, China, Japan, and South Korea. Neutral accents and strong written English reduce miscommunication with US, AU, and UK clients.',
               },
               {
-                icon: '🤝',
+                icon: Handshake,
+                color: '#1D4ED8',
                 stat: '100+ years',
                 title: 'Western Cultural Alignment',
                 body: 'A century of American-influenced education, media, and business culture means Filipino professionals share communication norms, work ethics, and professional expectations with Western teams. Minimal culture-gap friction.',
               },
               {
-                icon: '🕐',
+                icon: Clock,
+                color: '#0891B2',
                 stat: 'UTC+8',
                 title: 'Flexible Time Zone Coverage',
                 body: 'Philippine Standard Time overlaps with Australian business hours (1–4 hrs behind AEST) and can flex into US evening hours. Many KDCI teams split shifts to cover US East / West Coast business hours directly.',
               },
               {
-                icon: '🎓',
+                icon: GraduationCap,
+                color: '#7C3AED',
                 stat: '750,000+',
                 title: 'Graduates Per Year',
                 body: 'The Philippine higher education system produces over 750,000 graduates annually. Strong STEM output, plus nursing, accounting, and IT programs that consistently meet global professional certification standards.',
               },
               {
-                icon: '🏛️',
+                icon: Building2,
+                color: '#059669',
                 stat: 'PEZA-backed',
                 title: 'Government BPO Support',
                 body: 'The IT-BPM industry is a national priority. PEZA-registered business parks, government training programs, and stable infrastructure investment all support a reliable, growing offshore workforce.',
               },
               {
-                icon: '💰',
+                icon: DollarSign,
+                color: '#D97706',
                 stat: '50–70% savings',
                 title: 'Structural Cost Advantage',
                 body: 'Lower cost of living means competitive salaries for local staff at a fraction of US equivalent costs — without compromising on skill or commitment. A $1,800/mo offshore role often replaces a $6,500/mo US equivalent.',
@@ -325,7 +331,12 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             ].map((card, i) => (
               <div key={i} className="bg-white rounded-3xl p-7 border border-slate-100 hover:shadow-md transition-all group">
                 <div className="flex items-start justify-between mb-5">
-                  <span className="text-3xl">{card.icon}</span>
+                  <div
+                    className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: card.color + '18' }}
+                  >
+                    <card.icon size={20} style={{ color: card.color }} strokeWidth={1.75} />
+                  </div>
                   <span className="text-[11px] font-black text-[#E61739] uppercase tracking-wider bg-[#E61739]/8 px-2.5 py-1 rounded-full">{card.stat}</span>
                 </div>
                 <h4 className="text-base font-bold text-[#1D1D1F] mb-3">{card.title}</h4>
