@@ -39,6 +39,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const [showSticky, setShowSticky] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [engModel, setEngModel] = useState<'managed' | 'direct'>('managed');
 
   // SEO: update document head when this page is active
   useEffect(() => {
@@ -1143,7 +1144,156 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
 
-      {/* 7. Contact Form */}
+      {/* 10. Engagement Model Selector */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Engagement Models
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
+              Which model is right for you?
+            </h2>
+            <p className="text-slate-500 text-base font-medium max-w-lg mx-auto leading-relaxed">
+              KDCI offers two ways to engage. Toggle between them to see exactly what each model covers.
+            </p>
+          </div>
+
+          {/* Toggle */}
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-[#F5F5F7] rounded-2xl p-1.5 gap-1">
+              {(['managed', 'direct'] as const).map(m => (
+                <button
+                  key={m}
+                  onClick={() => setEngModel(m)}
+                  className={`px-7 py-3 rounded-xl font-bold text-sm transition-all ${engModel === m ? 'bg-white text-[#1D1D1F] shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                >
+                  {m === 'managed' ? '🏢 Managed Offshore Team' : '🔍 Direct Hire Support'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Model content */}
+          {engModel === 'managed' ? (
+            <div>
+              <div className="bg-[#F5F5F7] rounded-3xl p-8 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1D1D1F] mb-1">Managed Offshore Team</h3>
+                    <p className="text-sm text-slate-500 font-medium">KDCI acts as employer of record and team manager. You direct the work.</p>
+                  </div>
+                  <div className="shrink-0 text-center bg-white rounded-2xl px-6 py-3 border border-slate-100">
+                    <div className="text-xs text-slate-400 font-semibold uppercase tracking-wide">Best for</div>
+                    <div className="text-sm font-black text-[#1D1D1F] mt-0.5">Long-term, dedicated teams</div>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { kdci: true,  item: 'Sourcing, screening & shortlisting candidates' },
+                    { kdci: true,  item: 'Employment contracts & HR compliance' },
+                    { kdci: true,  item: 'Payroll, benefits & statutory contributions' },
+                    { kdci: true,  item: 'Office space, IT hardware & security' },
+                    { kdci: true,  item: 'Day-to-day HR management & leave tracking' },
+                    { kdci: true,  item: 'AI performance monitoring & reporting' },
+                    { kdci: true,  item: 'Dedicated account manager & escalation support' },
+                    { kdci: true,  item: '90-day free replacement guarantee' },
+                    { kdci: false, item: 'Daily work direction & task assignment' },
+                    { kdci: false, item: 'Access to your tools, systems & workflows' },
+                    { kdci: false, item: 'Defining KPIs and performance expectations' },
+                    { kdci: false, item: 'Training on your specific product/service' },
+                  ].map((row, i) => (
+                    <div key={i} className={`flex items-center gap-3 rounded-xl px-4 py-3 ${row.kdci ? 'bg-white border border-slate-100' : 'bg-[#1D1D1F]/3 border border-[#1D1D1F]/5'}`}>
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-black ${row.kdci ? 'bg-[#E61739] text-white' : 'bg-[#1D1D1F] text-white'}`}>
+                        {row.kdci ? 'K' : 'Y'}
+                      </div>
+                      <span className="text-sm font-medium text-[#1D1D1F]">{row.item}</span>
+                      <span className="ml-auto text-[10px] font-black uppercase tracking-wider shrink-0 text-slate-400">{row.kdci ? 'KDCI' : 'You'}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {[
+                  { label: 'All-in monthly pricing', detail: 'No hidden payroll, benefits, or equipment costs' },
+                  { label: 'Team sizes', detail: '1–100+ staff — start with 1, scale as needed' },
+                  { label: 'Onboarding time', detail: '14 days for common roles, 30 days for specialised' },
+                ].map((s, i) => (
+                  <div key={i} className="bg-[#F5F5F7] rounded-2xl px-5 py-4">
+                    <div className="text-xs font-black text-[#1D1D1F] mb-1">{s.label}</div>
+                    <div className="text-xs text-slate-500 font-medium leading-relaxed">{s.detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="bg-[#F5F5F7] rounded-3xl p-8 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1D1D1F] mb-1">Direct Hire Support</h3>
+                    <p className="text-sm text-slate-500 font-medium">KDCI finds and vets the talent. You hire them directly into your company.</p>
+                  </div>
+                  <div className="shrink-0 text-center bg-white rounded-2xl px-6 py-3 border border-slate-100">
+                    <div className="text-xs text-slate-400 font-semibold uppercase tracking-wide">Best for</div>
+                    <div className="text-sm font-black text-[#1D1D1F] mt-0.5">One-off senior hires</div>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { kdci: true,  item: 'Full talent search & candidate pipeline' },
+                    { kdci: true,  item: 'Skills assessment & technical screening' },
+                    { kdci: true,  item: 'Shortlist of 3–5 pre-vetted candidates' },
+                    { kdci: true,  item: 'Interview coordination & reference checks' },
+                    { kdci: false, item: 'Employment contract & onboarding' },
+                    { kdci: false, item: 'Payroll, benefits & HR compliance' },
+                    { kdci: false, item: 'Office / equipment provisioning' },
+                    { kdci: false, item: 'Day-to-day management & performance reviews' },
+                    { kdci: false, item: 'Training & integration into your team' },
+                    { kdci: false, item: 'Ongoing HR support & retention' },
+                    { kdci: false, item: 'All statutory employer obligations' },
+                    { kdci: false, item: 'Replacement in case of attrition' },
+                  ].map((row, i) => (
+                    <div key={i} className={`flex items-center gap-3 rounded-xl px-4 py-3 ${row.kdci ? 'bg-white border border-slate-100' : 'bg-[#1D1D1F]/3 border border-[#1D1D1F]/5'}`}>
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-black ${row.kdci ? 'bg-[#E61739] text-white' : 'bg-[#1D1D1F] text-white'}`}>
+                        {row.kdci ? 'K' : 'Y'}
+                      </div>
+                      <span className="text-sm font-medium text-[#1D1D1F]">{row.item}</span>
+                      <span className="ml-auto text-[10px] font-black uppercase tracking-wider shrink-0 text-slate-400">{row.kdci ? 'KDCI' : 'You'}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {[
+                  { label: 'One-time placement fee', detail: 'Charged only on successful hire — no upfront cost' },
+                  { kdci: false, label: 'Candidate delivery', detail: 'Shortlist of 3–5 vetted candidates within 5–10 business days' },
+                  { label: 'Guarantee', detail: '60-day replacement guarantee if the hire doesn\'t work out' },
+                ].map((s, i) => (
+                  <div key={i} className="bg-[#F5F5F7] rounded-2xl px-5 py-4">
+                    <div className="text-xs font-black text-[#1D1D1F] mb-1">{s.label}</div>
+                    <div className="text-xs text-slate-500 font-medium leading-relaxed">{s.detail}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-8 text-center">
+            <p className="text-sm text-slate-400 font-medium mb-4">Not sure which model fits? We'll help you decide on the call.</p>
+            <button
+              onClick={() => setView('contact')}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-full font-bold text-sm hover:bg-[#c41230] transition-colors"
+            >
+              Book a free discovery call <ArrowRight size={16} />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 11. Contact Form */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
