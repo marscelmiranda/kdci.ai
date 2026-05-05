@@ -95,7 +95,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero Section */}
-      <section className="relative pt-48 pb-32 md:pb-40 overflow-hidden bg-[#020202]">
+      <section className="relative pt-40 pb-28 md:pb-36 overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
           <img 
             src={IMG_STAFF_AUG_HERO} 
@@ -146,7 +146,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 2. What We Offer */}
-      <section className="py-32 bg-white overflow-hidden">
+      <section className="py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-stretch">
 
@@ -220,7 +220,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 3. Roles We Staff */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section className="py-20 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
@@ -269,7 +269,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 5. Why the Philippines */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section className="py-20 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="text-center mb-16">
@@ -365,7 +365,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 6. How It Works */}
-      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         {/* subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
 
@@ -471,7 +471,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* Engagement Model Selector */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
@@ -604,7 +604,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* Industry Savings */}
-      <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
+      <section className="py-20 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
 
           {/* Header */}
@@ -696,7 +696,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 5. How We Compare */}
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6">
 
           <div className="text-center mb-14">
@@ -800,7 +800,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 6. Pricing Transparency */}
-      <section className="py-28 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -918,7 +918,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* Client Results */}
-      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -1047,7 +1047,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
 
       {/* Contact Form */}
-      <section className="py-24 px-6">
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
           {/* Left — image panel */}
@@ -1130,7 +1130,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
       {/* 8. FAQ */}
-      <section className="py-28 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Frequently asked questions.</h2>
