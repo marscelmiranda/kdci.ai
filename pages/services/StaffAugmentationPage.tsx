@@ -239,31 +239,51 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 3. How It Works */}
-      <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-14 bg-slate-900 text-white relative overflow-hidden">
         <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3">How It Works.</h2>
-            <p className="text-white/40 text-base font-medium">Rapid deployment of world-class Philippine offshore talent.</p>
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-12">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold">How It Works.</h2>
+              <p className="text-white/40 text-sm font-medium mt-1">Four steps from brief to embedded team.</p>
+            </div>
+            <button onClick={() => setView('contact')} className="self-start md:self-auto flex items-center gap-2 px-6 py-3 bg-[#E61739] text-white rounded-xl font-bold text-sm hover:bg-[#c51431] transition-all group shrink-0">
+              Get Started <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            </button>
           </div>
-          <div className="grid md:grid-cols-4 gap-8 relative">
-            <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-            {[
-              { step: '01', title: 'Define Needs', desc: 'Tell us what roles and seniority your team requires.', icon: Target },
-              { step: '02', title: 'Source & Vet', desc: 'We select the top 1% of talent and manage onboarding.', icon: Search },
-              { step: '03', title: 'Onboard & Integrate', desc: 'Staff integrate into your native tools and workflows.', icon: Handshake },
-              { step: '04', title: 'AI Management', desc: 'We handle AI workflows, QA, reporting, and optimization.', icon: Activity }
-            ].map((s, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-4 group-hover:border-[#E61739] transition-all">
-                  <s.icon size={20} />
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Connecting line — sits behind the nodes */}
+            <div className="hidden md:block absolute top-[22px] left-[calc(12.5%-1px)] right-[calc(12.5%-1px)] h-[2px]" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(230,23,57,0.25) 15%, rgba(230,23,57,0.5) 50%, rgba(230,23,57,0.25) 85%, transparent 100%)' }} />
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
+              {[
+                { step: '01', title: 'Define Needs', desc: 'Tell us the roles, seniority, and team size you need.', icon: Target },
+                { step: '02', title: 'Source & Vet', desc: 'We select the top 1% of Philippine talent for your brief.', icon: Search },
+                { step: '03', title: 'Onboard & Integrate', desc: 'Staff embed into your tools, timezone, and workflows.', icon: Handshake },
+                { step: '04', title: 'AI Management', desc: 'Automated QA, reporting, and performance tracking kicks in.', icon: Activity },
+              ].map((s, idx) => (
+                <div key={idx} className="flex flex-col items-center text-center group">
+                  {/* Node */}
+                  <div className="relative mb-5">
+                    <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 group-hover:border-[#E61739] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#E61739] transition-all duration-300 relative z-10">
+                      <s.icon size={18} />
+                    </div>
+                    {/* pulse ring on hover */}
+                    <div className="absolute inset-0 rounded-full border border-[#E61739]/0 group-hover:border-[#E61739]/30 group-hover:scale-150 transition-all duration-500" />
+                  </div>
+                  {/* Content */}
+                  <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
+                  <h4 className="text-sm font-bold text-white mb-1 leading-snug">{s.title}</h4>
+                  <p className="text-[11px] text-white/35 leading-relaxed font-medium max-w-[160px]">{s.desc}</p>
                 </div>
-                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                <h4 className="text-base font-bold mb-1">{s.title}</h4>
-                <p className="text-xs text-white/40 leading-relaxed font-medium">{s.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
         </div>
       </section>
 
