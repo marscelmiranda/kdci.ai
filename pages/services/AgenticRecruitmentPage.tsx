@@ -54,6 +54,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
   const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+  const lightInp = "w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-colors";
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -694,18 +695,18 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
 
           {/* Panel */}
-          <div className="relative z-10 w-full max-w-2xl bg-[#0D0D0D] border border-white/10 rounded-3xl overflow-hidden shadow-2xl" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="relative z-10 w-full max-w-2xl bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-2xl" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
 
             {/* Header */}
-            <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/[0.07]">
+            <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-slate-100">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">
                   <Star size={10} /> Start Hiring
                 </div>
-                <h2 className="text-2xl font-black text-white leading-tight">Tell us about your role.</h2>
-                <p className="text-white/40 text-sm font-medium mt-1">We'll have a shortlist ready in 14 days.</p>
+                <h2 className="text-2xl font-black text-slate-900 leading-tight">Tell us about your role.</h2>
+                <p className="text-slate-400 text-sm font-medium mt-1">We'll have a shortlist ready in 14 days.</p>
               </div>
-              <button onClick={closeModal} className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white transition-all shrink-0 ml-4">
+              <button onClick={closeModal} className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 transition-all shrink-0 ml-4">
                 <X size={16} />
               </button>
             </div>
@@ -717,11 +718,11 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                   <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
                     <CheckCircle2 size={30} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-black text-white">You're on our radar!</h3>
-                  <p className="text-white/50 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
+                  <h3 className="text-xl font-black text-slate-900">You're on our radar!</h3>
+                  <p className="text-slate-500 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
                     Our talent leads will review your brief and reach out within 24 hours.
                   </p>
-                  <button onClick={closeModal} className="mt-2 px-8 py-3 bg-white/5 border border-white/10 rounded-2xl text-white text-sm font-bold hover:bg-white/10 transition-all">
+                  <button onClick={closeModal} className="mt-2 px-8 py-3 bg-slate-100 rounded-2xl text-slate-700 text-sm font-bold hover:bg-slate-200 transition-all">
                     Close
                   </button>
                 </div>
@@ -729,56 +730,56 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 <form onSubmit={handleModalForm} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
-                      <input required className={inp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
+                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={lightInp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
-                      <input required className={inp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
+                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={lightInp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
-                      <input required type="email" className={inp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />
+                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={lightInp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
-                      <input className={inp} placeholder="+1 555 000 0000" value={modalForm.phone} onChange={e => setModalForm(f => ({ ...f, phone: e.target.value }))} />
+                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={lightInp} placeholder="+1 555 000 0000" value={modalForm.phone} onChange={e => setModalForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
-                    <input required className={inp} placeholder="e.g. Senior Full-Stack Developer, Marketing Manager" value={modalForm.role} onChange={e => setModalForm(f => ({ ...f, role: e.target.value }))} />
+                    <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
+                    <input required className={lightInp} placeholder="e.g. Senior Full-Stack Developer, Marketing Manager" value={modalForm.role} onChange={e => setModalForm(f => ({ ...f, role: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="Timeline, budget, remote/on-site, team size..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
+                    <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={lightInp + " resize-none"} placeholder="Timeline, budget, remote/on-site, team size..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <div className="flex gap-3 pt-2">
-                    <button type="button" onClick={closeModal} className="flex-1 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/10 transition-all">
+                    <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-2 group">
+                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
-                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                  <p className="text-slate-400 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
                 </form>
               )}
             </div>
 
             {/* Trust strip */}
             {!modalSubmitted && (
-              <div className="px-8 pb-6 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-5">
+              <div className="px-8 pb-6 grid grid-cols-3 gap-4 border-t border-slate-100 pt-5 bg-slate-50">
                 {[
                   { val: '5,000+', label: 'Hires Sourced' },
                   { val: '14 Days', label: 'Avg. Time-to-Fill' },
                   { val: '90-Day', label: 'Guarantee' },
                 ].map((s, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-lg font-black text-white">{s.val}</div>
-                    <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                    <div className="text-lg font-black text-slate-900">{s.val}</div>
+                    <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{s.label}</div>
                   </div>
                 ))}
               </div>
