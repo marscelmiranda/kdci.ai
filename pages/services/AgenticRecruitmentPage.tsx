@@ -54,7 +54,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
   const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
-  const lightInp = "w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-colors";
+  const lightInp = "w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm";
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -712,7 +712,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Body */}
-            <div className="px-8 py-8">
+            <div className="px-8 py-8 bg-slate-50/60">
               {modalSubmitted ? (
                 <div className="flex flex-col items-center text-center gap-5 py-10">
                   <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
@@ -730,30 +730,30 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 <form onSubmit={handleModalForm} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
                       <input required className={lightInp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Company</label>
                       <input required className={lightInp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
                       <input required type="email" className={lightInp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
                       <input className={lightInp} placeholder="+1 555 000 0000" value={modalForm.phone} onChange={e => setModalForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
+                    <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
                     <input required className={lightInp} placeholder="e.g. Senior Full-Stack Developer, Marketing Manager" value={modalForm.role} onChange={e => setModalForm(f => ({ ...f, role: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="text-[10px] text-slate-400 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={lightInp + " resize-none"} placeholder="Timeline, budget, remote/on-site, team size..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <div className="flex gap-3 pt-2">
