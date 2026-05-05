@@ -149,31 +149,15 @@ export const RESOURCES = [
 export const TOP_SERVICES = [
   { 
     id: 'agentic-recruitment',
-    name: 'Smart Recruitment', 
+    name: 'Recruitment & Talent Services', 
     tag: 'Talent Sourcing',
     icon: Target, 
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
   { 
-    id: 'software-dev',
-    name: 'Software Engineering', 
-    tag: 'Product Teams',
-    icon: Binary, 
-    desc: 'Build scalable digital products faster using elite architecture and AI-augmented coding workflows.',
-    benefits: ['3x Feature Velocity', 'Architectural Quality', 'Managed Delivery']
-  },
-  { 
-    id: 'property-mgmt',
-    name: 'Property Support', 
-    tag: 'Portfolio Scaling',
-    icon: Building, 
-    desc: 'Streamline leasing, tenant support, and back-office operations with AI-powered offshore teams.',
-    benefits: ['70% Cost Savings', '24/7 Coverage', 'Tool Integration']
-  },
-  { 
     id: 'creative-prod',
-    name: 'Creative Production', 
+    name: 'Graphic Design Studio', 
     tag: 'Brand Production',
     icon: Sparkles, 
     desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
@@ -181,7 +165,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'customer-support',
-    name: 'Customer Experience', 
+    name: 'Customer Experience Operations', 
     tag: '24/7 Global Ops',
     icon: Activity, 
     desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
