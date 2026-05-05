@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown } from 'lucide-react';
+import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown, X } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
@@ -47,6 +47,11 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalForm, setModalForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
+  const [modalSubmitted, setModalSubmitted] = useState(false);
+  const handleModalForm = (e: React.FormEvent) => { e.preventDefault(); setModalSubmitted(true); };
+  const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -83,10 +88,10 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
+            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
               Request Pricing
             </button>
           </div>
@@ -677,6 +682,110 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
         </div>
       </section>
+
+      {/* Hiring Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center p-4"
+          style={{ animation: 'fadeInUp 0.25s ease both' }}
+          onKeyDown={e => e.key === 'Escape' && closeModal()}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
+
+          {/* Panel */}
+          <div className="relative z-10 w-full max-w-2xl bg-[#0D0D0D] border border-white/10 rounded-3xl overflow-hidden shadow-2xl" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/[0.07]">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">
+                  <Star size={10} /> Start Hiring
+                </div>
+                <h2 className="text-2xl font-black text-white leading-tight">Tell us about your role.</h2>
+                <p className="text-white/40 text-sm font-medium mt-1">We'll have a shortlist ready in 14 days.</p>
+              </div>
+              <button onClick={closeModal} className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white transition-all shrink-0 ml-4">
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="px-8 py-8">
+              {modalSubmitted ? (
+                <div className="flex flex-col items-center text-center gap-5 py-10">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                    <CheckCircle2 size={30} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-white">You're on our radar!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
+                    Our talent leads will review your brief and reach out within 24 hours.
+                  </p>
+                  <button onClick={closeModal} className="mt-2 px-8 py-3 bg-white/5 border border-white/10 rounded-2xl text-white text-sm font-bold hover:bg-white/10 transition-all">
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleModalForm} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={modalForm.phone} onChange={e => setModalForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
+                    <input required className={inp} placeholder="e.g. Senior Full-Stack Developer, Marketing Manager" value={modalForm.role} onChange={e => setModalForm(f => ({ ...f, role: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Timeline, budget, remote/on-site, team size..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button type="button" onClick={closeModal} className="flex-1 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/10 transition-all">
+                      Cancel
+                    </button>
+                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-2 group">
+                      Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                    </button>
+                  </div>
+                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
+            </div>
+
+            {/* Trust strip */}
+            {!modalSubmitted && (
+              <div className="px-8 pb-6 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-5">
+                {[
+                  { val: '5,000+', label: 'Hires Sourced' },
+                  { val: '14 Days', label: 'Avg. Time-to-Fill' },
+                  { val: '90-Day', label: 'Guarantee' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-lg font-black text-white">{s.val}</div>
+                    <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );
