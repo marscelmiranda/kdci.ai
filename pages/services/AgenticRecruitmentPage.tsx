@@ -96,7 +96,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight tracking-tight">
                 From job brief<br/>to <span className="text-[#E61739]">signed offer.</span>
               </h2>
-              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10">
+              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10" style={{ textWrap: 'balance' }}>
                 Full-cycle recruitment using AI tools to source, screen, and score candidates at 3× the speed of traditional methods. Our recruiters are specialists in the Philippine talent market, with deep networks across design, tech, marketing, finance, and operations roles.
               </p>
               <div className="space-y-3">
@@ -160,7 +160,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight">
               Skin in the game.<br/><span className="text-[#E61739]">Not just a service.</span>
             </h2>
-            <p className="text-white/40 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+            <p className="text-white/40 text-lg max-w-2xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
               Every placement is backed by a 90-day guarantee — no exceptions, no fine print.
             </p>
           </div>
@@ -202,7 +202,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                   </div>
                   <div>
                     <h4 className="text-lg font-black text-white mb-2">{item.title}</h4>
-                    <p className="text-white/40 text-sm font-medium leading-relaxed">{item.desc}</p>
+                    <p className="text-white/40 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -358,7 +358,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">Built for Speed.</h2>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Our AI-augmented recruitment lifecycle ensures you never waste time on sub-par candidates.</p>
+            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Our AI-augmented recruitment lifecycle ensures you never waste time on sub-par candidates.</p>
           </div>
           <div className="grid md:grid-cols-5 gap-8 relative">
             <div className="hidden md:block absolute top-[2.75rem] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
@@ -387,7 +387,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
               Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
             </p>
           </div>
@@ -486,7 +486,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                     </div>
                     <div>
                       <h4 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium" style={{ textWrap: 'balance' }}>{item.desc}</p>
                     </div>
                   </div>
                 ))}
