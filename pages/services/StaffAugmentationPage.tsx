@@ -234,16 +234,16 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { icon: Headphones,  role: 'Customer Service Agent',   rate: 'from $1,080/mo', tag: 'High demand' },
-              { icon: UserCircle,  role: 'Virtual Assistant',         rate: 'from $1,020/mo', tag: 'Quick hire' },
-              { icon: Palette,     role: 'Graphic Designer',          rate: 'from $1,320/mo', tag: '' },
-              { icon: Code,        role: 'Software Engineer',         rate: 'from $1,920/mo', tag: 'Specialist' },
-              { icon: Coins,       role: 'Accountant / Bookkeeper',   rate: 'from $1,200/mo', tag: '' },
-              { icon: Users,       role: 'HR Specialist',             rate: 'from $1,200/mo', tag: '' },
-              { icon: Target,      role: 'Digital Marketer / SEO',    rate: 'from $1,320/mo', tag: '' },
-              { icon: Database,    role: 'Data Analyst',              rate: 'from $1,440/mo', tag: 'Specialist' },
-              { icon: Home,        role: 'Real Estate Admin',         rate: 'from $1,080/mo', tag: 'High demand' },
-              { icon: Workflow,    role: 'Operations / Process Mgr',  rate: 'from $1,560/mo', tag: '' },
+              { icon: Headphones,  role: 'Customer Service Agent',   rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: UserCircle,  role: 'Virtual Assistant',         rate: 'from $1,450/mo', tag: 'Quick hire' },
+              { icon: Palette,     role: 'Graphic Designer',          rate: 'from $1,900/mo', tag: '' },
+              { icon: Code,        role: 'Software Engineer',         rate: 'from $2,750/mo', tag: 'Specialist' },
+              { icon: Coins,       role: 'Accountant / Bookkeeper',   rate: 'from $1,700/mo', tag: '' },
+              { icon: Users,       role: 'HR Specialist',             rate: 'from $1,700/mo', tag: '' },
+              { icon: Target,      role: 'Digital Marketer / SEO',    rate: 'from $1,900/mo', tag: '' },
+              { icon: Database,    role: 'Data Analyst',              rate: 'from $2,050/mo', tag: 'Specialist' },
+              { icon: Home,        role: 'Real Estate Admin',         rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: Workflow,    role: 'Operations / Process Mgr',  rate: 'from $2,200/mo', tag: '' },
             ].map((r, i) => (
               <div key={i} className="bg-white rounded-2xl border border-black/[0.05] p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group cursor-default">
                 {/* tag */}
@@ -896,10 +896,10 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 mb-5">Sample monthly rates (all-in)</p>
                 <div className="space-y-4">
                   {[
-                    { role: 'Customer Support / Admin',  range: '$1,080 – $1,680 / mo' },
-                    { role: 'Design / Content / Marketing', range: '$1,320 – $2,160 / mo' },
-                    { role: 'Software Engineer (Mid)',    range: '$1,920 – $3,120 / mo' },
-                    { role: 'Senior / Specialized Roles',range: '$3,000 – $4,800 / mo' },
+                    { role: 'Customer Support / Admin',  range: '$1,450 – $2,200 / mo' },
+                    { role: 'Design / Content / Marketing', range: '$1,900 – $3,100 / mo' },
+                    { role: 'Software Engineer (Mid)',    range: '$2,750 – $4,450 / mo' },
+                    { role: 'Senior / Specialized Roles',range: '$4,250 – $6,800 / mo' },
                   ].map((r, i) => (
                     <div key={i} className="flex items-center justify-between gap-4">
                       <span className="text-sm text-white/60 font-medium">{r.role}</span>
