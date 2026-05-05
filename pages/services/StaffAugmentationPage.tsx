@@ -132,13 +132,13 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               {/* floating stat badge */}
-              <div className="absolute top-8 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
-                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
-                  <Star size={18} className="text-[#E61739]" />
+              <div className="absolute top-8 left-8 bg-[#E61739] rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
+                <div className="w-9 h-9 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+                  <Star size={18} className="text-white" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-[#1D1D1F] leading-none">95%</div>
-                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Client Retention Rate</div>
+                  <div className="text-lg font-black text-white leading-none">95%</div>
+                  <div className="text-[9px] text-white/70 font-black uppercase tracking-widest mt-0.5">Client Retention Rate</div>
                 </div>
               </div>
             </div>
