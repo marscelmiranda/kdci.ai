@@ -137,7 +137,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       </section>
 
       {/* Why It Commands a Premium */}
-      <section className="py-24 bg-[#020202] relative overflow-hidden">
+      <section className="py-12 bg-[#020202] relative overflow-hidden">
         <style>{`
           @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(32px); }
@@ -148,64 +148,53 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             50%       { box-shadow: 0 0 0 14px rgba(230,23,57,0); }
           }
         `}</style>
-        <div className="mesh-container opacity-20">
-          <div className="blob blob-purple"></div>
-          <div className="blob blob-magenta"></div>
-        </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16" style={{ animation: 'fadeInUp 0.6s ease both' }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
-              <Award size={12} /> Why It Commands a Premium
-            </div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight">
-              Skin in the game.<br/><span className="text-[#E61739]">Not just a service.</span>
-            </h2>
-            <p className="text-white/40 text-lg max-w-2xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-              Every placement is backed by a 90-day guarantee — no exceptions, no fine print.
-            </p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-3 gap-4">
 
-            {/* Featured: 90-Day Guarantee */}
+            {/* 90-Day Guarantee */}
             <div
-              className="bg-[#E61739] rounded-3xl p-12 flex flex-col justify-between min-h-[380px]"
-              style={{ animation: 'fadeInUp 0.55s ease 0.2s both, pulseRing 2.8s ease-in-out 1.2s infinite' }}
+              className="bg-[#E61739] rounded-3xl p-8 flex items-center gap-6"
+              style={{ animation: 'fadeInUp 0.55s ease 0.1s both, pulseRing 2.8s ease-in-out 1.2s infinite' }}
             >
-              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center">
-                <Shield size={26} className="text-white" />
+              <div className="shrink-0">
+                <div className="text-[4.5rem] font-black text-white leading-none">90</div>
+                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Day Guarantee</div>
               </div>
-              <div>
-                <div className="text-[7rem] font-black text-white leading-none mb-1">90</div>
-                <div className="text-2xl font-black text-white/70 mb-5">Day Guarantee</div>
-                <p className="text-white/70 text-sm font-medium leading-relaxed max-w-xs" style={{ textWrap: 'balance' }}>
-                  If a hire doesn't work out within 90 days, we re-source at zero extra cost. No fine print.
+              <div className="border-l border-white/20 pl-6">
+                <p className="text-white/80 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
+                  Re-sourced at zero cost if a hire doesn't work out. No fine print.
                 </p>
               </div>
             </div>
 
-            {/* Right: two stacked cards */}
-            <div className="flex flex-col gap-6">
-              {[
-                { icon: Target,   stat: '70% Less',   title: 'Flat Fee Model',  desc: 'Skip the 15–25% agency markup. One flat fee, backed by guaranteed results.', delay: '0.35s' },
-                { icon: Workflow, stat: 'Day 1 Fit',  title: 'Embedded RPO',    desc: 'We become part of your team, learning your culture and hiring bar over time.', delay: '0.48s' },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  style={{ animation: `fadeInUp 0.55s ease ${item.delay} both` }}
-                  className="bg-white/5 border border-white/10 hover:bg-white/8 hover:border-white/20 transition-all rounded-3xl p-8 flex-1 flex flex-col justify-between"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-11 h-11 bg-white/10 rounded-2xl flex items-center justify-center">
-                      <item.icon size={20} className="text-white" />
-                    </div>
-                    <span className="text-3xl font-black text-[#E61739]">{item.stat}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-black text-white mb-2">{item.title}</h4>
-                    <p className="text-white/40 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+            {/* Flat Fee */}
+            <div
+              className="bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all"
+              style={{ animation: 'fadeInUp 0.55s ease 0.22s both' }}
+            >
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
+                <Target size={20} className="text-[#E61739]" />
+              </div>
+              <div>
+                <div className="text-2xl font-black text-[#E61739] mb-0.5">70% Less</div>
+                <h4 className="text-sm font-black text-white mb-1">Flat Fee Model</h4>
+                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Skip the 15–25% agency markup. One flat fee, guaranteed results.</p>
+              </div>
+            </div>
+
+            {/* Embedded RPO */}
+            <div
+              className="bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all"
+              style={{ animation: 'fadeInUp 0.55s ease 0.34s both' }}
+            >
+              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
+                <Workflow size={20} className="text-[#E61739]" />
+              </div>
+              <div>
+                <div className="text-2xl font-black text-[#E61739] mb-0.5">Day 1 Fit</div>
+                <h4 className="text-sm font-black text-white mb-1">Embedded RPO</h4>
+                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>We become part of your team, learning your culture and hiring bar.</p>
+              </div>
             </div>
 
           </div>
