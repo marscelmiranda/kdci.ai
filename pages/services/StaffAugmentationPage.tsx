@@ -98,7 +98,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Philippine Offshore Staffing" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Philippine Offshore</span><br/>
+            <span className="text-shine-white">Philippine Offshore </span>
             <span className="text-[#E61739]">Staffing.</span>
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
