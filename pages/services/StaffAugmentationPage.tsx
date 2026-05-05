@@ -228,7 +228,60 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 4. How It Works */}
+      {/* 4. Global Reach */}
+      <section className="py-20 bg-white border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12">
+
+            {/* Left — headline + stats */}
+            <div className="lg:w-80 shrink-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Global Reach
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-[#1D1D1F] tracking-tight mb-4 leading-tight">Serving clients<br/>on 4 continents.</h2>
+              <p className="text-slate-500 text-sm font-medium leading-relaxed mb-8">From US startups to Australian enterprises — KDCI offshore teams work seamlessly across every timezone.</p>
+              <div className="flex gap-6">
+                <div>
+                  <div className="text-2xl font-black text-[#E61739]">9+</div>
+                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">Countries</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-[#E61739]">500+</div>
+                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">Clients served</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-[#E61739]">13+</div>
+                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">Years operating</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — country grid */}
+            <div className="flex-1 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+              {[
+                { flag: '🇺🇸', country: 'United States',   note: 'Primary market' },
+                { flag: '🇦🇺', country: 'Australia',        note: 'Large timezone overlap' },
+                { flag: '🇬🇧', country: 'United Kingdom',   note: '' },
+                { flag: '🇨🇦', country: 'Canada',           note: '' },
+                { flag: '🇸🇬', country: 'Singapore',        note: '' },
+                { flag: '🇦🇪', country: 'UAE',              note: '' },
+                { flag: '🇩🇪', country: 'Germany',          note: '' },
+                { flag: '🇳🇿', country: 'New Zealand',      note: '' },
+                { flag: '🇮🇪', country: 'Ireland',          note: '' },
+              ].map((c, i) => (
+                <div key={i} className={`flex flex-col items-center text-center p-4 rounded-2xl border transition-all group cursor-default ${i < 2 ? 'bg-[#E61739]/5 border-[#E61739]/15 hover:bg-[#E61739]/10' : 'bg-[#F5F5F7] border-transparent hover:bg-white hover:border-slate-200 hover:shadow-sm'}`}>
+                  <span className="text-3xl mb-2 leading-none">{c.flag}</span>
+                  <span className="text-[11px] font-bold text-[#1D1D1F] leading-tight">{c.country}</span>
+                  {c.note && <span className="text-[9px] text-[#E61739] font-black uppercase tracking-wide mt-1">{c.note}</span>}
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. How It Works */}
       <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         {/* subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
