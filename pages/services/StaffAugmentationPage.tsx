@@ -131,7 +131,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-4 md:gap-x-16 lg:gap-x-20 items-center text-white">
             {[
               { stat: '500+',      label: 'Clients Globally' },
-              { stat: '13+ yrs',  label: 'In Operation' },
+              { stat: '15+ yrs',  label: 'In Operation' },
               { stat: '95%',      label: 'Client Retention' },
               { stat: '200+',     label: 'Roles Available' },
               { stat: '14–30d',   label: 'Time to First Hire' },
@@ -368,7 +368,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <p className="text-xs text-slate-400 font-medium">🇺🇸 US · 🇦🇺 AU · 🇬🇧 UK · 🇨🇦 CA · 🇸🇬 SG · 🇦🇪 UAE · 🇩🇪 DE · 🇳🇿 NZ · 🇮🇪 IE</p>
             </div>
             <div className="flex gap-8 shrink-0">
-              {[{ v: '500+', l: 'Clients' }, { v: '13+', l: 'Years' }, { v: '95%', l: 'Retention' }].map((s, i) => (
+              {[{ v: '500+', l: 'Clients' }, { v: '15+', l: 'Years' }, { v: '95%', l: 'Retention' }].map((s, i) => (
                 <div key={i} className="text-center">
                   <div className="text-lg font-black text-[#E61739]">{s.v}</div>
                   <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">{s.l}</div>
