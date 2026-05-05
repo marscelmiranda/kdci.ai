@@ -164,31 +164,50 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               Every placement is backed by a 90-day guarantee — no exceptions, no fine print.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: Shield,   title: '90-Day Guarantee',   desc: "If a hire doesn't work out, we re-source at zero extra cost.",          stat: '0 Risk',   highlight: false },
-              { icon: Target,   title: 'Flat Fee Model',     desc: 'Skip the 15–25% agency markup. One flat fee, backed by results.',        stat: '70% Less',  highlight: true  },
-              { icon: Workflow, title: 'Embedded RPO',       desc: 'Become a seamless extension of your team — we learn your hiring bar.',   stat: 'Day 1 Fit', highlight: false },
-            ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  animation: `fadeInUp 0.55s ease ${i * 0.12 + 0.2}s both${item.highlight ? ', pulseRing 2.5s ease-in-out 1s infinite' : ''}`,
-                }}
-                className={`p-8 rounded-3xl border flex flex-col gap-6 transition-all ${item.highlight ? 'bg-[#E61739] border-[#E61739]' : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'}`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.highlight ? 'bg-white/20' : 'bg-white/10'}`}>
-                    <item.icon size={22} className="text-white" />
-                  </div>
-                  <span className={`text-2xl font-black ${item.highlight ? 'text-white' : 'text-[#E61739]'}`}>{item.stat}</span>
-                </div>
-                <div>
-                  <h4 className="text-lg font-black text-white mb-2">{item.title}</h4>
-                  <p className={`text-sm font-medium leading-relaxed ${item.highlight ? 'text-white/80' : 'text-white/40'}`}>{item.desc}</p>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-6">
+
+            {/* Featured: 90-Day Guarantee */}
+            <div
+              className="bg-[#E61739] rounded-3xl p-12 flex flex-col justify-between min-h-[380px]"
+              style={{ animation: 'fadeInUp 0.55s ease 0.2s both, pulseRing 2.8s ease-in-out 1.2s infinite' }}
+            >
+              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center">
+                <Shield size={26} className="text-white" />
               </div>
-            ))}
+              <div>
+                <div className="text-[7rem] font-black text-white leading-none mb-1">90</div>
+                <div className="text-2xl font-black text-white/70 mb-5">Day Guarantee</div>
+                <p className="text-white/70 text-sm font-medium leading-relaxed max-w-xs">
+                  If your hire doesn't work out in 90 days, we re-source at zero extra cost — no fine print, no questions asked.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: two stacked cards */}
+            <div className="flex flex-col gap-6">
+              {[
+                { icon: Target,   stat: '70% Less',   title: 'Flat Fee Model',  desc: 'Skip the 15–25% agency markup. One flat fee, backed by guaranteed results.', delay: '0.35s' },
+                { icon: Workflow, stat: 'Day 1 Fit',  title: 'Embedded RPO',    desc: 'We become part of your team, learning your culture and hiring bar over time.', delay: '0.48s' },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{ animation: `fadeInUp 0.55s ease ${item.delay} both` }}
+                  className="bg-white/5 border border-white/10 hover:bg-white/8 hover:border-white/20 transition-all rounded-3xl p-8 flex-1 flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-11 h-11 bg-white/10 rounded-2xl flex items-center justify-center">
+                      <item.icon size={20} className="text-white" />
+                    </div>
+                    <span className="text-3xl font-black text-[#E61739]">{item.stat}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-black text-white mb-2">{item.title}</h4>
+                    <p className="text-white/40 text-sm font-medium leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
