@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { saveBlogPost, deleteBlogPost, getAllBlogPosts, type BlogPost as StoreBlogPost } from '../contentStore';
 import { 
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, 
   Image as ImageIcon, Bell, Search, Plus, LogOut, Settings,
@@ -36,6 +37,15 @@ const MOCK_POSTS: BlogPost[] = [
 export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
   const [posts, setPosts] = useState<BlogPost[]>(MOCK_POSTS);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Load live posts from Supabase on mount
+  useEffect(() => {
+    getAllBlogPosts()
+      .then(data => { if (data?.length) setPosts(data as any); })
+      .catch(() => {});
+  }, []);
   const [editingId, setEditingId] = useState<string | null>(null);
   
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
@@ -105,26 +115,52 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     setEditorTab('content');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSaving(true);
+    setSaveError(null);
     const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    
-    if (editingId) {
-      setPosts(prev => prev.map(p => p.id === editingId ? { 
-        ...p, title: formData.title, category: formData.category, author: formData.author, status: formData.status as any,
-        date: formData.status === 'Published' && p.status !== 'Published' ? currentDate : p.date
-      } : p));
-    } else {
-      const newPost: BlogPost = {
-        id: Math.random().toString(36).substr(2, 9), title: formData.title, category: formData.category, author: formData.author, status: formData.status as any, date: formData.status === 'Published' ? currentDate : '-', views: 0
+    try {
+      const payload: any = {
+        title: formData.title,
+        slug: formData.slug || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        excerpt: formData.excerpt || '',
+        category: formData.category,
+        author: formData.author,
+        read_time: formData.readTime,
+        tags: formData.tags,
+        featured: formData.featured,
+        img: formData.imageUrl,
+        image_url: formData.imageUrl,
+        status: formData.status,
+        date: formData.status === 'Published' ? currentDate : '-',
+        body: '',
+        blocks: [],
+        seo: {},
+        hubspot: {},
+        views: 0,
       };
-      setPosts([newPost, ...posts]);
+      if (editingId) payload.id = Number(editingId);
+      await saveBlogPost(payload);
+      // Reload from Supabase to get fresh data
+      const fresh = await getAllBlogPosts();
+      if (fresh?.length) setPosts(fresh as any);
+      setViewState('list');
+    } catch (err: any) {
+      setSaveError('Save failed: ' + (err?.message ?? 'Unknown error'));
+    } finally {
+      setSaving(false);
     }
-    setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this article?")) setPosts(prev => prev.filter(p => p.id !== id));
+  const handleDelete = async (id: string) => {
+    if (!confirm('Delete this article?')) return;
+    try {
+      await deleteBlogPost(Number(id));
+      setPosts(prev => prev.filter(p => String(p.id) !== id));
+    } catch (err: any) {
+      alert('Delete failed: ' + (err?.message ?? 'Unknown error'));
+    }
   };
 
   const handleNavClick = (id: string) => {
@@ -417,7 +453,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                      <option value="Published">Published</option>
                      <option value="Archived">Archived</option>
                   </select>
-                  <button type="submit" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2"><Save size={16}/> Save</button>
+                  {saveError && <span className="text-red-400 text-xs font-bold mr-2">{saveError}</span>}
+                  <button type="submit" disabled={saving} className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 disabled:opacity-60">
+                    {saving ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/> Saving…</> : <><Save size={16}/> Save</>}
+                  </button>
                </div>
             </header>
 

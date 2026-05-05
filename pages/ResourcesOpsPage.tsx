@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import {
+  saveEbook, deleteEbook, getAllEbooks,
+  saveCaseStudy, deleteCaseStudy, getAllCaseStudies,
+  saveWebinar, deleteWebinar, getAllWebinars,
+} from '../contentStore';
 import { 
   ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
   Save, Eye, Check, ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2, Quote, AppWindow, Minus, ExternalLink, Activity, User
@@ -35,6 +40,26 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
   const [activeTab, setActiveTab] = useState<'ebooks' | 'cases' | 'webinars'>('ebooks');
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
   const [resources, setResources] = useState<Resource[]>(MOCK_RESOURCES);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Load all resources from Supabase on mount
+  useEffect(() => {
+    const loadAll = async () => {
+      try {
+        const [ebooks, cases, webinars] = await Promise.all([
+          getAllEbooks(), getAllCaseStudies(), getAllWebinars()
+        ]);
+        const mapped: Resource[] = [
+          ...ebooks.map(e => ({ id: String(e.id), title: e.title, type: 'ebooks' as const, author: '', status: (e.status === 'Published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: e.created_at ? new Date(e.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+          ...cases.map(c => ({ id: String(c.id), title: c.title, type: 'cases' as const, author: '', status: (c.status === 'Published' || c.status === 'published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: c.created_at ? new Date(c.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+          ...webinars.map(w => ({ id: String(w.id), title: w.title, type: 'webinars' as const, author: '', status: (w.status === 'Published' || w.status === 'published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: w.created_at ? new Date(w.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+        ];
+        if (mapped.length) setResources(mapped);
+      } catch {}
+    };
+    loadAll();
+  }, []);
   const [editingId, setEditingId] = useState<string | null>(null);
   
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
@@ -105,26 +130,88 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
     setEditorTab('content');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    
-    if (editingId) {
-      setResources(prev => prev.map(p => p.id === editingId ? { 
-        ...p, title: formData.title, type: formData.type as any, author: formData.author, status: formData.status as any,
-        date: formData.status === 'Published' && p.status !== 'Published' ? currentDate : p.date
-      } : p));
-    } else {
-      const newResource: Resource = {
-        id: Math.random().toString(36).substr(2, 9), title: formData.title, type: formData.type as any, author: formData.author, status: formData.status as any, date: formData.status === 'Published' ? currentDate : '-', views: 0
-      };
-      setResources([newResource, ...resources]);
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const type = formData.type as 'ebooks' | 'cases' | 'webinars';
+
+      if (type === 'ebooks') {
+        const payload: any = {
+          title: formData.title,
+          description: '',
+          pages: '',
+          icon_name: 'FileText',
+          color: 'bg-blue-500',
+          pdf_url: formData.resourceUrl || '',
+          status: formData.status,
+        };
+        if (editingId) payload.id = Number(editingId);
+        await saveEbook(payload);
+
+      } else if (type === 'cases') {
+        const payload: any = {
+          client: formData.title,
+          industry: '',
+          icon_name: 'Building2',
+          title: formData.title,
+          description: '',
+          metrics: [],
+          tags: formData.tags ? formData.tags.split(',').map((t: string) => t.trim()) : [],
+          status: formData.status,
+          body: '',
+        };
+        if (editingId) payload.id = Number(editingId);
+        await saveCaseStudy(payload);
+
+      } else if (type === 'webinars') {
+        const payload: any = {
+          title: formData.title,
+          date: '',
+          time: '',
+          speakers: [],
+          description: '',
+          thumb: formData.imageUrl || '',
+          duration: '',
+          is_upcoming: true,
+          registration_url: formData.resourceUrl || '',
+          status: formData.status,
+        };
+        if (editingId) payload.id = Number(editingId);
+        await saveWebinar(payload);
+      }
+
+      // Reload all resources from Supabase
+      const [ebooks, cases, webinars] = await Promise.all([
+        getAllEbooks(), getAllCaseStudies(), getAllWebinars()
+      ]);
+      const mapped: Resource[] = [
+        ...ebooks.map(e => ({ id: String(e.id), title: e.title, type: 'ebooks' as const, author: '', status: (e.status === 'Published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: e.created_at ? new Date(e.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+        ...cases.map(c => ({ id: String(c.id), title: c.title, type: 'cases' as const, author: '', status: (c.status === 'Published' || c.status === 'published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: c.created_at ? new Date(c.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+        ...webinars.map(w => ({ id: String(w.id), title: w.title, type: 'webinars' as const, author: '', status: (w.status === 'Published' || w.status === 'published' ? 'Published' : 'Draft') as 'Published' | 'Draft' | 'Archived', date: w.created_at ? new Date(w.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-', views: 0 })),
+      ];
+      setResources(mapped);
+      setViewState('list');
+    } catch (err: any) {
+      setSaveError('Save failed: ' + (err?.message ?? 'Unknown error'));
+    } finally {
+      setSaving(false);
     }
-    setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this resource?")) setResources(prev => prev.filter(p => p.id !== id));
+  const handleDelete = async (id: string) => {
+    if (!confirm('Delete this resource?')) return;
+    // Find the type of the resource being deleted
+    const resource = resources.find(r => r.id === id);
+    try {
+      if (resource?.type === 'ebooks') await deleteEbook(Number(id));
+      else if (resource?.type === 'cases') await deleteCaseStudy(Number(id));
+      else if (resource?.type === 'webinars') await deleteWebinar(Number(id));
+      setResources(prev => prev.filter(p => p.id !== id));
+    } catch (err: any) {
+      alert('Delete failed: ' + (err?.message ?? 'Unknown error'));
+    }
   };
 
   const handleNavClick = (id: string) => {
@@ -453,7 +540,10 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                      <option value="Published">Published</option>
                      <option value="Archived">Archived</option>
                   </select>
-                  <button type="submit" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2"><Save size={16}/> Save</button>
+                  {saveError && <span className="text-red-400 text-xs font-bold mr-2">{saveError}</span>}
+                  <button type="submit" disabled={saving} className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 disabled:opacity-60">
+                    {saving ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/> Saving…</> : <><Save size={16}/> Save</>}
+                  </button>
                </div>
             </header>
 

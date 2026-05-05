@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { saveJob, deleteJob, getAllJobs } from '../contentStore';
 import {
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen,
   Image as ImageIcon, Bell, Search, Plus, LogOut, Settings,
@@ -107,6 +108,29 @@ const MOCK_APPLICANTS: Applicant[] = [
 export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [viewState, setViewState] = useState<'list' | 'editor' | 'applicants' | 'analytics'>('list');
   const [jobs, setJobs] = useState<JobListing[]>(MOCK_JOBS);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Load jobs from Supabase on mount
+  useEffect(() => {
+    getAllJobs()
+      .then(data => {
+        if (data?.length) {
+          const mapped = data.map(j => ({
+            id: String(j.id),
+            title: j.title,
+            department: j.department,
+            location: j.location,
+            type: j.type,
+            status: (j.status === 'Active' ? 'Active' : j.status === 'Closed' ? 'Closed' : 'Draft') as 'Active' | 'Draft' | 'Closed',
+            applicants: j.applicants ?? 0,
+            postedDate: j.created_at ? new Date(j.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-',
+          }));
+          setJobs(mapped);
+        }
+      })
+      .catch(() => {});
+  }, []);
   const [applicants] = useState<Applicant[]>(MOCK_APPLICANTS);
   const [editingId, setEditingId] = useState<string | null>(null);
 
@@ -175,27 +199,58 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
     setViewState('editor');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingId) {
-      // Update existing
-      setJobs(prev => prev.map(job => job.id === editingId ? { ...job, ...formData, id: job.id, applicants: job.applicants, postedDate: job.postedDate } as JobListing : job));
-    } else {
-      // Create new
-      const newJob: JobListing = {
-        id: Math.random().toString(36).substr(2, 9),
-        ...formData,
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const payload: any = {
+        title: formData.title,
+        department: formData.department,
+        location: formData.location,
+        type: formData.type,
+        description: formData.description,
+        requirements: formData.requirements,
+        status: formData.status,
+        active: formData.status === 'Active',
+        salary: '',
+        tags: [],
+        deadline: '',
         applicants: 0,
-        postedDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      } as JobListing;
-      setJobs([newJob, ...jobs]);
+        view_type: '',
+      };
+      if (editingId) payload.id = Number(editingId);
+      await saveJob(payload);
+      // Reload from Supabase
+      const fresh = await getAllJobs();
+      if (fresh?.length) {
+        const mapped = fresh.map(j => ({
+          id: String(j.id),
+          title: j.title,
+          department: j.department,
+          location: j.location,
+          type: j.type,
+          status: (j.status === 'Active' ? 'Active' : j.status === 'Closed' ? 'Closed' : 'Draft') as 'Active' | 'Draft' | 'Closed',
+          applicants: j.applicants ?? 0,
+          postedDate: j.created_at ? new Date(j.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-',
+        }));
+        setJobs(mapped);
+      }
+      setViewState('list');
+    } catch (err: any) {
+      setSaveError('Save failed: ' + (err?.message ?? 'Unknown error'));
+    } finally {
+      setSaving(false);
     }
-    setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this job posting?")) {
+  const handleDelete = async (id: string) => {
+    if (!confirm('Delete this job posting?')) return;
+    try {
+      await deleteJob(Number(id));
       setJobs(prev => prev.filter(j => j.id !== id));
+    } catch (err: any) {
+      alert('Delete failed: ' + (err?.message ?? 'Unknown error'));
     }
   };
 
@@ -1135,11 +1190,13 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                   >
                     Cancel
                   </button>
+                  {saveError && <span className="text-red-400 text-xs font-bold">{saveError}</span>}
                   <button 
                     type="submit"
-                    className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"
+                    disabled={saving}
+                    className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2 disabled:opacity-60"
                   >
-                    <Save size={16} /> Save Job Post
+                    {saving ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/> Saving…</> : <><Save size={16} /> Save Job Post</>}
                   </button>
                 </div>
               </div>
