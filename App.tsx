@@ -82,6 +82,10 @@ const App = () => {
     return <PublisherDashboardPage setView={setView} />;
   }
 
+  if (activeView === 'publisher-settings') {
+    return <PublisherDashboardPage setView={setView} />;
+  }
+
   // CMS Views
   if (activeView === 'cms-career-ops') {
     return <CareerOpsPage setView={setView} />;

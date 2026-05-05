@@ -38,6 +38,7 @@ export type ViewType =
   | 'contact'
   | 'login'
   | 'publisher-dashboard'
+  | 'publisher-settings'
   | 'cms-career-ops'
   | 'cms-blog-ops'
   | 'cms-resources-ops'
