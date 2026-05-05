@@ -212,7 +212,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-b-3xl overflow-hidden shadow-2xl h-full">
+              <div className="rounded-3xl overflow-hidden shadow-2xl h-full">
                 <img src={recIncludedImg} alt="Candidate vetting process" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               </div>
