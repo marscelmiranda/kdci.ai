@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
@@ -37,6 +37,12 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const [submitted, setSubmitted] = useState(false);
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+  const [showSticky, setShowSticky] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowSticky(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const capabilities = [
     { title: "Customer Service Agents", icon: Headphones, roles: "Support, Tech Support, Chat" },
@@ -516,6 +522,22 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
         </div>
       </section>
+      {/* Sticky floating CTA */}
+      <div className={`fixed bottom-8 right-8 z-50 transition-all duration-300 ${showSticky ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+        <button
+          onClick={() => {
+            const el = document.querySelector('#contact-form-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            else setView('contact');
+          }}
+          className="flex items-center gap-3 px-6 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#c51431] hover:scale-105 transition-all group"
+          style={{ boxShadow: '0 8px 32px rgba(230,23,57,0.45)' }}
+        >
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse shrink-0" />
+          Book a Free Call
+          <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
     </div>
   );
 };
