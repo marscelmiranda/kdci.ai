@@ -165,28 +165,30 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       {/* What's Included */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100">
+          <div className="grid lg:grid-cols-2 gap-20 items-stretch">
+            <div className="flex flex-col">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100 self-start">
                 <ClipboardCheck size={12} /> What's Included
               </div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6 leading-tight tracking-tight">
                 Everything you need.<br/><span className="text-[#E61739]">Nothing you don't.</span>
               </h2>
-              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10">
+              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
                 Every engagement includes our complete recruitment suite — from AI sourcing to offer management and beyond.
               </p>
-              <div className="grid grid-cols-1 gap-1.5">
-                {INCLUDED.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 py-1.5">
-                    <CheckCircle2 size={15} className="text-[#E61739] shrink-0" />
-                    <span className="text-sm font-semibold text-slate-600">{item}</span>
-                  </div>
-                ))}
+              <div className="bg-slate-50 border border-black/5 rounded-3xl p-8 flex-grow">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-3 h-full content-start">
+                  {INCLUDED.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
+                      <span className="text-sm font-semibold text-slate-600">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-[4rem] overflow-hidden shadow-2xl aspect-[4/5]">
+              <div className="rounded-[4rem] overflow-hidden shadow-2xl h-full">
                 <img src={IMG_REC_VETTING} alt="Candidate vetting process" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               </div>
