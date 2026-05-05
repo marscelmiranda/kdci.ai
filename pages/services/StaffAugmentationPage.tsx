@@ -219,52 +219,111 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 3. Roles We Staff */}
-      <section className="py-20 bg-[#F5F5F7]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+      {/* 3. How It Works + Roles We Staff — combined */}
+      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          {/* ── How It Works ── */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-                200+ Roles Available
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Onboarding Timeline
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight">Most-requested positions.</h2>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14–30 days.</h2>
             </div>
-            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Starting rates shown are all-in monthly costs. Contact us for an exact quote by level and experience.</p>
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. We handle every step.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="relative mb-6">
+            <div className="hidden lg:block absolute top-8 left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { day: 'Day 1',     icon: Target,      title: 'Discovery Call',  bullets: ['Define roles & seniority', 'Set team size & budget', 'Agree on KPIs & SLAs'] },
+                { day: 'Day 2–5',   icon: Search,      title: 'Source & Screen', bullets: ['AI-assisted talent search', 'Skills & culture fit vetting', 'Top 3 candidates presented'] },
+                { day: 'Day 6–10',  icon: Handshake,   title: 'You Approve',     bullets: ['Interview shortlist', 'Select your hire(s)', 'Contracts & NDAs signed'] },
+                { day: 'Day 11–14', icon: Activity,    title: 'Go Live',         bullets: ['Equipment & access set up', 'Integrated into your tools', 'AI monitoring activated'] },
+              ].map((s, idx) => (
+                <div key={idx} className="relative group">
+                  <div className="bg-white/[0.03] border border-white/8 rounded-3xl p-6 h-full hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/20 mb-5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#E61739]" />
+                      <span className="text-[#E61739] text-[10px] font-black uppercase tracking-widest">{s.day}</span>
+                    </div>
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all">
+                      <s.icon size={20} />
+                    </div>
+                    <h4 className="text-base font-bold text-white mb-3">{s.title}</h4>
+                    <ul className="space-y-2">
+                      {s.bullets.map((b, bi) => (
+                        <li key={bi} className="flex items-start gap-2 text-sm text-white/40 font-medium">
+                          <CheckCircle2 size={13} className="text-[#E61739]/60 mt-0.5 shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="absolute bottom-4 right-5 text-5xl font-black text-white/[0.04] select-none leading-none">{String(idx + 1).padStart(2, '0')}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Promise bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 py-5 border-t border-white/8 mb-16">
             {[
-              { icon: Headphones,  role: 'Customer Service Agent',   rate: 'from $1,550/mo', tag: 'High demand' },
-              { icon: UserCircle,  role: 'Virtual Assistant',         rate: 'from $1,450/mo', tag: 'Quick hire' },
-              { icon: Palette,     role: 'Graphic Designer',          rate: 'from $1,900/mo', tag: '' },
-              { icon: Code,        role: 'Software Engineer',         rate: 'from $2,750/mo', tag: 'Specialist' },
-              { icon: Coins,       role: 'Accountant / Bookkeeper',   rate: 'from $1,700/mo', tag: '' },
-              { icon: Users,       role: 'HR Specialist',             rate: 'from $1,700/mo', tag: '' },
-              { icon: Target,      role: 'Digital Marketer / SEO',    rate: 'from $1,900/mo', tag: '' },
-              { icon: Database,    role: 'Data Analyst',              rate: 'from $2,050/mo', tag: 'Specialist' },
-              { icon: Home,        role: 'Real Estate Admin',         rate: 'from $1,550/mo', tag: 'High demand' },
-              { icon: Workflow,    role: 'Operations / Process Mgr',  rate: 'from $2,200/mo', tag: '' },
+              { icon: CheckCircle2, text: 'First candidate presented in 5 days' },
+              { icon: CheckCircle2, text: '14 days for common roles · up to 30 for specialized' },
+              { icon: CheckCircle2, text: 'Free replacement within 90 days' },
+            ].map((p, i) => (
+              <div key={i} className="flex items-center gap-2.5 text-sm text-white/50 font-medium">
+                <p.icon size={14} className="text-[#E61739] shrink-0" />
+                {p.text}
+              </div>
+            ))}
+          </div>
+
+          {/* ── Roles Divider ── */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                200+ Roles Available
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight leading-tight">Most-requested positions.</h2>
+            </div>
+            <p className="text-white/40 text-sm font-medium max-w-sm leading-relaxed">Starting rates shown are all-in monthly costs. Contact us for an exact quote by level and experience.</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {[
+              { icon: Headphones, role: 'Customer Service Agent',  rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: UserCircle, role: 'Virtual Assistant',        rate: 'from $1,450/mo', tag: 'Quick hire' },
+              { icon: Palette,    role: 'Graphic Designer',         rate: 'from $1,900/mo', tag: '' },
+              { icon: Code,       role: 'Software Engineer',        rate: 'from $2,750/mo', tag: 'Specialist' },
+              { icon: Coins,      role: 'Accountant / Bookkeeper',  rate: 'from $1,700/mo', tag: '' },
+              { icon: Users,      role: 'HR Specialist',            rate: 'from $1,700/mo', tag: '' },
+              { icon: Target,     role: 'Digital Marketer / SEO',   rate: 'from $1,900/mo', tag: '' },
+              { icon: Database,   role: 'Data Analyst',             rate: 'from $2,050/mo', tag: 'Specialist' },
+              { icon: Home,       role: 'Real Estate Admin',        rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: Workflow,   role: 'Operations / Process Mgr', rate: 'from $2,200/mo', tag: '' },
             ].map((r, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-black/[0.05] p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group cursor-default">
-                {/* tag */}
-                <div className="h-5 mb-4">
-                  {r.tag && (
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-[#E61739]/8 text-[#E61739] text-[9px] font-black uppercase tracking-wider">{r.tag}</span>
-                  )}
+              <div key={i} className="bg-white/[0.04] border border-white/8 rounded-2xl p-5 hover:bg-white/[0.08] hover:border-white/15 hover:-translate-y-0.5 transition-all group cursor-default">
+                <div className="h-5 mb-3">
+                  {r.tag && <span className="inline-block px-2 py-0.5 rounded-full bg-[#E61739]/20 text-[#E61739] text-[9px] font-black uppercase tracking-wider">{r.tag}</span>}
                 </div>
-                {/* icon */}
-                <div className="w-10 h-10 bg-[#F5F5F7] rounded-xl flex items-center justify-center text-slate-400 mb-4 group-hover:bg-[#E61739] group-hover:text-white transition-all">
-                  <r.icon size={18} />
+                <div className="w-9 h-9 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white/50 mb-3 group-hover:bg-[#E61739]/20 group-hover:text-[#E61739] group-hover:border-[#E61739]/30 transition-all">
+                  <r.icon size={16} />
                 </div>
-                <h4 className="text-sm font-bold text-[#1D1D1F] leading-snug mb-2">{r.role}</h4>
+                <h4 className="text-sm font-bold text-white leading-snug mb-1.5">{r.role}</h4>
                 <p className="text-xs font-black text-[#E61739]">{r.rate}</p>
               </div>
             ))}
           </div>
 
-          <p className="text-center text-xs text-slate-400 font-medium mt-8">
+          <p className="text-center text-xs text-white/30 font-medium mt-8">
             Don't see your role? We staff 200+ positions across every function. <button onClick={() => setView('contact')} className="text-[#E61739] font-bold hover:underline">Ask us about it →</button>
           </p>
+
         </div>
       </section>
 
