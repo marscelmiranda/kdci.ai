@@ -134,20 +134,20 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               {/* floating stat badges */}
               <div className="absolute top-8 left-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
                 <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
-                  <Users size={18} className="text-[#E61739]" />
+                  <Clock size={18} className="text-[#E61739]" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-[#1D1D1F] leading-none">Top 1%</div>
-                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">PH Talent Pool</div>
+                  <div className="text-lg font-black text-[#1D1D1F] leading-none">14 Days</div>
+                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Avg. Time to Hire</div>
                 </div>
               </div>
               <div className="absolute top-8 right-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
                 <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
-                  <CheckCircle2 size={18} className="text-[#E61739]" />
+                  <Star size={18} className="text-[#E61739]" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-[#1D1D1F] leading-none">70%</div>
-                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Cost Savings</div>
+                  <div className="text-lg font-black text-[#1D1D1F] leading-none">95%</div>
+                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Client Retention</div>
                 </div>
               </div>
             </div>
