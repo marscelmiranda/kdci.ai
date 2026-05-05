@@ -137,50 +137,56 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       </section>
 
       {/* Why It Commands a Premium */}
-      <section className="py-32 bg-[#020202] relative overflow-hidden">
+      <section className="py-24 bg-[#020202] relative overflow-hidden">
+        <style>{`
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes pulseRing {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(230,23,57,0.5); }
+            50%       { box-shadow: 0 0 0 14px rgba(230,23,57,0); }
+          }
+        `}</style>
         <div className="mesh-container opacity-20">
           <div className="blob blob-purple"></div>
           <div className="blob blob-magenta"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" style={{ animation: 'fadeInUp 0.6s ease both' }}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
               <Award size={12} /> Why It Commands a Premium
             </div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight">
               Skin in the game.<br/><span className="text-[#E61739]">Not just a service.</span>
             </h2>
-            <p className="text-white/50 text-xl max-w-3xl mx-auto font-medium leading-relaxed">
-              We back every placement with a 90-day replacement guarantee — standard, no exceptions.
+            <p className="text-white/40 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+              Every placement is backed by a 90-day guarantee — no exceptions, no fine print.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              {
-                icon: Shield,
-                title: '90-Day Replacement Guarantee',
-                desc: "We have skin in the game. A 90-day replacement guarantee is standard on every placement. If it doesn't work out, we re-source at no extra cost.",
-                highlight: false,
-              },
-              {
-                icon: Target,
-                title: 'Flat Fee vs. 15–25%',
-                desc: 'US recruiting firms charge 15–25% of annual salary. We charge a flat fee and back it with a guarantee — saving you tens of thousands per hire.',
-                highlight: true,
-              },
-              {
-                icon: Workflow,
-                title: 'Embedded RPO Option',
-                desc: 'For RPO retainer clients, we become an embedded talent function that knows your culture and hiring bar intimately — delivering consistently better candidates over time.',
-                highlight: false,
-              },
+              { icon: Shield,   title: '90-Day Guarantee',   desc: "If a hire doesn't work out, we re-source at zero extra cost.",          stat: '0 Risk',   highlight: false },
+              { icon: Target,   title: 'Flat Fee Model',     desc: 'Skip the 15–25% agency markup. One flat fee, backed by results.',        stat: '70% Less',  highlight: true  },
+              { icon: Workflow, title: 'Embedded RPO',       desc: 'Become a seamless extension of your team — we learn your hiring bar.',   stat: 'Day 1 Fit', highlight: false },
             ].map((item, i) => (
-              <div key={i} className={`p-10 rounded-3xl border transition-all ${item.highlight ? 'bg-[#E61739] border-[#E61739]' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${item.highlight ? 'bg-white/20' : 'bg-white/10'}`}>
-                  <item.icon size={28} className="text-white" />
+              <div
+                key={i}
+                style={{
+                  animation: `fadeInUp 0.55s ease ${i * 0.12 + 0.2}s both${item.highlight ? ', pulseRing 2.5s ease-in-out 1s infinite' : ''}`,
+                }}
+                className={`p-8 rounded-3xl border flex flex-col gap-6 transition-all ${item.highlight ? 'bg-[#E61739] border-[#E61739]' : 'bg-white/5 border-white/10 hover:bg-white/8 hover:border-white/20'}`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.highlight ? 'bg-white/20' : 'bg-white/10'}`}>
+                    <item.icon size={22} className="text-white" />
+                  </div>
+                  <span className={`text-2xl font-black ${item.highlight ? 'text-white' : 'text-[#E61739]'}`}>{item.stat}</span>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-4">{item.title}</h4>
-                <p className={`text-sm font-medium leading-relaxed ${item.highlight ? 'text-white/80' : 'text-white/50'}`}>{item.desc}</p>
+                <div>
+                  <h4 className="text-lg font-black text-white mb-2">{item.title}</h4>
+                  <p className={`text-sm font-medium leading-relaxed ${item.highlight ? 'text-white/80' : 'text-white/40'}`}>{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
