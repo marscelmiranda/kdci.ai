@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
+import IMG_KDCI_OFFICE from '../../attached_assets/Gemini_Generated_Image_mhi0ftmhi0ftmhi0_1777992381262.png';
 
 const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
   'ecommerce':     [{ role: 'E-commerce Analyst',       ph: '$2,400', save: '65%' }, { role: 'Catalog Manager',         ph: '$2,160', save: '63%' }, { role: 'SEO Specialist',          ph: '$2,400', save: '67%' }, { role: 'CX Lead',                 ph: '$2,160', save: '62%' }, { role: 'Visual Merchandiser',     ph: '$2,280', save: '64%' }],
@@ -281,6 +282,22 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <p className="text-slate-500 text-base font-medium max-w-xl mx-auto leading-relaxed">
               Not every offshore market is equal. The Philippines consistently outperforms on the factors that matter most for long-term team success.
             </p>
+          </div>
+
+          {/* Office team photo */}
+          <div className="relative mb-10 rounded-3xl overflow-hidden shadow-lg" style={{ height: '400px' }}>
+            <img
+              src={IMG_KDCI_OFFICE}
+              alt="KDCI Operations team in Manila office"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 px-8 py-6 flex items-end justify-between">
+              <div>
+                <p className="text-white font-black text-lg leading-tight">Your dedicated team. Manila, Philippines.</p>
+                <p className="text-white/60 text-sm font-medium mt-1">KDCI-managed office — staffed, equipped, and compliant from day one.</p>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
