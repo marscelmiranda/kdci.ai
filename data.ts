@@ -165,7 +165,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'staff-aug',
-    name: 'Philippine Staffing', 
+    name: 'Philippine Offshore Staffing', 
     tag: 'On-Demand Talent',
     icon: Rocket, 
     desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',
