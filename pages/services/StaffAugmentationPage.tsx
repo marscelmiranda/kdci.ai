@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
+import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
 const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
   'ecommerce':     [{ role: 'E-commerce Analyst',       ph: '$2,000', save: '65%' }, { role: 'Catalog Manager',         ph: '$1,800', save: '63%' }, { role: 'SEO Specialist',          ph: '$2,000', save: '67%' }, { role: 'CX Lead',                 ph: '$1,800', save: '62%' }, { role: 'Visual Merchandiser',     ph: '$1,900', save: '64%' }],
@@ -32,6 +33,10 @@ const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string 
 
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   const capabilities = [
     { title: "Customer Service Agents", icon: Headphones, roles: "Support, Tech Support, Chat" },
@@ -427,27 +432,88 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 6. Final CTA */}
+
+      {/* 7. Contact Form */}
       <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
-           <div className="absolute inset-0 z-0">
-              <img 
-                src={IMG_STAFF_AUG_HERO} 
-                alt="KDCI Staff Augmentation" 
-                className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
-              />
-           </div>
-           <div className="mesh-container opacity-20 pointer-events-none">
-              <div className="blob blob-purple opacity-30"></div>
-              <div className="blob blob-magenta opacity-30"></div>
-           </div>
-           <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Your Philippine Offshore<br/><span className="text-shine-red">Team Starts Here.</span></h2>
-              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Tell us your goals and we’ll match you with full-time Philippine professionals — embedded in your team, managed by AI, and ready in 14 days.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-                 Request a Custom Quote <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-           </div>
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
+
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CONTACT}
+              alt="KDCI offshore professional"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">Philippine Offshore Staffing</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your team, ready<br/>in 14 days.</h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Expert Vetting', 'AI-Managed', 'Zero Risk'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
+                <p className="text-white/50 font-medium">Your request has been received. Expect a response within 1 business day.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Consultation
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Build Your Offshore Team.</h2>
+                  <p className="text-white/40 text-sm font-medium">Tell us what you need and we'll match you with top Philippine professionals.</p>
+                </div>
+                <form onSubmit={handleForm} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Role / Function Needed</label>
+                    <input required className={inp} placeholder="e.g. Customer Support Lead, Full-Stack Developer" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>
+                </form>
+              </>
+            )}
+          </div>
+
         </div>
       </section>
     </div>
