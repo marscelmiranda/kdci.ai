@@ -239,49 +239,60 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 3. How It Works */}
-      <section className="py-14 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
+      <section className="py-20 bg-[#080C14] text-white relative overflow-hidden">
+        {/* subtle grid texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
         <div className="max-w-6xl mx-auto px-6 relative z-10">
 
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold">How It Works.</h2>
-              <p className="text-white/40 text-sm font-medium mt-1">Four steps from brief to embedded team.</p>
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+              Our Process
             </div>
-            <button onClick={() => setView('contact')} className="self-start md:self-auto flex items-center gap-2 px-6 py-3 bg-[#E61739] text-white rounded-xl font-bold text-sm hover:bg-[#c51431] transition-all group shrink-0">
-              Get Started <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-            </button>
+            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-3">From Brief to<br/><span className="text-[#E61739]">Embedded Team.</span></h2>
+            <p className="text-white/40 text-base font-medium">Four steps. As fast as 14 days.</p>
           </div>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Connecting line — sits behind the nodes */}
-            <div className="hidden md:block absolute top-[22px] left-[calc(12.5%-1px)] right-[calc(12.5%-1px)] h-[2px]" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(230,23,57,0.25) 15%, rgba(230,23,57,0.5) 50%, rgba(230,23,57,0.25) 85%, transparent 100%)' }} />
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
-              {[
-                { step: '01', title: 'Define Needs', desc: 'Tell us the roles, seniority, and team size you need.', icon: Target },
-                { step: '02', title: 'Source & Vet', desc: 'We select the top 1% of Philippine talent for your brief.', icon: Search },
-                { step: '03', title: 'Onboard & Integrate', desc: 'Staff embed into your tools, timezone, and workflows.', icon: Handshake },
-                { step: '04', title: 'AI Management', desc: 'Automated QA, reporting, and performance tracking kicks in.', icon: Activity },
-              ].map((s, idx) => (
-                <div key={idx} className="flex flex-col items-center text-center group">
-                  {/* Node */}
-                  <div className="relative mb-5">
-                    <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 group-hover:border-[#E61739] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#E61739] transition-all duration-300 relative z-10">
+          {/* Steps row */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[
+              { step: '01', title: 'Define Needs', desc: 'Tell us the roles, seniority, and team size you need.', icon: Target, color: 'from-[#E61739]/20 to-[#E61739]/5' },
+              { step: '02', title: 'Source & Vet', desc: 'We select the top 1% of Philippine talent for your brief.', icon: Search, color: 'from-violet-500/20 to-violet-500/5' },
+              { step: '03', title: 'Onboard & Integrate', desc: 'Staff embed directly into your tools and workflows.', icon: Handshake, color: 'from-sky-500/20 to-sky-500/5' },
+              { step: '04', title: 'Managed & Optimised', desc: 'AI-driven QA, reporting, and performance tracking runs in the background.', icon: Activity, color: 'from-emerald-500/20 to-emerald-500/5' },
+            ].map((s, idx) => (
+              <div key={idx} className="relative group">
+                {/* Connector arrow between cards */}
+                {idx < 3 && (
+                  <div className="hidden md:flex absolute -right-2 top-8 z-20 items-center justify-center w-4">
+                    <ArrowRight size={14} className="text-white/15" />
+                  </div>
+                )}
+                <div className={`h-full rounded-2xl bg-gradient-to-b ${s.color} border border-white/[0.07] p-6 flex flex-col gap-4 group-hover:border-white/20 transition-all duration-300`}>
+                  {/* Step number + icon row */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-5xl font-black leading-none" style={{ color: 'rgba(255,255,255,0.06)' }}>{s.step}</span>
+                    <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center text-white/60 group-hover:text-white group-hover:bg-white/12 transition-all">
                       <s.icon size={18} />
                     </div>
-                    {/* pulse ring on hover */}
-                    <div className="absolute inset-0 rounded-full border border-[#E61739]/0 group-hover:border-[#E61739]/30 group-hover:scale-150 transition-all duration-500" />
                   </div>
-                  {/* Content */}
-                  <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                  <h4 className="text-sm font-bold text-white mb-1 leading-snug">{s.title}</h4>
-                  <p className="text-[11px] text-white/35 leading-relaxed font-medium max-w-[160px]">{s.desc}</p>
+                  {/* Title + desc */}
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1.5 leading-snug">{s.title}</h4>
+                    <p className="text-xs text-white/40 leading-relaxed font-medium">{s.desc}</p>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA strip */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-5 rounded-2xl bg-white/[0.04] border border-white/[0.07]">
+            <p className="text-sm text-white/50 font-medium">Ready to build your Philippine offshore team?</p>
+            <button onClick={() => setView('contact')} className="flex items-center gap-2 px-7 py-3 bg-[#E61739] text-white rounded-xl font-bold text-sm hover:bg-[#c51431] transition-all group shrink-0">
+              Start in 14 Days <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            </button>
           </div>
 
         </div>
