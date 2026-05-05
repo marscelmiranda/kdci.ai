@@ -1,7 +1,11 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "postgresql-16"]
 
 [[ports]]
 localPort = 3000
+externalPort = 3001
+
+[[ports]]
+localPort = 3001
 externalPort = 3001
 
 [[ports]]
@@ -27,10 +31,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node server.js & npm run dev"
+waitForPort = 5000
+
+[nix]
+channel = "stable-25_05"
