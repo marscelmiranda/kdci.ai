@@ -121,15 +121,15 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs 
             setView={setView} 
-            currentName="Staff Augmentation" 
+            currentName="Philippine Offshore Staffing" 
             parent={{ name: 'Solutions', view: 'solutions-hub' }} 
           />
           <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
-            Scale Your Team with <br/>
-            <span className="text-[#E61739]">AI‑Managed Talent.</span>
+            Build Your Team in the <br/>
+            <span className="text-[#E61739]">Philippines.</span>
           </h1>
           <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
-            Get full-time offshore professionals embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
+            Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
           </p>
           <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group mx-auto">
             Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -163,8 +163,8 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Expert Capacity, Any Function.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">From creative studios to software pods, we build the team your business needs to grow.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Top Philippine Talent, Any Function.</h2>
+            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">From creative studios to software pods, we source and embed the best offshore professionals the Philippines has to offer.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {capabilities.map((cap, i) => (
@@ -186,7 +186,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-6xl font-heading font-bold mb-6">How It Works.</h2>
-            <p className="text-white/40 text-xl font-medium">Rapid deployment of intelligent offshore operations.</p>
+            <p className="text-white/40 text-xl font-medium">Rapid deployment of world-class Philippine offshore talent.</p>
           </div>
           <div className="grid md:grid-cols-4 gap-12 relative">
             <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
@@ -213,8 +213,8 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-32 bg-[#F5F5F7] rounded-t-[5rem]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Transparent Pricing.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">Explore common roles and our tier-based monthly rates.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Transparent Offshore Pricing.</h2>
+            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">All-inclusive monthly rates for full-time Philippine professionals — no hidden fees, no surprise markups.</p>
           </div>
 
           {/* Category Selector */}
@@ -299,8 +299,8 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
            <div className="text-center mb-24">
-             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">The KDCI Advantage.</h2>
-             <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">Why enterprise teams scale with us.</p>
+             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">The KDCI Offshore Advantage.</h2>
+             <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">Why global teams choose the Philippines — and KDCI — to scale.</p>
            </div>
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
@@ -336,8 +336,8 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="blob blob-magenta opacity-30"></div>
            </div>
            <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Let's Build Your <br/><span className="text-shine-red">Scalable Team Together.</span></h2>
-              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Talk to us about your team goals and we’ll build a staffing solution to match — with full-time roles and AI-powered support.</p>
+              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Your Philippine Offshore<br/><span className="text-shine-red">Team Starts Here.</span></h2>
+              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Tell us your goals and we’ll match you with full-time Philippine professionals — embedded in your team, managed by AI, and ready in 14 days.</p>
               <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
                  Request a Custom Quote <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
