@@ -248,8 +248,8 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                   </div>
                 )}
                 <h4 className={`text-2xl font-bold mb-3 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
-                <div className="flex items-baseline gap-1.5 mb-1">
-                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.price}</span>
+                <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
+                  <span className={`text-3xl font-black whitespace-nowrap ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.price}</span>
                   <span className={`text-xs font-black uppercase tracking-widest ${plan.highlight ? 'text-white/40' : 'text-slate-400'}`}>{plan.priceNote}</span>
                 </div>
                 <p className={`text-sm font-semibold mb-4 ${plan.highlight ? 'text-white/60' : 'text-slate-500'}`}>{plan.tagline}</p>
