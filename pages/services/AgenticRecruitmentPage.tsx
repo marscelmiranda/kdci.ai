@@ -44,6 +44,10 @@ const INCLUDED = [
 
 export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -503,16 +507,14 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Contact Form */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
-          {/* Background image */}
           <div className="absolute inset-0 z-0">
-            <img src={IMG_REC_HERO} alt="Recruitment Team" className="w-full h-full object-cover opacity-[0.07]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]/60"></div>
+            <img src={IMG_REC_HERO} alt="Recruitment Team" className="w-full h-full object-cover opacity-[0.06]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
           </div>
-          {/* Glow accent */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
 
@@ -520,54 +522,90 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             <div className="reveal p-12 md:p-16 flex flex-col justify-between">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Ready When You Are
+                  <Star size={11} /> Let's Talk Hiring
                 </div>
-                <h2 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
                   Build your<br/><span className="text-[#E61739]">dream team.</span>
                 </h2>
-                <p className="text-white/50 text-lg font-medium leading-relaxed max-w-md" style={{ textWrap: 'balance' }}>
-                  Book a strategy session with our talent leads and get a customised sourcing plan within 24 hours.
+                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm" style={{ textWrap: 'balance' }}>
+                  Tell us about your hiring needs and we'll have a sourcing plan ready within 24 hours.
                 </p>
               </div>
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-10 border-t border-white/[0.07]">
+              <div className="space-y-4 mt-12">
                 {[
-                  { val: '5,000+', label: 'Hires Sourced' },
-                  { val: '14 Days', label: 'Avg. Time-to-Fill' },
-                  { val: '90-Day', label: 'Guarantee' },
-                ].map((s, i) => (
-                  <div key={i}>
-                    <div className="text-2xl font-black text-white mb-0.5">{s.val}</div>
-                    <div className="text-[10px] text-white/30 font-black uppercase tracking-widest">{s.label}</div>
+                  { icon: CheckCircle2, text: 'AI sourcing across 100k+ global profiles' },
+                  { icon: CheckCircle2, text: '3–5 vetted candidates, avg. 14-day turnaround' },
+                  { icon: CheckCircle2, text: '90-day replacement guarantee, no fine print' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <item.icon size={14} className="text-[#E61739] shrink-0" />
+                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
                   </div>
                 ))}
+                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
+                  {[
+                    { val: '5,000+', label: 'Hires Sourced' },
+                    { val: '14 Days', label: 'Avg. Fill' },
+                    { val: '90-Day', label: 'Guarantee' },
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
+                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Right — booking card */}
-            <div className="reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center gap-8">
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 space-y-5">
-                <h3 className="text-xl font-black text-white">What happens next</h3>
-                {[
-                  { step: '01', text: 'We review your role brief & ideal candidate profile' },
-                  { step: '02', text: 'AI sourcing begins — 100k+ profiles scanned in 48 hrs' },
-                  { step: '03', text: 'You receive a curated shortlist of 3–5 vetted candidates' },
-                ].map((item) => (
-                  <div key={item.step} className="flex items-start gap-4">
-                    <div className="w-7 h-7 rounded-lg bg-[#E61739]/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <span className="text-[#E61739] text-xs font-black">{item.step}</span>
-                    </div>
-                    <p className="text-white/60 text-sm font-medium leading-snug">{item.text}</p>
+            {/* Right — contact form */}
+            <div className="reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                    <CheckCircle2 size={30} className="text-white" />
                   </div>
-                ))}
-              </div>
-              <button
-                onClick={() => setView('contact')}
-                className="w-full py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all shadow-2xl flex items-center justify-center gap-3 group"
-              >
-                Book Recruitment Strategy
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <p className="text-white/20 text-xs text-center font-medium">No commitment required · Response within 24 hours</p>
+                  <h3 className="text-2xl font-black text-white">Message received!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
+                    Our talent leads will review your brief and get back to you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleForm} className="space-y-4">
+                  <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
+                    <input required className={inp} placeholder="e.g. Senior Full-Stack Developer, Marketing Manager" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Timeline, budget, team size, remote/on-site..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
             </div>
 
           </div>
