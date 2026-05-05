@@ -338,24 +338,26 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {INDUSTRIES.map((ind, i) => {
               const roles = INDUSTRY_ROLES[ind.id] ?? [];
               return (
-                <div key={i} className="bg-white border border-black/5 rounded-3xl p-5 hover:shadow-lg hover:border-[#E61739]/20 transition-all group flex flex-col">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 shrink-0 rounded-xl bg-slate-50 flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739]/10 transition-colors">
-                      <ind.icon size={15} />
+                <div key={i} className="bg-white border border-black/5 rounded-3xl p-4 hover:shadow-md hover:border-[#E61739]/25 transition-all duration-300 group overflow-hidden">
+                  <div className="flex items-center gap-2.5 mb-0 group-hover:mb-3 transition-all duration-300">
+                    <div className="w-7 h-7 shrink-0 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#E61739]/10 group-hover:text-[#E61739] transition-colors">
+                      <ind.icon size={13} />
                     </div>
-                    <h4 className="text-xs font-black text-slate-900 leading-tight">{ind.name}</h4>
+                    <h4 className="text-[11px] font-black text-slate-800 leading-tight">{ind.name}</h4>
                   </div>
-                  <div className="space-y-1.5 flex-grow">
-                    {roles.map((role, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <div className="w-1 h-1 rounded-full bg-[#E61739] mt-1.5 shrink-0 opacity-60"></div>
-                        <span className="text-[11px] font-medium text-slate-500 leading-tight">{role}</span>
-                      </div>
-                    ))}
+                  <div className="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-300 ease-in-out">
+                    <div className="space-y-1 pt-0.5">
+                      {roles.map((role, idx) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-[#E61739] shrink-0 opacity-50"></div>
+                          <span className="text-[10px] font-medium text-slate-500 leading-tight">{role}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
