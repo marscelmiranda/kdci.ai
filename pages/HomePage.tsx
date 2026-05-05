@@ -55,15 +55,15 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Built for results.</h2>
             <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Select a capability to see how we transform operations into competitive advantages.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {TOP_SERVICES.map((s, i) => (
-              <div key={i} className="group p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.02] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col items-start text-left">
-                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#E61739] mb-8 shadow-sm group-hover:scale-110 transition-transform">
-                  <s.icon size={28} />
+              <div key={i} className="group p-7 rounded-[2.5rem] bg-[#F5F5F7] border border-black/[0.02] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col items-start text-left">
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#E61739] mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                  <s.icon size={24} />
                 </div>
-                <h3 className="text-2xl font-bold text-[#1D1D1F] mb-4">{s.name}</h3>
-                <p className="text-[#86868b] text-sm leading-relaxed mb-10 flex-grow font-medium">{s.desc}</p>
-                <div className="w-full pt-6 border-t border-black/5 mb-8">
+                <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{s.name}</h3>
+                <p className="text-[#86868b] text-sm leading-relaxed mb-8 flex-grow font-medium">{s.desc}</p>
+                <div className="w-full pt-5 border-t border-black/5 mb-6">
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#1D1D1F] mb-3">Key Outcomes</div>
                   <div className="space-y-2">
                     {s.benefits.map((b, idx) => (
@@ -73,7 +73,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                     ))}
                   </div>
                 </div>
-                <button onClick={() => setView(s.id as ViewType)} className="w-full py-4 bg-white text-[#1D1D1F] rounded-2xl font-bold text-sm border border-black/5 hover:bg-[#E61739] hover:text-white transition-all shadow-sm">
+                <button onClick={() => setView(s.id as ViewType)} className="w-full py-3.5 bg-white text-[#1D1D1F] rounded-2xl font-bold text-sm border border-black/5 hover:bg-[#E61739] hover:text-white transition-all shadow-sm">
                   Explore Solution
                 </button>
               </div>
