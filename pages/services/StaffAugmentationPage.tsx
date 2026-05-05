@@ -239,14 +239,14 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 3. How It Works */}
-      <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
         <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-6">How It Works.</h2>
-            <p className="text-white/40 text-xl font-medium">Rapid deployment of world-class Philippine offshore talent.</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3">How It Works.</h2>
+            <p className="text-white/40 text-base font-medium">Rapid deployment of world-class Philippine offshore talent.</p>
           </div>
-          <div className="grid md:grid-cols-4 gap-12 relative">
+          <div className="grid md:grid-cols-4 gap-8 relative">
             <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
             {[
               { step: '01', title: 'Define Needs', desc: 'Tell us what roles and seniority your team requires.', icon: Target },
@@ -255,12 +255,12 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               { step: '04', title: 'AI Management', desc: 'We handle AI workflows, QA, reporting, and optimization.', icon: Activity }
             ].map((s, idx) => (
               <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-14 h-14 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-8 group-hover:border-[#E61739] transition-all">
-                  <s.icon size={24} />
+                <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-4 group-hover:border-[#E61739] transition-all">
+                  <s.icon size={20} />
                 </div>
-                <div className="text-[#E61739] text-xs font-black uppercase tracking-widest mb-2">{s.step}</div>
-                <h4 className="text-xl font-bold mb-2">{s.title}</h4>
-                <p className="text-sm text-white/40 leading-relaxed font-medium">{s.desc}</p>
+                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.step}</div>
+                <h4 className="text-base font-bold mb-1">{s.title}</h4>
+                <p className="text-xs text-white/40 leading-relaxed font-medium">{s.desc}</p>
               </div>
             ))}
           </div>
