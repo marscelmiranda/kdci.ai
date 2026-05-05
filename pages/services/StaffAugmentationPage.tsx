@@ -322,7 +322,6 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               { name: 'Softonic',          sub: '.com' },
               { name: 'QUANTIQ',           sub: '' },
               { name: 'Cyvatar',           sub: '' },
-              { name: 'RSK Group',         sub: '' },
             ].map((logo, i) => (
               <div key={i} className="opacity-35 hover:opacity-70 transition-opacity cursor-default select-none">
                 <span className="text-sm md:text-base font-black text-white tracking-tight whitespace-nowrap">
