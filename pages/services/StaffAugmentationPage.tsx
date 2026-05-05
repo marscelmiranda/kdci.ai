@@ -131,23 +131,14 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">World-class talent,<br/>timezone-friendly.</h3>
               </div>
 
-              {/* floating stat badges */}
-              <div className="absolute top-8 left-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
-                  <Clock size={18} className="text-[#E61739]" />
-                </div>
-                <div>
-                  <div className="text-lg font-black text-[#1D1D1F] leading-none">14 Days</div>
-                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Avg. Time to Hire</div>
-                </div>
-              </div>
-              <div className="absolute top-8 right-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
+              {/* floating stat badge */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
+                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
                   <Star size={18} className="text-[#E61739]" />
                 </div>
                 <div>
                   <div className="text-lg font-black text-[#1D1D1F] leading-none">95%</div>
-                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Client Retention</div>
+                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Client Retention Rate</div>
                 </div>
               </div>
             </div>
