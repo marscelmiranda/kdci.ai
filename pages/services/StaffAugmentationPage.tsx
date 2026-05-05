@@ -4,7 +4,7 @@ import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Hom
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
-import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
+import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_mhi0ftmhi0ftmhi0_1777989289578.png';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
 const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
