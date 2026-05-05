@@ -342,31 +342,33 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       </section>
 
       {/* The Process */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
+      <section className="py-12 bg-slate-900 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">Built for Speed.</h2>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Our AI-augmented recruitment lifecycle ensures you never waste time on sub-par candidates.</p>
-          </div>
-          <div className="grid md:grid-cols-5 gap-8 relative">
-            <div className="hidden md:block absolute top-[2.75rem] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-            {[
-              { step: "01", title: "Discovery", desc: "KPI targets & cultural fit.", icon: ScanSearch },
-              { step: "02", title: "AI Sourcing", desc: "100k+ global profiles scan.", icon: Cpu },
-              { step: "03", title: "Screening", desc: "Technical skill scoring.", icon: ClipboardCheck },
-              { step: "04", title: "Shortlist", desc: "Top 3–5 curated candidates.", icon: UserCheck },
-              { step: "05", title: "Offer & Close", desc: "Scheduling, offer & handover.", icon: Handshake },
-            ].map((s, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-14 h-14 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-8 group-hover:border-[#E61739] group-hover:bg-slate-900 transition-all shadow-lg">
-                  <s.icon size={24} />
+          <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+            <div className="shrink-0">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold whitespace-nowrap">Built for Speed.</h2>
+              <p className="text-white/40 text-sm font-medium mt-2 max-w-[220px]" style={{ textWrap: 'balance' }}>AI-augmented hiring. Zero wasted time.</p>
+            </div>
+            <div className="w-px bg-white/10 self-stretch hidden md:block shrink-0"></div>
+            <div className="grid grid-cols-5 gap-4 flex-1 relative">
+              <div className="hidden md:block absolute top-[1.6rem] left-[5%] right-[5%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+              {[
+                { step: "01", title: "Discovery",    desc: "KPI targets & cultural fit.", icon: ScanSearch },
+                { step: "02", title: "AI Sourcing",  desc: "100k+ global profiles.", icon: Cpu },
+                { step: "03", title: "Screening",    desc: "Technical skill scoring.", icon: ClipboardCheck },
+                { step: "04", title: "Shortlist",    desc: "Top 3–5 vetted candidates.", icon: UserCheck },
+                { step: "05", title: "Offer & Close", desc: "Offer & handover.", icon: Handshake },
+              ].map((s, idx) => (
+                <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
+                  <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-4 group-hover:border-[#E61739] transition-all">
+                    <s.icon size={18} />
+                  </div>
+                  <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.step}</div>
+                  <h4 className="text-sm font-bold mb-1">{s.title}</h4>
+                  <p className="text-[11px] text-white/40 leading-relaxed font-medium">{s.desc}</p>
                 </div>
-                <div className="text-[#E61739] text-xs font-black uppercase tracking-[0.2em] mb-2">{s.step}</div>
-                <h4 className="text-lg font-bold mb-2">{s.title}</h4>
-                <p className="text-xs text-white/40 leading-relaxed font-medium">{s.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
