@@ -725,7 +725,84 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 7. Client Testimonials */}
+      {/* 7. Compliance & Trust */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Compliance &amp; Legal
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight">Built to meet<br/>enterprise standards.</h2>
+            </div>
+            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Every engagement is structured to protect your business — legally, operationally, and from a data security standpoint.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                title: 'Philippine Labor Law Compliance',
+                body: 'All employment contracts, statutory benefits, and separation processes comply fully with the Philippine Labor Code. KDCI acts as employer of record — your business carries zero local legal liability.',
+                items: ['SSS, PhilHealth & Pag-IBIG filings', 'Statutory leave & 13th month compliance', 'DOLE-compliant employment contracts'],
+              },
+              {
+                title: 'Data Privacy & GDPR Readiness',
+                body: 'We operate under the Philippine Data Privacy Act (RA 10173) and align our data handling practices with GDPR requirements for clients in the EU and UK.',
+                items: ['Data Processing Agreements available', 'Role-based access control enforced', 'No data stored outside approved systems'],
+              },
+              {
+                title: 'NDAs & Confidentiality',
+                body: 'Every KDCI employee signs a binding Non-Disclosure Agreement before Day 1. Agreements are tailored to cover your specific IP, client data, and proprietary processes.',
+                items: ['Custom NDA templates per engagement', 'IP assignment clauses available', 'Enforceable under PH and international law'],
+              },
+              {
+                title: 'Cybersecurity Controls',
+                body: 'Our offices run enterprise-grade endpoint security, restricted USB policies, monitored network access, and clean-desk rules — all enforced by our IT security team.',
+                items: ['Endpoint protection on all devices', 'Restricted removable media access', 'CCTV-monitored, access-controlled offices'],
+              },
+              {
+                title: 'No Co-Employment Risk',
+                body: 'KDCI is the legal employer. You direct the work — we handle compliance, payroll, and HR. This structure protects you from misclassification risk common with independent contractors.',
+                items: ['Clear employer-of-record structure', 'No contractor misclassification exposure', 'Full HR liability stays with KDCI'],
+              },
+              {
+                title: 'Business Continuity',
+                body: 'Redundant internet connections, backup power systems, and documented disaster recovery plans ensure your offshore team keeps running even during local disruptions.',
+                items: ['Dual ISP + LTE failover on all desks', 'UPS and generator backup power', 'Documented BCP & DR procedures'],
+              },
+            ].map((card, i) => (
+              <div key={i} className="border border-slate-100 rounded-3xl p-7 hover:shadow-md hover:border-slate-200 transition-all group">
+                <div className="w-10 h-10 rounded-2xl bg-[#F5F5F7] flex items-center justify-center mb-5 group-hover:bg-[#E61739] transition-colors">
+                  <CheckCircle2 size={18} className="text-slate-400 group-hover:text-white transition-colors" />
+                </div>
+                <h4 className="text-base font-bold text-[#1D1D1F] mb-3">{card.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed font-medium mb-5">{card.body}</p>
+                <ul className="space-y-2">
+                  {card.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-2 text-xs text-slate-400 font-semibold">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#E61739]/50 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom assurance strip */}
+          <div className="mt-10 bg-[#F5F5F7] rounded-3xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate-500 font-medium">Need specific compliance documentation for your procurement team?</p>
+            <button
+              onClick={() => setView('contact')}
+              className="shrink-0 flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-bold text-sm hover:bg-[#E61739] transition-colors"
+            >
+              Request compliance docs <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Client Testimonials */}
       <section className="py-32 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
