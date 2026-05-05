@@ -213,14 +213,18 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               {
                 name: "Per Placement",
                 badge: null,
+                price: "$1,800–$3,500",
+                priceNote: "per hire",
                 tagline: "Per successful hire · No monthly commitment",
-                details: ["No setup fee", "Pay on hire"],
+                details: ["Junior to mid-level: $1,800 · Senior / specialist: $3,500", "No setup fee · Pay on hire"],
                 features: ["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"],
                 highlight: false,
               },
               {
                 name: "RPO Retainer",
                 badge: "Best Value",
+                price: "$3,500",
+                priceNote: "/ mo",
                 tagline: "Dedicated recruiter · up to 5 active roles/mo",
                 details: ["Priority sourcing · ATS management", "Setup fee: $1,000 · 3-month minimum"],
                 features: ["Everything in Per Placement", "Dedicated Recruiter", "ATS Management", "Talent Market Reports", "Interview Scheduling & Offer Management"],
@@ -229,6 +233,8 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               {
                 name: "Enterprise RPO",
                 badge: null,
+                price: "$6,000+",
+                priceNote: "/ mo",
                 tagline: "Full embedded talent function · unlimited roles",
                 details: ["Team of recruiters · employer branding support", "Setup fee: Waived · 6-month minimum"],
                 features: ["Everything in RPO Retainer", "Team of Recruiters", "Employer Branding Support", "Unlimited Active Roles", "Executive & Volume Hiring"],
@@ -242,6 +248,10 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                   </div>
                 )}
                 <h4 className={`text-2xl font-bold mb-3 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
+                <div className="flex items-baseline gap-1.5 mb-1">
+                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.price}</span>
+                  <span className={`text-xs font-black uppercase tracking-widest ${plan.highlight ? 'text-white/40' : 'text-slate-400'}`}>{plan.priceNote}</span>
+                </div>
                 <p className={`text-sm font-semibold mb-4 ${plan.highlight ? 'text-white/60' : 'text-slate-500'}`}>{plan.tagline}</p>
                 <div className="mb-6 space-y-1">
                   {plan.details.map((d, idx) => (
