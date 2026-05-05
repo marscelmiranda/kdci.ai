@@ -65,61 +65,64 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
     <div className="min-h-screen bg-white">
 
       {/* Hero */}
-      <section className="relative bg-[#020202] overflow-hidden min-h-[92vh] flex flex-col">
-        <div className="flex-1 grid lg:grid-cols-2 min-h-[92vh]">
+      <section className="relative bg-[#020202] overflow-hidden min-h-screen flex flex-col">
 
-          {/* Left — dark text panel */}
-          <div className="relative z-10 flex flex-col justify-center px-8 md:px-16 pt-36 pb-16 lg:pb-24">
-            <div className="mesh-container opacity-30 pointer-events-none">
-              <div className="blob blob-magenta opacity-20"></div>
-            </div>
-            <div className="relative z-10">
-              <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 mt-4">
-                <Globe2 size={11} /> Global Recruitment Services
+        {/* Full-bleed background image */}
+        <img
+          src={recHeroNew}
+          alt="KDCI Recruitment team presenting to clients"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ opacity: 0.55 }}
+        />
+        {/* Gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/75 to-[#020202]/20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-[#020202]/50 pointer-events-none"></div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-between min-h-screen max-w-7xl mx-auto w-full px-6 md:px-10">
+
+          {/* Top: breadcrumb */}
+          <div className="pt-32 pb-0">
+            <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+          </div>
+
+          {/* Centre: headline + CTAs */}
+          <div className="flex-1 flex items-center">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/12 text-[#E61739] text-[10px] font-black uppercase tracking-[0.18em] mb-6">
+                <Globe2 size={11} /> Global Recruitment · 40+ Countries
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 tracking-tight leading-[0.92]">
+              <h1 className="text-6xl md:text-8xl lg:text-[6.5rem] font-heading font-bold text-white tracking-tight leading-[0.9] mb-7">
                 Smarter,<br/>Faster<br/><span className="text-[#E61739]">Recruitment.</span>
               </h1>
-              <p className="text-white/55 text-base md:text-lg font-medium leading-relaxed mb-10 max-w-md" style={{ textWrap: 'balance' }}>
-                Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
+              <p className="text-white/55 text-base md:text-lg font-medium leading-relaxed mb-10 max-w-lg" style={{ textWrap: 'balance' }}>
+                Full-cycle global recruitment from job brief to signed offer — powered by AI and expert sourcers who deliver 3× faster than traditional agencies.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => setView('contact')} className="px-10 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group">
-                  Start Hiring <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <div className="flex flex-wrap gap-4">
+                <button onClick={() => setView('contact')} className="px-9 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center gap-3 group">
+                  Start Hiring <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button onClick={() => setView('contact')} className="px-10 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-base hover:bg-white/10 transition-all">
+                <button onClick={() => setView('contact')} className="px-9 py-4 bg-white/8 border border-white/15 text-white rounded-2xl font-bold text-base hover:bg-white/14 transition-all backdrop-blur-sm">
                   Request Pricing
                 </button>
-              </div>
-              {/* Inline stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/[0.08]">
-                {[
-                  { val: '5,000+', label: 'Hires Sourced' },
-                  { val: '14 Days', label: 'Avg. Time-to-Fill' },
-                  { val: '70%', label: 'Cost Savings' },
-                  { val: '90-Day', label: 'Guarantee' },
-                ].map((s, i) => (
-                  <div key={i}>
-                    <div className="text-lg md:text-xl font-black text-white">{s.val}</div>
-                    <div className="text-[9px] text-white/30 font-black uppercase tracking-widest mt-0.5">{s.label}</div>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
 
-          {/* Right — image panel */}
-          <div className="relative hidden lg:block">
-            <img
-              src={recHeroNew}
-              alt="KDCI Recruitment team presenting to clients"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-            />
-            {/* Left fade into dark panel */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent"></div>
-            {/* Bottom fade */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-[#020202]/30"></div>
+          {/* Bottom: stats strip */}
+          <div className="border-t border-white/10 py-7 flex flex-wrap gap-x-12 gap-y-5 items-center">
+            {[
+              { val: '5,000+', label: 'Hires Sourced' },
+              { val: '14 Days', label: 'Avg. Time-to-Fill' },
+              { val: '70%',    label: 'Typical Cost Savings' },
+              { val: '90-Day', label: 'Replacement Guarantee' },
+              { val: '40+',    label: 'Countries Covered' },
+            ].map((s, i) => (
+              <div key={i} className="flex items-baseline gap-2">
+                <span className="text-xl md:text-2xl font-black text-white">{s.val}</span>
+                <span className="text-[10px] text-white/35 font-black uppercase tracking-widest">{s.label}</span>
+              </div>
+            ))}
           </div>
 
         </div>
