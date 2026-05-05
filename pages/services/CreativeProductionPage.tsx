@@ -78,9 +78,6 @@ export const CreativeProductionPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Creative Production" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/50 text-[10px] font-black uppercase tracking-widest mb-6">
-            AI-Augmented Creative · On-demand Studio · Graphic Design Studio
-          </div>
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
             <span className="text-shine-white">Creative Production</span><br/>
             <span className="text-[#E61739]">at Scale.</span>
