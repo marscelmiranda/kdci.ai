@@ -115,7 +115,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-3xl aspect-[4/5] shadow-2xl" style={{ overflow: 'hidden' }}>
+              <div className="relative rounded-3xl aspect-[4/5] shadow-2xl" style={{ overflow: 'hidden' }}>
                 <img src={IMG_REC_HERO} alt="Recruitment team at work" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
               </div>
