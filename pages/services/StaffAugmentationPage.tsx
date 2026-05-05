@@ -932,7 +932,122 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 8. Client Testimonials */}
+      {/* 8. Client Results */}
+      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Client Results
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-white tracking-tight leading-tight">Real teams.<br/>Measurable outcomes.</h2>
+            </div>
+            <p className="text-white/40 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call — and grew into a long-term offshore team.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              {
+                client: 'Cedar Management Group',
+                industry: 'Property Management',
+                flag: '🇺🇸',
+                challenge: 'Could not find or retain qualified customer service and admin staff locally at a cost that matched their growth targets.',
+                outcome: 'Scaled from 3 KDCI agents to 40+ full-time team members over 4 years — now a core part of their operations across customer service, leasing support, and back-office functions.',
+                metrics: [
+                  { value: '40+', label: 'Team Members' },
+                  { value: '4 yrs', label: 'Partnership' },
+                  { value: 'CS + Admin', label: 'Roles Covered' },
+                ],
+                quote: 'KDCI has become an invaluable partnership — we count them as part of the Cedar Family.',
+                author: 'Rachel Rose, Cedar Management Group',
+              },
+              {
+                client: 'YogaClub',
+                industry: 'eCommerce / Subscription',
+                flag: '🇺🇸',
+                challenge: 'Rapid subscriber growth outpaced their ability to staff customer service in the US — ticket backlog was growing and CSAT scores were slipping.',
+                outcome: 'Deployed a dedicated KDCI customer service team that absorbed volume spikes, integrated with their helpdesk tools, and maintained sub-4-hour first response times during peak subscription cycles.',
+                metrics: [
+                  { value: '<4 hrs', label: 'First Response' },
+                  { value: '60%+', label: 'Cost Reduction vs US' },
+                  { value: '3 weeks', label: 'Onboarding Time' },
+                ],
+                quote: 'The team integrated seamlessly with our US staff. Customers can\'t tell the difference.',
+                author: 'YogaClub Operations Team',
+              },
+              {
+                client: 'CPO Commerce',
+                industry: 'B2B eCommerce',
+                flag: '🇺🇸',
+                challenge: 'Needed to scale product listing, catalog management, and customer support without proportionally scaling headcount costs as SKU count grew.',
+                outcome: 'KDCI built a blended offshore team covering catalog operations and customer support — freeing US staff for strategic work while processing 3x the SKU volume at a fraction of the previous cost.',
+                metrics: [
+                  { value: '3×', label: 'SKU Volume Handled' },
+                  { value: '65%', label: 'Per-Head Cost Saving' },
+                  { value: 'Catalog + CS', label: 'Roles Covered' },
+                ],
+                quote: 'We couldn\'t have scaled our catalog operations this fast without our KDCI team.',
+                author: 'CPO Commerce Leadership',
+              },
+            ].map((cs, i) => (
+              <div key={i} className="bg-white/[0.04] border border-white/8 rounded-3xl overflow-hidden flex flex-col hover:border-white/16 transition-all">
+                {/* Header */}
+                <div className="px-7 pt-7 pb-5 border-b border-white/8">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-lg">{cs.flag}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30 bg-white/5 px-2.5 py-1 rounded-full">{cs.industry}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{cs.client}</h3>
+                </div>
+
+                {/* Metrics */}
+                <div className="grid grid-cols-3 divide-x divide-white/8 border-b border-white/8">
+                  {cs.metrics.map((m, j) => (
+                    <div key={j} className="px-4 py-4 text-center">
+                      <div className="text-xl font-black text-[#E61739]">{m.value}</div>
+                      <div className="text-[10px] text-white/35 font-semibold uppercase tracking-wide mt-0.5">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Body */}
+                <div className="px-7 py-5 flex-1 flex flex-col gap-4">
+                  <div>
+                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Challenge</div>
+                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.challenge}</p>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Outcome</div>
+                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.outcome}</p>
+                  </div>
+                </div>
+
+                {/* Quote */}
+                <div className="px-7 pb-7">
+                  <div className="bg-white/[0.04] rounded-2xl px-5 py-4 border border-white/6">
+                    <p className="text-xs text-white/60 italic leading-relaxed mb-2">"{cs.quote}"</p>
+                    <p className="text-[10px] text-white/30 font-bold">— {cs.author}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => setView('contact')}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-full font-bold text-sm hover:bg-[#c41230] transition-colors"
+            >
+              Start your success story <ArrowRight size={16} />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 9. Client Testimonials */}
       <section className="py-32 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
