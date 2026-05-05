@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, BrainCircuit, Workflow, Target, Search, Handshake, Activity, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, BrainCircuit, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO } from '../../data';
@@ -156,6 +156,32 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="text-xl md:text-2xl font-black mb-1">24/7</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Managed Operations</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why the Philippines strip */}
+      <section className="bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+            {[
+              { icon: Globe,          stat: '#2 in Asia',    label: 'English Proficiency', sub: 'EF English Proficiency Index' },
+              { icon: GraduationCap,  stat: '500,000+',      label: 'Graduates Per Year',  sub: 'University-educated talent' },
+              { icon: Clock,          stat: 'GMT +8',        label: 'Timezone Advantage',  sub: 'Overlaps US, AU & UK hours' },
+              { icon: TrendingDown,   stat: 'Up to 70%',     label: 'Cost Savings',        sub: 'vs US & UK equivalent roles' },
+              { icon: Star,           stat: '20+ Years',     label: 'Outsourcing Legacy',  sub: 'Global BPO capital of Asia' },
+            ].map((f, i) => (
+              <div key={i} className="flex items-center gap-4 px-6 py-6 group hover:bg-slate-50 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-[#E61739]/8 flex items-center justify-center shrink-0">
+                  <f.icon size={18} className="text-[#E61739]" />
+                </div>
+                <div>
+                  <div className="text-lg font-black text-slate-900 leading-none mb-0.5">{f.stat}</div>
+                  <div className="text-xs font-bold text-slate-700 leading-snug">{f.label}</div>
+                  <div className="text-[10px] text-slate-400 font-medium mt-0.5">{f.sub}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
