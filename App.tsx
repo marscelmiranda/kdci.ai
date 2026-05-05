@@ -14,6 +14,7 @@ import { CompanyPage } from './pages/CompanyPage';
 import { ContactPage } from './pages/ContactPage';
 import { LoginPage } from './pages/LoginPage';
 import { PublisherDashboardPage } from './pages/PublisherDashboardPage';
+import { PublisherSettingsPage } from './pages/PublisherSettingsPage';
 import { CareerOpsPage } from './pages/CareerOpsPage';
 import { BlogOpsPage } from './pages/BlogOpsPage';
 import { ResourcesOpsPage } from './pages/ResourcesOpsPage';
@@ -72,21 +73,18 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [activeView]);
 
-  // If viewing the login page, render it without Navbar/Footer for a clean auth experience
   if (activeView === 'login') {
     return <LoginPage setView={setView} />;
   }
 
-  // If viewing the publisher dashboard, also render without public Navbar/Footer
   if (activeView === 'publisher-dashboard') {
     return <PublisherDashboardPage setView={setView} />;
   }
 
   if (activeView === 'publisher-settings') {
-    return <PublisherDashboardPage setView={setView} />;
+    return <PublisherSettingsPage setView={setView} />;
   }
 
-  // CMS Views
   if (activeView === 'cms-career-ops') {
     return <CareerOpsPage setView={setView} />;
   }
@@ -109,8 +107,6 @@ const App = () => {
       
       <main>
         {activeView === 'home' && <HomePage setView={setView} />}
-        
-        {/* Services */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
         {activeView === 'agentic-recruitment' && <AgenticRecruitmentPage setView={setView} />}
         {activeView === 'software-dev' && <SoftwareEngineeringPage setView={setView} />}
@@ -119,8 +115,6 @@ const App = () => {
         {activeView === 'property-mgmt' && <PropertyManagementPage setView={setView} />}
         {activeView === 'creative-prod' && <CreativeProductionPage setView={setView} />}
         {activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} />}
-        
-        {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}
         {activeView === 'fintech' && <FintechPage setView={setView} />}
         {activeView === 'healthcare' && <HealthcarePage setView={setView} />}
@@ -139,23 +133,16 @@ const App = () => {
         {activeView === 'energy' && <EnergyPage setView={setView} />}
         {activeView === 'prof-services' && <ProfServicesPage setView={setView} />}
         {activeView === 'gov' && <GovPage setView={setView} />}
-
-        {/* Company & Others */}
         {activeView === 'company' && <CompanyPage setView={setView} />}
         {activeView === 'contact' && <ContactPage setView={setView} />}
         {activeView === 'careers' && <CareersPage setView={setView} />}
         {activeView === 'privacy-policy' && <PrivacyPolicyPage setView={setView} />}
         {activeView === 'terms-and-conditions' && <TermsAndConditionsPage setView={setView} />}
-        
-        {/* Dynamic Job Posts Routing */}
         {activeView.startsWith('job-') && jobsData[activeView] && (
           <JobPost setView={setView} {...jobsData[activeView]} />
         )}
-
         {activeView === 'blog' && <BlogLandingPage setView={setView} />}
         {activeView === 'blog-detail' && <BlogDetailPage setView={setView} />}
-        
-        {/* Resource Pages */}
         {activeView === 'case-studies' && <CaseStudiesPage setView={setView} />}
         {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} />}
         {activeView === 'guides' && <GuidesPage setView={setView} />}
