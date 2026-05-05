@@ -116,15 +116,15 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                       <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-4">Our Services</p>
                       <div className="grid grid-cols-2 gap-2">
                         {TOP_SERVICES.map((item, idx) => (
-                          <button key={idx} onClick={() => { setView(item.id as ViewType); setIsSolutionsOpen(false); }} className="text-left p-4 rounded-2xl hover:bg-[#F5F5F7] transition-all group/sol flex items-center gap-4 border border-transparent hover:border-black/5">
-                            <div className="w-10 h-10 shrink-0 rounded-xl bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
+                          <button key={idx} onClick={() => { setView(item.id as ViewType); setIsSolutionsOpen(false); }} className="text-left p-4 rounded-2xl hover:bg-[#F5F5F7] transition-all group/sol flex items-start gap-4 border border-transparent hover:border-black/5">
+                            <div className="w-10 h-10 shrink-0 rounded-xl bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all mt-0.5">
                               <item.icon size={20} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="text-[13px] font-bold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">{item.name}</div>
-                              <p className="text-[11px] text-[#86868b] font-semibold mt-0.5">{item.tag}</p>
+                              <p className="text-[10px] font-black uppercase tracking-wider text-[#E61739]/70 mt-0.5 mb-1.5">{item.tag}</p>
+                              <p className="text-[11px] text-[#86868b] font-medium leading-snug">{item.desc}</p>
                             </div>
-                            <ChevronRight size={14} className="text-black/15 group-hover/sol:text-[#E61739] shrink-0 transition-colors" />
                           </button>
                         ))}
                       </div>
