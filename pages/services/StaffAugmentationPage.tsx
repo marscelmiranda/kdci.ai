@@ -4,6 +4,7 @@ import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Hom
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO } from '../../data';
+import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_hs1reohs1reohs1r_1777973044378.png';
 
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -160,22 +161,79 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 2. What We Offer */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Top Philippine Talent, Any Function.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">From creative studios to software pods, we source and embed the best offshore professionals the Philippines has to offer.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="group p-8 rounded-[2.5rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col items-start text-left h-full">
-                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] mb-6 group-hover:scale-110 transition-transform">
-                  <cap.icon size={28} />
-                </div>
-                <h3 className="text-lg font-bold text-[#1D1D1F] mb-2">{cap.title}</h3>
-                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest leading-relaxed">{cap.roles}</p>
+          <div className="flex flex-col lg:flex-row gap-16 items-stretch">
+
+            {/* LEFT — image column */}
+            <div className="lg:w-[46%] relative rounded-[3rem] overflow-hidden min-h-[560px] shrink-0">
+              <img
+                src={IMG_PH_TEAM}
+                alt="Philippine offshore team at KDCI"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* bottom copy */}
+              <div className="absolute bottom-0 left-0 right-0 p-10">
+                <p className="text-[11px] text-white/50 font-black uppercase tracking-widest mb-2">Based in the Philippines</p>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">World-class talent,<br/>timezone-friendly.</h3>
               </div>
-            ))}
+
+              {/* floating stat badges */}
+              <div className="absolute top-8 left-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
+                  <Users size={18} className="text-[#E61739]" />
+                </div>
+                <div>
+                  <div className="text-lg font-black text-[#1D1D1F] leading-none">Top 1%</div>
+                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">PH Talent Pool</div>
+                </div>
+              </div>
+              <div className="absolute top-8 right-8 bg-white rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
+                  <CheckCircle2 size={18} className="text-[#E61739]" />
+                </div>
+                <div>
+                  <div className="text-lg font-black text-[#1D1D1F] leading-none">70%</div>
+                  <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-0.5">Cost Savings</div>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — content column */}
+            <div className="lg:w-[54%] flex flex-col justify-center">
+              <div className="mb-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                  Expert Functions
+                </div>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight leading-tight">Top Philippine Talent,<br/>Any Function.</h2>
+                <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-xl">From creative studios to software pods, we source and embed the best offshore professionals the Philippines has to offer.</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {capabilities.map((cap, i) => (
+                  <div key={i} className="group flex items-center gap-4 p-4 rounded-2xl bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-lg transition-all duration-300 cursor-default">
+                    <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-[#E61739] shrink-0 group-hover:scale-110 transition-transform">
+                      <cap.icon size={20} />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-[#1D1D1F] leading-snug">{cap.title}</h3>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">{cap.roles}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => setView('contact')}
+                className="mt-10 self-start flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all group"
+              >
+                View All Roles <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </div>
+
           </div>
         </div>
       </section>
