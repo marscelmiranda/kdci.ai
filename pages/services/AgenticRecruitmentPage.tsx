@@ -216,7 +216,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 price: "$1,800–$3,500",
                 priceNote: "per hire",
                 tagline: "Per successful hire · No monthly commitment",
-                details: ["Junior to mid-level: $1,800 · Senior / specialist: $3,500", "No setup fee · Pay on hire"],
+                details: ["Junior to mid-level: $1,800 · Senior / specialist: $3,500 · No setup fee · Pay on hire"],
                 features: ["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"],
                 highlight: false,
               },
