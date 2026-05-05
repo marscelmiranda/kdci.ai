@@ -412,28 +412,97 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 6. Why Choose KDCI.ai */}
-      <section className="py-32 bg-white">
+      {/* 6. Client Testimonials */}
+      <section className="py-32 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-           <div className="text-center mb-24">
-             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">The KDCI Offshore Advantage.</h2>
-             <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto">Why global teams choose the Philippines — and KDCI — to scale.</p>
-           </div>
-           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-5 py-2 mb-8 shadow-sm">
+              <Star size={14} className="text-[#E61739] fill-[#E61739]" />
+              <span className="text-sm font-bold text-[#1D1D1F] tracking-wide uppercase">Client Success Stories</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">What our clients say.</h2>
+            <p className="text-slate-500 text-xl font-medium max-w-2xl mx-auto">Real feedback from companies who've built teams with KDCI.</p>
+          </div>
+
+          {/* Trust bar */}
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 mb-16">
             {[
-              { icon: UserPlus, title: 'Embedded Full-Time Roles', desc: 'No freelancers. Dedicated professionals who become a part of your company culture.' },
-              { icon: Activity, title: 'AI-Managed Backend', desc: 'Automatic reporting, quality audits, and performance tracking built-in.' },
-              { icon: Coins, title: 'Transparent Pricing', desc: 'Clear, monthly rates with zero hidden overheads or hiring fees.' },
-              { icon: Workflow, title: 'Scalable Support', desc: 'Add staff or managed pods in as little as 14 days to hit your milestones.' }
-            ].map((item, i) => (
-              <div key={i} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 bg-[#F5F5F7] rounded-3xl flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
-                  <item.icon size={32} />
-                </div>
-                <h4 className="text-lg font-bold text-[#1D1D1F] mb-3">{item.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+              { stat: '500+', label: 'Clients Served' },
+              { stat: '13+', label: 'Years in Business' },
+              { stat: '95%', label: 'Client Retention' },
+              { stat: '40+', label: 'Avg. Team Size' },
+            ].map((t, i) => (
+              <div key={i} className="text-center">
+                <div className="text-2xl font-bold text-[#E61739]">{t.stat}</div>
+                <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide">{t.label}</div>
               </div>
             ))}
+          </div>
+
+          {/* Testimonial cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                quote: "What started out as a few agents, has grown into an invaluable partnership with KDCI. With more than 40 team members, we are lucky enough to count as part of our Cedar Family. Thank you so much KDCI for making our Company better!",
+                name: "Rachel Rose",
+                company: "Cedar Management Group",
+                dept: "Customer Service & Sales",
+              },
+              {
+                quote: "We love our KDCI team. They're just like a regular part of our team — it's just that they're thousands of miles away. We had difficulty finding qualified talent in the US and outsourcing changed everything for us.",
+                name: "Jason Halfaker",
+                company: "Kole Imports",
+                dept: "Customer Service & Sales",
+              },
+              {
+                quote: "It's been five years since we started working with KDCI and it just keeps getting better. We've grown together and achieved a lot of shared success. Overall, they're incredibly professional yet fun to work with.",
+                name: "Dave Palmer",
+                company: "YogaClub",
+                dept: "Graphic Design",
+              },
+              {
+                quote: "We have found KDCI to be a consistently reliable partner, always willing to go the extra mile to ensure our valued customers receive the best possible service.",
+                name: "Chris McCaleb",
+                company: "CPO Commerce",
+                dept: "Customer Service & Sales",
+              },
+              {
+                quote: "KDCI plays a very important role in our catalog and content operations. They are responsive, kind, and always willing to help. We have been working together for more than 4 years.",
+                name: "Cristian Capdevila",
+                company: "Softonic.com",
+                dept: "Content Creation",
+              },
+              {
+                quote: "Having collaborated with KDCI for our creative needs, I can confidently attest to their unparalleled expertise and dedication. Their team consistently delivered innovative solutions that exceeded our expectations.",
+                name: "Emerson Bantegui",
+                company: "We Are VK, Inc.",
+                dept: "Graphic Design",
+              },
+            ].map((t, i) => (
+              <div key={i} className="bg-white rounded-3xl p-8 flex flex-col shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                {/* Stars */}
+                <div className="flex gap-1 mb-5">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} size={14} className="text-[#E61739] fill-[#E61739]" />
+                  ))}
+                </div>
+                <p className="text-[#1D1D1F] text-sm leading-relaxed font-medium flex-1 mb-8">"{t.quote}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-[#E61739] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    {t.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <div className="font-bold text-[#1D1D1F] text-sm">{t.name}</div>
+                    <div className="text-xs text-slate-400 font-medium">{t.company} · {t.dept}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA row */}
+          <div className="text-center mt-14">
+            <p className="text-slate-500 text-sm font-medium">Join 500+ companies who've built winning teams with KDCI</p>
           </div>
         </div>
       </section>
