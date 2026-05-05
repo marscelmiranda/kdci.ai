@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck,
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
+import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser'],
@@ -212,7 +213,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
             <div className="relative">
               <div className="rounded-b-3xl overflow-hidden shadow-2xl h-full">
-                <img src={IMG_REC_VETTING} alt="Candidate vetting process" className="w-full h-full object-cover" />
+                <img src={recIncludedImg} alt="Candidate vetting process" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               </div>
               <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
