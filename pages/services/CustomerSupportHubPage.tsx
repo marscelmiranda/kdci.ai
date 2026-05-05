@@ -1,9 +1,9 @@
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles, Briefcase, UserCheck, ClipboardCheck, Cpu, Workflow, CheckCircle2, Star, Target, Zap, FileSearch, Calendar, Shield, Users, BarChart3 } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { IMG_CX_HERO, IMG_CX_TEAM } from '../../data';
+import { IMG_CX_HERO, IMG_CX_TEAM, INDUSTRIES } from '../../data';
 
 const INCLUDED = [
   'AI-Powered Sourcing',
@@ -18,7 +18,31 @@ const INCLUDED = [
   'Talent Market Reports',
 ];
 
+const INDUSTRY_ROLES: Record<string, string[]> = {
+  'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
+  'software-dev':   ['Product Manager', 'Full-Stack Developer', 'QA Engineer', 'DevOps Engineer', 'Technical Writer', 'UI/UX Designer'],
+  'property-mgmt':  ['Property Manager', 'Listings Coordinator', 'Transaction Coordinator', 'CRM Specialist', 'Real Estate VA', 'Leasing Admin'],
+  'fintech':        ['Compliance Analyst', 'Fraud Detection Specialist', 'Financial Analyst', 'Data Analyst', 'CX Lead', 'KYC Specialist'],
+  'healthcare':     ['Medical VA', 'Healthcare Administrator', 'Medical Biller/Coder', 'Patient Coordinator', 'Claims Processor', 'Prior Auth Specialist'],
+  'marketing-ad':   ['Digital Marketing Manager', 'Content Strategist', 'Social Media Manager', 'PPC Specialist', 'Brand Designer', 'Email Marketing Specialist'],
+  'retail':         ['Inventory Manager', 'Customer Service Rep', 'E-commerce Coordinator', 'Supply Chain Analyst', 'Merchandiser', 'Returns & Refunds Specialist'],
+  'logistics':      ['Logistics Coordinator', 'Supply Chain Analyst', 'Operations Manager', 'Data Entry Specialist', 'Freight Broker VA', 'Dispatch Coordinator'],
+  'travel':         ['Booking Coordinator', 'Customer Support Agent', 'Travel Consultant', 'Reservations Manager', 'Content Writer', 'Itinerary Planner'],
+  'edtech':         ['Curriculum Developer', 'Instructional Designer', 'LMS Administrator', 'Student Support Rep', 'Content Creator', 'Academic Researcher'],
+  'legal':          ['Legal VA', 'Paralegal', 'Contract Reviewer', 'Legal Researcher', 'Compliance Coordinator', 'Litigation Support Specialist'],
+  'insurance':      ['Claims Processor', 'Underwriting Assistant', 'Policy Administrator', 'Insurance Analyst', 'Customer Support Rep', 'Loss Control Specialist'],
+  'media':          ['Content Writer', 'Copy Editor', 'Social Media Manager', 'Video Editor', 'SEO Content Specialist', 'Podcast Producer'],
+  'consumer-tech':  ['Product Support Specialist', 'Technical Writer', 'QA Tester', 'Customer Success Manager', 'Community Manager', 'App Onboarding Specialist'],
+  'telecom':        ['Technical Support Agent', 'Network Documentation Specialist', 'Billing Specialist', 'Sales Support Rep', 'Customer Service Rep', 'NOC Analyst'],
+  'auto':           ['Parts Coordinator', 'Customer Service Rep', 'Inventory Manager', 'Digital Marketing Specialist', 'Data Entry Specialist', 'Warranty Claims Processor'],
+  'fashion':        ['Product Listing Specialist', 'Visual Merchandiser', 'Customer Service Rep', 'Social Media Manager', 'E-commerce Coordinator', 'Influencer Outreach Coordinator'],
+  'energy':         ['Data Analyst', 'Operations Coordinator', 'Compliance Specialist', 'Billing Analyst', 'Customer Support Rep', 'Regulatory Affairs Assistant'],
+  'prof-services':  ['Executive VA', 'Research Analyst', 'Project Coordinator', 'Business Development Rep', 'Client Success Manager', 'Proposal Writer'],
+  'gov':            ['Data Entry Specialist', 'Records Management Specialist', 'Administrative Assistant', 'Research Analyst', 'Compliance Coordinator', 'Public Affairs Writer'],
+};
+
 export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
 
   useEffect(() => {
     const els = document.querySelectorAll('.rec-reveal');
@@ -337,6 +361,74 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                 </button>
               </div>
 
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Industry Specialization ── */}
+      <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="rec-reveal text-center mb-14">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
+              Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6 items-start">
+            {/* Industry list */}
+            <div className="rec-reveal d1 bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+              <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
+                {INDUSTRIES.map((ind, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedInd(ind)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
+                      selectedInd.id === ind.id
+                        ? 'bg-[#E61739] text-white shadow-sm'
+                        : 'hover:bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    <ind.icon size={15} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
+                    <span className="text-sm font-semibold leading-tight">{ind.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Detail panel */}
+            <div className="rec-reveal d2 lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                  <selectedInd.icon size={30} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black leading-tight">{selectedInd.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Top In-Demand Roles</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
+                {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
+                  <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
+                    <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-white leading-tight">{role}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                <p className="text-white/30 text-xs font-medium">Select any industry to explore its top roles</p>
+                <button
+                  onClick={() => setView('contact')}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                >
+                  Hire in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
