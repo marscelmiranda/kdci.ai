@@ -192,9 +192,9 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                 Onboarding Timeline
               </div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14 days.</h2>
+              <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14–30 days.</h2>
             </div>
-            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">We handle every step — you just approve the candidates and show up on Day 1.</p>
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. We handle every step.</p>
           </div>
 
           {/* Timeline */}
@@ -272,7 +272,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 py-6 border-t border-white/8">
             {[
               { icon: CheckCircle2, text: 'First candidate presented in 5 days' },
-              { icon: CheckCircle2, text: 'Team live within 14 days, guaranteed' },
+              { icon: CheckCircle2, text: '14 days for common roles · up to 30 for specialized' },
               { icon: CheckCircle2, text: 'Free replacement within 90 days' },
             ].map((p, i) => (
               <div key={i} className="flex items-center gap-2.5 text-sm text-white/50 font-medium">
@@ -435,7 +435,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               },
               {
                 factor: 'Time to Hire',
-                kdci:     { text: '~14 days average',                good: true  },
+                kdci:     { text: '14–30 days by role',              good: true  },
                 agency:   { text: '4–8 weeks typical',               good: false },
                 freelance:{ text: 'Fast but unvetted',               good: null  },
               },
@@ -616,7 +616,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
               <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">Philippine Offshore Staffing</p>
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your team, ready<br/>in 14 days.</h3>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your team, ready<br/>in 14–30 days.</h3>
               <div className="flex flex-wrap gap-2 mt-5">
                 {['Expert Vetting', 'AI-Managed', 'Zero Risk'].map((t, i) => (
                   <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
