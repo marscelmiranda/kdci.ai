@@ -177,8 +177,8 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               <div>
                 <div className="text-[7rem] font-black text-white leading-none mb-1">90</div>
                 <div className="text-2xl font-black text-white/70 mb-5">Day Guarantee</div>
-                <p className="text-white/70 text-sm font-medium leading-relaxed max-w-xs">
-                  If your hire doesn't work out in 90 days, we re-source at zero extra cost — no fine print, no questions asked.
+                <p className="text-white/70 text-sm font-medium leading-relaxed max-w-xs" style={{ textWrap: 'balance' }}>
+                  If a hire doesn't work out within 90 days, we re-source at zero extra cost. No fine print.
                 </p>
               </div>
             </div>
