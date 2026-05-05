@@ -179,7 +179,56 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 3. How It Works */}
+      {/* 3. Roles We Staff */}
+      <section className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                200+ Roles Available
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight">Most-requested positions.</h2>
+            </div>
+            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Starting rates shown are all-in monthly costs. Contact us for an exact quote by level and experience.</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              { icon: Headphones,  role: 'Customer Service Agent',   rate: 'from $900/mo',   tag: 'High demand' },
+              { icon: UserCircle,  role: 'Virtual Assistant',         rate: 'from $850/mo',   tag: 'Quick hire' },
+              { icon: Palette,     role: 'Graphic Designer',          rate: 'from $1,100/mo', tag: '' },
+              { icon: Code,        role: 'Software Engineer',         rate: 'from $1,600/mo', tag: 'Specialist' },
+              { icon: Coins,       role: 'Accountant / Bookkeeper',   rate: 'from $1,000/mo', tag: '' },
+              { icon: Users,       role: 'HR Specialist',             rate: 'from $1,000/mo', tag: '' },
+              { icon: Target,      role: 'Digital Marketer / SEO',    rate: 'from $1,100/mo', tag: '' },
+              { icon: Database,    role: 'Data Analyst',              rate: 'from $1,200/mo', tag: 'Specialist' },
+              { icon: Home,        role: 'Real Estate Admin',         rate: 'from $900/mo',   tag: 'High demand' },
+              { icon: Workflow,    role: 'Operations / Process Mgr',  rate: 'from $1,300/mo', tag: '' },
+            ].map((r, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-black/[0.05] p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group cursor-default">
+                {/* tag */}
+                <div className="h-5 mb-4">
+                  {r.tag && (
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-[#E61739]/8 text-[#E61739] text-[9px] font-black uppercase tracking-wider">{r.tag}</span>
+                  )}
+                </div>
+                {/* icon */}
+                <div className="w-10 h-10 bg-[#F5F5F7] rounded-xl flex items-center justify-center text-slate-400 mb-4 group-hover:bg-[#E61739] group-hover:text-white transition-all">
+                  <r.icon size={18} />
+                </div>
+                <h4 className="text-sm font-bold text-[#1D1D1F] leading-snug mb-2">{r.role}</h4>
+                <p className="text-xs font-black text-[#E61739]">{r.rate}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-xs text-slate-400 font-medium mt-8">
+            Don't see your role? We staff 200+ positions across every function. <button onClick={() => setView('contact')} className="text-[#E61739] font-bold hover:underline">Ask us about it →</button>
+          </p>
+        </div>
+      </section>
+
+      {/* 4. How It Works */}
       <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
         {/* subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
