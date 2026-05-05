@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
@@ -43,6 +43,7 @@ const INCLUDED = [
 ];
 
 export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   return (
     <div className="min-h-screen bg-white">
 
@@ -335,7 +336,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      {/* Industry Specialization — all 20 verticals */}
+      {/* Industry Specialization */}
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
@@ -344,30 +345,61 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {INDUSTRIES.map((ind, i) => {
-              const roles = INDUSTRY_ROLES[ind.id] ?? [];
-              return (
-                <div key={i} className="bg-white border border-black/5 rounded-3xl p-4 hover:shadow-md hover:border-[#E61739]/25 transition-all duration-300 group overflow-hidden">
-                  <div className="flex items-center gap-2.5 mb-0 group-hover:mb-3 transition-all duration-300">
-                    <div className="w-7 h-7 shrink-0 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#E61739]/10 group-hover:text-[#E61739] transition-colors">
-                      <ind.icon size={13} />
-                    </div>
-                    <h4 className="text-[11px] font-black text-slate-800 leading-tight">{ind.name}</h4>
-                  </div>
-                  <div className="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-300 ease-in-out">
-                    <div className="space-y-1 pt-0.5">
-                      {roles.map((role, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <div className="w-1 h-1 rounded-full bg-[#E61739] shrink-0 opacity-50"></div>
-                          <span className="text-[10px] font-medium text-slate-500 leading-tight">{role}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+
+          <div className="grid lg:grid-cols-3 gap-6 items-start">
+            {/* Left: industry list */}
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+              <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
+                {INDUSTRIES.map((ind, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedInd(ind)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
+                      selectedInd.id === ind.id
+                        ? 'bg-[#E61739] text-white shadow-sm'
+                        : 'hover:bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    <ind.icon size={15} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
+                    <span className="text-sm font-semibold leading-tight">{ind.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: detail panel */}
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                  <selectedInd.icon size={30} className="text-white" />
                 </div>
-              );
-            })}
+                <div>
+                  <h3 className="text-2xl font-black leading-tight">{selectedInd.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Top In-Demand Roles</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
+                {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
+                  <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
+                    <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-white leading-tight">{role}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                <p className="text-white/30 text-xs font-medium">Select any industry to explore its top roles</p>
+                <button
+                  onClick={() => setView('contact')}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                >
+                  Hire in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
