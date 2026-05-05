@@ -38,6 +38,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const [showSticky, setShowSticky] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   useEffect(() => {
     const onScroll = () => setShowSticky(window.scrollY > 600);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -591,6 +592,78 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
         </div>
       </section>
+      {/* 8. FAQ */}
+      <section className="py-28 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Frequently asked questions.</h2>
+            <p className="text-slate-500 text-lg font-medium">Everything you need to know before building your offshore team.</p>
+          </div>
+          <div className="space-y-3">
+            {([
+              {
+                q: "How quickly can I get a team up and running?",
+                a: "Most clients have their first hire placed and onboarded within 14 days. For larger team builds (5+ people), we typically complete full onboarding within 30 days. We handle sourcing, vetting, and HR setup — you just approve the candidates."
+              },
+              {
+                q: "What's included in the all-in monthly rate?",
+                a: "Your monthly rate covers the employee's salary, government-mandated benefits (SSS, PhilHealth, Pag-IBIG), paid leave, office space, equipment, IT infrastructure, HR management, and our AI-powered performance monitoring. No hidden fees or surprise invoices."
+              },
+              {
+                q: "Are these dedicated employees or shared resources?",
+                a: "All KDCI staff are fully dedicated to your business only. They work your hours, follow your processes, and become a true extension of your team — not shared across multiple clients like a typical BPO."
+              },
+              {
+                q: "What happens if a hire isn't the right fit?",
+                a: "We offer a free replacement guarantee. If a team member doesn't meet expectations within the first 90 days, we'll find and onboard a replacement at no additional cost. After that period, replacements are handled with the same speed and care."
+              },
+              {
+                q: "How do you handle data security and confidentiality?",
+                a: "All staff sign strict NDAs and data protection agreements. Our offices operate under enterprise-grade cybersecurity policies — including clean-desk rules, restricted USB access, and monitored networks. We're fully compliant with international data privacy standards."
+              },
+              {
+                q: "What time zones do Philippine teams work in?",
+                a: "The Philippines is GMT+8, which gives excellent overlap with US West Coast (evening shift), Australia, and parts of Europe. Many clients run their teams on shifted schedules to match their home-country business hours — this is standard practice and easily arranged."
+              },
+              {
+                q: "Can I scale my team up or down as needed?",
+                a: "Yes. You can add staff or scale down with as little as 30 days notice. There are no long-term lock-in contracts. Our engagement model is built for flexibility — whether you're growing fast or adjusting to seasonal demand."
+              },
+              {
+                q: "Do I manage the team directly or does KDCI handle management?",
+                a: "You have full day-to-day control of your team's tasks, priorities, and workflows. KDCI handles the HR, payroll, compliance, and performance infrastructure in the background — giving you the benefits of a direct hire without the employer-of-record overhead."
+              },
+            ] as { q: string; a: string }[]).map((item, i) => (
+              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-[#F5F5F7] transition-colors group"
+                >
+                  <span className="font-bold text-[#1D1D1F] text-base pr-4">{item.q}</span>
+                  <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all ${openFaq === i ? 'bg-[#E61739] border-[#E61739] text-white rotate-45' : 'border-slate-300 text-slate-400 group-hover:border-[#E61739] group-hover:text-[#E61739]'}`}>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6 text-slate-500 text-sm leading-relaxed font-medium border-t border-slate-100 pt-5">
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <p className="text-slate-400 text-sm font-medium mb-4">Still have questions?</p>
+            <button
+              onClick={() => setView('contact')}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-bold text-sm hover:bg-[#E61739] transition-colors"
+            >
+              Talk to our team <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Sticky floating CTA */}
       <div className={`fixed bottom-8 right-8 z-50 transition-all duration-300 ${showSticky ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
         <button
