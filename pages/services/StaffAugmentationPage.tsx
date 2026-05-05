@@ -4,7 +4,7 @@ import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Hom
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO } from '../../data';
-import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_hs1reohs1reohs1r_1777973044378.png';
+import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState(0);
