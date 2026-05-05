@@ -5,6 +5,29 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 
+const INDUSTRY_ROLES: Record<string, string[]> = {
+  'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser'],
+  'software-dev':   ['Product Manager', 'Full-Stack Developer', 'QA Engineer', 'DevOps Engineer', 'Technical Writer'],
+  'property-mgmt':  ['Property Manager', 'Listings Coordinator', 'Transaction Coordinator', 'CRM Specialist', 'Real Estate VA'],
+  'fintech':        ['Compliance Analyst', 'Fraud Detection Specialist', 'Financial Analyst', 'Data Analyst', 'CX Lead'],
+  'healthcare':     ['Medical VA', 'Healthcare Administrator', 'Medical Biller/Coder', 'Patient Coordinator', 'Claims Processor'],
+  'marketing-ad':   ['Digital Marketing Manager', 'Content Strategist', 'Social Media Manager', 'PPC Specialist', 'Brand Designer'],
+  'retail':         ['Inventory Manager', 'Customer Service Rep', 'E-commerce Coordinator', 'Supply Chain Analyst', 'Merchandiser'],
+  'logistics':      ['Logistics Coordinator', 'Supply Chain Analyst', 'Operations Manager', 'Data Entry Specialist', 'Freight Broker VA'],
+  'travel':         ['Booking Coordinator', 'Customer Support Agent', 'Travel Consultant', 'Reservations Manager', 'Content Writer'],
+  'edtech':         ['Curriculum Developer', 'Instructional Designer', 'LMS Administrator', 'Student Support Rep', 'Content Creator'],
+  'legal':          ['Legal VA', 'Paralegal', 'Contract Reviewer', 'Legal Researcher', 'Compliance Coordinator'],
+  'insurance':      ['Claims Processor', 'Underwriting Assistant', 'Policy Administrator', 'Insurance Analyst', 'Customer Support Rep'],
+  'media':          ['Content Writer', 'Copy Editor', 'Social Media Manager', 'Video Editor', 'SEO Content Specialist'],
+  'consumer-tech':  ['Product Support Specialist', 'Technical Writer', 'QA Tester', 'Customer Success Manager', 'Community Manager'],
+  'telecom':        ['Technical Support Agent', 'Network Documentation Specialist', 'Billing Specialist', 'Sales Support Rep', 'Customer Service Rep'],
+  'auto':           ['Parts Coordinator', 'Customer Service Rep', 'Inventory Manager', 'Digital Marketing Specialist', 'Data Entry Specialist'],
+  'fashion':        ['Product Listing Specialist', 'Visual Merchandiser', 'Customer Service Rep', 'Social Media Manager', 'E-commerce Coordinator'],
+  'energy':         ['Data Analyst', 'Operations Coordinator', 'Compliance Specialist', 'Billing Analyst', 'Customer Support Rep'],
+  'prof-services':  ['Executive VA', 'Research Analyst', 'Project Coordinator', 'Business Development Rep', 'Client Success Manager'],
+  'gov':            ['Data Entry Specialist', 'Records Management Specialist', 'Administrative Assistant', 'Research Analyst', 'Compliance Coordinator'],
+};
+
 const INCLUDED = [
   'AI-Powered Sourcing',
   'Resume Screening & Scoring',
@@ -315,17 +338,28 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {INDUSTRIES.map((ind, i) => (
-              <button
-                key={i}
-                onClick={() => setView(ind.id as ViewType)}
-                className="flex items-center gap-2 px-5 py-3 rounded-full bg-white border border-black/10 hover:border-[#E61739]/40 hover:text-[#E61739] hover:bg-[#E61739]/5 text-slate-600 font-semibold text-sm transition-all group shadow-sm"
-              >
-                <ind.icon size={14} className="text-slate-400 group-hover:text-[#E61739] transition-colors shrink-0" />
-                {ind.name}
-              </button>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {INDUSTRIES.map((ind, i) => {
+              const roles = INDUSTRY_ROLES[ind.id] ?? [];
+              return (
+                <div key={i} className="bg-white border border-black/5 rounded-3xl p-5 hover:shadow-lg hover:border-[#E61739]/20 transition-all group flex flex-col">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 shrink-0 rounded-xl bg-slate-50 flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739]/10 transition-colors">
+                      <ind.icon size={15} />
+                    </div>
+                    <h4 className="text-xs font-black text-slate-900 leading-tight">{ind.name}</h4>
+                  </div>
+                  <div className="space-y-1.5 flex-grow">
+                    {roles.map((role, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <div className="w-1 h-1 rounded-full bg-[#E61739] mt-1.5 shrink-0 opacity-60"></div>
+                        <span className="text-[11px] font-medium text-slate-500 leading-tight">{role}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
