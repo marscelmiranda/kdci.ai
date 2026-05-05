@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
@@ -381,8 +381,15 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 <img src={IMG_REC_VETTING} alt="Agent vetting" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
-                  <div className="text-3xl font-black text-slate-900 mb-1">70%</div>
-                  <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Typical OpEx Reduction</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
+                      <TrendingDown size={22} className="text-white" />
+                    </div>
+                    <div>
+                      <div className="text-3xl font-black text-slate-900 mb-1">70%</div>
+                      <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Typical OpEx Reduction</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
