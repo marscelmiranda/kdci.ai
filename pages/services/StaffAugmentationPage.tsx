@@ -29,8 +29,21 @@ const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string 
   'gov':           [{ role: 'Data Entry Specialist',    ph: '$1,500', save: '62%' }, { role: 'Records Mgmt. Specialist',ph: '$1,700', save: '61%' }, { role: 'Administrative Assistant',ph: '$1,600', save: '60%' }, { role: 'Research Analyst',        ph: '$2,000', save: '64%' }, { role: 'Compliance Coordinator',  ph: '$1,900', save: '63%' }],
 };
 
+const CALC_ROLES = [
+  { label: 'Customer Support Specialist', ph: 1800,  us: 4500  },
+  { label: 'Full-Stack Developer',         ph: 2800,  us: 10000 },
+  { label: 'UI/UX Designer',               ph: 2200,  us: 7500  },
+  { label: 'Executive / Virtual Assistant',ph: 1800,  us: 5000  },
+  { label: 'Digital Marketing Specialist', ph: 2000,  us: 6000  },
+  { label: 'Data Analyst',                 ph: 2500,  us: 7500  },
+  { label: 'Bookkeeper / Accountant',      ph: 1800,  us: 4800  },
+  { label: 'Project Manager',              ph: 2800,  us: 9000  },
+];
+
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
+  const [calcHeadcount, setCalcHeadcount] = useState(3);
+  const [calcRoleIdx, setCalcRoleIdx] = useState(0);
 
   const capabilities = [
     { title: "Customer Service Agents", icon: Headphones, roles: "Support, Tech Support, Chat" },
@@ -305,7 +318,125 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* 5. Why Choose KDCI.ai */}
+      {/* 5. ROI Calculator */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+
+          {/* Header */}
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Quick ROI Calculator
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Your Savings, Estimated.</h2>
+            <p className="text-slate-500 text-lg font-medium max-w-2xl mx-auto">Adjust your headcount and role to see your estimated annual savings with a Philippine offshore team.</p>
+          </div>
+
+          <div className="bg-[#F5F5F7] rounded-[3rem] p-8 md:p-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+              {/* Left: controls */}
+              <div className="space-y-8">
+
+                {/* Headcount slider */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="text-sm font-black text-slate-700 uppercase tracking-widest">Team Size</label>
+                    <span className="text-2xl font-black text-[#E61739]">{calcHeadcount} <span className="text-sm text-slate-400 font-medium">people</span></span>
+                  </div>
+                  <input
+                    type="range"
+                    min={1}
+                    max={20}
+                    value={calcHeadcount}
+                    onChange={e => setCalcHeadcount(Number(e.target.value))}
+                    className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                    style={{ accentColor: '#E61739' }}
+                  />
+                  <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1.5">
+                    <span>1</span><span>5</span><span>10</span><span>15</span><span>20</span>
+                  </div>
+                </div>
+
+                {/* Role selector */}
+                <div>
+                  <label className="block text-sm font-black text-slate-700 uppercase tracking-widest mb-3">Role Type</label>
+                  <div className="grid grid-cols-1 gap-2">
+                    {CALC_ROLES.map((r, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCalcRoleIdx(i)}
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold text-left transition-all border ${
+                          calcRoleIdx === i
+                            ? 'bg-slate-900 text-white border-slate-900 shadow-md'
+                            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        }`}
+                      >
+                        <span>{r.label}</span>
+                        <span className={`text-xs font-black ${calcRoleIdx === i ? 'text-[#E61739]' : 'text-slate-400'}`}>${r.ph.toLocaleString()}/mo</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: results */}
+              {(() => {
+                const role = CALC_ROLES[calcRoleIdx];
+                const annualPH = calcHeadcount * role.ph * 12;
+                const annualUS = calcHeadcount * role.us * 12;
+                const annualSave = annualUS - annualPH;
+                const savePct = Math.round((annualSave / annualUS) * 100);
+                const threeYear = annualSave * 3;
+                const fmt = (n: number) => '$' + n.toLocaleString('en-US');
+                return (
+                  <div className="flex flex-col gap-4">
+
+                    {/* Savings highlight */}
+                    <div className="bg-slate-900 rounded-3xl p-8 text-white text-center">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">Estimated Annual Savings</p>
+                      <div className="text-5xl md:text-6xl font-black text-white mb-1">{fmt(annualSave)}</div>
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/15 border border-emerald-400/20 rounded-lg text-emerald-400 text-sm font-black mt-2">
+                        <TrendingDown size={14} /> {savePct}% saved vs US hiring
+                      </div>
+                    </div>
+
+                    {/* Breakdown cards */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-white rounded-2xl p-5 border border-slate-200">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">KDCI Annual Cost</p>
+                        <div className="text-2xl font-black text-[#E61739]">{fmt(annualPH)}</div>
+                        <p className="text-[10px] text-slate-400 mt-0.5">{fmt(role.ph)}/mo × {calcHeadcount} staff</p>
+                      </div>
+                      <div className="bg-white rounded-2xl p-5 border border-slate-200">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">US Equivalent Cost</p>
+                        <div className="text-2xl font-black text-slate-400 line-through">{fmt(annualUS)}</div>
+                        <p className="text-[10px] text-slate-400 mt-0.5">{fmt(role.us)}/mo market avg</p>
+                      </div>
+                    </div>
+
+                    {/* 3-year callout */}
+                    <div className="bg-[#E61739]/6 border border-[#E61739]/15 rounded-2xl px-6 py-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-[9px] font-black uppercase tracking-widest text-[#E61739]/70 mb-0.5">3-Year Total Savings</p>
+                        <div className="text-2xl font-black text-[#E61739]">{fmt(threeYear)}</div>
+                      </div>
+                      <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-colors shrink-0">
+                        Get a Proposal <ArrowRight size={14} />
+                      </button>
+                    </div>
+
+                    <p className="text-[10px] text-slate-400 text-center font-medium">Estimates based on mid-level market averages. Actual savings may vary.</p>
+                  </div>
+                );
+              })()}
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. Why Choose KDCI.ai */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
            <div className="text-center mb-24">
