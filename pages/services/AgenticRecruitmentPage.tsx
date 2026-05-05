@@ -80,7 +80,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             <span className="text-[#E61739]">Recruitment.</span>
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
-            Full-cycle recruitment from job brief to signed offer — powered by AI tools and expert Philippine sourcers who deliver 3× faster than traditional agencies.
+            Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
