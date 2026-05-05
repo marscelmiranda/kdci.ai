@@ -105,7 +105,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
             {/* Solutions Dropdown */}
             <div className="group py-2" onMouseEnter={() => setIsSolutionsOpen(true)} onMouseLeave={() => setIsSolutionsOpen(false)}>
               <button onClick={() => setView('solutions-hub')} className={`flex items-center gap-1.5 transition-colors ${isSolutionsOpen || activeView === 'solutions-hub' ? 'text-[#E61739]' : 'hover:text-[#E61739]'}`}>
-                Solutions <ChevronDown size={14} className={`transition-transform duration-300 ${isSolutionsOpen ? 'rotate-180' : ''}`} />
+                What We Do <ChevronDown size={14} className={`transition-transform duration-300 ${isSolutionsOpen ? 'rotate-180' : ''}`} />
               </button>
               {isSolutionsOpen && (
                 <div className="absolute top-full right-0 pt-3 w-[920px] animate-in fade-in slide-in-from-top-1 duration-150">
@@ -155,7 +155,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
             {/* Resources Dropdown */}
             <div className="group py-2" onMouseEnter={() => setIsResourcesOpen(true)} onMouseLeave={() => setIsResourcesOpen(false)}>
               <button className={`flex items-center gap-1.5 transition-colors ${isResourcesOpen ? 'text-[#E61739]' : 'hover:text-[#E61739]'}`}>
-                Resources <ChevronDown size={14} className={`transition-transform duration-300 ${isResourcesOpen ? 'rotate-180' : ''}`} />
+                Insights <ChevronDown size={14} className={`transition-transform duration-300 ${isResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isResourcesOpen && (
                 <div className="absolute top-full right-0 pt-3 w-[640px] animate-in fade-in slide-in-from-top-1 duration-150">
@@ -184,7 +184,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
               )}
             </div>
 
-            <button onClick={() => setView('company')} className={`hover:text-[#E61739] transition-colors ${activeView === 'company' ? 'text-[#E61739]' : ''}`}>Company</button>
+            <button onClick={() => setView('company')} className={`hover:text-[#E61739] transition-colors ${activeView === 'company' ? 'text-[#E61739]' : ''}`}>Who We Are</button>
             <button onClick={() => setView('careers')} className={`hover:text-[#E61739] transition-colors ${activeView === 'careers' ? 'text-[#E61739]' : ''}`}>Careers</button>
             
             {/* Search Trigger */}
@@ -219,8 +219,8 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-black/5 p-6 animate-in slide-in-from-top-2 shadow-xl">
             <div className="flex flex-col gap-5 text-sm font-bold text-[#1D1D1F]">
-              <button className="flex items-center justify-between py-2 border-b border-black/5" onClick={() => { setView('solutions-hub'); setIsMobileMenuOpen(false); }}>Solutions <ChevronRight size={16} /></button>
-              <button className="flex items-center justify-between py-2 border-b border-black/5 text-left" onClick={() => { setView('blog'); setIsMobileMenuOpen(false); }}>Resources <ChevronRight size={16} /></button>
+              <button className="flex items-center justify-between py-2 border-b border-black/5" onClick={() => { setView('solutions-hub'); setIsMobileMenuOpen(false); }}>What We Do <ChevronRight size={16} /></button>
+              <button className="flex items-center justify-between py-2 border-b border-black/5 text-left" onClick={() => { setView('blog'); setIsMobileMenuOpen(false); }}>Insights <ChevronRight size={16} /></button>
               <button className="py-2 border-b border-black/5 text-left" onClick={() => { setView('company'); setIsMobileMenuOpen(false); }}>About Us</button>
               <button className="py-2 border-b border-black/5 text-left" onClick={() => { setView('careers'); setIsMobileMenuOpen(false); }}>Careers</button>
               <button onClick={() => { setView('contact'); setIsMobileMenuOpen(false); }} className="mt-4 w-full bg-[#E61739] text-white py-4 rounded-xl font-bold">Contact Us</button>
