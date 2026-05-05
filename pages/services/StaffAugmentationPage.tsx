@@ -138,48 +138,18 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
 
         {/* --- Stats Bar --- */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Top 1%</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Philippines Talent</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">14 Days</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Typical Launch Time</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">70%</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Average OpEx Savings</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">24/7</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Managed Operations</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why the Philippines strip */}
-      <section className="bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-6">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-4 md:gap-x-16 lg:gap-x-20 items-center text-white">
             {[
-              { icon: Globe,          stat: '#2 in Asia',    label: 'English Proficiency', sub: 'EF English Proficiency Index' },
-              { icon: GraduationCap,  stat: '500,000+',      label: 'Graduates Per Year',  sub: 'University-educated talent' },
-              { icon: Clock,          stat: 'GMT +8',        label: 'Timezone Advantage',  sub: 'Overlaps US, AU & UK hours' },
-              { icon: TrendingDown,   stat: 'Up to 70%',     label: 'Cost Savings',        sub: 'vs US & UK equivalent roles' },
-              { icon: Star,           stat: '20+ Years',     label: 'Outsourcing Legacy',  sub: 'Global BPO capital of Asia' },
-            ].map((f, i) => (
-              <div key={i} className="flex items-center gap-4 px-6 py-6 group hover:bg-slate-50 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-[#E61739]/8 flex items-center justify-center shrink-0">
-                  <f.icon size={18} className="text-[#E61739]" />
-                </div>
-                <div>
-                  <div className="text-lg font-black text-slate-900 leading-none mb-0.5">{f.stat}</div>
-                  <div className="text-xs font-bold text-slate-700 leading-snug">{f.label}</div>
-                  <div className="text-[10px] text-slate-400 font-medium mt-0.5">{f.sub}</div>
-                </div>
+              { stat: '#2 in Asia',  label: 'English Proficiency' },
+              { stat: '500,000+',    label: 'Graduates Per Year' },
+              { stat: 'GMT +8',      label: 'Timezone Advantage' },
+              { stat: 'Up to 70%',   label: 'Cost Savings' },
+              { stat: '20+ Years',   label: 'Outsourcing Legacy' },
+            ].map((s, i) => (
+              <div key={i} className="text-center">
+                <div className="text-xl md:text-2xl font-black mb-0.5">{s.stat}</div>
+                <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{s.label}</p>
               </div>
             ))}
           </div>
