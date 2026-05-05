@@ -104,17 +104,10 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
             Premium, fully-managed Philippine professionals embedded into your team — with KDCI.ai handling every layer of operations. The core KDCI franchise, now AI-augmented.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Build Your Team <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <div className="text-center">
-              <div className="text-white/30 text-xs font-black uppercase tracking-widest mb-1">Starting from</div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-white">$1,800</span>
-                <span className="text-white/40 text-sm font-black uppercase tracking-widest">/ mo per seat</span>
-              </div>
-            </div>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
