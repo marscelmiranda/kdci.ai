@@ -84,7 +84,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           {/* Left — copy */}
           <div className="flex-1 min-w-0">
             <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[1.05] drop-shadow-2xl">
               <span className="text-shine-white">Smarter, Faster</span><br/>
               <span className="text-[#E61739]">Recruitment.</span>
             </h1>
@@ -94,9 +94,6 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             <div className="flex flex-col sm:flex-row gap-6">
               <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                 Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
-                Request Pricing
               </button>
             </div>
           </div>
