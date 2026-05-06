@@ -105,7 +105,8 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             <img
               src={IMG_HERO_MEETING}
               alt="KDCI recruitment consultation"
-              className="w-full h-auto rounded-3xl shadow-2xl object-cover"
+              className="w-full rounded-3xl shadow-2xl object-cover"
+              style={{ height: '560px' }}
             />
           </div>
         </div>
