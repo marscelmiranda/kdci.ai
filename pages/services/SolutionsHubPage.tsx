@@ -36,7 +36,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group p-8 rounded-[3rem] bg-white/5 border border-black/10 backdrop-blur-xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 flex flex-col items-start text-left">
                 <div className="w-14 h-14 bg-[#E61739]/20 rounded-2xl flex items-center justify-center text-[#E61739] mb-8 shadow-inner group-hover:scale-110 transition-transform">
