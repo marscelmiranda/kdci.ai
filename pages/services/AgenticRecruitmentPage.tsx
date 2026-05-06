@@ -211,7 +211,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Flat Fee */}
-            <div className="reveal d2 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
+            <div className="reveal d2 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
                 <Target size={20} className="text-[#E61739]" />
               </div>
@@ -223,7 +223,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Embedded RPO */}
-            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
+            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
                 <Workflow size={20} className="text-[#E61739]" />
               </div>
@@ -296,7 +296,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="grid md:grid-cols-3 gap-5 items-stretch">
 
             {/* Per Placement */}
-            <div className="reveal d1 bg-white/5 border border-white/8 rounded-3xl p-8 flex flex-col hover:bg-white/8 transition-all">
+            <div className="reveal d1 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Per Placement</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span className="text-4xl font-black text-white">$1,800</span>
@@ -304,7 +304,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               </div>
               <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-2">per hire</p>
               <p className="text-white/40 text-sm font-medium mb-8 leading-relaxed">No monthly commitment. Pay on hire, no setup fee.</p>
-              <div className="border-t border-white/8 pt-6 mb-8 flex-grow">
+              <div className="border-t border-white/10 pt-6 mb-8 flex-grow">
                 <ul className="space-y-3">
                   {["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/60">
@@ -347,14 +347,14 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Enterprise RPO */}
-            <div className="reveal d3 bg-white/5 border border-white/8 rounded-3xl p-8 flex flex-col hover:bg-white/8 transition-all">
+            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Enterprise RPO</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span className="text-4xl font-black text-white">$6,000+</span>
               </div>
               <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-2">/ month</p>
               <p className="text-white/40 text-sm font-medium mb-8 leading-relaxed">Full embedded talent function. Unlimited roles, 6-month minimum.</p>
-              <div className="border-t border-white/8 pt-6 mb-8 flex-grow">
+              <div className="border-t border-white/10 pt-6 mb-8 flex-grow">
                 <ul className="space-y-3">
                   {["Team of Recruiters", "Employer Branding Support", "Unlimited Active Roles", "Executive & Volume Hiring"].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/60">
