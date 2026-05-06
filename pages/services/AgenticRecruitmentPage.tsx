@@ -285,7 +285,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       {/* Pricing */}
       <section className="py-24 bg-[#0A0A0A]">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="reveal text-center mb-16">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
@@ -296,7 +296,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="grid md:grid-cols-3 gap-5 items-stretch">
 
             {/* Per Placement */}
-            <div className="reveal d1 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Per Placement</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span className="text-4xl font-black text-white">$1,800</span>
@@ -320,7 +320,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* RPO Retainer — featured */}
-            <div className="reveal d2 bg-[#E61739] rounded-3xl p-8 flex flex-col relative shadow-2xl scale-[1.02]">
+            <div className="bg-[#E61739] rounded-3xl p-8 flex flex-col relative shadow-2xl scale-[1.02]">
               <div className="absolute top-6 right-6 bg-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
                 Best Value
               </div>
@@ -347,7 +347,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Enterprise RPO */}
-            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col hover:bg-white/10 transition-all">
               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Enterprise RPO</p>
               <div className="flex items-baseline gap-1.5 mb-1">
                 <span className="text-4xl font-black text-white">$6,000+</span>
