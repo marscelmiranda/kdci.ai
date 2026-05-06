@@ -108,7 +108,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
            <div className="blob blob-purple opacity-40"></div>
            <div className="blob blob-magenta opacity-30"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs 
             setView={setView} 
             currentName="Philippine Offshore Staffing" 
@@ -118,10 +118,10 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             Build Your Team in the <br/>
             <span className="text-[#E61739]">Philippines.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
+          <p className="max-w-2xl text-xl text-white/60 font-medium leading-relaxed mb-12">
             Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
           </p>
-          <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group mx-auto">
+          <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group">
             Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
