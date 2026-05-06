@@ -612,18 +612,17 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* Client Results */}
-      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="py-20 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                 Client Results
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-white tracking-tight leading-tight">Real teams.<br/>Measurable outcomes.</h2>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight">Real teams.<br/>Measurable outcomes.</h2>
             </div>
-            <p className="text-white/40 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call — and grew into a long-term offshore team.</p>
+            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call — and grew into a long-term offshore team.</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6">
@@ -671,22 +670,22 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 author: 'CPO Commerce Leadership',
               },
             ].map((cs, i) => (
-              <div key={i} className="bg-white/[0.04] border border-white/8 rounded-3xl overflow-hidden flex flex-col hover:border-white/16 transition-all">
+              <div key={i} className="bg-white border border-slate-100 rounded-3xl overflow-hidden flex flex-col hover:shadow-md transition-all">
                 {/* Header */}
-                <div className="px-7 pt-7 pb-5 border-b border-white/8">
+                <div className="px-7 pt-7 pb-5 border-b border-slate-100">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-lg">{cs.flag}</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30 bg-white/5 px-2.5 py-1 rounded-full">{cs.industry}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">{cs.industry}</span>
                   </div>
-                  <h3 className="text-lg font-bold text-white">{cs.client}</h3>
+                  <h3 className="text-lg font-bold text-[#1D1D1F]">{cs.client}</h3>
                 </div>
 
                 {/* Metrics */}
-                <div className="grid grid-cols-3 divide-x divide-white/8 border-b border-white/8">
+                <div className="grid grid-cols-3 divide-x divide-slate-100 border-b border-slate-100">
                   {cs.metrics.map((m, j) => (
                     <div key={j} className="px-4 py-4 text-center">
                       <div className="text-xl font-black text-[#E61739]">{m.value}</div>
-                      <div className="text-[10px] text-white/35 font-semibold uppercase tracking-wide mt-0.5">{m.label}</div>
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wide mt-0.5">{m.label}</div>
                     </div>
                   ))}
                 </div>
@@ -694,20 +693,20 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 {/* Body */}
                 <div className="px-7 py-5 flex-1 flex flex-col gap-4">
                   <div>
-                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Challenge</div>
-                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.challenge}</p>
+                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Challenge</div>
+                    <p className="text-sm text-slate-600 leading-relaxed font-medium">{cs.challenge}</p>
                   </div>
                   <div>
-                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Outcome</div>
-                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.outcome}</p>
+                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Outcome</div>
+                    <p className="text-sm text-slate-600 leading-relaxed font-medium">{cs.outcome}</p>
                   </div>
                 </div>
 
                 {/* Quote */}
                 <div className="px-7 pb-7">
-                  <div className="bg-white/[0.04] rounded-2xl px-5 py-4 border border-white/6">
-                    <p className="text-xs text-white/60 italic leading-relaxed mb-2">"{cs.quote}"</p>
-                    <p className="text-[10px] text-white/30 font-bold">— {cs.author}</p>
+                  <div className="bg-slate-50 rounded-2xl px-5 py-4 border border-slate-100">
+                    <p className="text-xs text-slate-500 italic leading-relaxed mb-2">"{cs.quote}"</p>
+                    <p className="text-[10px] text-slate-400 font-bold">— {cs.author}</p>
                   </div>
                 </div>
               </div>
@@ -715,16 +714,16 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           </div>
 
           {/* Slim testimonial strip */}
-          <div className="mt-10 grid md:grid-cols-3 gap-4">
+          <div className="mt-8 grid md:grid-cols-3 gap-4">
             {[
               { quote: "We love our KDCI team — they're just like a regular part of our team, thousands of miles away. Outsourcing changed everything for us.", name: "Jason Halfaker", company: "Kole Imports" },
               { quote: "Five years in and it just keeps getting better. Incredibly professional and a genuine pleasure to work with.", name: "Dave Palmer", company: "YogaClub" },
               { quote: "KDCI plays a very important role in our catalog and content operations. Responsive, kind, and always willing to help — 4+ years running.", name: "Cristian Capdevila", company: "Softonic.com" },
             ].map((t, i) => (
-              <div key={i} className="bg-white/[0.06] border border-white/10 rounded-2xl px-6 py-5">
+              <div key={i} className="bg-white border border-slate-100 rounded-2xl px-6 py-5">
                 <div className="flex gap-0.5 mb-3">{[...Array(5)].map((_, s) => <Star key={s} size={11} className="text-[#E61739] fill-[#E61739]" />)}</div>
-                <p className="text-xs text-white/60 italic leading-relaxed mb-3">"{t.quote}"</p>
-                <p className="text-[10px] text-white/30 font-bold">— {t.name}, {t.company}</p>
+                <p className="text-xs text-slate-600 italic leading-relaxed mb-3">"{t.quote}"</p>
+                <p className="text-[10px] text-slate-400 font-bold">— {t.name}, {t.company}</p>
               </div>
             ))}
           </div>
