@@ -563,7 +563,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               Transparent Pricing
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-bold tracking-tight mb-4">One rate. Everything included.</h2>
-            <p className="text-white/40 text-base font-medium max-w-xl mx-auto leading-relaxed">Salary, benefits, office, equipment, HR, and AI monitoring — one flat monthly number. No agency fees, no hidden costs.</p>
+            <p className="text-white/65 text-base font-medium max-w-xl mx-auto leading-relaxed">Salary, benefits, office, equipment, HR, and AI monitoring — one flat monthly number. No agency fees, no hidden costs.</p>
           </div>
 
           {/* Rate tiers */}
@@ -575,16 +575,16 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               { category: 'Senior & Specialized Roles',  range: '$4,250 – $6,800',  note: 'Senior engineers, finance leads, operations managers' },
             ].map((tier, i) => (
               <div key={i} className="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-7 py-5 border border-white/[0.07] rounded-2xl hover:border-white/[0.14] hover:bg-white/[0.02] transition-all duration-200">
-                <span className="flex-1 text-sm font-semibold text-white/70 group-hover:text-white/90 transition-colors">{tier.category}</span>
-                <span className="hidden sm:block text-xs text-white/25 font-medium flex-1">{tier.note}</span>
-                <span className="text-lg font-black text-white whitespace-nowrap">{tier.range} <span className="text-white/30 text-sm font-semibold">/ mo</span></span>
+                <span className="flex-1 text-sm font-semibold text-white/80 group-hover:text-white transition-colors">{tier.category}</span>
+                <span className="hidden sm:block text-xs text-white/50 font-medium flex-1">{tier.note}</span>
+                <span className="text-lg font-black text-white whitespace-nowrap">{tier.range} <span className="text-white/50 text-sm font-semibold">/ mo</span></span>
               </div>
             ))}
           </div>
 
           {/* Included strip */}
           <div className="border border-white/[0.07] rounded-2xl px-7 py-6">
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/25 mb-5">Every rate includes</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-5">Every rate includes</p>
             <div className="flex flex-wrap gap-3">
               {[
                 { icon: Users,        label: 'Salary & benefits' },
@@ -595,15 +595,15 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 { icon: Handshake,    label: 'Dedicated account manager' },
                 { icon: Shield,       label: '90-day replacement guarantee' },
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] border border-white/[0.10]">
                   <item.icon size={13} className="text-[#E61739] shrink-0" />
-                  <span className="text-xs font-semibold text-white/55">{item.label}</span>
+                  <span className="text-xs font-semibold text-white/75">{item.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-center text-xs text-white/25 font-medium mt-6">
+          <p className="text-center text-xs text-white/50 font-medium mt-6">
             Rates vary by seniority and team size.{' '}
             <button onClick={() => setView('contact')} className="text-[#E61739] font-bold hover:underline">Get an exact quote →</button>
           </p>
