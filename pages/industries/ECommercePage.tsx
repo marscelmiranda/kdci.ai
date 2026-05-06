@@ -138,14 +138,6 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
               </div>
             ))}
           </div>
-          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {verticals.map((vertical, i) => (
-              <button key={i} onClick={() => setSelectedVertical(i)} className={`rounded-2xl px-4 py-3 text-left border transition-all ${selectedVertical === i ? 'bg-[#E61739] text-white border-[#E61739]' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'}`}>
-                <div className="text-[10px] font-black uppercase tracking-widest mb-1">Industry Vertical</div>
-                <div className="text-sm font-bold">{vertical.name}</div>
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 
