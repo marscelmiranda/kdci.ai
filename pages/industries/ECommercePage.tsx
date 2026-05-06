@@ -126,7 +126,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                   )}
                   <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'} ${i >= 2 ? 'md:col-span-2' : ''}`}>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
-                    <div className={`grid ${i >= 2 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'} gap-x-4 gap-y-2`}>
+                    <div className={`grid ${i >= 2 ? 'grid-cols-2' : 'grid-cols-1'} gap-x-4 gap-y-2`}>
                       {rolesByService[i].map((role, idx) => (
                         <div key={idx} className={`flex items-center gap-2 text-xs font-semibold ${selectedService === i ? 'text-white/50' : 'text-slate-500'}`}>
                           <CheckCircle2 size={12} className="text-[#E61739]" /> {role}
