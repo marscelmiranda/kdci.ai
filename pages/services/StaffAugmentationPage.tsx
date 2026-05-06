@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles, Briefcase, UserCheck, ClipboardCheck, Cpu, Workflow, CheckCircle2, Star, Target, Zap, Shield, BrainCircuit, Globe2, ShieldCheck, Award, TrendingDown, MessageSquare, Handshake, Clock, GraduationCap, Building2, DollarSign, Search, Activity } from 'lucide-react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
@@ -31,388 +31,420 @@ const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string 
   'gov':           [{ role: 'Data Entry Specialist',    ph: '$1,800', save: '62%' }, { role: 'Records Mgmt. Specialist',ph: '$2,040', save: '61%' }, { role: 'Administrative Assistant',ph: '$1,920', save: '60%' }, { role: 'Research Analyst',        ph: '$2,400', save: '64%' }, { role: 'Compliance Coordinator',  ph: '$2,280', save: '63%' }],
 };
 
-const INCLUDED = [
-  'Full HR & Payroll',
-  'PH Legal Compliance',
-  'IT Setup & Security',
-  'Performance Monitoring',
-  'AI Tool Access & Training',
-  'Dedicated Account Manager',
-  'Monthly Performance Reports',
-  'Replacement Guarantee',
-  'Leave & Attendance Mgmt',
-  'Team Lead Option (3+ seats)',
-];
 
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+  const [showSticky, setShowSticky] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // SEO: update document head when this page is active
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = 'Staff Augmentation Philippines | Fully-Managed Offshore Teams | KDCI';
+    document.title = 'Philippine Offshore Staffing | Hire Dedicated Remote Staff | KDCI';
+
     const setMeta = (name: string, content: string, attr = 'name') => {
       let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
       if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
       el.setAttribute('content', content);
       return el;
     };
-    const desc = 'Premium, fully-managed Philippine professionals embedded in your team — KDCI.ai handles HR, payroll, compliance, IT, performance, and AI upskilling. Starting from $1,800/mo per seat.';
+
+    const desc = 'Hire dedicated, full-time offshore staff from the Philippines. Expert-vetted talent across 200+ roles — customer service, engineers, designers, accountants — all-in pricing, onboarded in 14–30 days.';
     setMeta('description', desc);
-    setMeta('og:title', 'Staff Augmentation | KDCI Operations', 'property');
-    setMeta('og:description', desc, 'property');
+    setMeta('og:title', 'Philippine Offshore Staffing | KDCI Outsourcing', 'property');
+    setMeta('og:description', 'Build a dedicated offshore team in the Philippines. 200+ roles, all-in monthly pricing, 14–30 day onboarding. 500+ clients across North America, Australia & Europe.', 'property');
+
+    // JSON-LD for this specific page
     const ldId = 'ld-staff-aug';
     let ld = document.getElementById(ldId);
     if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Staff Augmentation', description: desc, url: 'https://kdci.co' });
-    return () => { document.title = prevTitle; document.getElementById(ldId)?.remove(); };
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Philippine Offshore Staffing',
+      description: desc,
+      url: 'https://kdci.co',
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kdci.co' },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://kdci.co/services' },
+          { '@type': 'ListItem', position: 3, name: 'Philippine Offshore Staffing', item: 'https://kdci.co/services/offshore-staffing' },
+        ],
+      },
+    });
+
+    return () => {
+      document.title = prevTitle;
+      document.getElementById(ldId)?.remove();
+    };
   }, []);
 
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } }),
-      { threshold: 0.12 }
-    );
-    els.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
+    const onScroll = () => setShowSticky(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+
 
   return (
     <div className="min-h-screen bg-white">
-
-      {/* ── Hero ── */}
-      <section className="relative bg-[#020202] pt-36 pb-40" style={{ overflow: 'hidden' }}>
+      {/* 1. Hero Section */}
+      <section className="relative pt-40 pb-28 md:pb-36 overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
-          <img src={IMG_STAFF_AUG_HERO} alt="Staff Augmentation" className="w-full h-full object-cover opacity-20 object-center grayscale" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black" />
+          <img 
+            src={IMG_STAFF_AUG_HERO} 
+            alt="Staff Augmentation" 
+            className="w-full h-full object-cover opacity-30 object-center grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
         </div>
         <div className="mesh-container opacity-40">
-          <div className="blob blob-purple opacity-40" />
-          <div className="blob blob-magenta opacity-30" />
+           <div className="blob blob-purple opacity-40"></div>
+           <div className="blob blob-magenta opacity-30"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Philippine Offshore Staffing" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Philippine</span><br/>
-            <span className="text-[#E61739]">Offshore </span>
-            <span className="text-[#E61739]">Staffing.</span>
+          <Breadcrumbs 
+            setView={setView} 
+            currentName="Philippine Offshore Staffing" 
+            parent={{ name: 'Solutions', view: 'solutions-hub' }} 
+          />
+          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
+            Build Your Team in the <br/>
+            <span className="text-[#E61739]">Philippines.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
-            Premium, fully-managed Philippine professionals embedded into your team — with KDCI.ai handling every layer of operations. The core KDCI franchise, now AI-augmented.
+          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
+            Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Build Your Team <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
+          <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group mx-auto">
+            Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div><div className="text-xl md:text-2xl font-black">500+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Clients Globally</p></div>
-            <div><div className="text-xl md:text-2xl font-black">15+ yrs</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">In Operation</p></div>
-            <div><div className="text-xl md:text-2xl font-black">95%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Client Retention</p></div>
-            <div><div className="text-xl md:text-2xl font-black">14–30d</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Time to First Hire</p></div>
+
+        {/* --- Stats Bar --- */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-6">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-4 md:gap-x-16 lg:gap-x-20 items-center text-white">
+            {[
+              { stat: '500+',      label: 'Clients Globally' },
+              { stat: '15+ yrs',  label: 'In Operation' },
+              { stat: '95%',      label: 'Client Retention' },
+              { stat: '200+',     label: 'Roles Available' },
+              { stat: '14–30d',   label: 'Time to First Hire' },
+            ].map((s, i) => (
+              <div key={i} className="text-center">
+                <div className="text-xl md:text-2xl font-black mb-0.5">{s.stat}</div>
+                <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{s.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── What We Deliver ── */}
-      <section className="py-32 bg-white">
+      {/* 2. What We Offer */}
+      <section className="py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="reveal">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100">
-                <Sparkles size={12} /> What We Deliver
+          <div className="flex flex-col lg:flex-row gap-16 items-stretch">
+
+            {/* LEFT — image column */}
+            <div className="lg:w-[46%] relative rounded-[3rem] overflow-hidden min-h-[560px] shrink-0">
+              <img
+                src={IMG_PH_TEAM}
+                alt="Philippine offshore team at KDCI"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+              {/* bottom copy */}
+              <div className="absolute bottom-0 left-0 right-0 p-10">
+                <p className="text-[11px] text-white/50 font-black uppercase tracking-widest mb-2">Based in the Philippines</p>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">World-class talent,<br/>timezone-friendly.</h3>
               </div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight tracking-tight">
-                You direct the work.<br/><span className="text-[#E61739]">We own everything else.</span>
-              </h2>
-              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10" style={{ textWrap: 'balance' }}>
-                Dedicated full-time professionals who work exclusively for your business — screened, assessed, onboarded, and managed by KDCI.ai. We handle all HR, payroll, government compliance, IT infrastructure, performance management, and retention. Every team member receives KDCI.ai AI tool training, making them measurably more productive than a comparable unmanaged hire.
-              </p>
-              <div className="space-y-3">
+
+              {/* floating stat badge */}
+              <div className="absolute top-8 left-8 bg-[#E61739] rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
+                <div className="w-9 h-9 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+                  <Star size={18} className="text-white" />
+                </div>
+                <div>
+                  <div className="text-lg font-black text-white leading-none">95%</div>
+                  <div className="text-[9px] text-white/70 font-black uppercase tracking-widest mt-0.5">Client Retention Rate</div>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — content column */}
+            <div className="lg:w-[54%] flex flex-col justify-center">
+              <div className="mb-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                  How It Works
+                </div>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight leading-tight">A better way to<br/>build your team.</h2>
+                <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-xl mb-10">KDCI acts as your employer of record in the Philippines — we hire, manage compliance, and handle HR, while you direct the work and own the output.</p>
+              </div>
+
+              <div className="space-y-4 mb-10">
                 {[
-                  { icon: UserCheck, text: 'Dedicated full-time professionals, exclusively yours' },
-                  { icon: ShieldCheck, text: 'Full HR, payroll & PH legal compliance — fully handled' },
-                  { icon: BrainCircuit, text: 'AI tool training & access standard for every team member' },
-                  { icon: Award, text: 'Replacement guarantee — we replace underperformers at no cost' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-black/5 hover:border-black/10 hover:bg-white hover:shadow-sm transition-all">
-                    <div className="w-10 h-10 shrink-0 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#E61739]">
-                      <item.icon size={20} />
+                  { title: 'Expert-vetted talent only', body: 'Every candidate clears a multi-stage vetting process — skills tests, cultural fit interview, and reference checks before you ever see a profile.' },
+                  { title: 'All-in monthly pricing', body: 'One flat rate covers salary, benefits, office, equipment, HR, AI performance monitoring, and a dedicated account manager. No hidden costs.' },
+                  { title: 'Onboarded in 14–30 days', body: 'Common roles placed in 14 days. Senior or specialized roles within 30. KDCI handles every step from sourcing to Day 1 activation.' },
+                  { title: 'Scale up or down with 30 days notice', body: 'No long-term lock-in. Add roles as you grow or reduce headcount as your needs change — no penalties, no friction.' },
+                ].map((p, i) => (
+                  <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-[#F5F5F7] border border-black/[0.03]">
+                    <div className="w-6 h-6 rounded-full bg-[#E61739] flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckCircle2 size={13} className="text-white" />
                     </div>
-                    <span className="text-sm font-semibold text-slate-700">{item.text}</span>
+                    <div>
+                      <h3 className="text-sm font-bold text-[#1D1D1F] mb-1">{p.title}</h3>
+                      <p className="text-xs text-slate-500 font-medium leading-relaxed">{p.body}</p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="reveal d2 relative">
-              <div className="relative rounded-3xl aspect-[4/5] shadow-2xl" style={{ overflow: 'hidden' }}>
-                <img src={IMG_PH_TEAM} alt="Philippine offshore team at KDCI" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-              </div>
-              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
-                    <Star size={22} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-black text-slate-900">95% Retention Rate</div>
-                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Across 500+ global clients</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ── Why It Commands a Premium ── */}
-      <section className="py-12 bg-[#020202] relative" style={{ overflow: 'hidden' }}>
-        <style>{`
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(32px); }
-            to   { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes pulseRing {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(230,23,57,0.5); }
-            50%       { box-shadow: 0 0 0 14px rgba(230,23,57,0); }
-          }
-          .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.62s cubic-bezier(0.22,1,0.36,1), transform 0.62s cubic-bezier(0.22,1,0.36,1);
-          }
-          .reveal.in-view { opacity: 1; transform: translateY(0); }
-          .reveal.d1 { transition-delay: 0.1s; }
-          .reveal.d2 { transition-delay: 0.2s; }
-          .reveal.d3 { transition-delay: 0.3s; }
-          .reveal.d4 { transition-delay: 0.4s; }
-          .reveal.d5 { transition-delay: 0.5s; }
-        `}</style>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="reveal text-center mb-10">
-            <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-3">Why It Commands a Premium</p>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-white leading-tight">The "managed" part is where<br/>the premium <span className="text-[#E61739]">lives.</span></h2>
-          </div>
-          <div className="grid lg:grid-cols-3 gap-4">
-
-            <div className="reveal bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
-              <div className="shrink-0">
-                <div className="text-[4.5rem] font-black text-white leading-none">50<span className="text-3xl">–</span>70</div>
-                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">% Cost Savings</div>
-              </div>
-              <div className="border-l border-white/20 pl-6">
-                <p className="text-white/80 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-                  Standard VA platforms hand you a profile and walk away. We manage performance, replace underperformers, and handle compliance risk.
-                </p>
-              </div>
-            </div>
-
-            <div className="reveal d2 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
-                <BrainCircuit size={20} className="text-[#E61739]" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-[#E61739] mb-0.5">AI-Upskilled</div>
-                <h4 className="text-sm font-black text-white mb-1">Every Team Member</h4>
-                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>Continuous AI tool training makes your offshore team measurably more productive than unmanaged hires.</p>
-              </div>
-            </div>
-
-            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/8 transition-all">
-              <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
-                <ShieldCheck size={20} className="text-[#E61739]" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-[#E61739] mb-0.5">Zero Admin</div>
-                <h4 className="text-sm font-black text-white mb-1">Full Compliance Cover</h4>
-                <p className="text-white/40 text-xs font-medium leading-relaxed" style={{ textWrap: 'balance' }}>HR, payroll, PH government filings, IT infrastructure — all owned by KDCI.ai, not you.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── What's Included ── */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-stretch">
-            <div className="reveal flex flex-col">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100 self-start">
-                <ClipboardCheck size={12} /> What's Included
-              </div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6 leading-tight tracking-tight">
-                Everything you need.<br/><span className="text-[#E61739]">Nothing you don't.</span>
-              </h2>
-              <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
-                Every seat includes our complete managed operations suite — from day-one IT setup to monthly performance reporting and AI tool training.
-              </p>
-              <div className="bg-slate-50 border border-black/5 rounded-3xl p-8 flex-grow">
-                <div className="grid grid-cols-2 gap-x-6 gap-y-3 h-full content-start">
-                  {INCLUDED.map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
-                      <span className="text-sm font-semibold text-slate-600">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="reveal d2 relative h-full rounded-3xl shadow-2xl" style={{ overflow: 'hidden' }}>
-              <img src={IMG_KDCI_OFFICE} alt="KDCI Operations team" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
-              <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
-                    <Zap size={22} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="text-3xl font-black text-slate-900 mb-1">14–30 Days</div>
-                    <p className="text-slate-500 text-xs font-black uppercase tracking-widest">From brief to your first hire</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Rate by Role Level.</h2>
-            <p className="text-slate-500 text-lg font-medium">Structured for every stage of your team-building needs.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-
-            {/* LEFT — Mid-Level featured */}
-            <div className="reveal d1 bg-slate-900 rounded-3xl p-12 flex flex-col justify-between relative" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
-              <div className="absolute top-8 right-8 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                Most Common
-              </div>
-              <div>
-                <p className="text-white/40 text-xs font-black uppercase tracking-widest mb-3">Mid-Level Professional</p>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-5xl font-black text-white">$2,800–$4,200</span>
-                </div>
-                <span className="text-white/40 text-sm font-black uppercase tracking-widest">/ mo per seat</span>
-                <p className="text-white/50 text-sm font-medium mt-3 mb-8">Designers, marketers, accountants, SDRs, developers, project managers · Setup fee: $1,000 · 3-month minimum</p>
-                <div className="border-t border-white/10 pt-8">
-                  <ul className="space-y-3">
-                    {["Dedicated Full-Time Professional", "Full HR & Payroll Managed", "AI Tool Access & Training", "Performance Monitoring & Reporting", "Dedicated Account Manager", "90-Day Replacement Guarantee"].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/80">
-                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <button onClick={() => setView('contact')} className="mt-10 w-full py-4 rounded-3xl bg-[#E61739] text-white font-bold text-base hover:bg-[#c51431] transition-all shadow-xl">
-                Get a Quote
+              <button
+                onClick={() => setView('contact')}
+                className="self-start flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all group"
+              >
+                Book a Free Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
             </div>
 
-            {/* RIGHT — two stacked */}
-            <div className="flex flex-col gap-6">
-
-              <div className="reveal d2 bg-white border border-slate-100 rounded-3xl p-8 flex-1 hover:shadow-lg transition-all">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-1">Junior / Admin</p>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-black text-slate-900">$1,800–$2,200</span>
-                      <span className="text-slate-400 text-xs font-black uppercase tracking-widest">/ mo</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-slate-500 text-sm font-medium mb-5">Data ops, scheduling, CX support, admin, basic marketing execution · Setup fee: $750 · 3-month minimum</p>
-                <ul className="space-y-2">
-                  {["Full HR & Payroll", "IT Setup & Security", "AI Tool Access & Training", "Replacement Guarantee"].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-600">
-                      <CheckCircle2 size={13} className="text-[#E61739] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={() => setView('contact')} className="mt-6 w-full py-3.5 rounded-3xl bg-slate-900 text-white font-bold text-sm hover:bg-black transition-all">
-                  Get a Quote
-                </button>
-              </div>
-
-              <div className="reveal d3 bg-white border border-slate-100 rounded-3xl p-8 flex-1 hover:shadow-lg transition-all">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-1">Senior / AI Specialist</p>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-black text-slate-900">$4,500–$6,500</span>
-                      <span className="text-slate-400 text-xs font-black uppercase tracking-widest">/ mo</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-slate-500 text-sm font-medium mb-5">Senior devs, AI engineers, ops managers, team leads, CX architects · Setup fee: $1,500 · 6-month minimum</p>
-                <ul className="space-y-2">
-                  {["Senior-Level Vetting", "AI Specialist Training", "Team Lead Option", "Priority Account Manager"].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-600">
-                      <CheckCircle2 size={13} className="text-[#E61739] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={() => setView('contact')} className="mt-6 w-full py-3.5 rounded-3xl bg-slate-900 text-white font-bold text-sm hover:bg-black transition-all">
-                  Get a Quote
-                </button>
-              </div>
-
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ── How It Works ── */}
-      <section className="py-12 bg-slate-900 text-white relative" style={{ overflow: 'hidden' }}>
+      {/* 3. How It Works + Roles We Staff — combined */}
+      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
-            <div className="reveal shrink-0">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold whitespace-nowrap">Built for Speed.</h2>
-              <p className="text-white/40 text-sm font-medium mt-2 max-w-[220px]" style={{ textWrap: 'balance' }}>From brief to live team in 14–30 days.</p>
+
+          {/* ── How It Works ── */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Onboarding Timeline
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14–30 days.</h2>
             </div>
-            <div className="w-px bg-white/10 self-stretch hidden md:block shrink-0" />
-            <div className="reveal d2 grid grid-cols-4 gap-4 flex-1 relative">
-              <div className="hidden md:block absolute top-[1.6rem] left-[5%] right-[5%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. We handle every step.</p>
+          </div>
+
+          <div className="relative mb-6">
+            <div className="hidden lg:block absolute top-8 left-[calc(12.5%)] right-[calc(12.5%)] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
-                { step: "01", title: "Discovery",     desc: "Define roles, budget & KPIs.",      icon: Target },
-                { step: "02", title: "Source & Vet",  desc: "AI-assisted talent screening.",    icon: Search },
-                { step: "03", title: "You Approve",   desc: "Interview & select your hire.",    icon: UserCheck },
-                { step: "04", title: "Go Live",       desc: "Set up, onboarded & monitored.",   icon: Activity },
+                { day: 'Day 1',     icon: Target,      title: 'Discovery Call',  bullets: ['Define roles & seniority', 'Set team size & budget', 'Agree on KPIs & SLAs'] },
+                { day: 'Day 2–5',   icon: Search,      title: 'Source & Screen', bullets: ['AI-assisted talent search', 'Skills & culture fit vetting', 'Top 3 candidates presented'] },
+                { day: 'Day 6–10',  icon: Handshake,   title: 'You Approve',     bullets: ['Interview shortlist', 'Select your hire(s)', 'Contracts & NDAs signed'] },
+                { day: 'Day 11–14', icon: Activity,    title: 'Go Live',         bullets: ['Equipment & access set up', 'Integrated into your tools', 'AI monitoring activated'] },
               ].map((s, idx) => (
-                <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                  <div className="w-11 h-11 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-4 group-hover:border-[#E61739] transition-all">
-                    <s.icon size={18} />
+                <div key={idx} className="relative group">
+                  <div className="bg-white/[0.03] border border-white/8 rounded-3xl p-6 h-full hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/20 mb-5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#E61739]" />
+                      <span className="text-[#E61739] text-[10px] font-black uppercase tracking-widest">{s.day}</span>
+                    </div>
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all">
+                      <s.icon size={20} />
+                    </div>
+                    <h4 className="text-base font-bold text-white mb-3">{s.title}</h4>
+                    <ul className="space-y-2">
+                      {s.bullets.map((b, bi) => (
+                        <li key={bi} className="flex items-start gap-2 text-sm text-white/40 font-medium">
+                          <CheckCircle2 size={13} className="text-[#E61739]/60 mt-0.5 shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                  <h4 className="text-sm font-bold mb-1">{s.title}</h4>
-                  <p className="text-[11px] text-white/40 leading-relaxed font-medium">{s.desc}</p>
+                  <div className="absolute bottom-4 right-5 text-5xl font-black text-white/[0.04] select-none leading-none">{String(idx + 1).padStart(2, '0')}</div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Promise bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 py-5 border-t border-white/8 mb-16">
+            {[
+              { icon: CheckCircle2, text: 'First candidate presented in 5 days' },
+              { icon: CheckCircle2, text: '14 days for common roles · up to 30 for specialized' },
+              { icon: CheckCircle2, text: 'Free replacement within 90 days' },
+            ].map((p, i) => (
+              <div key={i} className="flex items-center gap-2.5 text-sm text-white/50 font-medium">
+                <p.icon size={14} className="text-[#E61739] shrink-0" />
+                {p.text}
+              </div>
+            ))}
+          </div>
+
+          {/* ── Roles Divider ── */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                200+ Roles Available
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight leading-tight">Most-requested positions.</h2>
+            </div>
+            <p className="text-white/40 text-sm font-medium max-w-sm leading-relaxed">Starting rates shown are all-in monthly costs. Contact us for an exact quote by level and experience.</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {[
+              { icon: Headphones, role: 'Customer Service Agent',  rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: UserCircle, role: 'Virtual Assistant',        rate: 'from $1,450/mo', tag: 'Quick hire' },
+              { icon: Palette,    role: 'Graphic Designer',         rate: 'from $1,900/mo', tag: '' },
+              { icon: Code,       role: 'Software Engineer',        rate: 'from $2,750/mo', tag: 'Specialist' },
+              { icon: Coins,      role: 'Accountant / Bookkeeper',  rate: 'from $1,700/mo', tag: '' },
+              { icon: Users,      role: 'HR Specialist',            rate: 'from $1,700/mo', tag: '' },
+              { icon: Target,     role: 'Digital Marketer / SEO',   rate: 'from $1,900/mo', tag: '' },
+              { icon: Database,   role: 'Data Analyst',             rate: 'from $2,050/mo', tag: 'Specialist' },
+              { icon: Home,       role: 'Real Estate Admin',        rate: 'from $1,550/mo', tag: 'High demand' },
+              { icon: Workflow,   role: 'Operations / Process Mgr', rate: 'from $2,200/mo', tag: '' },
+            ].map((r, i) => (
+              <div key={i} className="bg-white/[0.04] border border-white/8 rounded-2xl p-5 hover:bg-white/[0.08] hover:border-white/15 hover:-translate-y-0.5 transition-all group cursor-default">
+                <div className="h-5 mb-3">
+                  {r.tag && <span className="inline-block px-2 py-0.5 rounded-full bg-[#E61739]/20 text-[#E61739] text-[9px] font-black uppercase tracking-wider">{r.tag}</span>}
+                </div>
+                <div className="w-9 h-9 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white/50 mb-3 group-hover:bg-[#E61739]/20 group-hover:text-[#E61739] group-hover:border-[#E61739]/30 transition-all">
+                  <r.icon size={16} />
+                </div>
+                <h4 className="text-sm font-bold text-white leading-snug mb-1.5">{r.role}</h4>
+                <p className="text-xs font-black text-[#E61739]">{r.rate}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-xs text-white/30 font-medium mt-8">
+            Don't see your role? We staff 200+ positions across every function. <button onClick={() => setView('contact')} className="text-[#E61739] font-bold hover:underline">Ask us about it →</button>
+          </p>
+
         </div>
       </section>
 
-      {/* ── See the Savings ── */}
-      <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
+      {/* 5. Why the Philippines */}
+      <section className="py-20 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal text-center mb-14">
+
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Why the Philippines
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
+              The world's preferred<br/>offshore staffing destination.
+            </h2>
+            <p className="text-slate-500 text-base font-medium max-w-xl mx-auto leading-relaxed">
+              Not every offshore market is equal. The Philippines consistently outperforms on the factors that matter most for long-term team success.
+            </p>
+          </div>
+
+          {/* Office team photo */}
+          <div className="relative mb-10 rounded-3xl overflow-hidden shadow-lg" style={{ height: '400px' }}>
+            <img
+              src={IMG_KDCI_OFFICE}
+              alt="KDCI Operations team in Manila office"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 px-8 py-6 flex items-end justify-between">
+              <div>
+                <p className="text-white font-black text-lg leading-tight">Your dedicated team. Manila, Philippines.</p>
+                <p className="text-white/60 text-sm font-medium mt-1">KDCI-managed office — staffed, equipped, and compliant from day one.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                icon: MessageSquare,
+                color: '#E61739',
+                stat: '#2 in Asia',
+                title: 'English Proficiency',
+                body: 'The Philippines ranks 2nd in English proficiency across Asia (EF EPI 2024) — ahead of India, China, Japan, and South Korea. Neutral accents and strong written English reduce miscommunication with US, AU, and UK clients.',
+              },
+              {
+                icon: Handshake,
+                color: '#1D4ED8',
+                stat: '100+ years',
+                title: 'Western Cultural Alignment',
+                body: 'A century of American-influenced education, media, and business culture means Filipino professionals share communication norms, work ethics, and professional expectations with Western teams. Minimal culture-gap friction.',
+              },
+              {
+                icon: Clock,
+                color: '#0891B2',
+                stat: 'UTC+8',
+                title: 'Flexible Time Zone Coverage',
+                body: 'Philippine Standard Time overlaps with Australian business hours (1–4 hrs behind AEST) and can flex into US evening hours. Many KDCI teams split shifts to cover US East / West Coast business hours directly.',
+              },
+              {
+                icon: GraduationCap,
+                color: '#7C3AED',
+                stat: '750,000+',
+                title: 'Graduates Per Year',
+                body: 'The Philippine higher education system produces over 750,000 graduates annually. Strong STEM output, plus nursing, accounting, and IT programs that consistently meet global professional certification standards.',
+              },
+              {
+                icon: Building2,
+                color: '#059669',
+                stat: 'PEZA-backed',
+                title: 'Government BPO Support',
+                body: 'The IT-BPM industry is a national priority. PEZA-registered business parks, government training programs, and stable infrastructure investment all support a reliable, growing offshore workforce.',
+              },
+              {
+                icon: DollarSign,
+                color: '#D97706',
+                stat: '50–70% savings',
+                title: 'Structural Cost Advantage',
+                body: 'Lower cost of living means competitive salaries for local staff at a fraction of US equivalent costs — without compromising on skill or commitment. A $1,800/mo offshore role often replaces a $6,500/mo US equivalent.',
+              },
+            ].map((card, i) => (
+              <div key={i} className="bg-white rounded-3xl p-7 border border-slate-100 hover:shadow-md transition-all group">
+                <div className="flex items-start justify-between mb-5">
+                  <div
+                    className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: card.color + '18' }}
+                  >
+                    <card.icon size={20} style={{ color: card.color }} strokeWidth={1.75} />
+                  </div>
+                  <span className="text-[11px] font-black text-[#E61739] uppercase tracking-wider bg-[#E61739]/8 px-2.5 py-1 rounded-full">{card.stat}</span>
+                </div>
+                <h4 className="text-base font-bold text-[#1D1D1F] mb-3">{card.title}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed font-medium">{card.body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Country coverage strip */}
+          <div className="mt-10 bg-white border border-slate-100 rounded-3xl px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-black text-[#1D1D1F] uppercase tracking-widest mb-1">Serving clients in 9+ countries</p>
+              <p className="text-xs text-slate-400 font-medium">🇺🇸 US · 🇦🇺 AU · 🇬🇧 UK · 🇨🇦 CA · 🇸🇬 SG · 🇦🇪 UAE · 🇩🇪 DE · 🇳🇿 NZ · 🇮🇪 IE</p>
+            </div>
+            <div className="flex gap-8 shrink-0">
+              {[{ v: '500+', l: 'Clients' }, { v: '15+', l: 'Years' }, { v: '95%', l: 'Retention' }].map((s, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-lg font-black text-[#E61739]">{s.v}</div>
+                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Industry Savings */}
+      <section className="py-20 bg-[#F9F9F9] border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Header */}
+          <div className="text-center mb-14">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">See the Savings.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
               Pick your industry and see the top 5 offshore roles — with KDCI's all-in monthly rate and how much you save vs US market equivalents.
@@ -420,14 +452,18 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6 items-start">
-            <div className="reveal d1 bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+
+            {/* Left: industry list */}
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
               <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
                 {INDUSTRIES.map((ind, i) => (
                   <button
                     key={i}
                     onClick={() => setSelectedInd(ind)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
-                      selectedInd.id === ind.id ? 'bg-[#E61739] text-white shadow-sm' : 'hover:bg-slate-50 text-slate-600'
+                      selectedInd.id === ind.id
+                        ? 'bg-[#E61739] text-white shadow-sm'
+                        : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
                     <ind.icon size={15} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
@@ -437,7 +473,10 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
             </div>
 
-            <div className="reveal d2 lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+            {/* Right: savings panel */}
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+
+              {/* Panel header */}
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedInd.icon size={30} className="text-white" />
@@ -448,7 +487,9 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 </div>
               </div>
 
+              {/* Role rows */}
               <div className="flex flex-col gap-2 flex-grow">
+                {/* Column labels */}
                 <div className="grid grid-cols-12 px-5 mb-1">
                   <span className="col-span-6 text-[10px] font-black uppercase tracking-widest text-white/25">Role</span>
                   <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 text-center">KDCI / mo</span>
@@ -474,203 +515,440 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 ))}
               </div>
 
+              {/* Footer */}
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
                 <p className="text-white/30 text-xs font-medium">Indicative mid-level monthly rates · all-in, no hidden fees</p>
-                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                <button
+                  onClick={() => setView('contact')}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* ── The Staff Augmentation Advantage ── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="reveal relative">
-              <div className="bg-slate-100 rounded-3xl aspect-[4/5] relative shadow-2xl" style={{ overflow: 'hidden' }}>
-                <img src={IMG_CONTACT} alt="KDCI managed team" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
-                      <TrendingDown size={22} className="text-white" />
-                    </div>
-                    <div>
-                      <div className="text-3xl font-black text-slate-900 mb-1">70%</div>
-                      <p className="text-slate-500 text-xs font-black uppercase tracking-widest">Typical OpEx Reduction</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* 6. Pricing Transparency */}
+      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
+              Transparent Pricing
             </div>
-            <div className="reveal d2">
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Staff Augmentation<br/><span className="text-[#E61739]">Advantage.</span></h2>
-              <div className="space-y-8">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight mb-5">One rate. Everything included.</h2>
+            <p className="text-white/40 text-lg font-medium max-w-2xl mx-auto leading-relaxed">No recruiter fees. No surprise overheads. Your monthly rate covers every cost of employment — end to end.</p>
+          </div>
+
+          {/* Two-column: what's in vs what you skip */}
+          <div className="grid lg:grid-cols-2 gap-6 mb-12">
+
+            {/* What's included */}
+            <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-7">
+                <div className="w-9 h-9 rounded-xl bg-[#E61739]/15 border border-[#E61739]/25 flex items-center justify-center">
+                  <CheckCircle2 size={18} className="text-[#E61739]" />
+                </div>
+                <h3 className="text-lg font-bold text-white">What your rate covers</h3>
+              </div>
+              <div className="grid grid-cols-1 gap-3">
                 {[
-                  { title: "Fully Managed, Not Just Staffed", desc: "KDCI.ai monitors performance, handles underperformers, manages compliance risk, and upskills your team — continuously. This is where the premium lives.", icon: ShieldCheck },
-                  { title: "AI Tool Training as Standard", desc: "Every team member gets access to KDCI.ai's AI tool suite and ongoing training — making them measurably more productive than an equivalent unmanaged hire.", icon: BrainCircuit },
-                  { title: "Stop Worrying, Start Relying", desc: "Clients who choose fully-managed stop worrying about their offshore team and start relying on them. That's the outcome we design for.", icon: Globe2 },
-                  { title: "15+ Years of Operational Depth", desc: "500+ global clients, 95% retention, and 15 years of Philippines-based operations give KDCI.ai a depth of process no new offshore provider can match.", icon: Award },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex gap-6 group">
-                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
-                      <item.icon size={24} />
-                    </div>
+                  ['Employee salary', 'Benchmarked to Philippine market rates by role & level'],
+                  ['Government benefits', 'SSS, PhilHealth & Pag-IBIG contributions — fully managed'],
+                  ['13th month pay', 'Legally mandated & pro-rated — handled by KDCI'],
+                  ['Paid leave & holidays', 'PH statutory leave with zero admin on your side'],
+                  ['Office space & workstation', 'Dedicated desk in our Manila or Cebu offices'],
+                  ['IT equipment & internet', 'Company-grade laptop, monitors & redundant connectivity'],
+                  ['HR & payroll management', 'Employment contracts, payslips, compliance filings'],
+                  ['AI performance monitoring', 'Real-time KPI tracking, QA audits & reporting'],
+                  ['Dedicated account manager', 'Your single point of contact for anything team-related'],
+                ].map(([label, detail], i) => (
+                  <div key={i} className="flex items-start gap-3 py-2.5 border-b border-white/5 last:border-0">
+                    <CheckCircle2 size={14} className="text-[#E61739] mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium" style={{ textWrap: 'balance' }}>{item.desc}</p>
+                      <span className="text-sm font-semibold text-white/90">{label}</span>
+                      <span className="text-xs text-white/35 font-medium block mt-0.5">{detail}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ── Contact Form ── */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl relative border border-white/[0.07]" style={{ overflow: 'hidden' }}>
-          <div className="absolute inset-0 z-0">
-            <img src={IMG_STAFF_AUG_HERO} alt="Staff team" className="w-full h-full object-cover opacity-[0.06]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80" />
-          </div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
-
-            <div className="reveal p-12 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Let's Build Your Team
-                </div>
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Build your<br/><span className="text-[#E61739]">dream team.</span>
-                </h2>
-                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm" style={{ textWrap: 'balance' }}>
-                  Tell us about your team needs and we'll have a staffing plan ready within 24 hours.
-                </p>
-              </div>
-              <div className="space-y-4 mt-12">
-                {[
-                  { icon: CheckCircle2, text: 'First candidate presented within 5 days' },
-                  { icon: CheckCircle2, text: 'Common roles placed in 14 days, senior in 30' },
-                  { icon: CheckCircle2, text: '90-day replacement guarantee, no fine print' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <item.icon size={14} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
+            {/* What you skip */}
+            <div className="flex flex-col gap-6">
+              <div className="bg-white/[0.02] border border-white/6 rounded-3xl p-8">
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <TrendingDown size={18} className="text-white/40" />
                   </div>
-                ))}
-                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
-                  {[{ val: '500+', label: 'Clients' }, { val: '15 yrs', label: 'Operating' }, { val: '95%', label: 'Retention' }].map((s, i) => (
-                    <div key={i}>
-                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
-                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                  <h3 className="text-lg font-bold text-white">What you no longer pay</h3>
+                </div>
+                <div className="grid grid-cols-1 gap-2.5">
+                  {[
+                    ['Recruiter / agency fee', '15–25% of annual salary, per hire'],
+                    ['Benefits administration', 'HR software, filings, compliance overhead'],
+                    ['Office lease & utilities', '$1,000–$3,000+/mo per desk in the US'],
+                    ['Equipment procurement', 'Laptop, monitors, peripherals — $2,000+ upfront'],
+                    ['Payroll tools & tax filing', 'Software costs + accountant time'],
+                    ['Performance management systems', 'Replaced by KDCI\'s built-in AI layer'],
+                  ].map(([label, detail], i) => (
+                    <div key={i} className="flex items-start gap-3 py-2 border-b border-white/[0.04] last:border-0">
+                      <div className="w-4 h-4 rounded-full border border-white/15 flex items-center justify-center mt-0.5 shrink-0">
+                        <div className="w-1.5 h-px bg-white/30 rounded" />
+                      </div>
+                      <div>
+                        <span className="text-sm font-semibold text-white/50 line-through decoration-white/20">{label}</span>
+                        <span className="text-xs text-white/25 font-medium block mt-0.5">{detail}</span>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
 
-            <div className="reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
-                    <CheckCircle2 size={30} className="text-white" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white">Message received!</h3>
-                  <p className="text-white/50 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
-                    Our operations team will review your brief and get back to you within 24 hours.
-                  </p>
+              {/* Sample rate bands */}
+              <div className="bg-[#E61739]/10 border border-[#E61739]/20 rounded-3xl p-8">
+                <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 mb-5">Sample monthly rates (all-in)</p>
+                <div className="space-y-4">
+                  {[
+                    { role: 'Customer Support / Admin',  range: '$1,450 – $2,200 / mo' },
+                    { role: 'Design / Content / Marketing', range: '$1,900 – $3,100 / mo' },
+                    { role: 'Software Engineer (Mid)',    range: '$2,750 – $4,450 / mo' },
+                    { role: 'Senior / Specialized Roles',range: '$4,250 – $6,800 / mo' },
+                  ].map((r, i) => (
+                    <div key={i} className="flex items-center justify-between gap-4">
+                      <span className="text-sm text-white/60 font-medium">{r.role}</span>
+                      <span className="text-sm font-black text-white whitespace-nowrap">{r.range}</span>
+                    </div>
+                  ))}
                 </div>
-              ) : (
+                <p className="text-[10px] text-white/25 font-medium mt-5">Rates vary by role seniority, specialization, and team size. Contact us for an exact quote.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom stat row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { stat: 'Up to 70%', label: 'Cost savings vs US hiring' },
+              { stat: '$0',        label: 'Recruiter or placement fees' },
+              { stat: '1 invoice', label: 'Everything consolidated monthly' },
+              { stat: '30 days',   label: 'Notice to scale or exit' },
+            ].map((s, i) => (
+              <div key={i} className="bg-white/[0.03] border border-white/8 rounded-2xl px-6 py-5 text-center">
+                <div className="text-2xl font-black text-[#E61739] mb-1">{s.stat}</div>
+                <div className="text-[11px] text-white/35 font-semibold uppercase tracking-wide leading-tight">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* Client Results */}
+      <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Client Results
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-white tracking-tight leading-tight">Real teams.<br/>Measurable outcomes.</h2>
+            </div>
+            <p className="text-white/40 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call — and grew into a long-term offshore team.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              {
+                client: 'Cedar Management Group',
+                industry: 'Property Management',
+                flag: '🇺🇸',
+                challenge: 'Could not find or retain qualified customer service and admin staff locally at a cost that matched their growth targets.',
+                outcome: 'Scaled from 3 KDCI agents to 40+ full-time team members over 4 years — now a core part of their operations across customer service, leasing support, and back-office functions.',
+                metrics: [
+                  { value: '40+', label: 'Team Members' },
+                  { value: '4 yrs', label: 'Partnership' },
+                  { value: 'CS + Admin', label: 'Roles Covered' },
+                ],
+                quote: 'KDCI has become an invaluable partnership — we count them as part of the Cedar Family.',
+                author: 'Rachel Rose, Cedar Management Group',
+              },
+              {
+                client: 'YogaClub',
+                industry: 'eCommerce / Subscription',
+                flag: '🇺🇸',
+                challenge: 'Rapid subscriber growth outpaced their ability to staff customer service in the US — ticket backlog was growing and CSAT scores were slipping.',
+                outcome: 'Deployed a dedicated KDCI customer service team that absorbed volume spikes, integrated with their helpdesk tools, and maintained sub-4-hour first response times during peak subscription cycles.',
+                metrics: [
+                  { value: '<4 hrs', label: 'First Response' },
+                  { value: '60%+', label: 'Cost Reduction vs US' },
+                  { value: '3 weeks', label: 'Onboarding Time' },
+                ],
+                quote: 'The team integrated seamlessly with our US staff. Customers can\'t tell the difference.',
+                author: 'YogaClub Operations Team',
+              },
+              {
+                client: 'CPO Commerce',
+                industry: 'B2B eCommerce',
+                flag: '🇺🇸',
+                challenge: 'Needed to scale product listing, catalog management, and customer support without proportionally scaling headcount costs as SKU count grew.',
+                outcome: 'KDCI built a blended offshore team covering catalog operations and customer support — freeing US staff for strategic work while processing 3x the SKU volume at a fraction of the previous cost.',
+                metrics: [
+                  { value: '3×', label: 'SKU Volume Handled' },
+                  { value: '65%', label: 'Per-Head Cost Saving' },
+                  { value: 'Catalog + CS', label: 'Roles Covered' },
+                ],
+                quote: 'We couldn\'t have scaled our catalog operations this fast without our KDCI team.',
+                author: 'CPO Commerce Leadership',
+              },
+            ].map((cs, i) => (
+              <div key={i} className="bg-white/[0.04] border border-white/8 rounded-3xl overflow-hidden flex flex-col hover:border-white/16 transition-all">
+                {/* Header */}
+                <div className="px-7 pt-7 pb-5 border-b border-white/8">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-lg">{cs.flag}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/30 bg-white/5 px-2.5 py-1 rounded-full">{cs.industry}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{cs.client}</h3>
+                </div>
+
+                {/* Metrics */}
+                <div className="grid grid-cols-3 divide-x divide-white/8 border-b border-white/8">
+                  {cs.metrics.map((m, j) => (
+                    <div key={j} className="px-4 py-4 text-center">
+                      <div className="text-xl font-black text-[#E61739]">{m.value}</div>
+                      <div className="text-[10px] text-white/35 font-semibold uppercase tracking-wide mt-0.5">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Body */}
+                <div className="px-7 py-5 flex-1 flex flex-col gap-4">
+                  <div>
+                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Challenge</div>
+                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.challenge}</p>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1.5">Outcome</div>
+                    <p className="text-sm text-white/55 leading-relaxed font-medium">{cs.outcome}</p>
+                  </div>
+                </div>
+
+                {/* Quote */}
+                <div className="px-7 pb-7">
+                  <div className="bg-white/[0.04] rounded-2xl px-5 py-4 border border-white/6">
+                    <p className="text-xs text-white/60 italic leading-relaxed mb-2">"{cs.quote}"</p>
+                    <p className="text-[10px] text-white/30 font-bold">— {cs.author}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Slim testimonial strip */}
+          <div className="mt-10 grid md:grid-cols-3 gap-4">
+            {[
+              { quote: "We love our KDCI team — they're just like a regular part of our team, thousands of miles away. Outsourcing changed everything for us.", name: "Jason Halfaker", company: "Kole Imports" },
+              { quote: "Five years in and it just keeps getting better. Incredibly professional and a genuine pleasure to work with.", name: "Dave Palmer", company: "YogaClub" },
+              { quote: "KDCI plays a very important role in our catalog and content operations. Responsive, kind, and always willing to help — 4+ years running.", name: "Cristian Capdevila", company: "Softonic.com" },
+            ].map((t, i) => (
+              <div key={i} className="bg-white/[0.06] border border-white/10 rounded-2xl px-6 py-5">
+                <div className="flex gap-0.5 mb-3">{[...Array(5)].map((_, s) => <Star key={s} size={11} className="text-[#E61739] fill-[#E61739]" />)}</div>
+                <p className="text-xs text-white/60 italic leading-relaxed mb-3">"{t.quote}"</p>
+                <p className="text-[10px] text-white/30 font-bold">— {t.name}, {t.company}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <button onClick={() => setView('contact')}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-full font-bold text-sm hover:bg-[#c41230] transition-colors">
+              Start your success story <ArrowRight size={16} />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* Contact Form */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
+
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CONTACT}
+              alt="KDCI offshore professional"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">Philippine Offshore Staffing</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your team, ready<br/>in 14–30 days.</h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Expert Vetting', 'AI-Managed', 'Zero Risk'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
+                <p className="text-white/50 font-medium">Your request has been received. Expect a response within 1 business day.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Consultation
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Build Your Offshore Team.</h2>
+                  <p className="text-white/40 text-sm font-medium">Tell us what you need and we'll match you with top Philippine professionals.</p>
+                </div>
                 <form onSubmit={handleForm} className="space-y-4">
-                  <h3 className="text-lg font-black text-white mb-6">Tell us about your team</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
                       <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
                       <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Email</label>
                       <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
                       <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Looking to Hire</label>
-                    <input required className={inp} placeholder="e.g. Digital Marketer, Customer Service Rep" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} />
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Role / Function Needed</label>
+                    <input required className={inp} placeholder="e.g. Customer Support Lead, Full-Stack Developer" value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, budget, timeline, any specific requirements..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
-                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
-                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>
                 </form>
-              )}
-            </div>
-
+              </>
+            )}
           </div>
+
         </div>
       </section>
-
-      {/* ── FAQ ── */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <div className="reveal text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
-              <Shield size={11} /> FAQs
-            </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+      {/* 8. FAQ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Frequently asked questions.</h2>
+            <p className="text-slate-500 text-lg font-medium">Everything you need to know before building your offshore team.</p>
           </div>
-          <div className="reveal d1 space-y-3">
-            {[
-              { q: "What does 'fully managed' actually mean?", a: "KDCI.ai acts as the employer of record. We hire, onboard, equip, and manage your team member day-to-day — handling HR, payroll, government benefits (SSS, PhilHealth, Pag-IBIG), IT setup, leave management, and performance monitoring. You direct their work; we own all the operational complexity." },
-              { q: "How quickly can you place a hire?", a: "Common roles are placed within 14 business days. Senior or highly specialised roles take up to 30 days. You'll receive your first vetted candidate profiles within 5 days of the discovery call." },
-              { q: "What is the 90-day replacement guarantee?", a: "If a team member doesn't work out within 90 days of their start date, KDCI.ai will source and present a replacement at no additional cost — no conditions, no fine print." },
-              { q: "What does the setup fee cover?", a: "The one-time setup fee covers role scoping, talent sourcing, skills assessments, onboarding coordination, IT procurement, and KDCI.ai system integration. It is not a placement fee — it covers the operational cost of standing up your hire." },
-              { q: "Can I scale my team up or down?", a: "Yes. You can add seats with a new discovery call, and scale down with 30 days notice. There are no penalties for reducing headcount outside the minimum contract term." },
-              { q: "What AI tools do team members get access to?", a: "Every KDCI.ai team member is trained on and given access to a curated suite of productivity AI tools relevant to their role — from writing and research assistants to workflow automation and data analysis tools. Training is ongoing, not just a one-time induction." },
-              { q: "Do you only hire in the Philippines?", a: "Our primary staffing market is the Philippines — one of the world's top offshore destinations for English proficiency, cultural alignment, and cost-to-quality ratio. For highly specialised roles, we can discuss alternative markets." },
-              { q: "What is the minimum contract term?", a: "Junior and Mid-Level roles require a 3-month minimum engagement. Senior and AI Specialist roles require a 6-month minimum, reflecting the higher investment in onboarding and specialisation." },
-            ].map((item, i) => (
-              <div key={i} className="border border-slate-100 rounded-2xl" style={{ overflow: 'hidden' }}>
+          <div className="space-y-3">
+            {([
+              {
+                q: "How quickly can I get a team up and running?",
+                a: "Most clients have their first hire placed and onboarded within 14 days. For larger team builds (5+ people), we typically complete full onboarding within 30 days. We handle sourcing, vetting, and HR setup — you just approve the candidates."
+              },
+              {
+                q: "What's included in the all-in monthly rate?",
+                a: "Your monthly rate covers the employee's salary, government-mandated benefits (SSS, PhilHealth, Pag-IBIG), paid leave, office space, equipment, IT infrastructure, HR management, and our AI-powered performance monitoring. No hidden fees or surprise invoices."
+              },
+              {
+                q: "Are these dedicated employees or shared resources?",
+                a: "All KDCI staff are fully dedicated to your business only. They work your hours, follow your processes, and become a true extension of your team — not shared across multiple clients like a typical BPO."
+              },
+              {
+                q: "What happens if a hire isn't the right fit?",
+                a: "We offer a free replacement guarantee. If a team member doesn't meet expectations within the first 90 days, we'll find and onboard a replacement at no additional cost. After that period, replacements are handled with the same speed and care."
+              },
+              {
+                q: "How do you handle data security and confidentiality?",
+                a: "All staff sign strict NDAs and data protection agreements. Our offices operate under enterprise-grade cybersecurity policies — including clean-desk rules, restricted USB access, and monitored networks. We're fully compliant with international data privacy standards."
+              },
+              {
+                q: "What time zones do Philippine teams work in?",
+                a: "The Philippines is GMT+8, which gives excellent overlap with US West Coast (evening shift), Australia, and parts of Europe. Many clients run their teams on shifted schedules to match their home-country business hours — this is standard practice and easily arranged."
+              },
+              {
+                q: "Can I scale my team up or down as needed?",
+                a: "Yes. You can add staff or scale down with as little as 30 days notice. There are no long-term lock-in contracts. Our engagement model is built for flexibility — whether you're growing fast or adjusting to seasonal demand."
+              },
+              {
+                q: "Do I manage the team directly or does KDCI handle management?",
+                a: "You have full day-to-day control of your team's tasks, priorities, and workflows. KDCI handles the HR, payroll, compliance, and performance infrastructure in the background — giving you the benefits of a direct hire without the employer-of-record overhead."
+              },
+            ] as { q: string; a: string }[]).map((item, i) => (
+              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-[#F5F5F7] transition-colors group"
                 >
-                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
-                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
-                    <ArrowRight size={12} className="-rotate-45" />
+                  <span className="font-bold text-[#1D1D1F] text-base pr-4">{item.q}</span>
+                  <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all ${openFaq === i ? 'bg-[#E61739] border-[#E61739] text-white rotate-45' : 'border-slate-300 text-slate-400 group-hover:border-[#E61739] group-hover:text-[#E61739]'}`}>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
                   </span>
                 </button>
                 {openFaq === i && (
-                  <div className="px-7 pb-6">
-                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  <div className="px-7 pb-6 text-slate-500 text-sm leading-relaxed font-medium border-t border-slate-100 pt-5">
+                    {item.a}
                   </div>
                 )}
               </div>
             ))}
           </div>
+          <div className="text-center mt-12">
+            <p className="text-slate-400 text-sm font-medium mb-4">Still have questions?</p>
+            <button
+              onClick={() => setView('contact')}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-bold text-sm hover:bg-[#E61739] transition-colors"
+            >
+              Talk to our team <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
       </section>
 
+      {/* Sticky floating CTA */}
+      <div className={`fixed bottom-8 right-8 z-50 transition-all duration-300 ${showSticky ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+        <button
+          onClick={() => {
+            const el = document.querySelector('#contact-form-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            else setView('contact');
+          }}
+          className="flex items-center gap-3 px-6 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#c51431] hover:scale-105 transition-all group"
+          style={{ boxShadow: '0 8px 32px rgba(230,23,57,0.45)' }}
+        >
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse shrink-0" />
+          Book a Free Call
+          <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
     </div>
   );
 };

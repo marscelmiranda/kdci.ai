@@ -36,7 +36,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group p-8 rounded-[3rem] bg-white/5 border border-black/10 backdrop-blur-xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 flex flex-col items-start text-left">
                 <div className="w-14 h-14 bg-[#E61739]/20 rounded-2xl flex items-center justify-center text-[#E61739] mb-8 shadow-inner group-hover:scale-110 transition-transform">
@@ -71,7 +71,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We build custom workflows that respect the unique regulatory and operational needs of your sector.</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
             {INDUSTRIES.map((ind, i) => (
               <button key={i} onClick={() => setView(ind.id as ViewType)} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center hover:shadow-xl hover:border-[#E61739]/30 transition-all group">
                 <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] mb-4 group-hover:scale-110 transition-transform">
