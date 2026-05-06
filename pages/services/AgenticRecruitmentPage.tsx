@@ -121,7 +121,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="reveal">
+            <div className="">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100">
                 <Sparkles size={12} /> What We Deliver
               </div>
@@ -147,7 +147,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 ))}
               </div>
             </div>
-            <div className="reveal d2 relative">
+            <div className="relative">
               <div className="relative rounded-3xl aspect-[4/5] shadow-2xl" style={{ overflow: 'hidden' }}>
                 <img src={IMG_REC_HERO} alt="Recruitment team at work" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
@@ -198,7 +198,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="grid lg:grid-cols-3 gap-4">
 
             {/* 90-Day Guarantee */}
-            <div className="reveal bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
+            <div className="bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
               <div className="shrink-0">
                 <div className="text-[4.5rem] font-black text-white leading-none">90</div>
                 <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Day Guarantee</div>
@@ -211,7 +211,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Flat Fee */}
-            <div className="reveal d2 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
                 <Target size={20} className="text-[#E61739]" />
               </div>
@@ -223,7 +223,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Embedded RPO */}
-            <div className="reveal d3 bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 flex items-center gap-5 hover:bg-white/10 transition-all">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0">
                 <Workflow size={20} className="text-[#E61739]" />
               </div>
@@ -242,7 +242,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-stretch">
-            <div className="reveal flex flex-col">
+            <div className="flex flex-col">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100 self-start">
                 <ClipboardCheck size={12} /> What's Included
               </div>
@@ -263,7 +263,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 </div>
               </div>
             </div>
-            <div className="reveal d2 relative h-full rounded-3xl shadow-2xl" style={{ overflow: 'hidden' }}>
+            <div className="relative h-full rounded-3xl shadow-2xl" style={{ overflow: 'hidden' }}>
               <img src={recIncludedImg} alt="Candidate vetting process" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent"></div>
               <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-xl p-7 rounded-3xl shadow-2xl border border-black/5">
@@ -377,12 +377,12 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       <section className="py-12 bg-slate-900 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
-            <div className="reveal shrink-0">
+            <div className="shrink-0">
               <h2 className="text-3xl md:text-4xl font-heading font-bold whitespace-nowrap">Built for Speed.</h2>
               <p className="text-white/40 text-sm font-medium mt-2 max-w-[220px]" style={{ textWrap: 'balance' }}>AI-augmented hiring. Zero wasted time.</p>
             </div>
             <div className="w-px bg-white/10 self-stretch hidden md:block shrink-0"></div>
-            <div className="reveal d2 grid grid-cols-5 gap-4 flex-1 relative">
+            <div className="grid grid-cols-5 gap-4 flex-1 relative">
               <div className="hidden md:block absolute top-[1.6rem] left-[5%] right-[5%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
               {[
                 { step: "01", title: "Discovery",    desc: "KPI targets & cultural fit.", icon: ScanSearch },
@@ -408,7 +408,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       {/* Industry Specialization */}
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal text-center mb-14">
+          <div className="text-center mb-14">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
               Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
@@ -417,7 +417,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
 
           <div className="grid lg:grid-cols-3 gap-6 items-start">
             {/* Left: industry list */}
-            <div className="reveal d1 bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
               <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
                 {INDUSTRIES.map((ind, i) => (
                   <button
@@ -437,7 +437,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Right: detail panel */}
-            <div className="reveal d2 lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedInd.icon size={30} className="text-white" />
@@ -477,7 +477,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="reveal relative">
+            <div className="relative">
               <div className="bg-slate-100 rounded-3xl aspect-[4/5] relative shadow-2xl" style={{ overflow: 'hidden' }}>
                 <img src={IMG_REC_VETTING} alt="Agent vetting" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
@@ -494,7 +494,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
                 </div>
               </div>
             </div>
-            <div className="reveal d2">
+            <div className="">
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Global Recruitment <br/><span className="text-[#E61739]">Advantage.</span></h2>
               <div className="space-y-8">
                 {[
@@ -531,7 +531,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
 
             {/* Left — headline + stats */}
-            <div className="reveal p-12 md:p-16 flex flex-col justify-between">
+            <div className="p-12 md:p-16 flex flex-col justify-between">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
                   <Star size={11} /> Let's Talk Hiring
@@ -570,7 +570,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
 
             {/* Right — contact form */}
-            <div className="reveal d2 border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
                   <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
@@ -627,13 +627,13 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       {/* FAQ */}
       <section className="py-20 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
-          <div className="reveal text-center mb-14">
+          <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
               <Shield size={11} /> FAQs
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
           </div>
-          <div className="reveal d1 space-y-3">
+          <div className="space-y-3">
             {[
               {
                 q: "How quickly can you fill a role?",
