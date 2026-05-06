@@ -101,7 +101,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
           </div>
           <div className="grid lg:grid-cols-2 gap-6">
             {services.map((service, i) => (
-              <div key={i} className={`rounded-[3rem] border p-8 min-h-[560px] flex flex-col transition-all duration-500 ${selectedService === i ? 'bg-[#1D1D1F] border-[#E61739] shadow-2xl' : 'bg-[#F5F5F7] border-black/[0.03] hover:bg-white hover:shadow-2xl'}`}>
+              <div key={i} className={`rounded-[3rem] border p-8 flex flex-col transition-all duration-500 ${selectedService === i ? 'bg-[#1D1D1F] border-[#E61739] shadow-2xl' : 'bg-[#F5F5F7] border-black/[0.03] hover:bg-white hover:shadow-2xl'}`}>
                 <button onClick={() => setSelectedService(i)} className="w-full text-left flex items-start gap-5 mb-8">
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-[#E61739]'}`}>
                     <service.icon size={28} />
@@ -111,7 +111,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                     <p className={`text-sm leading-6 font-medium ${selectedService === i ? 'text-white/60' : 'text-slate-500'}`}>{service.desc}</p>
                   </div>
                 </button>
-                <div className="grid md:grid-cols-2 gap-6 flex-1">
+                <div className="grid md:grid-cols-2 gap-6 flex-1 items-start">
                   {i < 2 && (
                     <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
                       <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Service Focus</div>
