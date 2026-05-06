@@ -124,7 +124,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                       </div>
                     </div>
                   )}
-                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'} ${i >= 2 ? 'md:col-span-2' : ''}`}>
+                  <div className={`p-5 rounded-2xl self-start ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'} ${i >= 2 ? 'md:col-span-2 md:mt-0' : ''}`}>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
                     <div className={`grid ${i >= 2 ? 'grid-cols-2' : 'grid-cols-1'} gap-x-4 gap-y-2`}>
                       {rolesByService[i].map((role, idx) => (
