@@ -283,97 +283,92 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
       </section>
 
       {/* Pricing */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24 bg-[#0A0A0A]">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="reveal text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Simple, Transparent Pricing.</h2>
-            <p className="text-slate-500 text-lg font-medium">Structured for every stage of your hiring needs.</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Pricing
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">Simple, Transparent Pricing.</h2>
+            <p className="text-white/40 text-lg font-medium">Structured for every stage of your hiring needs.</p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6 items-stretch">
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
 
-            {/* LEFT — RPO Retainer (featured) */}
-            <div className="reveal d1 bg-slate-900 rounded-3xl p-12 flex flex-col justify-between relative" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
-              <div className="absolute top-8 right-8 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                Best Value
+            {/* Per Placement */}
+            <div className="reveal d1 bg-white/5 border border-white/8 rounded-3xl p-8 flex flex-col hover:bg-white/8 transition-all">
+              <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Per Placement</p>
+              <div className="flex items-baseline gap-1.5 mb-1">
+                <span className="text-4xl font-black text-white">$1,800</span>
+                <span className="text-white/30 text-xs font-black uppercase tracking-widest">– $3,500</span>
               </div>
-              <div>
-                <p className="text-white/40 text-xs font-black uppercase tracking-widest mb-3">RPO Retainer</p>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-6xl font-black text-white">$3,500</span>
-                  <span className="text-white/40 text-sm font-black uppercase tracking-widest">/ mo</span>
-                </div>
-                <p className="text-white/50 text-sm font-medium mb-8">Dedicated recruiter · up to 5 active roles/month · 3-month minimum</p>
-                <div className="border-t border-white/10 pt-8">
-                  <ul className="space-y-3">
-                    {["AI-Powered Sourcing", "Dedicated Recruiter", "ATS Management", "Talent Market Reports", "Interview Scheduling & Offer Management", "90-Day Replacement Guarantee"].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/80">
-                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-2">per hire</p>
+              <p className="text-white/40 text-sm font-medium mb-8 leading-relaxed">No monthly commitment. Pay on hire, no setup fee.</p>
+              <div className="border-t border-white/8 pt-6 mb-8 flex-grow">
+                <ul className="space-y-3">
+                  {["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/60">
+                      <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <button onClick={() => setView('contact')} className="mt-10 w-full py-4 rounded-3xl bg-[#E61739] text-white font-bold text-base hover:bg-[#c51431] transition-all shadow-xl">
+              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-white/20 transition-all">
                 Get a Quote
               </button>
             </div>
 
-            {/* RIGHT — two stacked cards */}
-            <div className="flex flex-col gap-6">
-
-              {/* Per Placement */}
-              <div className="reveal d2 bg-white border border-slate-100 rounded-3xl p-8 flex-1 hover:shadow-lg transition-all">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-1">Per Placement</p>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-black text-slate-900">$1,800–$3,500</span>
-                      <span className="text-slate-400 text-xs font-black uppercase tracking-widest">per hire</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-slate-500 text-sm font-medium mb-5">No monthly commitment · Pay on hire · No setup fee</p>
-                <ul className="space-y-2">
-                  {["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-600">
-                      <CheckCircle2 size={13} className="text-[#E61739] shrink-0" />
+            {/* RPO Retainer — featured */}
+            <div className="reveal d2 bg-[#E61739] rounded-3xl p-8 flex flex-col relative shadow-2xl scale-[1.02]">
+              <div className="absolute top-6 right-6 bg-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
+                Best Value
+              </div>
+              <p className="text-white/70 text-[10px] font-black uppercase tracking-widest mb-4">RPO Retainer</p>
+              <div className="flex items-baseline gap-1.5 mb-1">
+                <span className="text-4xl font-black text-white">$3,500</span>
+                <span className="text-white/60 text-xs font-black uppercase tracking-widest">/ mo</span>
+              </div>
+              <p className="text-white/60 text-xs font-black uppercase tracking-widest mb-2">up to 5 roles · 3-mo minimum</p>
+              <p className="text-white/70 text-sm font-medium mb-8 leading-relaxed">Dedicated recruiter with full-cycle management per month.</p>
+              <div className="border-t border-white/20 pt-6 mb-8 flex-grow">
+                <ul className="space-y-3">
+                  {["AI-Powered Sourcing", "Dedicated Recruiter", "ATS Management", "Talent Market Reports", "Interview & Offer Management", "90-Day Replacement Guarantee"].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/90">
+                      <CheckCircle2 size={14} className="text-white shrink-0" />
                       {f}
                     </li>
                   ))}
                 </ul>
-                <button onClick={() => setView('contact')} className="mt-6 w-full py-3.5 rounded-3xl bg-slate-900 text-white font-bold text-sm hover:bg-black transition-all">
-                  Get a Quote
-                </button>
               </div>
-
-              {/* Enterprise RPO */}
-              <div className="reveal d3 bg-white border border-slate-100 rounded-3xl p-8 flex-1 hover:shadow-lg transition-all">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-1">Enterprise RPO</p>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-black text-slate-900">$6,000+</span>
-                      <span className="text-slate-400 text-xs font-black uppercase tracking-widest">/ mo</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-slate-500 text-sm font-medium mb-5">Full embedded talent function · Unlimited roles · 6-month minimum</p>
-                <ul className="space-y-2">
-                  {["Team of Recruiters", "Employer Branding Support", "Unlimited Active Roles", "Executive & Volume Hiring"].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-600">
-                      <CheckCircle2 size={13} className="text-[#E61739] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={() => setView('contact')} className="mt-6 w-full py-3.5 rounded-3xl bg-slate-900 text-white font-bold text-sm hover:bg-black transition-all">
-                  Get a Quote
-                </button>
-              </div>
-
+              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white text-[#E61739] font-bold text-sm hover:bg-white/90 transition-all shadow-lg">
+                Get a Quote
+              </button>
             </div>
+
+            {/* Enterprise RPO */}
+            <div className="reveal d3 bg-white/5 border border-white/8 rounded-3xl p-8 flex flex-col hover:bg-white/8 transition-all">
+              <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-4">Enterprise RPO</p>
+              <div className="flex items-baseline gap-1.5 mb-1">
+                <span className="text-4xl font-black text-white">$6,000+</span>
+              </div>
+              <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-2">/ month</p>
+              <p className="text-white/40 text-sm font-medium mb-8 leading-relaxed">Full embedded talent function. Unlimited roles, 6-month minimum.</p>
+              <div className="border-t border-white/8 pt-6 mb-8 flex-grow">
+                <ul className="space-y-3">
+                  {["Team of Recruiters", "Employer Branding Support", "Unlimited Active Roles", "Executive & Volume Hiring"].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/60">
+                      <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-white/20 transition-all">
+                Get a Quote
+              </button>
+            </div>
+
           </div>
         </div>
       </section>
