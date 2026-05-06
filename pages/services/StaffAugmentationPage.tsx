@@ -7,6 +7,7 @@ import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 import IMG_KDCI_OFFICE from '../../attached_assets/Gemini_Generated_Image_mhi0ftmhi0ftmhi0_1777992381262.png';
+import IMG_HERO_HANDSHAKE from '../../attached_assets/Screenshot_2026-05-06_at_5.48.16_PM_1778060918147.png';
 
 const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
   'ecommerce':     [{ role: 'E-commerce Analyst',       ph: '$2,400', save: '65%' }, { role: 'Catalog Manager',         ph: '$2,160', save: '63%' }, { role: 'SEO Specialist',          ph: '$2,400', save: '67%' }, { role: 'CX Lead',                 ph: '$2,160', save: '62%' }, { role: 'Visual Merchandiser',     ph: '$2,280', save: '64%' }],
@@ -108,22 +109,33 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
            <div className="blob blob-purple opacity-40"></div>
            <div className="blob blob-magenta opacity-30"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs 
-            setView={setView} 
-            currentName="Philippine Offshore Staffing" 
-            parent={{ name: 'Solutions', view: 'solutions-hub' }} 
-          />
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
-            Build Your Team in the <br/>
-            <span className="text-[#E61739]">Philippines.</span>
-          </h1>
-          <p className="max-w-2xl text-xl text-white/60 font-medium leading-relaxed mb-12">
-            Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
-          </p>
-          <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group">
-            Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+          {/* Left — copy */}
+          <div className="flex-1 min-w-0">
+            <Breadcrumbs 
+              setView={setView} 
+              currentName="Philippine Offshore Staffing" 
+              parent={{ name: 'Solutions', view: 'solutions-hub' }} 
+            />
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
+              Build Your Team in the <br/>
+              <span className="text-[#E61739]">Philippines.</span>
+            </h1>
+            <p className="max-w-xl text-xl text-white/60 font-medium leading-relaxed mb-12">
+              Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
+            </p>
+            <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group">
+              Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+          {/* Right — image */}
+          <div className="hidden lg:block lg:w-[420px] xl:w-[480px] shrink-0">
+            <img
+              src={IMG_HERO_HANDSHAKE}
+              alt="KDCI team greeting a new client"
+              className="w-full h-auto rounded-3xl shadow-2xl"
+            />
+          </div>
         </div>
 
         {/* --- Stats Bar --- */}
