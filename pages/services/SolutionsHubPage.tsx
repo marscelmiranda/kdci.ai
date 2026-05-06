@@ -71,7 +71,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We build custom workflows that respect the unique regulatory and operational needs of your sector.</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
             {INDUSTRIES.map((ind, i) => (
               <button key={i} onClick={() => setView(ind.id as ViewType)} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center hover:shadow-xl hover:border-[#E61739]/30 transition-all group">
                 <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] mb-4 group-hover:scale-110 transition-transform">
