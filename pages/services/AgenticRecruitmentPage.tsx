@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
+import IMG_HERO_MEETING from '../../attached_assets/Screenshot_2026-05-06_at_6.08.19_PM_1778062111871.png';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
@@ -79,22 +80,33 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="blob blob-magenta opacity-30"></div>
           <div className="blob blob-purple opacity-40"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Smarter, Faster</span><br/>
-            <span className="text-[#E61739]">Recruitment.</span>
-          </h1>
-          <p className="max-w-3xl text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
-            Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6">
-            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
-              Request Pricing
-            </button>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+          {/* Left — copy */}
+          <div className="flex-1 min-w-0">
+            <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
+              <span className="text-shine-white">Smarter, Faster</span><br/>
+              <span className="text-[#E61739]">Recruitment.</span>
+            </h1>
+            <p className="max-w-3xl text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16">
+              Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
+                Request Pricing
+              </button>
+            </div>
+          </div>
+          {/* Right — hero image */}
+          <div className="hidden lg:block shrink-0 lg:w-[420px] xl:w-[480px]">
+            <img
+              src={IMG_HERO_MEETING}
+              alt="KDCI recruitment consultation"
+              className="w-full h-auto rounded-3xl shadow-2xl object-cover"
+            />
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
