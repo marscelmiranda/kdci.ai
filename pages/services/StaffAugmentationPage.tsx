@@ -242,22 +242,22 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             ].map((s, idx) => (
               <div key={idx} className="group flex items-center gap-0 border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/[0.14] transition-all duration-300">
                 <div className="w-20 md:w-28 shrink-0 flex flex-col items-center justify-center self-stretch bg-white/[0.03] border-r border-white/[0.07] group-hover:bg-[#E61739]/10 group-hover:border-[#E61739]/20 transition-all duration-300 py-6">
-                  <span className="text-3xl md:text-4xl font-black text-white/[0.12] group-hover:text-[#E61739]/30 transition-colors leading-none">{s.num}</span>
+                  <span className="text-3xl md:text-4xl font-black text-white/30 group-hover:text-[#E61739]/60 transition-colors leading-none">{s.num}</span>
                 </div>
                 <div className="flex flex-1 flex-col md:flex-row md:items-center gap-5 md:gap-10 px-6 md:px-10 py-6">
                   <div className="flex items-center gap-4 md:w-56 shrink-0">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center text-white/70 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all shrink-0">
                       <s.icon size={18} />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-white/25 mb-0.5">{s.day}</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-0.5">{s.day}</p>
                       <h4 className="text-base font-bold text-white leading-tight">{s.title}</h4>
                     </div>
                   </div>
-                  <p className="text-sm text-white/40 font-medium leading-relaxed flex-1">{s.desc}</p>
+                  <p className="text-sm text-white/65 font-medium leading-relaxed flex-1">{s.desc}</p>
                 </div>
                 <div className="hidden md:flex w-16 shrink-0 items-center justify-center self-stretch border-l border-white/[0.07]">
-                  <ArrowRight size={16} className="text-white/10 group-hover:text-[#E61739]/40 transition-colors" />
+                  <ArrowRight size={16} className="text-white/25 group-hover:text-[#E61739]/60 transition-colors" />
                 </div>
               </div>
             ))}
@@ -269,7 +269,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               { icon: CheckCircle2, text: '14 days for common roles · up to 30 for specialized' },
               { icon: CheckCircle2, text: 'Free replacement within 90 days' },
             ].map((p, i) => (
-              <div key={i} className="flex items-center gap-2.5 text-sm text-white/40 font-medium">
+              <div key={i} className="flex items-center gap-2.5 text-sm text-white/65 font-medium">
                 <p.icon size={14} className="text-[#E61739] shrink-0" />
                 {p.text}
               </div>
