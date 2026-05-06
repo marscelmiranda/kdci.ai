@@ -11,13 +11,16 @@
   },
   "dependencies": {
     "@google/genai": "^1.38.0",
+    "autoprefixer": "^10.5.0",
     "class-variance-authority": "latest",
     "clsx": "latest",
     "lucide-react": "^0.563.0",
+    "postcss": "^8.5.14",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "recharts": "^3.8.1",
-    "tailwind-merge": "latest"
+    "tailwind-merge": "latest",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
