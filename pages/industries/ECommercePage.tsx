@@ -30,7 +30,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
     {
       title: 'Global Recruitment Services',
       icon: Headphones,
-      desc: 'International hiring support for specialist roles and leadership hires.',
+      desc: 'We provide expert international hiring support for both technical specialist roles and leadership hires.',
       tasks: [],
     },
   ];
