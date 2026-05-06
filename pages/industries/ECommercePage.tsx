@@ -9,29 +9,36 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
 
   const services = [
     {
-      title: 'Listing & Catalog Management',
+      title: 'Customer Experience Operations',
       icon: ShoppingCart,
-      desc: 'Creation and optimization of product listings across your storefront and marketplaces.',
-      tasks: ['Product listing creation', 'SEO title optimization', 'Variant and attribute cleanup', 'Marketplace uploads', 'Catalog QA and enrichment', 'Merchandising support'],
+      desc: 'Omnichannel support coverage for pre-sale, post-sale, and retention workflows.',
+      tasks: ['Customer support rep', 'CX specialist', 'Chat/email agent', 'Escalation lead', 'Retention specialist', 'QA analyst'],
+    },
+    {
+      title: 'Graphic Design Studio',
+      icon: Layout,
+      desc: 'Creative production support for storefronts, campaigns, and social assets.',
+      tasks: ['Graphic designer', 'Layout artist', 'Thumbnail designer', 'Creative specialist', 'Banner designer', 'Brand artist'],
     },
     {
       title: 'Order & Inventory Ops',
       icon: Package,
       desc: 'Managed order processing, inventory synchronization, and supplier coordination.',
-      tasks: ['Order monitoring', 'Inventory sync', 'Backorder follow-up', 'Supplier communication', 'Exception handling', 'Returns tracking'],
-    },
-    {
-      title: '24/7 Customer Support',
-      icon: Headphones,
-      desc: 'Omnichannel support for pre-sale and post-sale customer needs.',
-      tasks: ['Live chat support', 'Email support', 'Returns & refunds', 'Tracking inquiries', 'Product questions', 'Escalation handling'],
+      tasks: ['Order specialist', 'Inventory coordinator', 'Supply chain analyst', 'Fulfillment assistant', 'Returns coordinator', 'Vendor liaison'],
     },
     {
       title: 'Growth & Ad Operations',
-      icon: Megaphone,
+      icon: Headphones,
       desc: 'Campaign support for retention, acquisition, and conversion growth.',
-      tasks: ['Campaign reporting', 'Email workflows', 'Ad ops support', 'Promo coordination', 'Cart recovery', 'Performance tracking'],
+      tasks: ['Performance marketer', 'Email marketing specialist', 'Ad ops manager', 'Lifecycle marketer', 'Growth analyst', 'Campaign coordinator'],
     },
+  ];
+
+  const rolesByService = [
+    ['CX Lead', 'Chat Support Agent', 'Email Support Agent', 'QA Analyst', 'Retention Specialist', 'Escalation Manager'],
+    ['Graphic Designer', 'Layout Artist', 'Thumbnail Designer', 'Brand Designer', 'Motion Designer', 'Creative QA'],
+    ['Order Specialist', 'Inventory Coordinator', 'Returns Coordinator', 'Fulfillment Assistant', 'Vendor Liaison', 'Supply Chain Analyst'],
+    ['Performance Marketer', 'Email Specialist', 'Ad Ops Manager', 'Lifecycle Marketer', 'Growth Analyst', 'Campaign Coordinator'],
   ];
 
   const insights = [
@@ -106,6 +113,21 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                   View Service Detail
                 </div>
               </button>
+            ))}
+          </div>
+          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, i) => (
+              <div key={i} className="rounded-[2.5rem] border border-slate-100 bg-white p-6 shadow-sm">
+                <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-4">{service.title}</h3>
+                <div className="space-y-2">
+                  {rolesByService[i].map((role, idx) => (
+                    <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+                      <CheckCircle2 size={12} className="text-[#E61739]" /> {role}
+                    </div>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
