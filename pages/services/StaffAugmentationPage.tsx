@@ -364,7 +364,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 5. Why the Philippines */}
-      <section className="pt-14 pb-20 bg-[#F5F5F7]">
+      <section className="pt-8 pb-20 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="text-center mb-16">
