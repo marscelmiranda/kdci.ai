@@ -33,6 +33,13 @@ const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string 
 };
 
 
+const phRange = (mid: string) => {
+  const n = parseInt(mid.replace(/[$,]/g, ''));
+  const lo = Math.round(n * 0.8 / 120) * 120;
+  const hi = Math.round(n * 1.2 / 120) * 120;
+  return `$${lo.toLocaleString()} – $${hi.toLocaleString()}`;
+};
+
 export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
@@ -535,7 +542,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 {/* Column labels */}
                 <div className="grid grid-cols-12 px-5 mb-1">
                   <span className="col-span-6 text-[10px] font-black uppercase tracking-widest text-white/25">Role</span>
-                  <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 text-center">KDCI / mo</span>
+                  <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 text-center">KDCI Range / mo</span>
                   <span className="col-span-3 text-[10px] font-black uppercase tracking-widest text-white/25 text-center">vs US</span>
                 </div>
                 {(INDUSTRY_SAVINGS[selectedInd.id] ?? []).map((row, idx) => (
@@ -547,7 +554,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                       <span className="text-sm font-semibold text-white leading-tight">{row.role}</span>
                     </div>
                     <div className="col-span-3 text-center">
-                      <span className="text-sm font-black text-white">{row.ph}</span>
+                      <span className="text-sm font-black text-white">{phRange(row.ph)}</span>
                     </div>
                     <div className="col-span-3 flex justify-center">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-500/15 border border-emerald-400/20 rounded-lg text-emerald-400 text-xs font-black">
@@ -560,7 +567,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
               {/* Footer */}
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-                <p className="text-white/30 text-xs font-medium">Indicative mid-level monthly rates · all-in, no hidden fees</p>
+                <p className="text-white/30 text-xs font-medium">Indicative monthly rate ranges (junior–senior) · all-in, no hidden fees</p>
                 <button
                   onClick={() => setView('contact')}
                   className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
