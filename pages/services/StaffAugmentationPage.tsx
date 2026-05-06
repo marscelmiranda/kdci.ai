@@ -95,7 +95,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero Section */}
-      <section className="relative pt-40 pb-28 md:pb-36 overflow-hidden bg-[#020202]">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
           <img 
             src={IMG_STAFF_AUG_HERO} 
@@ -108,17 +108,20 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
            <div className="blob blob-purple opacity-40"></div>
            <div className="blob blob-magenta opacity-30"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center -mb-20">
           <Breadcrumbs 
             setView={setView} 
             currentName="Philippine Offshore Staffing" 
             parent={{ name: 'Solutions', view: 'solutions-hub' }} 
           />
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
-            Build Your Team in the <br/>
-            <span className="text-[#E61739]">Philippines.</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-[11px] font-bold uppercase tracking-[0.15em] mb-8 backdrop-blur-sm">
+            <UserPlus size={12} className="text-[#E61739]" /> Offshore Team Building
+          </div>
+          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold mb-8 tracking-tight leading-[1.05] drop-shadow-2xl">
+            <span className="text-shine-white">Build Your Team in the</span><br/>
+            <span className="text-shine-red">Philippines.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
+          <p className="max-w-3xl mx-auto text-xl text-white/80 font-medium leading-relaxed mb-12">
             Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
           </p>
           <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group mx-auto">
@@ -138,7 +141,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-xl md:text-2xl font-black mb-0.5">{s.stat}</div>
-                <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{s.label}</p>
+                <p className="text-white/60 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{s.label}</p>
               </div>
             ))}
           </div>

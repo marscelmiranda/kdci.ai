@@ -70,7 +70,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
     <div className="min-h-screen bg-white">
 
       {/* Hero */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-40">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
           <img src={IMG_REC_HERO} alt="KDCI Recruitment Hub" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
@@ -79,30 +79,40 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="blob blob-magenta opacity-30"></div>
           <div className="blob blob-purple opacity-40"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center -mb-20">
           <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-[11px] font-bold uppercase tracking-[0.15em] mb-8 backdrop-blur-sm">
+            <Sparkles size={12} className="text-[#E61739]" /> AI-Powered Recruitment
+          </div>
+          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold mb-8 tracking-tight leading-[1.05] drop-shadow-2xl">
             <span className="text-shine-white">Smarter, Faster</span><br/>
-            <span className="text-[#E61739]">Recruitment.</span>
+            <span className="text-shine-red">Recruitment.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
+          <p className="max-w-3xl mx-auto text-xl text-white/80 font-medium leading-relaxed mb-12">
             Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onClick={() => setShowModal(true)} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+              Start Hiring <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-white/5 border border-white/10 text-white rounded-3xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md">
+            <button onClick={() => setShowModal(true)} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
               Request Pricing
             </button>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div><div className="text-xl md:text-2xl font-black">5,000+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Hires Sourced</p></div>
-            <div><div className="text-xl md:text-2xl font-black">14 Days</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Avg. Time-to-Fill</p></div>
-            <div><div className="text-xl md:text-2xl font-black">70%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Typical Cost Savings</p></div>
-            <div><div className="text-xl md:text-2xl font-black">90-Day</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Replacement Guarantee</p></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-6">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-4 md:gap-x-20 lg:gap-x-28 items-center text-white">
+            {[
+              { stat: '5,000+', label: 'Hires Sourced' },
+              { stat: '14 Days', label: 'Avg. Time-to-Fill' },
+              { stat: '70%', label: 'Typical Cost Savings' },
+              { stat: '90-Day', label: 'Replacement Guarantee' },
+            ].map((s, i) => (
+              <div key={i} className="text-center">
+                <div className="text-xl md:text-2xl font-black mb-0.5">{s.stat}</div>
+                <p className="text-white/60 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{s.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
