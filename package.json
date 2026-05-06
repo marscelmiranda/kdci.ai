@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5001/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit"
