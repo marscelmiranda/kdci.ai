@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign } from 'lucide-react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign, Shield } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
@@ -555,119 +555,58 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* 6. Pricing Transparency */}
-      <section className="py-24 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="py-20 bg-[#0A0A0A] text-white">
+        <div className="max-w-5xl mx-auto px-6">
 
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Transparent Pricing
             </div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight mb-5">One rate. Everything included.</h2>
-            <p className="text-white/40 text-lg font-medium max-w-2xl mx-auto leading-relaxed">No recruiter fees. No surprise overheads. Your monthly rate covers every cost of employment — end to end.</p>
+            <h2 className="text-3xl md:text-5xl font-heading font-bold tracking-tight mb-4">One rate. Everything included.</h2>
+            <p className="text-white/40 text-base font-medium max-w-xl mx-auto leading-relaxed">Salary, benefits, office, equipment, HR, and AI monitoring — one flat monthly number. No agency fees, no hidden costs.</p>
           </div>
 
-          {/* Two-column: what's in vs what you skip */}
-          <div className="grid lg:grid-cols-2 gap-6 mb-12">
-
-            {/* What's included */}
-            <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-7">
-                <div className="w-9 h-9 rounded-xl bg-[#E61739]/15 border border-[#E61739]/25 flex items-center justify-center">
-                  <CheckCircle2 size={18} className="text-[#E61739]" />
-                </div>
-                <h3 className="text-lg font-bold text-white">What your rate covers</h3>
-              </div>
-              <div className="grid grid-cols-1 gap-3">
-                {[
-                  ['Employee salary', 'Benchmarked to Philippine market rates by role & level'],
-                  ['Government benefits', 'SSS, PhilHealth & Pag-IBIG contributions — fully managed'],
-                  ['13th month pay', 'Legally mandated & pro-rated — handled by KDCI'],
-                  ['Paid leave & holidays', 'PH statutory leave with zero admin on your side'],
-                  ['Office space & workstation', 'Dedicated desk in our Manila or Cebu offices'],
-                  ['IT equipment & internet', 'Company-grade laptop, monitors & redundant connectivity'],
-                  ['HR & payroll management', 'Employment contracts, payslips, compliance filings'],
-                  ['AI performance monitoring', 'Real-time KPI tracking, QA audits & reporting'],
-                  ['Dedicated account manager', 'Your single point of contact for anything team-related'],
-                ].map(([label, detail], i) => (
-                  <div key={i} className="flex items-start gap-3 py-2.5 border-b border-white/5 last:border-0">
-                    <CheckCircle2 size={14} className="text-[#E61739] mt-0.5 shrink-0" />
-                    <div>
-                      <span className="text-sm font-semibold text-white/90">{label}</span>
-                      <span className="text-xs text-white/35 font-medium block mt-0.5">{detail}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* What you skip */}
-            <div className="flex flex-col gap-6">
-              <div className="bg-white/[0.02] border border-white/6 rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-7">
-                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                    <TrendingDown size={18} className="text-white/40" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">What you no longer pay</h3>
-                </div>
-                <div className="grid grid-cols-1 gap-2.5">
-                  {[
-                    ['Recruiter / agency fee', '15–25% of annual salary, per hire'],
-                    ['Benefits administration', 'HR software, filings, compliance overhead'],
-                    ['Office lease & utilities', '$1,000–$3,000+/mo per desk in the US'],
-                    ['Equipment procurement', 'Laptop, monitors, peripherals — $2,000+ upfront'],
-                    ['Payroll tools & tax filing', 'Software costs + accountant time'],
-                    ['Performance management systems', 'Replaced by KDCI\'s built-in AI layer'],
-                  ].map(([label, detail], i) => (
-                    <div key={i} className="flex items-start gap-3 py-2 border-b border-white/[0.04] last:border-0">
-                      <div className="w-4 h-4 rounded-full border border-white/15 flex items-center justify-center mt-0.5 shrink-0">
-                        <div className="w-1.5 h-px bg-white/30 rounded" />
-                      </div>
-                      <div>
-                        <span className="text-sm font-semibold text-white/50 line-through decoration-white/20">{label}</span>
-                        <span className="text-xs text-white/25 font-medium block mt-0.5">{detail}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Sample rate bands */}
-              <div className="bg-[#E61739]/10 border border-[#E61739]/20 rounded-3xl p-8">
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739]/70 mb-5">Sample monthly rates (all-in)</p>
-                <div className="space-y-4">
-                  {[
-                    { role: 'Customer Support / Admin',  range: '$1,450 – $2,200 / mo' },
-                    { role: 'Design / Content / Marketing', range: '$1,900 – $3,100 / mo' },
-                    { role: 'Software Engineer (Mid)',    range: '$2,750 – $4,450 / mo' },
-                    { role: 'Senior / Specialized Roles',range: '$4,250 – $6,800 / mo' },
-                  ].map((r, i) => (
-                    <div key={i} className="flex items-center justify-between gap-4">
-                      <span className="text-sm text-white/60 font-medium">{r.role}</span>
-                      <span className="text-sm font-black text-white whitespace-nowrap">{r.range}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-[10px] text-white/25 font-medium mt-5">Rates vary by role seniority, specialization, and team size. Contact us for an exact quote.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom stat row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Rate tiers */}
+          <div className="space-y-2 mb-10">
             {[
-              { stat: 'Up to 70%', label: 'Cost savings vs US hiring' },
-              { stat: '$0',        label: 'Recruiter or placement fees' },
-              { stat: '1 invoice', label: 'Everything consolidated monthly' },
-              { stat: '30 days',   label: 'Notice to scale or exit' },
-            ].map((s, i) => (
-              <div key={i} className="bg-white/[0.03] border border-white/8 rounded-2xl px-6 py-5 text-center">
-                <div className="text-2xl font-black text-[#E61739] mb-1">{s.stat}</div>
-                <div className="text-[11px] text-white/35 font-semibold uppercase tracking-wide leading-tight">{s.label}</div>
+              { category: 'Customer Support & Admin',    range: '$1,450 – $2,200',  note: 'CS agents, VAs, data entry, reception' },
+              { category: 'Design, Marketing & Content', range: '$1,900 – $3,100',  note: 'Graphic designers, SEO, social media, copywriters' },
+              { category: 'Software Engineering',        range: '$2,750 – $4,450',  note: 'Frontend, backend, QA, DevOps — mid level' },
+              { category: 'Senior & Specialized Roles',  range: '$4,250 – $6,800',  note: 'Senior engineers, finance leads, operations managers' },
+            ].map((tier, i) => (
+              <div key={i} className="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-7 py-5 border border-white/[0.07] rounded-2xl hover:border-white/[0.14] hover:bg-white/[0.02] transition-all duration-200">
+                <span className="flex-1 text-sm font-semibold text-white/70 group-hover:text-white/90 transition-colors">{tier.category}</span>
+                <span className="hidden sm:block text-xs text-white/25 font-medium flex-1">{tier.note}</span>
+                <span className="text-lg font-black text-white whitespace-nowrap">{tier.range} <span className="text-white/30 text-sm font-semibold">/ mo</span></span>
               </div>
             ))}
           </div>
+
+          {/* Included strip */}
+          <div className="border border-white/[0.07] rounded-2xl px-7 py-6">
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/25 mb-5">Every rate includes</p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { icon: Users,        label: 'Salary & benefits' },
+                { icon: Building2,    label: 'Office & workstation' },
+                { icon: Activity,     label: 'IT equipment & internet' },
+                { icon: CheckCircle2, label: 'HR & payroll' },
+                { icon: Target,       label: 'AI performance monitoring' },
+                { icon: Handshake,    label: 'Dedicated account manager' },
+                { icon: Shield,       label: '90-day replacement guarantee' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                  <item.icon size={13} className="text-[#E61739] shrink-0" />
+                  <span className="text-xs font-semibold text-white/55">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-center text-xs text-white/25 font-medium mt-6">
+            Rates vary by seniority and team size.{' '}
+            <button onClick={() => setView('contact')} className="text-[#E61739] font-bold hover:underline">Get an exact quote →</button>
+          </p>
 
         </div>
       </section>
