@@ -79,16 +79,16 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="blob blob-magenta opacity-30"></div>
           <div className="blob blob-purple opacity-40"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <Breadcrumbs setView={setView} currentName="Global Recruitment Services" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
             <span className="text-shine-white">Smarter, Faster</span><br/>
             <span className="text-[#E61739]">Recruitment.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
+          <p className="max-w-3xl text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
             Full-cycle global recruitment from job brief to signed offer — powered by AI tools and expert sourcers across 40+ countries who deliver 3× faster than traditional agencies.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6">
             <button onClick={() => setShowModal(true)} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Start Hiring <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
