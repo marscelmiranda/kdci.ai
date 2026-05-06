@@ -18,7 +18,211 @@ const INCLUDED = [
   'Monthly Optimization',
 ];
 
+const INDUSTRY_TASKS: Record<string, string[]> = {
+  ecommerce: [
+    'Live chat support for order inquiries',
+    'Email handling for shipping & delivery questions',
+    'Returns and refund request processing',
+    'Order status tracking and updates',
+    'Product listing copywriting and optimization',
+    'Customer review response management',
+    'Cart abandonment email follow-ups',
+    'Loyalty program enrollment and management',
+  ],
+  'software-dev': [
+    'Technical support via chat and email',
+    'Onboarding assistance for new users',
+    'Bug report triage and ticket routing',
+    'Knowledge base and help doc writing',
+    'Subscription and billing inquiry handling',
+    'Feature request logging and follow-up',
+    'Customer success check-ins via video/email',
+    'Churn prevention outreach',
+  ],
+  'property-mgmt': [
+    'Tenant inquiry handling via email and chat',
+    'Lease renewal coordination and follow-up',
+    'Maintenance request intake and routing',
+    'Virtual property tour scheduling',
+    'Rental listing creation and posting',
+    'Rent reminder and collections follow-up',
+    'Tenant onboarding documentation support',
+    'Vacancy marketing via digital channels',
+  ],
+  fintech: [
+    'Customer onboarding support (KYC guidance)',
+    'Account inquiry handling via chat and email',
+    'Transaction dispute intake and triage',
+    'Fraud alert follow-up communication',
+    'Billing and fee inquiry resolution',
+    'App and platform technical support',
+    'Regulatory communication drafting',
+    'Customer education on product features',
+  ],
+  healthcare: [
+    'Appointment scheduling and reminders',
+    'Insurance verification intake',
+    'Medical billing inquiry support',
+    'Patient intake form processing',
+    'Telehealth session coordination',
+    'Prescription refill request routing',
+    'Patient follow-up after visits',
+    'Health portal navigation assistance',
+  ],
+  'marketing-ad': [
+    'Campaign performance reporting',
+    'Social media content scheduling',
+    'Ad copy drafting and revisions',
+    'Email marketing campaign management',
+    'Lead generation form management',
+    'SEO content writing and optimization',
+    'Influencer outreach coordination',
+    'Client reporting and dashboard updates',
+  ],
+  retail: [
+    'Online order support via chat and email',
+    'Return and exchange request handling',
+    'Product availability inquiry responses',
+    'Customer review monitoring and replies',
+    'Loyalty program support',
+    'Gift card and promo code management',
+    'Back-in-stock notification setup',
+    'Customer complaint resolution via email',
+  ],
+  logistics: [
+    'Shipment tracking inquiry handling',
+    'Carrier coordination via email',
+    'Delivery exception follow-up communication',
+    'Customs documentation intake and support',
+    'Freight quote request processing',
+    'Supplier communication and follow-up',
+    'Order discrepancy triage and resolution',
+    'Logistics reporting and KPI updates',
+  ],
+  travel: [
+    'Reservation booking and modification support',
+    'Cancellation and refund request handling',
+    'Guest pre-arrival communication',
+    'Travel itinerary research and drafting',
+    'Hotel and flight inquiry responses',
+    'Loyalty points inquiry handling',
+    'Post-stay review response management',
+    'Travel documentation guidance (visas, requirements)',
+  ],
+  edtech: [
+    'Student enrollment and onboarding support',
+    'LMS navigation assistance',
+    'Course progress follow-up communication',
+    'Instructor scheduling and coordination',
+    'Payment and subscription inquiry handling',
+    'Content upload and course setup support',
+    'Student feedback collection and reporting',
+    'Certificate issuance and tracking',
+  ],
+  legal: [
+    'Client intake form processing',
+    'Document collection and organization',
+    'Legal research assistance (non-advisory)',
+    'Contract review scheduling coordination',
+    'Deadline and calendar management',
+    'Billing and invoice follow-up',
+    'Case status update communication',
+    'Legal transcription and summary drafting',
+  ],
+  insurance: [
+    'Policy inquiry handling via chat and email',
+    'Claims intake and initial documentation',
+    'Renewal reminder communication',
+    'Premium payment follow-up',
+    'Coverage explanation support',
+    'Policy change request intake',
+    'Customer onboarding for new policies',
+    'Claim status update communication',
+  ],
+  media: [
+    'Subscriber inquiry and support handling',
+    'Content scheduling and calendar management',
+    'Proofreading and editorial support',
+    'Social media audience engagement',
+    'Advertiser communication and reporting',
+    'Newsletter production and distribution',
+    'Content performance reporting',
+    'Rights and licensing inquiry intake',
+  ],
+  'consumer-tech': [
+    'Product setup and troubleshooting support',
+    'Warranty claim intake and processing',
+    'App and software support via chat/email',
+    'Product return and exchange coordination',
+    'User manual and FAQ writing',
+    'Customer feedback and review monitoring',
+    'Firmware/update guidance communication',
+    'Subscription and account management support',
+  ],
+  telecom: [
+    'Plan and pricing inquiry handling',
+    'Account change and upgrade processing',
+    'Billing dispute intake and resolution',
+    'Technical troubleshooting (Tier 1) via chat',
+    'Service outage communication and updates',
+    'Porting and number transfer support',
+    'Contract renewal outreach',
+    'Customer retention offer management',
+  ],
+  auto: [
+    'Service appointment scheduling',
+    'Recall and warranty inquiry handling',
+    'Vehicle availability and pricing inquiries',
+    'Financing inquiry intake and routing',
+    'Customer follow-up after service visits',
+    'Online lead response and qualification',
+    'Parts availability inquiry support',
+    'Post-purchase satisfaction follow-up',
+  ],
+  fashion: [
+    'Order and shipping inquiry handling',
+    'Size and fit guidance via chat/email',
+    'Return and exchange request processing',
+    'Product availability and restock updates',
+    'Styling advice via digital channels',
+    'Loyalty and rewards program support',
+    'Customer review response management',
+    'Influencer and PR outreach coordination',
+  ],
+  energy: [
+    'Billing inquiry handling and dispute intake',
+    'Service start/stop request processing',
+    'Outage reporting intake and status updates',
+    'Energy usage inquiry support',
+    'Payment plan setup and follow-up',
+    'Rebate and incentive program guidance',
+    'Account update and transfer processing',
+    'Renewable energy plan inquiry handling',
+  ],
+  'prof-services': [
+    'Client intake and onboarding coordination',
+    'Meeting and calendar scheduling',
+    'Proposal and contract follow-up',
+    'Invoice and billing inquiry handling',
+    'Project status update communication',
+    'Research and report drafting support',
+    'CRM data entry and maintenance',
+    'Client satisfaction survey follow-up',
+  ],
+  gov: [
+    'Constituent inquiry handling via email/chat',
+    'Public records request intake',
+    'Permit and license application guidance',
+    'Service availability and eligibility inquiries',
+    'Complaint and feedback intake processing',
+    'Document collection and verification support',
+    'Grant inquiry and application assistance',
+    'Public communication and announcement drafting',
+  ],
+};
+
 export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [selectedInd, setSelectedInd] = useState({ id: 'ecommerce', name: 'Ecommerce' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
@@ -352,11 +556,36 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             <div className="rec-reveal d1 bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
               <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
                 {[
-                  'E-commerce', 'Software Dev', 'Property Mgmt', 'FinTech', 'Healthcare', 'Marketing', 'Retail', 'Logistics', 'Travel', 'EdTech', 'Legal', 'Insurance', 'Media', 'Consumer Tech', 'Telecom', 'Auto', 'Fashion', 'Energy', 'Professional Services', 'Government'
+                  { id: 'ecommerce', name: 'E-commerce' },
+                  { id: 'software-dev', name: 'SaaS & Software' },
+                  { id: 'property-mgmt', name: 'Real Estate & Property Management' },
+                  { id: 'fintech', name: 'Fintech' },
+                  { id: 'healthcare', name: 'Healthcare Support' },
+                  { id: 'marketing-ad', name: 'Marketing & Ad' },
+                  { id: 'retail', name: 'Retail' },
+                  { id: 'logistics', name: 'Logistics & Supply Chain' },
+                  { id: 'travel', name: 'Travel & Hospitality' },
+                  { id: 'edtech', name: 'EdTech' },
+                  { id: 'legal', name: 'Legal Support' },
+                  { id: 'insurance', name: 'Insurance' },
+                  { id: 'media', name: 'Media & Publishing' },
+                  { id: 'consumer-tech', name: 'Consumer Tech' },
+                  { id: 'telecom', name: 'Telecommunications' },
+                  { id: 'auto', name: 'Automotive' },
+                  { id: 'fashion', name: 'Fashion & Apparel' },
+                  { id: 'energy', name: 'Energy & Utilities' },
+                  { id: 'prof-services', name: 'Professional Services' },
+                  { id: 'gov', name: 'Government & Public Sector' },
                 ].map((ind, i) => (
-                  <button key={i} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 hover:bg-slate-50 text-slate-600">
-                    <span className="w-3 h-3 rounded-full bg-[#E61739]" />
-                    <span className="text-sm font-semibold leading-tight">{ind}</span>
+                  <button
+                    key={i}
+                    onClick={() => setSelectedInd(ind)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
+                      selectedInd.id === ind.id ? 'bg-[#E61739] text-white shadow-sm' : 'hover:bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    <span className={`w-3 h-3 rounded-full ${selectedInd.id === ind.id ? 'bg-white' : 'bg-[#E61739]'}`} />
+                    <span className="text-sm font-semibold leading-tight">{ind.name}</span>
                   </button>
                 ))}
               </div>
@@ -370,7 +599,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
-                {['Email deflection', 'Chat automation', 'Voice containment', 'Escalation playbooks', 'Knowledge base tuning', 'QA & reporting'].map((role, idx) => (
+                {(INDUSTRY_TASKS[selectedInd.id] ?? []).slice(0, 8).map((role, idx) => (
                   <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
                     <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
                       <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>

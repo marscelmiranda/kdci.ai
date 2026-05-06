@@ -1,0 +1,274 @@
+You are building a staffing platform that matches remote Customer Experience (CX) workers to businesses across multiple industry verticals.
+
+Below is a complete list of remote-serviceable Customer Experience tasks organized by industry vertical. Use this data to power the task-matching logic, service catalog, or any relevant feature in the platform.
+
+RULES:
+- All tasks listed are REMOTE ONLY (no on-site or physical presence required)
+- Each vertical has 8 tasks that a remote CX worker can perform
+- Do not include tasks that require physical presence, on-site hardware, or in-person interaction
+
+---
+
+INDUSTRY: Ecommerce
+REMOTE-SERVICEABLE TASKS:
+1. Live chat support for order inquiries
+2. Email handling for shipping & delivery questions
+3. Returns and refund request processing
+4. Order status tracking and updates
+5. Product listing copywriting and optimization
+6. Customer review response management
+7. Cart abandonment email follow-ups
+8. Loyalty program enrollment and management
+
+---
+
+INDUSTRY: SaaS & Software
+REMOTE-SERVICEABLE TASKS:
+1. Technical support via chat and email
+2. Onboarding assistance for new users
+3. Bug report triage and ticket routing
+4. Knowledge base and help doc writing
+5. Subscription and billing inquiry handling
+6. Feature request logging and follow-up
+7. Customer success check-ins via video/email
+8. Churn prevention outreach
+
+---
+
+INDUSTRY: Real Estate & Property Management
+REMOTE-SERVICEABLE TASKS:
+1. Tenant inquiry handling via email and chat
+2. Lease renewal coordination and follow-up
+3. Maintenance request intake and routing
+4. Virtual property tour scheduling
+5. Rental listing creation and posting
+6. Rent reminder and collections follow-up
+7. Tenant onboarding documentation support
+8. Vacancy marketing via digital channels
+
+---
+
+INDUSTRY: Fintech
+REMOTE-SERVICEABLE TASKS:
+1. Customer onboarding support (KYC guidance)
+2. Account inquiry handling via chat and email
+3. Transaction dispute intake and triage
+4. Fraud alert follow-up communication
+5. Billing and fee inquiry resolution
+6. App and platform technical support
+7. Regulatory communication drafting
+8. Customer education on product features
+
+---
+
+INDUSTRY: Healthcare Support
+REMOTE-SERVICEABLE TASKS:
+1. Appointment scheduling and reminders
+2. Insurance verification intake
+3. Medical billing inquiry support
+4. Patient intake form processing
+5. Telehealth session coordination
+6. Prescription refill request routing
+7. Patient follow-up after visits
+8. Health portal navigation assistance
+
+---
+
+INDUSTRY: Marketing & Ad
+REMOTE-SERVICEABLE TASKS:
+1. Campaign performance reporting
+2. Social media content scheduling
+3. Ad copy drafting and revisions
+4. Email marketing campaign management
+5. Lead generation form management
+6. SEO content writing and optimization
+7. Influencer outreach coordination
+8. Client reporting and dashboard updates
+
+---
+
+INDUSTRY: Retail
+REMOTE-SERVICEABLE TASKS:
+1. Online order support via chat and email
+2. Return and exchange request handling
+3. Product availability inquiry responses
+4. Customer review monitoring and replies
+5. Loyalty program support
+6. Gift card and promo code management
+7. Back-in-stock notification setup
+8. Customer complaint resolution via email
+
+---
+
+INDUSTRY: Logistics & Supply Chain
+REMOTE-SERVICEABLE TASKS:
+1. Shipment tracking inquiry handling
+2. Carrier coordination via email
+3. Delivery exception follow-up communication
+4. Customs documentation intake and support
+5. Freight quote request processing
+6. Supplier communication and follow-up
+7. Order discrepancy triage and resolution
+8. Logistics reporting and KPI updates
+
+---
+
+INDUSTRY: Travel & Hospitality
+REMOTE-SERVICEABLE TASKS:
+1. Reservation booking and modification support
+2. Cancellation and refund request handling
+3. Guest pre-arrival communication
+4. Travel itinerary research and drafting
+5. Hotel and flight inquiry responses
+6. Loyalty points inquiry handling
+7. Post-stay review response management
+8. Travel documentation guidance (visas, requirements)
+
+---
+
+INDUSTRY: EdTech
+REMOTE-SERVICEABLE TASKS:
+1. Student enrollment and onboarding support
+2. LMS navigation assistance
+3. Course progress follow-up communication
+4. Instructor scheduling and coordination
+5. Payment and subscription inquiry handling
+6. Content upload and course setup support
+7. Student feedback collection and reporting
+8. Certificate issuance and tracking
+
+---
+
+INDUSTRY: Legal Support
+REMOTE-SERVICEABLE TASKS:
+1. Client intake form processing
+2. Document collection and organization
+3. Legal research assistance (non-advisory)
+4. Contract review scheduling coordination
+5. Deadline and calendar management
+6. Billing and invoice follow-up
+7. Case status update communication
+8. Legal transcription and summary drafting
+
+---
+
+INDUSTRY: Insurance
+REMOTE-SERVICEABLE TASKS:
+1. Policy inquiry handling via chat and email
+2. Claims intake and initial documentation
+3. Renewal reminder communication
+4. Premium payment follow-up
+5. Coverage explanation support
+6. Policy change request intake
+7. Customer onboarding for new policies
+8. Claim status update communication
+
+---
+
+INDUSTRY: Media & Publishing
+REMOTE-SERVICEABLE TASKS:
+1. Subscriber inquiry and support handling
+2. Content scheduling and calendar management
+3. Proofreading and editorial support
+4. Social media audience engagement
+5. Advertiser communication and reporting
+6. Newsletter production and distribution
+7. Content performance reporting
+8. Rights and licensing inquiry intake
+
+---
+
+INDUSTRY: Consumer Tech
+REMOTE-SERVICEABLE TASKS:
+1. Product setup and troubleshooting support
+2. Warranty claim intake and processing
+3. App and software support via chat/email
+4. Product return and exchange coordination
+5. User manual and FAQ writing
+6. Customer feedback and review monitoring
+7. Firmware/update guidance communication
+8. Subscription and account management support
+
+---
+
+INDUSTRY: Telecommunications
+REMOTE-SERVICEABLE TASKS:
+1. Plan and pricing inquiry handling
+2. Account change and upgrade processing
+3. Billing dispute intake and resolution
+4. Technical troubleshooting (Tier 1) via chat
+5. Service outage communication and updates
+6. Porting and number transfer support
+7. Contract renewal outreach
+8. Customer retention offer management
+
+---
+
+INDUSTRY: Automotive
+REMOTE-SERVICEABLE TASKS:
+1. Service appointment scheduling
+2. Recall and warranty inquiry handling
+3. Vehicle availability and pricing inquiries
+4. Financing inquiry intake and routing
+5. Customer follow-up after service visits
+6. Online lead response and qualification
+7. Parts availability inquiry support
+8. Post-purchase satisfaction follow-up
+
+---
+
+INDUSTRY: Fashion & Apparel
+REMOTE-SERVICEABLE TASKS:
+1. Order and shipping inquiry handling
+2. Size and fit guidance via chat/email
+3. Return and exchange request processing
+4. Product availability and restock updates
+5. Styling advice via digital channels
+6. Loyalty and rewards program support
+7. Customer review response management
+8. Influencer and PR outreach coordination
+
+---
+
+INDUSTRY: Energy & Utilities
+REMOTE-SERVICEABLE TASKS:
+1. Billing inquiry handling and dispute intake
+2. Service start/stop request processing
+3. Outage reporting intake and status updates
+4. Energy usage inquiry support
+5. Payment plan setup and follow-up
+6. Rebate and incentive program guidance
+7. Account update and transfer processing
+8. Renewable energy plan inquiry handling
+
+---
+
+INDUSTRY: Professional Services
+REMOTE-SERVICEABLE TASKS:
+1. Client intake and onboarding coordination
+2. Meeting and calendar scheduling
+3. Proposal and contract follow-up
+4. Invoice and billing inquiry handling
+5. Project status update communication
+6. Research and report drafting support
+7. CRM data entry and maintenance
+8. Client satisfaction survey follow-up
+
+---
+
+INDUSTRY: Government & Public Sector
+REMOTE-SERVICEABLE TASKS:
+1. Constituent inquiry handling via email/chat
+2. Public records request intake
+3. Permit and license application guidance
+4. Service availability and eligibility inquiries
+5. Complaint and feedback intake processing
+6. Document collection and verification support
+7. Grant inquiry and application assistance
+8. Public communication and announcement drafting
+
+---
+
+END OF TASK LIST
+Total verticals: 20
+Total remote-serviceable CX tasks: 160
