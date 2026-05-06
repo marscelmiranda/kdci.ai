@@ -112,16 +112,18 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                   </div>
                 </button>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
-                    <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Service Focus</div>
-                    <div className="space-y-2">
-                      {(i === 1 ? services[i].tasks : verticals[selectedVertical].focus).map((task, idx) => (
-                        <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
-                          <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
-                        </div>
-                      ))}
+                  {i < 2 && (
+                    <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
+                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Service Focus</div>
+                      <div className="space-y-2">
+                        {(i === 1 ? services[i].tasks : verticals[selectedVertical].focus).map((task, idx) => (
+                          <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
+                            <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'} ${i >= 2 ? 'md:col-span-2' : ''}`}>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
                     <div className={`grid ${i >= 2 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'} gap-x-4 gap-y-2`}>
