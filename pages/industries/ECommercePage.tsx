@@ -6,6 +6,7 @@ import { IMG_ECOM_HERO, IMG_ECOM_TEAM } from '../../data';
 
 export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedService, setSelectedService] = useState(0);
+  const [selectedVertical, setSelectedVertical] = useState(0);
 
   const services = [
     {
@@ -39,6 +40,13 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
     ['Graphic Designer', 'Layout Artist', 'Thumbnail Designer', 'Brand Designer', 'Motion Designer', 'Creative QA'],
     ['Order Specialist', 'Inventory Coordinator', 'Returns Coordinator', 'Fulfillment Assistant', 'Vendor Liaison', 'Supply Chain Analyst'],
     ['Performance Marketer', 'Email Specialist', 'Ad Ops Manager', 'Lifecycle Marketer', 'Growth Analyst', 'Campaign Coordinator'],
+  ];
+
+  const verticals = [
+    { name: 'E-commerce', focus: ['Live chat support for order inquiries', 'Email handling for shipping & delivery questions', 'Returns and refund request processing', 'Order status tracking and updates', 'Product listing copywriting and optimization', 'Customer review response management'] },
+    { name: 'SaaS & Software', focus: ['Technical support via chat and email', 'Onboarding assistance for new users', 'Bug report triage and ticket routing', 'Knowledge base and help doc writing', 'Subscription and billing inquiry handling', 'Feature request logging and follow-up'] },
+    { name: 'Property Mgmt', focus: ['Tenant inquiry handling via email and chat', 'Lease renewal coordination and follow-up', 'Maintenance request intake and routing', 'Virtual property tour scheduling', 'Rental listing creation and posting', 'Rent reminder and collections follow-up'] },
+    { name: 'FinTech', focus: ['Customer onboarding support', 'Account inquiry handling via chat and email', 'Transaction dispute intake and triage', 'Fraud alert follow-up communication', 'Billing and fee inquiry resolution', 'App and platform technical support'] },
   ];
 
   const insights = [
@@ -91,43 +99,49 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">What We Can Run For You.</h2>
             <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Four core services built from the same specialization patterns we use across our industry verticals.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid lg:grid-cols-2 gap-6">
             {services.map((service, i) => (
-              <button key={i} onClick={() => setSelectedService(i)} className={`group p-8 rounded-[3rem] border transition-all duration-500 flex flex-col items-start text-left ${selectedService === i ? 'bg-[#1D1D1F] border-[#E61739] shadow-2xl' : 'bg-[#F5F5F7] border-black/[0.03] hover:bg-white hover:shadow-2xl'}`}>
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 shadow-inner ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-[#E61739]'}`}>
-                  <service.icon size={28} />
-                </div>
-                <h3 className={`text-2xl font-bold mb-4 ${selectedService === i ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
-                <p className={`text-sm leading-relaxed mb-8 flex-grow font-medium ${selectedService === i ? 'text-white/60' : 'text-slate-500'}`}>{service.desc}</p>
-                <div className={`w-full pt-6 border-t mb-8 ${selectedService === i ? 'border-white/10' : 'border-black/5'}`}>
-                  <div className={`text-[10px] font-black uppercase tracking-widest mb-3 ${selectedService === i ? 'text-[#E61739]' : 'text-[#E61739]'}`}>Service Focus</div>
-                  <div className="space-y-2">
-                    {service.tasks.map((task, idx) => (
-                      <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
-                        <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
-                      </div>
-                    ))}
+              <div key={i} className={`rounded-[3rem] border p-8 transition-all duration-500 ${selectedService === i ? 'bg-[#1D1D1F] border-[#E61739] shadow-2xl' : 'bg-[#F5F5F7] border-black/[0.03] hover:bg-white hover:shadow-2xl'}`}>
+                <button onClick={() => setSelectedService(i)} className="w-full text-left flex items-start gap-5 mb-8">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-[#E61739]'}`}>
+                    <service.icon size={28} />
+                  </div>
+                  <div>
+                    <h3 className={`text-2xl font-bold mb-2 ${selectedService === i ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
+                    <p className={`text-sm leading-relaxed font-medium ${selectedService === i ? 'text-white/60' : 'text-slate-500'}`}>{service.desc}</p>
+                  </div>
+                </button>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Service Focus</div>
+                    <div className="space-y-2">
+                      {verticals[selectedVertical].focus.map((task, idx) => (
+                        <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
+                          <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
+                    <div className="space-y-2">
+                      {rolesByService[i].map((role, idx) => (
+                        <div key={idx} className={`flex items-center gap-2 text-xs font-semibold ${selectedService === i ? 'text-white/50' : 'text-slate-500'}`}>
+                          <CheckCircle2 size={12} className="text-[#E61739]" /> {role}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className={`w-full py-4 rounded-2xl font-bold text-sm text-center transition-all ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-slate-900 border border-slate-200'}`}>
-                  View Service Detail
-                </div>
-              </button>
+              </div>
             ))}
           </div>
-          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, i) => (
-              <div key={i} className="rounded-[2.5rem] border border-slate-100 bg-white p-6 shadow-sm">
-                <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
-                <h3 className="text-lg font-bold text-slate-900 mb-4">{service.title}</h3>
-                <div className="space-y-2">
-                  {rolesByService[i].map((role, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-500">
-                      <CheckCircle2 size={12} className="text-[#E61739]" /> {role}
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {verticals.map((vertical, i) => (
+              <button key={i} onClick={() => setSelectedVertical(i)} className={`rounded-2xl px-4 py-3 text-left border transition-all ${selectedVertical === i ? 'bg-[#E61739] text-white border-[#E61739]' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'}`}>
+                <div className="text-[10px] font-black uppercase tracking-widest mb-1">Industry Vertical</div>
+                <div className="text-sm font-bold">{vertical.name}</div>
+              </button>
             ))}
           </div>
         </div>
