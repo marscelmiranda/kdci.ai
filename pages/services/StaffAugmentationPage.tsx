@@ -221,7 +221,6 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
       {/* 3. How It Works + Roles We Staff — combined */}
       <section className="py-20 bg-[#0A0A0A] text-white relative" style={{ overflow: 'hidden' }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '48px 48px' }} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
           {/* ── How It Works ── */}

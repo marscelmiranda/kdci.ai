@@ -36,6 +36,10 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
+localPort = 5001
+externalPort = 3001
+
+[[ports]]
 localPort = 5002
 externalPort = 3002
 
@@ -77,19 +81,11 @@ externalPort = 8008
 
 [[ports]]
 localPort = 5012
-externalPort = 8081
-
-[[ports]]
-localPort = 5013
 externalPort = 8080
 
 [[ports]]
-localPort = 5014
-externalPort = 8099
-
-[[ports]]
-localPort = 5173
-externalPort = 9000
+localPort = 5013
+externalPort = 8081
 
 [deployment]
 deploymentTarget = "static"
