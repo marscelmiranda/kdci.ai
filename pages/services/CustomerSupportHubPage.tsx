@@ -599,7 +599,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
-                {(INDUSTRY_TASKS[selectedInd.id] ?? []).slice(0, 8).map((role, idx) => (
+                {(INDUSTRY_TASKS[selectedInd.id] ?? []).slice(0, 6).map((role, idx) => (
                   <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
                     <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
                       <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
