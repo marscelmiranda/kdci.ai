@@ -115,7 +115,8 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <Breadcrumbs 
               setView={setView} 
               currentName="Philippine Offshore Staffing" 
-              parent={{ name: 'Solutions', view: 'solutions-hub' }} 
+              parent={{ name: 'Solutions', view: 'solutions-hub' }}
+              align="left"
             />
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
               Build Your Team in the <br/>

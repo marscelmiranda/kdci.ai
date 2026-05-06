@@ -75,8 +75,8 @@ export const ParticleBackground = () => {
   return <canvas ref={canvasRef} className="particle-canvas" />;
 };
 
-export const Breadcrumbs = ({ setView, currentName, parent }: { setView: (v: ViewType) => void, currentName: string, parent?: { name: string, view: ViewType } }) => (
-  <nav className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8">
+export const Breadcrumbs = ({ setView, currentName, parent, align = 'center' }: { setView: (v: ViewType) => void, currentName: string, parent?: { name: string, view: ViewType }, align?: 'center' | 'left' }) => (
+  <nav className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8 ${align === 'left' ? 'justify-start' : 'justify-center'}`}>
     <button onClick={() => setView('home')} className="hover:text-white transition-colors">Home</button>
     {parent && (
       <>
