@@ -19,27 +19,27 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
       title: 'Graphic Design Studio',
       icon: Layout,
       desc: 'Creative production support for storefronts, campaigns, and social assets.',
-      tasks: ['Graphic designer', 'Layout artist', 'Thumbnail designer', 'Creative specialist', 'Banner designer', 'Brand artist'],
+      tasks: ['Storefront creative direction', 'Product image enhancement', 'Ad creative production', 'Social content design', 'Brand system updates', 'Marketplace image QA'],
     },
     {
-      title: 'Order & Inventory Ops',
+      title: 'Philippine Offshore Staffing',
       icon: Package,
-      desc: 'Managed order processing, inventory synchronization, and supplier coordination.',
-      tasks: ['Order specialist', 'Inventory coordinator', 'Supply chain analyst', 'Fulfillment assistant', 'Returns coordinator', 'Vendor liaison'],
+      desc: 'Dedicated offshore team builds for e-commerce operations and back-office execution.',
+      tasks: [],
     },
     {
-      title: 'Growth & Ad Operations',
+      title: 'Global Recruitment Services',
       icon: Headphones,
-      desc: 'Campaign support for retention, acquisition, and conversion growth.',
-      tasks: ['Performance marketer', 'Email marketing specialist', 'Ad ops manager', 'Lifecycle marketer', 'Growth analyst', 'Campaign coordinator'],
+      desc: 'International hiring support for specialist and leadership roles.',
+      tasks: [],
     },
   ];
 
   const rolesByService = [
     ['CX Lead', 'Chat Support Agent', 'Email Support Agent', 'QA Analyst', 'Retention Specialist', 'Escalation Manager'],
     ['Graphic Designer', 'Layout Artist', 'Thumbnail Designer', 'Brand Designer', 'Motion Designer', 'Creative QA'],
-    ['Order Specialist', 'Inventory Coordinator', 'Returns Coordinator', 'Fulfillment Assistant', 'Vendor Liaison', 'Supply Chain Analyst'],
-    ['Performance Marketer', 'Email Specialist', 'Ad Ops Manager', 'Lifecycle Marketer', 'Growth Analyst', 'Campaign Coordinator'],
+    ['Operations Manager', 'E-commerce Coordinator', 'Order Specialist', 'Inventory Manager', 'Returns Coordinator', 'Customer Support Rep', 'Supply Chain Analyst', 'Logistics Assistant', 'Vendor Liaison', 'Fulfillment Assistant', 'Marketplace Specialist', 'QA Analyst'],
+    ['Recruitment Lead', 'Talent Sourcer', 'Technical Recruiter', 'Account Manager', 'Interview Coordinator', 'Candidate Experience Specialist', 'Employer Branding Specialist', 'ATS Administrator', 'Compensation Analyst', 'Onboarding Specialist', 'Pipeline Analyst', 'Recruitment Ops Specialist'],
   ];
 
   const verticals = [
@@ -115,16 +115,16 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                   <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Service Focus</div>
                     <div className="space-y-2">
-                      {verticals[selectedVertical].focus.map((task, idx) => (
+                      {(i === 1 ? services[i].tasks : verticals[selectedVertical].focus).map((task, idx) => (
                         <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
                           <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'}`}>
+                  <div className={`p-5 rounded-2xl ${selectedService === i ? 'bg-white/5' : 'bg-white'} border ${selectedService === i ? 'border-white/10' : 'border-slate-100'} ${i >= 2 ? 'md:col-span-2' : ''}`}>
                     <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Roles we can hire</div>
-                    <div className="space-y-2">
+                    <div className={`grid ${i >= 2 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'} gap-x-4 gap-y-2`}>
                       {rolesByService[i].map((role, idx) => (
                         <div key={idx} className={`flex items-center gap-2 text-xs font-semibold ${selectedService === i ? 'text-white/50' : 'text-slate-500'}`}>
                           <CheckCircle2 size={12} className="text-[#E61739]" /> {role}
