@@ -457,16 +457,23 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           </div>
 
           {/* Country coverage strip */}
-          <div className="mt-10 bg-white border border-slate-100 rounded-3xl px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-black text-[#1D1D1F] uppercase tracking-widest mb-1">Serving clients in 9+ countries</p>
-              <p className="text-xs text-slate-400 font-medium">🇺🇸 US · 🇦🇺 AU · 🇬🇧 UK · 🇨🇦 CA · 🇸🇬 SG · 🇦🇪 UAE · 🇩🇪 DE · 🇳🇿 NZ · 🇮🇪 IE</p>
-            </div>
-            <div className="flex gap-8 shrink-0">
-              {[{ v: '500+', l: 'Clients' }, { v: '15+', l: 'Years' }, { v: '95%', l: 'Retention' }].map((s, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-lg font-black text-[#E61739]">{s.v}</div>
-                  <div className="text-[10px] text-slate-400 font-black uppercase tracking-wide">{s.l}</div>
+          <div className="mt-10 bg-white border border-slate-100 rounded-3xl px-8 py-6">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Serving clients in 9+ countries</p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                { flag: '🇺🇸', name: 'United States' },
+                { flag: '🇦🇺', name: 'Australia' },
+                { flag: '🇬🇧', name: 'United Kingdom' },
+                { flag: '🇨🇦', name: 'Canada' },
+                { flag: '🇸🇬', name: 'Singapore' },
+                { flag: '🇦🇪', name: 'UAE' },
+                { flag: '🇩🇪', name: 'Germany' },
+                { flag: '🇳🇿', name: 'New Zealand' },
+                { flag: '🇮🇪', name: 'Ireland' },
+              ].map((c, i) => (
+                <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-100">
+                  <span className="text-base leading-none">{c.flag}</span>
+                  <span className="text-xs font-semibold text-slate-600">{c.name}</span>
                 </div>
               ))}
             </div>
