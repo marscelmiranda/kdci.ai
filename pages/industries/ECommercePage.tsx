@@ -1,37 +1,51 @@
-
 import React, { useState } from 'react';
-import { ArrowRight, ShoppingCart, Package, Headphones, Megaphone, Layout, BrainCircuit, Target, Users2, BarChart3, Store, CheckCircle2, Shirt, Smartphone, Home, HeartPulse, Activity, Quote, Settings2, Users, Tags } from 'lucide-react';
+import { ArrowRight, ShoppingCart, Package, Headphones, Megaphone, Layout, BrainCircuit, Target, Users2, BarChart3, Store, CheckCircle2, Shirt, Smartphone, Home, HeartPulse, Activity, Quote, Settings2, Users, Tags, FileText, BookOpen, Presentation } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_ECOM_HERO, IMG_ECOM_TEAM } from '../../data';
 
 export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
+  const [selectedService, setSelectedService] = useState(0);
 
-  const ecomStack = [
-    { name: "Shopify Plus", color: "hover:border-[#95BF47]" },
-    { name: "Magento", color: "hover:border-[#EE672F]" },
-    { name: "BigCommerce", color: "hover:border-[#121118]" },
-    { name: "Amazon Seller Central", color: "hover:border-[#FF9900]" },
-    { name: "Walmart Marketplace", color: "hover:border-[#0071CE]" },
-    { name: "NetSuite", color: "hover:border-[#003399]" },
-    { name: "Klaviyo", color: "hover:border-[#20262E]" },
-    { name: "Gorgias", color: "hover:border-[#5252ff]" },
-    { name: "ShipStation", color: "hover:border-[#76BD43]" },
-    { name: "Linnworks", color: "hover:border-[#0089D0]" },
-    { name: "ChannelAdvisor", color: "hover:border-[#154674]" }
+  const services = [
+    {
+      title: 'Listing & Catalog Management',
+      icon: ShoppingCart,
+      desc: 'Creation and optimization of product listings across your storefront and marketplaces.',
+      tasks: ['Product listing creation', 'SEO title optimization', 'Variant and attribute cleanup', 'Marketplace uploads', 'Catalog QA and enrichment', 'Merchandising support'],
+    },
+    {
+      title: 'Order & Inventory Ops',
+      icon: Package,
+      desc: 'Managed order processing, inventory synchronization, and supplier coordination.',
+      tasks: ['Order monitoring', 'Inventory sync', 'Backorder follow-up', 'Supplier communication', 'Exception handling', 'Returns tracking'],
+    },
+    {
+      title: '24/7 Customer Support',
+      icon: Headphones,
+      desc: 'Omnichannel support for pre-sale and post-sale customer needs.',
+      tasks: ['Live chat support', 'Email support', 'Returns & refunds', 'Tracking inquiries', 'Product questions', 'Escalation handling'],
+    },
+    {
+      title: 'Growth & Ad Operations',
+      icon: Megaphone,
+      desc: 'Campaign support for retention, acquisition, and conversion growth.',
+      tasks: ['Campaign reporting', 'Email workflows', 'Ad ops support', 'Promo coordination', 'Cart recovery', 'Performance tracking'],
+    },
+  ];
+
+  const insights = [
+    { type: 'Case Study', title: 'Scaling to 500+ Agents: A Case Study in Fintech Support' },
+    { type: 'Blog', title: 'The Future of CX: Moving Beyond Ticketing to Real-time Agency' },
+    { type: 'Ebook', title: 'The 2024 AI Engineering Handbook' },
+    { type: 'Webinar', title: 'Future of Customer Ops (Live Session)' },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 1. Hero Section */}
-      <section className={`relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40`}>
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={IMG_ECOM_HERO} 
-            alt="AI-Managed E-commerce Operations" 
-            className="w-full h-full object-cover opacity-20 object-center"
-          />
+          <img src={IMG_ECOM_HERO} alt="AI-Managed E-commerce Operations" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
         </div>
         <div className="mesh-container opacity-40">
@@ -39,13 +53,9 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
           <div className="blob blob-purple opacity-40"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs 
-            setView={setView} 
-            currentName="E-commerce Operations" 
-            parent={{ name: 'Solutions', view: 'solutions-hub' }}
-          />
+          <Breadcrumbs setView={setView} currentName="E-commerce Operations" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Scale Your</span><br/>
+            <span className="text-shine-white">Scale Your</span><br />
             <span className="text-[#E61739]">Store Faster.</span>
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
@@ -67,255 +77,143 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
         </div>
       </section>
 
-      {/* 2. Capabilities */}
-      <section className="py-32 bg-white relative">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">E-commerce Arsenal</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Store Management.</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Daily operational excellence powered by embedded units and managed AI.</p>
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">E-commerce Services</div>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">What We Can Run For You.</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Four core services built from the same specialization patterns we use across our industry verticals.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: ShoppingCart, title: "Listing & Catalog Management", desc: "Creation and optimization of high-converting product listings across all major marketplaces." },
-              { icon: Package, title: "Order & Inventory Ops", desc: "Managed order processing, inventory synchronization, and supplier communication." },
-              { icon: Headphones, title: "24/7 Customer Support", desc: "Omnichannel support (chat, email, phone) specializing in returns and pre-sale queries." },
-              { icon: Megaphone, title: "Growth & Ad Operations", desc: "Digital advertising management and ROI-focused marketing campaign execution." },
-              { icon: Layout, title: "Storefront Design", desc: "Conversion rate optimization and visual updates for Shopify and Magento stores." },
-              { icon: BrainCircuit, title: "AI-Managed Automation", desc: "Deployment of custom bots and workflows to automate routine store tasks at scale." }
-            ].map((cap, i) => (
-              <div key={i} className="p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={28} /></div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">{cap.title}</h3>
-                <p className="text-slate-500 font-medium leading-relaxed">{cap.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Delivery Flow */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">The Operational Flow.</h2>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Scaling your e-commerce operations from setup to success.</p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Strategy Sync", desc: "Aligning on store KPIs, tech stack, and growth roadmap.", icon: Target },
-              { step: "02", title: "Team Deployment", desc: "Managed units embedded directly into your workflows.", icon: Users2 },
-              { step: "03", title: "AI Integration", desc: "Automating listing creation and customer inquiry routing.", icon: BrainCircuit },
-              { step: "04", title: "Performance Scale", desc: "Continuous optimization for ROAS, CSAT, and growth.", icon: BarChart3 }
-            ].map((s, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-8 group-hover:border-[#E61739] transition-all"><s.icon size={24} /></div>
-                <div className="text-[#E61739] text-xs font-black uppercase tracking-widest mb-2">{s.step}</div>
-                <h4 className="text-xl font-bold mb-2">{s.title}</h4>
-                <p className="text-sm text-white/40 leading-relaxed font-medium">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Tech Stack */}
-      <section className="py-24 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-slate-500 text-[10px] font-black uppercase mb-4 border border-slate-100">
-              <Store size={12} /> Tech Stack
-            </div>
-            <h3 className="text-2xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Marketplace Mastery.</h3>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our teams are certified experts across the entire e-commerce ecosystem.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {ecomStack.map((app, i) => (
-              <div key={i} className={`p-6 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-center transition-all duration-300 shadow-sm ${app.color}`}>
-                <span className="text-sm font-black text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-tighter">{app.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Plans */}
-      <section className="py-32 bg-[#F5F5F7] rounded-t-[5rem]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Flexible Store Plans.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto mb-10">Scaling your throughput without the headcount friction.</p>
-
-            {/* Toggle */}
-            <div className="inline-flex bg-white p-1.5 rounded-full border border-slate-200 shadow-sm mb-12">
-              <button 
-                onClick={() => setPricingModel('outcomes')}
-                className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${
-                  pricingModel === 'outcomes' 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'text-slate-400 hover:text-slate-900'
-                }`}
-              >
-                Outcomes
-              </button>
-              <button 
-                onClick={() => setPricingModel('staff-aug')}
-                className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${
-                  pricingModel === 'staff-aug' 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'text-slate-400 hover:text-slate-900'
-                }`}
-              >
-                Staff Augmentation
-              </button>
-            </div>
-          </div>
-
-          {pricingModel === 'outcomes' ? (
-            <div className="grid md:grid-cols-3 gap-6 items-start animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                { 
-                  name: "Store Launch", 
-                  price: "$2,500", 
-                  desc: "Complete setup package.", 
-                  features: ["Theme configuration", "Product upload (up to 50)", "Payment gateway setup", "Launch QA checklist"], 
-                  highlight: false 
-                },
-                { 
-                  name: "Growth Engine", 
-                  price: "Custom", 
-                  desc: "Full ops + ads + support.", 
-                  features: ["24/7 Customer Support", "Dedicated Ad Manager", "Inventory & Order Ops", "Weekly Growth Report"], 
-                  highlight: true, 
-                  badge: "Enterprise Ready" 
-                },
-                { 
-                  name: "Catalog Managed", 
-                  price: "$1,800", 
-                  desc: "Monthly SKU maintenance.", 
-                  features: ["Daily inventory sync", "New product listings", "Price monitoring", "Description optimization"], 
-                  highlight: false 
-                }
-              ].map((plan, i) => (
-                <div key={i} className={`p-10 rounded-[3.5rem] relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
-                  {plan.badge && <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">{plan.badge}</div>}
-                  <h4 className={`text-xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="text-4xl font-black">{plan.price}</span>
-                    <span className={`text-xs font-black uppercase tracking-widest ${plan.highlight ? 'text-white/40' : 'text-slate-400'}`}>{plan.highlight ? '/mo' : ''}</span>
-                  </div>
-                  <p className={`text-sm mb-8 font-medium ${plan.highlight ? 'text-white/50' : 'text-slate-500'}`}>{plan.desc}</p>
-                  <ul className="space-y-3 mb-10">
-                    {plan.features.map((f, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-sm font-bold opacity-80">
-                        <CheckCircle2 size={16} className="text-[#E61739]" /> {f}
-                      </li>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, i) => (
+              <button key={i} onClick={() => setSelectedService(i)} className={`group p-8 rounded-[3rem] border transition-all duration-500 flex flex-col items-start text-left ${selectedService === i ? 'bg-[#1D1D1F] border-[#E61739] shadow-2xl' : 'bg-[#F5F5F7] border-black/[0.03] hover:bg-white hover:shadow-2xl'}`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 shadow-inner ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-[#E61739]'}`}>
+                  <service.icon size={28} />
+                </div>
+                <h3 className={`text-2xl font-bold mb-4 ${selectedService === i ? 'text-white' : 'text-slate-900'}`}>{service.title}</h3>
+                <p className={`text-sm leading-relaxed mb-8 flex-grow font-medium ${selectedService === i ? 'text-white/60' : 'text-slate-500'}`}>{service.desc}</p>
+                <div className={`w-full pt-6 border-t mb-8 ${selectedService === i ? 'border-white/10' : 'border-black/5'}`}>
+                  <div className={`text-[10px] font-black uppercase tracking-widest mb-3 ${selectedService === i ? 'text-[#E61739]' : 'text-[#E61739]'}`}>Service Focus</div>
+                  <div className="space-y-2">
+                    {service.tasks.map((task, idx) => (
+                      <div key={idx} className={`flex items-center gap-2 text-xs font-bold ${selectedService === i ? 'text-white/50' : 'text-slate-400'}`}>
+                        <CheckCircle2 size={12} className="text-[#E61739]" /> {task}
+                      </div>
                     ))}
-                  </ul>
-                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
-                    {plan.name === "Growth Engine" ? "Request Custom Quote" : "Request Plan"}
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                { role: "Store Specialist", price: "$1,800", focus: "Ops", focusIcon: Store, desc: "A dedicated operations expert for Shopify/Amazon." },
-                { role: "CX Agent", price: "$1,800", focus: "Support", focusIcon: Users, desc: "Omnichannel support for pre-sale and post-sale queries." },
-                { role: "Order Specialist", price: "$1,700", focus: "Logistics", focusIcon: Package, desc: "Processing orders, tracking shipments, and managing exceptions." },
-                { role: "Catalog Admin", price: "$1,600", focus: "Data", focusIcon: Tags, desc: "Maintaining product listings, pricing, and inventory data." }
-              ].map((plan, i) => (
-                <div key={i} className="bg-white p-8 rounded-[3rem] border border-black/[0.03] hover:shadow-2xl transition-all group flex flex-col">
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{plan.role}</h4>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="text-3xl font-black text-slate-900">{plan.price}</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">/ MONTH</span>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed mb-10 flex-grow font-medium">{plan.desc}</p>
-                  <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#E61739] hover:text-white transition-all">Select Role</button>
                 </div>
-              ))}
-            </div>
-          )}
-          
-          <div className="mt-12 p-8 bg-white/60 backdrop-blur-md rounded-[3rem] border border-dashed border-slate-300 flex flex-col md:flex-row items-center justify-between gap-8">
-             <div className="flex gap-6 items-center">
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#E61739] shadow-sm"><Megaphone size={24} /></div>
-                <div>
-                   <h4 className="text-lg font-bold text-slate-900">Need Ad Management?</h4>
-                   <p className="text-sm text-slate-500 font-medium">We offer dedicated ad ops specialists for Meta and Google Ads.</p>
+                <div className={`w-full py-4 rounded-2xl font-bold text-sm text-center transition-all ${selectedService === i ? 'bg-[#E61739] text-white' : 'bg-white text-slate-900 border border-slate-200'}`}>
+                  View Service Detail
                 </div>
-             </div>
-             <button onClick={() => setView('contact')} className="px-10 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all">Contact Sales</button>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 6. Case Study / Quote */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Proven Results in <br/><span className="text-[#E61739]">Global Retail.</span></h2>
-              <div className="grid grid-cols-2 gap-4">
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">The E-commerce <br /><span className="text-[#E61739]">Advantage.</span></h2>
+              <div className="space-y-8">
                 {[
-                  { name: "Fashion & Apparel", icon: Shirt },
-                  { name: "Consumer Electronics", icon: Smartphone },
-                  { name: "Home & Furniture", icon: Home },
-                  { name: "Beauty & Wellness", icon: HeartPulse },
-                  { name: "Sports & Outdoors", icon: Activity },
-                  { name: "CPG & Grocery", icon: ShoppingCart }
-                ].map((ind, i) => (
-                  <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-[#E61739]/30 transition-all group shadow-sm">
-                    <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-[#E61739] transition-colors"><ind.icon size={20} /></div>
-                    <span className="text-[13px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors">{ind.name}</span>
+                  { title: 'Built for high-volume retail', desc: 'We adapt to marketplace speed, SKU complexity, and changing customer demand.', icon: Store },
+                  { title: 'Human + AI execution', desc: 'Automation where it helps, skilled operators where judgment matters.', icon: BrainCircuit },
+                  { title: 'Lower ops friction', desc: 'Reduce handoffs across support, catalog, and order workflows.', icon: Target },
+                  { title: 'Always-on coverage', desc: 'Scale support and ops without waiting on internal headcount.', icon: Users2 },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-6 group">
+                    <div className="w-12 h-12 bg-white rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h4>
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="space-y-6">
-              <div className="p-10 rounded-[3rem] bg-[#1D1D1F] text-white shadow-2xl relative overflow-hidden group">
-                <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
-                <div className="relative z-10">
-                   <Quote className="text-[#E61739] mb-6 opacity-30" size={40} />
-                   <p className="text-2xl font-heading font-bold mb-10 leading-snug">"KDCI scaled our listing throughput by 3x in one quarter. Their AI-managed QA ensures 100% catalog accuracy across 12 countries."</p>
-                   <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/40 font-bold uppercase">RM</div>
-                      <div>
-                         <div className="font-bold">Rachel M.</div>
-                         <div className="text-[10px] font-black uppercase text-white/40 tracking-widest">Director of Ops, Global E-com</div>
-                      </div>
-                   </div>
-                </div>
-              </div>
+            <div className="relative rounded-3xl aspect-[4/5] shadow-2xl overflow-hidden">
+              <img src={IMG_ECOM_TEAM} alt="E-commerce team" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. Final CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
-           <div className="absolute inset-0 z-0">
-              <img 
-                src={IMG_ECOM_TEAM} 
-                alt="E-commerce Production Team" 
-                className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
-              />
-           </div>
-           <div className="mesh-container opacity-20 pointer-events-none">
-              <div className="blob blob-magenta opacity-30"></div>
-           </div>
-           <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Let's Build Your <br/><span className="text-shine-red">E-commerce Machine.</span></h2>
-              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Talk to us about building an e-commerce ops solution tailored to your brand and workload.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-                 Book a Free Consultation <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-           </div>
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Insights</div>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Related Resources.</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Blogs, case studies, ebooks, and webinars that support your growth planning.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {insights.map((item, i) => (
+              <div key={i} className="p-8 rounded-[2.5rem] bg-[#F5F5F7] border border-black/[0.03] hover:shadow-2xl transition-all">
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#E61739] mb-6 shadow-sm">
+                  {item.type === 'Blog' ? <FileText size={24} /> : item.type === 'Case Study' ? <Settings2 size={24} /> : item.type === 'Ebook' ? <BookOpen size={24} /> : <Presentation size={24} />}
+                </div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-3">{item.type}</div>
+                <h3 className="text-xl font-bold text-slate-900 leading-tight">{item.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl relative border border-white/[0.07] overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img src={IMG_ECOM_HERO} alt="E-commerce team" className="w-full h-full object-cover opacity-[0.06]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80" />
+          </div>
+          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
+            <div className="p-12 md:p-16 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                  <Store size={11} /> E-commerce Vertical
+                </div>
+                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                  Launch with<br /><span className="text-[#E61739]">confidence.</span>
+                </h2>
+                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm" style={{ textWrap: 'balance' }}>
+                  Tell us your catalog size, channels, and support workload — we’ll tailor the right operating model.
+                </p>
+              </div>
+              <div className="space-y-4 mt-12">
+                {[
+                  'Catalog, support, and order workflows',
+                  'Marketplace and storefront coverage',
+                  'Custom AI + human escalation design',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 text-white/70 text-sm font-medium">
+                    <CheckCircle2 size={14} className="text-[#E61739]" /> {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white p-10 md:p-12">
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">Start Your E-commerce Project</h3>
+              <p className="text-slate-500 mb-8">Tell us what you need and we’ll send a tailored plan.</p>
+              <form className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="Full name" />
+                  <input className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="Work email" />
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="Company" />
+                  <input className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="Monthly order volume" />
+                </div>
+                <textarea className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm min-h-[140px]" placeholder="Tell us about your store, channels, and support needs" />
+                <button type="button" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all">
+                  Request Proposal
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </div>
