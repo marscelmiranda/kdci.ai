@@ -107,35 +107,32 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
     <div className="min-h-screen bg-white">
 
       {/* SECTION 1 — HERO */}
-      <section className="relative bg-[#080808] min-h-[90vh] flex flex-col justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at 60% 40%, rgba(230,23,57,0.08) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(230,23,57,0.05) 0%, transparent 50%)' }} />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24" style={{ animation: 'aiHeroFade 0.9s cubic-bezier(0.22,1,0.36,1) both' }}>
-          <style>{`
-            @keyframes aiHeroFade {
-              from { opacity: 0; transform: translateY(28px); }
-              to   { opacity: 1; transform: translateY(0); }
-            }
-          `}</style>
-          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black" />
+        </div>
+        <div className="mesh-container opacity-40">
+          <div className="blob blob-magenta opacity-30"></div>
+          <div className="blob blob-purple opacity-40"></div>
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-20">
             {/* Left — copy */}
             <div className="flex-1 min-w-0">
               <Breadcrumbs setView={setView} currentName="AI Consulting" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                <Cpu size={11} /> KDCI.ai · AI Consulting
-              </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.0] tracking-tight mb-8">
-                Your business deserves an AI strategy —<br />
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
+                <span className="text-shine-white">Your business deserves<br />an AI strategy —</span><br />
                 <span className="text-[#E61739]">not just AI tools.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/50 font-medium leading-relaxed max-w-xl mb-12">
+              <p className="text-lg md:text-2xl text-white/60 font-medium leading-relaxed max-w-xl mb-10 md:mb-16">
                 KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => setView('contact')} className="inline-flex items-center gap-3 px-10 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl group">
-                  Book a Discovery Call <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <div className="flex flex-col sm:flex-row gap-6">
+                <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                  Book a Discovery Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
                 </button>
-                <a href="#how-it-works" className="inline-flex items-center gap-2 px-10 py-4 border border-white/20 text-white rounded-2xl font-bold text-base hover:bg-white/5 transition-all">
-                  See How It Works <ChevronRight size={16} />
+                <a href="#how-it-works" className="px-14 py-5 bg-white/10 border border-white/20 text-white rounded-[2rem] font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+                  See How It Works <ChevronRight size={20} />
                 </a>
               </div>
             </div>
@@ -148,6 +145,14 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 style={{ maxHeight: '560px', objectPosition: 'center' }}
               />
             </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
+            <div><div className="text-xl md:text-2xl font-black">3x</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Faster AI Adoption</p></div>
+            <div><div className="text-xl md:text-2xl font-black">12+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Industries Served</p></div>
+            <div><div className="text-xl md:text-2xl font-black">100%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Outcome-Focused</p></div>
+            <div><div className="text-xl md:text-2xl font-black">Top 1%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">AI Specialists</p></div>
           </div>
         </div>
       </section>
