@@ -264,67 +264,72 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       </section>
 
       {/* SECTION 6 — WHY KDCI.AI */}
-      <section className="relative bg-[#F5F5F7] overflow-hidden" style={{ minHeight: '680px' }}>
+      <section className="bg-[#F5F5F7]">
 
-        {/* Right-side image — bleeds to edge */}
-        <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[48%]">
-          <img src="/our-difference.jpeg" alt="KDCI AI consulting team reviewing performance dashboards" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #F5F5F7 0%, transparent 18%)' }} />
+        {/* Full-width image — natural 16:9, no cropping */}
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '21/8' }}>
+          <img
+            src="/our-difference.jpeg"
+            alt="KDCI AI consulting team reviewing performance dashboards"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Bottom fade into section bg */}
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 55%, #F5F5F7 100%)' }} />
+          {/* Dark tint for contrast */}
+          <div className="absolute inset-0 bg-black/10" />
         </div>
 
-        {/* Mobile image */}
-        <div className="lg:hidden w-full h-64 relative overflow-hidden">
-          <img src="/our-difference.jpeg" alt="KDCI AI consulting team" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 50%, #F5F5F7 100%)' }} />
-        </div>
+        {/* Content — below the image */}
+        <div className="max-w-6xl mx-auto px-6 pb-24 -mt-6 relative z-10">
 
-        {/* Left content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 lg:py-28">
-          <div className="max-w-[520px]">
-
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-7">
-              Our Difference
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                Our Difference
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+                Built to deliver outcomes,<br />
+                <span className="text-[#E61739]">not slide decks.</span>
+              </h2>
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-12">
-              Built to deliver outcomes,<br />
-              <span className="text-[#E61739]">not slide decks.</span>
-            </h2>
-
-            <div className="space-y-0 divide-y divide-black/10">
-              {[
-                {
-                  num: '01',
-                  icon: Cpu,
-                  title: 'We build in-house',
-                  desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
-                },
-                {
-                  num: '02',
-                  icon: BarChart3,
-                  title: 'KPI-backed accountability',
-                  desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
-                },
-                {
-                  num: '03',
-                  icon: Users,
-                  title: 'Human in the loop, always',
-                  desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
-                },
-              ].map((d, i) => (
-                <div key={i} className="flex items-start gap-5 py-7 group">
-                  <span className="text-[11px] font-black text-[#E61739]/50 tracking-widest mt-1 w-6 shrink-0">{d.num}</span>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <d.icon size={16} className="text-[#E61739]" />
-                      <h3 className="text-base font-black text-[#1D1D1F]">{d.title}</h3>
-                    </div>
-                    <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
+
+          {/* Three columns */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                num: '01',
+                icon: Cpu,
+                title: 'We build in-house',
+                desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
+              },
+              {
+                num: '02',
+                icon: BarChart3,
+                title: 'KPI-backed accountability',
+                desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
+              },
+              {
+                num: '03',
+                icon: Users,
+                title: 'Human in the loop, always',
+                desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
+              },
+            ].map((d, i) => (
+              <div key={i} className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm flex flex-col">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-11 h-11 bg-[#E61739]/10 rounded-xl flex items-center justify-center">
+                    <d.icon size={20} className="text-[#E61739]" />
+                  </div>
+                  <span className="text-3xl font-black text-black/5">{d.num}</span>
+                </div>
+                <h3 className="text-base font-black text-[#1D1D1F] mb-3">{d.title}</h3>
+                <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
