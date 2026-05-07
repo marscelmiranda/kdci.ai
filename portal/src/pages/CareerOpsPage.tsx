@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { getAllJobs, createJob, updateJob, deleteJob } from '../lib/api';
 import {
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen,
   Image as ImageIcon, Search, Plus, LogOut, Settings,
@@ -55,9 +56,33 @@ const MOCK_APPLICANTS: Applicant[] = [
   { id: 'a4', name: 'Taylor Morgan', jobTitle: 'Senior AI Prompt Engineer', experience: 2, previousRole: 'Content Strategist at AI-Write', education: 'BA in Linguistics, UC Berkeley', compatibilityScore: 75, insights: 'Unique linguistics background is valuable for prompt engineering, but lacks deep technical experience.', source: 'Email', stage: 'Applied', dateApplied: '2024-10-23' },
 ];
 
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+const dbToJob = (row: any): JobListing => ({
+  id: String(row.id),
+  title: row.title ?? '',
+  department: row.department ?? '',
+  location: row.location ?? '',
+  type: row.employment_type ?? '',
+  status: row.status
+    ? ((row.status.charAt(0).toUpperCase() + row.status.slice(1)) as JobListing['status'])
+    : 'Draft',
+  applicants: 0,
+  postedDate: row.published_at
+    ? new Date(row.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : '-',
+  isFollowed: false,
+  isInvolved: false,
+  _raw: row,
+} as any);
+
 export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [viewState, setViewState] = useState<'list' | 'editor' | 'applicants' | 'analytics'>('list');
-  const [jobs, setJobs] = useState<JobListing[]>(MOCK_JOBS);
+  const [jobs, setJobs] = useState<JobListing[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
   const [applicants] = useState<Applicant[]>(MOCK_APPLICANTS);
   const [editingId, setEditingId] = useState<string | null>(null);
 
@@ -85,9 +110,27 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    setApiError(null);
+    (getAllJobs() as Promise<any[]>)
+      .then(rows => setJobs(rows.map(dbToJob)))
+      .catch(err => setApiError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
   const handleEdit = (job: JobListing) => {
+    const raw = (job as any)._raw ?? {};
     setEditingId(job.id);
-    setFormData({ title: job.title, department: job.department, location: job.location, type: job.type, description: "Sample description loaded...", requirements: "- Requirement 1\n- Requirement 2", status: job.status as string });
+    setFormData({
+      title: raw.title ?? job.title,
+      department: raw.department ?? job.department,
+      location: raw.location ?? job.location,
+      type: raw.employment_type ?? job.type,
+      description: raw.description ?? '',
+      requirements: raw.requirements ?? '',
+      status: job.status,
+    });
     setViewState('editor');
   };
 
@@ -97,24 +140,44 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
     setViewState('editor');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingId) {
-      setJobs(prev => prev.map(job => job.id === editingId ? { ...job, ...formData, id: job.id, applicants: job.applicants, postedDate: job.postedDate } as JobListing : job));
-    } else {
-      const newJob: JobListing = {
-        id: Math.random().toString(36).substr(2, 9),
-        ...formData,
-        applicants: 0,
-        postedDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      } as JobListing;
-      setJobs([newJob, ...jobs]);
+    setSaving(true);
+    setApiError(null);
+    const payload = {
+      title: formData.title,
+      slug: slugify(formData.title),
+      department: formData.department,
+      location: formData.location,
+      employment_type: formData.type,
+      description: formData.description,
+      requirements: formData.requirements,
+      status: formData.status.toLowerCase(),
+    };
+    try {
+      if (editingId) {
+        const updated = await updateJob(editingId, payload) as any;
+        setJobs(prev => prev.map(j => j.id === editingId ? dbToJob(updated) : j));
+      } else {
+        const created = await createJob(payload) as any;
+        setJobs(prev => [dbToJob(created), ...prev]);
+      }
+      setViewState('list');
+    } catch (err: any) {
+      setApiError(err.message);
+    } finally {
+      setSaving(false);
     }
-    setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this job posting?")) setJobs(prev => prev.filter(j => j.id !== id));
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this job posting?')) return;
+    try {
+      await deleteJob(id);
+      setJobs(prev => prev.filter(j => j.id !== id));
+    } catch (err: any) {
+      setApiError(err.message);
+    }
   };
 
   const handleNavClick = (id: string) => {
@@ -197,8 +260,21 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
           </div>
         </div>
 
+        {apiError && (
+          <div className="mb-6 px-6 py-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-bold flex items-center justify-between">
+            <span>Error: {apiError}</span>
+            <button onClick={() => setApiError(null)} className="ml-4 text-red-400 hover:text-white">✕</button>
+          </div>
+        )}
+
         {/* LIST VIEW */}
         {viewState === 'list' && (() => {
+          if (loading) return (
+            <div className="flex items-center justify-center py-24 text-white/40 font-bold text-sm gap-3">
+              <div className="w-5 h-5 border-2 border-white/20 border-t-[#E61739] rounded-full animate-spin" />
+              Loading job postings…
+            </div>
+          );
           const counts = { all: jobs.length, followed: jobs.filter(j => j.isFollowed).length, involved: jobs.filter(j => j.isInvolved).length, active: jobs.filter(j => j.status === 'Active' && (j.isInvolved || j.isFollowed)).length, archived: jobs.filter(j => j.status === 'Closed').length };
           const filteredJobs = jobs.filter(job => {
             const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) || job.department.toLowerCase().includes(searchQuery.toLowerCase());
@@ -595,7 +671,9 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                 </div>
                 <div className="flex gap-4">
                   <button type="button" onClick={() => setViewState('list')} className="px-6 py-3 rounded-xl border border-white/10 text-white/60 font-bold text-sm hover:text-white hover:bg-white/5 transition-all">Cancel</button>
-                  <button type="submit" className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"><Save size={16} /> Save Job Post</button>
+                  <button type="submit" disabled={saving} className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] disabled:opacity-60 text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2">
+                    {saving ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving…</> : <><Save size={16} /> Save Job Post</>}
+                  </button>
                 </div>
               </div>
             </form>
