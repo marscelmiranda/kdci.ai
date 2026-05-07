@@ -141,32 +141,38 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
             </div>
 
             {/* Resources Dropdown */}
-            <div className="group py-2" onMouseEnter={() => setIsResourcesOpen(true)} onMouseLeave={() => setIsResourcesOpen(false)}>
+            <div className="relative group py-2" onMouseEnter={() => setIsResourcesOpen(true)} onMouseLeave={() => setIsResourcesOpen(false)}>
               <button className={`flex items-center gap-1.5 transition-colors ${isResourcesOpen ? 'text-[#E61739]' : 'hover:text-[#E61739]'}`}>
                 Insights <ChevronDown size={14} className={`transition-transform duration-300 ${isResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isResourcesOpen && (
-                <div className="absolute top-full right-0 pt-3 w-[640px] animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="bg-white rounded-[2.5rem] border border-black/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] overflow-hidden">
-                    <div className="p-8 text-left">
-                      <h4 className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-6">Knowledge Hub</h4>
-                      <div className="grid grid-cols-2 gap-4">
-                        {RESOURCES.map((res, idx) => (
-                          <button key={idx} onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }} className="text-left p-4 rounded-2xl hover:bg-[#F5F5F7] transition-all group/res flex items-start gap-4 border border-transparent hover:border-black/5">
-                            <div className="w-10 h-10 shrink-0 rounded-xl bg-white border border-black/5 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] shadow-sm">
-                              <res.icon size={20} />
-                            </div>
-                            <div>
-                              <div className="text-[13px] font-bold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">{res.name}</div>
-                              <p className="text-[11px] text-[#86868b] font-medium leading-snug mt-1">{res.desc}</p>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
+                <div className="absolute top-full left-0 pt-3 w-[320px] animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
+
+                    {/* Resource list */}
+                    <div className="p-3">
+                      {RESOURCES.map((res, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
+                          className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
+                        >
+                          <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
+                            <res.icon size={14} />
+                          </div>
+                          <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">{res.name}</span>
+                        </button>
+                      ))}
                     </div>
-                    <div className="bg-[#F5F5F7] p-5 text-center border-t border-black/5">
-                      <p className="text-[11px] text-[#86868b] font-bold">New whitepaper: "The Future of AGI Operations 2025" — <button onClick={() => setView('contact')} className="text-[#E61739] hover:underline">Download Now</button></p>
+
+                    {/* Footer CTA */}
+                    <div className="border-t border-black/5 px-4 py-3 flex items-center justify-between bg-[#F9F9F9]">
+                      <p className="text-[11px] text-[#86868b] font-medium">Looking for something specific?</p>
+                      <button onClick={() => { setView('contact'); setIsResourcesOpen(false); }} className="text-[11px] font-bold text-[#E61739] flex items-center gap-1 hover:gap-2 transition-all">
+                        Ask us <ArrowRight size={10} />
+                      </button>
                     </div>
+
                   </div>
                 </div>
               )}
