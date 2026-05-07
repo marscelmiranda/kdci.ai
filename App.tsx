@@ -36,6 +36,7 @@ import { AIConsultingPage } from './pages/services/AIConsultingPage';
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
 import { jobsData } from './pages/careers/jobsData';
+import { JobDetailPage } from './pages/careers/JobDetailPage';
 
 // Industries (Verticals)
 import { ECommercePage } from './pages/industries/ECommercePage';
@@ -68,6 +69,7 @@ import { GlossaryPage } from './pages/GlossaryPage';
 
 const App = () => {
   const [activeView, setView] = useState<ViewType>('home');
+  const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -141,7 +143,15 @@ const App = () => {
         {/* Company & Others */}
         {activeView === 'company' && <CompanyPage setView={setView} />}
         {activeView === 'contact' && <ContactPage setView={setView} />}
-        {activeView === 'careers' && <CareersPage setView={setView} />}
+        {activeView === 'careers' && (
+          <CareersPage
+            setView={setView}
+            onSelectJob={(id) => { setSelectedJobId(id); setView('job-detail'); }}
+          />
+        )}
+        {activeView === 'job-detail' && selectedJobId !== null && (
+          <JobDetailPage setView={setView} jobId={selectedJobId} />
+        )}
         {activeView === 'privacy-policy' && <PrivacyPolicyPage setView={setView} />}
         {activeView === 'terms-and-conditions' && <TermsAndConditionsPage setView={setView} />}
         

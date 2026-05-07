@@ -43,6 +43,7 @@ export type ViewType =
   | 'cms-resources-ops'
   | 'cms-portfolio-ops'
   | 'careers'
+  | 'job-detail'
   | 'job-prompt-engineer'
   | 'job-full-stack-dev'
   | 'job-devops-architect'

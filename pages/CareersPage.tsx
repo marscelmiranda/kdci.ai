@@ -21,7 +21,7 @@ interface ApiJob {
   created_at: string;
 }
 
-export const CareersPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) => void; onSelectJob?: (id: number) => void }) => {
   const [jobs, setJobs] = useState<ApiJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -182,7 +182,7 @@ export const CareersPage = ({ setView }: { setView: (v: ViewType) => void }) => 
             {filteredJobs.map((job) => (
               <div
                 key={job.id}
-                onClick={() => setView('contact')}
+                onClick={() => onSelectJob ? onSelectJob(job.id) : setView('contact')}
                 className="group bg-white p-8 rounded-[2rem] border border-slate-200 hover:border-[#E61739]/30 hover:shadow-xl transition-all duration-300 relative overflow-hidden cursor-pointer"
               >
                 <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
