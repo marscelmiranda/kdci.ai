@@ -139,115 +139,77 @@ export const SoftwareEngineeringPage = ({ setView }: { setView: (v: ViewType) =>
       </section>
 
       {/* 5. Pricing / Role Plans */}
-      <section className="py-32 bg-[#F5F5F7] rounded-t-[5rem]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Transparent Pricing.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto mb-10">Choose the model that fits your growth stage.</p>
-            
-            {/* Toggle */}
-            <div className="inline-flex bg-white p-1.5 rounded-full border border-slate-200 shadow-sm mb-12">
-              <button 
-                onClick={() => setPricingModel('outcomes')}
-                className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${
-                  pricingModel === 'outcomes' 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'text-slate-400 hover:text-slate-900'
-                }`}
-              >
-                Outcomes
-              </button>
-              <button 
-                onClick={() => setPricingModel('staff-aug')}
-                className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${
-                  pricingModel === 'staff-aug' 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'text-slate-400 hover:text-slate-900'
-                }`}
-              >
-                Staff Augmentation
-              </button>
+      <section className="py-24 bg-[#080808]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Pricing
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent Pricing.</h2>
+            <p className="text-white/40 text-lg font-medium">Choose the model that fits your growth stage.</p>
+          </div>
+
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-white/5 p-1.5 rounded-full border border-white/10">
+              <button onClick={() => setPricingModel('outcomes')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'outcomes' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Outcomes</button>
+              <button onClick={() => setPricingModel('staff-aug')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'staff-aug' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Staff Augmentation</button>
             </div>
           </div>
 
           {pricingModel === 'outcomes' ? (
-            <div className="grid md:grid-cols-3 gap-6 items-start animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="grid md:grid-cols-3 gap-5 items-stretch animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
-                { 
-                  name: "Dedicated Engineer", 
-                  price: "$2,800", 
-                  desc: "A senior developer embedded in your team.", 
-                  features: ["Full-time (160h/mo)", "Git/Agile integration", "AI co-pilot enabled", "Daily standup sync"], 
-                  highlight: false 
-                },
-                { 
-                  name: "Managed DevOps", 
-                  price: "Custom", 
-                  desc: "Full Product Unit + PM.", 
-                  features: ["Frontend + Backend + QA", "Dedicated Project Manager", "Strategic Architecture Sync", "CI/CD pipeline management"], 
-                  highlight: true, 
-                  badge: "Scale Ready" 
-                },
-                { 
-                  name: "Maintenance Squad", 
-                  price: "$2,200", 
-                  desc: "SLA-driven uptime & fixes.", 
-                  features: ["Bug triage & resolution", "Security patching", "Uptime monitoring", "Legacy code refactoring"], 
-                  highlight: false 
-                }
+                { name: "Dedicated Engineer", price: "$2,800", period: "/mo", desc: "A senior developer embedded in your team.", features: ["Full-time (160h/mo)", "Git/Agile integration", "AI co-pilot enabled", "Daily standup sync"], highlight: false },
+                { name: "Managed DevOps", price: "Custom", period: "", desc: "Full Product Unit + PM.", features: ["Frontend + Backend + QA", "Dedicated Project Manager", "Strategic Architecture Sync", "CI/CD pipeline management"], highlight: true, badge: "Scale Ready" },
+                { name: "Maintenance Squad", price: "$2,200", period: "/mo", desc: "SLA-driven uptime & fixes.", features: ["Bug triage & resolution", "Security patching", "Uptime monitoring", "Legacy code refactoring"], highlight: false },
               ].map((plan, i) => (
-                <div key={i} className={`p-10 rounded-[3.5rem] relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
-                  {plan.badge && <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">{plan.badge}</div>}
-                  <h4 className={`text-xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="text-4xl font-black">{plan.price}</span>
-                    <span className={`text-xs font-black uppercase tracking-widest ${plan.highlight ? 'text-white/40' : 'text-slate-400'}`}>{plan.highlight ? '/mo' : ''}</span>
+                <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.highlight ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                  {plan.badge && <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">{plan.badge}</div>}
+                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
+                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
+                  <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                  <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                    <ul className="space-y-3">
+                      {plan.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className={`text-sm mb-8 font-medium ${plan.highlight ? 'text-white/50' : 'text-slate-500'}`}>{plan.desc}</p>
-                  <ul className="space-y-3 mb-10">
-                    {plan.features.map((f, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-sm font-bold opacity-80">
-                        <CheckCircle2 size={16} className="text-[#E61739]" /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
-                    {plan.name === "Managed Dev Pod" ? "Request Pod Quote" : "Request Plan"}
+                  <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                    Request Plan
                   </button>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
                 { role: "Frontend Dev", price: "$2,800", focus: "UI/UX", focusIcon: GlobeIcon, desc: "React, Vue, or Angular specialists for pixel-perfect UIs." },
                 { role: "Backend Engineer", price: "$3,000", focus: "Logic", focusIcon: Terminal, desc: "Node.js, Python, or Go for robust API & data layers." },
                 { role: "DevOps Specialist", price: "$3,500", focus: "Infra", focusIcon: Cloud, desc: "AWS/Azure management, CI/CD, and containerization." },
-                { role: "QA Automation", price: "$2,400", focus: "Quality", focusIcon: ShieldCheck, desc: "Building regression suites and automated test scripts." }
+                { role: "QA Automation", price: "$2,400", focus: "Quality", focusIcon: ShieldCheck, desc: "Building regression suites and automated test scripts." },
               ].map((plan, i) => (
-                <div key={i} className="bg-white p-8 rounded-[3rem] border border-black/[0.03] hover:shadow-2xl transition-all group flex flex-col">
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{plan.role}</h4>
+                <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
+                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className="text-3xl font-black text-slate-900">{plan.price}</span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase">/ MONTH</span>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed mb-10 flex-grow font-medium">{plan.desc}</p>
-                  <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#E61739] hover:text-white transition-all">Select Role</button>
+                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
+                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
+                  <p className="text-white/40 text-sm font-medium mb-8 flex-grow leading-relaxed">{plan.desc}</p>
+                  <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
                 </div>
               ))}
             </div>
           )}
-          
-          <div className="mt-12 p-8 bg-white/60 backdrop-blur-md rounded-[3rem] border border-dashed border-slate-300 flex flex-col md:flex-row items-center justify-between gap-8">
-             <div className="flex gap-6 items-center">
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#E61739] shadow-sm"><Settings2 size={24} /></div>
-                <div>
-                   <h4 className="text-lg font-bold text-slate-900">Custom Squads?</h4>
-                   <p className="text-sm text-slate-500 font-medium">Build a dedicated pod with Team Leads and Product Owners.</p>
-                </div>
-             </div>
-             <button onClick={() => setView('contact')} className="px-10 py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-black transition-all">Request Custom Quote</button>
+
+          <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
+            <div>
+              <h4 className="text-base font-bold text-white mb-1">Custom Squads?</h4>
+              <p className="text-sm text-white/40 font-medium">Build a dedicated pod with Team Leads and Product Owners.</p>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
           </div>
         </div>
       </section>
