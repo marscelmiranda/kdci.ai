@@ -92,4 +92,5 @@ export type ViewType =
   | 'energy'
   | 'prof-services'
   | 'gov'
-  | 'ai-consulting';
+  | 'ai-consulting'
+  | 'creative-prod-v2';
