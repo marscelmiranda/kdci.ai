@@ -268,18 +268,9 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-            {/* Floating image graphic */}
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[16/9]">
-              <img
-                src="/our-difference.jpeg"
-                alt="KDCI AI consulting team reviewing performance dashboards"
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-
             {/* Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
                 Our Difference
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
@@ -319,6 +310,15 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Floating portrait image */}
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
+              <img
+                src="/our-difference.png"
+                alt="KDCI AI consulting team reviewing performance dashboards"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
 
           </div>
