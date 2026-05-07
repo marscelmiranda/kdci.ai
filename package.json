@@ -4,20 +4,29 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; vite",
+    "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; concurrently \"npx tsx watch server.ts\" \"vite\"",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^1.38.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.20.0",
     "class-variance-authority": "latest",
     "clsx": "latest",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.5",
     "lucide-react": "^0.563.0",
+    "pg": "^8.20.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "recharts": "^3.8.1",
-    "tailwind-merge": "latest"
+    "tailwind-merge": "latest",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
