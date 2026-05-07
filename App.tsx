@@ -70,6 +70,7 @@ import { GlossaryPage } from './pages/GlossaryPage';
 const App = () => {
   const [activeView, setView] = useState<ViewType>('home');
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
+  const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -160,8 +161,13 @@ const App = () => {
           <JobPost setView={setView} {...jobsData[activeView]} />
         )}
 
-        {activeView === 'blog' && <BlogLandingPage setView={setView} />}
-        {activeView === 'blog-detail' && <BlogDetailPage setView={setView} />}
+        {activeView === 'blog' && (
+          <BlogLandingPage
+            setView={setView}
+            onSelectBlog={(id) => { setSelectedBlogId(id); setView('blog-detail'); }}
+          />
+        )}
+        {activeView === 'blog-detail' && <BlogDetailPage setView={setView} blogId={selectedBlogId} />}
         
         {/* Resource Pages */}
         {activeView === 'case-studies' && <CaseStudiesPage setView={setView} />}

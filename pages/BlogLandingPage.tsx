@@ -46,7 +46,7 @@ const STATIC_POSTS: Post[] = [
 
 const FALLBACK_IMGS = [IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6];
 
-export const BlogLandingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const BlogLandingPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) => void; onSelectBlog?: (id: number | null) => void }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [livePosts, setLivePosts] = useState<Post[]>([]);
@@ -141,7 +141,7 @@ export const BlogLandingPage = ({ setView }: { setView: (v: ViewType) => void })
               {/* Featured Post */}
               {activeCategory === "All" && !searchQuery && featuredPost && (
                 <div className="mb-20">
-                  <div onClick={() => setView('blog-detail')}
+                  <div onClick={() => { if (featuredPost.isLive && onSelectBlog) onSelectBlog(Number(featuredPost.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
                     className="bg-[#1D1D1F] rounded-[4rem] p-12 md:p-16 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all">
                     <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
                     {featuredPost.isLive && (
@@ -183,7 +183,7 @@ export const BlogLandingPage = ({ setView }: { setView: (v: ViewType) => void })
                 {filteredPosts.map((post) => {
                   const Icon = CATEGORY_ICON[post.category] || FileText;
                   return (
-                    <div key={post.id} onClick={() => setView('blog-detail')}
+                    <div key={post.id} onClick={() => { if (post.isLive && onSelectBlog) onSelectBlog(Number(post.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
                       className="group flex flex-col h-full bg-[#F5F5F7] rounded-[3rem] p-10 border border-black/[0.03] hover:shadow-2xl hover:bg-white transition-all duration-500 cursor-pointer relative">
                       {post.isLive && (
                         <div className="absolute top-8 right-8 px-2.5 py-1 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[9px] font-black uppercase tracking-widest">New</div>
