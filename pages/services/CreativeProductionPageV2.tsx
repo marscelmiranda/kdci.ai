@@ -60,7 +60,7 @@ const ScrollingColumn = ({
           <div
             key={i}
             className="rounded-2xl overflow-hidden shrink-0 w-full relative group cursor-zoom-in"
-            style={{ height: '240px' }}
+            style={{ height: i % 2 === 0 ? '150px' : '240px' }}
             onClick={() => onImageClick?.(tile.full)}
           >
             <img
