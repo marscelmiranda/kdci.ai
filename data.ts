@@ -179,6 +179,14 @@ export const TOP_SERVICES = [
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
+  {
+    id: 'ai-consulting',
+    name: 'AI Consulting',
+    tag: 'AI Strategy & Build',
+    icon: Cpu,
+    desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
+    benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
+  },
 ];
 
 export const DIFFERENTIATORS = [

@@ -91,4 +91,5 @@ export type ViewType =
   | 'fashion'
   | 'energy'
   | 'prof-services'
-  | 'gov';
+  | 'gov'
+  | 'ai-consulting';

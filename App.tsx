@@ -31,6 +31,7 @@ import { CustomerSupportHubPageV2 } from './pages/services/CustomerSupportHubPag
 import { StaffAugmentationPage } from './pages/services/StaffAugmentationPage';
 import { AgenticRecruitmentPage } from './pages/services/AgenticRecruitmentPage';
 import { PropertyManagementPage } from './pages/services/PropertyManagementPage';
+import { AIConsultingPage } from './pages/services/AIConsultingPage';
 
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
@@ -115,6 +116,7 @@ const App = () => {
         {activeView === 'property-mgmt' && <PropertyManagementPage setView={setView} />}
         {activeView === 'creative-prod' && <CreativeProductionPage setView={setView} />}
         {activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} />}
+        {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
         
         {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}
