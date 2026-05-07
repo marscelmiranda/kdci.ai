@@ -146,23 +146,41 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                 Insights <ChevronDown size={14} className={`transition-transform duration-300 ${isResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isResourcesOpen && (
-                <div className="absolute top-full left-0 pt-3 w-[320px] animate-in fade-in slide-in-from-top-1 duration-150">
+                <div className="absolute top-full left-0 pt-3 w-[480px] animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
 
-                    {/* Resource list */}
-                    <div className="p-3">
-                      {RESOURCES.map((res, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
-                          className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
-                        >
-                          <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
-                            <res.icon size={14} />
-                          </div>
-                          <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">{res.name}</span>
-                        </button>
-                      ))}
+                    {/* Resource list — 2 columns: 4 left, 3 right */}
+                    <div className="p-3 grid grid-cols-2 gap-x-2">
+                      {/* Left column — first 4 */}
+                      <div>
+                        {RESOURCES.slice(0, 4).map((res, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
+                            className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
+                          >
+                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
+                              <res.icon size={14} />
+                            </div>
+                            <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">{res.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                      {/* Right column — last 3 */}
+                      <div>
+                        {RESOURCES.slice(4).map((res, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
+                            className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
+                          >
+                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
+                              <res.icon size={14} />
+                            </div>
+                            <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">{res.name}</span>
+                          </button>
+                        ))}
+                      </div>
                     </div>
 
                     {/* Footer CTA */}
