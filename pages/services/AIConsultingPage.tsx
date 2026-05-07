@@ -139,7 +139,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       </section>
 
       {/* SECTION 2 — PROBLEM STRIP */}
-      <section className="bg-[#F5F0E8] py-16">
+      <section className="bg-[#F5F5F7] py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
             {[
@@ -181,7 +181,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       </section>
 
       {/* SECTION 4 — HOW IT WORKS */}
-      <section id="how-it-works" className="py-24 bg-[#F5F0E8]">
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
@@ -264,7 +264,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       </section>
 
       {/* SECTION 6 — WHY KDCI.AI */}
-      <section className="py-24 bg-[#F5F0E8]">
+      <section className="py-24 bg-[#F5F5F7]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
