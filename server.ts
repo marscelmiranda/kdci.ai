@@ -365,8 +365,8 @@ app.delete('/api/webinars/:id', requireApiKey, async (req, res) => {
 // ===== Frontend: Dev proxy / Prod static =====
 if (isDev) {
   app.use(
-    '/midgard',
     createProxyMiddleware({
+      pathFilter: (path) => path.startsWith('/midgard'),
       target: 'http://localhost:5174',
       changeOrigin: true,
       ws: true,
