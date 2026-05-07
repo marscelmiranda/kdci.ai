@@ -25,7 +25,6 @@ import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
 // Services
 import { SolutionsHubPage } from './pages/services/SolutionsHubPage';
 import { SoftwareEngineeringPage } from './pages/services/SoftwareEngineeringPage';
-import { CreativeProductionPage } from './pages/services/CreativeProductionPage';
 import { CreativeProductionPageV2 } from './pages/services/CreativeProductionPageV2';
 import { CustomerSupportHubPage } from './pages/services/CustomerSupportHubPage';
 import { CustomerSupportHubPageV2 } from './pages/services/CustomerSupportHubPageV2';
@@ -115,8 +114,7 @@ const App = () => {
         {activeView === 'customer-support' && <CustomerSupportHubPage setView={setView} />}
         {activeView === 'customer-support-v2' && <CustomerSupportHubPageV2 setView={setView} />}
         {activeView === 'property-mgmt' && <PropertyManagementPage setView={setView} />}
-        {activeView === 'creative-prod' && <CreativeProductionPage setView={setView} />}
-        {activeView === 'creative-prod-v2' && <CreativeProductionPageV2 setView={setView} />}
+        {activeView === 'creative-prod' && <CreativeProductionPageV2 setView={setView} />}
         {activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} />}
         {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
         
