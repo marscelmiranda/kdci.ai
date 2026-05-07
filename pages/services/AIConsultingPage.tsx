@@ -264,42 +264,55 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       </section>
 
       {/* SECTION 6 — WHY KDCI.AI */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section className="py-24 bg-[#F5F5F7] overflow-hidden">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Our Difference
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Image */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <img src="/our-difference.jpeg" alt="KDCI AI consulting team reviewing performance dashboards" className="w-full h-full object-cover" style={{ minHeight: '420px' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight max-w-2xl">
-              Built to deliver outcomes,<br /><span className="text-[#E61739]">not slide decks.</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Cpu,
-                title: 'We build in-house',
-                desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
-              },
-              {
-                icon: BarChart3,
-                title: 'KPI-backed accountability',
-                desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
-              },
-              {
-                icon: Users,
-                title: 'Human in the loop, always',
-                desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
-              },
-            ].map((d, i) => (
-              <div key={i} className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm hover:shadow-md transition-all">
-                <div className="w-12 h-12 bg-[#E61739]/10 rounded-2xl flex items-center justify-center mb-6">
-                  <d.icon size={22} className="text-[#E61739]" />
-                </div>
-                <h3 className="text-lg font-black text-[#1D1D1F] mb-3">{d.title}</h3>
-                <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
+
+            {/* Content */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
+                Our Difference
               </div>
-            ))}
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
+                Built to deliver outcomes,<br /><span className="text-[#E61739]">not slide decks.</span>
+              </h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    icon: Cpu,
+                    title: 'We build in-house',
+                    desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
+                  },
+                  {
+                    icon: BarChart3,
+                    title: 'KPI-backed accountability',
+                    desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
+                  },
+                  {
+                    icon: Users,
+                    title: 'Human in the loop, always',
+                    desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
+                  },
+                ].map((d, i) => (
+                  <div key={i} className="flex items-start gap-5 bg-white rounded-2xl p-6 border border-black/5 shadow-sm">
+                    <div className="w-11 h-11 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                      <d.icon size={20} className="text-[#E61739]" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-black text-[#1D1D1F] mb-1.5">{d.title}</h3>
+                      <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
