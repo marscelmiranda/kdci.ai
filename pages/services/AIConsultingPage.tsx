@@ -127,10 +127,10 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+              <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group whitespace-nowrap">
                 Book a Discovery Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
-              <a href="#how-it-works" className="px-14 py-5 bg-white/10 border border-white/20 text-white rounded-3xl font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+              <a href="#how-it-works" className="px-14 py-5 bg-white/10 border border-white/20 text-white rounded-3xl font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 backdrop-blur-sm whitespace-nowrap">
                 See How It Works <ChevronRight size={20} />
               </a>
             </div>
