@@ -409,24 +409,35 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
           <div className="grid lg:grid-cols-2 gap-16 items-start">
 
             {/* Left */}
-            <div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
-                Ready to build your<br /><span className="text-[#E61739]">AI operation?</span>
-              </h2>
-              <p className="text-white/50 text-lg font-medium leading-relaxed mb-10">
-                Book a 30-minute discovery call. We'll map your operations, identify the highest-impact AI opportunities, and show you exactly what KDCI.ai looks like for your business — no obligation.
-              </p>
-              <div className="space-y-4">
-                {[
-                  'No lock-in on Starter plans',
-                  'Live within 14–21 days',
-                  'KPI-backed SLAs on every engagement',
-                ].map((t, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <CheckCircle2 size={18} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/70 text-sm font-semibold">{t}</span>
-                  </div>
-                ))}
+            <div className="flex flex-col gap-8">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
+                  Ready to build your<br /><span className="text-[#E61739]">AI operation?</span>
+                </h2>
+                <p className="text-white/50 text-lg font-medium leading-relaxed mb-8">
+                  Book a 30-minute discovery call. We'll map your operations, identify the highest-impact AI opportunities, and show you exactly what KDCI.ai looks like for your business — no obligation.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    'No lock-in on Starter plans',
+                    'Live within 14–21 days',
+                    'KPI-backed SLAs on every engagement',
+                  ].map((t, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <CheckCircle2 size={18} className="text-[#E61739] shrink-0" />
+                      <span className="text-white/70 text-sm font-semibold">{t}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Image */}
+              <div className="rounded-[2rem] overflow-hidden shadow-2xl aspect-square w-full">
+                <img
+                  src="/contact-section.png"
+                  alt="KDCI operations consultant on a live discovery call"
+                  className="w-full h-full object-cover object-center"
+                />
               </div>
             </div>
 
