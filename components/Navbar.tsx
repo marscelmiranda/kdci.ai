@@ -108,51 +108,30 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                 What We Do <ChevronDown size={14} className={`transition-transform duration-300 ${isSolutionsOpen ? 'rotate-180' : ''}`} />
               </button>
               {isSolutionsOpen && (
-                <div className="absolute top-full right-0 pt-3 w-[720px] animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="bg-white rounded-[2rem] border border-black/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="absolute top-full right-0 pt-3 w-[320px] animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
 
-                    {/* Services 2x2 */}
-                    <div className="p-6 text-left">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-4">Our Services</p>
-                      <div className="grid grid-cols-2 gap-2">
-                        {TOP_SERVICES.map((item, idx) => (
-                          <button key={idx} onClick={() => { setView(item.id as ViewType); setIsSolutionsOpen(false); }} className="text-left p-4 rounded-2xl hover:bg-[#F5F5F7] transition-all group/sol flex items-start gap-4 border border-transparent hover:border-black/5">
-                            <div className="w-10 h-10 shrink-0 rounded-xl bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all mt-0.5">
-                              <item.icon size={20} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="text-[13px] font-bold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">{item.name}</div>
-                              <p className="text-[10px] font-black uppercase tracking-wider text-[#E61739]/70 mt-0.5 mb-1.5">{item.tag}</p>
-                              <p className="text-[11px] text-[#86868b] font-medium leading-snug">{item.desc}</p>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Industries pill tags */}
-                    <div className="border-t border-black/5 px-6 py-5 bg-[#F9F9F9] text-left">
-                      <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b]">Industries We Serve</p>
-                        <button onClick={() => { setView('solutions-hub'); setIsSolutionsOpen(false); }} className="text-[10px] font-black uppercase tracking-widest text-[#E61739] flex items-center gap-1.5 hover:gap-2.5 transition-all">
-                          View All <ArrowRight size={10} />
+                    {/* Service list */}
+                    <div className="p-3">
+                      {TOP_SERVICES.map((item, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => { setView(item.id as ViewType); setIsSolutionsOpen(false); }}
+                          className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/sol"
+                        >
+                          <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
+                            <item.icon size={14} />
+                          </div>
+                          <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">{item.name}</span>
                         </button>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {INDUSTRIES.slice(0, 14).map((ind, idx) => (
-                          <button key={idx} onClick={() => { setView(ind.id as ViewType); setIsSolutionsOpen(false); }}
-                            className="px-3 py-1.5 rounded-full text-[11px] font-semibold text-[#424245] bg-white border border-black/10 hover:border-[#E61739]/40 hover:text-[#E61739] hover:bg-[#E61739]/5 transition-all">
-                            {ind.name}
-                          </button>
-                        ))}
-                      </div>
+                      ))}
                     </div>
 
                     {/* Footer CTA */}
-                    <div className="border-t border-black/5 px-6 py-4 flex items-center justify-between bg-white">
-                      <p className="text-[11px] text-[#86868b] font-medium">Need help choosing the right solution?</p>
-                      <button onClick={() => { setView('contact'); setIsSolutionsOpen(false); }} className="text-[11px] font-bold text-[#E61739] flex items-center gap-1.5 hover:gap-2.5 transition-all">
-                        Book a Call <ArrowRight size={11} />
+                    <div className="border-t border-black/5 px-4 py-3 flex items-center justify-between bg-[#F9F9F9]">
+                      <p className="text-[11px] text-[#86868b] font-medium">Not sure where to start?</p>
+                      <button onClick={() => { setView('contact'); setIsSolutionsOpen(false); }} className="text-[11px] font-bold text-[#E61739] flex items-center gap-1 hover:gap-2 transition-all">
+                        Talk to us <ArrowRight size={10} />
                       </button>
                     </div>
 
