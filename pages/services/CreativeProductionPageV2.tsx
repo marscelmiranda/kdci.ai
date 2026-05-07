@@ -55,7 +55,7 @@ const ScrollingColumn = ({
           <div
             key={i}
             className="rounded-2xl overflow-hidden shrink-0 w-full"
-            style={{ height: '160px' }}
+            style={{ height: '240px' }}
           >
             <img
               src={src}
