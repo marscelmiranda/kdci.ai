@@ -108,7 +108,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                 What We Do <ChevronDown size={14} className={`transition-transform duration-300 ${isSolutionsOpen ? 'rotate-180' : ''}`} />
               </button>
               {isSolutionsOpen && (
-                <div className="absolute top-full right-0 pt-3 w-[320px] animate-in fade-in slide-in-from-top-1 duration-150">
+                <div className="absolute top-full left-0 pt-3 w-[320px] animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
 
                     {/* Service list */}
