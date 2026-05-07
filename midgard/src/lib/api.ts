@@ -1,11 +1,16 @@
-const API_KEY = import.meta.env.VITE_PORTAL_API_KEY ?? '';
+const TOKEN_KEY = 'midgard_token';
+
+export const getToken = (): string | null => localStorage.getItem(TOKEN_KEY);
+export const setToken = (t: string) => localStorage.setItem(TOKEN_KEY, t);
+export const clearToken = () => localStorage.removeItem(TOKEN_KEY);
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const token = getToken();
   const res = await fetch(path, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': API_KEY,
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
       ...(options.headers ?? {}),
     },
   });
@@ -15,6 +20,15 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   }
   return res.json();
 }
+
+// ---- Auth ----
+export const login = (email: string, password: string) =>
+  request<{ token: string; user: { id: number; email: string; name: string; role: string } }>(
+    '/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }
+  );
+export const getMe = () =>
+  request<{ id: number; email: string; name: string; role: string }>('/api/auth/me');
+export const logout = () => clearToken();
 
 // ---- Jobs ----
 export const getPublishedJobs  = ()           => request('/api/jobs');

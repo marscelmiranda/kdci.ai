@@ -4,6 +4,8 @@ import pg from 'pg';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -15,27 +17,65 @@ const isDev = process.env.NODE_ENV !== 'production';
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-api-key'],
+  allowedHeaders: ['Content-Type', 'x-api-key', 'Authorization'],
 }));
 app.use(express.json());
 
 app.use((req, _res, next) => {
   if (req.path.startsWith('/api')) {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} | key=${req.headers['x-api-key'] ? 'present' : 'MISSING'}`);
+    const hasKey = !!req.headers['x-api-key'];
+    const hasToken = !!req.headers['authorization'];
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} | auth=${hasKey ? 'api-key' : hasToken ? 'bearer' : 'NONE'}`);
   }
   next();
 });
 
-// ----- Auth middleware (write operations) -----
-const requireApiKey = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+// ----- Auth middleware -----
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback-dev-secret';
+
+const requireAuth = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  // Accept JWT Bearer token (portal login)
+  const authHeader = req.headers['authorization'];
+  if (authHeader?.startsWith('Bearer ')) {
+    try {
+      jwt.verify(authHeader.slice(7), JWT_SECRET);
+      return next();
+    } catch {
+      res.status(401).json({ error: 'Invalid or expired token' });
+      return;
+    }
+  }
+  // Also accept raw API key for backwards compatibility
   const key = req.headers['x-api-key'];
   const expected = process.env.PORTAL_API_KEY;
-  if (!expected || key !== expected) {
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
-  next();
+  if (expected && key === expected) return next();
+
+  res.status(401).json({ error: 'Unauthorized' });
 };
+
+// ----- AUTH ROUTES -----
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) { res.status(400).json({ error: 'Email and password required' }); return; }
+    const { rows } = await pool.query('SELECT * FROM users WHERE email = $1', [email.toLowerCase().trim()]);
+    const user = rows[0];
+    if (!user) { res.status(401).json({ error: 'Invalid email or password' }); return; }
+    const valid = await bcrypt.compare(password, user.password_hash);
+    if (!valid) { res.status(401).json({ error: 'Invalid email or password' }); return; }
+    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
+    res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/api/auth/me', (req, res) => {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader?.startsWith('Bearer ')) { res.status(401).json({ error: 'No token' }); return; }
+  try {
+    const payload = jwt.verify(authHeader.slice(7), JWT_SECRET) as any;
+    res.json({ id: payload.id, email: payload.email, name: payload.name, role: payload.role });
+  } catch { res.status(401).json({ error: 'Invalid or expired token' }); }
+});
 
 // ----- HEALTH -----
 app.get('/api/health', (_req, res) => {
@@ -73,7 +113,7 @@ app.get('/api/jobs/:id', async (req, res) => {
   }
 });
 
-app.post('/api/jobs', requireApiKey, async (req, res) => {
+app.post('/api/jobs', requireAuth, async (req, res) => {
   const { title, slug, department, location, employment_type, experience_level, description, responsibilities, requirements, salary_range, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -87,7 +127,7 @@ app.post('/api/jobs', requireApiKey, async (req, res) => {
   }
 });
 
-app.put('/api/jobs/:id', requireApiKey, async (req, res) => {
+app.put('/api/jobs/:id', requireAuth, async (req, res) => {
   const { title, slug, department, location, employment_type, experience_level, description, responsibilities, requirements, salary_range, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -101,7 +141,7 @@ app.put('/api/jobs/:id', requireApiKey, async (req, res) => {
   }
 });
 
-app.delete('/api/jobs/:id', requireApiKey, async (req, res) => {
+app.delete('/api/jobs/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM job_listings WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
@@ -141,7 +181,7 @@ app.get('/api/blog/:id', async (req, res) => {
   }
 });
 
-app.post('/api/blog', requireApiKey, async (req, res) => {
+app.post('/api/blog', requireAuth, async (req, res) => {
   const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -155,7 +195,7 @@ app.post('/api/blog', requireApiKey, async (req, res) => {
   }
 });
 
-app.put('/api/blog/:id', requireApiKey, async (req, res) => {
+app.put('/api/blog/:id', requireAuth, async (req, res) => {
   const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -169,7 +209,7 @@ app.put('/api/blog/:id', requireApiKey, async (req, res) => {
   }
 });
 
-app.delete('/api/blog/:id', requireApiKey, async (req, res) => {
+app.delete('/api/blog/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM blog_posts WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
@@ -193,7 +233,7 @@ app.get('/api/cases/all', async (_req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.post('/api/cases', requireApiKey, async (req, res) => {
+app.post('/api/cases', requireAuth, async (req, res) => {
   const { title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -205,7 +245,7 @@ app.post('/api/cases', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.put('/api/cases/:id', requireApiKey, async (req, res) => {
+app.put('/api/cases/:id', requireAuth, async (req, res) => {
   const { title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -217,7 +257,7 @@ app.put('/api/cases/:id', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.delete('/api/cases/:id', requireApiKey, async (req, res) => {
+app.delete('/api/cases/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM case_studies WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
@@ -239,7 +279,7 @@ app.get('/api/ebooks/all', async (_req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.post('/api/ebooks', requireApiKey, async (req, res) => {
+app.post('/api/ebooks', requireAuth, async (req, res) => {
   const { title, slug, description, author, category, cover_image, download_url, page_count, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -251,7 +291,7 @@ app.post('/api/ebooks', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.put('/api/ebooks/:id', requireApiKey, async (req, res) => {
+app.put('/api/ebooks/:id', requireAuth, async (req, res) => {
   const { title, slug, description, author, category, cover_image, download_url, page_count, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -263,7 +303,7 @@ app.put('/api/ebooks/:id', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.delete('/api/ebooks/:id', requireApiKey, async (req, res) => {
+app.delete('/api/ebooks/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM ebooks WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
@@ -285,7 +325,7 @@ app.get('/api/guides/all', async (_req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.post('/api/guides', requireApiKey, async (req, res) => {
+app.post('/api/guides', requireAuth, async (req, res) => {
   const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -297,7 +337,7 @@ app.post('/api/guides', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.put('/api/guides/:id', requireApiKey, async (req, res) => {
+app.put('/api/guides/:id', requireAuth, async (req, res) => {
   const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -309,7 +349,7 @@ app.put('/api/guides/:id', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.delete('/api/guides/:id', requireApiKey, async (req, res) => {
+app.delete('/api/guides/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM guides WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
@@ -331,7 +371,7 @@ app.get('/api/webinars/all', async (_req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.post('/api/webinars', requireApiKey, async (req, res) => {
+app.post('/api/webinars', requireAuth, async (req, res) => {
   const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -343,7 +383,7 @@ app.post('/api/webinars', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.put('/api/webinars/:id', requireApiKey, async (req, res) => {
+app.put('/api/webinars/:id', requireAuth, async (req, res) => {
   const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
@@ -355,7 +395,7 @@ app.put('/api/webinars/:id', requireApiKey, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.delete('/api/webinars/:id', requireApiKey, async (req, res) => {
+app.delete('/api/webinars/:id', requireAuth, async (req, res) => {
   try {
     await pool.query(`DELETE FROM webinars WHERE id = $1`, [req.params.id]);
     res.json({ success: true });

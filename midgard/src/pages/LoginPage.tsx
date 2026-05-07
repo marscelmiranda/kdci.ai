@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
-import { Lock, Mail, ArrowRight, Loader2, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, ArrowRight, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
+import { login, setToken } from '../lib/api';
 
 export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#020202';
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const { token } = await login(email.trim(), password);
+      setToken(token);
       setView('dashboard');
-    }, 1500);
+    } catch (err: any) {
+      setError(err.message ?? 'Login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,6 +47,13 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <p className="text-slate-500 text-sm mt-2 font-medium">Secure access for KDCI team members.</p>
           </div>
 
+          {error && (
+            <div className="mb-5 flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm font-medium">
+              <AlertCircle size={16} className="shrink-0" />
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-1.5">
               <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Work Email</label>
@@ -46,6 +63,8 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                   type="email"
                   required
                   placeholder="name@kdci.co"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:border-[#E61739] focus:ring-4 focus:ring-[#E61739]/10 transition-all placeholder:text-slate-400"
                 />
               </div>
@@ -59,6 +78,8 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                   type="password"
                   required
                   placeholder="••••••••"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:border-[#E61739] focus:ring-4 focus:ring-[#E61739]/10 transition-all placeholder:text-slate-400"
                 />
               </div>
@@ -69,7 +90,10 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
               disabled={loading}
               className="w-full py-4 bg-[#1D1D1F] text-white rounded-xl font-bold text-sm hover:bg-black transition-all flex items-center justify-center gap-2 group disabled:opacity-70 shadow-lg"
             >
-              {loading ? <Loader2 className="animate-spin" size={18} /> : <>Sign In <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>}
+              {loading
+                ? <Loader2 className="animate-spin" size={18} />
+                : <>Sign In <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>
+              }
             </button>
           </form>
 
