@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; fuser -k 5174/tcp 2>/dev/null; concurrently \"npx tsx watch server.ts\" \"vite\" \"vite --config midgard/vite.config.ts\"",
+    "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; concurrently \"npx tsx watch server.ts\" \"vite\"",
+    "build:midgard": "vite build --config midgard/vite.config.ts",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit"
