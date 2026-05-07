@@ -149,9 +149,9 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
 
           {/* Right — animated mosaic */}
           <div className="hidden lg:flex shrink-0 lg:w-[440px] xl:w-[500px] gap-3 overflow-hidden rounded-3xl" style={{ height: '560px' }}>
-            <ScrollingColumn images={COL_A} duration={20} direction="up" offset={-40} />
-            <ScrollingColumn images={COL_B} duration={26} direction="down" offset={0} />
-            <ScrollingColumn images={COL_C} duration={23} direction="up" offset={-80} />
+            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} />
+            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} />
+            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} />
           </div>
 
         </div>
