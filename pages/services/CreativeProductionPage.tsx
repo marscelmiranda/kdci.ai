@@ -57,6 +57,9 @@ export const CreativeProductionPage = ({ setView }: { setView: (v: ViewType) => 
             <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Book a Creative Strategy Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <button onClick={() => setView('creative-prod-v2')} className="px-14 py-5 bg-white/10 border border-white/20 text-white rounded-[2rem] font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-3 group backdrop-blur-sm">
+              See New Hero Design <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
