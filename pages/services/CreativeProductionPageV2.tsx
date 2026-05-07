@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette, ZoomIn, X } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
@@ -25,11 +25,13 @@ const ScrollingColumn = ({
   duration,
   direction = 'up',
   offset = 0,
+  onImageClick,
 }: {
   images: string[];
   duration: number;
   direction?: 'up' | 'down';
   offset?: number;
+  onImageClick?: (src: string) => void;
 }) => {
   const doubled = [...images, ...images];
   const animName = direction === 'up' ? 'creativeScrollUp' : 'creativeScrollDown';
@@ -54,15 +56,19 @@ const ScrollingColumn = ({
         {doubled.map((src, i) => (
           <div
             key={i}
-            className="rounded-2xl overflow-hidden shrink-0 w-full"
+            className="rounded-2xl overflow-hidden shrink-0 w-full relative group cursor-zoom-in"
             style={{ height: '240px' }}
+            onClick={() => onImageClick?.(src)}
           >
             <img
               src={src}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               draggable={false}
             />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+              <ZoomIn size={28} className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" />
+            </div>
           </div>
         ))}
       </div>
@@ -73,6 +79,16 @@ const ScrollingColumn = ({
 export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+
+  const closeLightbox = useCallback(() => setLightboxSrc(null), []);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [lightboxSrc, closeLightbox]);
 
   const creativeTools = [
     { name: "Figma", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773896658/Figma-Logo_t0pp3n.png" },
@@ -149,9 +165,9 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
 
           {/* Right — animated mosaic */}
           <div className="hidden lg:flex shrink-0 lg:w-[440px] xl:w-[500px] gap-3 overflow-hidden rounded-3xl" style={{ height: '560px' }}>
-            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} />
-            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} />
-            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} />
+            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={setLightboxSrc} />
+            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={setLightboxSrc} />
+            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={setLightboxSrc} />
           </div>
 
         </div>
@@ -404,6 +420,27 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
       </section>
 
       <PortfolioModal item={selectedPortfolioItem} onClose={() => setSelectedPortfolioItem(null)} />
+
+      {/* Lightbox */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all"
+          >
+            <X size={20} />
+          </button>
+          <img
+            src={lightboxSrc}
+            alt="Artwork preview"
+            className="max-w-[90vw] max-h-[90vh] rounded-2xl shadow-2xl object-contain"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };
