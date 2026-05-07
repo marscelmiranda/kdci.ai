@@ -405,8 +405,15 @@ app.delete('/api/webinars/:id', requireAuth, async (req, res) => {
 // ===== Frontend: Dev proxy / Prod static =====
 // Midgard portal — always served as pre-built static files (no proxy)
 const midgardDist = path.join(__dirname, 'midgard', 'dist');
-app.use('/midgard', express.static(midgardDist));
+// Hashed assets can be cached long-term; index.html must never be cached
+app.use('/midgard/assets', express.static(path.join(midgardDist, 'assets'), { maxAge: '1y', immutable: true }));
+app.use('/midgard', express.static(midgardDist, { etag: false, lastModified: false, setHeaders: (res, filePath) => {
+  if (filePath.endsWith('index.html')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  }
+}}));
 app.get(['/midgard', '/midgard/*splat'], (_req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
   res.sendFile(path.join(midgardDist, 'index.html'));
 });
 
