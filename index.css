@@ -1,5 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* 
-  All styles have been migrated to the Tailwind configuration and custom CSS block in index.html.
-  This ensures compatibility with the runtime Tailwind CDN engine without requiring a build step.
-*/
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 350 82% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 350 82% 50%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
+  body {
+    @apply font-sans antialiased text-kdci-black bg-[#F5F5F7];
+  }
+}
+
+@layer components {
+  .glow-red {
+    box-shadow: 0 10px 30px rgba(230, 23, 57, 0.2);
+  }
+
+  .bg-gradient-light {
+    background: radial-gradient(circle at top right, rgba(230, 23, 57, 0.05), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(245, 245, 247, 1), transparent 50%);
+  }
+
+  .glass-nav {
+    @apply bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.03)];
+  }
+
+  .card-shadow {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.06);
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-shadow:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    @apply -translate-y-1;
+  }
+
+  .text-shine-white {
+    background: linear-gradient(to right, #ffffff 20%, #d1d1d6 40%, #ffffff 60%, #ffffff 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply animate-shine;
+  }
+
+  .text-shine-red {
+    background: linear-gradient(to right, #E61739 20%, #ff7a8f 40%, #E61739 60%, #E61739 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply animate-shine;
+  }
+
+  .mesh-container {
+    @apply absolute inset-0 overflow-hidden bg-kdci-dark z-0;
+  }
+
+  .blob {
+    @apply absolute w-[800px] h-[800px] rounded-full opacity-15 mix-blend-screen filter blur-[140px];
+  }
+
+  .blob-magenta {
+    @apply bg-[#ff00ff] -top-[200px] -left-[100px] animate-blob-float;
+  }
+
+  .blob-purple {
+    @apply bg-[#7e22ce] -bottom-[300px] -right-[100px] animate-blob-float-reverse;
+  }
+
+  .blob-violet {
+    @apply bg-[#8b5cf6] top-[30%] right-[20%] w-[600px] h-[600px] animate-blob-float;
+  }
+
+  .grain-overlay {
+    @apply absolute inset-0 opacity-15 pointer-events-none mix-blend-overlay z-10;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  }
+
+  .particle-canvas {
+    @apply absolute inset-0 z-[1] opacity-60;
+  }
+
+  .mask-fade {
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
