@@ -173,7 +173,7 @@ app.get('/api/blog/all', async (_req, res) => {
 
 app.get('/api/blog/:id', async (req, res) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM blog_posts WHERE id = $1 OR slug = $1`, [req.params.id]);
+    const { rows } = await pool.query(`SELECT * FROM blog_posts WHERE id::text = $1 OR slug = $1`, [req.params.id]);
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
   } catch (err: any) {
