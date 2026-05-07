@@ -109,7 +109,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       {/* SECTION 1 — HERO */}
       <section className="relative bg-[#080808] min-h-[90vh] flex flex-col justify-center overflow-hidden">
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at 60% 40%, rgba(230,23,57,0.08) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(230,23,57,0.05) 0%, transparent 50%)' }} />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-36 pb-24" style={{ animation: 'aiHeroFade 0.9s cubic-bezier(0.22,1,0.36,1) both' }}>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24" style={{ animation: 'aiHeroFade 0.9s cubic-bezier(0.22,1,0.36,1) both' }}>
           <style>{`
             @keyframes aiHeroFade {
               from { opacity: 0; transform: translateY(28px); }
@@ -154,7 +154,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 2 — PROBLEM STRIP */}
       <section className="bg-[#F5F5F7] py-16">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
             {[
               "You've bought AI tools that went nowhere.",
@@ -171,7 +171,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 3 — WHAT WE DO */}
       <section className="py-24 bg-[#080808]">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Services
@@ -196,7 +196,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 4 — HOW IT WORKS */}
       <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Process
@@ -279,7 +279,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 6 — WHY KDCI.AI */}
       <section className="py-24 bg-[#F5F5F7]">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
             {/* Content */}
@@ -341,7 +341,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 7 — INDUSTRIES & DEPARTMENTS */}
       <section className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="mb-14 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Who We Serve
@@ -379,7 +379,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
       {/* SECTION 8 — AI TOOLS */}
       <section className="py-24 bg-[#080808]">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Our Stack
