@@ -365,6 +365,19 @@ app.delete('/api/webinars/:id', requireApiKey, async (req, res) => {
 // ===== Frontend: Dev proxy / Prod static =====
 if (isDev) {
   app.use(
+    '/midgard',
+    createProxyMiddleware({
+      target: 'http://localhost:5174',
+      changeOrigin: true,
+      ws: true,
+      on: {
+        error: (_err, _req, res) => {
+          (res as express.Response).status(503).send('Midgard dev server starting — please refresh.');
+        },
+      },
+    })
+  );
+  app.use(
     '/',
     createProxyMiddleware({
       target: 'http://localhost:5173',
@@ -378,6 +391,12 @@ if (isDev) {
     })
   );
 } else {
+  const midgardDist = path.join(__dirname, 'midgard', 'dist');
+  app.use('/midgard', express.static(midgardDist));
+  app.get('/midgard/*', (_req, res) => {
+    res.sendFile(path.join(midgardDist, 'index.html'));
+  });
+
   const distPath = path.join(__dirname, 'dist');
   app.use(express.static(distPath));
   app.get('*', (_req, res) => {
@@ -387,5 +406,8 @@ if (isDev) {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅  API server listening on :${PORT}`);
-  if (isDev) console.log(`    Proxying UI → Vite on :5173`);
+  if (isDev) {
+    console.log(`    Public site → Vite on :5173`);
+    console.log(`    Midgard portal → Vite on :5174`);
+  }
 });

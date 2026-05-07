@@ -91,7 +91,16 @@ externalPort = 8081
 localPort = 5173
 externalPort = 8099
 
+[[ports]]
+localPort = 5174
+externalPort = 9000
+
 [deployment]
 deploymentTarget = "static"
 build = ["npm", "run", "build"]
 publicDir = "dist"
+
+[userenv]
+
+[userenv.shared]
+VITE_PORTAL_API_KEY = "kdci-806f3d8bd197150de416bfa20536b7adc902db58"
