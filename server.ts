@@ -19,6 +19,13 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use((req, _res, next) => {
+  if (req.path.startsWith('/api')) {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} | key=${req.headers['x-api-key'] ? 'present' : 'MISSING'}`);
+  }
+  next();
+});
+
 // ----- Auth middleware (write operations) -----
 const requireApiKey = (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const key = req.headers['x-api-key'];
