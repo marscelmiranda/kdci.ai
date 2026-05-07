@@ -16,9 +16,12 @@ const EXTRA_6 = "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773890060/t
 const EXTRA_7 = "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773890071/nielsen_2_a4v1st.webp";
 const EXTRA_8 = "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773886863/H4_tc17d1.webp";
 
-const COL_A = [PORTFOLIO_1, PORTFOLIO_4, EXTRA_1, PORTFOLIO_7, EXTRA_5, EXTRA_8];
-const COL_B = [PORTFOLIO_2, PORTFOLIO_5, EXTRA_3, PORTFOLIO_8, EXTRA_6, PORTFOLIO_3];
-const COL_C = [PORTFOLIO_6, EXTRA_2, EXTRA_4, EXTRA_7, PORTFOLIO_4, PORTFOLIO_1];
+type Tile = { thumb: string; full: string };
+const t = (thumb: string, full: string = thumb): Tile => ({ thumb, full });
+
+const COL_A: Tile[] = [t(PORTFOLIO_1), t(PORTFOLIO_4), t(EXTRA_1), t(PORTFOLIO_7), t(EXTRA_5), t(EXTRA_8)];
+const COL_B: Tile[] = [t(PORTFOLIO_2), t(PORTFOLIO_5), t(EXTRA_3), t(PORTFOLIO_8), t(EXTRA_6), t(PORTFOLIO_3)];
+const COL_C: Tile[] = [t(PORTFOLIO_6), t(EXTRA_2), t(EXTRA_4), t(EXTRA_7), t(PORTFOLIO_4), t(PORTFOLIO_1)];
 
 const ScrollingColumn = ({
   images,
@@ -27,7 +30,7 @@ const ScrollingColumn = ({
   offset = 0,
   onImageClick,
 }: {
-  images: string[];
+  images: Tile[];
   duration: number;
   direction?: 'up' | 'down';
   offset?: number;
@@ -53,15 +56,15 @@ const ScrollingColumn = ({
           willChange: 'transform',
         }}
       >
-        {doubled.map((src, i) => (
+        {doubled.map((tile, i) => (
           <div
             key={i}
             className="rounded-2xl overflow-hidden shrink-0 w-full relative group cursor-zoom-in"
             style={{ height: '240px' }}
-            onClick={() => onImageClick?.(src)}
+            onClick={() => onImageClick?.(tile.full)}
           >
             <img
-              src={src}
+              src={tile.thumb}
               alt=""
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               draggable={false}
