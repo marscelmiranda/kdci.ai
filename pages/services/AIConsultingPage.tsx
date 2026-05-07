@@ -116,24 +116,38 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               to   { opacity: 1; transform: translateY(0); }
             }
           `}</style>
-          <Breadcrumbs setView={setView} currentName="AI Consulting" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-            <Cpu size={11} /> KDCI.ai · AI Consulting
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white leading-[1.0] tracking-tight mb-8 max-w-4xl">
-            Your business deserves an AI strategy —<br />
-            <span className="text-[#E61739]">not just AI tools.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/50 font-medium leading-relaxed max-w-2xl mb-12">
-            KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button onClick={() => setView('contact')} className="inline-flex items-center gap-3 px-10 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl group">
-              Book a Discovery Call <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <a href="#how-it-works" className="inline-flex items-center gap-2 px-10 py-4 border border-white/20 text-white rounded-2xl font-bold text-base hover:bg-white/5 transition-all">
-              See How It Works <ChevronRight size={16} />
-            </a>
+          <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+            {/* Left — copy */}
+            <div className="flex-1 min-w-0">
+              <Breadcrumbs setView={setView} currentName="AI Consulting" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                <Cpu size={11} /> KDCI.ai · AI Consulting
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.0] tracking-tight mb-8">
+                Your business deserves an AI strategy —<br />
+                <span className="text-[#E61739]">not just AI tools.</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-white/50 font-medium leading-relaxed max-w-xl mb-12">
+                KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button onClick={() => setView('contact')} className="inline-flex items-center gap-3 px-10 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl group">
+                  Book a Discovery Call <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <a href="#how-it-works" className="inline-flex items-center gap-2 px-10 py-4 border border-white/20 text-white rounded-2xl font-bold text-base hover:bg-white/5 transition-all">
+                  See How It Works <ChevronRight size={16} />
+                </a>
+              </div>
+            </div>
+            {/* Right — hero image */}
+            <div className="hidden lg:block shrink-0 w-[420px] xl:w-[480px]">
+              <img
+                src="/ai-consulting-hero.png"
+                alt="AI Consulting team"
+                className="w-full h-auto rounded-3xl object-cover shadow-2xl"
+                style={{ maxHeight: '560px', objectPosition: 'center' }}
+              />
+            </div>
           </div>
         </div>
       </section>
