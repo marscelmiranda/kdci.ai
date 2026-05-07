@@ -6,17 +6,17 @@ import {
   Image as ImageIcon, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Save, X, User, Check,
   ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2,
-  Quote, AppWindow, Minus, Activity
+  Quote, AppWindow, Minus, Activity, Loader2, AlertCircle
 } from 'lucide-react';
+import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
 
 interface BlogPost {
   id: string;
   title: string;
   category: string;
   author: string;
-  status: 'Published' | 'Draft' | 'Archived';
+  status: 'published' | 'draft' | 'archived';
   date: string;
-  views: number;
 }
 
 type BlockType = 'rich_text' | 'html' | 'image' | 'video' | 'two_columns' | 'cta' | 'pull_quote' | 'embed' | 'divider';
@@ -27,11 +27,6 @@ interface Block {
   isCollapsed: boolean;
   content: any;
 }
-
-const MOCK_POSTS: BlogPost[] = [
-  { id: '1', title: "Why the Philippines is the New Epicenter for AI Engineering", category: "Engineering", author: "Sarah Chen", status: 'Published', date: 'Oct 12, 2024', views: 2450 },
-  { id: '2', title: "Scaling to 500+ Agents: A Case Study in Fintech Support", category: "Case Studies", author: "Michael Ross", status: 'Published', date: 'Sep 28, 2024', views: 1890 },
-];
 
 const BLOCK_TYPES: { type: BlockType; label: string; icon: React.ReactNode }[] = [
   { type: 'rich_text', label: 'Rich Text', icon: <Type size={14} /> },
@@ -45,18 +40,23 @@ const BLOCK_TYPES: { type: BlockType; label: string; icon: React.ReactNode }[] =
   { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
 ];
 
+const emptyForm = () => ({
+  title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', status: 'draft',
+  blocks: [] as Block[],
+  metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
+  hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
+});
+
 export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
-  const [posts, setPosts] = useState<BlogPost[]>(MOCK_POSTS);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
-
-  const [formData, setFormData] = useState({
-    title: '', slug: '', category: 'AI Operations', author: '', readTime: '5 min read', tags: '', featured: false, imageUrl: '', status: 'Draft',
-    blocks: [] as Block[],
-    metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
-    hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
-  });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [formData, setFormData] = useState(emptyForm());
 
   useEffect(() => {
     document.body.style.backgroundColor = '#0a0a0a';
@@ -64,10 +64,29 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   }, []);
 
   useEffect(() => {
-    if (formData.title && !formData.slug) {
+    if (formData.title && !editingId) {
       setFormData(prev => ({ ...prev, slug: prev.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') }));
     }
   }, [formData.title]);
+
+  const loadPosts = () => {
+    setLoading(true);
+    getAllPosts()
+      .then((data: any[]) => {
+        setPosts(data.map(p => ({
+          id: String(p.id),
+          title: p.title,
+          category: p.category || '',
+          author: p.author || '',
+          status: p.status as BlogPost['status'],
+          date: p.published_at ? new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—',
+        })));
+      })
+      .catch(() => setError('Failed to load posts'))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => { loadPosts(); }, []);
 
   const handleNavClick = (id: string) => {
     if (id === 'overview') setView('dashboard');
@@ -79,31 +98,74 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
   const handleCreateNew = () => {
     setEditingId(null);
-    setFormData({ title: '', slug: '', category: 'AI Operations', author: '', readTime: '5 min read', tags: '', featured: false, imageUrl: '', status: 'Draft', blocks: [], metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: '' });
+    setFormData(emptyForm());
     setViewState('editor');
     setEditorTab('content');
+    setError(null);
   };
 
-  const handleEdit = (post: BlogPost) => {
+  const handleEdit = async (post: BlogPost) => {
     setEditingId(post.id);
-    setFormData({ title: post.title, slug: post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''), category: post.category, author: post.author, readTime: '5 min read', tags: '', featured: false, imageUrl: '', status: post.status, blocks: [{ id: '1', type: 'rich_text', isCollapsed: false, content: { text: "Sample content..." } }], metaTitle: post.title, metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: '' });
+    setError(null);
+    try {
+      const full: any = await (await fetch(`/api/blog/${post.id}`)).json();
+      setFormData({
+        title: full.title || '', slug: full.slug || '', category: full.category || 'AI Operations',
+        author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '',
+        status: full.status || 'draft',
+        blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
+        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
+        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
+        jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
+      });
+    } catch {
+      setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
+    }
     setViewState('editor');
     setEditorTab('content');
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    if (editingId) {
-      setPosts(prev => prev.map(p => p.id === editingId ? { ...p, title: formData.title, category: formData.category, author: formData.author, status: formData.status as any, date: formData.status === 'Published' && p.status !== 'Published' ? currentDate : p.date } : p));
-    } else {
-      setPosts([{ id: Math.random().toString(36).substr(2, 9), title: formData.title, category: formData.category, author: formData.author, status: formData.status as any, date: formData.status === 'Published' ? currentDate : '-', views: 0 }, ...posts]);
+    setSaving(true);
+    setError(null);
+    try {
+      const blocksJson = JSON.stringify(formData.blocks);
+      const excerpt = formData.metaDescription ||
+        formData.blocks.filter(b => b.type === 'rich_text').map(b => b.content.text || '').join(' ').slice(0, 200);
+      const payload = {
+        title: formData.title,
+        slug: formData.slug,
+        excerpt,
+        content: blocksJson,
+        author: formData.author,
+        category: formData.category,
+        cover_image: formData.imageUrl,
+        tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
+        status: formData.status,
+      };
+      if (editingId) {
+        await updatePost(editingId, payload);
+      } else {
+        await createPost(payload);
+      }
+      await loadPosts();
+      setViewState('list');
+    } catch (err: any) {
+      setError(err.message ?? 'Save failed');
+    } finally {
+      setSaving(false);
     }
-    setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this article?")) setPosts(prev => prev.filter(p => p.id !== id));
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this article?')) return;
+    try {
+      await deletePost(id);
+      setPosts(prev => prev.filter(p => p.id !== id));
+    } catch (err: any) {
+      alert('Delete failed: ' + err.message);
+    }
   };
 
   const addBlock = (type: BlockType) => setFormData(prev => ({ ...prev, blocks: [...prev.blocks, { id: Math.random().toString(36).substr(2, 9), type, isCollapsed: false, content: {} }] }));
@@ -167,6 +229,14 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     { label: 'JSON-LD included', done: formData.jsonLd.length > 0 },
   ];
 
+  const statusBadge = (status: string) => {
+    if (status === 'published') return 'bg-green-500/10 text-green-500 border-green-500/20';
+    if (status === 'archived') return 'bg-red-500/10 text-red-500 border-red-500/20';
+    return 'bg-white/5 text-white/50 border-white/10';
+  };
+
+  const filteredPosts = posts.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
@@ -211,10 +281,17 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               </button>
             </div>
 
+            {error && (
+              <div className="mb-6 flex items-center gap-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl px-4 py-3 text-sm">
+                <AlertCircle size={16} /> {error}
+              </div>
+            )}
+
             <div className="flex items-center gap-4 mb-8">
               <div className="relative flex-grow max-w-md">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={16} />
-                <input type="text" placeholder="Search articles..." className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
+                <input type="text" placeholder="Search articles..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+                  className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
               </div>
             </div>
 
@@ -226,12 +303,20 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {posts.map((post) => (
+                  {loading ? (
+                    <tr><td colSpan={6} className="px-8 py-16 text-center">
+                      <Loader2 size={24} className="animate-spin text-[#E61739]/60 mx-auto" />
+                    </td></tr>
+                  ) : filteredPosts.length === 0 ? (
+                    <tr><td colSpan={6} className="px-8 py-16 text-center text-white/30 text-sm">
+                      No articles yet. Click "Write Article" to create your first post.
+                    </td></tr>
+                  ) : filteredPosts.map((post) => (
                     <tr key={post.id} className="hover:bg-white/5 transition-colors group">
                       <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{post.title}</div></td>
                       <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{post.category}</span></td>
-                      <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{post.author}</div></td>
-                      <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${post.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : post.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{post.status}</span></td>
+                      <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{post.author || '—'}</div></td>
+                      <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${statusBadge(post.status)}`}>{post.status}</span></td>
                       <td className="px-8 py-5 text-sm text-white/40 font-mono">{post.date}</td>
                       <td className="px-8 py-5 text-right">
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -263,12 +348,15 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
               </div>
               <div className="flex items-center gap-3">
+                {error && <span className="text-red-400 text-xs font-bold">{error}</span>}
                 <select value={formData.status} onChange={e => setFormData(p => ({ ...p, status: e.target.value }))}
                   className="bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#E61739]">
-                  <option>Draft</option><option>Published</option><option>Archived</option>
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                  <option value="archived">Archived</option>
                 </select>
-                <button type="submit" className="px-6 py-2 bg-[#E61739] hover:bg-[#c51431] text-white rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
-                  <Save size={16} /> Save
+                <button type="submit" disabled={saving} className="px-6 py-2 bg-[#E61739] hover:bg-[#c51431] text-white rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red disabled:opacity-60">
+                  {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />} Save
                 </button>
               </div>
             </header>
@@ -286,7 +374,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Category</label>
                       <select value={formData.category} onChange={e => setFormData(p => ({ ...p, category: e.target.value }))}
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]">
-                        {['AI Operations', 'Engineering', 'Case Studies', 'Company News', 'Industry Insights'].map(c => <option key={c}>{c}</option>)}
+                        {['AI Operations', 'Engineering', 'Case Studies', 'Company News', 'Industry Insights', 'Future of Work'].map(c => <option key={c}>{c}</option>)}
                       </select>
                     </div>
                   </div>
@@ -306,6 +394,11 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <input type="text" value={formData.imageUrl} onChange={e => setFormData(p => ({ ...p, imageUrl: e.target.value }))}
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
                     </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Tags (comma separated)</label>
+                    <input type="text" value={formData.tags} onChange={e => setFormData(p => ({ ...p, tags: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="AI, Operations, Strategy" />
                   </div>
                   <div className="space-y-4">
                     {formData.blocks.map((block, index) => (
@@ -340,11 +433,25 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
               {editorTab === 'seo' && (
                 <div className="space-y-6">
+                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                    <h3 className="text-sm font-black uppercase tracking-widest text-white/40 mb-4">SEO Checklist</h3>
+                    <div className="space-y-2">
+                      {seoChecklist.map(item => (
+                        <div key={item.label} className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-green-500/20 text-green-500' : 'bg-white/5 text-white/20'}`}>
+                            <Check size={10} />
+                          </div>
+                          <span className={`text-xs font-bold ${item.done ? 'text-white/70' : 'text-white/30'}`}>{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Title</label>
                       <input type="text" value={formData.metaTitle} onChange={e => setFormData(p => ({ ...p, metaTitle: e.target.value }))}
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="SEO title..." />
+                      <p className="text-[10px] text-white/30">{formData.metaTitle.length}/60 chars</p>
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Canonical URL</label>
@@ -355,68 +462,33 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Description</label>
                     <textarea value={formData.metaDescription} onChange={e => setFormData(p => ({ ...p, metaDescription: e.target.value }))}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[100px]" placeholder="SEO description..." />
-                  </div>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Title</label>
-                      <input type="text" value={formData.ogTitle} onChange={e => setFormData(p => ({ ...p, ogTitle: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="Open Graph title..." />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Image URL</label>
-                      <input type="text" value={formData.ogImageUrl} onChange={e => setFormData(p => ({ ...p, ogImageUrl: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
-                    </div>
-                  </div>
-                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">SEO Checklist</p>
-                    <div className="space-y-3">
-                      {seoChecklist.map((item, i) => (
-                        <div key={i} className={`flex items-center gap-3 text-sm font-medium ${item.done ? 'text-green-500' : 'text-white/30'}`}>
-                          <Check size={14} className={item.done ? 'text-green-500' : 'text-white/20'} />{item.label}
-                        </div>
-                      ))}
-                    </div>
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[80px]" placeholder="160 char description..." />
+                    <p className="text-[10px] text-white/30">{formData.metaDescription.length}/160 chars</p>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">JSON-LD Structured Data</label>
-                    <textarea value={formData.jsonLd} onChange={e => setFormData(p => ({ ...p, jsonLd: e.target.value }))}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-green-400 font-mono text-xs focus:outline-none focus:border-[#E61739] min-h-[120px]" placeholder='{"@context": "https://schema.org", ...}' />
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Keywords</label>
+                    <input type="text" value={formData.keywords} onChange={e => setFormData(p => ({ ...p, keywords: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="keyword1, keyword2..." />
                   </div>
                 </div>
               )}
 
               {editorTab === 'hubspot' && (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-3 gap-6">
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">UTM Source</label>
-                      <input type="text" value={formData.utmSource} onChange={e => setFormData(p => ({ ...p, utmSource: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="e.g. linkedin" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">UTM Medium</label>
-                      <input type="text" value={formData.utmMedium} onChange={e => setFormData(p => ({ ...p, utmMedium: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="e.g. social" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">UTM Campaign</label>
-                      <input type="text" value={formData.utmCampaign} onChange={e => setFormData(p => ({ ...p, utmCampaign: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="e.g. q1-blog" />
-                    </div>
-                  </div>
                   <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">HubSpot Event Name</label>
-                      <input type="text" value={formData.hubspotEventName} onChange={e => setFormData(p => ({ ...p, hubspotEventName: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="e.g. blog_view" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">HubSpot Form GUID</label>
-                      <input type="text" value={formData.hubspotFormGuid} onChange={e => setFormData(p => ({ ...p, hubspotFormGuid: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="xxxxxxxx-xxxx-xxxx-xxxx" />
-                    </div>
+                    {[
+                      { key: 'hubspotEventName', label: 'HubSpot Event Name', placeholder: 'blog_view' },
+                      { key: 'hubspotFormGuid', label: 'HubSpot Form GUID', placeholder: 'xxxxxxxx-xxxx-...' },
+                      { key: 'utmSource', label: 'UTM Source', placeholder: 'newsletter' },
+                      { key: 'utmMedium', label: 'UTM Medium', placeholder: 'email' },
+                      { key: 'utmCampaign', label: 'UTM Campaign', placeholder: 'q4-2024' },
+                    ].map(f => (
+                      <div key={f.key} className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">{f.label}</label>
+                        <input type="text" value={(formData as any)[f.key]} onChange={e => setFormData(p => ({ ...p, [f.key]: e.target.value }))}
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder={f.placeholder} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
