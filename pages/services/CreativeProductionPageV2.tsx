@@ -80,8 +80,17 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
 
-  const closeLightbox = useCallback(() => setLightboxSrc(null), []);
+  const openLightbox = useCallback((src: string) => {
+    setLightboxSrc(src);
+    requestAnimationFrame(() => requestAnimationFrame(() => setLightboxVisible(true)));
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxVisible(false);
+    setTimeout(() => setLightboxSrc(null), 300);
+  }, []);
 
   useEffect(() => {
     if (!lightboxSrc) return;
@@ -165,9 +174,9 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
 
           {/* Right — animated mosaic */}
           <div className="hidden lg:flex shrink-0 lg:w-[440px] xl:w-[500px] gap-3 overflow-hidden rounded-3xl" style={{ height: '560px' }}>
-            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={setLightboxSrc} />
-            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={setLightboxSrc} />
-            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={setLightboxSrc} />
+            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={openLightbox} />
+            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={openLightbox} />
+            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={openLightbox} />
           </div>
 
         </div>
@@ -424,7 +433,12 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
       {/* Lightbox */}
       {lightboxSrc && (
         <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-[200] flex items-center justify-center backdrop-blur-sm"
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.9)',
+            opacity: lightboxVisible ? 1 : 0,
+            transition: 'opacity 300ms ease',
+          }}
           onClick={closeLightbox}
         >
           <button
@@ -437,6 +451,11 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
             src={lightboxSrc}
             alt="Artwork preview"
             className="max-w-[90vw] max-h-[90vh] rounded-2xl shadow-2xl object-contain"
+            style={{
+              transform: lightboxVisible ? 'scale(1)' : 'scale(0.95)',
+              transition: 'transform 300ms ease, opacity 300ms ease',
+              opacity: lightboxVisible ? 1 : 0,
+            }}
             onClick={e => e.stopPropagation()}
           />
         </div>
