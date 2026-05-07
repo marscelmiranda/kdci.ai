@@ -136,12 +136,11 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             </div>
           </div>
           {/* Right — hero image */}
-          <div className="hidden lg:block shrink-0 lg:w-[420px] xl:w-[480px]">
+          <div className="hidden lg:block shrink-0 lg:w-[420px] xl:w-[480px] rounded-3xl overflow-hidden shadow-2xl" style={{ height: '560px' }}>
             <img
               src="/ai-consulting-hero.png"
               alt="AI Consulting team"
-              className="w-full rounded-3xl shadow-2xl object-cover"
-              style={{ height: '560px' }}
+              className="w-full h-full object-cover scale-[1.15]"
             />
           </div>
         </div>
