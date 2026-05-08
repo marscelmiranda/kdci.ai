@@ -66,10 +66,33 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
     getMe().then(u => {
       setUserEmail(u.email);
       setUserName(u.name || '');
-      const stored = localStorage.getItem(`userProfile_${u.email}`);
+      const key = `userProfile_${u.email}`;
+      const stored = localStorage.getItem(key);
       if (stored) {
-        try { setProfile(JSON.parse(stored)); } catch {}
+        try { setProfile(JSON.parse(stored)); return; } catch {}
       }
+      // No profile yet — auto-initialize from auth name so sidebar is never empty
+      const parts = (u.name || '').trim().split(/\s+/);
+      const initial: SidebarProfile = {
+        avatarImage: '', firstName: parts[0] || '', lastName: parts.slice(1).join(' ') || '',
+        positionTitle: '', rank: '', department: '', city: '', state: '',
+        workPhone: '', mobilePhone: '',
+      };
+      // Persist a full minimal profile so ProfilePage & dashboard stay in sync
+      const fullInitial = {
+        coverImage:'', avatarImage:'', idPhotoImage:'',
+        city:'', state:'',
+        positionTitle:'', rank:'', department:'', hireDate:'',
+        employeeId:'', employmentType:'', workLocation:'', reportsTo:'',
+        directReports:[],
+        firstName: parts[0] || '', lastName: parts.slice(1).join(' ') || '', middleName:'',
+        dateOfBirth:'', gender:'', pronouns:'', nationality:'', maritalStatus:'',
+        personalEmail:'', workPhone:'', mobilePhone:'', officeLocation:'', linkedinUrl:'',
+        workAddress:{ street:'', city:'', state:'', zip:'' },
+        emergencyContacts:[],
+      };
+      localStorage.setItem(key, JSON.stringify(fullInitial));
+      setProfile(initial);
     }).catch(() => {});
   }, []);
 

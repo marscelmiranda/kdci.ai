@@ -113,8 +113,20 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
   useEffect(() => {
     getMe().then(u => {
       setUser({ email: u.email, name: u.name, role: u.role });
-      const stored = localStorage.getItem(`userProfile_${u.email}`);
-      if (stored) { try { setProfile(JSON.parse(stored)); } catch {} }
+      const key = `userProfile_${u.email}`;
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        try { setProfile(JSON.parse(stored)); return; } catch {}
+      }
+      // First visit — seed with user's real name from auth and auto-save
+      const parts = (u.name || '').trim().split(/\s+/);
+      const initial: ProfileData = {
+        ...SEED,
+        firstName: parts[0] || '',
+        lastName:  parts.slice(1).join(' ') || '',
+      };
+      setProfile(initial);
+      localStorage.setItem(key, JSON.stringify(initial));
     }).catch(() => {});
   }, []);
 
