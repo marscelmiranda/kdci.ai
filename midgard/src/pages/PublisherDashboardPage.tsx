@@ -4,8 +4,9 @@ import { Logo } from '../components/Logo';
 import {
   Briefcase, FileText, BookOpen,
   Image as ImageIcon, Bell, Search, LogOut,
-  ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2
+  ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2, MapPin, Building2
 } from 'lucide-react';
+import { getMe } from '../lib/api';
 
 interface DashboardCardProps {
   title: string;
@@ -38,11 +39,52 @@ const DashboardCard = ({ title, description, icon, actionText, color, onClick }:
   </div>
 );
 
+interface SidebarProfile {
+  avatarImage: string;
+  firstName: string;
+  lastName: string;
+  positionTitle: string;
+  rank: string;
+  department: string;
+  city: string;
+  state: string;
+  workPhone: string;
+  mobilePhone: string;
+}
+
 export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName]   = useState('');
+  const [profile, setProfile]     = useState<SidebarProfile | null>(null);
+
   useEffect(() => {
     document.body.style.backgroundColor = '#0a0a0a';
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
+
+  useEffect(() => {
+    getMe().then(u => {
+      setUserEmail(u.email);
+      setUserName(u.name || '');
+      const stored = localStorage.getItem(`userProfile_${u.email}`);
+      if (stored) {
+        try { setProfile(JSON.parse(stored)); } catch {}
+      }
+    }).catch(() => {});
+  }, []);
+
+  const displayName = profile
+    ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') || userName
+    : userName;
+
+  const displayTitle = profile?.positionTitle || '';
+  const displayPhone = profile?.workPhone || profile?.mobilePhone || '';
+  const displayAvatar = profile?.avatarImage || '';
+  const displayLocation = profile ? [profile.city, profile.state].filter(Boolean).join(', ') : '';
+  const displayDept = profile?.department || '';
+  const initials = displayName
+    ? displayName.split(' ').map((p: string) => p[0]).join('').slice(0, 2).toUpperCase()
+    : (userEmail[0] || '?').toUpperCase();
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
@@ -55,39 +97,77 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
         </div>
 
-        <div className="flex-grow px-8 py-6 flex flex-col gap-6 overflow-y-auto">
+        <div className="flex-grow px-8 py-6 flex flex-col gap-5 overflow-y-auto">
+          {/* Avatar */}
           <div className="flex flex-col items-center flex-shrink-0">
-            <div className="w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-white/10 mb-4 overflow-hidden relative group">
-              <img
-                src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1777595870/468598394_10162265374063293_2142667036521414352_n_krsqc5.jpg"
-                alt="Profile"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
+            <div
+              onClick={() => setView('profile')}
+              className="w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-white/10 mb-4 overflow-hidden relative group cursor-pointer"
+            >
+              {displayAvatar ? (
+                <img src={displayAvatar} alt="Profile" className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-2xl font-black text-[#E61739] select-none">
+                  {initials}
+                </div>
+              )}
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                 <Edit3 size={16} className="text-white" />
               </div>
             </div>
-            <h2 className="text-lg font-bold text-white text-center">Marscel Cruz</h2>
-            <p className="text-[#E61739] text-xs font-black uppercase tracking-widest mt-1">Operations Manager</p>
+
+            <h2 className="text-lg font-bold text-white text-center leading-tight">
+              {displayName || <span className="text-white/30 italic text-base">No name set</span>}
+            </h2>
+
+            {displayTitle ? (
+              <p className="text-[#E61739] text-xs font-black uppercase tracking-widest mt-1 text-center">
+                {displayTitle}
+              </p>
+            ) : (
+              <p className="text-white/20 text-xs italic mt-1">No title set</p>
+            )}
+
+            {(displayDept || displayLocation) && (
+              <div className="mt-2 flex flex-col items-center gap-1">
+                {displayDept && (
+                  <span className="flex items-center gap-1 text-white/40 text-[11px]">
+                    <Building2 size={10} />{displayDept}
+                  </span>
+                )}
+                {displayLocation && (
+                  <span className="flex items-center gap-1 text-white/30 text-[11px]">
+                    <MapPin size={10} />{displayLocation}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="space-y-4">
+          {/* Contact info */}
+          <div className="space-y-3 border-t border-white/5 pt-4">
             <div>
-              <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-1.5">
-                <Mail size={12} /> Email Address
+              <div className="flex items-center gap-1.5 text-white/30 text-[10px] font-black uppercase tracking-widest mb-1">
+                <Mail size={10} /> Work Email
               </div>
-              <div className="text-sm font-medium text-white/80">marscel@kdci.co</div>
+              <div className="text-xs font-medium text-white/70 truncate">{userEmail || '—'}</div>
             </div>
-            <div>
-              <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-1.5">
-                <Phone size={12} /> Contact Number
+            {displayPhone && (
+              <div>
+                <div className="flex items-center gap-1.5 text-white/30 text-[10px] font-black uppercase tracking-widest mb-1">
+                  <Phone size={10} /> Phone
+                </div>
+                <div className="text-xs font-medium text-white/70">{displayPhone}</div>
               </div>
-              <div className="text-sm font-medium text-white/80">+1 (555) 123-4567</div>
-            </div>
+            )}
           </div>
 
-          <div className="mt-2 space-y-2">
-            <button onClick={() => setView('profile')} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
+          {/* Actions */}
+          <div className="space-y-2">
+            <button
+              onClick={() => setView('profile')}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all"
+            >
               <Edit3 size={14} /> Edit Profile
             </button>
             <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
@@ -109,7 +189,9 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
       <main className="flex-grow p-8 md:p-12 overflow-y-auto">
         <header className="flex justify-between items-center mb-12">
           <div>
-            <h1 className="text-3xl font-heading font-bold mb-2">Welcome back, Editor.</h1>
+            <h1 className="text-3xl font-heading font-bold mb-2">
+              Welcome back, {displayName.split(' ')[0] || 'Editor'}.
+            </h1>
             <p className="text-white/40 text-sm font-medium">Manage your content pipeline and talent acquisition.</p>
           </div>
           <div className="flex items-center gap-6">
