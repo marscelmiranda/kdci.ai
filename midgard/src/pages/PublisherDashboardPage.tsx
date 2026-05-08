@@ -4,7 +4,7 @@ import { Logo } from '../components/Logo';
 import {
   Briefcase, FileText, BookOpen,
   Image as ImageIcon, Bell, Search, LogOut,
-  ChevronRight, Mail, Phone, Key, Edit3
+  ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2
 } from 'lucide-react';
 
 interface DashboardCardProps {
@@ -87,7 +87,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
 
           <div className="mt-2 space-y-2">
-            <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
+            <button onClick={() => setView('profile')} className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
               <Edit3 size={14} /> Edit Profile
             </button>
             <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
@@ -159,6 +159,22 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             actionText="Manage Portfolio"
             color="bg-orange-600"
             onClick={() => setView('portfolio-ops')}
+          />
+          <DashboardCard
+            title="User Approvals"
+            description="Review and approve pending team member accounts, manage access and unlock locked accounts."
+            icon={<Users size={24} />}
+            actionText="Manage Users"
+            color="bg-red-600"
+            onClick={() => setView('admin-approvals')}
+          />
+          <DashboardCard
+            title="My Profile"
+            description="View and update your employee profile, work information, contact details, and org chart position."
+            icon={<UserCircle2 size={24} />}
+            actionText="View Profile"
+            color="bg-indigo-600"
+            onClick={() => setView('profile')}
           />
         </div>
       </main>

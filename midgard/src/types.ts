@@ -7,4 +7,5 @@ export type ViewType =
   | 'career-ops'
   | 'resources-ops'
   | 'portfolio-ops'
-  | 'admin-approvals';
+  | 'admin-approvals'
+  | 'profile';

@@ -1,0 +1,125 @@
+Build a LinkedIn-style Employee Profile & Account Management page in React
+(single file). This page is part of an existing authentication system built with
+React and localStorage. Match the existing app's style
+The page has two modes:
+VIEW MODE: How others (or the user) see the profile — polished, card-based layout
+EDIT MODE: Inline editing triggered by a pencil/edit icon on each section
+PAGE LAYOUT (LinkedIn-style, top to bottom)
+SECTION 1 — PROFILE HERO CARD (top banner)
+Replicate LinkedIn's cover photo + avatar layout:
+A wide banner/cover image area at the top (solid gradient or uploadable image)
+Profile photo avatar overlapping the bottom of the banner (large circle, ~120px)
+Upload button on hover (camera icon overlay)
+Stored as base64 in localStorage
+Below avatar:
+Full Name (large, bold)
+Position Title (subtitle, muted color)
+Rank / Badge (styled pill/chip, e.g. "Senior" or "Level 3")
+Department (if set)
+Location (city, state — editable)
+Hire Date | Tenure auto-calculated as:
+"X years, Y months" from hire date to today
+Display as: "📅 Hired March 12, 2019 · 6 years, 2 months tenure"
+[Edit Profile] button (top-right of card)
+SECTION 2 — WORK INFORMATION CARD
+Card with pencil edit icon (top-right):
+Fields:
+Position Title
+Rank (dropdown: Junior, Mid-Level, Senior, Lead, Manager, Director, VP, C-Suite)
+Department
+Hire Date (date picker)
+Tenure (auto-calculated, read-only display)
+Employee ID (read-only)
+Employment Type (Full-Time, Part-Time, Contractor, Intern)
+Work Location (On-site, Remote, Hybrid)
+Manager / Reports To (text input or dropdown of other users)
+In edit mode: each field becomes an input. Save/Cancel buttons appear at bottom.
+SECTION 3 — ORG CHART CARD (Company Structure)
+Card showing the person's position in the org hierarchy:
+Layout (vertical tree structure):
+Manager above (if set) — show avatar + name + title in a box
+Current User in the center (highlighted box)
+Direct Reports below — show up to 6 employees in a row of cards
+Each card: avatar circle, name, title
+An [+ Add Report] button to add employee names
+Editable fields:
+Reports To (manager name)
+Direct Reports (add/remove names, titles)
+Use SVG lines or CSS borders to draw the connecting lines between levels.
+SECTION 4 — PERSONAL INFORMATION CARD
+Card with pencil edit icon:
+Fields:
+First Name, Last Name, Middle Name
+Date of Birth (stored, shown as age: "32 years old" in view mode)
+Gender (optional, dropdown: Male, Female, Non-binary, Prefer not to say)
+Pronouns (optional text)
+Nationality
+Marital Status (optional dropdown)
+SECTION 5 — CONTACT INFORMATION CARD
+Card with pencil edit icon:
+Fields:
+Work Email (read-only, from account)
+Personal Email
+Work Phone
+Mobile Phone
+Office Location / Room Number
+LinkedIn URL
+Work Address (street, city, state, zip)
+SECTION 6 — EMERGENCY CONTACT CARD
+Card with pencil edit icon:
+Fields (can add up to 2 emergency contacts):
+Contact Full Name
+Relationship (dropdown: Spouse, Parent, Sibling, Child, Friend, Other)
+Primary Phone
+Secondary Phone
+Email Address
+[+ Add Second Contact] button
+SECTION 7 — PROFILE PHOTO & DOCUMENTS
+(at bottom, smaller section)
+Profile photo (same as hero — shows current photo with re-upload option)
+Option to upload an ID photo or badge photo (separate from profile)
+All images stored as base64 in localStorage
+INTERACTION & BEHAVIOR RULES
+Edit Mode per Section: Each card has its own edit state. Clicking the pencil
+icon on a card makes only that card's fields editable. Other cards stay in view mode.
+Save to localStorage: On clicking Save in any section, persist the full profile
+object to localStorage under the key userProfile_[username].
+Tenure Calculation: Auto-calculate on page load using:
+const tenure = (today - hireDate) in years/months
+Display as: "6 yrs 2 mos" in compact form, full in expanded.
+Org Chart: If no direct reports are added, show an empty state:
+"No direct reports added yet" with the [+ Add Report] button.
+Profile Completeness Bar: Below the hero section, show a horizontal progress
+bar indicating what % of the profile is complete (based on filled fields).
+Label: "Profile {X}% complete — Add your contact info to reach 100%"
+Validation:
+Hire date cannot be in the future
+Phone numbers: format as (###) ###-#### on blur
+Email fields: validate format
+DOB: must result in age ≥ 16
+Unsaved Changes Warning: If user navigates away (clicks a nav link) while in
+edit mode, show a confirmation: "You have unsaved changes. Leave anyway?"
+SEED DATA
+Pre-populate the profile with this demo data on first load (if localStorage is empty):
+Name: Alex Morgan
+Title: Senior Systems Analyst
+Rank: Senior
+Hire Date: 2019-03-12
+Department: Information Technology
+Manager: Jordan Lee
+Direct Reports: Casey Thompson (IT Specialist), Devon Reyes (Systems Admin)
+Emergency Contact: Sam Morgan, Spouse, (555) 234-5678
+DESIGN SPECIFICS
+White cards with subtle box-shadow on light gray (#F4F6F8) background
+OR dark navy cards on deep background — match existing app theme
+Section headers: uppercase tracking-widest label style (like LinkedIn section titles)
+Edit pencil icon: top-right of every card, reveals on hover
+Smooth expand/collapse animation when switching edit/view mode
+Use DM Sans or IBM Plex Sans (Google Fonts)
+Electric blue (#0A66C2 LinkedIn-style or your existing brand blue) for:
+Active elements, save buttons, links, rank badges
+Mobile responsive: stack cards vertically on small screens
+Org chart boxes use card styling with subtle border
+INTEGRATION NOTES
+This page should be reachable from the existing app as screen: "profile
+Note that this will only be accessible to users approved through Midgard.

@@ -5,7 +5,7 @@ import {
   LayoutGrid, Briefcase, FileText, BookOpen, Image as ImageIcon,
   LogOut, Settings, ChevronLeft, Check, X, Loader2, AlertCircle,
   Users, Clock, CheckCircle2, XCircle, RefreshCw, Lock, Unlock,
-  ShieldCheck, ShieldAlert, User, Mail, Calendar
+  ShieldCheck, ShieldAlert, User, Mail, Calendar, UserCircle2
 } from 'lucide-react';
 import { getAdminUsers, approveUser, denyUser, unlockUser } from '../lib/api';
 
@@ -40,6 +40,7 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
     else if (id === 'resources') setView('resources-ops');
     else if (id === 'portfolio') setView('portfolio-ops');
     else if (id === 'admin') setView('admin-approvals');
+    else if (id === 'profile') setView('profile');
   };
 
   const load = () => {
@@ -107,12 +108,13 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
         </div>
         <nav className="flex-grow px-4 py-6 space-y-1">
           {[
-            { id: 'overview',  label: 'Overview',           icon: LayoutGrid },
-            { id: 'careers',   label: 'Career Ops',         icon: Briefcase  },
-            { id: 'blog',      label: 'Blogs & Insights',   icon: FileText   },
-            { id: 'resources', label: 'Resources',          icon: BookOpen   },
-            { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon  },
-            { id: 'admin',     label: 'User Approvals',     icon: Users      },
+            { id: 'overview',  label: 'Overview',           icon: LayoutGrid  },
+            { id: 'careers',   label: 'Career Ops',         icon: Briefcase   },
+            { id: 'blog',      label: 'Blogs & Insights',   icon: FileText    },
+            { id: 'resources', label: 'Resources',          icon: BookOpen    },
+            { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon   },
+            { id: 'admin',     label: 'User Approvals',     icon: Users       },
+            { id: 'profile',   label: 'My Profile',         icon: UserCircle2 },
           ].map(item => (
             <button key={item.id} onClick={() => handleNavClick(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${item.id === 'admin' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white hover:bg-white/5'}`}>

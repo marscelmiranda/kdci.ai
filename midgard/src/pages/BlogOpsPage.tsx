@@ -6,7 +6,7 @@ import {
   Image as ImageIcon, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Save, X, User, Check,
   ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2,
-  Quote, AppWindow, Minus, Activity, Loader2, AlertCircle
+  Quote, AppWindow, Minus, Activity, Loader2, AlertCircle, Users, UserCircle2
 } from 'lucide-react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
 
@@ -94,6 +94,8 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     else if (id === 'blog') setView('blog-ops');
     else if (id === 'resources') setView('resources-ops');
     else if (id === 'portfolio') setView('portfolio-ops');
+    else if (id === 'admin') setView('admin-approvals');
+    else if (id === 'profile') setView('profile');
   };
 
   const handleCreateNew = () => {
@@ -246,11 +248,13 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         </div>
         <nav className="flex-grow px-4 py-6 space-y-1">
           {[
-            { id: 'overview', label: 'Overview', icon: LayoutGrid },
-            { id: 'careers', label: 'Career Ops', icon: Briefcase },
-            { id: 'blog', label: 'Blogs & Insights', icon: FileText },
-            { id: 'resources', label: 'Resources', icon: BookOpen },
-            { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon },
+            { id: 'overview',  label: 'Overview',           icon: LayoutGrid  },
+            { id: 'careers',   label: 'Career Ops',         icon: Briefcase   },
+            { id: 'blog',      label: 'Blogs & Insights',   icon: FileText    },
+            { id: 'resources', label: 'Resources',          icon: BookOpen    },
+            { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon   },
+            { id: 'admin',     label: 'User Approvals',     icon: Users       },
+            { id: 'profile',   label: 'My Profile',         icon: UserCircle2 },
           ].map((item) => (
             <button key={item.id} onClick={() => handleNavClick(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${item.id === 'blog' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white hover:bg-white/5'}`}>
