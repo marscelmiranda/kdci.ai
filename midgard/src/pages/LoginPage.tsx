@@ -43,7 +43,7 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <div className="flex justify-center mb-6 scale-90">
               <Logo isDarkHero={false} />
             </div>
-            <h1 className="text-2xl font-heading font-bold text-slate-900">Employee Portal</h1>
+            <h1 className="text-2xl font-heading font-bold text-slate-900">Midgard</h1>
             <p className="text-slate-500 text-sm mt-2 font-medium">Secure access for KDCI team members.</p>
           </div>
 
