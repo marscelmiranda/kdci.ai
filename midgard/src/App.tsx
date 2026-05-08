@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from './types';
 import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { PublisherDashboardPage } from './pages/PublisherDashboardPage';
 import { BlogOpsPage } from './pages/BlogOpsPage';
 import { CareerOpsPage } from './pages/CareerOpsPage';
 import { ResourcesOpsPage } from './pages/ResourcesOpsPage';
 import { PortfolioOpsPage } from './pages/PortfolioOpsPage';
+import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { getToken, getMe, clearToken } from './lib/api';
+
+const PUBLIC_VIEWS: ViewType[] = ['login', 'register', 'forgot-password'];
 
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType | null>(null);
 
   useEffect(() => {
     const token = getToken();
-    if (!token) {
-      setActiveView('login');
-      return;
-    }
+    if (!token) { setActiveView('login'); return; }
     getMe()
       .then(() => setActiveView('dashboard'))
       .catch(() => { clearToken(); setActiveView('login'); });
@@ -28,9 +30,8 @@ const App = () => {
     window.scrollTo(0, 0);
   };
 
-  // Guard: redirect to login if trying to access portal pages without auth
   const guardedSetView = (v: ViewType) => {
-    if (v !== 'login' && !getToken()) { setActiveView('login'); return; }
+    if (!PUBLIC_VIEWS.includes(v) && !getToken()) { setActiveView('login'); return; }
     setView(v);
   };
 
@@ -43,8 +44,9 @@ const App = () => {
   }
 
   if (activeView === 'login') return <LoginPage setView={setView} />;
+  if (activeView === 'register') return <RegisterPage setView={setView} />;
+  if (activeView === 'forgot-password') return <ForgotPasswordPage setView={setView} />;
 
-  // All routes below require a valid token
   if (!getToken()) return <LoginPage setView={setView} />;
 
   if (activeView === 'dashboard') return <PublisherDashboardPage setView={guardedSetView} />;
@@ -52,6 +54,7 @@ const App = () => {
   if (activeView === 'career-ops') return <CareerOpsPage setView={guardedSetView} />;
   if (activeView === 'resources-ops') return <ResourcesOpsPage setView={guardedSetView} />;
   if (activeView === 'portfolio-ops') return <PortfolioOpsPage setView={guardedSetView} />;
+  if (activeView === 'admin-approvals') return <AdminApprovalsPage setView={guardedSetView} />;
 
   return <LoginPage setView={setView} />;
 };

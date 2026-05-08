@@ -30,6 +30,32 @@ export const getMe = () =>
   request<{ id: number; email: string; name: string; role: string }>('/api/auth/me');
 export const logout = () => clearToken();
 
+export const register = (data: {
+  full_name: string; email: string; username: string;
+  password: string; secret_question: string; secret_answer: string;
+}) => request<{ message: string }>('/api/auth/register', { method: 'POST', body: JSON.stringify(data) });
+
+export const forgotPassword = (email: string) =>
+  request<{ message: string; code?: string; secret_question?: string }>(
+    '/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }
+  );
+
+export const verifyCode = (email: string, code: string) =>
+  request<{ valid: boolean }>('/api/auth/verify-code', { method: 'POST', body: JSON.stringify({ email, code }) });
+
+export const verifySecret = (email: string, secret_answer: string) =>
+  request<{ valid: boolean }>('/api/auth/verify-secret', { method: 'POST', body: JSON.stringify({ email, secret_answer }) });
+
+export const resetPassword = (email: string, code: string, new_password: string) =>
+  request<{ message: string }>('/api/auth/reset-password', { method: 'POST', body: JSON.stringify({ email, code, new_password }) });
+
+// ---- Admin ----
+export const getAdminUsers = () => request<any[]>('/api/admin/users');
+export const approveUser = (id: number) => request<any>(`/api/admin/users/${id}/approve`, { method: 'PUT' });
+export const denyUser = (id: number, reason?: string) =>
+  request<any>(`/api/admin/users/${id}/deny`, { method: 'PUT', body: JSON.stringify({ reason }) });
+export const unlockUser = (id: number) => request<any>(`/api/admin/users/${id}/unlock`, { method: 'PUT' });
+
 // ---- Jobs ----
 export const getPublishedJobs  = ()           => request('/api/jobs');
 export const getAllJobs         = ()           => request('/api/jobs/all');

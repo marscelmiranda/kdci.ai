@@ -10,6 +10,36 @@ import bcrypt from 'bcryptjs';
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+// ----- DB migrations -----
+(async () => {
+  const cols = [
+    'ADD COLUMN IF NOT EXISTS username VARCHAR(50)',
+    'ADD COLUMN IF NOT EXISTS full_name VARCHAR(255)',
+    "ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'active'",
+    'ADD COLUMN IF NOT EXISTS failed_attempts INTEGER DEFAULT 0',
+    'ADD COLUMN IF NOT EXISTS locked_at TIMESTAMPTZ',
+    'ADD COLUMN IF NOT EXISTS deny_reason TEXT',
+    'ADD COLUMN IF NOT EXISTS secret_question TEXT',
+    'ADD COLUMN IF NOT EXISTS secret_answer TEXT',
+  ];
+  for (const col of cols) {
+    await pool.query(`ALTER TABLE users ${col}`).catch(() => {});
+  }
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS reset_codes (
+      id SERIAL PRIMARY KEY,
+      email VARCHAR(255) NOT NULL,
+      code VARCHAR(6) NOT NULL,
+      expires_at TIMESTAMPTZ NOT NULL,
+      used BOOLEAN DEFAULT FALSE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `).catch(() => {});
+  // Ensure existing admin account is active
+  await pool.query(`UPDATE users SET status='active', failed_attempts=0 WHERE status IS NULL OR status=''`).catch(() => {});
+})();
+
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000');
 const isDev = process.env.NODE_ENV !== 'production';
@@ -60,11 +90,35 @@ app.post('/api/auth/login', async (req, res) => {
     if (!email || !password) { res.status(400).json({ error: 'Email and password required' }); return; }
     const { rows } = await pool.query('SELECT * FROM users WHERE email = $1', [email.toLowerCase().trim()]);
     const user = rows[0];
-    if (!user) { res.status(401).json({ error: 'Invalid email or password' }); return; }
+    if (!user) { res.status(401).json({ error: 'Invalid email or password.' }); return; }
+    // Check locked (5+ failed attempts)
+    if ((user.failed_attempts ?? 0) >= 5) {
+      res.status(403).json({ error: 'Account locked due to too many failed attempts. Contact your administrator.' }); return;
+    }
+    // Check account status
+    if (user.status === 'pending') {
+      res.status(403).json({ error: 'Your account is pending administrator approval.' }); return;
+    }
+    if (user.status === 'denied') {
+      const reason = user.deny_reason ? ` Reason: ${user.deny_reason}` : '';
+      res.status(403).json({ error: `Your account request was denied.${reason}` }); return;
+    }
     const valid = await bcrypt.compare(password, user.password_hash);
-    if (!valid) { res.status(401).json({ error: 'Invalid email or password' }); return; }
-    const token = jwt.sign({ id: user.id, email: user.email, name: user.name, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
-    res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+    if (!valid) {
+      const attempts = (user.failed_attempts ?? 0) + 1;
+      await pool.query('UPDATE users SET failed_attempts = $1 WHERE id = $2', [attempts, user.id]);
+      const left = 5 - attempts;
+      if (left <= 0) {
+        res.status(403).json({ error: 'Account locked due to too many failed attempts. Contact your administrator.' });
+      } else {
+        res.status(401).json({ error: `Invalid email or password. ${left} attempt${left === 1 ? '' : 's'} remaining before lockout.` });
+      }
+      return;
+    }
+    await pool.query('UPDATE users SET failed_attempts = 0 WHERE id = $1', [user.id]);
+    const displayName = user.full_name || user.name;
+    const token = jwt.sign({ id: user.id, email: user.email, name: displayName, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
+    res.json({ token, user: { id: user.id, email: user.email, name: displayName, role: user.role } });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
@@ -75,6 +129,127 @@ app.get('/api/auth/me', (req, res) => {
     const payload = jwt.verify(authHeader.slice(7), JWT_SECRET) as any;
     res.json({ id: payload.id, email: payload.email, name: payload.name, role: payload.role });
   } catch { res.status(401).json({ error: 'Invalid or expired token' }); }
+});
+
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { full_name, email, username, password, secret_question, secret_answer } = req.body;
+    if (!full_name || !email || !username || !password || !secret_question || !secret_answer) {
+      res.status(400).json({ error: 'All fields are required.' }); return;
+    }
+    const { rows: existing } = await pool.query(
+      'SELECT id FROM users WHERE email = $1 OR username = $2',
+      [email.toLowerCase().trim(), username.toLowerCase().trim()]
+    );
+    if (existing.length > 0) { res.status(409).json({ error: 'An account with this email or username already exists.' }); return; }
+    const hash = await bcrypt.hash(password, 12);
+    const answerHash = await bcrypt.hash(secret_answer.toLowerCase().trim(), 10);
+    await pool.query(
+      `INSERT INTO users (email, password_hash, name, full_name, username, role, status, secret_question, secret_answer, failed_attempts, created_at)
+       VALUES ($1, $2, $3, $3, $4, 'user', 'pending', $5, $6, 0, NOW())`,
+      [email.toLowerCase().trim(), hash, full_name, username.toLowerCase().trim(), secret_question, answerHash]
+    );
+    res.status(201).json({ message: 'Account created. Pending administrator approval.' });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/auth/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) { res.status(400).json({ error: 'Email required.' }); return; }
+    const { rows } = await pool.query(
+      "SELECT id, secret_question FROM users WHERE email = $1 AND status = 'active'",
+      [email.toLowerCase().trim()]
+    );
+    if (!rows[0]) { res.json({ message: 'If that email is registered, a code has been sent.' }); return; }
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+    const expires = new Date(Date.now() + 15 * 60 * 1000);
+    await pool.query('DELETE FROM reset_codes WHERE email = $1', [email.toLowerCase().trim()]);
+    await pool.query('INSERT INTO reset_codes (email, code, expires_at) VALUES ($1, $2, $3)', [email.toLowerCase().trim(), code, expires]);
+    res.json({ message: 'Code generated.', code, secret_question: rows[0].secret_question });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/auth/verify-code', async (req, res) => {
+  try {
+    const { email, code } = req.body;
+    const { rows } = await pool.query(
+      'SELECT id FROM reset_codes WHERE email = $1 AND code = $2 AND used = FALSE AND expires_at > NOW()',
+      [email.toLowerCase().trim(), code]
+    );
+    if (!rows[0]) { res.status(400).json({ error: 'Invalid or expired code.' }); return; }
+    res.json({ valid: true });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/auth/verify-secret', async (req, res) => {
+  try {
+    const { email, secret_answer } = req.body;
+    const { rows } = await pool.query('SELECT secret_answer FROM users WHERE email = $1', [email.toLowerCase().trim()]);
+    if (!rows[0]) { res.status(400).json({ error: 'Invalid request.' }); return; }
+    const valid = await bcrypt.compare(secret_answer.toLowerCase().trim(), rows[0].secret_answer);
+    if (!valid) { res.status(400).json({ error: 'Incorrect answer to security question.' }); return; }
+    res.json({ valid: true });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/auth/reset-password', async (req, res) => {
+  try {
+    const { email, code, new_password } = req.body;
+    const { rows } = await pool.query(
+      'SELECT id FROM reset_codes WHERE email = $1 AND code = $2 AND used = FALSE AND expires_at > NOW()',
+      [email.toLowerCase().trim(), code]
+    );
+    if (!rows[0]) { res.status(400).json({ error: 'Invalid or expired reset session.' }); return; }
+    const hash = await bcrypt.hash(new_password, 12);
+    await pool.query('UPDATE users SET password_hash = $1, failed_attempts = 0 WHERE email = $2', [hash, email.toLowerCase().trim()]);
+    await pool.query('UPDATE reset_codes SET used = TRUE WHERE email = $1', [email.toLowerCase().trim()]);
+    res.json({ message: 'Password reset successfully.' });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+// ----- ADMIN ROUTES -----
+app.get('/api/admin/users', requireAuth, async (_req, res) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT id, full_name, name, email, username, role, status, deny_reason, failed_attempts, created_at FROM users ORDER BY created_at DESC'
+    );
+    res.json(rows);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/admin/users/:id/approve', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      "UPDATE users SET status = 'active', failed_attempts = 0 WHERE id = $1 RETURNING id, email, status",
+      [req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'User not found.' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/admin/users/:id/deny', requireAuth, async (req, res) => {
+  try {
+    const { reason } = req.body;
+    const { rows } = await pool.query(
+      "UPDATE users SET status = 'denied', deny_reason = $1 WHERE id = $2 RETURNING id, email, status",
+      [reason || null, req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'User not found.' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/admin/users/:id/unlock', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      'UPDATE users SET failed_attempts = 0 WHERE id = $1 RETURNING id, email, failed_attempts',
+      [req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'User not found.' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 // ----- HEALTH -----
