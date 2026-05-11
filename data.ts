@@ -148,28 +148,28 @@ export const RESOURCES = [
 
 export const TOP_SERVICES = [
   { 
-    id: 'customer-support',
-    name: 'Customer Experience Operations', 
-    tag: '24/7 Global Ops',
-    icon: Activity, 
-    desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
-    benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
-  },
-  { 
-    id: 'creative-prod',
-    name: 'Graphic Design Studio', 
-    tag: 'Brand Production',
-    icon: Sparkles, 
-    desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
-    benefits: ['48h Turnaround', 'Enterprise Scale', 'Infinite Versioning']
-  },
-  { 
     id: 'staff-aug',
     name: 'Philippine Offshore Staffing', 
     tag: 'On-Demand Talent',
     icon: Rocket, 
     desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',
     benefits: ['Experts on Demand', 'Zero Hiring Risk', 'Scale Instantly']
+  },
+  {
+    id: 'ai-consulting',
+    name: 'AI Consulting & Implementation',
+    tag: 'AI Strategy & Build',
+    icon: Cpu,
+    desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
+    benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
+  },
+  { 
+    id: 'customer-support',
+    name: 'Customer Experience Operations', 
+    tag: '24/7 Global Ops',
+    icon: Activity, 
+    desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
+    benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
   { 
     id: 'agentic-recruitment',
@@ -179,13 +179,13 @@ export const TOP_SERVICES = [
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
-  {
-    id: 'ai-consulting',
-    name: 'AI Consulting',
-    tag: 'AI Strategy & Build',
-    icon: Cpu,
-    desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
-    benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
+  { 
+    id: 'creative-prod',
+    name: 'Graphic Design Studio', 
+    tag: 'Brand Production',
+    icon: Sparkles, 
+    desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
+    benefits: ['48h Turnaround', 'Enterprise Scale', 'Infinite Versioning']
   },
 ];
 
