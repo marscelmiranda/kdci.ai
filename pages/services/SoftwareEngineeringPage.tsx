@@ -77,11 +77,11 @@ export const SoftwareEngineeringPage = ({ setView }: { setView: (v: ViewType) =>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { icon: GlobeIcon, title: "Web & SaaS Development", desc: "Building scalable, high-conversion multi-tenant platforms with modern architecture." },
+              { icon: Rocket, title: "Rapid Team Scaling", desc: "Deploy specialized engineering pods in weeks to hit your product roadmap milestones." },
+              { icon: ZapIcon, title: "AI-Augmented Agile", desc: "Sprint execution accelerated by AI-powered coding pods and automated task management." },
               { icon: LayersIcon, title: "Modern Tech Stacks", desc: "Expertise in React, Vue, and Angular frontends paired with robust Node.js or Laravel backends." },
               { icon: ApiIcon, title: "API & Integrations", desc: "Seamless systems interoperability via custom API design and industrial-grade integrations." },
-              { icon: ZapIcon, title: "AI-Augmented Agile", desc: "Sprint execution accelerated by AI-powered coding pods and automated task management." },
-              { icon: PipelineIcon, title: "CI/CD & Automation", desc: "Zero-downtime deployment pipelines with integrated QA and regression test automation." },
-              { icon: Rocket, title: "Rapid Team Scaling", desc: "Deploy specialized engineering pods in weeks to hit your product roadmap milestones." }
+              { icon: PipelineIcon, title: "CI/CD & Automation", desc: "Zero-downtime deployment pipelines with integrated QA and regression test automation." }
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={28} /></div>
