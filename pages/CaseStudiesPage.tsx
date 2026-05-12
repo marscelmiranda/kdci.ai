@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X } from 'lucide-react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X, ChevronDown } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -125,7 +125,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
     <div className="min-h-screen bg-white">
 
       {/* ── COMPACT HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-0">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-16">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
@@ -133,7 +133,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
           <div className="blob blob-purple opacity-30" />
           <div className="blob blob-magenta opacity-20" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 pb-16">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs setView={setView} currentName="Case Studies" />
           <div className="mt-6">
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
@@ -145,73 +145,78 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
             </p>
           </div>
         </div>
-
-        {/* ── FILTER BAR ── */}
-        <div ref={filterRef} className="relative z-30 border-t border-white/15">
-          {/* Two-column trigger row */}
-          <div className="flex divide-x divide-white/15">
-            {/* Industry trigger */}
-            <button
-              onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
-              className={`flex-1 flex items-center gap-3 px-8 py-5 text-left transition-colors ${
-                openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'
-              }`}
-            >
-              {industryActive
-                ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); }} />
-                : <Plus size={16} className="text-white/60 shrink-0" />
-              }
-              <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/60'}`}>
-                {industryLabel}
-              </span>
-            </button>
-
-            {/* Service trigger */}
-            <button
-              onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
-              className={`flex-1 flex items-center gap-3 px-8 py-5 text-left transition-colors ${
-                openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'
-              }`}
-            >
-              {serviceActive
-                ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); }} />
-                : <Plus size={16} className="text-white/60 shrink-0" />
-              }
-              <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/60'}`}>
-                {serviceLabel}
-              </span>
-            </button>
-          </div>
-
-          {/* Dropdown panel */}
-          {openPanel && (
-            <div className="absolute left-0 right-0 bg-[#111] border-t border-white/10 shadow-2xl px-8 py-6 z-40">
-              <div className="flex flex-wrap gap-3">
-                {(openPanel === 'industry' ? INDUSTRIES : SERVICES).map(opt => {
-                  const isActive = openPanel === 'industry' ? activeIndustry === opt : activeService === opt;
-                  return (
-                    <button
-                      key={opt}
-                      onClick={() => {
-                        if (openPanel === 'industry') setActiveIndustry(opt);
-                        else setActiveService(opt);
-                        setOpenPanel(null);
-                      }}
-                      className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all ${
-                        isActive
-                          ? 'bg-white text-black border-white'
-                          : 'bg-transparent text-white/60 border-white/20 hover:border-white/60 hover:text-white'
-                      }`}
-                    >
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
       </section>
+
+      {/* ── FILTER BAR ── outside overflow-hidden so dropdown isn't clipped */}
+      <div ref={filterRef} className="relative z-30 bg-[#0a0a0a] border-b border-white/10">
+        {/* Two-column trigger row */}
+        <div className="flex divide-x divide-white/10">
+          {/* Industry trigger */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${
+              openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'
+            }`}
+          >
+            {industryActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-white/50 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/50'}`}>
+              {industryLabel}
+            </span>
+            {!industryActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+          </button>
+
+          {/* Service trigger */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${
+              openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'
+            }`}
+          >
+            {serviceActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-white/50 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/50'}`}>
+              {serviceLabel}
+            </span>
+            {!serviceActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+          </button>
+        </div>
+
+        {/* Dropdown panel */}
+        {openPanel && (
+          <div className="absolute left-0 right-0 bg-[#111] border-t border-white/10 shadow-2xl px-8 py-6 z-50">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4">
+              {openPanel === 'industry' ? 'Filter by Industry' : 'Filter by Service'}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {(openPanel === 'industry' ? INDUSTRIES : SERVICES).map(opt => {
+                const isActive = openPanel === 'industry' ? activeIndustry === opt : activeService === opt;
+                return (
+                  <button
+                    key={opt}
+                    onClick={() => {
+                      if (openPanel === 'industry') setActiveIndustry(opt);
+                      else setActiveService(opt);
+                      setOpenPanel(null);
+                    }}
+                    className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${
+                      isActive
+                        ? 'bg-[#E61739] text-white border-[#E61739]'
+                        : 'bg-transparent text-white/60 border-white/20 hover:border-white/60 hover:text-white'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* ── CARDS GRID ── */}
       <section className="py-14 bg-[#F5F5F7]">
