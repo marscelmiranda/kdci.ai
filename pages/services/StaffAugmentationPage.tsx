@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign, Shield } from 'lucide-react';
+import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign, Shield, X } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
@@ -48,6 +48,12 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const [showSticky, setShowSticky] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalForm, setModalForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
+  const [modalSubmitted, setModalSubmitted] = useState(false);
+  const handleModalForm = (e: React.FormEvent) => { e.preventDefault(); setModalSubmitted(true); };
+  const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
+  const lightInp = "w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm";
 
   // SEO: update document head when this page is active
   useEffect(() => {
@@ -132,7 +138,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <p className="max-w-xl text-xl text-white/60 font-medium leading-relaxed mb-12">
               Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
             </p>
-            <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group">
+            <button onClick={() => setShowModal(true)} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group">
               Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -937,6 +943,108 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
         </button>
       </div>
+
+      {/* Consultation Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center p-4"
+          style={{ animation: 'fadeInUp 0.25s ease both' }}
+          onKeyDown={e => e.key === 'Escape' && closeModal()}
+        >
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
+          <div className="relative z-10 w-full max-w-2xl bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-2xl" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-slate-100">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">
+                  <Star size={10} /> Book a Consultation
+                </div>
+                <h2 className="text-2xl font-black text-slate-900 leading-tight">Tell us about your team needs.</h2>
+                <p className="text-slate-400 text-sm font-medium mt-1">We'll have a shortlist ready in 14 days.</p>
+              </div>
+              <button onClick={closeModal} className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 transition-all shrink-0 ml-4">
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="px-8 py-8 bg-slate-50/60">
+              {modalSubmitted ? (
+                <div className="flex flex-col items-center text-center gap-5 py-10">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                    <CheckCircle2 size={30} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900">You're on our radar!</h3>
+                  <p className="text-slate-500 text-sm font-medium max-w-xs" style={{ textWrap: 'balance' }}>
+                    Our team leads will review your brief and reach out within 24 hours.
+                  </p>
+                  <button onClick={closeModal} className="mt-2 px-8 py-3 bg-slate-100 rounded-2xl text-slate-700 text-sm font-bold hover:bg-slate-200 transition-all">
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleModalForm} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={lightInp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={lightInp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={lightInp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={lightInp} placeholder="+1 555 000 0000" value={modalForm.phone} onChange={e => setModalForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Role(s) You're Hiring For</label>
+                    <input required className={lightInp} placeholder="e.g. Customer Support Lead, Full-Stack Developer" value={modalForm.role} onChange={e => setModalForm(f => ({ ...f, role: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={lightInp + " resize-none"} placeholder="Timeline, budget, team size, timezone requirements..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
+                      Cancel
+                    </button>
+                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group">
+                      Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                    </button>
+                  </div>
+                  <p className="text-slate-400 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
+            </div>
+
+            {/* Trust strip */}
+            {!modalSubmitted && (
+              <div className="px-8 pb-6 grid grid-cols-3 gap-4 border-t border-slate-100 pt-5 bg-slate-50">
+                {[
+                  { val: '500+', label: 'Clients Globally' },
+                  { val: '14–30 Days', label: 'Time to First Hire' },
+                  { val: '95%', label: 'Client Retention' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-lg font-black text-slate-900">{s.val}</div>
+                    <div className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
