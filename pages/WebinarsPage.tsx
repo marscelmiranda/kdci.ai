@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, X, Plus, ChevronDown, Video, MonitorPlay, Mic2, Users, Globe, BrainCircuit, BarChart3, ShieldCheck, Layers, PlayCircle } from 'lucide-react';
+import { ArrowRight, X, Plus, ChevronDown, Video, MonitorPlay, Mic2, Users, Globe, BrainCircuit, BarChart3, ShieldCheck, Layers, PlayCircle, Play } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -148,8 +148,8 @@ export const WebinarsPage = ({ setView }: { setView: (v: ViewType) => void }) =>
                     </div>
                     <div className="p-8 flex flex-col flex-1">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
-                        <Icon size={22} />
+                      <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform shrink-0">
+                        <Play size={20} fill="white" />
                       </div>
                       <div>
                         <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{webinar.industry}</div>
