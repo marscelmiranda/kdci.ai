@@ -1,12 +1,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X, ChevronDown } from 'lucide-react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X, ChevronDown, Truck, Scale, GraduationCap, Plane, Megaphone, Car } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
 const caseStudies = [
   {
     id: 1,
+    thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800&h=420",
     client: "Fintech Unicorn",
     industry: "Financial Services",
     contentType: "Case Study",
@@ -22,10 +23,11 @@ const caseStudies = [
   },
   {
     id: 2,
+    thumb: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420",
     client: "Global Logistics Leader",
     industry: "Logistics",
-    contentType: "Guide & Playbooks",
-    icon: Globe,
+    contentType: "Case Study",
+    icon: Truck,
     title: "Automating 10,000 Weekly Waybills with AI + Humans",
     desc: "Implementing a human-in-the-loop OCR workflow to digitize shipping documentation with 99.9% accuracy.",
     metrics: [
@@ -37,9 +39,10 @@ const caseStudies = [
   },
   {
     id: 3,
+    thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=420",
     client: "SaaS Enterprise",
     industry: "Technology",
-    contentType: "Webinar",
+    contentType: "Case Study",
     icon: Building2,
     title: "Building a Dedicated Engineering Pod for Legacy Migration",
     desc: "Deploying a 15-person specialized dev team to modernize a monolithic architecture to microservices.",
@@ -52,9 +55,10 @@ const caseStudies = [
   },
   {
     id: 4,
+    thumb: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800&h=420",
     client: "D2C Fashion Brand",
     industry: "Retail",
-    contentType: "Blog",
+    contentType: "Case Study",
     icon: ShoppingCart,
     title: "24/7 Social Commerce Support & Community Management",
     desc: "Turning customer support into a revenue channel through proactive social engagement and chat sales.",
@@ -67,9 +71,10 @@ const caseStudies = [
   },
   {
     id: 5,
+    thumb: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800&h=420",
     client: "PropTech Platform",
     industry: "Real Estate",
-    contentType: "Ebook",
+    contentType: "Case Study",
     icon: Building2,
     title: "Streamlining Tenant Verification & Leasing Admin",
     desc: "Centralizing back-office operations for a property management platform managing 50k+ units.",
@@ -82,6 +87,7 @@ const caseStudies = [
   },
   {
     id: 6,
+    thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=420",
     client: "Healthcare Network",
     industry: "Healthcare",
     contentType: "Case Study",
@@ -94,11 +100,107 @@ const caseStudies = [
       { label: "Compliance", value: "100%" }
     ],
     tags: ["Healthcare", "Voice Support", "HIPAA"]
-  }
+  },
+  {
+    id: 7,
+    thumb: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "Global E-Commerce Brand",
+    industry: "E-Commerce",
+    contentType: "Case Study",
+    icon: Globe,
+    title: "Reducing Cart Abandonment with AI-Powered Live Chat",
+    desc: "A cross-border DTC brand deployed proactive chat agents to recover abandoned carts and drive repeat purchases.",
+    metrics: [
+      { label: "Recovery Rate", value: "38%" },
+      { label: "Revenue Lift", value: "+$4.2M" },
+      { label: "CSAT", value: "4.9/5" }
+    ],
+    tags: ["Customer Support", "Sales", "E-Commerce"]
+  },
+  {
+    id: 8,
+    thumb: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "Insurance Carrier",
+    industry: "Insurance",
+    contentType: "Case Study",
+    icon: Scale,
+    title: "Automating Claims Triage with AI + Offshore Adjusters",
+    desc: "Replacing a slow manual review queue with an intelligent triage layer, cutting claim cycle time in half.",
+    metrics: [
+      { label: "Cycle Time", value: "-52%" },
+      { label: "STP Rate", value: "71%" },
+      { label: "Cost/Claim", value: "-$18" }
+    ],
+    tags: ["Back Office", "AI Ops", "Insurance"]
+  },
+  {
+    id: 9,
+    thumb: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "EdTech Platform",
+    industry: "EdTech",
+    contentType: "Case Study",
+    icon: GraduationCap,
+    title: "Scaling Learner Support Across 14 Time Zones",
+    desc: "Launching a 24/7 learner success team to reduce churn, improve course completion rates, and drive upsells.",
+    metrics: [
+      { label: "Completion Rate", value: "+41%" },
+      { label: "Churn", value: "-28%" },
+      { label: "NPS", value: "72" }
+    ],
+    tags: ["Customer Support", "EdTech", "Retention"]
+  },
+  {
+    id: 10,
+    thumb: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "Online Travel Agency",
+    industry: "Travel",
+    contentType: "Case Study",
+    icon: Plane,
+    title: "24/7 Multilingual Travel Support at Scale",
+    desc: "Deploying a 120-seat multilingual support pod to handle flight disruptions, rebooking, and cancellations globally.",
+    metrics: [
+      { label: "First Contact Res.", value: "89%" },
+      { label: "Avg Handle Time", value: "-35%" },
+      { label: "Languages", value: "12" }
+    ],
+    tags: ["Customer Support", "Travel", "Multilingual"]
+  },
+  {
+    id: 11,
+    thumb: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "Marketing Agency",
+    industry: "Marketing",
+    contentType: "Case Study",
+    icon: Megaphone,
+    title: "Offshore Creative Pod Delivering 10x Content Volume",
+    desc: "A performance marketing agency built a Manila-based creative team producing ad assets, copy, and video at scale.",
+    metrics: [
+      { label: "Output", value: "10x" },
+      { label: "Cost Reduction", value: "58%" },
+      { label: "Launch Speed", value: "3 Weeks" }
+    ],
+    tags: ["Creative", "Social Media", "Marketing"]
+  },
+  {
+    id: 12,
+    thumb: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800&h=420",
+    client: "Automotive OEM",
+    industry: "Automotive",
+    contentType: "Case Study",
+    icon: Car,
+    title: "Dealer Support Network Modernization",
+    desc: "Unifying warranty claims, parts ordering, and dealer onboarding into a single managed operations center.",
+    metrics: [
+      { label: "Dealers Served", value: "4,200+" },
+      { label: "Resolution Time", value: "-44%" },
+      { label: "Cost Savings", value: "$3.1M" }
+    ],
+    tags: ["Back Office", "Customer Support", "Auto"]
+  },
 ];
 
-const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
-const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
+const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'E-Commerce', 'Insurance', 'EdTech', 'Travel', 'Marketing', 'Automotive'];
+const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office', 'AI Ops', 'Creative'];
 const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -250,48 +352,54 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
               {filtered.map((study) => (
                 <div
                   key={study.id}
-                  className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500"
+                  className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500"
                 >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
-                      <study.icon size={22} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{study.industry}</div>
-                      <div className="font-bold text-slate-900 text-sm">{study.client}</div>
-                    </div>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">
-                    {study.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">
-                    {study.desc}
-                  </p>
-
-                  <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
-                    {study.metrics.map((m, i) => (
-                      <div key={i}>
-                        <div className="text-xl font-black text-slate-900">{m.value}</div>
-                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight">{m.label}</div>
+                  {/* Thumbnail */}
+                  <div className="relative h-44 overflow-hidden shrink-0">
+                    <img src={study.thumb} alt={study.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                      <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
+                        <study.icon size={16} />
                       </div>
-                    ))}
+                      <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{study.industry}</span>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {study.tags.map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Content */}
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="font-bold text-slate-500 text-xs mb-3">{study.client}</div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">
+                      {study.title}
+                    </h3>
+                    <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">
+                      {study.desc}
+                    </p>
 
-                  <button
-                    onClick={() => setView('case-study-detail')}
-                    className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"
-                  >
-                    Read Case Study <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                    <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
+                      {study.metrics.map((m, i) => (
+                        <div key={i}>
+                          <div className="text-xl font-black text-slate-900">{m.value}</div>
+                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {study.tags.map((tag, i) => (
+                        <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => setView('case-study-detail')}
+                      className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"
+                    >
+                      Read Case Study <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
