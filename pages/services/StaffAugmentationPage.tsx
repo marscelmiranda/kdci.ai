@@ -250,7 +250,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                   How It Works
                 </div>
-                <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight leading-tight">All your staffing needs entrusted to one RPO services provider.</h2>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight leading-tight">All your offshore staffing needs entrusted to one outsourcing services provider.</h2>
                 <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-xl mb-10">KDCI acts as your employer of record in the Philippines — we hire, manage compliance, and handle HR, while you direct the work and own the output.</p>
               </div>
 
