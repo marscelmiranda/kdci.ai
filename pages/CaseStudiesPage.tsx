@@ -330,7 +330,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
                 src="/kdci-challenge.png"
                 alt="KDCI Solutions Architect"
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ objectPosition: '30% top' }}
+                style={{ objectPosition: '0% top' }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
