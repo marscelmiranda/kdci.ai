@@ -132,7 +132,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <span className="text-shine-white">Hire a Dedicated Offshore Team from the Philippines</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Get full-time, dedicated offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
+                Get full-time offshore professionals based in the Philippines embedded in your team — with AI handling performance, workflows, and reporting for seamless enterprise scale.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
