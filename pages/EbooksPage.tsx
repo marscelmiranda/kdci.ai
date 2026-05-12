@@ -5,15 +5,15 @@ import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
 const ebooks = [
-  { id: 1, title: "State of Global AI Operations 2025", desc: "An in-depth analysis of how 500+ enterprise leaders are integrating agentic AI into their workforce strategy.", industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["AI Ops", "Operations"], icon: Globe, metrics: [{ label: "Pages", value: "45" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 2, title: "The Ultimate Guide to QA Automation", desc: "Moving beyond manual testing: a framework for building self-healing regression suites with offshore teams.", industry: "Technology", source: "KDCI Engineering", contentType: "Ebook" as const, tags: ["Software Dev", "AI Ops"], icon: Cpu, metrics: [{ label: "Pages", value: "32" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 3, title: "Fintech Compliance: The Offshore Playbook", desc: "Navigating GDPR, SOC-2, and PCI-DSS when working with distributed financial operations teams globally.", industry: "Financial Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], icon: ShieldCheck, metrics: [{ label: "Pages", value: "28" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 4, title: "ROI of Managed Creative Pods", desc: "Calculating the velocity and cost impact of switching from freelancers to dedicated creative units.", industry: "Retail", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Creative", "Staff Aug"], icon: TrendingUp, metrics: [{ label: "Pages", value: "18" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 5, title: "Healthcare Data Management in a Distributed World", desc: "A comprehensive framework for HIPAA-compliant patient data workflows across multi-state offshore operations.", industry: "Healthcare", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], icon: Users, metrics: [{ label: "Pages", value: "36" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 6, title: "The Offshore Engineering Talent Report 2025", desc: "Benchmarks, salary data, and hiring trends for software engineers across Southeast Asia and Latin America.", industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Software Dev", "Staff Aug"], icon: BarChart3, metrics: [{ label: "Pages", value: "52" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 7, title: "Agentic AI in Customer Operations", desc: "How intelligent automation is reshaping CX teams — from chatbots to fully autonomous resolution agents.", industry: "Professional Services", source: "KDCI AI Labs", contentType: "Ebook" as const, tags: ["Customer Support", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Pages", value: "24" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 8, title: "Logistics Digitization Benchmark Report", desc: "How top-performing freight companies are eliminating manual bottlenecks and achieving real-time visibility.", industry: "Logistics", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Data Entry", "Operations"], icon: Layers, metrics: [{ label: "Pages", value: "22" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 9, title: "The Staff Augmentation Buyer's Guide", desc: "Everything procurement teams need to evaluate, negotiate, and onboard an offshore operations partner effectively.", industry: "Professional Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Staff Aug", "Operations"], icon: FileText, metrics: [{ label: "Pages", value: "30" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
+  { id: 1, icon: Globe, industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["AI Ops", "Operations"], thumb: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=800&h=420", title: "State of Global AI Operations 2025", desc: "An in-depth analysis of how 500+ enterprise leaders are integrating agentic AI into their workforce strategy.", metrics: [{ label: "Pages", value: "45" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
+  { id: 2, icon: Cpu, industry: "Technology", source: "KDCI Engineering", contentType: "Ebook" as const, tags: ["Software Dev", "AI Ops"], thumb: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=420", title: "The Ultimate Guide to QA Automation", desc: "Moving beyond manual testing: a framework for building self-healing regression suites with offshore teams.", metrics: [{ label: "Pages", value: "32" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
+  { id: 3, icon: ShieldCheck, industry: "Financial Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], thumb: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800&h=420", title: "Fintech Compliance: The Offshore Playbook", desc: "Navigating GDPR, SOC-2, and PCI-DSS when working with distributed financial operations teams globally.", metrics: [{ label: "Pages", value: "28" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
+  { id: 4, icon: TrendingUp, industry: "Retail", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Creative", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800&h=420", title: "ROI of Managed Creative Pods", desc: "Calculating the velocity and cost impact of switching from freelancers to dedicated creative units.", metrics: [{ label: "Pages", value: "18" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
+  { id: 5, icon: Users, industry: "Healthcare", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=420", title: "Healthcare Data Management in a Distributed World", desc: "A comprehensive framework for HIPAA-compliant patient data workflows across multi-state offshore operations.", metrics: [{ label: "Pages", value: "36" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
+  { id: 6, icon: BarChart3, industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Software Dev", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=420", title: "The Offshore Engineering Talent Report 2025", desc: "Benchmarks, salary data, and hiring trends for software engineers across Southeast Asia and Latin America.", metrics: [{ label: "Pages", value: "52" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
+  { id: 7, icon: BrainCircuit, industry: "Professional Services", source: "KDCI AI Labs", contentType: "Ebook" as const, tags: ["Customer Support", "AI Ops"], thumb: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800&h=420", title: "Agentic AI in Customer Operations", desc: "How intelligent automation is reshaping CX teams — from chatbots to fully autonomous resolution agents.", metrics: [{ label: "Pages", value: "24" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
+  { id: 8, icon: Layers, industry: "Logistics", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Data Entry", "Operations"], thumb: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420", title: "Logistics Digitization Benchmark Report", desc: "How top-performing freight companies are eliminating manual bottlenecks and achieving real-time visibility.", metrics: [{ label: "Pages", value: "22" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
+  { id: 9, icon: FileText, industry: "Professional Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Staff Aug", "Operations"], thumb: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420", title: "The Staff Augmentation Buyer's Guide", desc: "Everything procurement teams need to evaluate, negotiate, and onboard an offshore operations partner effectively.", metrics: [{ label: "Pages", value: "30" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
 ];
 
 const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'Professional Services'];
@@ -132,34 +132,43 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                 const Icon = ebook.icon;
                 return (
                   <div key={ebook.id} onClick={() => setView('contact')}
-                    className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
-                        <Icon size={22} />
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{ebook.industry}</div>
-                        <div className="font-bold text-slate-900 text-sm">{ebook.source}</div>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{ebook.title}</h3>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{ebook.desc}</p>
-                    <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
-                      {ebook.metrics.map((m, i) => (
-                        <div key={i}>
-                          <div className="text-base font-black text-slate-900 leading-tight">{m.value}</div>
-                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight mt-0.5">{m.label}</div>
+                    className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
+
+                    {/* Thumbnail */}
+                    <div className="relative h-44 overflow-hidden shrink-0">
+                      <img src={ebook.thumb} alt={ebook.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
+                          <Icon size={16} />
                         </div>
-                      ))}
+                        <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{ebook.industry}</span>
+                      </div>
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                        <span className="px-3 py-1 bg-[#E61739]/80 backdrop-blur-sm rounded-full text-[9px] font-black uppercase tracking-widest text-white border border-white/10">
+                          PDF · {ebook.metrics[0].value} pp
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {ebook.tags.map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
-                      ))}
+
+                    {/* Content */}
+                    <div className="p-8 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="font-bold text-slate-500 text-xs">{ebook.source}</span>
+                        <span className="text-slate-300">·</span>
+                        <span className="text-xs text-slate-400">{ebook.metrics[2].value}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{ebook.title}</h3>
+                      <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{ebook.desc}</p>
+                      <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-black/5">
+                        {ebook.tags.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
+                        ))}
+                      </div>
+                      <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
+                        Download PDF <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
                     </div>
-                    <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
-                      Download PDF <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
                   </div>
                 );
               })}

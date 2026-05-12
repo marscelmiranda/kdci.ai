@@ -5,15 +5,15 @@ import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
 const guides = [
-  { id: 1, title: "The Ultimate Guide to AI-Augmented Offshoring", desc: "A comprehensive blueprint for integrating agentic AI into your remote team workflows to 3x productivity.", industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "15 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
-  { id: 2, title: "Building a 24/7 Customer Support Operation from Scratch", desc: "Step-by-step framework for setting up shifts, tooling, and QA processes for round-the-clock coverage.", industry: "Professional Services", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Customer Support", "Operations"], icon: Users, metrics: [{ label: "Read Time", value: "10 min" }, { label: "Level", value: "Beginner" }, { label: "Format", value: "Online" }] },
-  { id: 3, title: "Scaling Engineering Teams: The Pod Model Explained", desc: "Why the 'Pod' structure outperforms individual staff augmentation for software development projects.", industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "Staff Aug"], icon: Layers, metrics: [{ label: "Read Time", value: "12 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
-  { id: 4, title: "Quality Assurance in the Age of Generative AI", desc: "How to adapt your QA frameworks when using LLMs for content and code generation at scale.", industry: "Technology", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "AI Ops"], icon: FileText, metrics: [{ label: "Read Time", value: "8 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
-  { id: 5, title: "The CFO's Guide to Outsourcing ROI", desc: "Moving beyond simple labor arbitrage to calculating total value creation and velocity impact.", industry: "Financial Services", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Operations", "Staff Aug"], icon: BarChart3, metrics: [{ label: "Read Time", value: "10 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
-  { id: 6, title: "Managing Remote Creative Teams: A Style Guide Template", desc: "Standardize your visual identity across borders with this customizable SOP template.", industry: "Retail", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Creative", "Operations"], icon: Palette, metrics: [{ label: "Read Time", value: "Downloadable" }, { label: "Level", value: "All Levels" }, { label: "Format", value: "PDF" }] },
-  { id: 7, title: "Healthcare Data Management: The Offshore Compliance Playbook", desc: "Navigate HIPAA, GDPR, and HITECH requirements for distributed medical data teams.", industry: "Healthcare", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Back Office", "Operations"], icon: Settings, metrics: [{ label: "Read Time", value: "14 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
-  { id: 8, title: "Logistics Operations Playbook: From Waybills to Real-time Tracking", desc: "End-to-end guide to digitizing freight documentation and operations at scale.", industry: "Logistics", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Data Entry", "Operations"], icon: Globe, metrics: [{ label: "Read Time", value: "11 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
-  { id: 9, title: "Agentic Recruitment: Hiring Offshore Engineers in 2025", desc: "A step-by-step sourcing, vetting, and onboarding framework for building elite distributed dev teams.", industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Staff Aug", "Software Dev"], icon: Users, metrics: [{ label: "Read Time", value: "9 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
+  { id: 1, icon: BrainCircuit, industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "AI Ops"], thumb: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=800&h=420", title: "The Ultimate Guide to AI-Augmented Offshoring", desc: "A comprehensive blueprint for integrating agentic AI into your remote team workflows to 3x productivity.", metrics: [{ label: "Read Time", value: "15 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
+  { id: 2, icon: Users, industry: "Professional Services", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Customer Support", "Operations"], thumb: "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&q=80&w=800&h=420", title: "Building a 24/7 Customer Support Operation from Scratch", desc: "Step-by-step framework for setting up shifts, tooling, and QA processes for round-the-clock coverage.", metrics: [{ label: "Read Time", value: "10 min" }, { label: "Level", value: "Beginner" }, { label: "Format", value: "Online" }] },
+  { id: 3, icon: Layers, industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800&h=420", title: "Scaling Engineering Teams: The Pod Model Explained", desc: "Why the 'Pod' structure outperforms individual staff augmentation for software development projects.", metrics: [{ label: "Read Time", value: "12 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
+  { id: 4, icon: FileText, industry: "Technology", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Software Dev", "AI Ops"], thumb: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800&h=420", title: "Quality Assurance in the Age of Generative AI", desc: "How to adapt your QA frameworks when using LLMs for content and code generation at scale.", metrics: [{ label: "Read Time", value: "8 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
+  { id: 5, icon: BarChart3, industry: "Financial Services", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Operations", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420", title: "The CFO's Guide to Outsourcing ROI", desc: "Moving beyond simple labor arbitrage to calculating total value creation and velocity impact.", metrics: [{ label: "Read Time", value: "10 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
+  { id: 6, icon: Palette, industry: "Retail", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Creative", "Operations"], thumb: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420", title: "Managing Remote Creative Teams: A Style Guide Template", desc: "Standardize your visual identity across borders with this customizable SOP template.", metrics: [{ label: "Read Time", value: "Downloadable" }, { label: "Level", value: "All Levels" }, { label: "Format", value: "PDF" }] },
+  { id: 7, icon: Settings, industry: "Healthcare", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Back Office", "Operations"], thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=420", title: "Healthcare Data Management: The Offshore Compliance Playbook", desc: "Navigate HIPAA, GDPR, and HITECH requirements for distributed medical data teams.", metrics: [{ label: "Read Time", value: "14 min" }, { label: "Level", value: "Advanced" }, { label: "Format", value: "Online" }] },
+  { id: 8, icon: Globe, industry: "Logistics", source: "KDCI Editorial", contentType: "Guide & Playbooks" as const, tags: ["Data Entry", "Operations"], thumb: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420", title: "Logistics Operations Playbook: From Waybills to Real-time Tracking", desc: "End-to-end guide to digitizing freight documentation and operations at scale.", metrics: [{ label: "Read Time", value: "11 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
+  { id: 9, icon: Users, industry: "Technology", source: "KDCI Research", contentType: "Guide & Playbooks" as const, tags: ["Staff Aug", "Software Dev"], thumb: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420", title: "Agentic Recruitment: Hiring Offshore Engineers in 2025", desc: "A step-by-step sourcing, vetting, and onboarding framework for building elite distributed dev teams.", metrics: [{ label: "Read Time", value: "9 min" }, { label: "Level", value: "Intermediate" }, { label: "Format", value: "Online" }] },
 ];
 
 const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'Professional Services'];
@@ -132,34 +132,44 @@ export const GuidesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                 const Icon = guide.icon;
                 return (
                   <div key={guide.id} onClick={() => setView('contact')}
-                    className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
-                        <Icon size={22} />
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{guide.industry}</div>
-                        <div className="font-bold text-slate-900 text-sm">{guide.source}</div>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{guide.title}</h3>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{guide.desc}</p>
-                    <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
-                      {guide.metrics.map((m, i) => (
-                        <div key={i}>
-                          <div className="text-base font-black text-slate-900 leading-tight">{m.value}</div>
-                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight mt-0.5">{m.label}</div>
+                    className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
+
+                    {/* Thumbnail */}
+                    <div className="relative h-44 overflow-hidden shrink-0">
+                      <img src={guide.thumb} alt={guide.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
+                          <Icon size={16} />
                         </div>
-                      ))}
+                        <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{guide.industry}</span>
+                      </div>
+                      <div className="absolute top-3 right-3">
+                        <span className="px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full text-[9px] font-black uppercase tracking-widest text-white/80 border border-white/20">
+                          {guide.metrics[1].value}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {guide.tags.map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
-                      ))}
+
+                    {/* Content */}
+                    <div className="p-8 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="font-bold text-slate-500 text-xs">{guide.source}</span>
+                        <span className="text-slate-300">·</span>
+                        <span className="text-xs text-slate-400">{guide.metrics[0].value}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{guide.title}</h3>
+                      <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{guide.desc}</p>
+                      <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-black/5">
+                        {guide.tags.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
+                        ))}
+                        <span className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-[#E61739] uppercase tracking-wide">{guide.metrics[2].value}</span>
+                      </div>
+                      <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
+                        Read Guide <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
                     </div>
-                    <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
-                      Read Guide <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
                   </div>
                 );
               })}
