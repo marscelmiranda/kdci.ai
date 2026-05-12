@@ -1,56 +1,57 @@
 
-import React, { useState, useEffect } from 'react';
-import { 
-  ArrowRight, Clock, Calendar, Search, BrainCircuit, Globe, 
-  Terminal, FileText, User, Sparkles, Loader2
-} from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ArrowRight, X, Plus, ChevronDown, FileText, BrainCircuit, Globe, Terminal, Loader2 } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-import { 
-  IMG_BLOG_HERO, IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, 
-  IMG_BLOG_5, IMG_BLOG_6, IMG_ECOM_HERO, IMG_PROP_HERO, IMG_CX_HERO 
-} from '../data';
+import { IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6, IMG_ECOM_HERO, IMG_PROP_HERO, IMG_CX_HERO } from '../data';
 
-interface Post {
+interface BlogCard {
   id: number | string;
   title: string;
   excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  img: string;
-  author: string;
+  industry: string;
+  source: string;
+  contentType: 'Blog';
+  tags: string[];
+  metrics: { label: string; value: string }[];
+  icon: React.ElementType;
   isLive?: boolean;
 }
 
-const CATEGORY_ICON: Record<string, React.ElementType> = {
-  'Engineering': Terminal,
-  'Case Studies': FileText,
-  'AI Operations': BrainCircuit,
-  'Future of Work': Globe,
-  'Company News': FileText,
-  'Industry Insights': Globe,
-};
+const FALLBACK_IMGS = [IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6, IMG_ECOM_HERO, IMG_PROP_HERO, IMG_CX_HERO];
 
-const STATIC_POSTS: Post[] = [
-  { id: 's1', title: "Why the Philippines is the New Epicenter for AI Engineering", excerpt: "Unpacking the talent shift as Manila transforms from a support hub into a global node for agentic AI development.", category: "Engineering", date: "Oct 12, 2024", readTime: "6 min read", img: IMG_BLOG_1, author: "Sarah Chen" },
-  { id: 's2', title: "Scaling to 500+ Agents: A Case Study in Fintech Support", excerpt: "How a high-growth fintech reduced OpEx by 65% while improving CSAT using managed offshore intelligence.", category: "Case Studies", date: "Sep 28, 2024", readTime: "8 min read", img: IMG_BLOG_2, author: "Michael Ross" },
-  { id: 's3', title: "Prompt Engineering vs. Software Engineering: The Merging Path", excerpt: "Why the developers of 2025 will spend as much time talking to code as they do writing it.", category: "AI Operations", date: "Sep 15, 2024", readTime: "5 min read", img: IMG_BLOG_3, author: "Devin Zhao" },
-  { id: 's4', title: "The Future of CX: Moving Beyond Ticketing to Real-time Agency", excerpt: "Traditional support is dead. Agentic AI is allowing pods to resolve issues before the user even knows they exist.", category: "AI Operations", date: "Aug 30, 2024", readTime: "7 min read", img: IMG_BLOG_4, author: "Sarah Chen" },
-  { id: 's5', title: "How Global Logistics Firms are Scaling with Managed Pods", excerpt: "Exploring the operational blueprint for managing high-volume data and tracking across multiple timezones.", category: "Case Studies", date: "Aug 12, 2024", readTime: "10 min read", img: IMG_BLOG_5, author: "Marcus Jordon" },
-  { id: 's6', title: "Building the Modern Offshore Strategy for Mid-Market Firms", excerpt: "You don't need enterprise budgets to build enterprise-scale teams. A tactical guide to intelligent scaling.", category: "Future of Work", date: "Jul 25, 2024", readTime: "9 min read", img: IMG_BLOG_6, author: "Sarah Chen" },
-  { id: 's7', title: "Cybersecurity in the AGI Era: Vetting Your Offshore Partner", excerpt: "Why SOC-2 compliance and industrial-grade security are the new baseline for global talent partners.", category: "Engineering", date: "Jul 10, 2024", readTime: "6 min read", img: IMG_ECOM_HERO, author: "Michael Ross" },
-  { id: 's8', title: "PropTech Revolution: AI-Managed Leasing Desks in Manila", excerpt: "How real estate giants are using specialized offshore teams to handle the entire tenant lifecycle.", category: "AI Operations", date: "Jun 22, 2024", readTime: "5 min read", img: IMG_PROP_HERO, author: "Devin Zhao" },
-  { id: 's9', title: "Measuring ROI in AI-Augmented Operations: The Hard Truth", excerpt: "Moving beyond 'headcount cost' to 'outcome velocity'. How to build a modern ROI model for your team.", category: "Future of Work", date: "Jun 05, 2024", readTime: "12 min read", img: IMG_CX_HERO, author: "Marcus Jordon" },
+const STATIC_CARDS: BlogCard[] = [
+  { id: 's1', title: "Why the Philippines is the New Epicenter for AI Engineering", excerpt: "Unpacking the talent shift as Manila transforms from a support hub into a global node for agentic AI development.", industry: "Technology", source: "Sarah Chen", contentType: "Blog", tags: ["Software Dev", "AI Ops"], icon: Terminal, metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Oct 2024" }, { label: "Category", value: "Engineering" }] },
+  { id: 's2', title: "Scaling to 500+ Agents: A Case Study in Fintech Support", excerpt: "How a high-growth fintech reduced OpEx by 65% while improving CSAT using managed offshore intelligence.", industry: "Financial Services", source: "Michael Ross", contentType: "Blog", tags: ["Customer Support", "Fintech"], icon: FileText, metrics: [{ label: "Read Time", value: "8 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "Case Studies" }] },
+  { id: 's3', title: "Prompt Engineering vs. Software Engineering: The Merging Path", excerpt: "Why the developers of 2025 will spend as much time talking to code as they do writing it.", industry: "Technology", source: "Devin Zhao", contentType: "Blog", tags: ["Software Dev", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "AI Operations" }] },
+  { id: 's4', title: "The Future of CX: Moving Beyond Ticketing to Real-time Agency", excerpt: "Traditional support is dead. Agentic AI is allowing pods to resolve issues before the user even knows they exist.", industry: "Technology", source: "Sarah Chen", contentType: "Blog", tags: ["Customer Support", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "7 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "AI Operations" }] },
+  { id: 's5', title: "How Global Logistics Firms are Scaling with Managed Pods", excerpt: "Exploring the operational blueprint for managing high-volume data and tracking across multiple timezones.", industry: "Logistics", source: "Marcus Jordon", contentType: "Blog", tags: ["Data Entry", "Operations"], icon: Globe, metrics: [{ label: "Read Time", value: "10 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "Case Studies" }] },
+  { id: 's6', title: "Building the Modern Offshore Strategy for Mid-Market Firms", excerpt: "You don't need enterprise budgets to build enterprise-scale teams. A tactical guide to intelligent scaling.", industry: "Professional Services", source: "Sarah Chen", contentType: "Blog", tags: ["Staff Aug", "Operations"], icon: Globe, metrics: [{ label: "Read Time", value: "9 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Future of Work" }] },
+  { id: 's7', title: "Cybersecurity in the AGI Era: Vetting Your Offshore Partner", excerpt: "Why SOC-2 compliance and industrial-grade security are the new baseline for global talent partners.", industry: "Technology", source: "Michael Ross", contentType: "Blog", tags: ["Software Dev", "Operations"], icon: Terminal, metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Engineering" }] },
+  { id: 's8', title: "PropTech Revolution: AI-Managed Leasing Desks in Manila", excerpt: "How real estate giants are using specialized offshore teams to handle the entire tenant lifecycle.", industry: "Real Estate", source: "Devin Zhao", contentType: "Blog", tags: ["Back Office", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "AI Operations" }] },
+  { id: 's9', title: "Measuring ROI in AI-Augmented Operations: The Hard Truth", excerpt: "Moving beyond 'headcount cost' to 'outcome velocity'. How to build a modern ROI model for your team.", industry: "Professional Services", source: "Marcus Jordon", contentType: "Blog", tags: ["Operations", "Staff Aug"], icon: FileText, metrics: [{ label: "Read Time", value: "12 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "Future of Work" }] },
 ];
 
-const FALLBACK_IMGS = [IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6];
+const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'Professional Services'];
+const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Back Office', 'AI Ops', 'Operations'];
+const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
 export const BlogLandingPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) => void; onSelectBlog?: (id: number | null) => void }) => {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [livePosts, setLivePosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [activeIndustry, setActiveIndustry]       = useState('All');
+  const [activeService, setActiveService]         = useState('All');
+  const [activeContentType, setActiveContentType] = useState('Blog');
+  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'content' | null>(null);
+  const [livePosts, setLivePosts] = useState<BlogCard[]>([]);
+  const [loading, setLoading]     = useState(true);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) setOpenPanel(null);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   useEffect(() => {
     fetch('/api/blog')
@@ -60,188 +61,198 @@ export const BlogLandingPage = ({ setView, onSelectBlog }: { setView: (v: ViewTy
           id: p.id,
           title: p.title,
           excerpt: p.excerpt || '',
-          category: p.category || 'AI Operations',
-          date: p.published_at ? new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '',
-          readTime: '5 min read',
-          img: p.cover_image || FALLBACK_IMGS[i % FALLBACK_IMGS.length],
-          author: p.author || 'KDCI Editorial',
+          industry: 'Technology',
+          source: p.author || 'KDCI Editorial',
+          contentType: 'Blog' as const,
+          tags: ['AI Ops', 'Operations'],
+          icon: BrainCircuit,
           isLive: true,
+          metrics: [
+            { label: "Read Time", value: "5 min" },
+            { label: "Published", value: p.published_at ? new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent' },
+            { label: "Category", value: p.category || 'AI Operations' },
+          ],
         })));
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
-  const allPosts: Post[] = [...livePosts, ...STATIC_POSTS];
-  const categories = ["All", ...Array.from(new Set(allPosts.map(p => p.category))).sort()];
+  const allCards = [...livePosts, ...STATIC_CARDS];
 
-  const featuredPost = allPosts[0];
-  const filteredPosts = allPosts.slice(1).filter(post => {
-    const matchesCategory = activeCategory === "All" || post.category === activeCategory;
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+  const filtered = allCards.filter(c => {
+    const industryOk    = activeIndustry    === 'All' || c.industry    === activeIndustry;
+    const serviceOk     = activeService     === 'All' || c.tags.includes(activeService);
+    const contentTypeOk = activeContentType === 'All' || c.contentType === activeContentType;
+    return industryOk && serviceOk && contentTypeOk;
   });
+
+  const industryLabel    = activeIndustry    === 'All' ? 'Industry'     : activeIndustry;
+  const serviceLabel     = activeService     === 'All' ? 'Service'      : activeService;
+  const contentTypeLabel = activeContentType === 'All' ? 'Content Type' : activeContentType;
+  const industryActive    = activeIndustry    !== 'All';
+  const serviceActive     = activeService     !== 'All';
+  const contentTypeActive = activeContentType !== 'All';
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative pt-48 pb-32 overflow-hidden bg-[#020202]">
+
+      {/* ── HERO ── */}
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-16">
         <div className="absolute inset-0 z-0">
-          <img src={IMG_BLOG_HERO} alt="Insights" className="w-full h-full object-cover opacity-20 object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
         <div className="mesh-container opacity-40">
-           <div className="blob blob-purple"></div>
-           <div className="blob blob-magenta opacity-30"></div>
+          <div className="blob blob-purple opacity-30" />
+          <div className="blob blob-magenta opacity-20" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Insights Hub" />
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1] drop-shadow-2xl">
-            <span className="text-shine-white">Operational</span><br/>
-            <span className="text-[#E61739]">Intelligence.</span>
-          </h1>
-          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
-            Strategic insights on AGI-ready operations, global talent strategy, and high-velocity business outcomes.
-          </p>
+          <div className="mt-6">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
+              <span className="text-shine-white">Operational</span>{' '}
+              <span className="text-[#E61739]">Intelligence.</span>
+            </h1>
+            <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
+              Strategic insights on AGI-ready operations, global talent strategy, and high-velocity business outcomes.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-
-          {/* Filters */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-20">
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full">
-              {categories.map((cat) => (
-                <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all border ${
-                    activeCategory === cat
-                      ? 'bg-[#1D1D1F] text-white border-[#1D1D1F] shadow-lg'
-                      : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
-                  }`}>
-                  {cat}
-                </button>
-              ))}
-            </div>
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-              <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-100 border-none rounded-xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white transition-all placeholder:text-slate-400" />
+      {/* ── FILTER BAR ── */}
+      <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
+        <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
+          <button onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
+            {industryActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-slate-900' : 'text-slate-500'}`}>{industryLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'industry' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+          <button onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
+            {serviceActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-slate-900' : 'text-slate-500'}`}>{serviceLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'service' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+          <button onClick={() => setOpenPanel(openPanel === 'content' ? null : 'content')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'content' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
+            {contentTypeActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveContentType('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${contentTypeActive ? 'text-slate-900' : 'text-slate-500'}`}>{contentTypeLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'content' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+        </div>
+        {openPanel && (
+          <div className="absolute left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-8 py-6 z-50">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
+              {openPanel === 'industry' ? 'Filter by Industry' : openPanel === 'service' ? 'Filter by Service' : 'Filter by Content Type'}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {(openPanel === 'industry' ? INDUSTRIES : openPanel === 'service' ? SERVICES : CONTENT_TYPES).map(opt => {
+                const isActive = openPanel === 'industry' ? activeIndustry === opt : openPanel === 'service' ? activeService === opt : activeContentType === opt;
+                return (
+                  <button key={opt} onClick={() => {
+                    if (openPanel === 'industry') setActiveIndustry(opt);
+                    else if (openPanel === 'service') setActiveService(opt);
+                    else setActiveContentType(opt);
+                    setOpenPanel(null);
+                  }} className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${isActive ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-300 hover:border-slate-900 hover:text-slate-900'}`}>
+                    {opt}
+                  </button>
+                );
+              })}
             </div>
           </div>
+        )}
+      </div>
 
+      {/* ── CARDS GRID ── */}
+      <section className="py-14 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
           {loading ? (
-            <div className="flex justify-center py-20">
-              <Loader2 size={36} className="animate-spin text-[#E61739]/40" />
-            </div>
+            <div className="flex justify-center py-24"><Loader2 size={36} className="animate-spin text-[#E61739]/40" /></div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-24 text-slate-400 font-medium text-lg">No articles match the selected filters.</div>
           ) : (
-            <>
-              {/* Featured Post */}
-              {activeCategory === "All" && !searchQuery && featuredPost && (
-                <div className="mb-20">
-                  <div onClick={() => { if (featuredPost.isLive && onSelectBlog) onSelectBlog(Number(featuredPost.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
-                    className="bg-[#1D1D1F] rounded-[4rem] p-12 md:p-16 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all">
-                    <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
-                    {featuredPost.isLive && (
-                      <div className="absolute top-8 right-8 px-3 py-1.5 rounded-full bg-[#E61739]/20 border border-[#E61739]/30 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
-                        New
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filtered.map(card => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.id}
+                    onClick={() => { if (card.isLive && onSelectBlog) onSelectBlog(Number(card.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
+                    className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
+                        <Icon size={22} />
                       </div>
-                    )}
-                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                      <div className="md:w-2/3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E61739]/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-[#E61739]/20">
-                          <Sparkles size={12} /> Featured Insight
-                        </div>
-                        <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 group-hover:text-[#E61739] transition-colors leading-tight">
-                          {featuredPost.title}
-                        </h2>
-                        <p className="text-white/60 text-lg mb-8 leading-relaxed">{featuredPost.excerpt}</p>
-                        <div className="flex flex-wrap gap-6 mb-8 border-t border-white/10 pt-8">
-                          {featuredPost.date && <div className="flex items-center gap-3 text-white/50 text-xs font-bold uppercase tracking-widest"><Calendar size={14} /> {featuredPost.date}</div>}
-                          <div className="flex items-center gap-3 text-white/50 text-xs font-bold uppercase tracking-widest"><Clock size={14} /> {featuredPost.readTime}</div>
-                          <div className="flex items-center gap-3 text-white/50 text-xs font-bold uppercase tracking-widest"><User size={14} /> {featuredPost.author}</div>
-                        </div>
-                        <button className="px-8 py-3 bg-white text-black rounded-xl font-bold hover:bg-[#E61739] hover:text-white transition-all flex items-center gap-2">
-                          Read Article <ArrowRight size={16} />
-                        </button>
-                      </div>
-                      <div className="md:w-1/3 flex justify-center">
-                        <div className="w-64 h-64 rounded-[2.5rem] overflow-hidden border border-white/10 group-hover:scale-105 transition-transform duration-700 shadow-2xl relative">
-                          <img src={featuredPost.img} alt={featuredPost.title} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-[#E61739]/10 mix-blend-overlay"></div>
-                        </div>
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{card.industry}</div>
+                        <div className="font-bold text-slate-900 text-sm">{card.source}</div>
                       </div>
                     </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{card.title}</h3>
+                    <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{card.excerpt}</p>
+                    <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
+                      {card.metrics.map((m, i) => (
+                        <div key={i}>
+                          <div className="text-base font-black text-slate-900 leading-tight">{m.value}</div>
+                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight mt-0.5">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {card.tags.map((tag, i) => (
+                        <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
+                      ))}
+                    </div>
+                    <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
+                      Read Article <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </div>
-                </div>
-              )}
-
-              {/* Blog Grid */}
-              <div className="grid md:grid-cols-2 gap-12">
-                {filteredPosts.map((post) => {
-                  const Icon = CATEGORY_ICON[post.category] || FileText;
-                  return (
-                    <div key={post.id} onClick={() => { if (post.isLive && onSelectBlog) onSelectBlog(Number(post.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
-                      className="group flex flex-col h-full bg-[#F5F5F7] rounded-[3rem] p-10 border border-black/[0.03] hover:shadow-2xl hover:bg-white transition-all duration-500 cursor-pointer relative">
-                      {post.isLive && (
-                        <div className="absolute top-8 right-8 px-2.5 py-1 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[9px] font-black uppercase tracking-widest">New</div>
-                      )}
-                      <div className="flex justify-between items-start mb-8">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform">
-                            <Icon size={24} />
-                          </div>
-                          <div>
-                            <div className="text-xs font-black uppercase tracking-widest text-[#E61739]">{post.category}</div>
-                            <div className="font-bold text-slate-900 text-xs text-slate-400">{post.date}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#E61739] transition-colors leading-snug">{post.title}</h3>
-                      <p className="text-slate-500 font-medium leading-relaxed mb-8 flex-grow">{post.excerpt}</p>
-                      <div className="flex items-center justify-between pt-8 border-t border-black/5 mt-auto">
-                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                          <Clock size={12} /> {post.readTime}
-                        </div>
-                        <button className="flex items-center gap-2 text-slate-900 font-bold text-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform">
-                          Read Story <ArrowRight size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {filteredPosts.length === 0 && allPosts.length > 1 && (
-                <div className="text-center py-20 text-slate-400">
-                  <p className="text-xl font-medium">No articles found matching "{searchQuery}"</p>
-                  <button onClick={() => { setSearchQuery(""); setActiveCategory("All"); }} className="mt-4 text-[#E61739] font-bold hover:underline">Clear Filters</button>
-                </div>
-              )}
-            </>
+                );
+              })}
+            </div>
           )}
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-24 px-6 bg-slate-50">
-        <div className="max-w-5xl mx-auto bg-[#1D1D1F] rounded-[4rem] p-12 md:p-20 text-center relative overflow-hidden">
-          <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">Weekly Intelligence.</h2>
-            <p className="text-white/50 text-xl font-medium mb-10 max-w-2xl mx-auto">
-              Join 15,000+ operations leaders receiving our proprietary AGI playbook. No fluff, just operational architecture.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
-              <input type="email" placeholder="Work Email"
-                className="px-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739] w-full font-bold" />
-              <button className="px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold hover:bg-[#c51431] transition-all glow-red shadow-xl whitespace-nowrap">Subscribe</button>
+      {/* ── CTA ── */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 group">
+          <div className="mesh-container opacity-20 pointer-events-none">
+            <div className="blob blob-purple opacity-30" />
+            <div className="blob blob-magenta opacity-30" />
+          </div>
+          <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
+            <div className="flex-1 px-12 py-[58px] md:px-20 md:py-[68px] flex flex-col justify-center">
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight leading-tight">
+                Have a similar<br /><span className="text-shine-red">challenge?</span>
+              </h2>
+              <p className="text-lg md:text-xl text-white/60 mb-10 font-medium leading-relaxed max-w-lg">
+                Our solutions architects can design a custom operational model for your specific needs.
+              </p>
+              <div>
+                <button onClick={() => setView('contact')}
+                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta">
+                  Consult an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+            <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
+              <img src="/kdci-challenge.png" alt="KDCI Solutions Architect" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 };
