@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, X, Plus, ChevronDown, FileText, BrainCircuit, Globe, Terminal, Loader2 } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-import { IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6, IMG_ECOM_HERO, IMG_PROP_HERO, IMG_CX_HERO } from '../data';
 
 interface BlogCard {
   id: number | string;
@@ -15,21 +14,92 @@ interface BlogCard {
   tags: string[];
   metrics: { label: string; value: string }[];
   icon: React.ElementType;
+  thumb: string;
   isLive?: boolean;
 }
 
-const FALLBACK_IMGS = [IMG_BLOG_1, IMG_BLOG_2, IMG_BLOG_3, IMG_BLOG_4, IMG_BLOG_5, IMG_BLOG_6, IMG_ECOM_HERO, IMG_PROP_HERO, IMG_CX_HERO];
+const FALLBACK_THUMBS = [
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=420",
+  "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800&h=420",
+  "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800&h=420",
+  "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800&h=420",
+  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420",
+];
 
 const STATIC_CARDS: BlogCard[] = [
-  { id: 's1', title: "Why the Philippines is the New Epicenter for AI Engineering", excerpt: "Unpacking the talent shift as Manila transforms from a support hub into a global node for agentic AI development.", industry: "Technology", source: "Sarah Chen", contentType: "Blog", tags: ["Software Dev", "AI Ops"], icon: Terminal, metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Oct 2024" }, { label: "Category", value: "Engineering" }] },
-  { id: 's2', title: "Scaling to 500+ Agents: A Case Study in Fintech Support", excerpt: "How a high-growth fintech reduced OpEx by 65% while improving CSAT using managed offshore intelligence.", industry: "Financial Services", source: "Michael Ross", contentType: "Blog", tags: ["Customer Support", "Fintech"], icon: FileText, metrics: [{ label: "Read Time", value: "8 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "Case Studies" }] },
-  { id: 's3', title: "Prompt Engineering vs. Software Engineering: The Merging Path", excerpt: "Why the developers of 2025 will spend as much time talking to code as they do writing it.", industry: "Technology", source: "Devin Zhao", contentType: "Blog", tags: ["Software Dev", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "AI Operations" }] },
-  { id: 's4', title: "The Future of CX: Moving Beyond Ticketing to Real-time Agency", excerpt: "Traditional support is dead. Agentic AI is allowing pods to resolve issues before the user even knows they exist.", industry: "Technology", source: "Sarah Chen", contentType: "Blog", tags: ["Customer Support", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "7 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "AI Operations" }] },
-  { id: 's5', title: "How Global Logistics Firms are Scaling with Managed Pods", excerpt: "Exploring the operational blueprint for managing high-volume data and tracking across multiple timezones.", industry: "Logistics", source: "Marcus Jordon", contentType: "Blog", tags: ["Data Entry", "Operations"], icon: Globe, metrics: [{ label: "Read Time", value: "10 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "Case Studies" }] },
-  { id: 's6', title: "Building the Modern Offshore Strategy for Mid-Market Firms", excerpt: "You don't need enterprise budgets to build enterprise-scale teams. A tactical guide to intelligent scaling.", industry: "Professional Services", source: "Sarah Chen", contentType: "Blog", tags: ["Staff Aug", "Operations"], icon: Globe, metrics: [{ label: "Read Time", value: "9 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Future of Work" }] },
-  { id: 's7', title: "Cybersecurity in the AGI Era: Vetting Your Offshore Partner", excerpt: "Why SOC-2 compliance and industrial-grade security are the new baseline for global talent partners.", industry: "Technology", source: "Michael Ross", contentType: "Blog", tags: ["Software Dev", "Operations"], icon: Terminal, metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Engineering" }] },
-  { id: 's8', title: "PropTech Revolution: AI-Managed Leasing Desks in Manila", excerpt: "How real estate giants are using specialized offshore teams to handle the entire tenant lifecycle.", industry: "Real Estate", source: "Devin Zhao", contentType: "Blog", tags: ["Back Office", "AI Ops"], icon: BrainCircuit, metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "AI Operations" }] },
-  { id: 's9', title: "Measuring ROI in AI-Augmented Operations: The Hard Truth", excerpt: "Moving beyond 'headcount cost' to 'outcome velocity'. How to build a modern ROI model for your team.", industry: "Professional Services", source: "Marcus Jordon", contentType: "Blog", tags: ["Operations", "Staff Aug"], icon: FileText, metrics: [{ label: "Read Time", value: "12 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "Future of Work" }] },
+  {
+    id: 's1', icon: Terminal, industry: "Technology", source: "Sarah Chen", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Why the Philippines is the New Epicenter for AI Engineering",
+    excerpt: "Unpacking the talent shift as Manila transforms from a support hub into a global node for agentic AI development.",
+    tags: ["Software Dev", "AI Ops"],
+    metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Oct 2024" }, { label: "Category", value: "Engineering" }]
+  },
+  {
+    id: 's2', icon: FileText, industry: "Financial Services", source: "Michael Ross", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Scaling to 500+ Agents: A Case Study in Fintech Support",
+    excerpt: "How a high-growth fintech reduced OpEx by 65% while improving CSAT using managed offshore intelligence.",
+    tags: ["Customer Support", "Fintech"],
+    metrics: [{ label: "Read Time", value: "8 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "Case Studies" }]
+  },
+  {
+    id: 's3', icon: BrainCircuit, industry: "Technology", source: "Devin Zhao", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Prompt Engineering vs. Software Engineering: The Merging Path",
+    excerpt: "Why the developers of 2025 will spend as much time talking to code as they do writing it.",
+    tags: ["Software Dev", "AI Ops"],
+    metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Sep 2024" }, { label: "Category", value: "AI Operations" }]
+  },
+  {
+    id: 's4', icon: BrainCircuit, industry: "Technology", source: "Sarah Chen", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "The Future of CX: Moving Beyond Ticketing to Real-time Agency",
+    excerpt: "Traditional support is dead. Agentic AI is allowing pods to resolve issues before the user even knows they exist.",
+    tags: ["Customer Support", "AI Ops"],
+    metrics: [{ label: "Read Time", value: "7 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "AI Operations" }]
+  },
+  {
+    id: 's5', icon: Globe, industry: "Logistics", source: "Marcus Jordon", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "How Global Logistics Firms are Scaling with Managed Pods",
+    excerpt: "Exploring the operational blueprint for managing high-volume data and tracking across multiple timezones.",
+    tags: ["Data Entry", "Operations"],
+    metrics: [{ label: "Read Time", value: "10 min" }, { label: "Published", value: "Aug 2024" }, { label: "Category", value: "Case Studies" }]
+  },
+  {
+    id: 's6', icon: Globe, industry: "Professional Services", source: "Sarah Chen", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Building the Modern Offshore Strategy for Mid-Market Firms",
+    excerpt: "You don't need enterprise budgets to build enterprise-scale teams. A tactical guide to intelligent scaling.",
+    tags: ["Staff Aug", "Operations"],
+    metrics: [{ label: "Read Time", value: "9 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Future of Work" }]
+  },
+  {
+    id: 's7', icon: Terminal, industry: "Technology", source: "Michael Ross", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Cybersecurity in the AGI Era: Vetting Your Offshore Partner",
+    excerpt: "Why SOC-2 compliance and industrial-grade security are the new baseline for global talent partners.",
+    tags: ["Software Dev", "Operations"],
+    metrics: [{ label: "Read Time", value: "6 min" }, { label: "Published", value: "Jul 2024" }, { label: "Category", value: "Engineering" }]
+  },
+  {
+    id: 's8', icon: BrainCircuit, industry: "Real Estate", source: "Devin Zhao", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "PropTech Revolution: AI-Managed Leasing Desks in Manila",
+    excerpt: "How real estate giants are using specialized offshore teams to handle the entire tenant lifecycle.",
+    tags: ["Back Office", "AI Ops"],
+    metrics: [{ label: "Read Time", value: "5 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "AI Operations" }]
+  },
+  {
+    id: 's9', icon: FileText, industry: "Professional Services", source: "Marcus Jordon", contentType: "Blog",
+    thumb: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420",
+    title: "Measuring ROI in AI-Augmented Operations: The Hard Truth",
+    excerpt: "Moving beyond 'headcount cost' to 'outcome velocity'. How to build a modern ROI model for your team.",
+    tags: ["Operations", "Staff Aug"],
+    metrics: [{ label: "Read Time", value: "12 min" }, { label: "Published", value: "Jun 2024" }, { label: "Category", value: "Future of Work" }]
+  },
 ];
 
 const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'Professional Services'];
@@ -66,6 +136,7 @@ export const BlogLandingPage = ({ setView, onSelectBlog }: { setView: (v: ViewTy
           contentType: 'Blog' as const,
           tags: ['AI Ops', 'Operations'],
           icon: BrainCircuit,
+          thumb: FALLBACK_THUMBS[i % FALLBACK_THUMBS.length],
           isLive: true,
           metrics: [
             { label: "Read Time", value: "5 min" },
@@ -186,34 +257,44 @@ export const BlogLandingPage = ({ setView, onSelectBlog }: { setView: (v: ViewTy
                 return (
                   <div key={card.id}
                     onClick={() => { if (card.isLive && onSelectBlog) onSelectBlog(Number(card.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
-                    className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
-                        <Icon size={22} />
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{card.industry}</div>
-                        <div className="font-bold text-slate-900 text-sm">{card.source}</div>
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{card.title}</h3>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{card.excerpt}</p>
-                    <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
-                      {card.metrics.map((m, i) => (
-                        <div key={i}>
-                          <div className="text-base font-black text-slate-900 leading-tight">{m.value}</div>
-                          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight mt-0.5">{m.label}</div>
+                    className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
+
+                    {/* Thumbnail */}
+                    <div className="relative h-44 overflow-hidden shrink-0">
+                      <img src={card.thumb} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
+                          <Icon size={16} />
                         </div>
-                      ))}
+                        <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{card.industry}</span>
+                      </div>
+                      <div className="absolute top-3 right-3">
+                        <span className="px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full text-[9px] font-black uppercase tracking-widest text-white/80 border border-white/20">
+                          {card.metrics[0].value} read
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {card.tags.map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
-                      ))}
+
+                    {/* Content */}
+                    <div className="p-8 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="font-bold text-slate-500 text-xs">{card.source}</span>
+                        <span className="text-slate-300">·</span>
+                        <span className="text-xs text-slate-400">{card.metrics[1].value}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{card.title}</h3>
+                      <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{card.excerpt}</p>
+                      <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-black/5">
+                        {card.tags.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
+                        ))}
+                        <span className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-[#E61739] uppercase tracking-wide">{card.metrics[2].value}</span>
+                      </div>
+                      <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
+                        Read Article <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
                     </div>
-                    <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
-                      Read Article <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
                   </div>
                 );
               })}
