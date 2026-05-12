@@ -102,7 +102,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="blob blob-purple opacity-40"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs 
             setView={setView} 
             currentName="Customer Experience" 
@@ -112,11 +112,11 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             <span className="text-shine-white">AI-Powered Efficiency.</span><br/>
             <span className="text-[#E61739]">Human-Led Satisfaction.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8 px-4">
+          <p className="max-w-3xl text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
             Deploy AI agents to handle interactions at scale, with seamless escalation to human professionals. We provide the strategy, oversight, and talent ensuring consistent quality.
           </p>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12 text-white/90 text-sm md:text-base font-medium">
+          <div className="flex flex-col md:flex-row items-start gap-6 mb-12 text-white/90 text-sm md:text-base font-medium">
             <div className="flex items-center gap-2">
               <CheckCircle2 size={20} className="text-[#E61739] shrink-0" />
               <span>AI agents handle calls and chat at scale</span>
@@ -131,7 +131,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-4 justify-center">
+          <div className="flex flex-col items-start gap-4">
             <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Book a Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
