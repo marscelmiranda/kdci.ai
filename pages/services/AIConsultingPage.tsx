@@ -107,43 +107,81 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
     <div className="min-h-screen bg-white">
 
       {/* SECTION 1 — HERO */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900"></div>
         </div>
         <div className="mesh-container opacity-40">
           <div className="blob blob-magenta opacity-30"></div>
           <div className="blob blob-purple opacity-40"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
-          {/* Left — copy */}
-          <div className="flex-1 min-w-0">
-            <Breadcrumbs setView={setView} currentName="AI Consulting" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[1.05] drop-shadow-2xl">
-              <span className="text-shine-white">Your business deserves<br />an AI strategy —</span><br />
-              <span className="text-[#E61739]">not just AI tools.</span>
-            </h1>
-            <p className="max-w-3xl text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16">
-              KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group whitespace-nowrap">
-                Book a Discovery Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <a href="#how-it-works" className="px-14 py-5 bg-white/10 border border-white/20 text-white rounded-3xl font-bold text-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2 backdrop-blur-sm whitespace-nowrap">
-                See How It Works <ChevronRight size={20} />
-              </a>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <Breadcrumbs setView={setView} currentName="AI Consulting & Implementation" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
+            {/* Left — copy */}
+            <div className="text-left flex flex-col justify-between py-2">
+              <div>
+                <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                  <span className="text-shine-white">Your business deserves an AI strategy —</span><br />
+                  <span className="text-[#E61739]">not just AI tools.</span>
+                </h1>
+                <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
+                  KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
+                </p>
+
+                <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">AI strategy mapped to your specific departments and workflows</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">Custom AI agents built, integrated, and production-ready</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">Managed operations with measurable KPIs and human oversight</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <button onClick={() => setView('contact')} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                  Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right — image card */}
+            <div className="relative lg:h-full">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+                <img
+                  src="/ai-consulting-hero.png"
+                  alt="AI Consulting team"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+
+                <div className="absolute top-6 left-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    AI-Powered · Outcome-Driven
+                  </div>
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
+                  {['OpenAI', 'Claude', 'n8n', 'ElevenLabs', 'LangChain'].map((tool, i) => (
+                    <span key={i} className="text-[11px] font-black text-slate-800 tracking-tight whitespace-nowrap">{tool}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          {/* Right — hero image */}
-          <div className="hidden lg:block shrink-0 lg:w-[420px] xl:w-[480px] rounded-3xl overflow-hidden shadow-2xl" style={{ height: '560px' }}>
-            <img
-              src="/ai-consulting-hero.png"
-              alt="AI Consulting team"
-              className="w-full h-full object-cover scale-[1.15]"
-            />
-          </div>
         </div>
+
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div><div className="text-xl md:text-2xl font-black">3x</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Faster AI Adoption</p></div>
