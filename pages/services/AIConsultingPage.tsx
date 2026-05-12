@@ -117,7 +117,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs setView={setView} currentName="AI Consulting & Implementation" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+          <Breadcrumbs setView={setView} currentName="AI Consulting & Implementation" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
