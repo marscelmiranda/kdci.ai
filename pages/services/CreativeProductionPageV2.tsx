@@ -40,7 +40,7 @@ const ScrollingColumn = ({
   const animName = direction === 'up' ? 'creativeScrollUp' : 'creativeScrollDown';
   return (
     <div
-      className="flex flex-col gap-3 overflow-hidden flex-1"
+      className="flex flex-col gap-3 overflow-hidden w-[190px] shrink-0"
       style={{
         maskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
@@ -183,7 +183,7 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
 
             {/* Right — animated mosaic */}
             <div className="hidden lg:flex justify-end">
-              <div className="flex gap-3 overflow-hidden rounded-3xl" style={{ width: '564px', height: '560px' }}>
+              <div className="flex gap-3 overflow-hidden rounded-3xl" style={{ width: '594px', height: '560px' }}>
                 <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={openLightbox} />
                 <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={openLightbox} />
                 <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={openLightbox} />
