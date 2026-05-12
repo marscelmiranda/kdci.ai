@@ -144,14 +144,14 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
           <div className="blob blob-purple opacity-30" />
           <div className="blob blob-magenta opacity-20" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Case Studies" />
           <div className="mt-6">
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
               <span className="text-shine-white">Proven</span>{' '}
               <span className="text-[#E61739]">Results.</span>
             </h1>
-            <p className="text-white/60 text-lg font-medium max-w-2xl">
+            <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
               See how leading enterprises use KDCI's managed intelligence to scale faster, cut costs, and improve quality.
             </p>
           </div>
