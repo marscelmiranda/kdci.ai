@@ -121,29 +121,27 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
-            <div className="text-left flex flex-col justify-between py-2">
-              <div>
-                <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                  <span className="text-shine-white">Your business deserves an AI strategy —</span><br />
-                  <span className="text-[#E61739]">not just AI tools.</span>
-                </h1>
-                <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                  KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
-                </p>
+            <div className="text-left flex flex-col py-2">
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                <span className="text-shine-white">Your business deserves an AI strategy —</span><br />
+                <span className="text-[#E61739]">not just AI tools.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
+                KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
+              </p>
 
-                <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">AI strategy mapped to your specific departments and workflows</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">Custom AI agents built, integrated, and production-ready</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">Managed operations with measurable KPIs and human oversight</span>
-                  </div>
+              <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">AI strategy mapped to your specific departments and workflows</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">Custom AI agents built, integrated, and production-ready</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">Managed operations with measurable KPIs and human oversight</span>
                 </div>
               </div>
 
