@@ -174,7 +174,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   {[
                     { name: "Claude",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/330px-Claude_AI_logo.svg.png", imgH: '18px' },
                     { name: "ChatGPT",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778627897/chatgpt_logo_b4z32j.png", imgH: '24px' },
-                    { name: "Gemini",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Google_Gemini_logo_2025.svg/330px-Google_Gemini_logo_2025.svg.png", imgH: '24px' },
+                    { name: "Gemini",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Google_Gemini_logo_2025.svg/330px-Google_Gemini_logo_2025.svg.png", imgH: '20px' },
                     { name: "Freshdesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Freshdesk_Logo_suwwdf.png" },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
