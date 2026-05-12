@@ -161,7 +161,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
       {/* ── FILTER BAR ── outside overflow-hidden so dropdown isn't clipped */}
       <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
         {/* Three-column trigger row */}
-        <div className="flex divide-x divide-slate-200">
+        <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
           {/* Industry trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
