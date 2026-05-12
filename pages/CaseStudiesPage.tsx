@@ -1,10 +1,8 @@
 
-import React from 'react';
-import { ArrowRight, TrendingUp, BarChart3, Users, Clock, Building2, Smartphone, Globe, ShoppingCart, Activity } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-
-const HERO_IMG = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=800";
 
 const caseStudies = [
   {
@@ -24,7 +22,7 @@ const caseStudies = [
   {
     id: 2,
     client: "Global Logistics Leader",
-    industry: "Supply Chain",
+    industry: "Logistics",
     icon: Globe,
     title: "Automating 10,000 Weekly Waybills with AI + Humans",
     desc: "Implementing a human-in-the-loop OCR workflow to digitize shipping documentation with 99.9% accuracy.",
@@ -75,7 +73,7 @@ const caseStudies = [
       { label: "Savings", value: "$1.2M" },
       { label: "Errors", value: "0%" }
     ],
-    tags: ["PropTech", "Back Office", "Admin"]
+    tags: ["Back Office", "PropTech", "Admin"]
   },
   {
     id: 6,
@@ -93,133 +91,166 @@ const caseStudies = [
   }
 ];
 
+const INDUSTRIES = ['All Industries', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
+const SERVICES   = ['All Services', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
+
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [activeIndustry, setActiveIndustry] = useState('All Industries');
+  const [activeService, setActiveService]   = useState('All Services');
+
+  const filtered = caseStudies.filter(cs => {
+    const industryOk = activeIndustry === 'All Industries' || cs.industry === activeIndustry;
+    const serviceOk  = activeService  === 'All Services'  || cs.tags.includes(activeService);
+    return industryOk && serviceOk;
+  });
+
+  const pillBase = "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer whitespace-nowrap";
+  const pillActive = `${pillBase} bg-[#E61739] text-white shadow-lg`;
+  const pillInactive = `${pillBase} bg-white/10 text-white/60 hover:bg-white/20 hover:text-white border border-white/10`;
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative pt-48 pb-32 overflow-hidden bg-[#020202]">
+
+      {/* ── COMPACT HERO + FILTERS ── */}
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-10">
         <div className="absolute inset-0 z-0">
-          <img src={HERO_IMG} alt="Case Studies" className="w-full h-full object-cover opacity-20 object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
         <div className="mesh-container opacity-40">
-           <div className="blob blob-purple"></div>
-           <div className="blob blob-magenta opacity-30"></div>
+          <div className="blob blob-purple opacity-30" />
+          <div className="blob blob-magenta opacity-20" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs setView={setView} currentName="Case Studies" />
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1] drop-shadow-2xl">
-            <span className="text-shine-white">Proven</span><br/>
-            <span className="text-[#E61739]">Results.</span>
-          </h1>
-          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
-            See how leading enterprises are using KDCI's managed intelligence to scale faster, reduce costs, and improve quality.
-          </p>
-        </div>
-      </section>
 
-      {/* Case Studies Grid */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          
-          {/* Featured Case Study */}
-          <div className="mb-20">
-            <div className="bg-[#1D1D1F] rounded-[4rem] p-12 md:p-16 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all">
-               <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
-               <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                  <div className="md:w-2/3">
-                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E61739]/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-[#E61739]/20">
-                       <Smartphone size={12} /> Featured Success Story
-                     </div>
-                     <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6 group-hover:text-[#E61739] transition-colors">{caseStudies[0].title}</h2>
-                     <p className="text-white/60 text-lg mb-8 leading-relaxed">{caseStudies[0].desc}</p>
-                     
-                     <div className="grid grid-cols-3 gap-6 mb-8 border-t border-white/10 pt-8">
-                        {caseStudies[0].metrics.map((m, i) => (
-                          <div key={i}>
-                             <div className="text-2xl md:text-3xl font-black text-white">{m.value}</div>
-                             <div className="text-[10px] font-bold text-white/40 uppercase tracking-tight">{m.label}</div>
-                          </div>
-                        ))}
-                     </div>
+          <div className="mt-6 mb-10">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
+              <span className="text-shine-white">Proven</span>{' '}
+              <span className="text-[#E61739]">Results.</span>
+            </h1>
+            <p className="text-white/60 text-lg font-medium max-w-2xl">
+              See how leading enterprises use KDCI's managed intelligence to scale faster, cut costs, and improve quality.
+            </p>
+          </div>
 
-                     <button onClick={() => setView('case-study-detail')} className="px-8 py-3 bg-white text-black rounded-xl font-bold hover:bg-[#E61739] hover:text-white transition-all flex items-center gap-2">
-                        Read Full Story <ArrowRight size={16} />
-                     </button>
-                  </div>
-                  <div className="md:w-1/3 flex justify-center">
-                     <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-white/5 to-white/0 rounded-full flex items-center justify-center border border-white/10 group-hover:scale-110 transition-transform duration-700 backdrop-blur-sm relative">
-                        <div className="absolute inset-0 rounded-full border border-white/5 animate-spin-slow"></div>
-                        <Smartphone size={80} className="text-[#E61739]" />
-                     </div>
-                  </div>
-               </div>
+          {/* Filter bar */}
+          <div className="space-y-3">
+            {/* Industry filters */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mr-1 shrink-0">Industry</span>
+              {INDUSTRIES.map(ind => (
+                <button
+                  key={ind}
+                  onClick={() => setActiveIndustry(ind)}
+                  className={activeIndustry === ind ? pillActive : pillInactive}
+                >
+                  {ind}
+                </button>
+              ))}
+            </div>
+            {/* Service filters */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mr-1 shrink-0">Service</span>
+              {SERVICES.map(svc => (
+                <button
+                  key={svc}
+                  onClick={() => setActiveService(svc)}
+                  className={activeService === svc ? pillActive : pillInactive}
+                >
+                  {svc}
+                </button>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {caseStudies.slice(1).map((study) => (
-              <div key={study.id} className="group flex flex-col h-full bg-[#F5F5F7] rounded-[3rem] p-10 border border-black/[0.03] hover:shadow-2xl hover:bg-white transition-all duration-500">
-                <div className="flex justify-between items-start mb-8">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform">
-                      <study.icon size={24} />
+      {/* ── CARDS GRID ── */}
+      <section className="py-14 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          {filtered.length === 0 ? (
+            <div className="text-center py-24 text-slate-400 font-medium text-lg">
+              No case studies match the selected filters.
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filtered.map((study) => (
+                <div
+                  key={study.id}
+                  className="group flex flex-col h-full bg-white rounded-[2.5rem] p-8 border border-black/[0.04] hover:shadow-2xl transition-all duration-500"
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform shrink-0">
+                      <study.icon size={22} />
                     </div>
                     <div>
-                      <div className="text-xs font-black uppercase tracking-widest text-[#E61739]">{study.industry}</div>
-                      <div className="font-bold text-slate-900">{study.client}</div>
+                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739]">{study.industry}</div>
+                      <div className="font-bold text-slate-900 text-sm">{study.client}</div>
                     </div>
                   </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#E61739] transition-colors">{study.title}</h3>
-                <p className="text-slate-500 font-medium leading-relaxed mb-8 flex-grow">{study.desc}</p>
-                
-                <div className="grid grid-cols-3 gap-4 mb-8 pt-8 border-t border-black/5">
-                  {study.metrics.map((m, i) => (
-                    <div key={i}>
-                      <div className="text-2xl font-black text-slate-900">{m.value}</div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">{m.label}</div>
-                    </div>
-                  ))}
-                </div>
 
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {study.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-white border border-slate-200 rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                      {tag}
-                    </span>
-                  ))}
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">
+                    {study.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">
+                    {study.desc}
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-3 mb-6 pt-6 border-t border-black/5">
+                    {study.metrics.map((m, i) => (
+                      <div key={i}>
+                        <div className="text-xl font-black text-slate-900">{m.value}</div>
+                        <div className="text-[9px] font-bold text-slate-400 uppercase tracking-tight leading-tight">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {study.tags.map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => setView('case-study-detail')}
+                    className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"
+                  >
+                    Read Case Study <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
-                
-                <button className="mt-8 w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2">
-                  Read Case Study <ArrowRight size={16} />
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── FINAL CTA ── */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
+          <div className="mesh-container opacity-20 pointer-events-none">
+            <div className="blob blob-purple opacity-30" />
+            <div className="blob blob-magenta opacity-30" />
+          </div>
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">
+              Have a similar<br/><span className="text-shine-red">challenge?</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">
+              Our solutions architects can design a custom operational model for your specific needs.
+            </p>
+            <button
+              onClick={() => setView('contact')}
+              className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 mx-auto group/cta"
+            >
+              Consult an Architect <ArrowRight size={24} className="group-hover/cta:translate-x-1 transition-transform" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
-           <div className="absolute inset-0 z-0">
-              <img src={HERO_IMG} alt="Case Studies Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
-           </div>
-           <div className="mesh-container opacity-20 pointer-events-none">
-              <div className="blob blob-purple opacity-30"></div>
-              <div className="blob blob-magenta opacity-30"></div>
-           </div>
-           <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Have a similar <br/><span className="text-shine-red">challenge?</span></h2>
-              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Our solutions architects can design a custom operational model for your specific needs.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-                 Consult an Architect <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-           </div>
-        </div>
-      </section>
     </div>
   );
 };
