@@ -139,7 +139,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Full-time, dedicated offshore professionals</span>
+                  <span className="leading-snug">Full-time, dedicated Filipino offshore professionals</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
