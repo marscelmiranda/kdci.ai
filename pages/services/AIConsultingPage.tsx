@@ -171,8 +171,15 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
-                  {['OpenAI', 'Claude', 'n8n', 'ElevenLabs', 'LangChain'].map((tool, i) => (
-                    <span key={i} className="text-[11px] font-black text-slate-800 tracking-tight whitespace-nowrap">{tool}</span>
+                  {[
+                    { name: "Zendesk",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Zendesk_Logo_jlsxla.png" },
+                    { name: "Intercom",  logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png" },
+                    { name: "Gorgias",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327925/GorgiasLogo_xvhteo.png" },
+                    { name: "Freshdesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Freshdesk_Logo_suwwdf.png" },
+                  ].map((app, i) => (
+                    <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                      <img src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
+                    </div>
                   ))}
                 </div>
               </div>
