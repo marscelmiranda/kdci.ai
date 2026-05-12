@@ -163,7 +163,7 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
       </section>
 
       {/* Content Section */}
-      <section className="py-32 bg-white min-h-[50vh]">
+      <section className="pt-8 pb-32 bg-white min-h-[50vh]">
         <div className="max-w-6xl mx-auto px-6">
           
           {/* Controls Container */}
