@@ -172,13 +172,13 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
-                    { name: "Claude",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/330px-Claude_AI_logo.svg.png" },
+                    { name: "Claude",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Claude_AI_logo.svg/330px-Claude_AI_logo.svg.png", imgH: '24px' },
                     { name: "Intercom",  logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png" },
                     { name: "Gorgias",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327925/GorgiasLogo_xvhteo.png" },
                     { name: "Freshdesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Freshdesk_Logo_suwwdf.png" },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
+                      <img src={app.logo} alt={app.name} className="object-contain" style={(app as any).imgH ? { height: (app as any).imgH } : { maxHeight: '100%', maxWidth: '100%' }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
