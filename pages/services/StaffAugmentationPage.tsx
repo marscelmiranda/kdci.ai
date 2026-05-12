@@ -423,7 +423,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Why the Philippines
+              Why Hire From the Philippines
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
               The world's preferred<br/>offshore staffing destination.
