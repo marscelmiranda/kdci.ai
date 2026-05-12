@@ -186,7 +186,6 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
               <div className="flex gap-3 overflow-hidden rounded-3xl" style={{ width: '400px', height: '560px' }}>
                 <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={openLightbox} />
                 <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={openLightbox} />
-                <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={openLightbox} />
               </div>
             </div>
           </div>
