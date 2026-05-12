@@ -104,7 +104,7 @@ const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webina
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeIndustry, setActiveIndustry]     = useState('All');
   const [activeService, setActiveService]       = useState('All');
-  const [activeContentType, setActiveContentType] = useState('All');
+  const [activeContentType, setActiveContentType] = useState('Case Study');
   const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'content' | null>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
