@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Landmark, Truck, Monitor, Store, Home, HeartPulse, Headphones, Database, Code2, Users, Share2, Layers } from 'lucide-react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -91,33 +91,16 @@ const caseStudies = [
   }
 ];
 
-const INDUSTRIES = [
-  { label: 'All', value: 'All Industries', icon: Layers },
-  { label: 'Financial Services', value: 'Financial Services', icon: Landmark },
-  { label: 'Logistics', value: 'Logistics', icon: Truck },
-  { label: 'Technology', value: 'Technology', icon: Monitor },
-  { label: 'Retail', value: 'Retail', icon: Store },
-  { label: 'Real Estate', value: 'Real Estate', icon: Home },
-  { label: 'Healthcare', value: 'Healthcare', icon: HeartPulse },
-];
-
-const SERVICES = [
-  { label: 'All', value: 'All Services', icon: Layers },
-  { label: 'Customer Support', value: 'Customer Support', icon: Headphones },
-  { label: 'Data Entry', value: 'Data Entry', icon: Database },
-  { label: 'Software Dev', value: 'Software Dev', icon: Code2 },
-  { label: 'Staff Aug', value: 'Staff Aug', icon: Users },
-  { label: 'Social Media', value: 'Social Media', icon: Share2 },
-  { label: 'Back Office', value: 'Back Office', icon: Layers },
-];
+const INDUSTRIES = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
+const SERVICES   = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
 
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [activeIndustry, setActiveIndustry] = useState('All Industries');
-  const [activeService, setActiveService]   = useState('All Services');
+  const [activeIndustry, setActiveIndustry] = useState('All');
+  const [activeService, setActiveService]   = useState('All');
 
   const filtered = caseStudies.filter(cs => {
-    const industryOk = activeIndustry === 'All Industries' || cs.industry === activeIndustry;
-    const serviceOk  = activeService  === 'All Services'  || cs.tags.includes(activeService);
+    const industryOk = activeIndustry === 'All' || cs.industry === activeIndustry;
+    const serviceOk  = activeService  === 'All' || cs.tags.includes(activeService);
     return industryOk && serviceOk;
   });
 
@@ -125,7 +108,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
     <div className="min-h-screen bg-white">
 
       {/* ── COMPACT HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-0">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-12">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
@@ -133,10 +116,8 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
           <div className="blob blob-purple opacity-30" />
           <div className="blob blob-magenta opacity-20" />
         </div>
-
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs setView={setView} currentName="Case Studies" />
-
           <div className="mt-6 mb-10">
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
               <span className="text-shine-white">Proven</span>{' '}
@@ -147,72 +128,49 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
             </p>
           </div>
         </div>
+      </section>
 
-        {/* ── FILTER STRIP ── */}
-        <div className="relative z-10 border-t border-white/10 bg-white/[0.03] backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6">
-
-            {/* Industry row */}
-            <div className="flex items-stretch border-b border-white/8 overflow-x-auto scrollbar-none">
-              <div className="shrink-0 flex items-center pr-6 border-r border-white/10 mr-2">
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30">Industry</span>
-              </div>
-              <div className="flex items-stretch gap-1 py-1">
-                {INDUSTRIES.map(({ label, value, icon: Icon }) => {
-                  const active = activeIndustry === value;
-                  return (
-                    <button
-                      key={value}
-                      onClick={() => setActiveIndustry(value)}
-                      className={`relative flex items-center gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all rounded-t-xl ${
-                        active
-                          ? 'text-white bg-white/10'
-                          : 'text-white/40 hover:text-white/80 hover:bg-white/5'
-                      }`}
-                    >
-                      <Icon size={13} className={active ? 'text-[#E61739]' : ''} />
-                      {label}
-                      {active && (
-                        <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#E61739] rounded-full" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
+      {/* ── FILTER BAR ── */}
+      <div className="sticky top-16 z-20 bg-white border-b border-slate-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 shrink-0">Industry</span>
+            <div className="flex gap-2 flex-wrap">
+              {INDUSTRIES.map(ind => (
+                <button
+                  key={ind}
+                  onClick={() => setActiveIndustry(ind)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                    activeIndustry === ind
+                      ? 'bg-slate-900 text-white'
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800'
+                  }`}
+                >
+                  {ind}
+                </button>
+              ))}
             </div>
-
-            {/* Service row */}
-            <div className="flex items-stretch overflow-x-auto scrollbar-none">
-              <div className="shrink-0 flex items-center pr-6 border-r border-white/10 mr-2">
-                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30">Service</span>
-              </div>
-              <div className="flex items-stretch gap-1 py-1">
-                {SERVICES.map(({ label, value, icon: Icon }) => {
-                  const active = activeService === value;
-                  return (
-                    <button
-                      key={value}
-                      onClick={() => setActiveService(value)}
-                      className={`relative flex items-center gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all rounded-b-xl ${
-                        active
-                          ? 'text-white bg-white/10'
-                          : 'text-white/40 hover:text-white/80 hover:bg-white/5'
-                      }`}
-                    >
-                      <Icon size={13} className={active ? 'text-[#E61739]' : ''} />
-                      {label}
-                      {active && (
-                        <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#E61739] rounded-full" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
+          </div>
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 shrink-0">Service</span>
+            <div className="flex gap-2 flex-wrap">
+              {SERVICES.map(svc => (
+                <button
+                  key={svc}
+                  onClick={() => setActiveService(svc)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                    activeService === svc
+                      ? 'bg-[#E61739] text-white'
+                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800'
+                  }`}
+                >
+                  {svc}
+                </button>
+              ))}
             </div>
-
           </div>
         </div>
-      </section>
+      </div>
 
       {/* ── CARDS GRID ── */}
       <section className="py-14 bg-[#F5F5F7]">
