@@ -297,7 +297,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none">From brief to team<br/>in 14–30 days.</h2>
             </div>
-            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. Our RPO team in the Philippines handles every step, from sourcing to onboarding.</p>
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. We handle every step.</p>
           </div>
 
           <div className="space-y-3">
