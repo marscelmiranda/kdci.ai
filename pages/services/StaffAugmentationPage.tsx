@@ -428,7 +428,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               The world's leading source of remote offshore teams.
             </h2>
             <p className="text-slate-500 text-base font-medium max-w-xl mx-auto leading-relaxed ml-[251.6px] mr-[251.6px]">
-              The Philippines consistently outperforms competing markets on factors that that drive long-term team success, making it the top choice for companies building offshore teams.
+              The Philippines consistently outperforms competing markets on factors that drive long-term team success, making it the top choice for companies building offshore teams.
             </p>
           </div>
 
