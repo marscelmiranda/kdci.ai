@@ -308,7 +308,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
           </div>
           <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
             {/* Left — text */}
-            <div className="flex-1 px-12 py-[68px] md:px-20 md:py-20 flex flex-col justify-center">
+            <div className="flex-1 px-12 py-[58px] md:px-20 md:py-[68px] flex flex-col justify-center">
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight leading-tight">
                 Have a similar<br/><span className="text-shine-red">challenge?</span>
               </h2>
@@ -325,7 +325,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
               </div>
             </div>
             {/* Right — image */}
-            <div className="lg:w-[777px] shrink-0 relative min-h-[306px]">
+            <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
               <img
                 src="/kdci-challenge.png"
                 alt="KDCI Solutions Architect"
