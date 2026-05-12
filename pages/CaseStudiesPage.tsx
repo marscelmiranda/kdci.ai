@@ -325,7 +325,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
               </div>
             </div>
             {/* Right — image */}
-            <div className="lg:w-[676px] shrink-0 relative min-h-[360px]">
+            <div className="lg:w-[777px] shrink-0 relative min-h-[360px]">
               <img
                 src="/kdci-challenge.png"
                 alt="KDCI Solutions Architect"
