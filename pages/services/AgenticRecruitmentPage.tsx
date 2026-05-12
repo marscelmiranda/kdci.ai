@@ -136,7 +136,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
-                    { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '22px' },
+                    { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '28px' },
                     { name: "Intercom",  logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png" },
                     { name: "Gorgias",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327925/GorgiasLogo_xvhteo.png" },
                     { name: "Freshdesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Freshdesk_Logo_suwwdf.png" },
