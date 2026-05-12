@@ -129,59 +129,67 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
         <div className="mesh-container opacity-40">
           <div className="blob blob-magenta opacity-30" />
           <div className="blob blob-purple opacity-40" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-20">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <Breadcrumbs
+            setView={setView}
+            currentName="Creative Production"
+            parent={{ name: 'Solutions', view: 'solutions-hub' }}
+          />
 
-          {/* Left — copy */}
-          <div className="flex-1 min-w-0">
-            <Breadcrumbs
-              setView={setView}
-              currentName="Creative Production"
-              parent={{ name: 'Solutions', view: 'solutions-hub' }}
-              align="left"
-            />
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[1.05] drop-shadow-2xl">
-              <span className="text-shine-white">Creative Production</span><br />
-              <span className="text-[#E61739]">at Scale.</span>
-            </h1>
-            <p className="max-w-xl text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16">
-              Our embedded creative teams deliver on-brand assets daily, while we manage the AI workflows that drive accuracy, speed, and creative consistency.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => setView('contact')}
-                className="px-10 py-5 bg-[#E61739] text-white rounded-3xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group"
-              >
-                Book a Creative Strategy Call
-                <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('cp-portfolio');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="px-10 py-5 border border-white/20 text-white rounded-3xl font-bold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-              >
-                See Our Work
-              </button>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
+            {/* Left — copy */}
+            <div className="text-left flex flex-col py-2">
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                <span className="text-shine-white">Creative<br/>Production</span><br/>
+                <span className="text-[#E61739]">at Scale.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
+                Our embedded creative teams deliver on-brand assets daily, while we manage the AI workflows that drive accuracy, speed, and creative consistency.
+              </p>
+
+              <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">Unlimited asset requests with 24–48h turnaround</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">100% brand-aligned by dedicated embedded designers</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                  <span className="leading-snug">AI-powered workflows for consistency and speed</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <button
+                  onClick={() => setView('contact')}
+                  className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group"
+                >
+                  Book a Creative Strategy Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right — animated mosaic */}
+            <div className="hidden lg:flex justify-end">
+              <div className="flex gap-3 overflow-hidden rounded-3xl" style={{ width: '400px', height: '560px' }}>
+                <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={openLightbox} />
+                <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={openLightbox} />
+                <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={openLightbox} />
+              </div>
             </div>
           </div>
-
-          {/* Right — animated mosaic */}
-          <div className="hidden lg:flex shrink-0 lg:w-[440px] xl:w-[500px] gap-3 overflow-hidden rounded-3xl" style={{ height: '560px' }}>
-            <ScrollingColumn images={COL_A} duration={60} direction="up" offset={-40} onImageClick={openLightbox} />
-            <ScrollingColumn images={COL_B} duration={78} direction="down" offset={0} onImageClick={openLightbox} />
-            <ScrollingColumn images={COL_C} duration={69} direction="up" offset={-80} onImageClick={openLightbox} />
-          </div>
-
         </div>
 
         {/* Stats bar */}
