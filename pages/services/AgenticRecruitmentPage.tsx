@@ -121,7 +121,7 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557802/Global_Staffing_c8rayy.png"
+                  src={IMG_HERO_MEETING}
                   alt="KDCI recruitment consultation"
                   className="w-full h-full object-cover"
                 />
