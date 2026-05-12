@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -97,6 +97,18 @@ const SERVICES   = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'St
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeIndustry, setActiveIndustry] = useState('All');
   const [activeService, setActiveService]   = useState('All');
+  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | null>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setOpenPanel(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const filtered = caseStudies.filter(cs => {
     const industryOk = activeIndustry === 'All' || cs.industry === activeIndustry;
@@ -104,11 +116,16 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
     return industryOk && serviceOk;
   });
 
+  const industryLabel = activeIndustry === 'All' ? 'Industry' : `Industry: ${activeIndustry}`;
+  const serviceLabel  = activeService  === 'All' ? 'Service'  : `Service: ${activeService}`;
+  const industryActive = activeIndustry !== 'All';
+  const serviceActive  = activeService  !== 'All';
+
   return (
     <div className="min-h-screen bg-white">
 
       {/* ── COMPACT HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-12">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-0">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
@@ -116,9 +133,9 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
           <div className="blob blob-purple opacity-30" />
           <div className="blob blob-magenta opacity-20" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 pb-16">
           <Breadcrumbs setView={setView} currentName="Case Studies" />
-          <div className="mt-6 mb-10">
+          <div className="mt-6">
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
               <span className="text-shine-white">Proven</span>{' '}
               <span className="text-[#E61739]">Results.</span>
@@ -128,49 +145,73 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
             </p>
           </div>
         </div>
-      </section>
 
-      {/* ── FILTER BAR ── */}
-      <div className="sticky top-16 z-20 bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 shrink-0">Industry</span>
-            <div className="flex gap-2 flex-wrap">
-              {INDUSTRIES.map(ind => (
-                <button
-                  key={ind}
-                  onClick={() => setActiveIndustry(ind)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    activeIndustry === ind
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800'
-                  }`}
-                >
-                  {ind}
-                </button>
-              ))}
-            </div>
+        {/* ── FILTER BAR ── */}
+        <div ref={filterRef} className="relative z-30 border-t border-white/15">
+          {/* Two-column trigger row */}
+          <div className="flex divide-x divide-white/15">
+            {/* Industry trigger */}
+            <button
+              onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
+              className={`flex-1 flex items-center gap-3 px-8 py-5 text-left transition-colors ${
+                openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'
+              }`}
+            >
+              {industryActive
+                ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); }} />
+                : <Plus size={16} className="text-white/60 shrink-0" />
+              }
+              <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/60'}`}>
+                {industryLabel}
+              </span>
+            </button>
+
+            {/* Service trigger */}
+            <button
+              onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
+              className={`flex-1 flex items-center gap-3 px-8 py-5 text-left transition-colors ${
+                openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'
+              }`}
+            >
+              {serviceActive
+                ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); }} />
+                : <Plus size={16} className="text-white/60 shrink-0" />
+              }
+              <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/60'}`}>
+                {serviceLabel}
+              </span>
+            </button>
           </div>
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 shrink-0">Service</span>
-            <div className="flex gap-2 flex-wrap">
-              {SERVICES.map(svc => (
-                <button
-                  key={svc}
-                  onClick={() => setActiveService(svc)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    activeService === svc
-                      ? 'bg-[#E61739] text-white'
-                      : 'bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800'
-                  }`}
-                >
-                  {svc}
-                </button>
-              ))}
+
+          {/* Dropdown panel */}
+          {openPanel && (
+            <div className="absolute left-0 right-0 bg-[#111] border-t border-white/10 shadow-2xl px-8 py-6 z-40">
+              <div className="flex flex-wrap gap-3">
+                {(openPanel === 'industry' ? INDUSTRIES : SERVICES).map(opt => {
+                  const isActive = openPanel === 'industry' ? activeIndustry === opt : activeService === opt;
+                  return (
+                    <button
+                      key={opt}
+                      onClick={() => {
+                        if (openPanel === 'industry') setActiveIndustry(opt);
+                        else setActiveService(opt);
+                        setOpenPanel(null);
+                      }}
+                      className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all ${
+                        isActive
+                          ? 'bg-white text-black border-white'
+                          : 'bg-transparent text-white/60 border-white/20 hover:border-white/60 hover:text-white'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
-      </div>
+      </section>
 
       {/* ── CARDS GRID ── */}
       <section className="py-14 bg-[#F5F5F7]">
