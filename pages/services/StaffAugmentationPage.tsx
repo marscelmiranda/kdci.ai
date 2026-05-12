@@ -853,7 +853,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     Free Consultation
                   </div>
                   <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your Offshore Team Today</h2>
-                  <p className="text-white/40 font-medium text-[13px]">Every long-term offshore staffing enggement begins with a discovery call. Tell us what you need, and we'll match you with top Philippine professionals.</p>
+                  <p className="text-white/40 font-medium text-[13px]">Every long-term offshore staffing engagement begins with a discovery call. Tell us what you need, and we'll match you with top Philippine professionals.</p>
                 </div>
                 <form onSubmit={handleForm} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
