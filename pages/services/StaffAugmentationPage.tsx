@@ -180,7 +180,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '28px' },
                     { name: "Intercom",  logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png" },
                     { name: "Eightfold", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778625323/eightfold_logo_mzmlaw.png", imgH: '28px' },
-                    { name: "HireVue",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778626347/hirevue-logo_cv5sqa.svg", imgH: '28px' },
+                    { name: "HireVue",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778626347/hirevue-logo_cv5sqa.svg", imgH: '24px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
                       <img src={app.logo} alt={app.name} className="max-w-full object-contain" style={(app as any).imgH ? { height: (app as any).imgH } : { maxHeight: '100%' }} referrerPolicy="no-referrer" />
