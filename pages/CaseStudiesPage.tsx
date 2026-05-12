@@ -9,6 +9,7 @@ const caseStudies = [
     id: 1,
     client: "Fintech Unicorn",
     industry: "Financial Services",
+    contentType: "Case Study",
     icon: Smartphone,
     title: "Scaling Support from 0 to 500 Agents in 6 Months",
     desc: "How a high-growth neobank maintained 98% CSAT while hyper-scaling their customer operations offshore.",
@@ -23,6 +24,7 @@ const caseStudies = [
     id: 2,
     client: "Global Logistics Leader",
     industry: "Logistics",
+    contentType: "Guide & Playbooks",
     icon: Globe,
     title: "Automating 10,000 Weekly Waybills with AI + Humans",
     desc: "Implementing a human-in-the-loop OCR workflow to digitize shipping documentation with 99.9% accuracy.",
@@ -37,6 +39,7 @@ const caseStudies = [
     id: 3,
     client: "SaaS Enterprise",
     industry: "Technology",
+    contentType: "Webinar",
     icon: Building2,
     title: "Building a Dedicated Engineering Pod for Legacy Migration",
     desc: "Deploying a 15-person specialized dev team to modernize a monolithic architecture to microservices.",
@@ -51,6 +54,7 @@ const caseStudies = [
     id: 4,
     client: "D2C Fashion Brand",
     industry: "Retail",
+    contentType: "Blog",
     icon: ShoppingCart,
     title: "24/7 Social Commerce Support & Community Management",
     desc: "Turning customer support into a revenue channel through proactive social engagement and chat sales.",
@@ -65,6 +69,7 @@ const caseStudies = [
     id: 5,
     client: "PropTech Platform",
     industry: "Real Estate",
+    contentType: "Ebook",
     icon: Building2,
     title: "Streamlining Tenant Verification & Leasing Admin",
     desc: "Centralizing back-office operations for a property management platform managing 50k+ units.",
@@ -79,6 +84,7 @@ const caseStudies = [
     id: 6,
     client: "Healthcare Network",
     industry: "Healthcare",
+    contentType: "Case Study",
     icon: Activity,
     title: "HIPAA-Compliant Patient Intake & Scheduling",
     desc: "Secure, empathetic patient coordination support for a multi-state hospital network.",
@@ -91,13 +97,15 @@ const caseStudies = [
   }
 ];
 
-const INDUSTRIES = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
-const SERVICES   = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
+const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
+const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
+const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [activeIndustry, setActiveIndustry] = useState('All');
-  const [activeService, setActiveService]   = useState('All');
-  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | null>(null);
+  const [activeIndustry, setActiveIndustry]     = useState('All');
+  const [activeService, setActiveService]       = useState('All');
+  const [activeContentType, setActiveContentType] = useState('All');
+  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'content' | null>(null);
   const filterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -111,15 +119,18 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
   }, []);
 
   const filtered = caseStudies.filter(cs => {
-    const industryOk = activeIndustry === 'All' || cs.industry === activeIndustry;
-    const serviceOk  = activeService  === 'All' || cs.tags.includes(activeService);
-    return industryOk && serviceOk;
+    const industryOk    = activeIndustry    === 'All' || cs.industry    === activeIndustry;
+    const serviceOk     = activeService     === 'All' || cs.tags.includes(activeService);
+    const contentTypeOk = activeContentType === 'All' || cs.contentType === activeContentType;
+    return industryOk && serviceOk && contentTypeOk;
   });
 
-  const industryLabel = activeIndustry === 'All' ? 'Industry' : `Industry: ${activeIndustry}`;
-  const serviceLabel  = activeService  === 'All' ? 'Service'  : `Service: ${activeService}`;
-  const industryActive = activeIndustry !== 'All';
-  const serviceActive  = activeService  !== 'All';
+  const industryLabel    = activeIndustry    === 'All' ? 'Industry'     : activeIndustry;
+  const serviceLabel     = activeService     === 'All' ? 'Service'      : activeService;
+  const contentTypeLabel = activeContentType === 'All' ? 'Content Type' : activeContentType;
+  const industryActive    = activeIndustry    !== 'All';
+  const serviceActive     = activeService     !== 'All';
+  const contentTypeActive = activeContentType !== 'All';
 
   return (
     <div className="min-h-screen bg-white">
@@ -149,40 +160,45 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
 
       {/* ── FILTER BAR ── outside overflow-hidden so dropdown isn't clipped */}
       <div ref={filterRef} className="relative z-30 bg-[#0a0a0a] border-b border-white/10">
-        {/* Two-column trigger row */}
+        {/* Three-column trigger row */}
         <div className="flex divide-x divide-white/10">
           {/* Industry trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${
-              openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'
-            }`}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'}`}
           >
             {industryActive
               ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} />
               : <Plus size={16} className="text-white/50 shrink-0" />
             }
-            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/50'}`}>
-              {industryLabel}
-            </span>
+            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/50'}`}>{industryLabel}</span>
             {!industryActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
           </button>
 
           {/* Service trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${
-              openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'
-            }`}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'}`}
           >
             {serviceActive
               ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} />
               : <Plus size={16} className="text-white/50 shrink-0" />
             }
-            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/50'}`}>
-              {serviceLabel}
-            </span>
+            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/50'}`}>{serviceLabel}</span>
             {!serviceActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+          </button>
+
+          {/* Content Type trigger */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'content' ? null : 'content')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'content' ? 'bg-white/10' : 'hover:bg-white/5'}`}
+          >
+            {contentTypeActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveContentType('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-white/50 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${contentTypeActive ? 'text-white' : 'text-white/50'}`}>{contentTypeLabel}</span>
+            {!contentTypeActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
           </button>
         </div>
 
@@ -190,17 +206,21 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
         {openPanel && (
           <div className="absolute left-0 right-0 bg-[#111] border-t border-white/10 shadow-2xl px-8 py-6 z-50">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4">
-              {openPanel === 'industry' ? 'Filter by Industry' : 'Filter by Service'}
+              {openPanel === 'industry' ? 'Filter by Industry' : openPanel === 'service' ? 'Filter by Service' : 'Filter by Content Type'}
             </p>
             <div className="flex flex-wrap gap-3">
-              {(openPanel === 'industry' ? INDUSTRIES : SERVICES).map(opt => {
-                const isActive = openPanel === 'industry' ? activeIndustry === opt : activeService === opt;
+              {(openPanel === 'industry' ? INDUSTRIES : openPanel === 'service' ? SERVICES : CONTENT_TYPES).map(opt => {
+                const isActive =
+                  openPanel === 'industry' ? activeIndustry === opt :
+                  openPanel === 'service'  ? activeService  === opt :
+                  activeContentType === opt;
                 return (
                   <button
                     key={opt}
                     onClick={() => {
                       if (openPanel === 'industry') setActiveIndustry(opt);
-                      else setActiveService(opt);
+                      else if (openPanel === 'service') setActiveService(opt);
+                      else setActiveContentType(opt);
                       setOpenPanel(null);
                     }}
                     className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${
