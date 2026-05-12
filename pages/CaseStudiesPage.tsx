@@ -159,53 +159,53 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
       </section>
 
       {/* ── FILTER BAR ── outside overflow-hidden so dropdown isn't clipped */}
-      <div ref={filterRef} className="relative z-30 bg-[#0a0a0a] border-b border-white/10">
+      <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
         {/* Three-column trigger row */}
-        <div className="flex divide-x divide-white/10">
+        <div className="flex divide-x divide-slate-200">
           {/* Industry trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-white/10' : 'hover:bg-white/5'}`}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
           >
             {industryActive
               ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} />
-              : <Plus size={16} className="text-white/50 shrink-0" />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
             }
-            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-white' : 'text-white/50'}`}>{industryLabel}</span>
-            {!industryActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-slate-900' : 'text-slate-500'}`}>{industryLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'industry' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
           </button>
 
           {/* Service trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-white/10' : 'hover:bg-white/5'}`}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
           >
             {serviceActive
               ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} />
-              : <Plus size={16} className="text-white/50 shrink-0" />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
             }
-            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-white' : 'text-white/50'}`}>{serviceLabel}</span>
-            {!serviceActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-slate-900' : 'text-slate-500'}`}>{serviceLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'service' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
           </button>
 
           {/* Content Type trigger */}
           <button
             onClick={() => setOpenPanel(openPanel === 'content' ? null : 'content')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'content' ? 'bg-white/10' : 'hover:bg-white/5'}`}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'content' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
           >
             {contentTypeActive
               ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveContentType('All'); setOpenPanel(null); }} />
-              : <Plus size={16} className="text-white/50 shrink-0" />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
             }
-            <span className={`text-sm font-bold uppercase tracking-widest ${contentTypeActive ? 'text-white' : 'text-white/50'}`}>{contentTypeLabel}</span>
-            {!contentTypeActive && <ChevronDown size={14} className="text-white/30 ml-auto" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${contentTypeActive ? 'text-slate-900' : 'text-slate-500'}`}>{contentTypeLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'content' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
           </button>
         </div>
 
         {/* Dropdown panel */}
         {openPanel && (
-          <div className="absolute left-0 right-0 bg-[#111] border-t border-white/10 shadow-2xl px-8 py-6 z-50">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4">
+          <div className="absolute left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-8 py-6 z-50">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
               {openPanel === 'industry' ? 'Filter by Industry' : openPanel === 'service' ? 'Filter by Service' : 'Filter by Content Type'}
             </p>
             <div className="flex flex-wrap gap-3">
@@ -225,8 +225,8 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
                     }}
                     className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${
                       isActive
-                        ? 'bg-[#E61739] text-white border-[#E61739]'
-                        : 'bg-transparent text-white/60 border-white/20 hover:border-white/60 hover:text-white'
+                        ? 'bg-slate-900 text-white border-slate-900'
+                        : 'bg-white text-slate-600 border-slate-300 hover:border-slate-900 hover:text-slate-900'
                     }`}
                   >
                     {opt}
