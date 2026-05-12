@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight } from 'lucide-react';
+import IMG_AI_CONSULTING_HERO from '@assets/AI-Consulting_1778556686736.png';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 
@@ -157,7 +158,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="/ai-consulting-hero.png"
+                  src={IMG_AI_CONSULTING_HERO}
                   alt="AI Consulting team"
                   className="w-full h-full object-cover"
                 />
