@@ -636,7 +636,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               Transparent Pricing
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-bold tracking-tight mb-4">One rate. Everything included.</h2>
-            <p className="text-white/65 text-base font-medium max-w-xl mx-auto leading-relaxed">Salary, benefits, office, equipment, HR, and AI monitoring — one flat monthly number. No agency fees, no hidden costs.</p>
+            <p className="text-white/65 text-base font-medium max-w-xl mx-auto leading-relaxed">Our offshore staffing services run on one flat monthly rate covering salary, benefits, office, equipment, HR, and AI monitoring. No agency fees, no hidden costs.</p>
           </div>
 
           {/* Rate tiers */}
