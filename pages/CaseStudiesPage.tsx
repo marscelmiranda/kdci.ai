@@ -301,24 +301,38 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
 
       {/* ── FINAL CTA ── */}
       <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 group">
           <div className="mesh-container opacity-20 pointer-events-none">
             <div className="blob blob-purple opacity-30" />
             <div className="blob blob-magenta opacity-30" />
           </div>
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">
-              Have a similar<br/><span className="text-shine-red">challenge?</span>
-            </h2>
-            <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">
-              Our solutions architects can design a custom operational model for your specific needs.
-            </p>
-            <button
-              onClick={() => setView('contact')}
-              className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 mx-auto group/cta"
-            >
-              Consult an Architect <ArrowRight size={24} className="group-hover/cta:translate-x-1 transition-transform" />
-            </button>
+          <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
+            {/* Left — text */}
+            <div className="flex-1 px-12 py-20 md:px-20 md:py-24 flex flex-col justify-center">
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight leading-tight">
+                Have a similar<br/><span className="text-shine-red">challenge?</span>
+              </h2>
+              <p className="text-lg md:text-xl text-white/60 mb-10 font-medium leading-relaxed max-w-lg">
+                Our solutions architects can design a custom operational model for your specific needs.
+              </p>
+              <div>
+                <button
+                  onClick={() => setView('contact')}
+                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
+                >
+                  Consult an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+            {/* Right — image */}
+            <div className="lg:w-[480px] shrink-0 relative min-h-[320px]">
+              <img
+                src="/kdci-challenge.png"
+                alt="KDCI Solutions Architect"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-transparent to-transparent lg:block hidden" />
+            </div>
           </div>
         </div>
       </section>
