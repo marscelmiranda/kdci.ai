@@ -163,7 +163,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src={IMG_HERO_HANDSHAKE}
+                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.png"
                   alt="KDCI team greeting a new client"
                   className="w-full h-full object-cover"
                 />
