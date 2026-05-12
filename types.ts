@@ -30,7 +30,6 @@ export type ViewType =
   | 'property-mgmt' 
   | 'creative-prod' 
   | 'customer-support' 
-  | 'customer-support-v2'
   | 'staff-aug' 
   | 'ecommerce'
   | 'outcome-models'

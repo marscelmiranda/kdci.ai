@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ArrowRight, MessageSquare, BrainCircuit, Users, ShoppingCart, Code, Building, Landmark, HeartPulse, Megaphone, Truck, GraduationCap, Layers2, ScanSearch, UsersRound, Rocket, CheckCircle2, Settings2, ShieldCheck, Zap } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { IMG_CX_HERO, IMG_CX_TEAM } from '../../data';
+import { IMG_CX_TEAM } from '../../data';
 
 export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
@@ -89,66 +89,82 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
     <div className="min-h-screen bg-white">
       <section className={`relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40`}>
         <div className="absolute inset-0 z-0">
-          <img 
-            src={IMG_CX_HERO} 
-            alt="KDCI CX Team in Office" 
-            className="w-full h-full object-cover opacity-20 object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900"></div>
         </div>
-        
+
         <div className="mesh-container opacity-40">
           <div className="blob blob-magenta opacity-30"></div>
           <div className="blob blob-purple opacity-40"></div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs 
-            setView={setView} 
-            currentName="Customer Experience" 
+          <Breadcrumbs
+            setView={setView}
+            currentName="Customer Experience"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
           />
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-            <span className="text-shine-white">AI-Powered Efficiency.</span><br/>
-            <span className="text-[#E61739]">Human-Led Satisfaction.</span>
-          </h1>
-          <p className="max-w-3xl text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-            Deploy AI agents to handle interactions at scale, with seamless escalation to human professionals. We provide the strategy, oversight, and talent ensuring consistent quality.
-          </p>
-          
-          <div className="flex flex-col md:flex-row items-start gap-6 mb-12 text-white/90 text-sm md:text-base font-medium">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={20} className="text-[#E61739] shrink-0" />
-              <span>AI agents handle calls and chat at scale</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={20} className="text-[#E61739] shrink-0" />
-              <span>Seamless escalation to human specialists</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={20} className="text-[#E61739] shrink-0" />
-              <span>Human oversight ensures continuous improvement</span>
-            </div>
-          </div>
 
-          <div className="flex flex-col items-start gap-4">
-            <button onClick={() => setView('contact')} className="px-12 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              Book a Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button onClick={() => setView('customer-support-v2')} className="text-white/60 hover:text-white text-sm font-medium transition-colors underline underline-offset-4 mt-2">
-              View V2 (Split Hero Layout)
-            </button>
-          </div>
-        </div>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
+            <div className="text-left flex flex-col justify-between py-2">
+              <div>
+                <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                  <span className="text-shine-white">AI-Powered Efficiency.</span><br/>
+                  <span className="text-[#E61739]">Human-Led Satisfaction.</span>
+                </h1>
+                <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
+                  Deploy AI agents to handle interactions at scale, with seamless escalation to human professionals.
+                </p>
 
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center">
-            {['98% Avg CSAT', '10 Sec Response', '24/7 Global Ops', '60% OpEx Savings'].map((stat, i) => (
-              <div key={i} className="text-center md:text-left">
-                <div className="text-white text-xl md:text-2xl font-black mb-1">{stat.split(' ')[0]}</div>
-                <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">{stat.split(' ').slice(1).join(' ')}</p>
+                <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">AI agents handle calls and chat at scale</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">Seamless escalation to human specialists</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
+                    <span className="leading-snug">Human oversight ensures continuous improvement</span>
+                  </div>
+                </div>
               </div>
-            ))}
+
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <button onClick={() => setView('contact')} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                  Book a Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+
+            <div className="relative lg:h-full">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+                <img
+                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png?auto=format&fit=crop&q=80&w=1000&h=1000"
+                  alt="Filipino Customer Support Agent"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+
+                <div className="absolute top-6 left-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Manila, Philippines
+                  </div>
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
+                  {cxApps.slice(0, 4).map((app, i) => (
+                    <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                      <img src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
