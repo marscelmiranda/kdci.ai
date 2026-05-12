@@ -152,11 +152,11 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Glossary" />
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1] drop-shadow-2xl">
+          <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
             <span className="text-shine-white">Operational</span><br/>
             <span className="text-[#E61739]">Lexicon.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-white/60 font-medium leading-relaxed mb-12">
+          <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
             The definitive guide to AI and outsourcing terminology. Understand the language of modern operations.
           </p>
         </div>
