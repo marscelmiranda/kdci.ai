@@ -852,7 +852,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Consultation
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Build Your Offshore Team.</h2>
+                  <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your Offshore Team Today</h2>
                   <p className="text-white/40 text-sm font-medium">Tell us what you need and we'll match you with top Philippine professionals.</p>
                 </div>
                 <form onSubmit={handleForm} className="space-y-4">
