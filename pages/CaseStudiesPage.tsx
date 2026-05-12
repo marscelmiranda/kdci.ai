@@ -325,13 +325,14 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
               </div>
             </div>
             {/* Right — image */}
-            <div className="lg:w-[480px] shrink-0 relative min-h-[320px]">
+            <div className="lg:w-[520px] shrink-0 relative min-h-[360px]">
               <img
                 src="/kdci-challenge.png"
                 alt="KDCI Solutions Architect"
-                className="w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-left-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-transparent to-transparent lg:block hidden" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>
           </div>
         </div>
