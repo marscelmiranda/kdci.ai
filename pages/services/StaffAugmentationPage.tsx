@@ -179,7 +179,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   {[
                     { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '28px' },
                     { name: "Intercom",  logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png" },
-                    { name: "Eightfold", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778625323/eightfold_logo_mzmlaw.png" },
+                    { name: "Eightfold", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778625323/eightfold_logo_mzmlaw.png", imgH: '28px' },
                     { name: "Freshdesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Freshdesk_Logo_suwwdf.png" },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
