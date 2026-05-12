@@ -428,7 +428,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               The world's leading source of offshore talent.
             </h2>
             <p className="text-slate-500 text-base font-medium max-w-xl mx-auto leading-relaxed">
-              Not every offshore market offers the same quality talent. The Philippines consistently outperforms on the factors that matter most, making it the top choice for companies building long-term offshore teams.
+              Not every offshore market offers the same quality talent. The Philippines consistently outperforms competing markets on factors that that drive long-term team success, making it the top choice for companies building long-term offshore teams.
             </p>
           </div>
 
