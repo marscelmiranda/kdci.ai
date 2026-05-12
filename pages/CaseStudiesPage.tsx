@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity } from 'lucide-react';
+import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Landmark, Truck, Monitor, Store, Home, HeartPulse, Headphones, Database, Code2, Users, Share2, Layers } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -91,8 +91,25 @@ const caseStudies = [
   }
 ];
 
-const INDUSTRIES = ['All Industries', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare'];
-const SERVICES   = ['All Services', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office'];
+const INDUSTRIES = [
+  { label: 'All', value: 'All Industries', icon: Layers },
+  { label: 'Financial Services', value: 'Financial Services', icon: Landmark },
+  { label: 'Logistics', value: 'Logistics', icon: Truck },
+  { label: 'Technology', value: 'Technology', icon: Monitor },
+  { label: 'Retail', value: 'Retail', icon: Store },
+  { label: 'Real Estate', value: 'Real Estate', icon: Home },
+  { label: 'Healthcare', value: 'Healthcare', icon: HeartPulse },
+];
+
+const SERVICES = [
+  { label: 'All', value: 'All Services', icon: Layers },
+  { label: 'Customer Support', value: 'Customer Support', icon: Headphones },
+  { label: 'Data Entry', value: 'Data Entry', icon: Database },
+  { label: 'Software Dev', value: 'Software Dev', icon: Code2 },
+  { label: 'Staff Aug', value: 'Staff Aug', icon: Users },
+  { label: 'Social Media', value: 'Social Media', icon: Share2 },
+  { label: 'Back Office', value: 'Back Office', icon: Layers },
+];
 
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeIndustry, setActiveIndustry] = useState('All Industries');
@@ -104,15 +121,11 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
     return industryOk && serviceOk;
   });
 
-  const pillBase = "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer whitespace-nowrap";
-  const pillActive = `${pillBase} bg-[#E61739] text-white shadow-lg`;
-  const pillInactive = `${pillBase} bg-white/10 text-white/60 hover:bg-white/20 hover:text-white border border-white/10`;
-
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── COMPACT HERO + FILTERS ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-10">
+      {/* ── COMPACT HERO ── */}
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-0">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
@@ -133,35 +146,70 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
               See how leading enterprises use KDCI's managed intelligence to scale faster, cut costs, and improve quality.
             </p>
           </div>
+        </div>
 
-          {/* Filter bar */}
-          <div className="space-y-3">
-            {/* Industry filters */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mr-1 shrink-0">Industry</span>
-              {INDUSTRIES.map(ind => (
-                <button
-                  key={ind}
-                  onClick={() => setActiveIndustry(ind)}
-                  className={activeIndustry === ind ? pillActive : pillInactive}
-                >
-                  {ind}
-                </button>
-              ))}
+        {/* ── FILTER STRIP ── */}
+        <div className="relative z-10 border-t border-white/10 bg-white/[0.03] backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-6">
+
+            {/* Industry row */}
+            <div className="flex items-stretch border-b border-white/8 overflow-x-auto scrollbar-none">
+              <div className="shrink-0 flex items-center pr-6 border-r border-white/10 mr-2">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30">Industry</span>
+              </div>
+              <div className="flex items-stretch gap-1 py-1">
+                {INDUSTRIES.map(({ label, value, icon: Icon }) => {
+                  const active = activeIndustry === value;
+                  return (
+                    <button
+                      key={value}
+                      onClick={() => setActiveIndustry(value)}
+                      className={`relative flex items-center gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all rounded-t-xl ${
+                        active
+                          ? 'text-white bg-white/10'
+                          : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon size={13} className={active ? 'text-[#E61739]' : ''} />
+                      {label}
+                      {active && (
+                        <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#E61739] rounded-full" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            {/* Service filters */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mr-1 shrink-0">Service</span>
-              {SERVICES.map(svc => (
-                <button
-                  key={svc}
-                  onClick={() => setActiveService(svc)}
-                  className={activeService === svc ? pillActive : pillInactive}
-                >
-                  {svc}
-                </button>
-              ))}
+
+            {/* Service row */}
+            <div className="flex items-stretch overflow-x-auto scrollbar-none">
+              <div className="shrink-0 flex items-center pr-6 border-r border-white/10 mr-2">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/30">Service</span>
+              </div>
+              <div className="flex items-stretch gap-1 py-1">
+                {SERVICES.map(({ label, value, icon: Icon }) => {
+                  const active = activeService === value;
+                  return (
+                    <button
+                      key={value}
+                      onClick={() => setActiveService(value)}
+                      className={`relative flex items-center gap-2 px-4 py-3 text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all rounded-b-xl ${
+                        active
+                          ? 'text-white bg-white/10'
+                          : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon size={13} className={active ? 'text-[#E61739]' : ''} />
+                      {label}
+                      {active && (
+                        <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#E61739] rounded-full" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
+
           </div>
         </div>
       </section>
