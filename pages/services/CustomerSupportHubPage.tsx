@@ -168,6 +168,28 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
           </div>
         </div>
+
+        {/* Stats Bar */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
+            <div className="text-center md:text-left">
+              <div className="text-xl md:text-2xl font-black mb-1">98%</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">CSAT Score</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-xl md:text-2xl font-black mb-1">3.2x</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Faster Resolution</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-xl md:text-2xl font-black mb-1">24/7</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Always-On Coverage</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-xl md:text-2xl font-black mb-1">Top 1%</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Vetted CX Talent</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="py-32 bg-white relative">
