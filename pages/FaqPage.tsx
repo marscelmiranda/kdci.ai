@@ -43,7 +43,7 @@ export const FaqPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-48 pb-32 overflow-hidden bg-[#020202]">
+      <section className="relative pt-36 pb-16 overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
           <img src={HERO_IMG} alt="FAQ" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
