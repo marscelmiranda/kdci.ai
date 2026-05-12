@@ -296,7 +296,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none">Begin your offshore staffing engagement in four steps.</h2>
             </div>
-            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Common roles in 14 days. Specialized or senior roles in up to 30. Our offshore recruiters handle every step, from sourcing to onboarding.</p>
+            <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Place common roles in 14 days. Fill specialized or senior roles within 30. Our offshore recruiters handle every step, from sourcing to onboarding.</p>
           </div>
 
           <div className="space-y-3">
