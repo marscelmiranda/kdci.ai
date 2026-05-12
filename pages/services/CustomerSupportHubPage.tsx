@@ -102,6 +102,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
             setView={setView}
             currentName="Customer Experience"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
+            align="left"
           />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">

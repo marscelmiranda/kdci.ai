@@ -43,6 +43,7 @@ export const SoftwareEngineeringPage = ({ setView }: { setView: (v: ViewType) =>
             setView={setView} 
             currentName="Software Engineering" 
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
+            align="left"
           />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
             <span className="text-shine-white">Code Better.</span><br/>

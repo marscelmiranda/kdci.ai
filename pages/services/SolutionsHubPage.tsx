@@ -18,7 +18,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="mb-20 text-center">
-            <Breadcrumbs setView={setView} currentName="Solutions Hub" />
+            <Breadcrumbs setView={setView} currentName="Solutions Hub" align="left" />
             <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
               <span className="text-shine-white">AI-Managed Solutions for</span><br/>
               <span className="text-[#E61739]">Enterprise-Ready Growth.</span>

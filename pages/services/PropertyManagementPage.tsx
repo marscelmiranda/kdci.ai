@@ -24,7 +24,7 @@ export const PropertyManagementPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Property Support" parent={{ name: 'Solutions', view: 'solutions-hub' }} />
+          <Breadcrumbs setView={setView} currentName="Property Support" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
           <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
             <span className="text-shine-white">Smarter Property</span><br/>
             <span className="text-[#E61739]">Operations.</span>

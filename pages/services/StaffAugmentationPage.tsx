@@ -123,6 +123,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             setView={setView}
             currentName="Philippine Offshore Staffing"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
+            align="left"
           />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
