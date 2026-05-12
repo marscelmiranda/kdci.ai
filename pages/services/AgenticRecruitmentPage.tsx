@@ -136,13 +136,13 @@ export const AgenticRecruitmentPage = ({ setView }: { setView: (v: ViewType) => 
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
-                    { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '28px' },
+                    { name: "Workday",   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Workday_logo.svg/330px-Workday_logo.svg.png", imgH: '28px', imgMB: '4px' },
                     { name: "Greenhouse", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778627008/greenhouse_logo_cvxxgz.png", imgH: '26px', imgMT: '8px' },
                     { name: "Eightfold", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778625323/eightfold_logo_mzmlaw.png", imgH: '28px' },
                     { name: "HireVue",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778626347/hirevue-logo_cv5sqa.svg", imgH: '14px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="max-w-full object-contain" style={(app as any).imgH ? { height: (app as any).imgH, marginTop: (app as any).imgMT || 0 } : { maxHeight: '100%' }} referrerPolicy="no-referrer" />
+                      <img src={app.logo} alt={app.name} className="max-w-full object-contain" style={(app as any).imgH ? { height: (app as any).imgH, marginTop: (app as any).imgMT || 0, marginBottom: (app as any).imgMB || 0 } : { maxHeight: '100%' }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
