@@ -138,9 +138,7 @@ export const WebinarsPage = ({ setView }: { setView: (v: ViewType) => void }) =>
                       <img src={webinar.thumb} alt={webinar.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <PlayCircle size={26} className="text-white" fill="white" />
-                        </div>
+                        <Play size={48} className="text-white drop-shadow-lg group-hover:scale-110 transition-transform" fill="white" />
                       </div>
                       <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-widest">
                         {webinar.metrics[0].value}
