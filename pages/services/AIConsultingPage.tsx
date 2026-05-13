@@ -128,7 +128,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 <span className="text-[#E61739]">not just AI tools.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                KDCI.ai builds, integrates, and manages AI systems across your departments with human oversight and measurable outcomes.
+                We design, build, and manage AI systems built for your objects, managed with precision and human oversight.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
