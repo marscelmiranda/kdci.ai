@@ -72,6 +72,7 @@ const App = () => {
   const [activeView, setView] = useState<ViewType>('home');
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
+  const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -174,8 +175,13 @@ const App = () => {
         {activeView === 'blog-detail' && <BlogDetailPage setView={setView} blogId={selectedBlogId} />}
         
         {/* Resource Pages */}
-        {activeView === 'case-studies' && <CaseStudiesPage setView={setView} />}
-        {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} />}
+        {activeView === 'case-studies' && (
+          <CaseStudiesPage
+            setView={setView}
+            onStudyClick={(id) => { setSelectedCaseStudyId(id); setView('case-study-detail'); }}
+          />
+        )}
+        {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} studyId={selectedCaseStudyId} />}
         {activeView === 'guides' && <GuidesPage setView={setView} />}
         {activeView === 'webinars' && <WebinarsPage setView={setView} />}
         {activeView === 'ebooks' && <EbooksPage setView={setView} />}
