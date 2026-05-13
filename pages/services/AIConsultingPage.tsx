@@ -414,7 +414,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
               AI operations for the businesses<br /><span className="text-[#E61739]">that run America.</span>
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">If your team does it manually today, we can make it smarter.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">Reimagine work with agentic AI. What your team does manually today, we can make it smarter.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-4 mb-14">
             {INDUSTRIES.map((ind, i) => (
