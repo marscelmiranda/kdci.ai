@@ -133,7 +133,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <span className="text-[#E61739]">HR Outsourcing Services </span><span className="text-white">for Scaling Teams</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Hire full-time, dedicated Philippines-based professionals embedded in your team — powered by HR outsourcing services that use AI to manage performance, workflows, and reporting.
+                Get full-time, dedicated Philippines-based professionals embedded in your team — powered by HR outsourcing services that use AI to manage performance, workflows, and reporting.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
