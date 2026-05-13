@@ -101,7 +101,7 @@ export const AUTHOR_1 = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
 
 // --- Global Data ---
 export const TECH_PARTNERS = [
-  { name: "ChatGPT", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773190000/chatgpt_logo_w_kes4uw.png" },
+  { name: "ChatGPT", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193526/ChatGPTLogo_upw7qf.png" },
   { name: "Zapier", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193531/ZapierLogo_x8j673.png" },
   { name: "UiPath", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193529/UIPathLogo_oolrxc.png" },
   { name: "Microsoft", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193527/CopilotLogo_obyp2q.png" },
