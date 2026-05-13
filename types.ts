@@ -41,6 +41,7 @@ export type ViewType =
   | 'cms-blog-ops'
   | 'cms-resources-ops'
   | 'cms-portfolio-ops'
+  | 'cms-case-studies-ops'
   | 'careers'
   | 'job-detail'
   | 'job-prompt-engineer'

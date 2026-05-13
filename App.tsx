@@ -18,6 +18,7 @@ import { CareerOpsPage } from './pages/CareerOpsPage';
 import { BlogOpsPage } from './pages/BlogOpsPage';
 import { ResourcesOpsPage } from './pages/ResourcesOpsPage';
 import { PortfolioOpsPage } from './pages/PortfolioOpsPage';
+import { CaseStudyOpsPage } from './pages/CaseStudyOpsPage';
 import { CareersPage } from './pages/CareersPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
@@ -100,6 +101,10 @@ const App = () => {
 
   if (activeView === 'cms-portfolio-ops') {
     return <PortfolioOpsPage setView={setView} />;
+  }
+
+  if (activeView === 'cms-case-studies-ops') {
+    return <CaseStudyOpsPage setView={setView} />;
   }
 
   return (

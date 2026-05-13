@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { 
-  ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon
+  ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon, Award
 } from 'lucide-react';
 
 export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -11,7 +11,9 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
     if (id === 'overview') setView('publisher-dashboard');
     else if (id === 'careers') setView('cms-career-ops');
     else if (id === 'blog') setView('cms-blog-ops');
+    else if (id === 'case-studies') setView('cms-case-studies-ops');
     else if (id === 'resources') setView('cms-resources-ops');
+    else if (id === 'portfolio') setView('cms-portfolio-ops');
   };
 
   return (
@@ -31,6 +33,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
             { id: 'overview', label: 'Overview', icon: LayoutGrid },
             { id: 'careers', label: 'Career Ops', icon: Briefcase },
             { id: 'blog', label: 'Blogs & Insights', icon: FileText },
+            { id: 'case-studies', label: 'Case Studies', icon: Award },
             { id: 'resources', label: 'Resources', icon: BookOpen },
             { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon },
           ].map((item) => (

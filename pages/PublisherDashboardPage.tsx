@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { 
-  Briefcase, FileText, BookOpen, 
+  Briefcase, FileText, BookOpen, Award,
   Image as ImageIcon, Bell, Search, LogOut,
   ChevronRight, Mail, Phone, Key, Edit3
 } from 'lucide-react';
@@ -58,6 +58,8 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
       setView('cms-career-ops');
     } else if (type === 'Blog Post') {
       setView('cms-blog-ops');
+    } else if (type === 'Case Study') {
+      setView('cms-case-studies-ops');
     } else {
       alert(`This would open the ${type} creation modal/form.`);
     }
@@ -72,6 +74,8 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
         setView('cms-resources-ops');
     } else if (id === 'portfolio') {
         setView('cms-portfolio-ops');
+    } else if (id === 'case-studies') {
+        setView('cms-case-studies-ops');
     } else {
         setActiveTab(id);
     }
@@ -169,7 +173,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
         </header>
 
         {/* Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           <DashboardCard 
             title="Career Ops" 
             description="Manage all open job requisitions, view active applicant pipelines, and publish new roles." 
@@ -201,6 +205,14 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             actionText="Manage Portfolio"
             color="bg-orange-600"
             onClick={() => handleNavClick('portfolio')}
+          />
+          <DashboardCard 
+            title="Case Studies" 
+            description="Build and publish structured client success stories with outcomes, metrics, and pull quotes." 
+            icon={<Award size={24} />} 
+            actionText="Manage Case Studies"
+            color="bg-red-600"
+            onClick={() => handleNavClick('case-studies')}
           />
         </div>
 

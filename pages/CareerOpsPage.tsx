@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import {
-  LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen,
+  LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, Award,
   Image as ImageIcon, Bell, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Eye, Save, X, Check, MapPin, Clock, Users, Code, Zap, Sparkles,
   Calendar, ClipboardList, Activity, MoreHorizontal, UserCheck, UserX, UserMinus, UserPlus, Linkedin, Mail, Link,
@@ -203,6 +203,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
     if (id === 'overview') setView('publisher-dashboard');
     else if (id === 'careers') setView('cms-career-ops');
     else if (id === 'blog') setView('cms-blog-ops');
+    else if (id === 'case-studies') setView('cms-case-studies-ops');
     else if (id === 'resources') setView('cms-resources-ops');
     else if (id === 'portfolio') setView('cms-portfolio-ops');
   };
@@ -224,6 +225,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
             { id: 'overview', label: 'Overview', icon: LayoutGrid },
             { id: 'careers', label: 'Career Ops', icon: Briefcase },
             { id: 'blog', label: 'Blogs & Insights', icon: FileText },
+            { id: 'case-studies', label: 'Case Studies', icon: Award },
             { id: 'resources', label: 'Resources', icon: BookOpen },
             { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon },
           ].map((item) => (
