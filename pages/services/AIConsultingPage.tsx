@@ -223,7 +223,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Services
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              End-to-end AI consulting —<br />from strategy to <span className="text-[#E61739]">business transformation.</span>
+              AI Implementation Services that Power <span className="text-[#E61739]">business transformation.</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
