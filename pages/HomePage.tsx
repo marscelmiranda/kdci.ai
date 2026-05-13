@@ -27,14 +27,15 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         </div>
       </section>
 
-      <div className="w-full bg-[#0a0a0a] py-8 border-y border-white/5 overflow-hidden">
+      <div className="w-full overflow-hidden -mt-[50px] relative z-10 py-8">
+        <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-6">Brands we have worked with</p>
         <div className="relative flex mask-fade overflow-hidden">
           <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
             {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
               <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name} 
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
                   className="h-[44px] md:h-[46px] w-auto object-contain opacity-30 grayscale brightness-200 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
                   referrerPolicy="no-referrer"
                 />
