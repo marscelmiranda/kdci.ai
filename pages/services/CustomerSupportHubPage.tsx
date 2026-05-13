@@ -345,17 +345,37 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
-                { role: "CX Specialist", price: "$1,600", focus: "General", focusIcon: Users, desc: "Handling tier 1 inquiries via email and chat." },
-                { role: "Technical Support", price: "$2,000", focus: "Tech", focusIcon: Zap, desc: "Troubleshooting product issues and bugs." },
-                { role: "Trust & Safety", price: "$1,900", focus: "Risk", focusIcon: ShieldCheck, desc: "Moderation and fraud prevention workflows." },
-                { role: "Team Lead", price: "$2,500", focus: "Mgmt", focusIcon: UsersRound, desc: "Managing performance, QA, and coaching." },
+                {
+                  role: "CX Specialist", price: "$1,600", focus: "General", focusIcon: Users,
+                  features: ["Tier 1 email and live chat support", "Ticket logging and resolution tracking", "Customer satisfaction follow-ups"],
+                },
+                {
+                  role: "Technical Support", price: "$2,000", focus: "Tech", focusIcon: Zap,
+                  features: ["Product issue troubleshooting and escalation", "Bug documentation and dev handoff", "Knowledge base article creation"],
+                },
+                {
+                  role: "Trust & Safety", price: "$1,900", focus: "Risk", focusIcon: ShieldCheck,
+                  features: ["Content moderation and policy enforcement", "Fraud detection and prevention workflows", "Account review and dispute resolution"],
+                },
+                {
+                  role: "Team Lead", price: "$2,500", focus: "Mgmt", focusIcon: UsersRound,
+                  features: ["Agent performance monitoring and QA", "Shift scheduling and capacity planning", "Coaching, feedback, and team reporting"],
+                },
               ].map((plan, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
                   <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
                   <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
                   <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <p className="text-white/40 text-sm font-medium mb-8 flex-grow leading-relaxed">{plan.desc}</p>
+                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
+                    <ul className="space-y-3">
+                      {plan.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
                 </div>
               ))}
