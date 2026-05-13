@@ -224,6 +224,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
               From Strategy to <span className="text-[#E61739] text-[48px]">Scalable Success.</span>
             </h2>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">We guide you from strategy to deployment, bringing clarity, control, and measurable results into every stage of your AI journey.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICES.map((s, i) => (
