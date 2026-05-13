@@ -1,0 +1,23 @@
+11:54:50 PM [vite] Internal server error: [postcss] /home/runner/workspace/index.css:84:5: The `shadow-[0_4px_30px_rgba(0,` class does not exist. If `shadow-[0_4px_30px_rgba(0,` is a custom class, make sure it is defined within a `@layer` directive.
+[1]   Plugin: vite:css
+[1]   File: /home/runner/workspace/index.css:84:4
+[1]   82 |  
+[1]   83 |    .glass-nav {
+[1]   84 |      @apply bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0, 0, 0, 0.03)];
+[1]      |      ^
+[1]   85 |    }
+[1]   86 |  
+[1]       at Input.error (/home/runner/workspace/node_modules/postcss/lib/input.js:135:16)
+[1]       at AtRule.error (/home/runner/workspace/node_modules/postcss/lib/node.js:146:32)
+[1]       at processApply (/home/runner/workspace/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:380:29)
+[1]       at /home/runner/workspace/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:551:9
+[1]       at /home/runner/workspace/node_modules/tailwindcss/lib/processTailwindFeatures.js:55:50
+[1]       at async plugins (/home/runner/workspace/node_modules/tailwindcss/lib/plugin.js:38:17)
+[1]       at async LazyResult.runAsync (/home/runner/workspace/node_modules/postcss/lib/lazy-result.js:293:11)
+[1]       at async runPostCSS (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:43878:21)
+[1]       at async compilePostCSS (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:43848:18)
+[1]       at async compileCSS (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:43703:27)
+[1]       at async TransformPluginContext.handler (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:43019:11)
+[1]       at async EnvironmentPluginContainer.transform (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:42348:18)
+[1]       at async loadAndTransform (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:35740:27)
+[1]       at async viteTransformMiddleware (file:///home/runner/workspace/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:37264:24)
