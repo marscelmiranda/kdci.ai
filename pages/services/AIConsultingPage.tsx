@@ -248,7 +248,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Our Process
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              Live within <span className="text-[#E61739]">21 days.</span>
+              3-Week AI Implementation Sprint.<br />Live within <span className="text-[#E61739]">21 days.</span>
             </h2>
           </div>
           <div className="relative">
