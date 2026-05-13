@@ -696,7 +696,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight">Real teams.<br/>Measurable outcomes.</h2>
             </div>
-            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call — and grew into a long-term offshore team.</p>
+            <p className="text-slate-500 text-base font-medium max-w-sm leading-relaxed">Every engagement below started with a discovery call and grew into a long-term partnership. Outsource an offshore team today!</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6">
