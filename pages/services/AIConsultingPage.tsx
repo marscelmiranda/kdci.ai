@@ -450,7 +450,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Our Stack
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
-              Best-in-class tools.<br /><span className="text-[#E61739]">Configured for your business.</span>
+              Multi-Platform. <span className="text-[#E61739]">Tech-Agnostic.</span>
             </h2>
             <p className="text-white/40 font-medium max-w-2xl text-[17px]">KDCI.ai is tool-agnostic. We don't lock you into proprietary software. Rather, we build on the leading AI platforms and customize them around your workflows.</p>
           </div>
