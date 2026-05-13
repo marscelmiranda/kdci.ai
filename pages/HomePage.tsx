@@ -36,8 +36,9 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-30 grayscale brightness-200 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
+                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-40 grayscale brightness-150 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
                     referrerPolicy="no-referrer"
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 </div>
               ))}
