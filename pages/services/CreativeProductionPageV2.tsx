@@ -334,17 +334,37 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
-                { role: "Graphic Designer", price: "$1,800", focus: "Static", focusIcon: Palette, desc: "Social assets, ads, and brand collateral." },
-                { role: "Video Editor", price: "$2,200", focus: "Motion", focusIcon: Video, desc: "Short-form content and ad sequencing." },
-                { role: "Motion Artist", price: "$2,500", focus: "Anim", focusIcon: Play, desc: "2D/3D motion graphics and visual effects." },
-                { role: "UI/UX Designer", price: "$2,800", focus: "Product", focusIcon: Eye, desc: "Web and mobile app interface design." },
+                {
+                  role: "Graphic Designer", price: "$1,800", focus: "Static", focusIcon: Palette,
+                  features: ["Social media assets and ad creatives", "Brand collateral and print-ready files", "Template systems and style guide adherence"],
+                },
+                {
+                  role: "Video Editor", price: "$2,200", focus: "Motion", focusIcon: Video,
+                  features: ["Short-form content cuts for social and ads", "Multi-format resizing and versioning", "Captions, transitions, and audio sync"],
+                },
+                {
+                  role: "Motion Artist", price: "$2,500", focus: "Anim", focusIcon: Play,
+                  features: ["2D and 3D motion graphics production", "Animated explainers and brand intros", "Visual effects and compositing"],
+                },
+                {
+                  role: "UI/UX Designer", price: "$2,800", focus: "Product", focusIcon: Eye,
+                  features: ["Web and mobile interface design", "Wireframing, prototyping, and user flows", "Design system creation and component libraries"],
+                },
               ].map((plan, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
                   <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
                   <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
                   <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <p className="text-white/40 text-sm font-medium mb-8 flex-grow leading-relaxed">{plan.desc}</p>
+                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
+                    <ul className="space-y-3">
+                      {plan.features.map((f, fi) => (
+                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
                 </div>
               ))}
