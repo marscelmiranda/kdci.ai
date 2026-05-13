@@ -3,8 +3,22 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Smartphone, Globe, Building2, ShoppingCart, Activity, Plus, X, ChevronDown, Truck, Scale, GraduationCap, Plane, Megaphone, Car } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
+import { useCaseStudies } from '../store/caseStudiesStore';
 
-const caseStudies = [
+const INDUSTRY_ICON_MAP: Record<string, React.ElementType> = {
+  'Financial Services': Smartphone, 'Fintech': Smartphone,
+  'Logistics': Truck, 'Technology': Building2,
+  'Retail': ShoppingCart, 'Real Estate': Building2,
+  'Healthcare': Activity, 'E-Commerce': Globe,
+  'Insurance': Scale, 'EdTech': GraduationCap,
+  'Travel': Plane, 'Marketing': Megaphone,
+  'Automotive': Car, 'Legal': Scale,
+  'Media': Globe, 'Telecom': Smartphone,
+};
+const getIndustryIcon = (industry: string): React.ElementType =>
+  INDUSTRY_ICON_MAP[industry] || Building2;
+
+const HARDCODED_STUDIES = [
   {
     id: 1,
     thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800&h=420",
@@ -199,11 +213,41 @@ const caseStudies = [
   },
 ];
 
-const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'E-Commerce', 'Insurance', 'EdTech', 'Travel', 'Marketing', 'Automotive'];
-const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office', 'AI Ops', 'Creative'];
-const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
+const BASE_INDUSTRIES = ['Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'E-Commerce', 'Insurance', 'EdTech', 'Travel', 'Marketing', 'Automotive'];
+const SERVICES        = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office', 'AI Ops', 'Creative'];
+const CONTENT_TYPES   = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
 export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const { studies: cmsStudies } = useCaseStudies();
+
+  const cmsCards = cmsStudies
+    .filter(s => s.status === 'Published')
+    .map(s => ({
+      id: `cms-${s.id}`,
+      thumb: s.heroImageUrl || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800&h=420',
+      client: s.clientName || s.sidebarIndustry,
+      industry: s.sidebarIndustry,
+      contentType: 'Case Study' as const,
+      icon: getIndustryIcon(s.sidebarIndustry),
+      title: s.title,
+      desc: s.subtitle || s.inBrief.substring(0, 160),
+      metrics: [
+        ...(s.stat1Value ? [{ label: s.stat1Label, value: s.stat1Value }] : []),
+        ...(s.stat2Value ? [{ label: s.stat2Label, value: s.stat2Value }] : []),
+        ...(s.stat3Value ? [{ label: s.stat3Label, value: s.stat3Value }] : []),
+      ],
+      tags: [s.category2, s.category3, ...s.sidebarServices.split(',').map(t => t.trim())]
+        .filter(Boolean)
+        .filter((t, i, arr) => arr.indexOf(t) === i),
+    }));
+
+  const allStudies = [...cmsCards, ...HARDCODED_STUDIES];
+
+  const cmsIndustries = cmsStudies
+    .filter(s => s.status === 'Published' && s.sidebarIndustry)
+    .map(s => s.sidebarIndustry);
+  const INDUSTRIES = ['All', ...new Set([...BASE_INDUSTRIES, ...cmsIndustries])];
+
   const [activeIndustry, setActiveIndustry]     = useState('All');
   const [activeService, setActiveService]       = useState('All');
   const [activeContentType, setActiveContentType] = useState('Case Study');
@@ -220,7 +264,7 @@ export const CaseStudiesPage = ({ setView }: { setView: (v: ViewType) => void })
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const filtered = caseStudies.filter(cs => {
+  const filtered = allStudies.filter(cs => {
     const industryOk    = activeIndustry    === 'All' || cs.industry    === activeIndustry;
     const serviceOk     = activeService     === 'All' || cs.tags.includes(activeService);
     const contentTypeOk = activeContentType === 'All' || cs.contentType === activeContentType;

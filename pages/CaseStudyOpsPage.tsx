@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { useCaseStudies, CmsStudy } from '../store/caseStudiesStore';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, Image as ImageIcon,
   Bell, Search, Plus, LogOut, Settings, ChevronLeft, Edit2, Trash2,
@@ -8,25 +9,11 @@ import {
   Quote, Tag, Globe, Layers, AlignLeft, Award, ChevronRight
 } from 'lucide-react';
 
-interface CaseStudy {
-  id: string;
-  title: string;
-  industry: string;
-  author: string;
-  status: 'Published' | 'Draft' | 'Archived';
-  date: string;
-}
-
-const MOCK_STUDIES: CaseStudy[] = [
-  { id: '1', title: 'Scaling Support from 0 to 500 Agents', industry: 'Fintech', author: 'Michael Ross', status: 'Published', date: 'Oct 12, 2024' },
-  { id: '2', title: 'Automating 10,000 Weekly Waybills with AI + Humans', industry: 'Logistics', author: 'Sarah Chen', status: 'Published', date: 'Sep 28, 2024' },
-  { id: '3', title: 'HIPAA-Compliant Patient Intake at Scale', industry: 'Healthcare', author: 'Jason Park', status: 'Draft', date: '-' },
-];
-
-const emptyForm = () => ({
+const emptyForm = (): Omit<CmsStudy, 'id' | 'date'> => ({
   title: '',
   subtitle: '',
   heroImageUrl: '',
+  clientName: '',
   category1: 'Case Study',
   category2: '',
   category3: '',
@@ -88,8 +75,8 @@ const emptyForm = () => ({
 type FormData = ReturnType<typeof emptyForm>;
 
 export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const { studies, setStudies } = useCaseStudies();
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
-  const [studies, setStudies] = useState<CaseStudy[]>(MOCK_STUDIES);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
   const [formData, setFormData] = useState<FormData>(emptyForm());
@@ -119,39 +106,35 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
     setEditorTab('content');
   };
 
-  const handleEdit = (s: CaseStudy) => {
+  const handleEdit = (s: CmsStudy) => {
     setEditingId(s.id);
-    setFormData({
-      ...emptyForm(),
-      title: s.title,
-      sidebarIndustry: s.industry,
-      author: s.author,
-      status: s.status,
-      slug: s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
-    });
+    const { id, date, ...rest } = s;
+    setFormData({ ...emptyForm(), ...rest });
     setViewState('editor');
     setEditorTab('content');
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('Delete this case study?')) setStudies(prev => prev.filter(s => s.id !== id));
+    if (confirm('Delete this case study?')) setStudies(studies.filter(s => s.id !== id));
   };
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     if (editingId) {
-      setStudies(prev => prev.map(s => s.id === editingId ? {
-        ...s, title: formData.title, industry: formData.sidebarIndustry || s.industry,
-        author: formData.author, status: formData.status as any,
-        date: formData.status === 'Published' && s.status !== 'Published' ? now : s.date
+      const existing = studies.find(s => s.id === editingId);
+      setStudies(studies.map(s => s.id === editingId ? {
+        ...formData,
+        id: s.id,
+        date: formData.status === 'Published' && s.status !== 'Published' ? now : s.date,
       } : s));
     } else {
-      setStudies(prev => [{
-        id: Math.random().toString(36).substr(2, 9), title: formData.title,
-        industry: formData.sidebarIndustry || 'General', author: formData.author,
-        status: formData.status as any, date: formData.status === 'Published' ? now : '-'
-      }, ...prev]);
+      const newStudy: CmsStudy = {
+        ...formData,
+        id: Math.random().toString(36).substr(2, 9),
+        date: formData.status === 'Published' ? now : '-',
+      };
+      setStudies([newStudy, ...studies]);
     }
     setViewState('list');
   };
@@ -292,7 +275,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                   {studies.map(s => (
                     <tr key={s.id} className="hover:bg-white/5 transition-colors group">
                       <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{s.title}</div></td>
-                      <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{s.industry}</span></td>
+                      <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{s.sidebarIndustry}</span></td>
                       <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{s.author}</div></td>
                       <td className="px-8 py-5">
                         <span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${s.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : s.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{s.status}</span>
@@ -680,6 +663,10 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                   {/* Post Details */}
                   <div className="space-y-4">
                     <h4 className="text-xs font-black uppercase tracking-widest text-white/40 border-b border-white/5 pb-2">Case Study Details</h4>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-white/40">Client Name</label>
+                      <input type="text" value={formData.clientName} onChange={e => field('clientName', e.target.value)} placeholder="e.g. Fortune 500 Retailer" className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/20" />
+                    </div>
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold text-white/40">URL Slug</label>
                       <input type="text" value={formData.slug} onChange={e => field('slug', e.target.value)} className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white" />

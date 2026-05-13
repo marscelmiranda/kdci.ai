@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 
 import { ViewType } from './types';
+import { CaseStudiesProvider } from './store/caseStudiesStore';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -187,4 +188,10 @@ const App = () => {
   );
 };
 
-export default App;
+const AppWithProviders = () => (
+  <CaseStudiesProvider>
+    <App />
+  </CaseStudiesProvider>
+);
+
+export default AppWithProviders;
