@@ -25,25 +25,26 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             </button>
           </div>
         </div>
-      </section>
 
-      <div className="w-full overflow-hidden -mt-[50px] relative z-10 py-8">
-        <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-6">Brands we have worked with</p>
-        <div className="relative flex mask-fade overflow-hidden">
-          <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
-            {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
-              <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-[44px] md:h-[46px] w-auto object-contain opacity-30 grayscale brightness-200 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            ))}
+        {/* Brand ticker — layered over the constellation */}
+        <div className="absolute bottom-[100px] left-0 w-full z-30">
+          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5">Brands we have worked with</p>
+          <div className="relative flex mask-fade overflow-hidden">
+            <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
+              {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
+                <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-30 grayscale brightness-200 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <section className="pt-20 pb-32 bg-white rounded-t-[5rem] relative z-10">
         <div className="max-w-7xl mx-auto px-6">
