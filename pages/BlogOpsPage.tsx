@@ -37,6 +37,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const [viewState, setViewState] = useState<'list' | 'editor'>('list');
   const [posts, setPosts] = useState<BlogPost[]>(MOCK_POSTS);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
   
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
 
@@ -123,8 +124,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     setViewState('list');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this article?")) setPosts(prev => prev.filter(p => p.id !== id));
+  const handleDelete = (id: string) => setDeleteTargetId(id);
+  const confirmDelete = () => {
+    if (deleteTargetId) setPosts(prev => prev.filter(p => p.id !== deleteTargetId));
+    setDeleteTargetId(null);
   };
 
   const handleNavClick = (id: string) => {
@@ -699,6 +702,38 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         )}
 
       </main>
+
+      {/* Delete confirmation modal */}
+      {deleteTargetId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-[#1a1a1a] border border-white/10 rounded-3xl p-10 w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6">
+              <Trash2 size={24} className="text-red-500" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Delete Article?</h3>
+            <p className="text-white/50 text-sm mb-8 leading-relaxed">
+              This will permanently remove the article from your CMS. Published posts will no longer appear on the blog.
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setDeleteTargetId(null)}
+                className="flex-1 py-3 rounded-xl border border-white/10 text-white/70 font-bold text-sm hover:bg-white/5 transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDelete}
+                className="flex-1 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold text-sm transition-all"
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
