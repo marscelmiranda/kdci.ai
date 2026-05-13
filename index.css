@@ -77,20 +77,20 @@
 
   .bg-gradient-light {
     background: radial-gradient(circle at top right, rgba(230, 23, 57, 0.05), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(245, 245, 247, 1), transparent 50%);
+      radial-gradient(circle at bottom left, rgba(245, 245, 247, 1), transparent 50%);
   }
 
   .glass-nav {
-    @apply bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.03)];
+    @apply bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0, 0, 0, 0.03)];
   }
 
   .card-shadow {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.06);
     @apply transition-all duration-300 ease-out;
   }
 
   .card-shadow:hover {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     @apply -translate-y-1;
   }
 
@@ -144,12 +144,17 @@
   }
 
   @keyframes ticker-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .animate-ticker {
-    animation: ticker-scroll 40s linear infinite;
+    animation: ticker-scroll 120s linear infinite;
   }
 
   .no-scrollbar::-webkit-scrollbar {
