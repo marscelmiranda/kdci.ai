@@ -124,7 +124,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[67px] text-[#e61739]">AI Implementation Services Designed for Enterprise Growth.</span><br />
+                <span className="text-shine-white text-[66px]">AI Implementation Services </span><br />
                 <span className="text-[#E61739]">not just AI tools.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
