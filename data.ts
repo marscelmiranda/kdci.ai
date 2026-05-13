@@ -101,16 +101,24 @@ export const AUTHOR_1 = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
 
 // --- Global Data ---
 export const TECH_PARTNERS = [
-  { name: "ChatGPT", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193526/ChatGPTLogo_upw7qf.png" },
-  { name: "Zapier", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193531/ZapierLogo_x8j673.png" },
-  { name: "UiPath", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193529/UIPathLogo_oolrxc.png" },
-  { name: "Microsoft", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193527/CopilotLogo_obyp2q.png" },
-  { name: "Google Cloud", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193526/CloudLogo_sjc2z7.png" },
-  { name: "Workato", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193530/WorkatoLogo_zjb1tv.png" },
-  { name: "Claude", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193526/ClaudeLogo_yyt2uf.png" },
-  { name: "Adobe Firefly", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193528/FireflyLogo_jkkcag.png" },
-  { name: "Gemini", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193528/GeminiLogo_drliyh.png" },
-  { name: "xAI", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773193529/GrokLogo_jxnfro.png" }
+  { name: "Apple",        logo: "https://logo.clearbit.com/apple.com" },
+  { name: "Adobe",        logo: "https://logo.clearbit.com/adobe.com" },
+  { name: "Nespresso",    logo: "https://logo.clearbit.com/nespresso.com" },
+  { name: "Amazon",       logo: "https://logo.clearbit.com/amazon.com" },
+  { name: "Canon",        logo: "https://logo.clearbit.com/canon.com" },
+  { name: "DeWalt",       logo: "https://logo.clearbit.com/dewalt.com" },
+  { name: "Microsoft",    logo: "https://logo.clearbit.com/microsoft.com" },
+  { name: "Milwaukee",    logo: "https://logo.clearbit.com/milwaukeetool.com" },
+  { name: "Arby's",       logo: "https://logo.clearbit.com/arbys.com" },
+  { name: "Nike",         logo: "https://logo.clearbit.com/nike.com" },
+  { name: "Intel",        logo: "https://logo.clearbit.com/intel.com" },
+  { name: "Insight",      logo: "https://logo.clearbit.com/insight.com" },
+  { name: "Ingram Micro", logo: "https://logo.clearbit.com/ingrammicro.com" },
+  { name: "Samsung",      logo: "https://logo.clearbit.com/samsung.com" },
+  { name: "Tiffany & Co", logo: "https://logo.clearbit.com/tiffany.com" },
+  { name: "Cole Haan",    logo: "https://logo.clearbit.com/colehaan.com" },
+  { name: "Dell",         logo: "https://logo.clearbit.com/dell.com" },
+  { name: "Softonic",     logo: "https://logo.clearbit.com/softonic.com" },
 ];
 
 export const INDUSTRIES = [
