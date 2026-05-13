@@ -103,7 +103,7 @@ export const AUTHOR_1 = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
 export const TECH_PARTNERS = [
   { name: "Apple",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778711883/apple_logo_icon_168588_silbg2.svg" },
   { name: "Adobe",        logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/adobe.svg" },
-  { name: "Nespresso",    logo: "https://www.google.com/s2/favicons?domain=nespresso.com&sz=128" },
+  { name: "Nespresso",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778715363/nespresso-logo-brandlogos.net_d1ncmiluy_sw0bne.svg", style: { height: '22px', width: 'auto' } },
   { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg" },
   { name: "Canon",        logo: "https://www.google.com/s2/favicons?domain=canon.com&sz=128" },
   { name: "DeWalt",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714267/dewalt-logo-brandlogos.net_7etvns4sq_sw5w6r.svg", style: { height: '22px', width: 'auto' } },
