@@ -1,12 +1,16 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, MessageSquare, BrainCircuit, Users, ShoppingCart, Code, Building, Landmark, HeartPulse, Megaphone, Truck, GraduationCap, Layers2, ScanSearch, UsersRound, Rocket, CheckCircle2, Settings2, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, MessageSquare, BrainCircuit, Users, ShoppingCart, Code, Building, Landmark, HeartPulse, Megaphone, Truck, GraduationCap, Layers2, ScanSearch, UsersRound, Rocket, CheckCircle2, Settings2, ShieldCheck, Zap, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_CX_TEAM } from '../../data';
 
 export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   const cxApps = [
     { name: "Zendesk", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Zendesk_Logo_jlsxla.png" },
@@ -392,26 +396,149 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
         </div>
       </section>
 
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
-           <div className="absolute inset-0 z-0">
-              <img 
-                src={IMG_CX_TEAM} 
-                alt="KDCI CX Team" 
-                className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
-              />
-           </div>
-           <div className="mesh-container opacity-20 pointer-events-none">
-              <div className="blob blob-magenta opacity-30"></div>
-              <div className="blob blob-purple opacity-30"></div>
-           </div>
-           <div className="relative z-10 max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Redefine your <br/><span className="text-shine-red">support legacy.</span></h2>
-              <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Book a strategy session with our CX leads and design a pod that actually converts.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-                 Book Free CX Consultation <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-           </div>
+      {/* ── CONTACT FORM ── */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
+          <div className="absolute inset-0 z-0">
+            <img src={IMG_CX_TEAM} alt="KDCI CX Team" className="w-full h-full object-cover opacity-[0.06]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
+          </div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
+
+            {/* Left — headline + bullets */}
+            <div className="p-12 md:p-16 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                  <Star size={11} /> Let's Talk Support
+                </div>
+                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                  Build your<br /><span className="text-[#E61739]">support legacy.</span>
+                </h2>
+                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
+                  Tell us about your CX needs — we'll have a pod design and cost model ready within 24 hours.
+                </p>
+              </div>
+              <div className="space-y-4 mt-12">
+                {[
+                  { icon: CheckCircle2, text: 'Omnichannel coverage across voice, chat, email & social' },
+                  { icon: CheckCircle2, text: '14-day ramp for a fully trained 5-agent pod' },
+                  { icon: CheckCircle2, text: '4.7–4.9/5 CSAT across all managed accounts' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <item.icon size={14} className="text-[#E61739] shrink-0" />
+                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
+                  </div>
+                ))}
+                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
+                  {[
+                    { val: '4.8/5', label: 'Avg CSAT' },
+                    { val: '14 Days', label: 'Ramp Time' },
+                    { val: '24/7', label: 'Coverage' },
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
+                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right — contact form */}
+            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                    <CheckCircle2 size={30} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white">Message received!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs">Our CX leads will review your brief and get back to you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                  <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Support Channels Needed</label>
+                    <input required className={inp} placeholder="e.g. Live Chat, Email, Voice, Social Media" value={form.channel} onChange={e => setForm(f => ({ ...f, channel: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, hours, industry, current helpdesk..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "What customer support channels can KDCI cover?", a: "We support voice, email, live chat, social media DMs, SMS, and in-app messaging. Our agents are trained across multiple channels simultaneously, so you get a true omnichannel operation from a single managed team." },
+              { q: "What are your typical CSAT and FCR benchmarks?", a: "Across our managed CX pods, we consistently deliver 4.7–4.9/5 CSAT and 85–92% First Contact Resolution. We publish monthly QA scorecards for full transparency." },
+              { q: "Can KDCI handle 24/7 support coverage?", a: "Yes. We run three overlapping shifts from Metro Manila, giving you uninterrupted coverage across all time zones without the complexity of managing multiple vendors." },
+              { q: "How quickly can we ramp up a support team?", a: "Our standard ramp is 14 days for a 5-agent pod. We maintain a pre-vetted bench of trained candidates, so we can often exceed that speed for urgent scaling needs." },
+              { q: "Do your agents handle escalations and complex complaints?", a: "Absolutely. We train a dedicated Tier 2 and Tier 3 layer within each pod. Complex escalations are routed automatically using AI triage and handled by senior agents with specialized domain knowledge." },
+              { q: "Can KDCI integrate with our existing helpdesk platform?", a: "Yes. Our agents are proficient in Zendesk, Freshdesk, Salesforce Service Cloud, Intercom, Gorgias, HubSpot Service Hub, Kustomer, and most major platforms. We can be operational in your stack within days." },
+              { q: "How do you maintain quality across a large team?", a: "We use our proprietary QA system that samples 15% of all interactions weekly, scoring them against a calibrated rubric. Agents receive weekly coaching, and Team Leads review results daily." },
+              { q: "Can agents upsell and cross-sell during support interactions?", a: "Yes. We run dedicated 'support-to-sales' training programs. Our retail and e-commerce clients see an average 18–25% lift in revenue from support interactions through proactive upselling." },
+              { q: "What languages can KDCI support?", a: "Our primary language is English (neutral accent). We also have agents proficient in Spanish, French, Mandarin, Japanese, and German. For specialized language needs, we can source and train within 4–6 weeks." },
+              { q: "How do you handle spikes in volume (holiday, campaign surges)?", a: "We build flexible surge capacity into every contract. You can request additional seats with 72-hour notice for up to 30% above your base headcount. For larger surges, we plan together 30 days in advance." },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
