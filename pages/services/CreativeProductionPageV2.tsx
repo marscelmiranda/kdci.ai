@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette, ZoomIn, X } from 'lucide-react';
+import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette, ZoomIn, X, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
@@ -84,6 +84,10 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   const openLightbox = useCallback((src: string) => {
     setLightboxSrc(src);
@@ -443,19 +447,147 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
+      {/* ── CONTACT FORM ── */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
           <div className="absolute inset-0 z-0">
-            <img src={IMG_CREATIVE_TEAM} alt="Creative Production Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
+            <img src={IMG_CREATIVE_TEAM} alt="Creative Production Team" className="w-full h-full object-cover opacity-[0.06]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
           </div>
-          <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-magenta opacity-30" /></div>
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Let's Build Your <br /><span className="text-shine-red">Creative Machine.</span></h2>
-            <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Talk to us about building a creative ops solution tailored to your brand and workload.</p>
-            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
-              Book a Free Consultation <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
+
+            {/* Left — headline + bullets */}
+            <div className="p-12 md:p-16 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
+                  <Star size={11} /> Let's Talk Creative
+                </div>
+                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
+                  Build your<br /><span className="text-[#E61739]">creative machine.</span>
+                </h2>
+                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
+                  Tell us about your brand and workload — we'll have a creative ops plan ready within 24 hours.
+                </p>
+              </div>
+              <div className="space-y-4 mt-12">
+                {[
+                  { icon: CheckCircle2, text: 'Dedicated creative pod, onboarded in 14 days' },
+                  { icon: CheckCircle2, text: '50–200+ assets per month at scale' },
+                  { icon: CheckCircle2, text: 'Brand-trained team with AI workflow support' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <item.icon size={14} className="text-[#E61739] shrink-0" />
+                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
+                  </div>
+                ))}
+                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
+                  {[
+                    { val: '200+', label: 'Assets/mo' },
+                    { val: '14 Days', label: 'Onboarding' },
+                    { val: '500+', label: 'Clients Served' },
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
+                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right — contact form */}
+            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
+                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                    <CheckCircle2 size={30} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white">Message received!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs">Our creative leads will review your brief and get back to you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                  <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Service You Need</label>
+                    <input required className={inp} placeholder="e.g. Graphic Design Pod, Video Editing, UI/UX" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, deadlines, brand guidelines, tools..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                </form>
+              )}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "What creative services does KDCI's production team provide?", a: "We offer graphic design, video editing and production, motion graphics, UI/UX design, social media content creation, copywriting, email design, ad creative (static and animated), and brand identity work." },
+              { q: "How does a managed creative pod work?", a: "A Creative Pod is a dedicated team of 2–6 creatives (Art Director, Designers, Video Editors, Copywriter) assigned exclusively to your account. They operate as your in-house team, just offshore." },
+              { q: "What design tools does your team use?", a: "Our designers work in Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere Pro, After Effects), Canva Pro, Webflow, and Framer. We adapt to whatever's in your existing workflow." },
+              { q: "Can KDCI maintain our brand guidelines at scale?", a: "Absolutely. We conduct a brand onboarding session in week one, build a shared asset library, and implement a style guide review step into every deliverable. Brand consistency is a core KPI for our creative teams." },
+              { q: "How do we manage revisions and feedback loops?", a: "We use a structured feedback process via Frame.io for video, Figma comments for design, and a project board (Asana, ClickUp, or Notion) for all task tracking. Most feedback cycles complete in under 24 hours." },
+              { q: "How quickly can KDCI produce content at scale?", a: "Our creative pods can produce 50–200+ social media assets per month, 10–30 video edits per month, and unlimited copy drafts depending on pod size. We're built for high-velocity creative output." },
+              { q: "Do your creatives have experience with performance marketing assets?", a: "Yes. We have a dedicated performance creative unit that specializes in direct-response ad creative for Meta, TikTok, Google, and YouTube. We understand hooks, CTAs, and creative testing frameworks." },
+              { q: "Can KDCI handle video production from raw footage?", a: "Yes. Our video editors work from your raw footage, stock footage, and motion graphics briefs. We produce polished edits for social, YouTube, webinars, product demos, and brand films." },
+              { q: "What's the minimum team size for a creative engagement?", a: "You can start with a single dedicated creative (e.g., one Graphic Designer or one Video Editor) at a monthly flat rate. Most clients scale to full pods within 90 days after validating the initial hire." },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
