@@ -28,7 +28,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
 
         {/* Brand ticker — layered over the constellation */}
         <div className="absolute bottom-[100px] left-0 w-full z-30">
-          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5">We work with the brands you love</p>
+          <p className="text-center text-[10px] text-white font-black uppercase tracking-widest mb-5">We work with the brands you love</p>
           <div className="relative flex mask-fade overflow-hidden">
             <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
               {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
@@ -36,7 +36,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-40 grayscale brightness-150 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-default"
+                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-70 grayscale invert brightness-200 hover:opacity-100 transition-all duration-500 cursor-default"
                     referrerPolicy="no-referrer"
                     onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
