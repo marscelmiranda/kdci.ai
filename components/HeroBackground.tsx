@@ -89,12 +89,12 @@ export const HeroBackground = () => {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connDist) {
-            const alpha = (1 - dist / connDist) * 0.11;
+            const alpha = (1 - dist / connDist) * 0.28;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           }
         }
@@ -109,24 +109,24 @@ export const HeroBackground = () => {
           const pulse = 0.40 + 0.40 * Math.sin(n.pulsePhase); // 0.40–0.80
 
           // Soft glow halo
-          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
-          halo.addColorStop(0, `rgba(230, 57, 70, ${pulse * 0.38})`);
-          halo.addColorStop(0.5, `rgba(230, 57, 70, ${pulse * 0.10})`);
+          const halo = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 32);
+          halo.addColorStop(0, `rgba(230, 57, 70, ${pulse * 0.60})`);
+          halo.addColorStop(0.5, `rgba(230, 57, 70, ${pulse * 0.18})`);
           halo.addColorStop(1, 'rgba(230, 57, 70, 0)');
           ctx.fillStyle = halo;
           ctx.beginPath();
-          ctx.arc(n.x, n.y, 22, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, 32, 0, Math.PI * 2);
           ctx.fill();
 
           // Core dot
           ctx.beginPath();
-          ctx.arc(n.x, n.y, 2.8, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(230, 57, 70, ${pulse})`;
           ctx.fill();
         } else {
           ctx.beginPath();
-          ctx.arc(n.x, n.y, 1.4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.32)';
+          ctx.arc(n.x, n.y, 1.8, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
           ctx.fill();
         }
 
