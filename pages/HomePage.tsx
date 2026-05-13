@@ -11,7 +11,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
       <section className="relative h-screen flex items-center justify-center pt-24 overflow-hidden">
         <HeroBackground />
         <div className="grain-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}></div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-20">
+        <div className="max-w-7xl mx-auto px-6 text-center relative z-20 -translate-y-[75px]">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-[11px] font-bold uppercase tracking-[0.15em] mb-10 backdrop-blur-sm">
             <Cpu size={12} className="text-[#E61739]" /> Managed AI Operations
           </div>
@@ -28,7 +28,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
 
         {/* Brand ticker — layered over the constellation */}
         <div className="absolute bottom-[100px] left-0 w-full z-30">
-          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5 mt-[150px]">We work with the brands you love</p>
+          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5">We work with the brands you love</p>
           <div className="relative flex mask-fade overflow-hidden">
             <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
               {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
