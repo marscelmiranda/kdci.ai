@@ -80,6 +80,8 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
   const [formData, setFormData] = useState<FormData>(emptyForm());
+  const [saveError, setSaveError] = useState('');
+  const [savedToast, setSavedToast] = useState(false);
 
   useEffect(() => {
     const originalBg = document.body.style.backgroundColor;
@@ -118,11 +120,16 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
     if (confirm('Delete this case study?')) setStudies(studies.filter(s => s.id !== id));
   };
 
-  const handleSave = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSave = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    setSaveError('');
+    if (!formData.title.trim()) {
+      setSaveError('Case Study Title is required before saving.');
+      setEditorTab('content');
+      return;
+    }
     const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     if (editingId) {
-      const existing = studies.find(s => s.id === editingId);
       setStudies(studies.map(s => s.id === editingId ? {
         ...formData,
         id: s.id,
@@ -136,6 +143,8 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
       };
       setStudies([newStudy, ...studies]);
     }
+    setSavedToast(true);
+    setTimeout(() => setSavedToast(false), 2500);
     setViewState('list');
   };
 
@@ -199,6 +208,13 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
+
+      {/* Saved Toast */}
+      {savedToast && (
+        <div className="fixed top-6 right-6 z-[999] flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-xl shadow-2xl font-bold text-sm animate-in fade-in slide-in-from-top-2 duration-300">
+          <Check size={16} /> Case study saved successfully!
+        </div>
+      )}
 
       {/* Sidebar */}
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
@@ -298,7 +314,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
         {/* ── EDITOR VIEW ── */}
         {viewState === 'editor' && (
-          <form onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen animate-in fade-in slide-in-from-right-8 duration-500">
+          <form noValidate onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen animate-in fade-in slide-in-from-right-8 duration-500">
 
             {/* Top Toolbar */}
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
@@ -322,9 +338,18 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                   <option value="Published">Published</option>
                   <option value="Archived">Archived</option>
                 </select>
-                <button type="submit" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2"><Save size={16} /> Save</button>
+                <button type="button" onClick={() => handleSave()} className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 hover:bg-[#c51431] transition-colors"><Save size={16} /> Save</button>
               </div>
             </header>
+
+            {/* Save Error Banner */}
+            {saveError && (
+              <div className="bg-red-500/10 border-b border-red-500/30 px-8 py-3 flex items-center gap-3">
+                <X size={14} className="text-red-400 shrink-0" />
+                <span className="text-red-400 text-sm font-medium">{saveError}</span>
+                <button type="button" onClick={() => setSaveError('')} className="ml-auto text-red-400/60 hover:text-red-400"><X size={12} /></button>
+              </div>
+            )}
 
             <div className="flex flex-grow overflow-hidden relative">
 
@@ -344,7 +369,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                         </div>
                         <div className="space-y-2">
                           <label className={labelCls}>Case Study Title *</label>
-                          <input required type="text" value={formData.title} onChange={e => field('title', e.target.value)} placeholder="E.g. Scaling Support from 0 to 500 Agents" className="w-full bg-transparent border-0 border-b-2 border-white/10 px-0 py-4 text-white focus:ring-0 focus:outline-none focus:border-[#E61739] transition-all font-heading font-bold text-3xl placeholder:text-white/10" />
+                          <input type="text" value={formData.title} onChange={e => field('title', e.target.value)} placeholder="E.g. Scaling Support from 0 to 500 Agents" className={`w-full bg-transparent border-0 border-b-2 px-0 py-4 text-white focus:ring-0 focus:outline-none transition-all font-heading font-bold text-3xl placeholder:text-white/10 ${saveError && !formData.title.trim() ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-[#E61739]'}`} />
                         </div>
                         <div className="space-y-2">
                           <label className={labelCls}>Subtitle / Lead Paragraph</label>
