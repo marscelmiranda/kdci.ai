@@ -101,6 +101,7 @@ const TOOLS = [
 export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   return (
@@ -270,54 +271,73 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
       {/* SECTION 5 — PRICING */}
       <section className="py-24 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
             <p className="text-white/40 text-lg font-medium">Pick a plan. Agree on KPIs. We deliver.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5 items-stretch">
-            {PRICING.map((plan, i) => (
-              <div
-                key={i}
-                className={`rounded-3xl p-8 flex flex-col ${
-                  plan.featured
-                    ? 'bg-white/5 border-2 border-[#E61739] relative'
-                    : 'bg-white/5 border border-white/10'
-                }`}
-              >
-                {plan.featured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">
-                    Most Popular
+
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-white/5 p-1.5 rounded-full border border-white/10">
+              <button onClick={() => setPricingModel('outcomes')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'outcomes' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Outcomes</button>
+              <button onClick={() => setPricingModel('staff-aug')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'staff-aug' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Staff Augmentation</button>
+            </div>
+          </div>
+
+          {pricingModel === 'outcomes' ? (
+            <div className="grid md:grid-cols-3 gap-5 items-stretch animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {PRICING.map((plan, i) => (
+                <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                  {plan.featured && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>
+                  )}
+                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
+                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
+                  <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                  <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                    <ul className="space-y-3">
+                      {plan.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                )}
-                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
-                <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
-                <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
-                <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
-                  <ul className="space-y-3">
-                    {plan.features.map((f, fi) => (
-                      <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
-                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+                  <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                    {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
+                  </button>
                 </div>
-                <button
-                  onClick={() => setView('contact')}
-                  className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${
-                    plan.featured
-                      ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg'
-                      : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'
-                  }`}
-                >
-                  {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {[
+                { role: 'AI Strategy Consultant', price: '$4,500', focus: 'Strategy', focusIcon: Target, desc: 'Roadmaps, AI readiness audits, and department-level adoption planning.' },
+                { role: 'AI Engineer', price: '$5,200', focus: 'Build', focusIcon: BrainCircuit, desc: 'Custom agent configuration, LLM fine-tuning, and production deployment.' },
+                { role: 'AI Ops Manager', price: '$3,800', focus: 'Ops', focusIcon: BarChart3, desc: 'Ongoing monitoring, performance reporting, and KPI accountability.' },
+                { role: 'Integration Specialist', price: '$4,000', focus: 'Integrations', focusIcon: Workflow, desc: 'CRM, ERP, and helpdesk connectivity so AI flows into your existing stack.' },
+              ].map((plan, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
+                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
+                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
+                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
+                  <p className="text-white/40 text-sm font-medium mb-8 flex-grow leading-relaxed">{plan.desc}</p>
+                  <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
+            <div>
+              <h4 className="text-base font-bold text-white mb-1">Need a full AI ops team?</h4>
+              <p className="text-sm text-white/40 font-medium">Build a dedicated pod with AI Engineers, Ops Managers, and a Strategy Lead.</p>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
           </div>
         </div>
       </section>
