@@ -28,7 +28,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
 
         {/* Brand ticker — layered over the constellation */}
         <div className="absolute bottom-[100px] left-0 w-full z-30">
-          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5">Brands we have worked with</p>
+          <p className="text-center text-[10px] text-white/30 font-black uppercase tracking-widest mb-5 mt-[150px]">We work with the brands you love</p>
           <div className="relative flex mask-fade overflow-hidden">
             <div className="flex animate-infinite-scroll whitespace-nowrap min-w-full items-center">
               {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
