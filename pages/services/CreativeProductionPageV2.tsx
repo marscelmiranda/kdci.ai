@@ -285,26 +285,6 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
         </div>
       </section>
 
-      {/* ── TECH STACK ── */}
-      <section className="py-24 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-[10px] font-black uppercase mb-4 border border-slate-100">
-              <Laptop size={12} /> Tech Stack
-            </div>
-            <h3 className="text-2xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Native Tool Integration.</h3>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our designers are certified across the Adobe Creative Cloud and modern AI suites.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {creativeTools.map((app, i) => (
-              <div key={i} className="p-6 h-24 rounded-2xl bg-white border border-slate-100 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md grayscale hover:grayscale-0 opacity-70 hover:opacity-100 cursor-pointer">
-                <img src={app.logo} alt={app.name} className="w-[180px] max-h-full object-contain" referrerPolicy="no-referrer" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PRICING ── */}
       <section className="py-24 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
@@ -377,6 +357,26 @@ export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) =
               <p className="text-sm text-white/40 font-medium">Build a dedicated pod with Team Leads and QA Managers.</p>
             </div>
             <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TECH STACK ── */}
+      <section className="py-24 bg-white border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-[10px] font-black uppercase mb-4 border border-slate-100">
+              <Laptop size={12} /> Tech Stack
+            </div>
+            <h3 className="text-2xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Native Tool Integration.</h3>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our designers are certified across the Adobe Creative Cloud and modern AI suites.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {creativeTools.map((app, i) => (
+              <div key={i} className="p-6 h-24 rounded-2xl bg-white border border-slate-100 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md grayscale hover:grayscale-0 opacity-70 hover:opacity-100 cursor-pointer">
+                <img src={app.logo} alt={app.name} className="w-[180px] max-h-full object-contain" referrerPolicy="no-referrer" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
