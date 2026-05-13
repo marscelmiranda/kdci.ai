@@ -222,7 +222,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Services
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              AI Implementation Services that Power <span className="text-[#E61739] text-[48px]">Scalable Success.</span>
+              From Strategy to <span className="text-[#E61739] text-[48px]">Scalable Success.</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
