@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 
@@ -102,6 +102,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   return (
@@ -591,6 +592,49 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             )}
           </div>
 
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "What is 'AI Operations' and how does KDCI deliver it?", a: "AI Operations (AI Ops) is the integration of intelligent automation into business workflows — using large language models, OCR, computer vision, and process automation layered with human oversight. KDCI designs, deploys, and manages these hybrid human-AI systems for clients." },
+              { q: "Do I need to have my own AI tools for KDCI to work with?", a: "No. We bring our own AI stack including LLM integrations, workflow automation platforms, and proprietary QA tools. We can also integrate with your existing AI infrastructure or tools like OpenAI, Anthropic, or Google AI." },
+              { q: "Can KDCI build custom AI agents for my business processes?", a: "Yes. Our AI engineering team designs and deploys custom agentic workflows using LangChain, CrewAI, and similar frameworks. We build agents for tasks like automated research, document review, outreach sequencing, and data synthesis." },
+              { q: "How do you handle AI hallucinations and accuracy in automated workflows?", a: "We implement human-in-the-loop checkpoints at every critical step. Our AI agents generate outputs that are reviewed and approved by trained human operators before execution, ensuring accuracy without sacrificing speed." },
+              { q: "What business processes are best suited for AI augmentation?", a: "High-volume, rule-based tasks with structured inputs are ideal: document classification, data extraction, content generation, email routing, lead scoring, report generation, and first-response customer support triage." },
+              { q: "Can you help us identify automation opportunities in our current operations?", a: "Yes. We offer a free 2-hour Operations Audit session where our AI solutions architects map your existing workflows and identify the highest-ROI automation opportunities, ranked by effort and impact." },
+              { q: "How is AI performance monitored over time?", a: "We track accuracy rates, task completion rates, time savings, and error rates through a monthly AI Ops performance report. Models are retrained or updated as your data and processes evolve." },
+              { q: "Is agentic AI safe to deploy in regulated industries like Fintech or Healthcare?", a: "Yes, with the right safeguards. We implement strict data governance, encrypted pipelines, audit logs, and human approval gates for any sensitive outputs. We have deployed AI Ops solutions for HIPAA and SOC-2 environments." },
+              { q: "What is the typical ROI timeline for an AI Ops engagement?", a: "Most clients see measurable ROI within 60–90 days. Common outcomes include 40–80% reduction in manual processing time, 30–50% cost reduction versus purely human teams, and near-zero error rates on automated tasks." },
+              { q: "How does KDCI stay current with rapidly evolving AI technology?", a: "Our AI Labs team conducts weekly model evaluations, attends major AI research conferences, and has direct partnerships with leading AI vendors. We proactively upgrade client workflows when superior tools become available." },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
