@@ -99,7 +99,7 @@ export default {
       },
       animation: {
         shine: 'shine 5s linear infinite',
-        'infinite-scroll': 'scroll 5s linear infinite',
+        'infinite-scroll': 'scroll 10s linear infinite',
         'blob-float': 'blob-float 25s infinite alternate ease-in-out',
         'blob-float-reverse': 'blob-float-reverse 30s infinite alternate-reverse ease-in-out',
         'spin-slow': 'spin 12s linear infinite',
