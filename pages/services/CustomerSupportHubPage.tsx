@@ -330,8 +330,8 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                   <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
                     <ul className="space-y-3">
                       {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
                         </li>
                       ))}
                     </ul>
@@ -370,8 +370,8 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                   <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
                     <ul className="space-y-3">
                       {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
                         </li>
                       ))}
                     </ul>
