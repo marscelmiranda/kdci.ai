@@ -525,7 +525,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                     Free Discovery Call
                   </div>
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Ready to Build AI that Works?</h2>
-                  <p className="text-white/40 text-sm font-medium">We'll map your operations and identify the highest-impact AI opportunities — no obligation.</p>
+                  <p className="text-white/40 text-sm font-medium">Book a free 30-minute discovery call. Let's map out your top AI implementation opportunities and identify the highest-impact AI opportunities — no obligation.</p>
                 </div>
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
