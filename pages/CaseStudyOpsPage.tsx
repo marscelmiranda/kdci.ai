@@ -299,7 +299,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                       <td className="px-8 py-5 text-sm text-white/40 font-mono">{s.date}</td>
                       <td className="px-8 py-5 text-right">
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white" title="Preview"><Eye size={16} /></button>
+                          <button type="button" onClick={() => setView('case-studies')} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white" title="Preview on site"><Eye size={16} /></button>
                           <button onClick={() => handleEdit(s)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
                           <button onClick={() => handleDelete(s.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
                         </div>
