@@ -354,7 +354,7 @@ export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => 
                   features: ["Product issue troubleshooting and escalation", "Bug documentation and dev handoff", "Knowledge base article creation"],
                 },
                 {
-                  role: "Trust & Safety", price: "$1,900", focus: "Risk", focusIcon: ShieldCheck,
+                  role: "Fraud & Risk Analyst", price: "$1,900", focus: "Risk", focusIcon: ShieldCheck,
                   features: ["Content moderation and policy enforcement", "Fraud detection and prevention workflows", "Account review and dispute resolution"],
                 },
                 {
