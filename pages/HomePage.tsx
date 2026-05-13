@@ -2,20 +2,15 @@
 import React from 'react';
 import { Cpu, ChevronRight, CheckCircle2, Zap, Quote, ArrowRight } from 'lucide-react';
 import { ViewType } from '../types';
-import { ParticleBackground } from '../components/Shared';
+import { HeroBackground } from '../components/HeroBackground';
 import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../data';
 
 export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
-    <div className="min-h-screen bg-[#020202]">
-      <ParticleBackground />
+    <div className="min-h-screen bg-[#0A0A1A]">
       <section className="relative h-screen flex items-center justify-center pt-24 overflow-hidden">
-        <div className="mesh-container">
-          <div className="blob blob-magenta"></div>
-          <div className="blob blob-purple"></div>
-          <div className="blob blob-violet"></div>
-          <div className="grain-overlay"></div>
-        </div>
+        <HeroBackground />
+        <div className="grain-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}></div>
         <div className="max-w-7xl mx-auto px-6 text-center relative z-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-[11px] font-bold uppercase tracking-[0.15em] mb-10 backdrop-blur-sm">
             <Cpu size={12} className="text-[#E61739]" /> Managed AI Operations
