@@ -124,7 +124,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739] text-[66px]">AI Implementation Services that Power Your</span><br />
+                <span className="text-[#E61739] text-[66px]">AI Implementation Services</span><span className="text-shine-white text-[66px]"> Designed for Enterprise Growth.</span><br />
                 <span className="text-[#E61739]">not just AI tools.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
@@ -223,7 +223,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Services
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              End-to-end AI consulting —<br />from strategy to <span className="text-[#E61739]">business transformation.</span>
+              End-to-end AI consulting —<br />from strategy to <span className="text-[#E61739]">live systems.</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
