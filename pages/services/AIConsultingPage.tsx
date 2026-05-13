@@ -245,7 +245,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Process
+              AI Implementation timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
               Live within <span className="text-[#E61739]">21 days.</span>
