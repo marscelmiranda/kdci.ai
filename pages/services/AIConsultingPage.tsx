@@ -127,7 +127,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 <span className="text-[#E61739] text-[66px]">AI Implementation Services</span><span className="text-shine-white text-[66px]"> Designed for Enterprise Growth.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                We design, build, and manage AI systems built for your objects, managed with precision and human oversight.
+                We design, integrate, and manage AI systems built around your business operations, with human oversight at every step.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
