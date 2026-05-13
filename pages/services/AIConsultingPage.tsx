@@ -377,17 +377,37 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
-                { role: 'AI Strategy Consultant', price: '$4,500', focus: 'Strategy', focusIcon: Target, desc: 'Roadmaps, AI readiness audits, and department-level adoption planning.' },
-                { role: 'AI Engineer', price: '$5,200', focus: 'Build', focusIcon: BrainCircuit, desc: 'Custom agent configuration, LLM fine-tuning, and production deployment.' },
-                { role: 'AI Ops Manager', price: '$3,800', focus: 'Ops', focusIcon: BarChart3, desc: 'Ongoing monitoring, performance reporting, and KPI accountability.' },
-                { role: 'Integration Specialist', price: '$4,000', focus: 'Integrations', focusIcon: Workflow, desc: 'CRM, ERP, and helpdesk connectivity so AI flows into your existing stack.' },
+                {
+                  role: 'AI Strategy Consultant', price: '$4,500', focus: 'Strategy', focusIcon: Target,
+                  features: ['AI adoption roadmap design', 'Workflow automation opportunity mapping', 'Performance and ROI tracking'],
+                },
+                {
+                  role: 'AI Engineer', price: '$5,200', focus: 'Build', focusIcon: BrainCircuit,
+                  features: ['Custom AI agent configuration', 'LLM fine-tuning and prompt engineering', 'Production deployment and handover'],
+                },
+                {
+                  role: 'AI Ops Manager', price: '$3,800', focus: 'Ops', focusIcon: BarChart3,
+                  features: ['Live system monitoring and alerts', 'Monthly KPI performance reporting', 'Continuous model improvement'],
+                },
+                {
+                  role: 'Integration Specialist', price: '$4,000', focus: 'Integrations', focusIcon: Workflow,
+                  features: ['CRM, ERP, and helpdesk connectivity', 'API and webhook configuration', 'End-to-end data flow validation'],
+                },
               ].map((plan, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
                   <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
                   <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
                   <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <p className="text-white/40 text-sm font-medium mb-8 flex-grow leading-relaxed">{plan.desc}</p>
+                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
+                    <ul className="space-y-3">
+                      {plan.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
+                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
                 </div>
               ))}
