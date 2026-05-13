@@ -268,7 +268,69 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         </div>
       </section>
 
-      {/* SECTION 5 — PRICING */}
+      {/* SECTION 5 — WHY KDCI.AI */}
+      <section className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Content */}
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
+                Our Difference
+              </div>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
+                Built to deliver outcomes,<br />
+                <span className="text-[#E61739]">not slide decks.</span>
+              </h2>
+              <div className="divide-y divide-black/10">
+                {[
+                  {
+                    num: '01',
+                    icon: Cpu,
+                    title: 'We build in-house',
+                    desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
+                  },
+                  {
+                    num: '02',
+                    icon: BarChart3,
+                    title: 'KPI-backed accountability',
+                    desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
+                  },
+                  {
+                    num: '03',
+                    icon: Users,
+                    title: 'Human in the loop, always',
+                    desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
+                  },
+                ].map((d, i) => (
+                  <div key={i} className="flex items-start gap-4 py-6">
+                    <span className="text-[11px] font-black text-[#E61739]/40 tracking-widest pt-0.5 w-6 shrink-0">{d.num}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <d.icon size={15} className="text-[#E61739]" />
+                        <h3 className="text-sm font-black text-[#1D1D1F]">{d.title}</h3>
+                      </div>
+                      <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Floating portrait image */}
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
+              <img
+                src="/our-difference.png"
+                alt="KDCI AI consulting team reviewing performance dashboards"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6 — PRICING */}
       <section className="py-24 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-14">
@@ -338,68 +400,6 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               <p className="text-sm text-white/40 font-medium">Build a dedicated pod with AI Engineers, Ops Managers, and a Strategy Lead.</p>
             </div>
             <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6 — WHY KDCI.AI */}
-      <section className="py-24 bg-[#F5F5F7]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-            {/* Content */}
-            <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
-                Our Difference
-              </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
-                Built to deliver outcomes,<br />
-                <span className="text-[#E61739]">not slide decks.</span>
-              </h2>
-              <div className="divide-y divide-black/10">
-                {[
-                  {
-                    num: '01',
-                    icon: Cpu,
-                    title: 'We build in-house',
-                    desc: 'No third-party reselling or vendor markups. Every AI system is configured by our own team — giving us full control over quality, speed, and customization.',
-                  },
-                  {
-                    num: '02',
-                    icon: BarChart3,
-                    title: 'KPI-backed accountability',
-                    desc: 'We agree on measurable outcomes before work begins and report against them every month. If we miss a target, you get a credit.',
-                  },
-                  {
-                    num: '03',
-                    icon: Users,
-                    title: 'Human in the loop, always',
-                    desc: 'Every AI deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve the system.',
-                  },
-                ].map((d, i) => (
-                  <div key={i} className="flex items-start gap-4 py-6">
-                    <span className="text-[11px] font-black text-[#E61739]/40 tracking-widest pt-0.5 w-6 shrink-0">{d.num}</span>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2.5 mb-1.5">
-                        <d.icon size={15} className="text-[#E61739]" />
-                        <h3 className="text-sm font-black text-[#1D1D1F]">{d.title}</h3>
-                      </div>
-                      <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Floating portrait image */}
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
-              <img
-                src="/our-difference.png"
-                alt="KDCI AI consulting team reviewing performance dashboards"
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-
           </div>
         </div>
       </section>
