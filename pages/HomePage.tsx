@@ -30,7 +30,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         <div className="absolute bottom-[100px] left-0 w-full z-30">
           <p className="text-center text-[10px] text-white font-black uppercase tracking-widest mb-5">We work with the brands you love</p>
           <div className="relative overflow-hidden mask-fade">
-            <div className="flex w-max animate-infinite-scroll items-center">
+            <div className="flex w-max animate-ticker items-center">
               {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
                 <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
                   <img

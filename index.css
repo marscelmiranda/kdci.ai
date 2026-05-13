@@ -143,6 +143,15 @@
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   }
 
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-ticker {
+    animation: ticker-scroll 40s linear infinite;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
