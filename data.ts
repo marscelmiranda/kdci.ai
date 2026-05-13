@@ -104,7 +104,7 @@ export const TECH_PARTNERS = [
   { name: "Apple",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778711883/apple_logo_icon_168588_silbg2.svg" },
   { name: "Adobe",        logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/adobe.svg" },
   { name: "Nespresso",    logo: "https://www.google.com/s2/favicons?domain=nespresso.com&sz=128" },
-  { name: "Amazon",       logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazon.svg" },
+  { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg" },
   { name: "Canon",        logo: "https://www.google.com/s2/favicons?domain=canon.com&sz=128" },
   { name: "DeWalt",       logo: "https://www.google.com/s2/favicons?domain=dewalt.eu&sz=128" },
   { name: "Microsoft",    logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoft.svg" },
