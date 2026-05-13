@@ -524,7 +524,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Discovery Call
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Book your 30-minute call.</h2>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Ready to Build AI that Works?</h2>
                   <p className="text-white/40 text-sm font-medium">We'll map your operations and identify the highest-impact AI opportunities — no obligation.</p>
                 </div>
                 <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
