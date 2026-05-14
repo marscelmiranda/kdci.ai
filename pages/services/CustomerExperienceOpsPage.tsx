@@ -418,7 +418,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                   Build your<br /><span className="text-[#E61739]">support legacy.</span>
                 </h2>
                 <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your CX needs — we'll have a pod design and cost model ready within 24 hours.
+                  Tell us about your CX needs and we'll have a pod design and cost model ready within 24 hours.
                 </p>
               </div>
               <div className="space-y-4 mt-12">
