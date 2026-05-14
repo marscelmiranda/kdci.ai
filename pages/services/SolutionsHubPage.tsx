@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
@@ -38,25 +38,38 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
-              <div key={i} className="group p-8 rounded-[3rem] bg-white/5 border border-black/10 backdrop-blur-xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 flex flex-col items-start text-left">
-                <div className="w-14 h-14 bg-[#E61739]/20 rounded-2xl flex items-center justify-center text-[#E61739] mb-8 shadow-inner group-hover:scale-110 transition-transform">
-                  <s.icon size={28} />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{s.name}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-10 flex-grow font-medium">{s.desc}</p>
-                <div className="w-full pt-6 border-t border-white/10 mb-8">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-3">Service Focus</div>
-                  <div className="space-y-2">
-                    {s.benefits.map((b, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs font-bold text-white/40">
-                        <CheckCircle2 size={12} className="text-[#E61739]" /> {b}
-                      </div>
-                    ))}
+              <div key={i} className="group flex flex-col bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500">
+                <div className="relative h-44 overflow-hidden shrink-0">
+                  <img src={(s as any).image} alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: (s as any).imagePosition || 'center' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-widest text-white border border-white/30">
+                      {s.tag}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <div className="w-9 h-9 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
+                      <s.icon size={18} />
+                    </div>
                   </div>
                 </div>
-                <button onClick={() => setView(s.id as ViewType)} className="w-full py-4 bg-white/5 text-white/90 rounded-2xl font-bold text-sm border border-white/10 hover:bg-[#E61739] hover:text-white hover:border-transparent transition-all">
-                  View Full Details
-                </button>
+                <div className="flex flex-col flex-grow p-7">
+                  <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{s.name}</h3>
+                  <p className="text-[#86868b] text-sm leading-relaxed mb-6 flex-grow font-medium">{s.desc}</p>
+                  <div className="w-full pt-5 border-t border-black/5 mb-6">
+                    <div className="text-[10px] font-black uppercase tracking-widest text-[#1D1D1F] mb-3">Key Outcomes</div>
+                    <div className="space-y-2">
+                      {s.benefits.map((b, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-500">
+                          <CheckCircle2 size={12} className="text-[#E61739]" /> {b}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2">
+                    Explore Solution <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
