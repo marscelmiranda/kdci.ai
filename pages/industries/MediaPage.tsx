@@ -40,19 +40,19 @@ export const MediaPage = ({ setView }: { setView: (v: ViewType) => void }) => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">99%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">99%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Safety Score</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">24/7</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">24/7</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Moderation</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">High Vol</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">High Vol</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">UGC Review</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">40%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">40%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Cost Savings</p>
             </div>
           </div>

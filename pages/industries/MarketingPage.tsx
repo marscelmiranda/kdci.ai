@@ -42,19 +42,19 @@ export const MarketingPage = ({ setView }: { setView: (v: ViewType) => void }) =
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">24h</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">24h</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Turnaround Time</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">$50M+</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">$50M+</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Ad Spend Managed</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">40%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">40%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Cost Efficiency</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">100%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">100%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Brand Compliance</p>
             </div>
           </div>

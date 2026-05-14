@@ -42,19 +42,19 @@ export const FintechPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">SOC-2</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">SOC-2</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Compliance Ready</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">99.9%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">99.9%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Accuracy Rate</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">24/7</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">24/7</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Global Ops</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">60%</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">60%</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">OpEx Reduction</p>
             </div>
           </div>

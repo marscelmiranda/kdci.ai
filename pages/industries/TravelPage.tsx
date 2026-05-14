@@ -42,19 +42,19 @@ export const TravelPage = ({ setView }: { setView: (v: ViewType) => void }) => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Multilingual</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">Multilingual</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Support</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">&lt;1 Min</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">&lt;1 Min</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Response Time</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">High Vol</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">High Vol</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Booking Mgmt</p>
             </div>
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">70</div>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">70</div>
               <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">NPS Score</p>
             </div>
           </div>
