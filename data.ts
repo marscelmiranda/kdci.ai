@@ -112,7 +112,7 @@ export const TECH_PARTNERS = [
   { name: "Arby's",       logo: "https://www.google.com/s2/favicons?domain=arbys.com&sz=128" },
   { name: "Nike",         logo: "https://cdn.simpleicons.org/nike", style: { height: '44px', width: 'auto' } },
   { name: "Intel",        logo: "https://cdn.simpleicons.org/intel" },
-  { name: "Insight",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719235/insight-enterprises-inc-vector-logo_kjjrq5.svg", style: { height: '90px', width: 'auto' } },
+  { name: "Insight",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719235/insight-enterprises-inc-vector-logo_kjjrq5.svg", style: { height: '96px', width: 'auto' } },
   { name: "Ingram Micro", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714775/ingram-micro-logo-brandlogos.net_mivkxfgdf_bs0ndu.svg", style: { height: '18px', width: 'auto' } },
   { name: "Samsung",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778718825/samsung-group-logo-brandlogos.net_l7sj7kfi1_i0j75c.svg", style: { height: '18px', width: 'auto' } },
   { name: "Tiffany & Co", logo: "https://www.google.com/s2/favicons?domain=tiffany.com&sz=128" },
