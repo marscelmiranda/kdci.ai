@@ -354,7 +354,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1D1D1F]/8 border border-[#1D1D1F]/12 text-[#1D1D1F] text-[10px] font-black uppercase tracking-widest mb-5">
               200+ Roles Available
             </div>
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">Most-requested offshore staffing roles.</h2>
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">Most-requested offshore roles.</h2>
             <p className="text-slate-500 text-base font-medium max-w-lg mx-auto leading-relaxed">Source the most in-demand offshore roles at all-in monthly rates that include salary, benefits, office, and HR. No recruiter fees.</p>
           </div>
 
