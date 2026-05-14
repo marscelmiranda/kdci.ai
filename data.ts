@@ -102,7 +102,7 @@ export const AUTHOR_1 = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
 // --- Global Data ---
 export const TECH_PARTNERS = [
   { name: "Apple",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778711883/apple_logo_icon_168588_silbg2.svg" },
-  { name: "Adobe",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778717195/adobe-logo-brandlogos.net_s8j1ucsel_kgd6ek.svg" },
+  { name: "Adobe",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778717195/adobe-logo-brandlogos.net_s8j1ucsel_kgd6ek.svg", style: { height: '20px', width: 'auto' } },
   { name: "Nespresso",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778715363/nespresso-logo-brandlogos.net_d1ncmiluy_sw0bne.svg", style: { height: '22px', width: 'auto' } },
   { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg" },
   { name: "Canon",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716717/Canon-logo-brandlogos-a583c7_yujjzj.svg", style: { height: '18px', width: 'auto' } },
