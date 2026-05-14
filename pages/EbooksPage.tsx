@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, X, Plus, ChevronDown, Globe, Cpu, ShieldCheck, TrendingUp, Users, BarChart3, BrainCircuit, Layers, FileText } from 'lucide-react';
+import { ArrowRight, X, Plus, ChevronDown, Globe, Cpu, ShieldCheck, TrendingUp, Users, BarChart3, BrainCircuit, Layers, FileText, Search } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -25,6 +25,7 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeService, setActiveService]         = useState('All');
   const [activeContentType, setActiveContentType] = useState('Ebook');
   const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'content' | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const filterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,7 +40,9 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
     const industryOk    = activeIndustry    === 'All' || e.industry    === activeIndustry;
     const serviceOk     = activeService     === 'All' || e.tags.includes(activeService);
     const contentTypeOk = activeContentType === 'All' || e.contentType === activeContentType;
-    return industryOk && serviceOk && contentTypeOk;
+    const q = searchQuery.toLowerCase();
+    const searchOk = q === '' || e.title.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q);
+    return industryOk && serviceOk && contentTypeOk && searchOk;
   });
 
   const industryLabel    = activeIndustry    === 'All' ? 'Industry'     : activeIndustry;
@@ -77,6 +80,19 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
 
       {/* ── FILTER BAR ── */}
       <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
+        {/* Search row */}
+        <div className="max-w-7xl mx-auto px-8 pt-5 pb-4 border-b border-slate-100">
+          <div className="relative max-w-lg">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <input
+              type="text"
+              placeholder="Search ebooks, reports, or topics..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white focus:border-[#E61739]/40 transition-all placeholder:text-slate-400 outline-none"
+            />
+          </div>
+        </div>
         <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
           <button onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
             className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>

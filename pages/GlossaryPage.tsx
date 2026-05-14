@@ -190,14 +190,14 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
 
              {/* Search Bar */}
              <div className="relative w-full md:w-80">
-               <input 
-                 type="text" 
-                 placeholder="Search definitions..." 
+               <input
+                 type="text"
+                 placeholder="Search definitions..."
                  value={search}
                  onChange={(e) => setSearch(e.target.value)}
-                 className="w-full py-3 pl-12 pr-6 rounded-xl bg-slate-50 border-none text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white transition-all font-bold text-sm" 
+                 className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white focus:border-[#E61739]/40 transition-all placeholder:text-slate-400 outline-none"
                />
-               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
              </div>
           </div>
 

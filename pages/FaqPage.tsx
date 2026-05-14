@@ -237,7 +237,7 @@ export const FaqPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                   placeholder={`Search in ${currentCategory.label}...`}
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full py-4 pl-13 pr-6 pl-14 rounded-2xl bg-white border border-black/[0.06] text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E61739]/20 focus:border-[#E61739] transition-all font-medium shadow-sm"
+                  className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white focus:border-[#E61739]/40 transition-all placeholder:text-slate-400 outline-none"
                 />
               </div>
 
