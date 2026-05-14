@@ -244,7 +244,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Vertical Specialization</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Expertise by Vertical.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Built for How Your Business Works</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">Our agents are trained in the specific toolsets and jargon of your industry vertical, ensuring seamless integration from day one.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
