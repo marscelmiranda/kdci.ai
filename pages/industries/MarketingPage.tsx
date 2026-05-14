@@ -197,7 +197,7 @@ export const MarketingPage = ({ setView }: { setView: (v: ViewType) => void }) =
                      </div>
                   </div>
                   <div className="absolute -bottom-10 -right-10 bg-[#E61739] p-8 rounded-[3rem] shadow-2xl hidden md:block">
-                     <div className="text-3xl font-black mb-1">3x</div>
+                     <div className="text-3xl font-black mb-1 text-center">3x</div>
                      <div className="text-[10px] font-black uppercase tracking-widest opacity-80">Output Speed</div>
                   </div>
                </div>

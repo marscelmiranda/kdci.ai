@@ -197,7 +197,7 @@ export const ConsumerTechPage = ({ setView }: { setView: (v: ViewType) => void }
                      </div>
                   </div>
                   <div className="absolute -bottom-10 -right-10 bg-[#E61739] p-8 rounded-[3rem] shadow-2xl hidden md:block">
-                     <div className="text-3xl font-black mb-1">AI</div>
+                     <div className="text-3xl font-black mb-1 text-center">AI</div>
                      <div className="text-[10px] font-black uppercase tracking-widest opacity-80">Bug Triaging</div>
                   </div>
                </div>
