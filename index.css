@@ -81,7 +81,8 @@
   }
 
   .glass-nav {
-    @apply bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0, 0, 0, 0.03)];
+    @apply bg-white/90 backdrop-blur-md;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
   .card-shadow {
