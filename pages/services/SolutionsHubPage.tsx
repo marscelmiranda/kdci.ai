@@ -96,6 +96,45 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
           </div>
         </div>
       </section>
+
+      {/* ── CONTACT CTA ── */}
+      <section className="py-24 px-6 bg-slate-50">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 group">
+          <div className="mesh-container opacity-20 pointer-events-none">
+            <div className="blob blob-purple opacity-30" />
+            <div className="blob blob-magenta opacity-30" />
+          </div>
+          <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
+            <div className="flex-1 px-12 py-[58px] md:px-20 md:py-[68px] flex flex-col justify-center">
+              <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Get Started</div>
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight leading-tight">
+                Ready to scale your<br/><span className="text-shine-red">operations?</span>
+              </h2>
+              <p className="text-lg md:text-xl text-white/60 mb-10 font-medium leading-relaxed max-w-lg">
+                Our solutions architects will design a custom operational model tailored to your business needs and industry.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => setView('contact')}
+                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
+                >
+                  Talk to a Solutions Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+            <div className="lg:w-[560px] shrink-0 relative min-h-[260px]">
+              <img
+                src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.png"
+                alt="KDCI Team"
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ objectPosition: 'center top' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
