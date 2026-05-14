@@ -132,7 +132,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#ffffff]">Outsource to the Philippines </span><span className="text-white">for Scaling Teams</span>
+                <span className="text-[#ffffff]">Outsource to the Philippines</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Get full-time, dedicated Philippines-based professionals embedded in your team — powered by HR outsourcing services that use AI to manage performance, workflows, and reporting.
