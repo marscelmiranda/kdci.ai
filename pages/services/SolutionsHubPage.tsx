@@ -1,11 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
+import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
 export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+
   return (
     <div className="min-h-screen bg-white">
       <section className={`relative bg-[#020202] overflow-hidden pt-48 pb-32`}>
@@ -97,42 +103,87 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
         </div>
       </section>
 
-      {/* ── CONTACT CTA ── */}
-      <section className="py-24 px-6 bg-slate-50">
-        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 group">
-          <div className="mesh-container opacity-20 pointer-events-none">
-            <div className="blob blob-purple opacity-30" />
-            <div className="blob blob-magenta opacity-30" />
-          </div>
-          <div className="relative z-10 flex flex-col lg:flex-row items-stretch">
-            <div className="flex-1 px-12 py-[58px] md:px-20 md:py-[68px] flex flex-col justify-center">
-              <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Get Started</div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight leading-tight">
-                Ready to scale your<br/><span className="text-shine-red">operations?</span>
-              </h2>
-              <p className="text-lg md:text-xl text-white/60 mb-10 font-medium leading-relaxed max-w-lg">
-                Our solutions architects will design a custom operational model tailored to your business needs and industry.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
-                >
-                  Talk to a Solutions Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
-                </button>
+      {/* ── CONTACT FORM ── */}
+      <section className="py-20 px-6 bg-slate-50">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
+
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CONTACT}
+              alt="KDCI solutions team"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI-Powered Business Solutions</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your operations,<br/>transformed.</h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Expert Teams', 'AI-Managed', 'Zero Risk'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
+                ))}
               </div>
             </div>
-            <div className="lg:w-[560px] shrink-0 relative min-h-[260px]">
-              <img
-                src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.png"
-                alt="KDCI Team"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ objectPosition: 'center top' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
-            </div>
           </div>
+
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
+                <p className="text-white/50 font-medium">Your request has been received. Expect a response within 1 business day.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Consultation
+                  </div>
+                  <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Talk to a Solutions Architect</h2>
+                  <p className="text-white/40 font-medium text-[13px]">Tell us what you need and we'll design a custom operational model tailored to your business and industry.</p>
+                </div>
+                <form onSubmit={handleForm} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
+                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Email</label>
+                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Service of Interest</label>
+                    <input required className={inp} placeholder="e.g. Offshore Staffing, AI Consulting, Customer Support" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>
+                </form>
+              </>
+            )}
+          </div>
+
         </div>
       </section>
     </div>
