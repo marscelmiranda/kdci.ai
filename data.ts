@@ -115,7 +115,7 @@ export const TECH_PARTNERS = [
   { name: "Insight",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719235/insight-enterprises-inc-vector-logo_kjjrq5.svg", style: { height: '96px', width: 'auto' } },
   { name: "Ingram Micro", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714775/ingram-micro-logo-brandlogos.net_mivkxfgdf_bs0ndu.svg", style: { height: '18px', width: 'auto' } },
   { name: "Samsung",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778718825/samsung-group-logo-brandlogos.net_l7sj7kfi1_i0j75c.svg", style: { height: '18px', width: 'auto' } },
-  { name: "Tiffany & Co", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719490/tiffany-_-co-logo-brandlogos.net_q0je28nfd_nmiidy.svg" },
+  { name: "Tiffany & Co", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719490/tiffany-_-co-logo-brandlogos.net_q0je28nfd_nmiidy.svg", style: { height: '24px', width: 'auto' } },
   { name: "Cole Haan",    logo: "https://www.google.com/s2/favicons?domain=colehaan.com&sz=128" },
   { name: "Dell",         logo: "https://cdn.simpleicons.org/dell" },
   { name: "Softonic",     logo: "https://www.google.com/s2/favicons?domain=softonic.com&sz=128" },
