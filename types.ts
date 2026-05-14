@@ -26,8 +26,7 @@ export type ViewType =
   | 'home' 
   | 'solutions-hub' 
   | 'agentic-recruitment' 
-  | 'software-dev' 
-  | 'property-mgmt' 
+
   | 'creative-prod' 
   | 'customer-support' 
   | 'staff-aug' 

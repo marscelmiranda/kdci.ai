@@ -124,8 +124,7 @@ export const TECH_PARTNERS = [
 
 export const INDUSTRIES = [
   { name: 'E-commerce', icon: ShoppingCart, id: 'ecommerce' },
-  { name: 'SaaS & Software', icon: Code, id: 'software-dev' },
-  { name: 'Real Estate & PropMgmt', icon: Building, id: 'property-mgmt' },
+
   { name: 'Fintech', icon: Landmark, id: 'fintech' },
   { name: 'Healthcare Support', icon: HeartPulse, id: 'healthcare' },
   { name: 'Marketing & Ad', icon: Megaphone, id: 'marketing-ad' },

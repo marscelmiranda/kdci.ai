@@ -23,8 +23,7 @@ const POPULAR_SEARCHES = [
   { label: 'Generative AI', view: 'solutions-hub' },
   { label: 'Philippine Offshore Staffing', view: 'staff-aug' },
   { label: 'Customer Support', view: 'customer-support' },
-  { label: 'Software Engineers', view: 'software-dev' },
-  { label: 'Data Entry', view: 'property-mgmt' },
+
 ];
 
 export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView: (v: ViewType) => void }) => {

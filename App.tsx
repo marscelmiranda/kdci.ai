@@ -26,12 +26,12 @@ import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
 
 // Services
 import { SolutionsHubPage } from './pages/services/SolutionsHubPage';
-import { SoftwareEngineeringPage } from './pages/services/SoftwareEngineeringPage';
+
 import { GraphicDesignStudioPage } from './pages/services/GraphicDesignStudioPage';
 import { CustomerExperienceOpsPage } from './pages/services/CustomerExperienceOpsPage';
 import { OffshoreStaffingPage } from './pages/services/OffshoreStaffingPage';
 import { GlobalRecruitmentPage } from './pages/services/GlobalRecruitmentPage';
-import { PropertyManagementPage } from './pages/services/PropertyManagementPage';
+
 import { AIConsultingPage } from './pages/services/AIConsultingPage';
 
 // Import Job Post Components and Data
@@ -119,9 +119,9 @@ const App = () => {
         {/* Services */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
         {activeView === 'agentic-recruitment' && <GlobalRecruitmentPage setView={setView} />}
-        {activeView === 'software-dev' && <SoftwareEngineeringPage setView={setView} />}
+
         {activeView === 'customer-support' && <CustomerExperienceOpsPage setView={setView} />}
-        {activeView === 'property-mgmt' && <PropertyManagementPage setView={setView} />}
+
         {activeView === 'creative-prod' && <GraphicDesignStudioPage setView={setView} />}
         {activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} />}
         {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
