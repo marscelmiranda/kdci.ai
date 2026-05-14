@@ -114,7 +114,7 @@ export const TECH_PARTNERS = [
   { name: "Intel",        logo: "https://cdn.simpleicons.org/intel" },
   { name: "Insight",      logo: "https://www.google.com/s2/favicons?domain=insight.com&sz=128" },
   { name: "Ingram Micro", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714775/ingram-micro-logo-brandlogos.net_mivkxfgdf_bs0ndu.svg", style: { height: '18px', width: 'auto' } },
-  { name: "Samsung",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778718825/samsung-group-logo-brandlogos.net_l7sj7kfi1_i0j75c.svg", style: { height: '24px', width: 'auto' } },
+  { name: "Samsung",      logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778718825/samsung-group-logo-brandlogos.net_l7sj7kfi1_i0j75c.svg", style: { height: '18px', width: 'auto' } },
   { name: "Tiffany & Co", logo: "https://www.google.com/s2/favicons?domain=tiffany.com&sz=128" },
   { name: "Cole Haan",    logo: "https://www.google.com/s2/favicons?domain=colehaan.com&sz=128" },
   { name: "Dell",         logo: "https://cdn.simpleicons.org/dell" },
