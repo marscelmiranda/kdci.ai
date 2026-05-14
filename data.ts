@@ -104,7 +104,7 @@ export const TECH_PARTNERS = [
   { name: "Apple",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778711883/apple_logo_icon_168588_silbg2.svg" },
   { name: "Adobe",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778717195/adobe-logo-brandlogos.net_s8j1ucsel_kgd6ek.svg", style: { height: '20px', width: 'auto' } },
   { name: "Nespresso",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778715363/nespresso-logo-brandlogos.net_d1ncmiluy_sw0bne.svg", style: { height: '22px', width: 'auto' } },
-  { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg", style: { height: '36px', width: 'auto' } },
+  { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg", style: { height: '44px', width: 'auto' } },
   { name: "Canon",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716717/Canon-logo-brandlogos-a583c7_yujjzj.svg", style: { height: '18px', width: 'auto' } },
   { name: "DeWalt",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714267/dewalt-logo-brandlogos.net_7etvns4sq_sw5w6r.svg", style: { height: '22px', width: 'auto' } },
   { name: "Microsoft",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716839/microsoft-logo-brandlogos.net_5i6qb39x4_e4pwgf.svg", style: { height: '26px', width: 'auto', filter: 'brightness(0) invert(1) opacity(0.7)' } },
