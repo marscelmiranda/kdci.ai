@@ -426,7 +426,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               Why Hire From the Philippines
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
-              The world's leading source of remote offshore teams.
+              The world's leading provider of outsourced teams.
             </h2>
             <p className="text-slate-500 text-base font-medium leading-relaxed max-w-5xl mx-auto">
               The Philippines consistently outperforms competing markets on factors that drive long-term team success, making it the top choice for companies looking for HR outsourcing services.
