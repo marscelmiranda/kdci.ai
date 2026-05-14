@@ -40,7 +40,7 @@ const phRange = (mid: string) => {
   return `$${lo.toLocaleString()} – $${hi.toLocaleString()}`;
 };
 
-export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);

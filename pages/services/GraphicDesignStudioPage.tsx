@@ -79,7 +79,7 @@ const ScrollingColumn = ({
   );
 };
 
-export const CreativeProductionPageV2 = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);

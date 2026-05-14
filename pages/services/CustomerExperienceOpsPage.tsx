@@ -5,7 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_CX_TEAM } from '../../data';
 
-export const CustomerSupportHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);

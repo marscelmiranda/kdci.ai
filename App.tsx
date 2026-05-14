@@ -27,10 +27,10 @@ import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
 // Services
 import { SolutionsHubPage } from './pages/services/SolutionsHubPage';
 import { SoftwareEngineeringPage } from './pages/services/SoftwareEngineeringPage';
-import { CreativeProductionPageV2 } from './pages/services/CreativeProductionPageV2';
-import { CustomerSupportHubPage } from './pages/services/CustomerSupportHubPage';
-import { StaffAugmentationPage } from './pages/services/StaffAugmentationPage';
-import { AgenticRecruitmentPage } from './pages/services/AgenticRecruitmentPage';
+import { GraphicDesignStudioPage } from './pages/services/GraphicDesignStudioPage';
+import { CustomerExperienceOpsPage } from './pages/services/CustomerExperienceOpsPage';
+import { OffshoreStaffingPage } from './pages/services/OffshoreStaffingPage';
+import { GlobalRecruitmentPage } from './pages/services/GlobalRecruitmentPage';
 import { PropertyManagementPage } from './pages/services/PropertyManagementPage';
 import { AIConsultingPage } from './pages/services/AIConsultingPage';
 
@@ -118,12 +118,12 @@ const App = () => {
         
         {/* Services */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
-        {activeView === 'agentic-recruitment' && <AgenticRecruitmentPage setView={setView} />}
+        {activeView === 'agentic-recruitment' && <GlobalRecruitmentPage setView={setView} />}
         {activeView === 'software-dev' && <SoftwareEngineeringPage setView={setView} />}
-        {activeView === 'customer-support' && <CustomerSupportHubPage setView={setView} />}
+        {activeView === 'customer-support' && <CustomerExperienceOpsPage setView={setView} />}
         {activeView === 'property-mgmt' && <PropertyManagementPage setView={setView} />}
-        {activeView === 'creative-prod' && <CreativeProductionPageV2 setView={setView} />}
-        {activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} />}
+        {activeView === 'creative-prod' && <GraphicDesignStudioPage setView={setView} />}
+        {activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} />}
         {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
         
         {/* Industries */}
