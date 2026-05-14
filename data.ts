@@ -107,7 +107,7 @@ export const TECH_PARTNERS = [
   { name: "Amazon",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714164/amazon_logo_icon_169612_jxsmps.svg" },
   { name: "Canon",        logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716717/Canon-logo-brandlogos-a583c7_yujjzj.svg", style: { height: '18px', width: 'auto' } },
   { name: "DeWalt",       logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714267/dewalt-logo-brandlogos.net_7etvns4sq_sw5w6r.svg", style: { height: '22px', width: 'auto' } },
-  { name: "Microsoft",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716839/microsoft-logo-brandlogos.net_5i6qb39x4_e4pwgf.svg", style: { height: '18px', width: 'auto' } },
+  { name: "Microsoft",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716839/microsoft-logo-brandlogos.net_5i6qb39x4_e4pwgf.svg", style: { height: '26px', width: 'auto', filter: 'brightness(0) invert(1) opacity(0.7)' } },
   { name: "Milwaukee",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714332/Milwaukee-OjD7Fzl3p_brandlogos.net_ugkx7h.svg" },
   { name: "Arby's",       logo: "https://www.google.com/s2/favicons?domain=arbys.com&sz=128" },
   { name: "Nike",         logo: "https://cdn.simpleicons.org/nike" },
