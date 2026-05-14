@@ -7,6 +7,7 @@ import {
   Binary, Activity, Rocket, Building, Plane, Newspaper, Shirt, Gavel,
   BookOpen, Video, FileText, CircleHelp, FileJson, Smartphone
 } from 'lucide-react';
+import IMG_RECRUITMENT_HERO from './attached_assets/Untitled-1_1778062521021.png';
 
 // --- Assets & Branding ---
 export const LOGO_SRC = "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23E61739'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M50 28C37.8497 28 28 37.8497 28 50C28 62.1503 37.8497 72 50 72C62.1503 72 72 62.1503 72 50H100V60H88V50H72C72 37.8497 62.1503 28 50 28ZM50 61C43.9249 61 39 56.0751 39 50C39 43.9249 43.9249 39 50 39C56.0751 39 61 43.9249 61 50C61 56.0751 56.0751 61 50 61Z' fill='white'/%3E%3C/svg%3E";
@@ -160,7 +161,7 @@ export const TOP_SERVICES = [
     name: 'Philippine Offshore Staffing', 
     tag: 'On-Demand Talent',
     icon: Rocket,
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420',
+    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.png',
     desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',
     benefits: ['Experts on Demand', 'Zero Hiring Risk', 'Scale Instantly']
   },
@@ -169,7 +170,7 @@ export const TOP_SERVICES = [
     name: 'AI Consulting & Implementation',
     tag: 'AI Strategy & Build',
     icon: Cpu,
-    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=800&h=420',
+    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
     desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
     benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
   },
@@ -178,7 +179,7 @@ export const TOP_SERVICES = [
     name: 'Customer Experience Operations', 
     tag: '24/7 Global Ops',
     icon: Activity,
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800&h=420',
+    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png',
     desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
@@ -187,7 +188,7 @@ export const TOP_SERVICES = [
     name: 'Global Recruitment Services', 
     tag: 'Talent Sourcing',
     icon: Target,
-    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&q=80&w=800&h=420',
+    image: IMG_RECRUITMENT_HERO,
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
