@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
+import { Captcha } from '../components/Captcha';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
@@ -22,6 +23,7 @@ import { Badge } from '../components/ui/badge';
 export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [fileName, setFileName] = useState<string | null>(null);
+  const [captchaOk, setCaptchaOk] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => { 
     e.preventDefault(); 
@@ -173,8 +175,10 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     </label>
                   </div>
 
+                  <Captcha onVerify={setCaptchaOk} theme="light" />
+
                   <Button 
-                    disabled={formState === 'submitting'} 
+                    disabled={formState === 'submitting' || !captchaOk} 
                     type="submit" 
                     size="lg"
                     className="w-full text-lg gap-3"

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette, ZoomIn, X, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
+import { Captcha } from '../../components/Captcha';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
 import { portfolioItems, PortfolioItem } from './PortfolioData';
 import { PortfolioModal } from './PortfolioModal';
@@ -86,6 +87,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [captchaOk, setCaptchaOk] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -538,7 +540,8 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                     <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, deadlines, brand guidelines, tools..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                  <Captcha onVerify={setCaptchaOk} theme="dark" />
+                  <button type="submit" disabled={!captchaOk} className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
                     Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
+import { Captcha } from '../../components/Captcha';
 
 const SERVICES = [
   {
@@ -101,6 +102,7 @@ const TOOLS = [
 export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [captchaOk, setCaptchaOk] = useState(false);
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
@@ -583,7 +585,8 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                     <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="Tell us about your biggest operational pain point…" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                  <Captcha onVerify={setCaptchaOk} theme="dark" />
+                  <button type="submit" disabled={!captchaOk} className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>
