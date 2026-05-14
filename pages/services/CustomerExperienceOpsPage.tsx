@@ -118,7 +118,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                   <span className="text-shine-white mt-[0px]">Agentic Solutions</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                  Deploy AI agents to handle interactions at scale, with seamless escalation to human professionals.
+                  Our agentic solutions combine autonomous AI agents with skilled specialists to handle complex interactions your bots can't solve alone. 
                 </p>
 
                 <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
