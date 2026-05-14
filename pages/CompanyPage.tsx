@@ -35,31 +35,65 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     <div className="min-h-screen bg-white">
 
       {/* 1. Hero */}
-      <section className="relative pt-48 pb-32 overflow-hidden bg-[#020202]">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
         <div className="absolute inset-0 z-0">
-          <img
-            src={IMG_CX_TEAM2}
-            alt="KDCI Corporate Culture"
-            className="w-full h-full object-cover opacity-20 grayscale object-center"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900"></div>
         </div>
-        <div className="mesh-container opacity-50">
-          <div className="blob blob-magenta"></div>
-          <div className="blob blob-purple"></div>
+        <div className="mesh-container opacity-40">
+          <div className="blob blob-purple opacity-40"></div>
+          <div className="blob blob-magenta opacity-30"></div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Our Company" />
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-            Trusted Offshore Partner Since 2011
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <Breadcrumbs setView={setView} currentName="Our Company" align="left" />
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
+            {/* Left — copy */}
+            <div className="text-left flex flex-col py-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8 w-fit">
+                Trusted Offshore Partner Since 2011
+              </div>
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                <span className="text-[#E61739]">Your Trusted </span>
+                <span className="text-white">Offshore Partner.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed">
+                Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with the best people in creative design, customer service, back office support, software development, and offshore IT — now supercharged with AI.
+              </p>
+            </div>
+
+            {/* Right — image card */}
+            <div className="relative lg:h-full">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+                <img
+                  src={IMG_CX_TEAM2}
+                  alt="KDCI team at their Manila headquarters"
+                  className="w-full h-full object-cover grayscale"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                <div className="absolute top-6 left-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Ortigas Center, Manila
+                  </div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl flex items-center justify-around">
+                  {[
+                    { label: 'Founded', value: '2011' },
+                    { label: 'Team Members', value: '300+' },
+                    { label: 'Global Clients', value: '50+' },
+                    { label: 'Cost Savings', value: '70%' },
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-white font-black text-xl md:text-2xl leading-none">{stat.value}</div>
+                      <div className="text-white/50 text-[9px] font-bold uppercase tracking-widest mt-1">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-8 tracking-tight leading-[1.05]">
-            <span className="text-shine-white">Your Trusted</span><br />
-            <span className="text-[#E61739]">Offshore Partner.</span>
-          </h1>
-          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/60 font-medium leading-relaxed mb-12">
-            Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with the best people in creative design, customer service, back office support, software development, and offshore IT — now supercharged with AI.
-          </p>
         </div>
       </section>
 
