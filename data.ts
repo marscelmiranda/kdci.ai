@@ -110,7 +110,7 @@ export const TECH_PARTNERS = [
   { name: "Microsoft",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778716839/microsoft-logo-brandlogos.net_5i6qb39x4_e4pwgf.svg", style: { height: '26px', width: 'auto', filter: 'brightness(0) invert(1) opacity(0.7)' } },
   { name: "Milwaukee",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714332/Milwaukee-OjD7Fzl3p_brandlogos.net_ugkx7h.svg" },
   { name: "Arby's",       logo: "https://www.google.com/s2/favicons?domain=arbys.com&sz=128" },
-  { name: "Nike",         logo: "https://cdn.simpleicons.org/nike", style: { height: '36px', width: 'auto' } },
+  { name: "Nike",         logo: "https://cdn.simpleicons.org/nike", style: { height: '44px', width: 'auto' } },
   { name: "Intel",        logo: "https://cdn.simpleicons.org/intel" },
   { name: "Insight",      logo: "https://www.google.com/s2/favicons?domain=insight.com&sz=128" },
   { name: "Ingram Micro", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778714775/ingram-micro-logo-brandlogos.net_mivkxfgdf_bs0ndu.svg", style: { height: '18px', width: 'auto' } },
