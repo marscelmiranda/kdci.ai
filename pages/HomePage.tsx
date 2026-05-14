@@ -58,7 +58,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group flex flex-col bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500">
                 <div className="relative h-44 overflow-hidden shrink-0">
-                  <img src={(s as any).image} alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={(s as any).image} alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: (s as any).imagePosition || 'center' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-widest text-white border border-white/30">
