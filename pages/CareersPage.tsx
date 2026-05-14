@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-import { Search, MapPin, Clock, ArrowRight, Filter, Briefcase, Loader2 } from 'lucide-react';
+import { Search, MapPin, Clock, ArrowRight, Briefcase, Loader2, ChevronDown, Plus, X } from 'lucide-react';
 import { IMG_REC_HERO } from '../data';
 
 interface ApiJob {
@@ -10,6 +10,7 @@ interface ApiJob {
   title: string;
   slug: string;
   department: string;
+  industry?: string | null;
   location: string;
   employment_type: string;
   experience_level: string | null;
@@ -25,9 +26,14 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
   const [jobs, setJobs] = useState<ApiJob[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [locationFilter, setLocationFilter] = useState("All Locations");
+
+  const [activeIndustry, setActiveIndustry]     = useState('All');
+  const [activeService, setActiveService]       = useState('All');
+  const [activeLocation, setActiveLocation]     = useState('All');
+  const [activeContract, setActiveContract]     = useState('All');
+  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'location' | 'contract' | null>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/jobs')
@@ -39,16 +45,39 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
       .catch(err => { setError(err.message); setLoading(false); });
   }, []);
 
-  const departments = ["All", ...Array.from(new Set(jobs.map(j => j.department))).sort()];
-  const locations = ["All Locations", ...Array.from(new Set(jobs.map(j => j.location))).sort()];
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
+        setOpenPanel(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const industries   = ['All', ...Array.from(new Set(jobs.map(j => j.industry).filter(Boolean) as string[])).sort()];
+  const services     = ['All', ...Array.from(new Set(jobs.map(j => j.department))).sort()];
+  const locations    = ['All', ...Array.from(new Set(jobs.map(j => j.location))).sort()];
+  const contractTypes = ['All', ...Array.from(new Set(jobs.map(j => j.employment_type))).sort()];
 
   const filteredJobs = jobs.filter(job => {
-    const matchesCategory = activeCategory === "All" || job.department === activeCategory;
-    const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          (job.description ?? '').toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation = locationFilter === "All Locations" || job.location === locationFilter;
-    return matchesCategory && matchesSearch && matchesLocation;
+    const matchesIndustry  = activeIndustry === 'All' || job.industry === activeIndustry;
+    const matchesService   = activeService  === 'All' || job.department === activeService;
+    const matchesLocation  = activeLocation === 'All' || job.location === activeLocation;
+    const matchesContract  = activeContract === 'All' || job.employment_type === activeContract;
+    const matchesSearch    = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                             (job.description ?? '').toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesIndustry && matchesService && matchesLocation && matchesContract && matchesSearch;
   });
+
+  const clearAll = () => {
+    setActiveIndustry('All');
+    setActiveService('All');
+    setActiveLocation('All');
+    setActiveContract('All');
+    setSearchQuery('');
+    setOpenPanel(null);
+  };
 
   const timeAgo = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
@@ -60,107 +89,171 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
     return months === 1 ? '1 month ago' : `${months} months ago`;
   };
 
+  const industryLabel  = activeIndustry === 'All' ? 'Industry'      : activeIndustry;
+  const serviceLabel   = activeService  === 'All' ? 'Service'       : activeService;
+  const locationLabel  = activeLocation === 'All' ? 'Location'      : activeLocation;
+  const contractLabel  = activeContract === 'All' ? 'Contract Type' : activeContract;
+
+  const industryActive  = activeIndustry !== 'All';
+  const serviceActive   = activeService  !== 'All';
+  const locationActive  = activeLocation !== 'All';
+  const contractActive  = activeContract !== 'All';
+
+  const panelOptions: Record<string, string[]> = {
+    industry: industries,
+    service:  services,
+    location: locations,
+    contract: contractTypes,
+  };
+  const panelSetters: Record<string, (v: string) => void> = {
+    industry: setActiveIndustry,
+    service:  setActiveService,
+    location: setActiveLocation,
+    contract: setActiveContract,
+  };
+  const panelActives: Record<string, string> = {
+    industry: activeIndustry,
+    service:  activeService,
+    location: activeLocation,
+    contract: activeContract,
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
-      {/* Hero Section */}
-      <section className="relative bg-[#020202] overflow-hidden pt-48 pb-32 md:pb-40">
+
+      {/* ── COMPACT HERO ── */}
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-16">
         <div className="absolute inset-0 z-0">
-          <img src={IMG_REC_HERO} alt="Careers at KDCI" className="w-full h-full object-cover opacity-20 object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
         <div className="mesh-container opacity-40">
-          <div className="blob blob-purple"></div>
-          <div className="blob blob-magenta opacity-30"></div>
+          <div className="blob blob-purple opacity-30" />
+          <div className="blob blob-magenta opacity-20" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <Breadcrumbs setView={setView} currentName="Careers" />
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 md:mb-10 tracking-tight leading-[0.95] drop-shadow-2xl">
-            <span className="text-shine-white">Join the</span><br/>
-            <span className="text-[#E61739]">Elite Intelligence.</span>
-          </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-2xl text-white/60 font-medium leading-relaxed mb-10 md:mb-16 px-4">
-            Build your career with the world's most innovative brands. We are looking for the top 1% of talent to drive the AGI revolution.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => document.getElementById('job-board')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
-              View Open Roles <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-        {/* Stats Bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Top 1%</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Talent Only</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Global</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Opportunities</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Remote</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">First Culture</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1">Growth</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Accelerated</p>
-            </div>
+          <div className="mt-6">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
+              <span className="text-shine-white">Join the</span>{' '}
+              <span className="text-[#E61739]">Elite Intelligence.</span>
+            </h1>
+            <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
+              Build your career with the world's most innovative brands. We're looking for the top 1% of talent to drive the AI revolution.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Filter & Tabs Bar */}
-      <div id="job-board" className="sticky top-[72px] z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm transition-all">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-              <input
-                type="text"
-                placeholder="Search roles, skills, or keywords..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-100 border-none rounded-xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white transition-all placeholder:text-slate-400"
-              />
-            </div>
-            <div className="flex items-center gap-3 w-full md:w-auto">
-              <div className="relative w-full md:w-auto">
-                <select
-                  value={locationFilter}
-                  onChange={(e) => setLocationFilter(e.target.value)}
-                  className="w-full md:w-56 appearance-none pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:border-[#E61739] focus:outline-none transition-all cursor-pointer"
-                >
-                  {locations.map(loc => <option key={loc} value={loc}>{loc}</option>)}
-                </select>
-                <MapPin className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
-            {departments.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest whitespace-nowrap transition-all border ${
-                  activeCategory === cat
-                    ? 'bg-[#1D1D1F] text-white border-[#1D1D1F] shadow-lg'
-                    : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      {/* ── FILTER BAR ── outside overflow-hidden so dropdown isn't clipped */}
+      <div id="job-board" ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
+
+        {/* Search row */}
+        <div className="max-w-7xl mx-auto px-8 pt-5 pb-4 border-b border-slate-100">
+          <div className="relative max-w-lg">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <input
+              type="text"
+              placeholder="Search roles, skills, or keywords..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white focus:border-[#E61739]/40 transition-all placeholder:text-slate-400 outline-none"
+            />
           </div>
         </div>
+
+        {/* Four-column trigger row */}
+        <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
+
+          {/* Industry */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
+          >
+            {industryActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-slate-900' : 'text-slate-500'}`}>{industryLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'industry' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+
+          {/* Service */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
+          >
+            {serviceActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-slate-900' : 'text-slate-500'}`}>{serviceLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'service' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+
+          {/* Location */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'location' ? null : 'location')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'location' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
+          >
+            {locationActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveLocation('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${locationActive ? 'text-slate-900' : 'text-slate-500'}`}>{locationLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'location' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+
+          {/* Contract Type */}
+          <button
+            onClick={() => setOpenPanel(openPanel === 'contract' ? null : 'contract')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'contract' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
+          >
+            {contractActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={(e) => { e.stopPropagation(); setActiveContract('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />
+            }
+            <span className={`text-sm font-bold uppercase tracking-widest ${contractActive ? 'text-slate-900' : 'text-slate-500'}`}>{contractLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'contract' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          </button>
+
+        </div>
+
+        {/* Dropdown panel */}
+        {openPanel && (
+          <div className="absolute left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-8 py-6 z-50">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
+              {openPanel === 'industry' ? 'Filter by Industry' :
+               openPanel === 'service'  ? 'Filter by Service'  :
+               openPanel === 'location' ? 'Filter by Location' :
+                                          'Filter by Contract Type'}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {panelOptions[openPanel].map(opt => {
+                const isActive = panelActives[openPanel] === opt;
+                return (
+                  <button
+                    key={opt}
+                    onClick={() => { panelSetters[openPanel](opt); setOpenPanel(null); }}
+                    className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${
+                      isActive
+                        ? 'bg-slate-900 text-white border-slate-900'
+                        : 'bg-white text-slate-600 border-slate-300 hover:border-slate-900 hover:text-slate-900'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Job Grid */}
-      <section className="py-20 px-6 max-w-7xl mx-auto min-h-[60vh]">
+      {/* ── JOB GRID ── */}
+      <section className="py-14 px-6 max-w-7xl mx-auto min-h-[60vh]">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-slate-900">
-            {activeCategory === "All" ? "Latest Openings" : `${activeCategory} Roles`}
+            Open Roles
             {!loading && (
               <span className="ml-3 text-sm font-medium text-slate-400 bg-white px-3 py-1 rounded-full border border-slate-200 align-middle">
                 {filteredJobs.length} Available
@@ -231,12 +324,12 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
         ) : (
           <div className="text-center py-32">
             <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
-              <Filter size={40} />
+              <Briefcase size={40} />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-2">No roles found</h3>
             <p className="text-slate-500">Try adjusting your search or filters to find what you're looking for.</p>
             <button
-              onClick={() => { setActiveCategory("All"); setSearchQuery(""); setLocationFilter("All Locations"); }}
+              onClick={clearAll}
               className="mt-6 text-[#E61739] font-bold text-sm hover:underline"
             >
               Clear all filters
@@ -245,7 +338,7 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
         )}
       </section>
 
-      {/* Final CTA Section */}
+      {/* ── FINAL CTA ── */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
           <div className="absolute inset-0 z-0">
@@ -264,6 +357,7 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
           </div>
         </div>
       </section>
+
     </div>
   );
 };
