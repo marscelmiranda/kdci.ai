@@ -295,7 +295,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                 Onboarding Timeline
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none">Get started with outsourced HR services in four steps.</h2>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none mr-[15px]">Get started with outsourced HR services in four steps.</h2>
             </div>
             <p className="text-white/40 text-base font-medium max-w-xs leading-relaxed">Place common roles in 14 days. Fill specialized or senior roles within 30. Our offshore recruiters handle every step, from sourcing to onboarding.</p>
           </div>
