@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles, Briefcase, ScanSearch, UserCheck, ClipboardCheck, Workflow, Cpu, Handshake, BrainCircuit, Globe2, ShieldCheck, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown, X } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { Captcha } from '../../components/Captcha';
+import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
 import IMG_HERO_MEETING from '../../attached_assets/Untitled-1_1778062521021.png';
@@ -52,11 +52,11 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
   const [showModal, setShowModal] = useState(false);
   const [modalForm, setModalForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [modalSubmitted, setModalSubmitted] = useState(false);
-  const [captchaOk, setCaptchaOk] = useState(false);
-  const [modalCaptchaOk, setModalCaptchaOk] = useState(false);
-  const handleModalForm = (e: React.FormEvent) => { e.preventDefault(); setModalSubmitted(true); };
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const modalCaptchaRef = useRef<CaptchaHandle>(null);
+  const handleModalForm = (e: React.FormEvent) => { e.preventDefault(); if (modalCaptchaRef.current?.isBot()) return; setModalSubmitted(true); };
   const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
-  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const lightInp = "w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm";
 
@@ -659,8 +659,8 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                     <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="Timeline, budget, team size, remote/on-site..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <Captcha onVerify={setCaptchaOk} theme="dark" />
-                  <button type="submit" disabled={!captchaOk} className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
+                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
                     Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
@@ -809,12 +809,12 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                     <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={lightInp + " resize-none"} placeholder="Timeline, budget, remote/on-site, team size..." value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <Captcha onVerify={setModalCaptchaOk} theme="light" />
+                  <Captcha ref={modalCaptchaRef} onVerify={() => {}} theme="light" />
                   <div className="flex gap-3 pt-2">
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" disabled={!modalCaptchaOk} className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
+                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   CheckCircle2, 
   Loader2, 
@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-import { Captcha } from '../components/Captcha';
+import { Captcha, CaptchaHandle } from '../components/Captcha';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
@@ -23,10 +23,11 @@ import { Badge } from '../components/ui/badge';
 export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [fileName, setFileName] = useState<string | null>(null);
-  const [captchaOk, setCaptchaOk] = useState(false);
+  const captchaRef = useRef<CaptchaHandle>(null);
 
   const handleSubmit = (e: React.FormEvent) => { 
-    e.preventDefault(); 
+    e.preventDefault();
+    if (captchaRef.current?.isBot()) return;
     setFormState('submitting'); 
     setTimeout(() => setFormState('success'), 1500); 
   };
@@ -175,10 +176,10 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     </label>
                   </div>
 
-                  <Captcha onVerify={setCaptchaOk} theme="light" />
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="light" />
 
                   <Button 
-                    disabled={formState === 'submitting' || !captchaOk} 
+                    disabled={formState === 'submitting'} 
                     type="submit" 
                     size="lg"
                     className="w-full text-lg gap-3"

@@ -1,17 +1,17 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { Captcha } from '../../components/Captcha';
+import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
 export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [captchaOk, setCaptchaOk] = useState(false);
-  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   return (
@@ -177,8 +177,8 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                     <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <Captcha onVerify={setCaptchaOk} theme="dark" />
-                  <button type="submit" disabled={!captchaOk} className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>

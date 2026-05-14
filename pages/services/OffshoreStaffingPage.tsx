@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign, Shield, X } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { Captcha } from '../../components/Captcha';
+import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
 import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.png';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
@@ -45,8 +45,8 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [captchaOk, setCaptchaOk] = useState(false);
-  const handleForm = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const handleForm = (e: React.FormEvent) => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const [showSticky, setShowSticky] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -887,8 +887,8 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                     <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <Captcha onVerify={setCaptchaOk} theme="dark" />
-                  <button type="submit" disabled={!captchaOk} className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>

@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
-import { Captcha } from '../../components/Captcha';
+import { Captcha, CaptchaHandle } from '../../components/Captcha';
 
 const SERVICES = [
   {
@@ -102,7 +102,7 @@ const TOOLS = [
 export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [captchaOk, setCaptchaOk] = useState(false);
+  const captchaRef = useRef<CaptchaHandle>(null);
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
@@ -550,7 +550,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Ready to Build AI that Works?</h2>
                   <p className="text-white/40 text-sm font-medium">Book a free 30-minute discovery call. Let's map out your top AI implementation opportunities and identify the highest-impact AI opportunities — no obligation.</p>
                 </div>
-                <form onSubmit={e => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name</label>
@@ -585,8 +585,8 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                     <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="Tell us about your biggest operational pain point…" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
-                  <Captcha onVerify={setCaptchaOk} theme="dark" />
-                  <button type="submit" disabled={!captchaOk} className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#E61739]">
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>
