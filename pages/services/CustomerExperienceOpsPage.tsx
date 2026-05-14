@@ -225,7 +225,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[9px] font-black uppercase tracking-widest mb-4">
                   <Layers2 size={12} /> Tech Ecosystem
                </div>
-               <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">Your App Stack, Fully Managed.</h3>
+               <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">Agentic Solutions that Work With Your Favorite Support Platforms.</h3>
                <p className="text-slate-400 mt-2 text-sm font-medium">Our agents are certified across the world's leading CX platforms.</p>
             </div>
             
