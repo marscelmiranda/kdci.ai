@@ -115,7 +115,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <div className="text-left flex flex-col justify-between py-2">
               <div>
                 <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                  <span className="text-shine-white">AI-Powered Efficiency.</span>
+                  <span className="text-shine-white">Agentic Solutions</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                   Deploy AI agents to handle interactions at scale, with seamless escalation to human professionals.
