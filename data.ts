@@ -159,7 +159,8 @@ export const TOP_SERVICES = [
     id: 'staff-aug',
     name: 'Philippine Offshore Staffing', 
     tag: 'On-Demand Talent',
-    icon: Rocket, 
+    icon: Rocket,
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',
     benefits: ['Experts on Demand', 'Zero Hiring Risk', 'Scale Instantly']
   },
@@ -168,6 +169,7 @@ export const TOP_SERVICES = [
     name: 'AI Consulting & Implementation',
     tag: 'AI Strategy & Build',
     icon: Cpu,
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
     benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
   },
@@ -175,7 +177,8 @@ export const TOP_SERVICES = [
     id: 'customer-support',
     name: 'Customer Experience Operations', 
     tag: '24/7 Global Ops',
-    icon: Activity, 
+    icon: Activity,
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
@@ -183,7 +186,8 @@ export const TOP_SERVICES = [
     id: 'agentic-recruitment',
     name: 'Global Recruitment Services', 
     tag: 'Talent Sourcing',
-    icon: Target, 
+    icon: Target,
+    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
@@ -191,7 +195,8 @@ export const TOP_SERVICES = [
     id: 'creative-prod',
     name: 'Graphic Design Studio', 
     tag: 'Brand Production',
-    icon: Sparkles, 
+    icon: Sparkles,
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
     benefits: ['48h Turnaround', 'Enterprise Scale', 'Infinite Versioning']
   },
