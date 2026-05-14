@@ -118,7 +118,7 @@ export const TECH_PARTNERS = [
   { name: "Tiffany & Co", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719490/tiffany-_-co-logo-brandlogos.net_q0je28nfd_nmiidy.svg", style: { height: '18px', width: 'auto' } },
   { name: "Cole Haan",    logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778719718/cdnlogo.com_cole-haan_tklsg1.svg", style: { height: '18px', width: 'auto' } },
   { name: "Dell",         logo: "https://cdn.simpleicons.org/dell" },
-  { name: "Softonic",     logo: "https://www.google.com/s2/favicons?domain=softonic.com&sz=128" },
+  { name: "Softonic",     logo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Logo_softonic_H_color_%281%29.svg" },
 ];
 
 export const INDUSTRIES = [
