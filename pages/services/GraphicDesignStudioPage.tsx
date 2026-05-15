@@ -225,7 +225,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               { icon: Play, title: "Motion & Video Ops", desc: "Short-form video edits, motion graphics, and animated ads for paid social and digital campaigns." },
               { icon: Presentation, title: "Pitch Decks & Sales", desc: "Professional presentation systems and sales collateral that converts complex ideas into clarity." },
               { icon: ShieldCheck, title: "Creative QA & Systems", desc: "Automated brand audits and template systems ensuring 100% visual consistency." },
-              { icon: BrainCircuit, title: "AI-Enhanced Workflows", desc: "Deploying Gen-AI for rapid resizing, asset versioning, and smart tagging at scale." },
+              { icon: BrainCircuit, title: "AI-Enhanced Workflows", desc: "AI-powered design workflows for faster resizing, asset versioning, and bulk creative production." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={28} /></div>
