@@ -243,7 +243,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">The Delivery Flow.</h2>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Streamlined creative ops from alignment to delivery.</p>
+            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed">From your first brief to final asset, here's how our graphic design service works.</p>
           </div>
           <div className="grid md:grid-cols-4 gap-8">
             {[
