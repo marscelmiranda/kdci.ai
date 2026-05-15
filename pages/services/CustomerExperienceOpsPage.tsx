@@ -202,7 +202,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Intelligent Infrastructure</div>
             <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[60px]">Purpose-Built AI that Elevates Your CX</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Accelerate resolutions with AI-driven automation, backed by top-tier human talent for complex interactions.</p>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Accelerate resolutions with AI customer service agents, backed by top-tier human talent for complex interactions.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-24">
