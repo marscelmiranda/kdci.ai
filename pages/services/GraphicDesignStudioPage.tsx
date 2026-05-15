@@ -249,7 +249,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
             {[
               { step: "01", title: "Brand Alignment", desc: "We learn your brand guidelines, SOPs, and creative goals.", icon: Target },
               { step: "02", title: "Native Embedding", desc: "Dedicated graphic designers sync directly into your Figma, Slack, and ClickUp.", icon: Users2 },
-              { step: "03", title: "AI-Managed Ops", desc: "We deploy automation for resizing, QA, and task routing.", icon: BrainCircuit },
+              { step: "03", title: "AI-Powered Production", desc: "We deploy automation for resizing, QA, and task routing.", icon: BrainCircuit },
               { step: "04", title: "Daily Output", desc: "Consistent asset delivery with real-time performance tracking.", icon: BarChart3 },
             ].map((s, idx) => (
               <div key={idx} className="flex flex-col items-center text-center group">
