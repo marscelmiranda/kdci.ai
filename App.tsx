@@ -67,6 +67,8 @@ import { WebinarsPage } from './pages/WebinarsPage';
 import { EbooksPage } from './pages/EbooksPage';
 import { FaqPage } from './pages/FaqPage';
 import { GlossaryPage } from './pages/GlossaryPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { ComingSoonPage } from './pages/ComingSoonPage';
 
 const App = () => {
   const [activeView, setView] = useState<ViewType>('home');
@@ -187,6 +189,10 @@ const App = () => {
         {activeView === 'ebooks' && <EbooksPage setView={setView} />}
         {activeView === 'faqs' && <FaqPage setView={setView} />}
         {activeView === 'glossary' && <GlossaryPage setView={setView} />}
+
+        {/* Utility pages */}
+        {activeView === 'not-found' && <NotFoundPage setView={setView} />}
+        {activeView === 'coming-soon' && <ComingSoonPage setView={setView} />}
       </main>
       
       <Footer setView={setView} />
