@@ -224,7 +224,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               { icon: ShoppingCart, title: "eCommerce Content", desc: "Amazon A+ content, PDP imagery, and high-end product retouching for global retail." },
               { icon: Play, title: "Motion & Video Ops", desc: "Short-form video edits, motion graphics, and animated ads for paid social and digital campaigns." },
               { icon: Presentation, title: "Pitch Decks & Sales", desc: "Professional presentation systems and sales collateral that converts complex ideas into clarity." },
-              { icon: ShieldCheck, title: "Creative QA & Systems", desc: "Automated brand audits and template systems ensuring 100% visual consistency." },
+              { icon: ShieldCheck, title: "Creative QA & Systems", desc: "Automated brand consistency checks and template systems, ensuring 100% visual consistency." },
               { icon: BrainCircuit, title: "AI-Enhanced Workflows", desc: "AI-powered design workflows for faster resizing, asset versioning, and bulk creative production." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
