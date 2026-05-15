@@ -399,105 +399,86 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
 
       {/* ── CONTACT FORM ── */}
       <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
-          <div className="absolute inset-0 z-0">
-            <img src={IMG_CX_TEAM} alt="KDCI CX Team" className="w-full h-full object-cover opacity-[0.06]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
-          </div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
-          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
-
-            {/* Left — headline + bullets */}
-            <div className="p-12 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Let's Talk Support
-                </div>
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Build your<br /><span className="text-[#E61739]">support legacy.</span>
-                </h2>
-                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your CX needs and we'll have a pod design and cost model ready within 24 hours.
-                </p>
-              </div>
-              <div className="space-y-4 mt-12">
-                {[
-                  { icon: CheckCircle2, text: 'Omnichannel coverage across voice, chat, email & social' },
-                  { icon: CheckCircle2, text: '14-day ramp for a fully trained 5-agent pod' },
-                  { icon: CheckCircle2, text: '4.7–4.9/5 CSAT across all managed accounts' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <item.icon size={14} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
-                  </div>
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CX_TEAM}
+              alt="KDCI CX Team"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI-Powered Customer Experience</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your CX pod, live<br/>in 14 days.</h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['AI-Augmented', 'Omnichannel', '24/7 Coverage'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
                 ))}
-                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
-                  {[
-                    { val: '4.8/5', label: 'Avg CSAT' },
-                    { val: '14 Days', label: 'Ramp Time' },
-                    { val: '24/7', label: 'Coverage' },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
-                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
+          </div>
 
-            {/* Right — contact form */}
-            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
-                    <CheckCircle2 size={30} className="text-white" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white">Message received!</h3>
-                  <p className="text-white/50 text-sm font-medium max-w-xs">Our CX leads will review your brief and get back to you within 24 hours.</p>
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
                 </div>
-              ) : (
+                <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
+                <p className="text-white/50 font-medium">Your brief has been received. Expect a response within 24 hours.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Consultation
+                  </div>
+                  <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your CX Pod Today</h2>
+                  <p className="text-white/40 font-medium text-[13px]">Every engagement begins with a discovery call. Tell us what you need and we'll design your ideal support operation.</p>
+                </div>
                 <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
-                  <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
                       <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
                       <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email</label>
                       <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
                       <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Support Channels Needed</label>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Support Channels Needed</label>
                     <input required className={inp} placeholder="e.g. Live Chat, Email, Voice, Social Media" value={form.channel} onChange={e => setForm(f => ({ ...f, channel: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, hours, industry, current helpdesk..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
-                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
-                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 24 hours</p>
                 </form>
-              )}
-            </div>
-
+              </>
+            )}
           </div>
+
         </div>
       </section>
 
