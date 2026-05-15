@@ -216,7 +216,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Production Arsenal</div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">What We Do.</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">On-demand graphic design delivered through embedded pods and AI-enhanced workflows.</p>
+            <p className="text-slate-500 max-w-3xl mx-auto font-medium text-[17px]">On-demand graphic design delivered through embedded pods and AI-enhanced workflows.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
