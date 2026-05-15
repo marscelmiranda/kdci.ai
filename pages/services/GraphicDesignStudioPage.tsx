@@ -156,7 +156,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739]">Creative<br/>Production</span><br/>
+                <span className="text-[#E61739]">AI-Powered</span><br/>
                 <span className="text-shine-white">at Scale.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
