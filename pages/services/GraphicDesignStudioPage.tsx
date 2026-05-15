@@ -222,7 +222,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
             {[
               { icon: PenTool, title: "Graphic & Ad Design", desc: "High-velocity static ads, social kits, and email templates following strict brand guides." },
               { icon: ShoppingCart, title: "eCommerce Content", desc: "Amazon A+ content, PDP imagery, and high-end product retouching for global retail." },
-              { icon: Play, title: "Motion & Video Ops", desc: "Short-form video editing, motion graphics, and animated ad sequences for paid social." },
+              { icon: Play, title: "Motion & Video Ops", desc: "Short-form video edits, motion graphics, and animated ads for paid social and digital campaigns." },
               { icon: Presentation, title: "Pitch Decks & Sales", desc: "Professional presentation systems and sales collateral that converts complex ideas into clarity." },
               { icon: ShieldCheck, title: "Creative QA & Systems", desc: "Automated brand audits and template systems ensuring 100% visual consistency." },
               { icon: BrainCircuit, title: "AI-Enhanced Workflows", desc: "Deploying Gen-AI for rapid resizing, asset versioning, and smart tagging at scale." },
