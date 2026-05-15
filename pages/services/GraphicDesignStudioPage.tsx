@@ -160,7 +160,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 <span className="text-[#e61739]">Graphic Design Services</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Our embedded creative teams deliver on-brand assets daily, while we manage the AI workflows that drive accuracy, speed, and creative consistency.
+                We deliver on-demand graphic design services accelerated by AI workflows for enhanced creative and on-brand asset delivery.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
