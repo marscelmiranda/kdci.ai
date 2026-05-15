@@ -166,7 +166,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Unlimited asset requests with 24–48h turnaround</span>
+                  <span className="leading-snug">Unlimited graphic design requests with 24–48h turnaround</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
