@@ -1,11 +1,61 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Cpu, ChevronRight, CheckCircle2, Zap, Quote, ArrowRight } from 'lucide-react';
 import { ViewType } from '../types';
 import { HeroBackground } from '../components/HeroBackground';
 import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../data';
 
+const STORIES = [
+  {
+    quote: "What started out as a few agents, has grown into an invaluable partnership with KDCI. With more than 40 team members, we are lucky enough to count as part of our Cedar Family. Thank you so much KDCI for making our Company better!",
+    name: "Cedar Team Lead",
+    role: "Operations, Cedar",
+    initials: "CT",
+    tag: "Offshore Staffing",
+  },
+  {
+    quote: "We have found KDCI to be a consistently reliable partner, always willing to 'go the extra mile' to ensure our valued customers receive the best possible service.",
+    name: "Client Partner",
+    role: "Customer Experience",
+    initials: "CP",
+    tag: "Customer Support",
+  },
+  {
+    quote: "It's been five years since we started working with KDCI, and it just keeps getting better and better. We've grown together and achieved a lot of shared success. Overall, they're incredibly professional yet fun to work with.",
+    name: "Long-Term Client",
+    role: "5-Year Partnership",
+    initials: "LC",
+    tag: "Long-term Partner",
+  },
+  {
+    quote: "KDCI's team has been instrumental in helping us not only modernize our platforms but also increase the experiences for the customer, and to deliver on the tsunami of content that came their way.",
+    name: "Platform Director",
+    role: "Technology & Content",
+    initials: "PD",
+    tag: "Tech & Content",
+  },
+  {
+    quote: "We love our KDCI team. They're just like a regular part of our team, it's just that they're thousands of miles away. We had a lot of difficulty finding qualified talent in the United States — KDCI solved that completely.",
+    name: "US Business Owner",
+    role: "Founder, US-based Company",
+    initials: "UB",
+    tag: "Talent Solutions",
+  },
+  {
+    quote: "KDCI plays a very important role in our catalog and content operations. They are responsive, kind, and always willing to help us as much as possible. We have been working together for more than 4 years.",
+    name: "eCommerce Lead",
+    role: "Catalog & Content Operations",
+    initials: "EC",
+    tag: "eCommerce",
+  },
+];
+
 export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [activeStory, setActiveStory] = useState(0);
+  const prev2 = (activeStory + STORIES.length - 2) % STORIES.length;
+  const prev1 = (activeStory + STORIES.length - 1) % STORIES.length;
+  const sideIndices = [prev2, prev1];
+
   return (
     <div className="min-h-screen bg-[#0A0A1A]">
       <section className="relative h-[calc(100vh-250px)] flex items-center justify-center pt-24 overflow-hidden">
@@ -131,50 +181,6 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         </div>
       </section>
 
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-6">Trusted by Industry Leaders.</h2>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
-               <div className="text-2xl font-black font-heading">FINTECH<span className="text-[#E61739]">X</span></div>
-               <div className="text-2xl font-black font-heading italic">GLOBAL.ecom</div>
-               <div className="text-2xl font-black font-heading tracking-widest uppercase">PropBase</div>
-               <div className="text-2xl font-black font-heading">CORE<span className="opacity-50">SaaS</span></div>
-               <div className="text-2xl font-black font-heading">LOGI<span className="text-[#E61739]">FLOW</span></div>
-            </div>
-          </div>
-
-          <div className="bg-[#1D1D1F] rounded-[4rem] p-12 md:p-24 relative overflow-hidden">
-             <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
-             <div className="relative z-10 grid lg:grid-cols-5 gap-16 items-center">
-                <div className="lg:col-span-3">
-                   <Quote size={64} className="text-[#E61739] mb-10 opacity-50" />
-                   <p className="text-2xl md:text-4xl font-heading font-bold text-white mb-12 leading-snug italic">
-                      "KDCI didn't just give us staff; they gave us a smarter process. We scaled our operations by 40% in two quarters without increasing our internal management load. They are truly an extensions of our core team."
-                   </p>
-                   <div className="flex items-center gap-6">
-                      <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-white/30 border border-white/10 font-bold uppercase">MJ</div>
-                      <div>
-                         <div className="text-white font-bold text-lg">Marcus Jordon</div>
-                         <div className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em]">VP Operations, Stealth FinTech</div>
-                      </div>
-                   </div>
-                </div>
-                <div className="lg:col-span-2 space-y-4">
-                   <div className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-md">
-                      <div className="text-4xl font-black text-white mb-2">$300K+</div>
-                      <p className="text-white/60 text-sm font-medium">Saved in annual staffing and overhead costs within the first year.</p>
-                   </div>
-                   <div className="bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-md">
-                      <div className="text-4xl font-black text-[#E61739] mb-2">99.8%</div>
-                      <p className="text-white/60 text-sm font-medium">Uptime and accuracy for global customer support and logistics data.</p>
-                   </div>
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── CLIENT SUCCESS STORIES ── */}
       <section className="py-32 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
@@ -184,60 +190,80 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <p className="text-[#86868b] text-lg font-medium max-w-2xl mx-auto">Real stories from the businesses we've helped scale, streamline, and grow.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                quote: "What started out as a few agents, has grown into an invaluable partnership with KDCI. With more than 40 team members, we are lucky enough to count as part of our Cedar Family. Thank you so much KDCI for making our Company better!",
-                name: "Cedar Team Lead",
-                role: "Operations, Cedar",
-                initials: "CT",
-              },
-              {
-                quote: "We have found KDCI to be a consistently reliable partner, always willing to 'go the extra mile' to ensure our valued customers receive the best possible service.",
-                name: "Client Partner",
-                role: "Customer Experience",
-                initials: "CP",
-              },
-              {
-                quote: "It's been five years since we started working with KDCI, and it just keeps getting better and better. We've grown together and achieved a lot of shared success. Overall, they're incredibly professional yet fun to work with.",
-                name: "Long-Term Client",
-                role: "5-Year Partnership",
-                initials: "LC",
-              },
-              {
-                quote: "KDCI's team has been instrumental in helping us not only modernize our platforms but also increase the experiences for the customer, and to deliver on the tsunami of content that came their way.",
-                name: "Platform Director",
-                role: "Technology & Content",
-                initials: "PD",
-              },
-              {
-                quote: "We love our KDCI team. They're just like a regular part of our team, it's just that they're thousands of miles away. We had a lot of difficulty finding qualified talent in the United States — KDCI solved that completely.",
-                name: "US Business Owner",
-                role: "Founder, US-based Company",
-                initials: "UB",
-              },
-              {
-                quote: "KDCI plays a very important role in our catalog and content operations. They are responsive, kind, and always willing to help us as much as possible. We have been working together for more than 4 years.",
-                name: "eCommerce Lead",
-                role: "Catalog & Content Operations",
-                initials: "EC",
-              },
-            ].map((t, i) => (
-              <div key={i} className="bg-white rounded-[2.5rem] p-8 border border-black/[0.04] flex flex-col hover:shadow-xl transition-all duration-500">
-                <Quote size={28} className="text-[#E61739] opacity-60 mb-5 shrink-0" />
-                <p className="text-[#1D1D1F] text-sm font-medium leading-relaxed flex-grow mb-8 italic">
-                  "{t.quote}"
+          {/* Main layout: big card + 2 side cards */}
+          <div className="grid lg:grid-cols-3 gap-6 items-stretch">
+
+            {/* Big featured card */}
+            <div className="lg:col-span-2 bg-[#1D1D1F] rounded-[2.5rem] p-10 md:p-14 flex flex-col justify-between relative overflow-hidden min-h-[380px]">
+              <div className="absolute top-0 right-0 w-72 h-72 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <Quote size={36} className="text-[#E61739] opacity-60" />
+                  <span className="px-3 py-1 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-white/50">
+                    {STORIES[activeStory].tag}
+                  </span>
+                </div>
+                <p className="text-xl md:text-2xl font-heading font-bold text-white leading-snug italic mb-10">
+                  "{STORIES[activeStory].quote}"
                 </p>
-                <div className="flex items-center gap-4 pt-6 border-t border-black/5">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs shrink-0">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="text-[#1D1D1F] font-bold text-sm">{t.name}</div>
-                    <div className="text-[#86868b] text-[10px] font-black uppercase tracking-widest">{t.role}</div>
-                  </div>
+              </div>
+              <div className="relative z-10 flex items-center gap-4 pt-8 border-t border-white/[0.08]">
+                <div className="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/60 font-bold text-sm shrink-0">
+                  {STORIES[activeStory].initials}
+                </div>
+                <div>
+                  <div className="text-white font-bold">{STORIES[activeStory].name}</div>
+                  <div className="text-white/40 text-[10px] font-black uppercase tracking-widest">{STORIES[activeStory].role}</div>
                 </div>
               </div>
+            </div>
+
+            {/* Two side preview cards */}
+            <div className="flex flex-col gap-6">
+              {sideIndices.map((idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveStory(idx)}
+                  className="flex-1 text-left bg-white rounded-[2rem] p-8 border border-black/[0.04] hover:shadow-xl hover:border-[#E61739]/20 transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <Quote size={18} className="text-[#E61739] opacity-50" />
+                      <span className="px-2 py-0.5 bg-slate-100 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-400">
+                        {STORIES[idx].tag}
+                      </span>
+                    </div>
+                    <p className="text-[#1D1D1F] text-sm font-medium leading-relaxed italic line-clamp-3">
+                      "{STORIES[idx].quote}"
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 mt-5 pt-4 border-t border-black/5">
+                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-[10px] shrink-0">
+                      {STORIES[idx].initials}
+                    </div>
+                    <div>
+                      <div className="text-[#1D1D1F] font-bold text-xs">{STORIES[idx].name}</div>
+                      <div className="text-[#86868b] text-[9px] font-black uppercase tracking-widest">{STORIES[idx].role}</div>
+                    </div>
+                    <ArrowRight size={14} className="ml-auto text-slate-300 group-hover:text-[#E61739] transition-colors" />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Carousel dots */}
+          <div className="flex items-center justify-center gap-2 mt-10">
+            {STORIES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveStory(i)}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeStory
+                    ? 'w-8 h-2.5 bg-[#E61739]'
+                    : 'w-2.5 h-2.5 bg-black/15 hover:bg-black/30'
+                }`}
+              />
             ))}
           </div>
         </div>
