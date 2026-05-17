@@ -26,27 +26,28 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           </div>
         </div>
 
-        {/* Brand ticker — layered over the constellation */}
-        <div className="absolute bottom-[100px] left-0 w-full z-30">
-          <p className="text-center text-[10px] text-white font-black uppercase tracking-widest mb-5">We work with the brands you love</p>
-          <div className="relative overflow-hidden mask-fade">
-            <div className="flex w-max animate-ticker items-center">
-              {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
-                <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="h-[44px] md:h-[46px] w-auto object-contain opacity-70 grayscale invert brightness-200 hover:opacity-100 transition-all duration-500 cursor-default"
-                    style={(partner as any).style ?? {}}
-                    referrerPolicy="no-referrer"
-                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
-                </div>
-              ))}
-            </div>
+      </section>
+
+      {/* Brand ticker — black band */}
+      <div className="bg-[#020202] py-10 border-y border-white/[0.06]">
+        <p className="text-center text-[10px] text-white font-black uppercase tracking-widest mb-6">We work with the brands you love</p>
+        <div className="relative overflow-hidden mask-fade">
+          <div className="flex w-max animate-ticker items-center">
+            {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
+              <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-[44px] md:h-[46px] w-auto object-contain opacity-70 grayscale invert brightness-200 hover:opacity-100 transition-all duration-500 cursor-default"
+                  style={(partner as any).style ?? {}}
+                  referrerPolicy="no-referrer"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
 
       <section className="pt-20 pb-32 bg-white rounded-t-[5rem] relative z-10">
         <div className="max-w-7xl mx-auto px-6">
