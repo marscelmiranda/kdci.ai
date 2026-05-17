@@ -182,7 +182,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
       </section>
 
       {/* ── CLIENT SUCCESS STORIES ── */}
-      <section className="py-32 bg-[#F5F5F7]">
+      <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Client Success Stories</div>
