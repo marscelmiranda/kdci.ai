@@ -175,6 +175,74 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         </div>
       </section>
 
+      {/* ── CLIENT SUCCESS STORIES ── */}
+      <section className="py-32 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Client Success Stories</div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Our Clients Love Working With Us.</h2>
+            <p className="text-[#86868b] text-lg font-medium max-w-2xl mx-auto">Real stories from the businesses we've helped scale, streamline, and grow.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                quote: "What started out as a few agents, has grown into an invaluable partnership with KDCI. With more than 40 team members, we are lucky enough to count as part of our Cedar Family. Thank you so much KDCI for making our Company better!",
+                name: "Cedar Team Lead",
+                role: "Operations, Cedar",
+                initials: "CT",
+              },
+              {
+                quote: "We have found KDCI to be a consistently reliable partner, always willing to 'go the extra mile' to ensure our valued customers receive the best possible service.",
+                name: "Client Partner",
+                role: "Customer Experience",
+                initials: "CP",
+              },
+              {
+                quote: "It's been five years since we started working with KDCI, and it just keeps getting better and better. We've grown together and achieved a lot of shared success. Overall, they're incredibly professional yet fun to work with.",
+                name: "Long-Term Client",
+                role: "5-Year Partnership",
+                initials: "LC",
+              },
+              {
+                quote: "KDCI's team has been instrumental in helping us not only modernize our platforms but also increase the experiences for the customer, and to deliver on the tsunami of content that came their way.",
+                name: "Platform Director",
+                role: "Technology & Content",
+                initials: "PD",
+              },
+              {
+                quote: "We love our KDCI team. They're just like a regular part of our team, it's just that they're thousands of miles away. We had a lot of difficulty finding qualified talent in the United States — KDCI solved that completely.",
+                name: "US Business Owner",
+                role: "Founder, US-based Company",
+                initials: "UB",
+              },
+              {
+                quote: "KDCI plays a very important role in our catalog and content operations. They are responsive, kind, and always willing to help us as much as possible. We have been working together for more than 4 years.",
+                name: "eCommerce Lead",
+                role: "Catalog & Content Operations",
+                initials: "EC",
+              },
+            ].map((t, i) => (
+              <div key={i} className="bg-white rounded-[2.5rem] p-8 border border-black/[0.04] flex flex-col hover:shadow-xl transition-all duration-500">
+                <Quote size={28} className="text-[#E61739] opacity-60 mb-5 shrink-0" />
+                <p className="text-[#1D1D1F] text-sm font-medium leading-relaxed flex-grow mb-8 italic">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-4 pt-6 border-t border-black/5">
+                  <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs shrink-0">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="text-[#1D1D1F] font-bold text-sm">{t.name}</div>
+                    <div className="text-[#86868b] text-[10px] font-black uppercase tracking-widest">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-32 px-6 relative overflow-hidden">
          <div className="max-w-7xl mx-auto">
             <div className="bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-24 md:p-32 text-center group">
