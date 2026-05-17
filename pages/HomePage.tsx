@@ -57,38 +57,30 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
-              <div key={i} className="group flex flex-col bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500">
-                <div className="relative h-44 overflow-hidden shrink-0">
-                  <img src={(s as any).image} alt={s.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: (s as any).imagePosition || 'center' }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-widest text-white border border-white/30">
-                      {s.tag}
-                    </span>
+              <div key={i} className="group flex flex-col bg-white rounded-[2.5rem] border border-black/[0.04] hover:shadow-2xl transition-all duration-500 p-7">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-all duration-300">
+                    <s.icon size={22} />
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="w-9 h-9 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
-                      <s.icon size={18} />
-                    </div>
+                  <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    {s.tag}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{s.name}</h3>
+                <p className="text-[#86868b] text-sm leading-relaxed mb-6 flex-grow font-medium">{s.desc}</p>
+                <div className="w-full pt-5 border-t border-black/5 mb-6">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-[#1D1D1F] mb-3">Key Outcomes</div>
+                  <div className="space-y-2">
+                    {s.benefits.map((b, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-500">
+                        <CheckCircle2 size={12} className="text-[#E61739]" /> {b}
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="flex flex-col flex-grow p-7">
-                  <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{s.name}</h3>
-                  <p className="text-[#86868b] text-sm leading-relaxed mb-6 flex-grow font-medium">{s.desc}</p>
-                  <div className="w-full pt-5 border-t border-black/5 mb-6">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-[#1D1D1F] mb-3">Key Outcomes</div>
-                    <div className="space-y-2">
-                      {s.benefits.map((b, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-500">
-                          <CheckCircle2 size={12} className="text-[#E61739]" /> {b}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2">
-                    Explore Solution <ArrowRight size={14} />
-                  </button>
-                </div>
+                <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2">
+                  Explore Solution <ArrowRight size={14} />
+                </button>
               </div>
             ))}
           </div>
