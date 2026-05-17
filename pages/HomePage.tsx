@@ -8,7 +8,7 @@ import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../d
 export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="min-h-screen bg-[#0A0A1A]">
-      <section className="relative h-screen flex items-center justify-center pt-24 overflow-hidden">
+      <section className="relative h-[calc(100vh-250px)] flex items-center justify-center pt-24 overflow-hidden">
         <HeroBackground />
         <div className="grain-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}></div>
         <div className="max-w-7xl mx-auto px-6 text-center relative z-20 -translate-y-[75px]">
