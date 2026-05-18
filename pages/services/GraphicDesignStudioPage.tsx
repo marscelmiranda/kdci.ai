@@ -170,7 +170,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">100% brand-aligned by dedicated embedded designers</span>
+                  <span className="leading-snug">On-brand assets from dedicated designers who know your brand</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
