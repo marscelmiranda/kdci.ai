@@ -297,7 +297,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 Everything you need.<br/><span className="text-[#E61739]">Nothing you don't.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
-                Every engagement includes our complete recruitment suite — from AI sourcing to offer management and beyond.
+                From AI sourcing to offer management, every engagement includes our full-service HR outsourcing suite.
               </p>
               <div className="bg-slate-50 border border-black/5 rounded-3xl p-8 flex-grow">
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3 h-full content-start">
