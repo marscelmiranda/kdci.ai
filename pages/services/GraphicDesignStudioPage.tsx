@@ -299,7 +299,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Flexible Creative Plans.</h2>
-            <p className="text-white/40 text-lg font-medium">Scaling your creative throughput without the headcount friction.</p>
+            <p className="text-white/40 text-lg font-medium">Scale your creative output without the cost of hiring a full in-house design team.</p>
           </div>
 
           <div className="flex justify-center mb-10">
