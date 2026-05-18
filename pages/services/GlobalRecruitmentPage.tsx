@@ -180,7 +180,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               </p>
               <div className="space-y-3">
                 {[
-                  { icon: Cpu, text: 'AI-powered sourcing across 100k+ global profiles' },
+                  { icon: Cpu, text: 'AI-powered talent sourcing across 100k+ global profiles' },
                   { icon: UserCheck, text: 'Expert Philippine talent market specialists' },
                   { icon: Briefcase, text: 'Deep networks in design, tech, marketing, finance & ops' },
                   { icon: ClipboardCheck, text: 'Shortlists of only 3–5 fully vetted candidates' },
