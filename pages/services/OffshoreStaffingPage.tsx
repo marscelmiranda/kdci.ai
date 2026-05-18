@@ -254,7 +254,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                   How It Works
                 </div>
                 <h2 className="md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight text-[47px]">One outsourcing partner for all your staffing needs.</h2>
-                <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-xl mb-10">KDCI acts as your employer of record in the Philippines — we hire, manage compliance, and handle HR, while you direct the work and own the output.</p>
+                <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-xl mb-10">KDCI acts as your employer of record in the Philippines — managing hiring, HR compliance, and payroll so you can build an outsourced team in the Philippines or without setting up a local entity.</p>
               </div>
 
               <div className="space-y-4 mb-10">
