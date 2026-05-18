@@ -35,7 +35,7 @@ const INCLUDED = [
   'AI-Powered Sourcing',
   'Resume Screening & Scoring',
   'Skills Assessment',
-  '3–5 Vetted Shortlist',
+  '3–5 Pre-Screened Candidates',
   'Pre-Employment Background Checks',
   'Interview Scheduling',
   'Offer Management',
@@ -353,7 +353,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               <p className="text-white/40 text-sm font-medium mb-8 leading-relaxed">No monthly commitment. Pay on hire, no setup fee.</p>
               <div className="border-t border-white/10 pt-6 mb-8 flex-grow">
                 <ul className="space-y-3">
-                  {["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Vetted Shortlist", "90-Day Replacement Guarantee"].map((f, i) => (
+                  {["AI-Powered Sourcing", "Resume Screening & Scoring", "3–5 Pre-Screened Candidates", "90-Day Replacement Guarantee"].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/60">
                       <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />
                       {f}
