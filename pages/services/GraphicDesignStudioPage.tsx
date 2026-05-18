@@ -395,7 +395,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               <Laptop size={12} /> Tech Stack
             </div>
             <h3 className="text-2xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Native Tool Integration.</h3>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our designers are certified across the Adobe Creative Cloud and modern AI suites.</p>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our designers are certified in Adobe Creative Cloud and the latest AI design tools.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {creativeTools.map((app, i) => (
