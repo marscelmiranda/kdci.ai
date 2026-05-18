@@ -547,7 +547,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 {[
                   { title: "Worldwide Talent Access", desc: "We source from 100k+ profiles across 40+ countries — surfacing the best candidate regardless of geography.", icon: Globe2 },
                   { title: "AI + Human Hybrid", desc: "Algorithmic speed meets deep recruiter intuition to deliver shortlists of only 3–5 fully-vetted candidates.", icon: BrainCircuit },
-                  { title: "Cross-Border Compliance", desc: "We handle visa readiness, timezone alignment, and local labour law nuances so you don't have to.", icon: ShieldCheck },
+                  { title: "Cross-Border Compliance", desc: "Our offshore staffing solutions cover visa readiness, time zone alignment, and local labor law so you don't have to.", icon: ShieldCheck },
                   { title: "90-Day Placement Guarantee", desc: "If a hire doesn't work out within 90 days, we replace them at no additional cost — zero risk to you.", icon: Award },
                 ].map((item, idx) => (
                   <div key={idx} className="flex gap-6 group">
