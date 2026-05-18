@@ -572,7 +572,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               { q: "How quickly can KDCI produce creative assets at scale?", a: "Our creative pods can produce 50–200+ social media assets per month, 10–30 video edits per month, and unlimited copy drafts depending on pod size. We're built for high-velocity creative output." },
               { q: "Do your creatives have experience with creating performance marketing assets?", a: "Yes. We have a dedicated performance creative unit that specializes in direct-response ad creative for Meta, TikTok, Google, and YouTube. We understand hooks, CTAs, and creative testing frameworks." },
               { q: "Can KDCI handle video production from raw footage?", a: "Yes. Our video editors and motion graphics designers work from raw footage, stock footage, and creative briefs to produce polished edits for social media, YouTube, webinars, product demos, and brand films." },
-              { q: "What's the minimum team size for a creative engagement?", a: "You can start with a single dedicated creative (e.g., one Graphic Designer or one Video Editor) at a monthly flat rate. Most clients scale to full pods within 90 days after validating the initial hire." },
+              { q: "What's the minimum team size for a creative engagement?", a: "You can start with a single dedicated creative (e.g., one Graphic Designer or one Video Editor) at a monthly flat rate. Most clients scale to a full outsourced design team within 90 days after validating the initial hire." },
             ].map((item, i) => (
               <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
                 <button
