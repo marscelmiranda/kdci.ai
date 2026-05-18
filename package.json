@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "fuser -k 5000/tcp 2>/dev/null; fuser -k 5173/tcp 2>/dev/null; concurrently \"npx tsx watch server.ts\" \"vite\"",
     "build:midgard": "vite build --config midgard/vite.config.ts",
-    "build": "vite build",
+    "build": "vite build && vite build --config midgard/vite.config.ts",
+    "start": "NODE_ENV=production npx tsx server.ts",
     "preview": "vite preview",
     "lint": "tsc --noEmit"
   },
