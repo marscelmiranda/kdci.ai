@@ -41,7 +41,7 @@ const INCLUDED = [
   'Offer Management',
   '90-Day Replacement Guarantee',
   'ATS Management (RPO)',
-  'Talent Market Reports',
+  'Hiring Market Reports',
 ];
 
 export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -380,7 +380,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               <p className="text-white/70 text-sm font-medium mb-8 leading-relaxed">Dedicated recruiter with full-cycle management per month.</p>
               <div className="border-t border-white/20 pt-6 mb-8 flex-grow">
                 <ul className="space-y-3">
-                  {["AI-Powered Sourcing", "Dedicated Recruiter", "ATS Management", "Talent Market Reports", "Interview & Offer Management", "90-Day Replacement Guarantee"].map((f, i) => (
+                  {["AI-Powered Sourcing", "Dedicated Recruiter", "ATS Management", "Hiring Market Reports", "Interview & Offer Management", "90-Day Replacement Guarantee"].map((f, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm font-semibold text-white/90">
                       <CheckCircle2 size={14} className="text-white shrink-0" />
                       {f}
