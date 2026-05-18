@@ -412,7 +412,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Design Services for <br /><span className="text-[#E61739]">Growing Brands.</span></h2>
+              <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-8 text-[58px]">Design Services for <br /><span className="text-[#E61739]">Growing Brands.</span></h2>
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { name: "eCommerce & Retail", icon: ShoppingCart },
