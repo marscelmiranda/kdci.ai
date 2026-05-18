@@ -684,7 +684,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="space-y-3">
             {[
               {
-                q: "How quickly can you fill a role?",
+                q: "What is your average time-to-fill?",
                 a: "Our average time-to-fill is 14 business days from brief to signed offer. For senior or highly specialised roles it can extend to 21 days, but you'll have a vetted shortlist within 5–7 days in most cases."
               },
               {
