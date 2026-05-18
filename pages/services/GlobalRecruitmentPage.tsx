@@ -426,7 +426,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
             <div className="shrink-0">
               <h2 className="text-3xl md:text-4xl font-heading font-bold whitespace-nowrap">Built for Faster Hiring.</h2>
-              <p className="text-white/40 text-sm font-medium mt-2 max-w-[220px]" style={{ textWrap: 'balance' }}>AI-augmented hiring. Zero wasted time.</p>
+              <p className="text-white/40 text-sm font-medium mt-2 max-w-[220px]" style={{ textWrap: 'balance' }}>AI-driven recruitment. Zero wasted time.</p>
             </div>
             <div className="w-px bg-white/10 self-stretch hidden md:block shrink-0"></div>
             <div className="grid grid-cols-5 gap-4 flex-1 relative">
