@@ -467,7 +467,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                   <Star size={11} /> Let's Talk Creative
                 </div>
                 <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Build your<br /><span className="text-[#E61739]">design team.</span>
+                  Build your<br /><span className="text-[#E61739]">creative team.</span>
                 </h2>
                 <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
                   Tell us about your brand and design needs — we'll have a custom graphic design plan ready within 24 hours.
