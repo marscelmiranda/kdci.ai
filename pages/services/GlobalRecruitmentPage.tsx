@@ -252,7 +252,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
               <div className="border-l border-white/20 pl-6">
                 <p className="text-white/80 text-sm font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-                  Re-sourced at zero cost if a hire doesn't work out. No fine print.
+                  If the hire doesn't work out, we find a replacement at zero cost.
                 </p>
               </div>
             </div>
