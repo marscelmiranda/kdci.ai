@@ -174,7 +174,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">AI-powered workflows for consistency and speed</span>
+                  <span className="leading-snug">AI-powered design workflows for faster and consistent creative</span>
                 </div>
               </div>
 
