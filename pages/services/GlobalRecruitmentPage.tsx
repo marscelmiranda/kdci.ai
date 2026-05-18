@@ -692,8 +692,8 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 a: "If a placed candidate leaves or doesn't work out within 90 days of their start date, we re-source and deliver a replacement shortlist at zero additional cost — no conditions, no fine print."
               },
               {
-                q: "Do you only hire in the Philippines?",
-                a: "No. While we specialise in Philippine talent, our AI sourcing platform scans 100k+ profiles across 40+ countries. We match the right talent to your role regardless of geography."
+                q: "Are your HR outsourcing services limited to the Philippines?",
+                a: "No. Our offshore RPO services and global HR solutions extend well beyond the Philippines, scanning 100k+ candidate profiles across 40+ countries to place the right talent wherever you need them."
               },
               {
                 q: "What's the difference between Per Placement and the RPO Retainer?",
