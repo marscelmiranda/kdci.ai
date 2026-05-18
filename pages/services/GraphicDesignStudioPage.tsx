@@ -475,7 +475,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               </div>
               <div className="space-y-4 mt-12">
                 {[
-                  { icon: CheckCircle2, text: 'Dedicated creative pod, onboarded in 14 days' },
+                  { icon: CheckCircle2, text: 'Dedicated graphic designers, onboarded in 14 days' },
                   { icon: CheckCircle2, text: '50–200+ assets per month at scale' },
                   { icon: CheckCircle2, text: 'Brand-trained team with AI workflow support' },
                 ].map((item, i) => (
