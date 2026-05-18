@@ -477,7 +477,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 {[
                   { icon: CheckCircle2, text: 'Dedicated graphic designers, onboarded in 14 days' },
                   { icon: CheckCircle2, text: '50–200+ design assets delivered per month, at scale' },
-                  { icon: CheckCircle2, text: 'Brand-trained team with AI workflow support' },
+                  { icon: CheckCircle2, text: 'On-brand design team with AI workflow support' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <item.icon size={14} className="text-[#E61739] shrink-0" />
