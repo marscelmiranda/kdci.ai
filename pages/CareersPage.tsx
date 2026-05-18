@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
-import { Search, MapPin, Clock, ArrowRight, Briefcase, Loader2, ChevronDown, Plus, X } from 'lucide-react';
+import { Search, MapPin, Clock, ArrowRight, Briefcase, Loader2, ChevronDown, Plus, X, ShieldCheck } from 'lucide-react';
 import { IMG_REC_HERO } from '../data';
 
 interface ApiJob {
@@ -140,6 +140,14 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
             <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
               Build your career with the world's most innovative brands. We're looking for the top 1% of talent to drive the AI revolution.
             </p>
+            <div className="mt-6 flex items-center justify-center">
+              <a
+                href="/midgard/"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white/70 text-xs font-bold uppercase tracking-widest hover:bg-white/20 hover:text-white transition-all backdrop-blur-sm"
+              >
+                <ShieldCheck size={13} className="text-[#E61739]" /> Already a KDCI employee? Access the portal
+              </a>
+            </div>
           </div>
         </div>
       </section>

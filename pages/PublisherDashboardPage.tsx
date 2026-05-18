@@ -172,6 +172,23 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
         </header>
 
+        {/* Employee Portal Banner */}
+        <a
+          href="/midgard/"
+          className="flex items-center justify-between mb-10 p-5 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 hover:bg-[#E61739]/15 transition-all group"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-[#E61739] flex items-center justify-center shrink-0">
+              <Key size={18} className="text-white" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-white">Employee Portal — Midgard</div>
+              <div className="text-xs text-white/40 font-medium">Secure CMS access with JWT auth, account approval & brute-force protection</div>
+            </div>
+          </div>
+          <ChevronRight size={18} className="text-[#E61739] group-hover:translate-x-1 transition-transform" />
+        </a>
+
         {/* Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           <DashboardCard 

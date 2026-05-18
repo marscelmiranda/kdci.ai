@@ -24,12 +24,10 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate login delay
     setTimeout(() => {
-        setLoading(false);
-        // Redirect to the Publisher Dashboard
-        setView('publisher-dashboard');
-    }, 1500);
+      setLoading(false);
+      window.location.href = '/midgard/';
+    }, 800);
   };
 
   return (
@@ -99,7 +97,7 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
              </button>
 
              <div className="mt-8 text-center">
-                <a href="#" className="text-xs font-bold text-slate-400 hover:text-[#E61739] transition-colors">Forgot Password?</a>
+                <a href="/midgard/" className="text-xs font-bold text-slate-400 hover:text-[#E61739] transition-colors">Forgot Password? Sign in via Portal</a>
                 <div className="mt-6 flex items-center justify-center gap-2 text-[10px] font-bold text-green-600 bg-green-50 py-2 px-4 rounded-full w-fit mx-auto border border-green-100">
                    <ShieldCheck size={12} /> SSO Enabled
                 </div>
