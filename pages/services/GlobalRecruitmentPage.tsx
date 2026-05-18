@@ -183,7 +183,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                   { icon: Cpu, text: 'AI-powered talent sourcing across 100k+ global profiles' },
                   { icon: UserCheck, text: 'Expert Philippine recruitment specialists and consultants' },
                   { icon: Briefcase, text: 'Deep networks in design, tech, marketing, finance & ops' },
-                  { icon: ClipboardCheck, text: 'Shortlists of only 3–5 fully vetted candidates' },
+                  { icon: ClipboardCheck, text: 'Shortlists of 3–5 fully vetted, pre-screened candidates' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-black/5 hover:border-black/10 hover:bg-white hover:shadow-sm transition-all">
                     <div className="w-10 h-10 shrink-0 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#E61739]">
