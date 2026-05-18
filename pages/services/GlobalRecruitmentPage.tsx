@@ -593,7 +593,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="space-y-4 mt-12">
                 {[
                   { icon: CheckCircle2, text: 'AI sourcing across 100k+ global profiles' },
-                  { icon: CheckCircle2, text: '3–5 vetted candidates, avg. 14-day turnaround' },
+                  { icon: CheckCircle2, text: '3–5 pre-screened candidates shortlisted in 14 days' },
                   { icon: CheckCircle2, text: '90-day replacement guarantee, no fine print' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
