@@ -542,7 +542,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
             </div>
             <div className="">
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Global Recruitment <br/><span className="text-[#E61739]">Advantage.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-10 leading-tight">The Global HR Solutions <br/><span className="text-[#E61739]">Advantage.</span></h2>
               <div className="space-y-8">
                 {[
                   { title: "Worldwide Talent Access", desc: "We source from 100k+ profiles across 40+ countries — surfacing the best candidate regardless of geography.", icon: Globe2 },
