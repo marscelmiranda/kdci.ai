@@ -470,7 +470,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                   Build your<br /><span className="text-[#E61739]">creative machine.</span>
                 </h2>
                 <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your brand and workload — we'll have a creative ops plan ready within 24 hours.
+                  Tell us about your brand and design needs — we'll have a custom graphic design plan ready within 24 hours.
                 </p>
               </div>
               <div className="space-y-4 mt-12">
