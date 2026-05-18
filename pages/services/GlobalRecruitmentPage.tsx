@@ -685,7 +685,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
             {[
               {
                 q: "What is your average time-to-fill?",
-                a: "Our average time-to-fill is 14 business days from brief to signed offer. For senior or highly specialised roles it can extend to 21 days, but you'll have a vetted shortlist within 5–7 days in most cases."
+                a: "Our HR outsourcing services deliver an average time-to-hire of 14 business days from brief to signed offer. Senior or specialised roles may extend to 21 days, but you'll have a vetted candidate shortlist within 5–7 days."
               },
               {
                 q: "What does the 90-day guarantee actually mean?",
