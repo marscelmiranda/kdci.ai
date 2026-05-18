@@ -267,7 +267,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       <section id="cp-portfolio" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">See Our Work.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Graphic Design Work & Portfolio</h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto">See how we help brands produce high-quality, on-brand creative assets at scale.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
