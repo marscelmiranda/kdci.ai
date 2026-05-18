@@ -36,7 +36,7 @@ const INCLUDED = [
   'Resume Screening & Scoring',
   'Skills Assessment',
   '3–5 Vetted Shortlist',
-  'Background Check Coordination',
+  'Pre-Employment Background Checks',
   'Interview Scheduling',
   'Offer Management',
   '90-Day Replacement Guarantee',
