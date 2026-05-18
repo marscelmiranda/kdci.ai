@@ -380,7 +380,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
           <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
             <div>
               <h4 className="text-base font-bold text-white mb-1">Want a Custom Creatives Team?</h4>
-              <p className="text-sm text-white/40 font-medium">Build a dedicated pod with Team Leads and QA Managers.</p>
+              <p className="text-sm text-white/40 font-medium">Build a dedicated graphic design team with Team Leads and QA Managers.</p>
             </div>
             <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
           </div>
