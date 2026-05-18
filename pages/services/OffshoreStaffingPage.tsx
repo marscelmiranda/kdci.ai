@@ -262,7 +262,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                   { title: 'Expert-vetted talent only', body: 'Every candidate clears a multi-stage vetting process — skills tests, cultural fit interview, and reference checks before you ever see a profile.' },
                   { title: 'All-in monthly pricing', body: 'One flat rate covers salary, benefits, office, equipment, HR, AI performance monitoring, and a dedicated account manager. No hidden costs.' },
                   { title: 'Onboarded in 14–30 days', body: 'Common roles are filled in 14 days. Senior or specialized roles within 30. KDCI handles every step from sourcing to Day 1 activation.' },
-                  { title: 'Scale up or down with 30 days notice', body: 'No long-term lock-in. Add roles as you grow or reduce headcount as your needs change — no penalties, no friction.' },
+                  { title: 'Scale up or down with 30 days notice', body: 'No long-term lock-in. Add roles as you grow or reduce headcount as your needs change, and we adjust accordingly— no penalties, no friction.' },
                 ].map((p, i) => (
                   <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-[#F5F5F7] border border-black/[0.03]">
                     <div className="w-6 h-6 rounded-full bg-[#E61739] flex items-center justify-center shrink-0 mt-0.5">
