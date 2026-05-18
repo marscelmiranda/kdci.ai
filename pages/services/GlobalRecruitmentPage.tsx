@@ -337,7 +337,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">Transparent Outsourced HR Pricing.</h2>
-            <p className="text-white/40 text-lg font-medium">Structured for every stage of your hiring needs.</p>
+            <p className="text-white/40 text-lg font-medium">Straightforward pricing across all our HR outsourcing services, from single placements to full-service HR outsourcing.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-5 items-stretch">
