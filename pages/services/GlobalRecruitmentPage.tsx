@@ -697,7 +697,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               },
               {
                 q: "What's the difference between Per Placement and the RPO Retainer?",
-                a: "Per Placement is pay-per-hire with no ongoing commitment — ideal for one-off or occasional hires. The RPO Retainer gives you a dedicated recruiter managing up to 5 active roles per month with priority sourcing, ATS management, and market reports."
+                a: "Per Placement is a pay-per-hire outsourced recruitment service with no ongoing commitment, ideal for one-off or occasional hires. The RPO Retainer is a full-service HR outsourcing plan where a dedicated recruiter manages up to 5 active roles per month, with priority candidate sourcing, ATS management, and hiring market reports."
               },
               {
                 q: "What industries do you specialise in?",
