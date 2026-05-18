@@ -432,7 +432,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="grid grid-cols-5 gap-4 flex-1 relative">
               <div className="hidden md:block absolute top-[1.6rem] left-[5%] right-[5%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
               {[
-                { step: "01", title: "Discovery",    desc: "KPI targets & cultural fit.", icon: ScanSearch },
+                { step: "01", title: "Discovery",    desc: "Defining role requirements and cultural fit.", icon: ScanSearch },
                 { step: "02", title: "AI Sourcing",  desc: "100k+ global profiles.", icon: Cpu },
                 { step: "03", title: "Screening",    desc: "Technical skill scoring.", icon: ClipboardCheck },
                 { step: "04", title: "Shortlist",    desc: "Top 3–5 vetted candidates.", icon: UserCheck },
