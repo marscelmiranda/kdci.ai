@@ -176,7 +176,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 From job brief<br/>to <span className="text-[#E61739]">signed offer.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10" style={{ textWrap: 'balance' }}>
-                Full-cycle recruitment using AI tools to source, screen, and score candidates at 3× the speed of traditional methods. Our recruiters are specialists in the Philippine talent market, with deep networks across design, tech, marketing, finance, and operations roles.
+                AI-powered HR outsourcing services to source, screen, and score candidates 3× faster than traditional staffing methods. Our specialist recruiters bring deep talent networks across the Philippine job market, covering design, tech, marketing, finance, and operations roles.
               </p>
               <div className="space-y-3">
                 {[
