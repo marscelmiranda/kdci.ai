@@ -257,6 +257,78 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true, ts: new Date().toISOString() });
 });
 
+// ----- ONE-TIME DEV→PROD SEED (remove after use) -----
+app.post('/api/admin/seed-db', async (req, res) => {
+  const key = req.headers['x-api-key'];
+  if (!process.env.PORTAL_API_KEY || key !== process.env.PORTAL_API_KEY) {
+    res.status(401).json({ error: 'Unauthorized' }); return;
+  }
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Users
+    await client.query('DELETE FROM reset_codes');
+    await client.query('DELETE FROM users');
+    const USERS = [
+      [1,'admin@kdci.co','$2b$12$8RZ2AqthACt8CrNH6tY4cemL05GlmJMxPjST219ERCAHFCqN8hjn2','Admin','admin','2026-05-07 08:02:09.12553',null,null,'active',0,null,null,null,null],
+      [2,'testuser@kdci.co','$2b$12$IzhMVfwG7ITx/njaCLQHAuoPmKBxrPzl3T0ppVppIPTfAdGIVKGSG','Test User','user','2026-05-08 02:13:23.106361','testuser','Test User','pending',0,null,null,'What city were you born in?','$2b$10$UM6a7Iu52NcfCISFqNGIrOUyYkA2wg6Iaf0NyhZqTESv4LRqRIIiO'],
+      [3,'marscel@kdci.co','$2b$12$v9mSk/4XEiNtvJfXN/heV.E24WaRcMVS9gkz6QscV6N.5YVcTrqwi','Marscel Miranda','admin','2026-05-08 02:40:06.937169','marscel','Marscel Miranda','active',0,null,null,'What city were you born in?','$2b$10$YVpOkYyp/pVCz7EneXmL9OC4IkoOl/0kFu2gmbXo.JraxD7LZhcuC'],
+      [4,'marisse.marasigan@kdci.co','$2a$06$2e3ZaarPiPzdF9ioAHKqVeKvtVXD03w0YPOXPHbZ1d3jSXX7HD0ZO','Marisse Marasigan','admin','2026-05-13 02:21:49.452272',null,null,'active',0,null,null,null,null],
+    ];
+    for (const u of USERS) {
+      await client.query(
+        `INSERT INTO users (id,email,password_hash,name,role,created_at,username,full_name,status,failed_attempts,locked_at,deny_reason,secret_question,secret_answer)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
+        u
+      );
+    }
+    await client.query(`SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))`);
+
+    // Job listings
+    await client.query('DELETE FROM job_listings');
+    const JOBS = [
+      [3,'Content Writer','content-writer','CX & Support','Pasig City','Contract',null,
+        `Job Summary\n\nKDCI Outsourcing is seeking a Staff Writer to create high-quality, original written content across client case studies, business research papers, and company communications. This role is not focused on generic SEO blogging. Instead, it is responsible for producing substantive, insight-driven content that demonstrates KDCI's impact on clients, showcases operational outcomes, and positions the company as a thought leader in outsourcing and professional services.\n\nThe ideal candidate has a journalism or research-driven writing background and is comfortable turning real business data, interviews, and operational results into compelling narratives. This role requires curiosity, analytical thinking, and the ability to independently propose and develop story ideas that matter to decision-makers.\n\nKey Responsibilities\n\nWrite original client case studies that document KDCI's results, processes, and business impact across industries.\nProduce research papers and white papers analyzing business process outcomes, outsourcing performance, productivity, cost efficiency, and operational improvements.\nWrite company newsletters and internal/external updates highlighting milestones, client wins, product launches, and company developments.\nPropose story ideas and research topics to the marketing and leadership team, based on trends, client data, and market opportunities.\nConduct interviews with clients, account managers, executives, and subject-matter experts to gather firsthand insights.\nPerform independent research, data validation, and fact-checking to ensure accuracy and credibility.\nTranslate complex business and operational concepts into clear, persuasive, and engaging content for executive-level and professional audiences.\nCollaborate with marketing, sales, and leadership to align content with strategic positioning and go-to-market initiatives.\nRevise and refine content based on editorial feedback while maintaining high standards of quality, structure, and originality.\nMaintain consistency with KDCI\'s brand voice, tone, and editorial standards across all written materials.`,
+        null,
+        `Job Requirements\n\nBachelor\'s degree in Journalism, Communications, English, Business, or a related field.\n2–4 years of professional writing experience in journalism, research writing, B2B content, or editorial publishing.\nDemonstrated experience writing case studies, research articles, white papers, or analytical business content.\nStrong portfolio of published work showing original reporting, structured thinking, and depth of analysis.\nAbility to conduct interviews, extract insights, and synthesize qualitative and quantitative information into compelling narratives.\nExceptional writing, editing, and proofreading skills with attention to clarity, logic, and factual accuracy.\nAbility to independently generate content ideas and story angles without relying on prompts.\nStrong time management skills and the ability to manage multiple projects and deadlines.\nComfortable working cross-functionally with marketing, operations, and executive leadership.`,
+        null,'active','2026-05-07 07:52:22.089','2026-05-07 07:52:22.099489','2026-05-07 07:52:22.099489'],
+      [4,'AI Consultant','ai-consultant','AI & Data','Hybrid','Full-Time',null,
+        `About the role\n\nKDCI Outsourcing is looking for an experienced AI Consultant to help our clients and internal teams harness the power of artificial intelligence. You\'ll assess business processes, identify automation and AI opportunities, design tailored AI strategies, and guide implementation end-to-end — from proof-of-concept to full deployment. This is a high-impact, client-facing role at the intersection of strategy, technology, and outsourcing operations.\n\nKey responsibilities\n\nConduct AI readiness assessments for clients across industries including e-commerce, healthcare, finance, and marketing.\n\nDesign and deliver AI roadmaps aligned with business goals, covering NLP, machine learning, computer vision, and generative AI use cases.\n\nCollaborate with KDCI\'s outsourced teams to integrate AI-powered tools into existing client workflows (CRM, BPO, content, support).\n\nEvaluate, recommend, and oversee implementation of third-party AI tools and platforms (ChatGPT, Gemini, Claude, Midjourney, HubSpot AI, etc.).\n\nLead internal AI upskilling programs and workshops to build team capability across KDCI departments.\n\nStay ahead of AI trends and proactively identify new service offerings KDCI can bring to market.`,
+        null,
+        `3–5 years in AI consulting, data science, or technology strategy\n\nStrong understanding of ML frameworks, LLMs, and AI application layers\n\nProven client-facing experience delivering strategic recommendations\n\nProficiency in Python or no-code AI tools; familiarity with APIs\n\nExcellent English communication — written and verbal`,
+        null,'active',null,'2026-05-07 08:44:28.83657','2026-05-07 08:44:48.05881'],
+      [5,'Test','test','Engineering','Manila','Full-Time',null,'Test',null,'Test',null,'active','2026-05-08 04:07:54.435','2026-05-08 04:07:54.444815','2026-05-08 04:07:54.444815'],
+    ];
+    for (const j of JOBS) {
+      await client.query(
+        `INSERT INTO job_listings (id,title,slug,department,location,employment_type,experience_level,description,responsibilities,requirements,salary_range,status,published_at,created_at,updated_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`,
+        j
+      );
+    }
+    await client.query(`SELECT setval('job_listings_id_seq', (SELECT MAX(id) FROM job_listings))`);
+
+    // Blog posts
+    await client.query('DELETE FROM blog_posts');
+    const blogContent = '[{"id":"txw61tdxl","type":"pull_quote","isCollapsed":false,"content":{"quote":"Do or Do Not, there is no try."}},{"id":"931oyxv5x","type":"divider","isCollapsed":false,"content":{}}]';
+    await client.query(
+      `INSERT INTO blog_posts (id,title,slug,excerpt,content,author,category,cover_image,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+      [2,'Test file','test-file',null,blogContent,'Marscel Miranda','Company News',null,'{Test,company,news}','published','2026-05-07 08:33:55.409','2026-05-07 08:33:55.418906','2026-05-07 08:33:55.418906']
+    );
+    await client.query(`SELECT setval('blog_posts_id_seq', (SELECT MAX(id) FROM blog_posts))`);
+
+    await client.query('COMMIT');
+    res.json({ success: true, message: 'Database seeded from dev snapshot', tables: { users: USERS.length, job_listings: JOBS.length, blog_posts: 1 } });
+  } catch (err: any) {
+    await client.query('ROLLBACK');
+    res.status(500).json({ error: err.message });
+  } finally {
+    client.release();
+  }
+});
+
 // ===== JOB LISTINGS =====
 app.get('/api/jobs', async (_req, res) => {
   try {
