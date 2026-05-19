@@ -294,7 +294,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 <ClipboardCheck size={12} /> What's Included
               </div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6 leading-tight tracking-tight">
-                Everything you need.<br/><span className="text-[#E61739]">Nothing you don't.</span>
+                One HR outsourcing partner.<br/><span className="text-[#E61739]">Every function covered.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
                 From AI sourcing to offer management, every engagement includes our full-service HR outsourcing suite.
