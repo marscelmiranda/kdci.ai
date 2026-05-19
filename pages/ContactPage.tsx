@@ -8,8 +8,7 @@ import {
   Phone, 
   MapPin, 
   Upload, 
-  Globe2,
-  LockKeyhole
+  Globe2
 } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
@@ -267,18 +266,6 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
               </CardContent>
             </Card>
-
-            {/* Employee Portal Widget */}
-            <button onClick={() => setView('login')} className="w-full text-left p-10 rounded-[2.5rem] bg-[#1D1D1F] text-white shadow-2xl relative overflow-hidden group hover:scale-[1.02] transition-all duration-300 border border-white/5">
-              <div className="mesh-container opacity-10 pointer-events-none transition-opacity group-hover:opacity-20"><div className="blob blob-magenta"></div></div>
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <LockKeyhole size={20} />
-                </div>
-                <h4 className="text-xl font-bold mb-2">Employee Portal</h4>
-                <p className="text-white/50 text-sm leading-relaxed mb-0">Secure access for KDCI team members.</p>
-              </div>
-            </button>
           </div>
 
         </div>
