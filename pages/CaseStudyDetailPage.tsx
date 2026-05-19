@@ -108,7 +108,8 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.challengeHeading || 'The Challenge'}
                     </h2>
                     {study.challengeBody && (
-                      <p className="text-slate-500 leading-loose mb-8">{study.challengeBody}</p>
+                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-8"
+                        dangerouslySetInnerHTML={{ __html: study.challengeBody }} />
                     )}
                     {challengeItems.length > 0 && (
                       <ul className="space-y-4 mb-12 not-prose">
@@ -130,10 +131,12 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.solutionHeading || 'The Solution'}
                     </h2>
                     {study.solutionBody1 && (
-                      <p className="text-slate-500 leading-loose mb-8">{study.solutionBody1}</p>
+                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-8"
+                        dangerouslySetInnerHTML={{ __html: study.solutionBody1 }} />
                     )}
                     {study.solutionBody2 && (
-                      <p className="text-slate-500 leading-loose mb-12">{study.solutionBody2}</p>
+                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-12"
+                        dangerouslySetInnerHTML={{ __html: study.solutionBody2 }} />
                     )}
                   </>
                 )}
@@ -167,7 +170,8 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.outcomeHeading || 'The Outcome'}
                     </h2>
                     {study.outcomeBody && (
-                      <p className="text-slate-500 leading-loose mb-6">{study.outcomeBody}</p>
+                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-6"
+                        dangerouslySetInnerHTML={{ __html: study.outcomeBody }} />
                     )}
                     {outcomeMetrics.length > 0 && (
                       <div className="grid sm:grid-cols-2 gap-6 mb-12 not-prose">

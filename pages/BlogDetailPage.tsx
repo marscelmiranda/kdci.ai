@@ -38,11 +38,10 @@ const renderBlocks = (contentStr: string) => {
     switch (block.type) {
       case 'rich_text':
         return (
-          <div key={i} className="prose prose-lg prose-slate max-w-none prose-p:text-slate-600 prose-p:leading-loose prose-p:mb-6">
-            {(block.content?.text || '').split('\n\n').filter(Boolean).map((para: string, j: number) => (
-              <p key={j}>{para}</p>
-            ))}
-          </div>
+          <div key={i}
+            className="prose prose-lg prose-slate max-w-none prose-headings:font-heading prose-headings:font-bold prose-headings:text-slate-900 prose-p:text-slate-600 prose-p:leading-loose prose-p:mb-6 prose-a:text-[#E61739] prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-800 prose-blockquote:border-l-[#E61739] prose-blockquote:text-slate-500 prose-code:text-[#E61739] prose-code:bg-slate-50 prose-code:px-1 prose-code:rounded prose-li:text-slate-600"
+            dangerouslySetInnerHTML={{ __html: block.content?.text || '' }}
+          />
         );
       case 'html':
         return <div key={i} dangerouslySetInnerHTML={{ __html: block.content?.code || '' }} />;
