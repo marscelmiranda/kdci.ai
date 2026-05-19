@@ -190,7 +190,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
                     { name: 'Zendesk',      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Zendesk_logo.svg/320px-Zendesk_logo.svg.png' },
-                    { name: 'ElevenLabs',   logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779173814/Elevenlabs_Ai_Logo_PNG_SVG_Vector_chtxqo.svg' },
+                    { name: 'ElevenLabs',   logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/f_png,w_160,c_fit/v1779173814/Elevenlabs_Ai_Logo_PNG_SVG_Vector_chtxqo.svg' },
                     { name: 'Zendesk',      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Zendesk_logo.svg/320px-Zendesk_logo.svg.png' },
                     { name: 'PagerDuty',    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/PagerDuty_logo.svg/320px-PagerDuty_logo.svg.png' },
                   ].map((app, i) => (
