@@ -168,8 +168,8 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {DIFFERENTIATORS.map((item, idx) => (
               <div key={idx} className="flex gap-6 items-start group">
-                <div className="w-12 h-12 bg-white rounded-xl shrink-0 flex items-center justify-center text-[#E61739] shadow-sm group-hover:scale-110 transition-transform">
-                  <item.icon size={24} />
+                <div className="w-12 h-12 bg-white rounded-full border border-[#E61739] shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform">
+                  <item.icon size={22} strokeWidth={1} />
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-[#1D1D1F] mb-3">{item.title}</h4>
