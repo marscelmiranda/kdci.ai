@@ -293,7 +293,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 border border-slate-100 self-start">
                 <ClipboardCheck size={12} /> What's Included
               </div>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6 leading-tight tracking-tight">
+              <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 tracking-tight text-[45px]">
                 One HR outsourcing partner.<br/><span className="text-[#E61739]">Every function covered.</span>
               </h2>
               <p className="text-slate-500 text-lg font-medium leading-relaxed mb-8">
