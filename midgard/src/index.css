@@ -13,3 +13,103 @@
     box-shadow: 0 10px 30px rgba(230, 23, 57, 0.2);
   }
 }
+
+/* ── Rich Text Editor (TipTap) ─────────────────────────────────────── */
+.rte-wrap .tiptap {
+  outline: none;
+  min-height: inherit;
+  color: rgba(255,255,255,0.88);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+/* Placeholder */
+.rte-wrap .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgba(255,255,255,0.25);
+  pointer-events: none;
+  height: 0;
+}
+
+/* Paragraphs */
+.rte-wrap .tiptap p { margin-bottom: 0.75em; }
+.rte-wrap .tiptap p:last-child { margin-bottom: 0; }
+
+/* Headings */
+.rte-wrap .tiptap h1 {
+  font-size: 1.5rem; font-weight: 800; color: #fff;
+  margin: 1.25em 0 0.5em; letter-spacing: -0.01em; line-height: 1.2;
+}
+.rte-wrap .tiptap h2 {
+  font-size: 1.2rem; font-weight: 700; color: #fff;
+  margin: 1.1em 0 0.4em; line-height: 1.3;
+}
+.rte-wrap .tiptap h3 {
+  font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.9);
+  margin: 1em 0 0.35em; letter-spacing: 0.01em;
+}
+.rte-wrap .tiptap h1:first-child,
+.rte-wrap .tiptap h2:first-child,
+.rte-wrap .tiptap h3:first-child { margin-top: 0; }
+
+/* Inline marks */
+.rte-wrap .tiptap strong { color: #fff; font-weight: 700; }
+.rte-wrap .tiptap em { font-style: italic; }
+.rte-wrap .tiptap u { text-decoration: underline; text-underline-offset: 2px; }
+.rte-wrap .tiptap s { text-decoration: line-through; color: rgba(255,255,255,0.4); }
+
+/* Inline code */
+.rte-wrap .tiptap code {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.82em;
+  color: #e879f9;
+}
+
+/* Code block */
+.rte-wrap .tiptap pre {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1em 1.25em;
+  overflow-x: auto;
+  margin: 0.75em 0;
+}
+.rte-wrap .tiptap pre code {
+  background: none; border: none; padding: 0;
+  color: #a5f3fc; font-size: 0.8em; line-height: 1.6;
+}
+
+/* Blockquote */
+.rte-wrap .tiptap blockquote {
+  border-left: 3px solid #E61739;
+  padding-left: 1em;
+  margin: 0.75em 0;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+}
+
+/* Lists */
+.rte-wrap .tiptap ul { list-style: disc; padding-left: 1.4em; margin: 0.6em 0; }
+.rte-wrap .tiptap ol { list-style: decimal; padding-left: 1.4em; margin: 0.6em 0; }
+.rte-wrap .tiptap li { margin-bottom: 0.3em; }
+.rte-wrap .tiptap li p { margin-bottom: 0; }
+
+/* Links */
+.rte-wrap .tiptap a {
+  color: #E61739; text-decoration: underline;
+  text-underline-offset: 2px; cursor: pointer;
+}
+.rte-wrap .tiptap a:hover { color: #ff3355; }
+
+/* Horizontal rule */
+.rte-wrap .tiptap hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1em 0; }
+
+/* Text alignment */
+.rte-wrap .tiptap [style*="text-align: center"] { text-align: center; }
+.rte-wrap .tiptap [style*="text-align: right"]  { text-align: right; }
+.rte-wrap .tiptap [style*="text-align: left"]   { text-align: left; }

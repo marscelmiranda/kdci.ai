@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { RichTextEditor } from '../components/RichTextEditor';
 import {
   ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
   Save, Eye, Check, ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2, Quote, AppWindow, Minus, ExternalLink, Activity, User,
@@ -123,9 +124,13 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
   const renderBlockEditor = (block: Block) => {
     switch (block.type) {
       case 'rich_text': return (
-        <textarea value={block.content.text || ''} onChange={e => updateBlock(block.id, { ...block.content, text: e.target.value })}
-          className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] transition-all min-h-[150px]"
-          placeholder="Write your rich text content here..." />
+        <RichTextEditor
+          key={block.id}
+          value={block.content.text || ''}
+          onChange={html => updateBlock(block.id, { ...block.content, text: html })}
+          placeholder="Write your rich text content here…"
+          minHeight="150px"
+        />
       );
       case 'html': return (
         <textarea value={block.content.code || ''} onChange={e => updateBlock(block.id, { ...block.content, code: e.target.value })}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { RichTextEditor } from '../components/RichTextEditor';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, BookMarked,
   Image as ImageIcon, Search, Plus, LogOut, Settings,
@@ -426,7 +427,13 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
 
                   {/* In Brief */}
                   <p className={sectionHeadingCls}>In Brief</p>
-                  <textarea rows={3} value={formData.in_brief} onChange={e => set('in_brief', e.target.value)} className={textareaCls} placeholder="Executive summary shown in a highlighted card at the top of the body…" />
+                  <RichTextEditor
+                    key={`in_brief_${editingId ?? 'new'}`}
+                    value={formData.in_brief}
+                    onChange={html => set('in_brief', html)}
+                    placeholder="Executive summary shown in a highlighted card at the top of the body…"
+                    minHeight="100px"
+                  />
 
                   {/* Challenge */}
                   <p className={sectionHeadingCls}>Who We Worked With / The Challenge</p>
@@ -437,7 +444,13 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
                       <input type="text" value={formData.author} onChange={e => set('author', e.target.value)} className={inputCls} placeholder="Writer name" /></div>
                   </div>
                   <div><label className={labelCls}>Challenge Body</label>
-                    <textarea rows={4} value={formData.challenge_body} onChange={e => set('challenge_body', e.target.value)} className={textareaCls} placeholder="Describe the core problem or challenge the client faced…" /></div>
+                    <RichTextEditor
+                      key={`challenge_body_${editingId ?? 'new'}`}
+                      value={formData.challenge_body}
+                      onChange={html => set('challenge_body', html)}
+                      placeholder="Describe the core problem or challenge the client faced…"
+                      minHeight="140px"
+                    /></div>
                   <div className="space-y-3">
                     <label className={labelCls}>Challenge Bullet Points (leave blank to omit)</label>
                     {([1, 2, 3, 4, 5] as const).map(n => (
@@ -450,9 +463,21 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
                   <div><label className={labelCls}>Section Heading</label>
                     <input type="text" value={formData.solution_heading} onChange={e => set('solution_heading', e.target.value)} className={inputCls} /></div>
                   <div><label className={labelCls}>Solution Body (paragraph 1)</label>
-                    <textarea rows={4} value={formData.solution_body1} onChange={e => set('solution_body1', e.target.value)} className={textareaCls} placeholder="Describe what KDCI built or deployed…" /></div>
+                    <RichTextEditor
+                      key={`solution_body1_${editingId ?? 'new'}`}
+                      value={formData.solution_body1}
+                      onChange={html => set('solution_body1', html)}
+                      placeholder="Describe what KDCI built or deployed…"
+                      minHeight="140px"
+                    /></div>
                   <div><label className={labelCls}>Solution Body (paragraph 2, optional)</label>
-                    <textarea rows={3} value={formData.solution_body2} onChange={e => set('solution_body2', e.target.value)} className={textareaCls} placeholder="Additional detail…" /></div>
+                    <RichTextEditor
+                      key={`solution_body2_${editingId ?? 'new'}`}
+                      value={formData.solution_body2}
+                      onChange={html => set('solution_body2', html)}
+                      placeholder="Additional detail, second paragraph…"
+                      minHeight="100px"
+                    /></div>
 
                   {/* Pull Quote */}
                   <p className={sectionHeadingCls}>Client Quote (optional)</p>
@@ -470,7 +495,13 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
                   <div><label className={labelCls}>Section Heading</label>
                     <input type="text" value={formData.outcome_heading} onChange={e => set('outcome_heading', e.target.value)} className={inputCls} /></div>
                   <div><label className={labelCls}>Outcome Body</label>
-                    <textarea rows={4} value={formData.outcome_body} onChange={e => set('outcome_body', e.target.value)} className={textareaCls} placeholder="What changed as a result of the engagement…" /></div>
+                    <RichTextEditor
+                      key={`outcome_body_${editingId ?? 'new'}`}
+                      value={formData.outcome_body}
+                      onChange={html => set('outcome_body', html)}
+                      placeholder="What changed as a result of the engagement…"
+                      minHeight="140px"
+                    /></div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="p-4 bg-white/5 rounded-xl border border-white/10 space-y-3">
                       <div className="text-[10px] font-black uppercase tracking-widest text-white/30">Outcome Metric 1</div>
