@@ -16,12 +16,12 @@ const DELIVERABLES = [
   {
     icon: Activity,
     title: 'Daily Performance Monitoring',
-    desc: 'Every agent, every day. We track response accuracy, resolution rates, hallucination frequency, and latency across your entire AI stack.',
+    desc: 'We track response accuracy, debug hallucinations, and latency spikes across your entire AI stack.',
   },
   {
     icon: RefreshCw,
     title: 'Prompt Retraining on Drift',
-    desc: 'When an agent starts drifting — wrong answers, off-script responses, degrading quality — we detect it and retrain before it impacts customers.',
+    desc: 'Detect and respond to deviations in AI agent behavior—wrong answers, off-script responses, degrading quality—before it impacts your customers.',
   },
   {
     icon: AlertCircle,
@@ -31,17 +31,17 @@ const DELIVERABLES = [
   {
     icon: Settings,
     title: 'Integration Health Checks',
-    desc: 'Regular checks across your CRM, helpdesk, and API connections to catch sync failures, broken webhooks, and stale data before they cascade.',
+    desc: 'Conduct regular checks across your CRM, helpdesk, and API connections to sync failures, broken webhooks, and stale data, and get these issues fixed before cascade.',
   },
   {
     icon: BarChart3,
     title: 'Monthly Scorecard & Recommendations',
-    desc: 'A full performance report every month — benchmarks, trend analysis, improvement recommendations, and next actions. Transparent and actionable.',
+    desc: 'Score your ai agent\'s monthly performance. Benchmarks, trends, improvements, recommendations, and next actions—get a full performance report every month.',
   },
   {
     icon: Users,
     title: 'Dedicated AI Ops Specialist',
-    desc: 'Every account gets a named AI Ops Specialist. They know your agents, your workflows, and your business. One point of contact, full accountability.',
+    desc: 'Your AI agents create dense outputs that make debugging hard by yourself, so we have a dedicated AI Ops Specialist onboard to help give you clear visibility into every step of what your agent is doing.',
   },
 ];
 
