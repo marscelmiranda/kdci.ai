@@ -151,7 +151,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 {[
-                  'Daily performance monitoring across every active agent',
+                  'Daily performance monitoring across every AI agent',
                   'Prompt retraining triggered automatically on drift detection',
                   'Dedicated AI Ops Specialist included on every account',
                 ].map((pt, i) => (
