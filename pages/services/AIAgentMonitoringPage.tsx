@@ -146,7 +146,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                 <span className="text-shine-white text-[62px]"> so you don't have to.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Daily monitoring, prompt optimization, and human oversight for your AI agents — delivered as a fully managed service.
+                Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and ( ). KDCI.ai delivers all three as a fully managed service.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
