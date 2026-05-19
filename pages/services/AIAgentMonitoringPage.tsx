@@ -2,13 +2,15 @@
 import React, { useState, useRef } from 'react';
 import {
   ArrowRight, CheckCircle2, Activity, ShieldCheck, BarChart3,
-  RefreshCw, Settings, Users, Zap, AlertCircle, Calendar,
-  ShoppingCart, HeartPulse, Scale, Landmark, Building2, Home,
-  Monitor, Clock, FileText, Target, TrendingUp, Bell
+  RefreshCw, Settings, Users, Zap, AlertCircle, Bell,
+  ShoppingCart, HeartPulse, Scale, Landmark, Home,
+  Monitor, Clock, TrendingUp, Target, BarChart, Shield
 } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+
+/* ─── Data ─────────────────────────────────────────────────────────── */
 
 const DELIVERABLES = [
   {
@@ -19,11 +21,11 @@ const DELIVERABLES = [
   {
     icon: RefreshCw,
     title: 'Prompt Retraining on Drift',
-    desc: 'When an agent starts drifting — giving wrong answers, going off-script, or degrading in quality — we detect it and retrain before it impacts customers.',
+    desc: 'When an agent starts drifting — wrong answers, off-script responses, degrading quality — we detect it and retrain before it impacts customers.',
   },
   {
     icon: AlertCircle,
-    title: 'Escalation Path Design',
+    title: 'Escalation Path Design & Management',
     desc: 'We design and manage the human handoff layer so the right issues reach the right people, every time. No missed escalations, no frustrated customers.',
   },
   {
@@ -43,52 +45,36 @@ const DELIVERABLES = [
   },
 ];
 
-const INDUSTRIES = [
-  {
-    icon: ShoppingCart,
-    name: 'E-Commerce & Retail',
-    tag: 'Highest urgency',
-    desc: 'High ticket volume means agent failures directly cost sales. We keep your support and commerce agents performing at peak — especially during surges.',
-  },
-  {
-    icon: Target,
-    name: 'SaaS & Technology',
-    tag: 'Fastest to deploy',
-    desc: 'Native integrations with Intercom, Zendesk, and Freshdesk make SaaS accounts our fastest onboarding. We speak your stack.',
-  },
-  {
-    icon: Home,
-    name: 'Real Estate',
-    tag: 'High growth',
-    desc: 'Lead qualification bots are everywhere in real estate — and most are underperforming. We tune and monitor them so no lead slips through.',
-  },
-  {
-    icon: HeartPulse,
-    name: 'Healthcare',
-    tag: 'Compliance critical',
-    desc: 'AI oversight in healthcare isn\'t optional — it\'s regulatory. We provide the audit trail, monitoring logs, and human review layer your compliance team needs.',
-  },
-  {
-    icon: Landmark,
-    name: 'Financial Services',
-    tag: 'Regulatory-driven',
-    desc: 'Regulators are watching AI deployments in finance. Our managed oversight model gives you documented monitoring and explainability at every step.',
-  },
-  {
-    icon: Scale,
-    name: 'Insurance',
-    tag: 'High complexity',
-    desc: 'Complex products and long customer journeys mean insurance agents drift and hallucinate more. We run continuous correction so your agents stay accurate.',
-  },
+const STEPS = [
+  { n: '01', period: 'Day 1–2',   title: 'Kickoff',               desc: 'Map all active AI agents and platforms. Catalog integrations, escalation paths, and current performance baselines.' },
+  { n: '02', period: 'Day 3–4',   title: 'Health Check',          desc: 'Run our AI Agent Health Check — scoring each agent on accuracy, drift risk, escalation rate, and integration stability.' },
+  { n: '03', period: 'Day 5–7',   title: 'Monitoring Setup',      desc: 'Configure your monitoring dashboard and alert triggers. You get full visibility — we get the alerts.' },
+  { n: '04', period: 'Week 2',    title: 'First Optimizations',   desc: 'First round of prompt optimizations executed and tested. Measurable improvement within two weeks of kickoff.' },
+  { n: '05', period: 'Month 1',   title: 'First Report',          desc: 'Deliver your first monthly performance scorecard with benchmarks, trend analysis, and the Month 2 action plan.' },
 ];
 
-const TIMELINE = [
-  { period: 'Day 1–2', title: 'Kickoff', desc: 'Map all active AI agents and platforms. Catalog integrations, escalation paths, and current performance baselines.' },
-  { period: 'Day 3–4', title: 'AI Agent Health Check', desc: 'Run our proprietary health check — scoring each agent on accuracy, drift risk, escalation rate, and integration stability.' },
-  { period: 'Day 5–7', title: 'Monitoring Setup', desc: 'Configure your monitoring dashboard and alert triggers. You get visibility. We get the alerts.' },
-  { period: 'Week 2', title: 'First Optimizations', desc: 'First round of prompt optimizations executed and tested. Measurable improvement within two weeks of kickoff.' },
-  { period: 'Month 1', title: 'First Report', desc: 'Deliver your first monthly performance report with benchmarks, improvement summary, and the roadmap for Month 2.' },
-  { period: 'Ongoing', title: 'Continuous Ops', desc: 'Daily monitoring, weekly check-ins, monthly reports. Your agents stay sharp — permanently.' },
+const INDUSTRIES = [
+  { icon: ShoppingCart, name: 'E-Commerce & Retail',    desc: 'High ticket volume means agent failures directly cost sales. We keep support and commerce agents performing at peak.' },
+  { icon: Target,       name: 'SaaS & Technology',       desc: 'Native integrations with Intercom, Zendesk, and Freshdesk make SaaS the fastest onboarding profile we handle.' },
+  { icon: Home,         name: 'Real Estate',              desc: 'Lead qualification bots are everywhere in real estate — and most are underperforming. We tune and monitor them continuously.' },
+  { icon: HeartPulse,   name: 'Healthcare',               desc: 'AI oversight in healthcare isn\'t optional — it\'s regulatory. We provide the audit trail and human review layer compliance teams need.' },
+  { icon: Landmark,     name: 'Financial Services',       desc: 'Regulators are watching AI deployments in finance. Our managed oversight model gives you documented monitoring at every step.' },
+  { icon: Scale,        name: 'Insurance',                desc: 'Complex products and long journeys mean insurance agents drift and hallucinate more. We run continuous correction so agents stay accurate.' },
+];
+
+const TOOLS = [
+  { name: 'LangSmith',     category: 'LLM Observability' },
+  { name: 'Datadog',       category: 'Infrastructure' },
+  { name: 'OpenAI Evals',  category: 'Model Evaluation' },
+  { name: 'Intercom',      category: 'Helpdesk' },
+  { name: 'Zendesk',       category: 'Support' },
+  { name: 'Grafana',       category: 'Dashboards' },
+  { name: 'PagerDuty',     category: 'Incident Mgmt' },
+  { name: 'Slack',         category: 'Alerts & Comms' },
+  { name: 'Make',          category: 'Automation' },
+  { name: 'n8n',           category: 'Workflow Ops' },
+  { name: 'HubSpot',       category: 'CRM Monitoring' },
+  { name: 'Freshdesk',     category: 'Support' },
 ];
 
 const PRICING = [
@@ -96,16 +82,10 @@ const PRICING = [
     name: 'Starter',
     price: '$2,500',
     period: '/mo',
-    setup: '$1,500 setup',
+    setup: '$1,500 setup fee',
     agents: '1–2 agents',
-    desc: 'Ideal for businesses running one or two AI agents and wanting professional oversight without a full operations team.',
-    features: [
-      '1–2 agents monitored',
-      'Weekly performance reports',
-      'Email support',
-      'Monthly scorecard',
-      'Prompt drift alerts',
-    ],
+    desc: 'For businesses running one or two AI agents that need professional oversight without a full operations team.',
+    features: ['1–2 agents monitored', 'Weekly performance reports', 'Email support', 'Monthly scorecard', 'Prompt drift alerts'],
     featured: false,
     cta: 'Get Started',
   },
@@ -113,17 +93,10 @@ const PRICING = [
     name: 'Core',
     price: '$5,000',
     period: '/mo',
-    setup: '$2,500 setup',
+    setup: '$2,500 setup fee',
     agents: '3–5 agents',
-    desc: 'For growing teams running multiple agents across departments who need daily oversight and a dedicated point of contact.',
-    features: [
-      '3–5 agents monitored',
-      'Daily monitoring',
-      'Dedicated account manager',
-      'Integration health checks',
-      'Escalation path management',
-      'Monthly benchmark report',
-    ],
+    desc: 'For growing teams running multiple agents across departments who need daily oversight and a named point of contact.',
+    features: ['3–5 agents monitored', 'Daily monitoring', 'Dedicated account manager', 'Integration health checks', 'Escalation path management', 'Monthly benchmark report'],
     featured: true,
     cta: 'Most Popular',
   },
@@ -134,45 +107,29 @@ const PRICING = [
     setup: 'Setup waived',
     agents: 'Unlimited agents',
     desc: 'Full managed AI operations for enterprise deployments with complex agent ecosystems and executive-level reporting.',
-    features: [
-      'Unlimited agents',
-      'Dedicated ops team',
-      'Quarterly business reviews',
-      'Custom SLA & escalation design',
-      'Priority response',
-      'Executive dashboards',
-    ],
+    features: ['Unlimited agents', 'Dedicated ops team', 'Quarterly business reviews', 'Custom SLA & escalation design', 'Priority response SLA', 'Executive dashboards'],
     featured: false,
     cta: 'Book a Call',
   },
 ];
 
+/* ─── Component ─────────────────────────────────────────────────────── */
+
 export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', agents: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const captchaRef = useRef<CaptchaHandle>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const ok = await captchaRef.current?.verify();
-    if (!ok) return;
-    try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, service: 'AI Agent Monitoring', source: 'ai-agent-monitoring-page' }),
-      });
-    } catch {}
-    setSubmitted(true);
-  };
 
   return (
     <div className="min-h-screen bg-white">
 
-      {/* HERO */}
+      {/* ── SECTION 1 — HERO ──────────────────────────────────────────── */}
       <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
+        </div>
         <div className="mesh-container opacity-40">
           <div className="blob blob-magenta opacity-30" />
           <div className="blob blob-purple opacity-40" />
@@ -184,23 +141,19 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/30 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E61739] animate-pulse" />
-                Fully Managed · Always On
-              </div>
-              <h1 className="text-5xl md:text-6xl lg:text-[62px] font-heading font-bold text-white mb-6 tracking-tight leading-[1.1]">
-                <span className="text-[#E61739]">We watch your AI agents</span>
-                <span className="text-shine-white"> so you don't have to.</span>
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
+                <span className="text-[#E61739] text-[62px]">We watch your AI agents</span>
+                <span className="text-shine-white text-[62px]"> so you don't have to.</span>
               </h1>
-              <p className="text-lg md:text-xl text-white/70 font-medium leading-relaxed mb-8">
-                Daily monitoring, prompt optimization, and human oversight — delivered as a fully managed service. Your agents stay accurate, compliant, and on-brand, 24/7.
+              <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
+                Daily monitoring, prompt optimization, and human oversight for your AI agents — delivered as a fully managed service.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 {[
                   'Daily performance monitoring across every active agent',
                   'Prompt retraining triggered automatically on drift detection',
-                  'Dedicated AI Ops Specialist for every account',
+                  'Dedicated AI Ops Specialist included on every account',
                 ].map((pt, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
@@ -216,36 +169,35 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
             </div>
 
-            {/* Right — stats card */}
+            {/* Right — image card */}
             <div className="relative lg:h-full">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105" />
-              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-[#111]">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#E61739]/5 via-transparent to-[#7e22ce]/10" />
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=900&h=600"
+                  alt="AI agent monitoring dashboard"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
                 <div className="absolute top-6 left-6">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    Live Monitoring Active
+                    Live Monitoring · Always On
                   </div>
                 </div>
 
-                <div className="absolute inset-0 flex flex-col items-center justify-center px-10 gap-6">
-                  <div className="w-20 h-20 rounded-[1.5rem] bg-[#E61739]/15 border border-[#E61739]/30 flex items-center justify-center mb-2">
-                    <Monitor size={36} className="text-[#E61739]" />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 w-full">
-                    {[
-                      { value: '100%', label: 'Uptime Accountability' },
-                      { value: '24 hrs', label: 'Drift Detection SLA' },
-                      { value: '18+ mo', label: 'Avg Client Lifetime' },
-                      { value: '6', label: 'Target Industries' },
-                    ].map((stat, i) => (
-                      <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
-                        <div className="text-2xl font-black text-white mb-1">{stat.value}</div>
-                        <div className="text-[10px] font-black uppercase tracking-widest text-white/40">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
+                  {[
+                    { name: 'LangSmith',    logo: 'https://avatars.githubusercontent.com/u/139275913?s=64' },
+                    { name: 'Datadog',      logo: 'https://imgix.datadoghq.com/img/dd_logo_n_70x75.png' },
+                    { name: 'Zendesk',      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Zendesk_logo.svg/320px-Zendesk_logo.svg.png' },
+                    { name: 'PagerDuty',    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/PagerDuty_logo.svg/320px-PagerDuty_logo.svg.png' },
+                  ].map((app, i) => (
+                    <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform">
+                      <img src={app.logo} alt={app.name} className="object-contain max-h-7 max-w-[80px]" referrerPolicy="no-referrer" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -256,14 +208,14 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div><div className="text-xl md:text-2xl font-black">Daily</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Monitoring Cadence</p></div>
-            <div><div className="text-xl md:text-2xl font-black">3-mo</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Minimum Term</p></div>
-            <div><div className="text-xl md:text-2xl font-black">18+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Months Avg Lifetime</p></div>
-            <div><div className="text-xl md:text-2xl font-black">1:1</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Specialist Per Account</p></div>
+            <div><div className="text-xl md:text-2xl font-black">7 Days</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Time to Live Monitoring</p></div>
+            <div><div className="text-xl md:text-2xl font-black">18+ mo</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Avg Client Lifetime</p></div>
+            <div><div className="text-xl md:text-2xl font-black">1:1</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">AI Ops Specialist per Account</p></div>
           </div>
         </div>
       </section>
 
-      {/* PROBLEM STRIP */}
+      {/* ── SECTION 2 — PROBLEM STRIP ─────────────────────────────────── */}
       <section className="bg-[#F5F5F7] py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
@@ -280,7 +232,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* WHAT WE DELIVER */}
+      {/* ── SECTION 3 — WHAT WE DELIVER ───────────────────────────────── */}
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
@@ -288,17 +240,17 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               What We Deliver
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              Everything your AI agents need to <span className="text-[#E61739]">stay sharp.</span>
+              Everything your AI agents need to <span className="text-[#E61739] text-[48px]">stay sharp.</span>
             </h2>
             <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six core deliverables, managed end-to-end. You deploy AI — we make sure it keeps working.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {DELIVERABLES.map((s, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
                 <div className="w-12 h-12 bg-[#E61739]/15 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#E61739]/25 transition-all">
                   <s.icon size={22} className="text-[#E61739]" />
                 </div>
-                <h3 className="text-lg font-black text-white mb-3">{s.title}</h3>
+                <h3 className="text-xl font-black text-white mb-3">{s.title}</h3>
                 <p className="text-white/50 text-sm font-medium leading-relaxed">{s.desc}</p>
               </div>
             ))}
@@ -306,195 +258,377 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
-      {/* TARGET INDUSTRIES */}
-      <section className="py-24 bg-[#F5F5F7]">
+      {/* ── SECTION 4 — HOW IT WORKS ──────────────────────────────────── */}
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Target Industries
-            </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              Built for industries where <span className="text-[#E61739]">agent errors are expensive.</span>
-            </h2>
-            <p className="text-[#86868b] text-lg font-medium mt-4 max-w-2xl">We specialize in six verticals where AI agent failures have real business consequences — from lost revenue to regulatory risk.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {INDUSTRIES.map((ind, i) => (
-              <div key={i} className="bg-white border border-slate-100 rounded-3xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 bg-[#E61739]/8 rounded-2xl flex items-center justify-center group-hover:bg-[#E61739]/15 transition-all">
-                    <ind.icon size={22} className="text-[#E61739]" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#E61739] bg-[#E61739]/8 px-2.5 py-1 rounded-full">{ind.tag}</span>
-                </div>
-                <h3 className="text-lg font-black text-[#1D1D1F] mb-2">{ind.name}</h3>
-                <p className="text-[#86868b] text-sm font-medium leading-relaxed">{ind.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ONBOARDING TIMELINE */}
-      <section className="py-24 bg-[#080808]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Onboarding Timeline
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight">
-              From kickoff to <span className="text-[#E61739]">fully monitored in 7 days.</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+              From kickoff to fully monitored.<br />Live within <span className="text-[#E61739]">7 days.</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">We move fast. Most clients are fully operational within a week — and seeing their first optimizations in week two.</p>
           </div>
           <div className="relative">
-            <div className="absolute top-0 bottom-0 left-[23px] w-px bg-gradient-to-b from-[#E61739]/40 via-[#E61739]/20 to-transparent md:hidden" />
-            <div className="space-y-0">
-              {TIMELINE.map((step, i) => (
-                <div key={i} className="grid md:grid-cols-[180px_1fr] gap-0 md:gap-8 group">
-                  <div className="flex md:justify-end items-start gap-4 md:gap-0 pb-8 md:pb-0">
-                    <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-xs shrink-0 relative z-10 shadow-lg md:ml-auto">
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    <div className="md:hidden">
-                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-0.5">{step.period}</div>
-                      <h4 className="text-base font-black text-white">{step.title}</h4>
-                      <p className="text-white/40 text-sm font-medium leading-relaxed mt-1">{step.desc}</p>
-                    </div>
+            <div className="hidden md:block absolute top-6 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+              {STEPS.map((s, i) => (
+                <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {s.n}
                   </div>
-                  <div className="hidden md:block border-l border-white/8 pl-10 pb-10 group-last:border-l-0">
-                    <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{step.period}</div>
-                    <h4 className="text-lg font-black text-white mb-2">{step.title}</h4>
-                    <p className="text-white/40 text-sm font-medium leading-relaxed max-w-xl">{step.desc}</p>
-                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* PRICING */}
-      <section className="py-24 bg-[#F5F5F7]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Pricing
+          <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Clock size={18} className="text-[#E61739]" />
+              </div>
+              <div>
+                <h4 className="font-black text-[#1D1D1F] text-sm mb-0.5">Ongoing after Month 1</h4>
+                <p className="text-[#86868b] text-sm font-medium">Daily monitoring · weekly check-ins · monthly performance reports</p>
+              </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-3">Transparent tiers. No surprises.</h2>
-            <p className="text-[#86868b] text-lg font-medium">3-month minimum · Average client lifetime: 18+ months</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5 items-stretch">
-            {PRICING.map((plan, i) => (
-              <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-[#1D1D1F] border-2 border-[#E61739] shadow-2xl' : 'bg-white border border-slate-200 shadow-sm'}`}>
-                {plan.featured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
-                )}
-                <p className={`text-[10px] font-black uppercase tracking-widest mb-3 ${plan.featured ? 'text-white/40' : 'text-[#86868b]'}`}>{plan.name}</p>
-                <div className="flex items-end gap-1 mb-1">
-                  <span className={`text-4xl font-black ${plan.featured ? 'text-white' : 'text-[#1D1D1F]'}`}>{plan.price}</span>
-                  <span className={`text-base font-bold mb-1 ${plan.featured ? 'text-white/40' : 'text-[#86868b]'}`}>{plan.period}</span>
-                </div>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className={`text-xs font-black uppercase tracking-widest ${plan.featured ? 'text-[#E61739]' : 'text-[#E61739]'}`}>{plan.agents}</span>
-                  <span className={`text-xs font-medium ${plan.featured ? 'text-white/30' : 'text-[#86868b]'}`}>·</span>
-                  <span className={`text-xs font-medium ${plan.featured ? 'text-white/30' : 'text-[#86868b]'}`}>{plan.setup}</span>
-                </div>
-                <p className={`text-sm font-medium mb-6 leading-relaxed ${plan.featured ? 'text-white/50' : 'text-[#86868b]'}`}>{plan.desc}</p>
-                <div className={`border-t pt-6 mb-6 flex-grow ${plan.featured ? 'border-white/10' : 'border-slate-100'}`}>
-                  <ul className="space-y-3">
-                    {plan.features.map((f, fi) => (
-                      <li key={fi} className={`flex items-start gap-3 text-sm font-semibold ${plan.featured ? 'text-white/70' : 'text-[#1D1D1F]/70'}`}>
-                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <button
-                  onClick={() => setView('contact')}
-                  className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-[#1D1D1F] text-white hover:bg-[#333]'}`}
-                >
-                  {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
-                </button>
-              </div>
-            ))}
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+              Start Your 7-Day Onboarding <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* CONTACT FORM */}
-      <section className="py-24 bg-[#080808]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+      {/* ── SECTION 5 — WHY KDCI ──────────────────────────────────────── */}
+      <section className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-            {/* Left — value prop */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
-                Get Started
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
+                Our Difference
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight">
-                Ready to stop worrying about your agents?
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
+                Built to keep your agents performing,<br />
+                <span className="text-[#E61739]">not just running.</span>
               </h2>
-              <p className="text-white/50 text-lg font-medium leading-relaxed mb-10">
-                Book a discovery call and we'll run a free AI Agent Health Check on your existing agents — no commitment required.
-              </p>
-              <div className="space-y-6">
+              <div className="divide-y divide-black/10">
                 {[
-                  { icon: Clock, title: '7-day onboarding', desc: 'Fully operational monitoring within one week of kickoff.' },
-                  { icon: Bell, title: 'Drift alerts in 24 hrs', desc: 'We catch and flag agent degradation within a business day.' },
-                  { icon: TrendingUp, title: 'Monthly scorecards', desc: 'Clear benchmarks, trend data, and a concrete action plan every month.' },
-                ].map((pt, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 bg-[#E61739]/15 rounded-xl flex items-center justify-center shrink-0">
-                      <pt.icon size={18} className="text-[#E61739]" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-sm mb-0.5">{pt.title}</h4>
-                      <p className="text-white/40 text-sm font-medium leading-relaxed">{pt.desc}</p>
+                  {
+                    num: '01',
+                    icon: Monitor,
+                    title: 'We watch — you build',
+                    desc: 'Your team stays focused on growth while our AI Ops Specialists manage every agent across your stack. No internal headcount required.',
+                  },
+                  {
+                    num: '02',
+                    icon: BarChart3,
+                    title: 'Scorecard-backed accountability',
+                    desc: 'We agree on performance benchmarks before we start and report against them every month. If we miss a target, we own the fix.',
+                  },
+                  {
+                    num: '03',
+                    icon: Users,
+                    title: 'Human in the loop, always',
+                    desc: 'Every AI system is managed by a trained specialist who monitors performance, catches drift, and continuously improves your agents over time.',
+                  },
+                ].map((d, i) => (
+                  <div key={i} className="flex items-start gap-4 py-6">
+                    <span className="text-[11px] font-black text-[#E61739]/40 tracking-widest pt-0.5 w-6 shrink-0">{d.num}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <d.icon size={15} className="text-[#E61739]" />
+                        <h3 className="text-sm font-black text-[#1D1D1F]">{d.title}</h3>
+                      </div>
+                      <p className="text-[#86868b] text-sm font-medium leading-relaxed">{d.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right — form */}
-            <div className="bg-white/3 border border-white/8 rounded-3xl p-8">
-              {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-green-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 size={32} className="text-green-400" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white mb-3">We'll be in touch.</h3>
-                  <p className="text-white/50 text-sm font-medium">Expect a response within one business day. We'll schedule your free AI Agent Health Check on the call.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="text-xl font-black text-white mb-6">Book a Discovery Call</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <input required placeholder="First Name" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} className={inp} />
-                    <input required placeholder="Last Name" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} className={inp} />
-                  </div>
-                  <input required type="email" placeholder="Work Email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inp} />
-                  <input required placeholder="Company Name" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} className={inp} />
-                  <input placeholder="Phone (optional)" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inp} />
-                  <select value={form.agents} onChange={e => setForm(f => ({ ...f, agents: e.target.value }))} className={`${inp} appearance-none`}>
-                    <option value="">How many AI agents do you have?</option>
-                    <option value="1-2">1–2 agents</option>
-                    <option value="3-5">3–5 agents</option>
-                    <option value="6-10">6–10 agents</option>
-                    <option value="10+">10+ agents</option>
-                    <option value="not-sure">Not sure yet</option>
-                  </select>
-                  <textarea rows={3} placeholder="Any context on your current AI setup (optional)" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} className={`${inp} resize-none`} />
-                  <Captcha ref={captchaRef} />
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-3 group">
-                    Book My Discovery Call <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <p className="text-white/25 text-xs font-medium text-center">3-month minimum · Free AI Agent Health Check included</p>
-                </form>
-              )}
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
+              <img
+                src="/our-difference.png"
+                alt="KDCI AI operations team reviewing agent performance dashboards"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 6 — PRICING ───────────────────────────────────────── */}
+      <section className="py-24 bg-[#080808]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Pricing
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
+            <p className="text-white/40 text-lg font-medium">3-month minimum · Average client lifetime: 18+ months</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
+            {PRICING.map((plan, i) => (
+              <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                {plan.featured && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
+                )}
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                <div className="flex items-end gap-1 mb-1">
+                  <span className="text-3xl font-black text-white">{plan.price}</span>
+                  <span className="text-white/30 text-sm font-black mb-1">{plan.period}</span>
+                </div>
+                <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{plan.agents}</p>
+                <p className="text-white/30 text-xs font-medium mb-3">{plan.setup}</p>
+                <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                  <ul className="space-y-3">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                  {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
+            <div>
+              <h4 className="text-base font-bold text-white mb-1">Running more than 10 agents?</h4>
+              <p className="text-sm text-white/40 font-medium">Build a dedicated AI Ops pod tailored to the scale and complexity of your deployment.</p>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 7 — WHO WE SERVE ──────────────────────────────────── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-14 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Who We Serve
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
+              Industries where AI agent failures<br /><span className="text-[#E61739]">have real consequences.</span>
+            </h2>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">From lost revenue to regulatory risk — we specialize in the verticals where monitoring isn't optional.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {INDUSTRIES.map((ind, i) => (
+              <div key={i} className="flex items-start gap-4 p-6 rounded-2xl border border-slate-100 bg-slate-50 hover:border-[#E61739]/20 hover:bg-white hover:shadow-sm transition-all">
+                <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                  <ind.icon size={18} className="text-[#E61739]" />
+                </div>
+                <div>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-1">{ind.name}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{ind.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 8 — TOOLS ─────────────────────────────────────────── */}
+      <section className="py-24 bg-[#080808]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Our Stack
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
+              Platform-Agnostic. <span className="text-[#E61739]">Integration-Ready.</span>
+            </h2>
+            <p className="text-white/40 font-medium max-w-2xl text-[17px]">We monitor agents built on any platform and connect to the helpdesks, CRMs, and alerting tools your team already uses — no rip-and-replace required.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {TOOLS.map((tool, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center text-center hover:bg-white/10 transition-all">
+                <div className="w-10 h-10 bg-[#E61739]/15 rounded-xl flex items-center justify-center mb-3">
+                  <Zap size={16} className="text-[#E61739]" />
+                </div>
+                <div className="text-sm font-black text-white leading-tight mb-1">{tool.name}</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-white/30">{tool.category}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 9 — GUARANTEE ─────────────────────────────────────── */}
+      <section className="py-20 bg-[#080808] border-t border-white/10">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="border-l-4 border-[#E61739] pl-10 py-4">
+            <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6 max-w-3xl">
+              "We agree on benchmarks before we start. Miss them once — you get a credit. Miss them twice — you walk away free."
+            </p>
+            <p className="text-white/40 text-base font-medium max-w-2xl">
+              Every engagement includes measurable performance targets agreed at kickoff. We price at a premium because we back it with accountability.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 10 — CONTACT FORM ─────────────────────────────────── */}
+      <section className="py-20 px-6 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
+
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src="/contact-section.png"
+              alt="KDCI AI Ops specialist on a discovery call"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Agent Monitoring</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
+                Ready to stop worrying<br />about your agents?
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Free Health Check included', 'Live in 7 days', '3-month minimum'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
+                <p className="text-white/50 font-medium">Expect a response within 2 business hours. We'll schedule your free AI Agent Health Check on the call.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Discovery Call
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Book a Free AI Agent Health Check</h2>
+                  <p className="text-white/40 text-sm font-medium">We'll audit your active AI agents, score each one on accuracy, drift risk, and integration health — no commitment required.</p>
+                </div>
+                <form onSubmit={async e => {
+                  e.preventDefault();
+                  const ok = await captchaRef.current?.verify();
+                  if (!ok) return;
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ ...form, service: 'AI Agent Monitoring', source: 'ai-agent-monitoring-page' }),
+                    });
+                  } catch {}
+                  setSubmitted(true);
+                }} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name</label>
+                      <input required className={inp} placeholder="Jane" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Last Name</label>
+                      <input required className={inp} placeholder="Smith" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Corp" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@acme.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
+                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Number of AI agents</label>
+                      <select value={form.agents} onChange={e => setForm(f => ({ ...f, agents: e.target.value }))} className={`${inp} appearance-none`}>
+                        <option value="">Select…</option>
+                        <option value="1-2">1–2 agents</option>
+                        <option value="3-5">3–5 agents</option>
+                        <option value="6-10">6–10 agents</option>
+                        <option value="10+">10+ agents</option>
+                        <option value="not-sure">Not sure yet</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={`${inp} resize-none`} placeholder="Tell us about your current AI agent setup…" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                  </div>
+                  <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 11 — FAQ ──────────────────────────────────────────── */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5 border border-slate-100">
+              <Shield size={11} /> FAQs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 tracking-tight">Frequently asked questions.</h2>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "What exactly counts as an 'AI agent' for monitoring purposes?", a: "Any automated system using a large language model (LLM) to handle customer interactions, internal queries, data processing, or decision support — including chatbots, voice agents, email bots, support agents on Intercom or Zendesk, and custom-built LLM workflows." },
+              { q: "How do you detect prompt drift?", a: "We run daily automated evaluation benchmarks against a set of baseline test cases established at kickoff. When accuracy scores fall below threshold — or when hallucination rates, escalation rates, or latency spikes are detected — our system flags the agent for human review and retraining." },
+              { q: "What's the response time when an issue is detected?", a: "Critical issues (agent failures, integration outages) are escalated within 4 business hours. Performance drift triggers a review within one business day, with optimization executed and tested within the same week." },
+              { q: "Do you need admin access to our AI platforms?", a: "We need read access to your agent configurations and, for optimization, the ability to update prompt templates. We document every change and require client approval for any structural modifications to an agent's logic." },
+              { q: "What AI platforms and helpdesks do you support?", a: "We support agents built on OpenAI, Anthropic, Google Gemini, and most LLM platforms. For integrations, we work with Intercom, Zendesk, Freshdesk, HubSpot, Salesforce, and custom API-based setups." },
+              { q: "How is pricing calculated — is it per agent?", a: "Pricing is tier-based, not strictly per-agent. Each tier covers a range (1–2, 3–5, or unlimited agents) and includes a standard set of services. For high-volume deployments, we build custom pricing around the complexity of your stack." },
+              { q: "What happens if an agent goes down completely?", a: "Full agent failures are treated as critical incidents. Your AI Ops Specialist is notified immediately via PagerDuty, investigates root cause, and coordinates with your team or vendor to restore service. You receive an incident report within 24 hours." },
+              { q: "Can you monitor voice AI agents (e.g. Retell AI, Vapi)?", a: "Yes. We monitor voice agents for call completion rate, resolution rate, transfer rate, and sentiment patterns. We also review call transcripts to catch accuracy issues that automated scoring may miss." },
+              { q: "How is sensitive customer data handled during monitoring?", a: "All monitoring is conducted on anonymized or aggregated performance data wherever possible. If transcript review is required, we follow your data handling policy and can operate under NDA and DPA agreements." },
+              { q: "What's included in the monthly scorecard?", a: "The monthly scorecard includes: agent-by-agent accuracy scores, drift trend charts, escalation rate analysis, integration health status, prompt optimization summary, benchmark comparisons to your industry baseline, and a prioritized recommendation list for the next 30 days." },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                    <ArrowRight size={12} className="-rotate-45" />
+                  </span>
+                </button>
+                {openFaq === i && (
+                  <div className="px-7 pb-6">
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
