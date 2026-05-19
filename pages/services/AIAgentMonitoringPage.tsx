@@ -312,7 +312,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
                 Built to keep your agents performing,<br />
-                <span className="text-[#E61739]">not just running.</span>
+                under <span className="text-[#E61739]">agentic trust controls</span>.
               </h2>
               <div className="divide-y divide-black/10">
                 {[
