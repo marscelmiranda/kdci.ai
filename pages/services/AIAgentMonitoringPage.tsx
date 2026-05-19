@@ -48,8 +48,8 @@ const DELIVERABLES = [
 const STEPS = [
   { n: '01', period: 'Day 1–2',   title: 'Kickoff',               desc: 'Map all active AI agents and platforms. Catalog integrations, escalation paths, and current performance baselines.' },
   { n: '02', period: 'Day 3–4',   title: 'Health Check',          desc: 'Run our AI Agent Health Check — scoring each agent on accuracy, drift risk, escalation rate, and integration stability.' },
-  { n: '03', period: 'Day 5–7',   title: 'Monitoring Setup',      desc: 'Configure your monitoring dashboard and alert triggers. You get full visibility — we get the alerts.' },
-  { n: '04', period: 'Week 2',    title: 'First Optimizations',   desc: 'First round of prompt optimizations executed and tested. Measurable improvement within two weeks of kickoff.' },
+  { n: '03', period: 'Day 5–7',   title: 'Monitoring Setup',      desc: 'Configure your monitoring dashboard so you get full visibility on the full decision path, and we get the alerts.' },
+  { n: '04', period: 'Week 2',    title: 'First Optimizations',   desc: 'First round of prompt optimizations executed and tested. See measurable improvement within two weeks of kickoff.' },
   { n: '05', period: 'Month 1',   title: 'First Report',          desc: 'Deliver your first monthly performance scorecard with benchmarks, trend analysis, and the Month 2 action plan.' },
 ];
 
