@@ -74,25 +74,23 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <p className="text-white/60 text-lg font-medium max-w-2xl mx-auto">
               Comprehensive research, data-driven reports, and strategic frameworks for the modern executive.
             </p>
+            <div className="relative max-w-lg mx-auto mt-8">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <input
+                type="text"
+                placeholder="Search ebooks, reports, or topics..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-medium text-white focus:ring-2 focus:ring-[#E61739]/40 focus:bg-white/15 focus:border-[#E61739]/60 transition-all placeholder:text-white/40 outline-none backdrop-blur-sm"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── FILTER BAR ── */}
       <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
-        {/* Search row */}
-        <div className="max-w-7xl mx-auto px-8 pt-5 pb-4 border-b border-slate-100">
-          <div className="relative max-w-lg">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input
-              type="text"
-              placeholder="Search ebooks, reports, or topics..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:ring-2 focus:ring-[#E61739]/20 focus:bg-white focus:border-[#E61739]/40 transition-all placeholder:text-slate-400 outline-none"
-            />
-          </div>
-        </div>
+        {/* Search row removed — now in hero */}
         <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
           <button onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
             className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
