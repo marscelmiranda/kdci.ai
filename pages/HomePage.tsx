@@ -146,19 +146,19 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
               <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most BPOs focus on headcount. We focus on outcome. By merging high-end Philippine talent with agentic AI workflows, we create operational units that are 3x more efficient than traditional teams.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-8 bg-white rounded-[2.5rem] shadow-sm">
+              <div className="p-8 bg-white rounded-[20px] shadow-sm">
                 <div className="text-3xl font-bold text-[#1D1D1F] mb-1">35%</div>
                 <div className="text-[10px] font-black uppercase text-[#86868b] tracking-widest">Average CSAT Boost</div>
               </div>
-              <div className="p-8 bg-white rounded-[2.5rem] shadow-sm">
+              <div className="p-8 bg-white rounded-[20px] shadow-sm">
                 <div className="text-3xl font-bold text-[#1D1D1F] mb-1">60%</div>
                 <div className="text-[10px] font-black uppercase text-[#86868b] tracking-widest">OpEx Reduction</div>
               </div>
-              <div className="p-8 bg-[#E61739] rounded-[2.5rem] shadow-lg">
+              <div className="p-8 bg-[#E61739] rounded-[20px] shadow-lg">
                 <div className="text-3xl font-bold text-white mb-1">24h</div>
                 <div className="text-[10px] font-black uppercase text-white/70 tracking-widest">Setup Potential</div>
               </div>
-              <div className="p-8 bg-[#1D1D1F] rounded-[2.5rem] shadow-lg">
+              <div className="p-8 bg-[#1D1D1F] rounded-[20px] shadow-lg">
                 <div className="text-3xl font-bold text-white mb-1">0.1%</div>
                 <div className="text-[10px] font-black uppercase text-white/70 tracking-widest">Error Threshold</div>
               </div>
