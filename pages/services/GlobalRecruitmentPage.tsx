@@ -458,7 +458,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="text-center mb-14">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our recruiters understand the technical nuances of your vertical — sourcing talent that hits the ground running across 20+ industries.
+              Our HR specialists understand the technical demands of your industry, managing recruitment, employee onboarding, payroll administration, and HR compliance across 20+ industries.
             </p>
           </div>
 
