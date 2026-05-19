@@ -34,6 +34,7 @@ import { GlobalRecruitmentPage } from './pages/services/GlobalRecruitmentPage';
 
 import { AIConsultingPage } from './pages/services/AIConsultingPage';
 import { AIAgentMonitoringPage } from './pages/services/AIAgentMonitoringPage';
+import { AIOutboundPage } from './pages/services/AIOutboundPage';
 
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
@@ -126,9 +127,10 @@ const App = () => {
         {activeView === 'customer-support' && <CustomerExperienceOpsPage setView={setView} />}
 
         {activeView === 'creative-prod' && <GraphicDesignStudioPage setView={setView} />}
-        {activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} />}
+        {/* activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} /> */}
         {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
         {activeView === 'ai-agent-monitoring' && <AIAgentMonitoringPage setView={setView} />}
+        {activeView === 'ai-outbound' && <AIOutboundPage setView={setView} />}
         
         {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}

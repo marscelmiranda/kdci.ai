@@ -62,7 +62,7 @@ export const ComingSoonPage = ({ setView }: { setView: (v: ViewType) => void }) 
           <div className="flex flex-wrap items-center justify-center gap-3">
             {[
               { label: 'Services', view: 'solutions-hub' },
-              { label: 'Offshore Staffing', view: 'staff-aug' },
+              { label: 'AI Outbound & Lead Gen', view: 'ai-outbound' },
               { label: 'AI-Augmented Customer Experience', view: 'customer-support' },
               { label: 'Blog', view: 'blog' },
               { label: 'Careers', view: 'careers' },

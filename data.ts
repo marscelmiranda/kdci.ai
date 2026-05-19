@@ -155,14 +155,14 @@ export const RESOURCES = [
 ];
 
 export const TOP_SERVICES = [
-  { 
-    id: 'staff-aug',
-    name: 'Philippine Offshore Staffing', 
-    tag: 'On-Demand Talent',
-    icon: Rocket,
-    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.png',
-    desc: 'Add expert capacity to any department overnight with dedicated, high-performance professionals.',
-    benefits: ['Experts on Demand', 'Zero Hiring Risk', 'Scale Instantly']
+  {
+    id: 'ai-outbound',
+    name: 'AI Outbound & Lead Generation',
+    tag: 'Pipeline on Demand',
+    icon: TrendingUp,
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
+    desc: 'We build and operate your entire outbound engine — ICP research, list building, AI-personalized sequences, and meeting booking.',
+    benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
   },
   {
     id: 'ai-consulting',

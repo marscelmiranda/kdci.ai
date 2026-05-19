@@ -94,5 +94,6 @@ export type ViewType =
   | 'gov'
   | 'ai-consulting'
   | 'ai-agent-monitoring'
+  | 'ai-outbound'
   | 'not-found'
   | 'coming-soon';
