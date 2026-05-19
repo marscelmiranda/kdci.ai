@@ -152,8 +152,8 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 {[
                   'Daily performance monitoring across every AI agent',
-                  'Prompt retraining triggered automatically on drift detection',
-                  'Dedicated AI Ops Specialist included on every account',
+                  'Prompt retaining triggered automatically on drift detection',
+                  'With a dedicated AI Ops Specialist onboard every account',
                 ].map((pt, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
