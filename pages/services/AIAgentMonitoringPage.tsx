@@ -192,7 +192,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                     { name: 'Zendesk',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Zendesk_Logo_jlsxla.png', style: { maxHeight: '40px', maxWidth: '112px' } },
                     { name: 'ElevenLabs',   logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/f_png,w_160,c_fit/v1779173814/Elevenlabs_Ai_Logo_PNG_SVG_Vector_chtxqo.svg', style: { maxHeight: '100px', maxWidth: '120px' } },
                     { name: 'Intercom',     logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png', style: { maxHeight: '40px', maxWidth: '112px' } },
-                    { name: 'PagerDuty',    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/PagerDuty_logo.svg/320px-PagerDuty_logo.svg.png' },
+                    { name: 'HubSpot',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779174606/hubspot-logo-black-and-white_joijyn.png' },
                   ].map((app: any, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform">
                       <img src={app.logo} alt={app.name} className="object-contain max-h-7 max-w-[80px]" style={app.style ?? {}} referrerPolicy="no-referrer" />
