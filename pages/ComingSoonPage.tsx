@@ -63,7 +63,7 @@ export const ComingSoonPage = ({ setView }: { setView: (v: ViewType) => void }) 
             {[
               { label: 'Services', view: 'solutions-hub' },
               { label: 'Offshore Staffing', view: 'staff-aug' },
-              { label: 'Customer Experience', view: 'customer-support' },
+              { label: 'AI-Augmented Customer Experience', view: 'customer-support' },
               { label: 'Blog', view: 'blog' },
               { label: 'Careers', view: 'careers' },
             ].map((link) => (

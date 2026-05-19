@@ -175,7 +175,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'customer-support',
-    name: 'Customer Experience Operations', 
+    name: 'AI-Augmented Customer Experience', 
     tag: '24/7 Global Ops',
     icon: Activity,
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png',
