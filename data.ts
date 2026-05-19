@@ -185,7 +185,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'agentic-recruitment',
-    name: 'Global Recruitment Services', 
+    name: 'AI Workforce Augmentation', 
     tag: 'Talent Sourcing',
     icon: Target,
     image: IMG_RECRUITMENT_HERO,

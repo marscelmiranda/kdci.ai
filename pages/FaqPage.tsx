@@ -128,7 +128,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'recruitment',
-    label: 'Agentic Recruitment',
+    label: 'AI Workforce Augmentation',
     icon: UserCheck,
     questions: [
       { q: "What is 'Agentic Recruitment' and how is it different from traditional RPO?", a: "Agentic Recruitment combines AI-driven sourcing and screening with expert human recruiters to dramatically accelerate hiring. Unlike traditional RPO that relies purely on human effort, our system automates outreach, resume scoring, and initial qualification — delivering a curated shortlist in days, not weeks." },
