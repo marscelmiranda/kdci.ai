@@ -174,7 +174,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105" />
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=900&h=600"
+                  src="/ai-agent-monitoring-hero.jpeg"
                   alt="AI agent monitoring dashboard"
                   className="w-full h-full object-cover"
                 />
