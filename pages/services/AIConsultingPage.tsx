@@ -8,74 +8,85 @@ import { Captcha, CaptchaHandle } from '../../components/Captcha';
 const SERVICES = [
   {
     icon: Target,
-    title: 'AI Strategy & Roadmap',
-    desc: 'We assess your operations and build a department-by-department AI adoption plan tied to measurable business outcomes. No generic frameworks — everything is scoped to your business.',
+    title: 'AI Readiness Audit',
+    desc: 'We assess every department — ops, support, sales, finance — and map where AI creates the highest-impact opportunities. Delivered as a structured report with a prioritized implementation roadmap.',
+  },
+  {
+    icon: Cpu,
+    title: 'Custom AI Stack Recommendation & Vendor Selection',
+    desc: 'We recommend the right platforms, models, and tools for your specific use case — without vendor bias. You get a complete stack design with rationale, cost estimates, and integration requirements.',
   },
   {
     icon: BrainCircuit,
-    title: 'Custom AI Agent Build',
-    desc: 'We configure and train AI agents for your specific workflows — from customer support and lead qualification to internal ops and data processing. Deployed, tested, and handed over production-ready.',
+    title: 'Agent Design, Prompt Engineering & Build',
+    desc: 'We architect and build your AI agents from the ground up — prompt design, model selection, testing, QA, and production deployment. Handed over fully documented and production-ready.',
   },
   {
     icon: Workflow,
-    title: 'System Integration & Automation',
-    desc: 'We connect your AI agents to your CRM, helpdesk, ERP, and data sources so outcomes flow into the systems your team already uses. No rip-and-replace required.',
+    title: 'Integration Setup with Existing Tools',
+    desc: 'We connect your new AI agents to the CRM, helpdesk, ERP, and data sources your team already uses — so outcomes flow into your existing systems from day one.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Team Training & Change Management',
+    desc: 'We run hands-on training sessions for every team that will interact with the new AI system, and deliver a runbook so your team can operate independently from day one.',
   },
   {
     icon: ShieldCheck,
-    title: 'Managed AI Operations',
-    desc: 'Ongoing management of your AI systems including monitoring, retraining, performance reporting, and a dedicated AI ops team. We stay accountable to the KPIs we agreed on at kickoff.',
+    title: '30-Day Post-Launch Monitoring Handoff',
+    desc: 'The engagement ends with a 30-day monitored handoff — catching edge cases, retraining on real-world data, and setting up the performance baseline before converting to a monitoring retainer.',
   },
 ];
 
 const STEPS = [
-  { n: '01', title: 'Discovery Call', desc: '60-min session to map your operations, pain points, and AI readiness.' },
-  { n: '02', title: 'AI Readiness Audit', desc: 'We assess your current tools, workflows, and data to identify the highest-impact opportunities.' },
-  { n: '03', title: 'Strategy & Roadmap', desc: 'A custom department-by-department plan with defined KPIs, timelines, and expected ROI.' },
-  { n: '04', title: 'Build & Integrate', desc: 'We configure and deploy your AI agents, connecting them to your existing systems.' },
-  { n: '05', title: 'Go Live & Manage', desc: 'Your AI systems go live with human oversight and monthly performance reporting against agreed KPIs.' },
+  { n: '01', period: 'Week 1',    title: 'Discovery',  desc: 'Audit current operations, map AI opportunities department by department, and agree on success metrics.' },
+  { n: '02', period: 'Week 2',    title: 'Design',     desc: 'Select platforms, architect the agent stack, and finalize the integration plan with your existing tools.' },
+  { n: '03', period: 'Week 3–4',  title: 'Build',      desc: 'Prompt engineering, agent configuration, integration setup, and full QA testing before go-live.' },
+  { n: '04', period: 'Week 5',    title: 'Deploy',     desc: 'Go live with team training, runbook handoff, and a structured launch process managed by our team.' },
+  { n: '05', period: 'Week 6',    title: 'Monitor',    desc: '30-day post-launch review — real-world retraining, edge case resolution, and performance baseline set.' },
+  { n: '06', period: 'Month 2+',  title: 'Convert',    desc: 'Transition to an AI Agent Monitoring retainer — continuous oversight, prompt optimization, and monthly reporting.' },
 ];
 
 const PRICING = [
   {
-    name: 'Starter',
-    price: 'From $3,000/mo',
-    period: '3-month minimum',
-    desc: 'For businesses ready to start with AI in one department.',
-    features: ['AI readiness audit', '1-department strategy', '1 AI agent build', 'Monthly review call', 'Performance dashboard'],
-    cta: 'Get Started',
+    name: 'AI Readiness Audit',
+    price: '$3,000',
+    period: 'One-time',
+    tag: '1-week engagement',
+    desc: 'A structured audit of your operations with a prioritized AI opportunity report and implementation roadmap delivered at the end of week one.',
+    features: ['Department-by-department AI mapping', 'Stack recommendation + vendor selection', 'Prioritized implementation roadmap', 'ROI estimates per opportunity', 'Delivered as a written report'],
+    cta: 'Start with an Audit',
     featured: false,
   },
   {
-    name: 'Growth',
-    price: 'From $7,000/mo',
-    period: '6-month minimum',
-    desc: 'For companies scaling AI across multiple departments.',
-    features: ['Multi-department strategy', 'Custom agent builds', 'System integrations', 'Human oversight layer', 'Dedicated AI consultant', 'Weekly reporting & KPI tracking'],
-    cta: 'Most Popular',
+    name: 'Implementation',
+    price: '$8,000–$15,000',
+    period: 'Project-based',
+    tag: 'Full build included',
+    desc: 'Complete agent design, prompt engineering, integration setup, team training, and 30-day monitored handoff. Everything to go live.',
+    features: ['Full agent design & prompt engineering', 'Integration with your existing tools', 'QA testing and production deployment', 'Team training & runbook', '30-day post-launch monitoring', 'Natural feeder into monitoring retainer'],
+    cta: 'Start Implementation',
     featured: true,
   },
   {
-    name: 'Enterprise',
-    price: "Let's talk",
-    period: 'Custom term',
-    desc: 'Full embedded AI operations team for enterprise-scale deployment.',
-    features: ['Unlimited departments', 'Full AI ops team', 'Custom SLAs', 'Executive strategy sessions', 'Priority support', 'Bespoke KPI framework'],
+    name: 'Consulting Retainer',
+    price: '$3,000–$5,000',
+    period: '/mo · 3-month minimum',
+    tag: 'Ongoing strategy',
+    desc: 'Ongoing AI strategy support with quarterly implementation sprints — for businesses that want continuous improvement without a full-time AI team.',
+    features: ['Monthly strategy sessions', 'Quarterly implementation sprints', 'Stack optimization & new agent scoping', 'Performance review & recommendations', 'Priority access to our AI team'],
     cta: 'Book a Call',
     featured: false,
   },
 ];
 
 const INDUSTRIES = [
-  { icon: ShoppingCart, name: 'E-Commerce & Retail', desc: 'Order management, customer support, inventory ops, returns automation.' },
-  { icon: HeartPulse, name: 'Healthcare & Wellness', desc: 'Patient intake, appointment scheduling, billing support, compliance workflows.' },
-  { icon: Scale, name: 'Legal & Professional', desc: 'Document review, client intake, billing automation, contract processing.' },
-  { icon: Landmark, name: 'Financial Services', desc: 'KYC workflows, fraud detection, compliance reporting, customer ops.' },
-  { icon: GraduationCap, name: 'EdTech & Education', desc: 'Student support, course operations, enrollment workflows, LMS integrations.' },
-  { icon: Building2, name: 'Real Estate & Property', desc: 'Listing management, lead qualification, tenant ops, maintenance workflows.' },
-  { icon: Megaphone, name: 'Marketing & Agencies', desc: 'Content pipelines, reporting automation, campaign ops, client management.' },
-  { icon: Truck, name: 'Logistics & Supply Chain', desc: 'Dispatch coordination, tracking updates, claims processing, vendor ops.' },
-  { icon: Globe, name: 'SaaS & Technology', desc: 'Onboarding automation, support triage, churn prediction, product ops.' },
+  { icon: Building2,    name: 'Professional Services', tag: 'Highest willingness to pay', desc: 'Clear ROI on implementation — consulting, accounting, and agency firms are fast-movers with strong budgets.' },
+  { icon: HeartPulse,  name: 'Healthcare & Telehealth', tag: 'Complex workflows', desc: 'Patient intake, scheduling, billing, and compliance workflows demand expert AI design — not off-the-shelf tools.' },
+  { icon: Scale,        name: 'Legal Services', tag: 'Trusted partner needed', desc: 'Risk-averse buyers who need a proven implementation partner — not a vendor. Document review, intake, and billing automation.' },
+  { icon: Truck,        name: 'Logistics', tag: 'Massive ops savings', desc: 'Exception handling agents — for dispatch, freight, and claims — deliver some of the highest measurable ROI of any vertical.' },
+  { icon: Landmark,     name: 'Financial Services', tag: 'Compliance-aware', desc: 'Compliance-aware AI implementation is rare and highly valued. KYC, fraud detection, and customer ops with full audit trails.' },
+  { icon: GraduationCap, name: 'Education', tag: 'Growing demand', desc: 'Enrollment automation and student support agent demand is growing fast across higher ed and online learning platforms.' },
 ];
 
 const DEPARTMENTS = [
@@ -85,25 +96,24 @@ const DEPARTMENTS = [
 ];
 
 const TOOLS = [
-  { name: 'ElevenLabs', category: 'Voice AI' },
-  { name: 'n8n', category: 'Workflow Automation' },
-  { name: 'OpenAI', category: 'Language Models' },
-  { name: 'Anthropic Claude', category: 'AI Reasoning' },
-  { name: 'Retell AI', category: 'Voice Agents' },
-  { name: 'Vapi', category: 'Voice Infrastructure' },
-  { name: 'Make', category: 'Automation' },
-  { name: 'Zapier', category: 'Integrations' },
-  { name: 'Pinecone', category: 'Vector Database' },
-  { name: 'LangChain', category: 'AI Orchestration' },
-  { name: 'Notion AI', category: 'Knowledge Ops' },
-  { name: 'HubSpot AI', category: 'CRM Automation' },
+  { name: 'Claude API',         category: 'AI Reasoning' },
+  { name: 'GPT-4o',             category: 'Language Models' },
+  { name: 'Gemini',             category: 'AI Models' },
+  { name: 'Zapier',             category: 'Integrations' },
+  { name: 'Make',               category: 'Automation' },
+  { name: 'n8n',                category: 'Workflow Automation' },
+  { name: 'LangChain',          category: 'AI Orchestration' },
+  { name: 'Pinecone',           category: 'Vector Database' },
+  { name: 'ElevenLabs',         category: 'Voice AI' },
+  { name: 'Retell AI',          category: 'Voice Agents' },
+  { name: 'Custom API',         category: 'API Integrations' },
+  { name: '24+ Platforms',      category: 'Monitoring Ecosystem' },
 ];
 
 export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
-  const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -127,24 +137,24 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739] text-[66px]">AI Implementation Services</span><span className="text-shine-white text-[66px]"> Designed for Enterprise Growth.</span>
+                <span className="text-[#E61739] text-[66px]">We audit, design, and build your AI stack.</span><span className="text-shine-white text-[66px]"> Then we monitor it for life.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                We design, integrate, and manage AI systems built around your business operations, with human oversight at every step.
+                From AI readiness audit to full agent implementation — delivered in 6 weeks and converted into a long-term monitoring retainer.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">AI strategy mapped to your specific departments and workflows</span>
+                  <span className="leading-snug">Readiness audit across all departments — delivered in week one</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Custom AI agents built, integrated, and production-ready</span>
+                  <span className="leading-snug">Custom agent design, build, and integration with your existing tools</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Managed operations with measurable KPIs and human oversight</span>
+                  <span className="leading-snug">30-day monitored handoff, then converts to an ongoing monitoring retainer</span>
                 </div>
               </div>
 
@@ -192,10 +202,10 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
 
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div><div className="text-xl md:text-2xl font-black">3x</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Faster AI Adoption</p></div>
-            <div><div className="text-xl md:text-2xl font-black">12+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Industries Served</p></div>
+            <div><div className="text-xl md:text-2xl font-black">$3K</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Audit Starting Price</p></div>
+            <div><div className="text-xl md:text-2xl font-black">6 Weeks</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Audit to Live Agents</p></div>
+            <div><div className="text-xl md:text-2xl font-black">24+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Platforms Supported</p></div>
             <div><div className="text-xl md:text-2xl font-black">100%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Outcome-Focused</p></div>
-            <div><div className="text-xl md:text-2xl font-black">Top 1%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">AI Specialists</p></div>
           </div>
         </div>
       </section>
@@ -225,9 +235,9 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               What we do
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              From Strategy to <span className="text-[#E61739] text-[48px]">Scalable Success.</span>
+              Everything you need to go from <span className="text-[#E61739] text-[48px]">zero to live AI.</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">We guide you from strategy to deployment, bringing clarity, control, and measurable results into every stage of your AI journey.</p>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six deliverables, one engagement. We audit, design, build, integrate, train your team, and hand off a monitored system.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICES.map((s, i) => (
@@ -251,17 +261,18 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Our Process
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              3-Week AI Implementation Sprint.<br />Go live within <span className="text-[#E61739]">21 days.</span>
+              6-Week Implementation Roadmap.<br />Live agents within <span className="text-[#E61739]">42 days.</span>
             </h2>
           </div>
           <div className="relative">
-            <div className="hidden md:block absolute top-6 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div className="hidden md:block absolute top-6 left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
               {STEPS.map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
                   <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
                     {s.n}
                   </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
                   <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
                   <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
                 </div>
@@ -341,88 +352,44 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
-            <p className="text-white/40 text-lg font-medium">Pick a plan. Agree on KPIs. We deliver.</p>
+            <p className="text-white/40 text-lg font-medium">Project-based or 3-month retainer · Natural feeder into monitoring</p>
           </div>
 
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-white/5 p-1.5 rounded-full border border-white/10">
-              <button onClick={() => setPricingModel('outcomes')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'outcomes' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Outcomes</button>
-              <button onClick={() => setPricingModel('staff-aug')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'staff-aug' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Staff Augmentation</button>
-            </div>
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
+            {PRICING.map((plan, i) => (
+              <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                {plan.featured && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
+                )}
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                <div className="flex items-end gap-1 mb-1">
+                  <span className="text-3xl font-black text-white">{plan.price}</span>
+                </div>
+                <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{plan.tag}</p>
+                <p className="text-white/30 text-xs font-medium mb-4">{plan.period}</p>
+                <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                  <ul className="space-y-3">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                  {plan.cta}
+                </button>
+              </div>
+            ))}
           </div>
-
-          {pricingModel === 'outcomes' ? (
-            <div className="grid md:grid-cols-3 gap-5 items-stretch animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {PRICING.map((plan, i) => (
-                <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
-                  {plan.featured && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>
-                  )}
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
-                  <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
-                  <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
-                    {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                {
-                  role: 'AI Strategy Consultant', price: '$4,500', focus: 'Strategy', focusIcon: Target,
-                  features: ['AI adoption roadmap design', 'Workflow automation opportunity mapping', 'Performance and ROI tracking'],
-                },
-                {
-                  role: 'AI Engineer', price: '$5,200', focus: 'Build', focusIcon: BrainCircuit,
-                  features: ['Custom AI agent configuration', 'LLM fine-tuning and prompt engineering', 'Production deployment and handover'],
-                },
-                {
-                  role: 'AI Ops Manager', price: '$3,800', focus: 'Ops', focusIcon: BarChart3,
-                  features: ['Live system monitoring and alerts', 'Monthly KPI performance reporting', 'Continuous model improvement'],
-                },
-                {
-                  role: 'Integration Specialist', price: '$4,000', focus: 'Integrations', focusIcon: Workflow,
-                  features: ['CRM, ERP, and helpdesk connectivity', 'API and webhook configuration', 'End-to-end data flow validation'],
-                },
-              ].map((plan, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
-                </div>
-              ))}
-            </div>
-          )}
 
           <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
             <div>
-              <h4 className="text-base font-bold text-white mb-1">Need a full AI ops team?</h4>
-              <p className="text-sm text-white/40 font-medium">Build a dedicated pod with AI Engineers, Ops Managers, and a Strategy Lead.</p>
+              <h4 className="text-base font-bold text-white mb-1">Not sure where to start?</h4>
+              <p className="text-sm text-white/40 font-medium">Start with the $3,000 AI Readiness Audit — a structured 1-week engagement that gives you a full implementation roadmap and vendor recommendation before you commit to a build.</p>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all whitespace-nowrap">Book the Audit</button>
           </div>
         </div>
       </section>
@@ -435,17 +402,18 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              AI operations for the businesses<br /><span className="text-[#E61739]">that run America.</span>
+              The industries where AI implementation<br /><span className="text-[#E61739]">pays for itself fastest.</span>
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">Reimagine work with agentic AI. What your team does manually today, we can make it smarter.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">Six verticals with proven ROI, clear budget, and urgent demand for expert AI design.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 mb-14">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
             {INDUSTRIES.map((ind, i) => (
               <div key={i} className="flex items-start gap-4 p-6 rounded-2xl border border-slate-100 bg-slate-50 hover:border-[#E61739]/20 hover:bg-white hover:shadow-sm transition-all">
                 <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
                   <ind.icon size={18} className="text-[#E61739]" />
                 </div>
                 <div>
+                  <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[#E61739] bg-[#E61739]/10 px-2 py-0.5 rounded-full mb-1.5">{ind.tag}</span>
                   <h4 className="font-black text-[#1D1D1F] text-sm mb-1">{ind.name}</h4>
                   <p className="text-[#86868b] text-xs font-medium leading-relaxed">{ind.desc}</p>
                 </div>
