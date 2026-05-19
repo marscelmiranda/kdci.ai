@@ -220,9 +220,9 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
             {[
-              'Your AI agents were set up once and never touched again.',
-              'Nobody on your team is watching for drift or failures.',
-              'When agents break, you find out from an angry customer.',
+              'Your AI Agents were set up once and never touched again',
+              'Nobody on your team is watching for drift or failures',
+              'Where your AI agents break, you find out from an angry customer',
             ].map((pain, i) => (
               <div key={i} className="px-8 py-8 md:py-4 first:pl-0 last:pr-0">
                 <p className="text-xl md:text-2xl font-black text-[#1D1D1F] leading-snug">{pain}</p>
