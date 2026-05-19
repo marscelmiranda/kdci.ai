@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, ShieldCheck, BrainCircuit, Target, Users2, BarChart3, Laptop, CheckCircle2, Megaphone, Home, Shirt, HeartPulse, Quote, Settings2, Video, Eye, Palette, ZoomIn, X, Shield, Star } from 'lucide-react';
+import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, BrainCircuit, Target, Laptop, CheckCircle2, Megaphone, Home, Quote, Video, Eye, ZoomIn, X, Shield, Star, ImageIcon, Layers, Building2, Briefcase, Sparkles, Palette } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -81,7 +81,6 @@ const ScrollingColumn = ({
 };
 
 export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);
@@ -109,16 +108,52 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
   }, [lightboxSrc, closeLightbox]);
 
   const creativeTools = [
-    { name: "Figma", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773896658/Figma-Logo_t0pp3n.png" },
-    { name: "Photoshop", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900297/ps_logo_ld4hl9.png" },
-    { name: "Illustrator", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900298/ai_logo_x0wbhp.png" },
-    { name: "After Effects", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900298/ai_logo_x0wbhp.png" },
-    { name: "InDesign", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900287/indd_logo_b6z33k.png" },
-    { name: "Canva Pro", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900671/canva_logo_tiqapn.png" },
     { name: "Midjourney", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900915/mj_logo_zggxbt.png" },
-    { name: "Runway", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773901127/runway_logo_c_h9fvko.png" },
     { name: "Adobe Firefly", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900300/fi_logo_jxaqfa.png" },
-    { name: "ClickUp", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900672/clickup_logo_egqqdk.png" },
+    { name: "Canva AI", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900671/canva_logo_tiqapn.png" },
+    { name: "Runway ML", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773901127/runway_logo_c_h9fvko.png" },
+    { name: "Adobe Creative Suite", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900297/ps_logo_ld4hl9.png" },
+    { name: "CapCut AI", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900298/ai_logo_x0wbhp.png" },
+    { name: "ElevenLabs", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900287/indd_logo_b6z33k.png" },
+  ];
+
+  const industries = [
+    {
+      name: "E-Commerce & Retail",
+      icon: ShoppingCart,
+      tag: "Catalog & Ads",
+      workflows: ["Product catalog design at scale", "Ad creative — static and motion", "Promotional graphics & seasonal campaigns", "Packaging design & brand refresh", "Amazon A+ and PDP imagery"],
+    },
+    {
+      name: "Real Estate",
+      icon: Home,
+      tag: "Listings & Brand",
+      workflows: ["Property listing graphics & brochures", "Agent and agency branding kits", "Social content for listings", "Video walkthroughs & reels", "Proposal and pitch deck design"],
+    },
+    {
+      name: "SaaS & Tech",
+      icon: Laptop,
+      tag: "Product & Decks",
+      workflows: ["Product screenshots & UI mockups", "Investor and sales pitch decks", "Social media content at scale", "Onboarding and in-app visuals", "Ad creative for paid channels"],
+    },
+    {
+      name: "Hospitality",
+      icon: Building2,
+      tag: "Brand & Social",
+      workflows: ["Brand imagery for properties & venues", "Menu design and signage", "Social content calendar production", "Campaign graphics for promotions", "Email design and landing pages"],
+    },
+    {
+      name: "Professional Services",
+      icon: Briefcase,
+      tag: "Thought Leadership",
+      workflows: ["Proposal and report design", "Thought leadership content", "Presentation and deck templates", "LinkedIn content and infographics", "Brand identity and visual systems"],
+    },
+    {
+      name: "Startups",
+      icon: Sparkles,
+      tag: "Full Brand Identity",
+      workflows: ["Brand identity from scratch", "Logo and visual system design", "Pitch deck for fundraising", "Social and ad creative launch kits", "Website and product visual assets"],
+    },
   ];
 
   return (
@@ -147,7 +182,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs
             setView={setView}
-            currentName="Creative Production"
+            currentName="AI Creative Studio"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
             align="left"
           />
@@ -155,26 +190,29 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
+                Easy Sell · AI Creative Studio
+              </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#ffffff]">AI-Powered</span><br/>
-                <span className="text-[#e61739]">Graphic Design Services</span>
+                <span className="text-[#ffffff]">AI-native</span><br/>
+                <span className="text-[#e61739]">Creative Studio.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                We deliver on-demand graphic design services accelerated by AI workflows for enhanced creative and on-brand asset delivery.
+                Faster output, lower cost, premium quality. Our Manila creative team produces at a pace no traditional agency can match — powered by AI tools at every step.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Unlimited graphic design requests delivered in 24-48 hours</span>
+                  <span className="leading-snug">AI-generated imagery with strict brand consistency — no off-brand outputs</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">On-brand assets from dedicated designers who know your brand</span>
+                  <span className="leading-snug">Social media, ads, video, and brand assets — one team, full coverage</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">AI-powered design workflows for faster and consistent creative</span>
+                  <span className="leading-snug">First content delivered within 2 weeks — full production cadence live in 30 days</span>
                 </div>
               </div>
 
@@ -202,61 +240,71 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         {/* Stats bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
-            <div><div className="text-xl md:text-2xl font-black">24-48h</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Typical Turnaround</p></div>
-            <div><div className="text-xl md:text-2xl font-black">Unlimited</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Asset Requests</p></div>
-            <div><div className="text-xl md:text-2xl font-black">100%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Brand Alignment</p></div>
-            <div><div className="text-xl md:text-2xl font-black">Top 1%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Vetted Designers</p></div>
+            <div><div className="text-xl md:text-2xl font-black">5-Day</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Turnaround SLA</p></div>
+            <div><div className="text-xl md:text-2xl font-black">7 AI Tools</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">In Every Workflow</p></div>
+            <div><div className="text-xl md:text-2xl font-black">100%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Brand Consistent</p></div>
+            <div><div className="text-xl md:text-2xl font-black">Top 1%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Manila Creatives</p></div>
           </div>
         </div>
       </section>
 
-      {/* ── WHAT WE DO ── */}
-      <section className="py-32 bg-white relative">
+      {/* ── WHAT WE DELIVER ── */}
+      <section className="py-32 bg-[#080808] relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Creative Design Services</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">What We Do.</h2>
-            <p className="text-slate-500 max-w-3xl mx-auto font-medium text-[17px]">On-demand assets creation delivered faster with AI-enhanced workflows.</p>
+          <div className="text-center mb-16">
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Everything your brand needs.</h2>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">AI-native production across every creative format — brand, social, ads, and video — from one dedicated Manila team.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: PenTool, title: "Graphic & Ad Design", desc: "Static ads, social media graphics, and email templates following strict brand guides." },
-              { icon: ShoppingCart, title: "eCommerce Content", desc: "Amazon A+ content, PDP imagery, and high-end product retouching for global retail." },
-              { icon: Play, title: "Motion & Video Ops", desc: "Short-form video edits, motion graphics, and animated ads for paid social and digital campaigns." },
-              { icon: Presentation, title: "Pitch Decks & Sales", desc: "Pitch decks and sales collaterals that convert complex ideas into clarity." },
-              { icon: ShieldCheck, title: "Creative QA & Systems", desc: "Automated brand consistency checks and template systems, ensuring 100% visual consistency." },
-              { icon: BrainCircuit, title: "AI-Enhanced Workflows", desc: "AI-powered design workflows for faster resizing, asset versioning, and bulk creative production." },
+              { icon: Palette, title: "Brand Identity & Visual System", desc: "Logo, typography, colour system, and a full brand guide. Built from scratch or refreshed — consistent across every channel." },
+              { icon: Megaphone, title: "Social Media Content", desc: "Graphics, carousels, and reels produced on a weekly content calendar. On-brand, scroll-stopping, and ready to publish." },
+              { icon: ShoppingCart, title: "Product & Catalog Design at Scale", desc: "High-volume product imagery, catalog layouts, and e-commerce visuals — optimised for retail, DTC, and marketplace channels." },
+              { icon: Video, title: "Ad Creative — Static, Motion & Video", desc: "Performance-tested ad creative across static, animated, and short-form video formats for Meta, TikTok, Google, and YouTube." },
+              { icon: Presentation, title: "Presentation & Pitch Deck Design", desc: "Investor decks, sales presentations, and proposals designed to communicate clearly and close deals." },
+              { icon: ImageIcon, title: "AI-Generated Imagery", desc: "Brand-consistent AI imagery produced with Midjourney and Adobe Firefly — fully guided, no off-brand outputs." },
             ].map((cap, i) => (
-              <div key={i} className="p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={28} /></div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">{cap.title}</h3>
-                <p className="text-slate-500 font-medium leading-relaxed">{cap.desc}</p>
+              <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
+                <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
+                <h3 className="text-xl font-bold text-white mb-4">{cap.title}</h3>
+                <p className="text-white/40 font-medium leading-relaxed">{cap.desc}</p>
               </div>
             ))}
           </div>
+
+          {/* Platforms strip */}
+          <div className="mt-16 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.07] text-center">
+            <p className="text-[10px] text-white/30 font-black uppercase tracking-widest mb-3">Platforms</p>
+            <p className="text-white/60 font-semibold text-sm md:text-base">
+              Midjourney · Adobe Firefly · Canva AI · Runway ML · ElevenLabs · Adobe Creative Suite · CapCut AI
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ── DELIVERY FLOW ── */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mesh-container opacity-20"><div className="blob blob-purple" /></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      {/* ── ONBOARDING TIMELINE ── */}
+      <section className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">The Design Process.</h2>
-            <p className="text-white/40 text-xl max-w-3xl mx-auto font-medium leading-relaxed">From your first brief to final asset, here's how our graphic design service works.</p>
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Onboarding Timeline</div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Live in 30 days.</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">From brand discovery to full production cadence — a structured onboarding that gets content flowing fast.</p>
           </div>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
-              { step: "01", title: "Brand Alignment", desc: "We learn your brand guidelines, SOPs, and creative goals.", icon: Target },
-              { step: "02", title: "Native Embedding", desc: "Dedicated graphic designers sync directly into your Figma, Slack, and ClickUp.", icon: Users2 },
-              { step: "03", title: "AI-Powered Production", desc: "We deploy automation for resizing, QA, and task routing.", icon: BrainCircuit },
-              { step: "04", title: "Daily Output", desc: "Consistent asset delivery with real-time performance tracking.", icon: BarChart3 },
-            ].map((s, idx) => (
-              <div key={idx} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-8 group-hover:border-[#E61739] transition-all"><s.icon size={24} /></div>
-                <div className="text-[#E61739] text-xs font-black uppercase tracking-widest mb-2">{s.step}</div>
-                <h4 className="text-xl font-bold mb-2">{s.title}</h4>
-                <p className="text-sm text-white/40 leading-relaxed font-medium">{s.desc}</p>
+              { step: "01", period: "Day 1–3", title: "Brand Discovery", desc: "Collect assets, brand voice, style preferences and existing guidelines." },
+              { step: "02", period: "Day 4–7", title: "Brand Guide", desc: "Create or audit your brand guide. Document colours, fonts, tone, and visual rules." },
+              { step: "03", period: "Week 2", title: "First Batch", desc: "First content delivered — feedback cycle begins. Revisions turned around in 48 hours." },
+              { step: "04", period: "Week 3", title: "Refine & Rhythm", desc: "Refine based on feedback. Establish the production rhythm and template systems." },
+              { step: "05", period: "Month 1", title: "Full Cadence Live", desc: "Full production cadence live. Content calendar set and weekly delivery begins." },
+              { step: "06", period: "Ongoing", title: "Weekly Delivery", desc: "Weekly asset delivery. Monthly creative review and planning session with your team." },
+            ].map((s, i) => (
+              <div key={i} className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm flex flex-col">
+                <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
+                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">{s.period}</div>
+                <h4 className="text-base font-bold text-slate-900 mb-2">{s.title}</h4>
+                <p className="text-sm text-slate-500 font-medium leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -302,149 +350,119 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
             <p className="text-white/40 text-lg font-medium">Scale your creative output without the cost of hiring a full in-house design team.</p>
           </div>
 
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-white/5 p-1.5 rounded-full border border-white/10">
-              <button onClick={() => setPricingModel('outcomes')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'outcomes' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Outcomes</button>
-              <button onClick={() => setPricingModel('staff-aug')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'staff-aug' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Staff Augmentation</button>
-            </div>
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
+            {[
+              {
+                name: "Content Pack",
+                price: "$2,500",
+                period: "/mo",
+                setup: "$1,000 setup",
+                desc: "Predictable monthly creative output for brands building a content rhythm.",
+                features: ["20 social posts per month", "4 carousels per month", "Monthly brand asset refresh", "5-day turnaround SLA", "Brand guide adherence review"],
+                highlight: false,
+                badge: null,
+              },
+              {
+                name: "Creative Retainer",
+                price: "$4,500",
+                period: "/mo",
+                setup: "$1,500 setup",
+                desc: "A dedicated designer fully embedded in your workflow — unlimited requests.",
+                features: ["Dedicated designer assigned", "Unlimited design requests", "5-day turnaround on all tasks", "Figma, Slack & ClickUp native", "Monthly creative review call"],
+                highlight: true,
+                badge: "Most Popular",
+              },
+              {
+                name: "Full Studio",
+                price: "$7,500",
+                period: "/mo",
+                setup: "$2,500 setup",
+                desc: "A full creative team covering brand, ads, video, and social — priority SLA.",
+                features: ["Full team: design + video + motion", "Brand, ads, video & social covered", "Priority 3-day SLA", "Dedicated Creative Director", "Weekly delivery + monthly planning"],
+                highlight: false,
+                badge: null,
+              },
+            ].map((plan, i) => (
+              <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.highlight ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                {plan.badge && <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">{plan.badge}</div>}
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                <div className="text-4xl font-black text-white mb-1">{plan.price}<span className="text-xl text-white/40">{plan.period}</span></div>
+                <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">{plan.setup}</p>
+                <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                  <ul className="space-y-3">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
+                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                  Request Plan
+                </button>
+              </div>
+            ))}
           </div>
 
-          {pricingModel === 'outcomes' ? (
-            <div className="grid md:grid-cols-3 gap-5 items-stretch animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                { name: "Design Retainer", price: "$2,200", period: "/mo", desc: "Unlimited graphic design requests.", features: ["Integrated into your Figma/Slack", "Follows your brand guides", "Unlimited task queue", "AI workflow support included"], highlight: false },
-                { name: "Creative Studio", price: "Custom", period: "", desc: "Multi-disciplinary team + PM.", features: ["Task execution at massive scale", "Dedicated PM oversight", "Strategic brand consulting", "Full performance analytics"], highlight: true, badge: "Enterprise Scale" },
-                { name: "Ad Performance Pack", price: "$2,800", period: "/mo", desc: "High-velocity creative testing.", features: ["Auto-versioning & resizing", "Creative QA automation", "Smart tagging systems", "Supports internal designers"], highlight: false },
-              ].map((plan, i) => (
-                <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.highlight ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
-                  {plan.badge && <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">{plan.badge}</div>}
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
-                  <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
-                  <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-center gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
-                    Request Plan
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                {
-                  role: "Graphic Designer", price: "$1,800", focus: "Static", focusIcon: Palette,
-                  features: ["Social media assets and ad creatives", "Brand collateral and print-ready files", "Template systems and style guide adherence"],
-                },
-                {
-                  role: "Video Editor", price: "$2,200", focus: "Motion", focusIcon: Video,
-                  features: ["Short-form content cuts for social and ads", "Multi-format resizing and versioning", "Captions, transitions, and audio sync"],
-                },
-                {
-                  role: "Motion Artist", price: "$2,500", focus: "Anim", focusIcon: Play,
-                  features: ["2D and 3D motion graphics production", "Animated explainers and brand intros", "Visual effects and compositing"],
-                },
-                {
-                  role: "UI/UX Designer", price: "$2,800", focus: "Product", focusIcon: Eye,
-                  features: ["Web and mobile interface design", "Wireframing, prototyping, and user flows", "Design system creation and component libraries"],
-                },
-              ].map((plan, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
-                </div>
-              ))}
-            </div>
-          )}
+          <p className="text-center text-white/25 text-xs font-bold uppercase tracking-widest mt-6">3-month minimum · Easy upsell from Content Pack to Full Studio</p>
 
           <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
             <div>
-              <h4 className="text-base font-bold text-white mb-1">Want a Custom Creatives Team?</h4>
-              <p className="text-sm text-white/40 font-medium">Build a dedicated graphic design team with Team Leads and QA Managers.</p>
+              <h4 className="text-base font-bold text-white mb-1">Scaling to a full studio?</h4>
+              <p className="text-sm text-white/40 font-medium">Custom team builds available for high-volume or multi-brand production needs.</p>
             </div>
             <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
           </div>
         </div>
       </section>
 
-      {/* ── TECH STACK ── */}
-      <section className="py-24 bg-white border-y border-slate-100">
+      {/* ── WHO WE SERVE ── */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-500 text-[10px] font-black uppercase mb-4 border border-slate-100">
-              <Laptop size={12} /> Tech Stack
-            </div>
-            <h3 className="text-2xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Native Tool Integration.</h3>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our designers are certified in Adobe Creative Cloud and the latest AI design tools.</p>
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Who We Serve</div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Built for brands that move fast.</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Six verticals where our AI creative studio delivers the highest impact.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {creativeTools.map((app, i) => (
-              <div key={i} className="p-6 h-24 rounded-2xl bg-white border border-slate-100 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md grayscale hover:grayscale-0 opacity-70 hover:opacity-100 cursor-pointer">
-                <img src={app.logo} alt={app.name} className="w-[180px] max-h-full object-contain" referrerPolicy="no-referrer" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {industries.map((ind, i) => (
+              <div key={i} className="p-8 rounded-[2.5rem] border border-slate-100 bg-white shadow-sm hover:shadow-xl hover:border-[#E61739]/20 transition-all duration-500 flex flex-col">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400">
+                    <ind.icon size={22} />
+                  </div>
+                  <span className="px-3 py-1 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest rounded-full">{ind.tag}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-4">{ind.name}</h3>
+                <ul className="space-y-2">
+                  {ind.workflows.map((w, wi) => (
+                    <li key={wi} className="flex items-start gap-2 text-sm text-slate-500 font-medium">
+                      <span className="text-[#E61739] mt-1 shrink-0">·</span>{w}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── INDUSTRIES + TESTIMONIAL ── */}
-      <section className="py-24 bg-slate-50">
+      {/* ── TOOLS ── */}
+      <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-8 text-[58px]">Design Services for <br /><span className="text-[#E61739]">Growing Brands.</span></h2>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { name: "eCommerce & Retail", icon: ShoppingCart },
-                  { name: "SaaS & Tech Startups", icon: Laptop },
-                  { name: "Marketing Agencies", icon: Megaphone },
-                  { name: "Real Estate & PropTech", icon: Home },
-                  { name: "Consumer Goods", icon: Shirt },
-                  { name: "Healthcare & Wellness", icon: HeartPulse },
-                ].map((ind, i) => (
-                  <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 hover:border-[#E61739]/30 transition-all group shadow-sm">
-                    <div className="w-10 h-10 rounded-xl bg-slate-50 shadow-sm flex items-center justify-center text-slate-400 group-hover:text-[#E61739] transition-colors"><ind.icon size={20} /></div>
-                    <span className="text-[13px] font-bold text-slate-600 group-hover:text-slate-900 transition-colors">{ind.name}</span>
-                  </div>
-                ))}
+          <div className="text-center mb-16">
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Platforms & Tools</div>
+            <h3 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">AI-first. Human-guided.</h3>
+            <p className="text-white/40 text-lg max-w-2xl mx-auto">The best AI creative tools, in the hands of Manila's top 1% designers and motion artists.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            {creativeTools.map((app, i) => (
+              <div key={i} className="p-5 h-20 rounded-2xl bg-white/[0.04] border border-white/[0.07] flex flex-col items-center justify-center gap-2 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer">
+                <img src={app.logo} alt={app.name} className="h-7 max-w-full object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300" referrerPolicy="no-referrer" />
+                <span className="text-[9px] text-white/25 font-black uppercase tracking-widest text-center leading-tight">{app.name}</span>
               </div>
-            </div>
-            <div className="space-y-6">
-              <div className="p-10 rounded-[3rem] bg-[#1D1D1F] text-white shadow-2xl relative overflow-hidden group">
-                <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple" /></div>
-                <div className="relative z-10">
-                  <Quote className="text-[#E61739] mb-6 opacity-30" size={40} />
-                  <p className="text-2xl font-heading font-bold mb-10 leading-snug">"KDCI reduced our time-to-publish by 40% with their dedicated design pod. Their AI layer standardizes our asset versioning instantly."</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/40 font-bold uppercase">KL</div>
-                    <div>
-                      <div className="font-bold">Kevin L.</div>
-                      <div className="text-[10px] font-black uppercase text-white/40 tracking-widest">Brand Director, Global SaaS</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -453,7 +471,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
           <div className="absolute inset-0 z-0">
-            <img src={IMG_CREATIVE_TEAM} alt="Creative Production Team" className="w-full h-full object-cover opacity-[0.06]" />
+            <img src={IMG_CREATIVE_TEAM} alt="AI Creative Studio Team" className="w-full h-full object-cover opacity-[0.06]" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
           </div>
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
@@ -467,17 +485,17 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                   <Star size={11} /> Let's Talk Creative
                 </div>
                 <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Build your<br /><span className="text-[#E61739]">creative team.</span>
+                  Launch your<br /><span className="text-[#E61739]">AI Creative Studio.</span>
                 </h2>
                 <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your brand and design needs, and we'll have a creative ops plan ready within 24 hours.
+                  Tell us about your brand and creative needs — we'll have a production plan and pricing ready within 24 hours.
                 </p>
               </div>
               <div className="space-y-4 mt-12">
                 {[
-                  { icon: CheckCircle2, text: 'Dedicated graphic designers, onboarded in 14 days' },
-                  { icon: CheckCircle2, text: '50–200+ design assets delivered per month, at scale' },
-                  { icon: CheckCircle2, text: 'On-brand design team with AI workflow support' },
+                  { icon: CheckCircle2, text: 'First content batch delivered within 14 days of onboarding' },
+                  { icon: CheckCircle2, text: 'Full production cadence live within 30 days' },
+                  { icon: CheckCircle2, text: '3-month minimum · easy upsell from Content Pack to Full Studio' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <item.icon size={14} className="text-[#E61739] shrink-0" />
@@ -486,9 +504,9 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 ))}
                 <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
                   {[
-                    { val: '200+', label: 'Assets/mo' },
-                    { val: '14 Days', label: 'Onboarding' },
-                    { val: '500+', label: 'Clients Served' },
+                    { val: '$2,500', label: 'Starting/mo' },
+                    { val: '14 Days', label: 'First Content' },
+                    { val: '7', label: 'AI Platforms' },
                   ].map((s, i) => (
                     <div key={i}>
                       <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
@@ -533,12 +551,12 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Service You Need</label>
-                    <input required className={inp} placeholder="e.g. Graphic Design Pod, Video Editing, UI/UX" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
+                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">AI Creative Studio Service</label>
+                    <input required className={inp} placeholder="e.g. Content Pack, Creative Retainer, Full Studio" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
                   </div>
                   <div>
                     <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, deadlines, brand guidelines, tools..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, deadlines, brand guidelines, formats..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
                   <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
@@ -564,15 +582,14 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
           </div>
           <div className="space-y-3">
             {[
-              { q: "What creative services does KDCI's production team provide?", a: "We offer graphic design, video editing and production, motion graphics, UI/UX design, social media content creation, copywriting, email design, ad creative (static and animated), and brand identity work." },
-              { q: "How does a managed creative pod work?", a: "A Creative Pod is a dedicated team of 2–6 creatives (Art Director, Designers, Video Editors, Copywriter) assigned exclusively to your account. They operate as your in-house team, just offshore." },
-              { q: "What design tools does your team use?", a: "Our designers work in Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere Pro, After Effects), Canva Pro, Webflow, and Framer. We adapt to whatever's in your existing workflow." },
-              { q: "Can KDCI maintain our brand guidelines at scale?", a: "Absolutely. We conduct a brand onboarding session in week one, build a shared asset library, and implement a style guide review step into every deliverable. Brand consistency is a core KPI for our creative teams." },
-              { q: "How do we manage revisions and feedback loops?", a: "We use a structured feedback process via Frame.io for video, Figma comments for design, and a project board (Asana, ClickUp, or Notion) for all task tracking. Most feedback cycles complete in under 24 hours." },
-              { q: "How quickly can KDCI produce creative assets at scale?", a: "Our creative pods can produce 50–200+ social media assets per month, 10–30 video edits per month, and unlimited copy drafts depending on pod size. We're built for high-velocity creative output." },
-              { q: "Do your creatives have experience with creating performance marketing assets?", a: "Yes. We have a dedicated performance creative unit that specializes in direct-response ad creative for Meta, TikTok, Google, and YouTube. We understand hooks, CTAs, and creative testing frameworks." },
-              { q: "Can KDCI handle video production from raw footage?", a: "Yes. Our video editors and motion graphics designers work from raw footage, stock footage, and creative briefs to produce polished edits for social media, YouTube, webinars, product demos, and brand films." },
-              { q: "What's the minimum team size for a creative engagement?", a: "You can start with a single dedicated creative (e.g., one Graphic Designer or one Video Editor) at a monthly flat rate. Most clients scale to a full outsourced design team within 90 days after validating the initial hire." },
+              { q: "What makes KDCI's AI Creative Studio different from a traditional design agency?", a: "Our Manila team runs AI tools — Midjourney, Adobe Firefly, Runway ML, CapCut AI — at every stage of production. That means faster delivery, lower cost per asset, and consistent brand output without sacrificing quality. Traditional agencies bill hourly and have slower turnaround cycles. We operate on a production cadence model." },
+              { q: "What's included in each pricing tier?", a: "Content Pack ($2,500/mo + $1K setup): 20 social posts, 4 carousels, and monthly brand assets — ideal for brands that need consistent social output. Creative Retainer ($4,500/mo + $1.5K setup): dedicated designer, unlimited requests, 5-day turnaround. Full Studio ($7,500/mo + $2.5K setup): full team covering brand, ads, video, and social with a 3-day priority SLA." },
+              { q: "How quickly can we get started?", a: "We begin brand discovery within 48 hours of sign-off. Your first content batch is delivered by the end of Week 2. Full production cadence is live by Month 1. We're structured to move fast without skipping brand alignment." },
+              { q: "How does AI-generated imagery work without going off-brand?", a: "We build a brand prompt library in Week 1 — documenting your colour palette, visual style, subject matter rules, and tone. Every AI image generated goes through a brand consistency review before delivery. You'll never receive outputs that don't match your visual identity." },
+              { q: "Can you handle video and motion content?", a: "Yes. Our Full Studio tier includes a dedicated motion and video team. We use Runway ML for AI-assisted video, CapCut AI for short-form editing, and Adobe Premiere/After Effects for polished cuts. ElevenLabs handles voiceover where required." },
+              { q: "What's the minimum commitment?", a: "All plans require a 3-month minimum. This ensures we have enough runway to complete onboarding, establish a production rhythm, and deliver measurable results. Most clients stay well beyond the minimum — our average engagement is over 18 months." },
+              { q: "Can we start on a Content Pack and upgrade later?", a: "Absolutely — and this is the most common path. Many clients start with the Content Pack to validate quality and cadence, then move to the Creative Retainer or Full Studio as their creative needs scale. The upgrade is seamless because your brand guide and team are already in place." },
+              { q: "What industries do you specialise in?", a: "Our highest-volume verticals are E-Commerce & Retail, Real Estate, SaaS & Tech, Hospitality, Professional Services, and Startups. We have pre-built template systems and production playbooks for each that accelerate onboarding significantly." },
             ].map((item, i) => (
               <div key={i} className="border border-slate-100 rounded-2xl overflow-hidden">
                 <button

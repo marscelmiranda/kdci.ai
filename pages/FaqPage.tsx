@@ -77,7 +77,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'creative',
-    label: 'Creative Production',
+    label: 'AI Creative Studio',
     icon: Palette,
     questions: [
       { q: "What creative services does KDCI's production team provide?", a: "We offer graphic design, video editing and production, motion graphics, UI/UX design, social media content creation, copywriting, email design, ad creative (static and animated), and brand identity work." },

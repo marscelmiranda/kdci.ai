@@ -193,7 +193,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               },
               {
                 icon: Palette,
-                title: "Creative Production",
+                title: "AI Creative Studio",
                 desc: "Graphic designers, video editors, and content creators who leverage the latest AI tools to produce brand-grade work at speed.",
               },
               {

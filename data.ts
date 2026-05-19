@@ -194,12 +194,12 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'creative-prod',
-    name: 'Graphic Design Studio', 
-    tag: 'Brand Production',
+    name: 'AI Creative Studio', 
+    tag: 'AI-Native Design',
     icon: Sparkles,
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
-    benefits: ['48h Turnaround', 'Enterprise Scale', 'Infinite Versioning']
+    desc: 'AI-native design and content production — faster output, lower cost, premium quality from our Manila creative team.',
+    benefits: ['5-Day Turnaround', 'AI-Powered Output', 'Full Brand Consistency']
   },
   {
     id: 'ai-agent-monitoring',
