@@ -93,5 +93,6 @@ export type ViewType =
   | 'prof-services'
   | 'gov'
   | 'ai-consulting'
+  | 'ai-agent-monitoring'
   | 'not-found'
   | 'coming-soon';

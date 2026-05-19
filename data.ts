@@ -5,7 +5,7 @@ import {
   ShoppingCart, HeartPulse, Scale, Truck, GraduationCap, Megaphone,
   Settings, Network, Flame, UserCircle, Landmark, Sparkles, Target,
   Binary, Activity, Rocket, Building, Plane, Newspaper, Shirt, Gavel,
-  BookOpen, Video, FileText, CircleHelp, FileJson, Smartphone
+  BookOpen, Video, FileText, CircleHelp, FileJson, Smartphone, Monitor
 } from 'lucide-react';
 import IMG_RECRUITMENT_HERO from './attached_assets/Untitled-1_1778062521021.png';
 
@@ -200,6 +200,15 @@ export const TOP_SERVICES = [
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'High-end design pods in the Philippines using AI to deliver brand assets 3x faster.',
     benefits: ['48h Turnaround', 'Enterprise Scale', 'Infinite Versioning']
+  },
+  {
+    id: 'ai-agent-monitoring',
+    name: 'AI Agent Monitoring',
+    tag: 'Managed AI Ops',
+    icon: Monitor,
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
+    desc: 'Daily monitoring, prompt optimization, and human oversight for your AI agents — as a fully managed service.',
+    benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
   },
 ];
 

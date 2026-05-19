@@ -33,6 +33,7 @@ import { OffshoreStaffingPage } from './pages/services/OffshoreStaffingPage';
 import { GlobalRecruitmentPage } from './pages/services/GlobalRecruitmentPage';
 
 import { AIConsultingPage } from './pages/services/AIConsultingPage';
+import { AIAgentMonitoringPage } from './pages/services/AIAgentMonitoringPage';
 
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
@@ -127,6 +128,7 @@ const App = () => {
         {activeView === 'creative-prod' && <GraphicDesignStudioPage setView={setView} />}
         {activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} />}
         {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
+        {activeView === 'ai-agent-monitoring' && <AIAgentMonitoringPage setView={setView} />}
         
         {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}
