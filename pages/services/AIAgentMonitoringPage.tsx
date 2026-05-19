@@ -189,9 +189,9 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
-                    { name: 'Zendesk',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Zendesk_Logo_jlsxla.png', style: { maxHeight: '40px', maxWidth: '112px' } },
+                    { name: 'Zendesk',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327923/Zendesk_Logo_jlsxla.png', style: { maxHeight: '48px', maxWidth: '134px' } },
                     { name: 'ElevenLabs',   logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/f_png,w_160,c_fit/v1779173814/Elevenlabs_Ai_Logo_PNG_SVG_Vector_chtxqo.svg', style: { maxHeight: '100px', maxWidth: '120px' } },
-                    { name: 'Intercom',     logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png', style: { maxHeight: '40px', maxWidth: '112px' } },
+                    { name: 'Intercom',     logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327927/IntercomLogo_tqzspk.png', style: { maxHeight: '48px', maxWidth: '134px' } },
                     { name: 'HubSpot',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779174606/hubspot-logo-black-and-white_joijyn.png' },
                   ].map((app: any, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform">
