@@ -61,7 +61,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
       <section className="relative h-[calc(100vh-250px)] flex items-center justify-center pt-24 overflow-hidden">
         <HeroBackground />
         <div className="grain-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}></div>
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-20 -translate-y-[75px]">
+        <div className="max-w-7xl mx-auto px-6 text-center relative z-20 -translate-y-[75px] pt-[150px]">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/90 text-[11px] font-bold uppercase tracking-[0.15em] mb-10 backdrop-blur-sm">
             <Cpu size={12} className="text-[#E61739]" /> Managed AI Operations
           </div>
