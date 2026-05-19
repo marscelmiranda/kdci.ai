@@ -87,7 +87,9 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
       {/* Sidebar Navigation */}
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
         <div className="p-8 pb-4">
-          <Logo isDarkHero={true} />
+          <button onClick={() => setView('home')} className="block hover:opacity-80 transition-opacity" title="Back to website">
+            <Logo isDarkHero={true} />
+          </button>
           <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
             Publisher Portal
           </div>
