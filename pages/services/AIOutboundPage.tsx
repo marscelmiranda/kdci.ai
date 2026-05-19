@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { ArrowRight, CheckCircle2, Star, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, Calendar, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -121,29 +121,35 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
               </div>
             </div>
 
-            {/* Right — metrics panel */}
-            <div className="hidden lg:flex flex-col justify-center gap-4">
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Avg Open Rate", value: "52%", sub: "Cold email benchmark: 23%" },
-                  { label: "Avg Reply Rate", value: "8.4%", sub: "Industry benchmark: 2.1%" },
-                  { label: "Meetings / Month", value: "12–40", sub: "Depends on ICP and volume" },
-                  { label: "Ramp Period", value: "6 Weeks", sub: "Before full performance output" },
-                ].map((m, i) => (
-                  <div key={i} className="p-6 rounded-[2rem] bg-white/[0.04] border border-white/[0.08] flex flex-col">
-                    <div className="text-[10px] text-white/30 font-black uppercase tracking-widest mb-2">{m.label}</div>
-                    <div className="text-4xl font-black text-white mb-1">{m.value}</div>
-                    <div className="text-xs text-white/30 font-medium">{m.sub}</div>
+            {/* Right — image card */}
+            <div className="relative lg:h-full hidden lg:block">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000&h=1000"
+                  alt="AI Outbound team"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+
+                <div className="absolute top-6 left-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/20 text-white text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    AI-Powered · Full-Funnel Outbound
                   </div>
-                ))}
-              </div>
-              <div className="p-5 rounded-[1.5rem] bg-[#E61739]/10 border border-[#E61739]/20 flex items-center gap-4">
-                <div className="w-10 h-10 bg-[#E61739] rounded-xl flex items-center justify-center shrink-0">
-                  <Calendar size={18} className="text-white" />
                 </div>
-                <div>
-                  <div className="text-white text-sm font-bold mb-0.5">Meeting booking included</div>
-                  <div className="text-white/40 text-xs font-medium">Qualified meetings booked to your calendar — we handle the full funnel</div>
+
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
+                  {[
+                    { name: 'Apollo.io',  logo: 'https://logo.clearbit.com/apollo.io',   imgH: '22px' },
+                    { name: 'Clay',       logo: 'https://logo.clearbit.com/clay.com',     imgH: '22px' },
+                    { name: 'Instantly',  logo: 'https://logo.clearbit.com/instantly.ai', imgH: '22px' },
+                    { name: 'HubSpot',    logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327928/Hubspot_Logo_skscda.png', imgH: '22px' },
+                  ].map((app, i) => (
+                    <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
+                      <img src={app.logo} alt={app.name} className="object-contain" style={{ height: app.imgH }} referrerPolicy="no-referrer" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
