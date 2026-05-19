@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import {
-  Briefcase, FileText, BookOpen,
+  Briefcase, FileText, BookOpen, BookMarked,
   Image as ImageIcon, Bell, Search, LogOut,
   ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2, MapPin, Building2
 } from 'lucide-react';
@@ -264,6 +264,14 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             actionText="Manage Portfolio"
             color="bg-orange-600"
             onClick={() => setView('portfolio-ops')}
+          />
+          <DashboardCard
+            title="Case Studies"
+            description="Write, publish, and manage client success stories displayed on the public case studies page."
+            icon={<BookMarked size={24} />}
+            actionText="Manage Case Studies"
+            color="bg-teal-600"
+            onClick={() => setView('case-studies-ops')}
           />
           <DashboardCard
             title="User Approvals"

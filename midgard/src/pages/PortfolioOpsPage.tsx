@@ -2,7 +2,7 @@ import React from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import {
-  ChevronLeft, BookOpen, Plus, LogOut, Settings,
+  ChevronLeft, BookOpen, BookMarked, Plus, LogOut, Settings,
   LayoutGrid, Briefcase, FileText, Image as ImageIcon, Users, UserCircle2
 } from 'lucide-react';
 
@@ -11,6 +11,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
     if (id === 'overview') setView('dashboard');
     else if (id === 'careers') setView('career-ops');
     else if (id === 'blog') setView('blog-ops');
+    else if (id === 'case-studies') setView('case-studies-ops');
     else if (id === 'resources') setView('resources-ops');
     else if (id === 'portfolio') setView('portfolio-ops');
     else if (id === 'admin') setView('admin-approvals');
@@ -30,13 +31,14 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
         <nav className="flex-grow px-4 py-6 space-y-1">
           {[
-            { id: 'overview',  label: 'Overview',           icon: LayoutGrid  },
-            { id: 'careers',   label: 'Career Ops',         icon: Briefcase   },
-            { id: 'blog',      label: 'Blogs & Insights',   icon: FileText    },
-            { id: 'resources', label: 'Resources',          icon: BookOpen    },
-            { id: 'portfolio', label: 'Creative Portfolio', icon: ImageIcon   },
-            { id: 'admin',     label: 'User Approvals',     icon: Users       },
-            { id: 'profile',   label: 'My Profile',         icon: UserCircle2 },
+            { id: 'overview',     label: 'Overview',           icon: LayoutGrid  },
+            { id: 'careers',      label: 'Career Ops',         icon: Briefcase   },
+            { id: 'blog',         label: 'Blogs & Insights',   icon: FileText    },
+            { id: 'case-studies', label: 'Case Studies',       icon: BookMarked  },
+            { id: 'resources',    label: 'Resources',          icon: BookOpen    },
+            { id: 'portfolio',    label: 'Creative Portfolio', icon: ImageIcon   },
+            { id: 'admin',        label: 'User Approvals',     icon: Users       },
+            { id: 'profile',      label: 'My Profile',         icon: UserCircle2 },
           ].map((item) => (
             <button
               key={item.id}

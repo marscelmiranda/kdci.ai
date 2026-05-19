@@ -466,38 +466,160 @@ app.delete('/api/blog/:id', requireAuth, async (req, res) => {
 });
 
 // ===== CASE STUDIES =====
+const CASE_FIELDS = `
+  id, title, slug, subtitle, hero_image_url, client, category1, category2, category3,
+  stat1_value, stat1_label, stat2_value, stat2_label, stat3_value, stat3_label,
+  in_brief, challenge_heading, challenge_body, challenge_item1, challenge_item2,
+  challenge_item3, challenge_item4, challenge_item5,
+  solution_heading, solution_body1, solution_body2,
+  quote_text, quote_attribution, quote_title,
+  outcome_heading, outcome_body, outcome_metric1_value, outcome_metric1_label,
+  outcome_metric2_value, outcome_metric2_label,
+  sidebar_industry, sidebar_services, sidebar_region, sidebar_tech_stack,
+  read_next1_category, read_next1_title, read_next1_excerpt,
+  read_next2_category, read_next2_title, read_next2_excerpt,
+  author, status, published_at, created_at, updated_at,
+  meta_title, meta_description, keywords, canonical_url,
+  og_title, og_description, og_image_url, json_ld, no_index,
+  hubspot_event_name, hubspot_form_guid, utm_source, utm_medium, utm_campaign
+`;
+
 app.get('/api/cases', async (_req, res) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM case_studies WHERE status = 'published' ORDER BY published_at DESC NULLS LAST`);
+    const { rows } = await pool.query(`SELECT ${CASE_FIELDS} FROM case_studies WHERE status = 'published' ORDER BY published_at DESC NULLS LAST`);
     res.json(rows);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 app.get('/api/cases/all', async (_req, res) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM case_studies ORDER BY created_at DESC`);
+    const { rows } = await pool.query(`SELECT ${CASE_FIELDS} FROM case_studies ORDER BY created_at DESC`);
     res.json(rows);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
+app.get('/api/cases/:id', async (req, res) => {
+  try {
+    const { rows } = await pool.query(`SELECT ${CASE_FIELDS} FROM case_studies WHERE id = $1`, [req.params.id]);
+    if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
 app.post('/api/cases', requireAuth, async (req, res) => {
-  const { title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags, status } = req.body;
+  const b = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO case_studies (title,slug,client,industry,challenge,solution,results,excerpt,cover_image,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,NOW(),NOW()) RETURNING *`,
-      [title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO case_studies (
+        title, slug, subtitle, hero_image_url, client, category1, category2, category3,
+        stat1_value, stat1_label, stat2_value, stat2_label, stat3_value, stat3_label,
+        in_brief, challenge_heading, challenge_body,
+        challenge_item1, challenge_item2, challenge_item3, challenge_item4, challenge_item5,
+        solution_heading, solution_body1, solution_body2,
+        quote_text, quote_attribution, quote_title,
+        outcome_heading, outcome_body, outcome_metric1_value, outcome_metric1_label,
+        outcome_metric2_value, outcome_metric2_label,
+        sidebar_industry, sidebar_services, sidebar_region, sidebar_tech_stack,
+        read_next1_category, read_next1_title, read_next1_excerpt,
+        read_next2_category, read_next2_title, read_next2_excerpt,
+        author, status, published_at,
+        meta_title, meta_description, keywords, canonical_url,
+        og_title, og_description, og_image_url, json_ld, no_index,
+        hubspot_event_name, hubspot_form_guid, utm_source, utm_medium, utm_campaign,
+        created_at, updated_at
+      ) VALUES (
+        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,
+        $21,$22,$23,$24,$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38,
+        $39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,
+        $57,$58,$59,$60,$61,NOW(),NOW()
+      ) RETURNING *`,
+      [
+        b.title, b.slug, b.subtitle, b.hero_image_url, b.client,
+        b.category1, b.category2 || '', b.category3 || '',
+        b.stat1_value || '', b.stat1_label || '', b.stat2_value || '', b.stat2_label || '',
+        b.stat3_value || '', b.stat3_label || '',
+        b.in_brief || '', b.challenge_heading || 'The Challenge', b.challenge_body || '',
+        b.challenge_item1 || '', b.challenge_item2 || '', b.challenge_item3 || '',
+        b.challenge_item4 || '', b.challenge_item5 || '',
+        b.solution_heading || 'The Solution', b.solution_body1 || '', b.solution_body2 || '',
+        b.quote_text || '', b.quote_attribution || '', b.quote_title || '',
+        b.outcome_heading || 'The Outcome', b.outcome_body || '',
+        b.outcome_metric1_value || '', b.outcome_metric1_label || '',
+        b.outcome_metric2_value || '', b.outcome_metric2_label || '',
+        b.sidebar_industry || '', b.sidebar_services || '',
+        b.sidebar_region || '', b.sidebar_tech_stack || '',
+        b.read_next1_category || '', b.read_next1_title || '', b.read_next1_excerpt || '',
+        b.read_next2_category || '', b.read_next2_title || '', b.read_next2_excerpt || '',
+        b.author || '', b.status,
+        b.status === 'published' ? new Date() : null,
+        b.meta_title || '', b.meta_description || '', b.keywords || '',
+        b.canonical_url || '', b.og_title || '', b.og_description || '',
+        b.og_image_url || '', b.json_ld || '', b.no_index || false,
+        b.hubspot_event_name || '', b.hubspot_form_guid || '',
+        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '',
+      ]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 app.put('/api/cases/:id', requireAuth, async (req, res) => {
-  const { title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags, status } = req.body;
+  const b = req.body;
   try {
+    const existing = await pool.query(`SELECT published_at, status FROM case_studies WHERE id=$1`, [req.params.id]);
+    const wasPublished = existing.rows[0]?.status === 'published';
+    const nowPublished = b.status === 'published';
+    const publishedAt = nowPublished && !wasPublished ? new Date() : (existing.rows[0]?.published_at ?? null);
     const { rows } = await pool.query(
-      `UPDATE case_studies SET title=$1,slug=$2,client=$3,industry=$4,challenge=$5,solution=$6,results=$7,excerpt=$8,cover_image=$9,tags=$10,status=$11,updated_at=NOW() WHERE id=$12 RETURNING *`,
-      [title, slug, client, industry, challenge, solution, results, excerpt, cover_image, tags || [], status, req.params.id]
+      `UPDATE case_studies SET
+        title=$1, slug=$2, subtitle=$3, hero_image_url=$4, client=$5,
+        category1=$6, category2=$7, category3=$8,
+        stat1_value=$9, stat1_label=$10, stat2_value=$11, stat2_label=$12,
+        stat3_value=$13, stat3_label=$14,
+        in_brief=$15, challenge_heading=$16, challenge_body=$17,
+        challenge_item1=$18, challenge_item2=$19, challenge_item3=$20,
+        challenge_item4=$21, challenge_item5=$22,
+        solution_heading=$23, solution_body1=$24, solution_body2=$25,
+        quote_text=$26, quote_attribution=$27, quote_title=$28,
+        outcome_heading=$29, outcome_body=$30,
+        outcome_metric1_value=$31, outcome_metric1_label=$32,
+        outcome_metric2_value=$33, outcome_metric2_label=$34,
+        sidebar_industry=$35, sidebar_services=$36,
+        sidebar_region=$37, sidebar_tech_stack=$38,
+        read_next1_category=$39, read_next1_title=$40, read_next1_excerpt=$41,
+        read_next2_category=$42, read_next2_title=$43, read_next2_excerpt=$44,
+        author=$45, status=$46, published_at=$47,
+        meta_title=$48, meta_description=$49, keywords=$50, canonical_url=$51,
+        og_title=$52, og_description=$53, og_image_url=$54, json_ld=$55, no_index=$56,
+        hubspot_event_name=$57, hubspot_form_guid=$58,
+        utm_source=$59, utm_medium=$60, utm_campaign=$61,
+        updated_at=NOW()
+      WHERE id=$62 RETURNING *`,
+      [
+        b.title, b.slug, b.subtitle || '', b.hero_image_url || '', b.client || '',
+        b.category1 || 'Case Study', b.category2 || '', b.category3 || '',
+        b.stat1_value || '', b.stat1_label || '', b.stat2_value || '', b.stat2_label || '',
+        b.stat3_value || '', b.stat3_label || '',
+        b.in_brief || '', b.challenge_heading || 'The Challenge', b.challenge_body || '',
+        b.challenge_item1 || '', b.challenge_item2 || '', b.challenge_item3 || '',
+        b.challenge_item4 || '', b.challenge_item5 || '',
+        b.solution_heading || 'The Solution', b.solution_body1 || '', b.solution_body2 || '',
+        b.quote_text || '', b.quote_attribution || '', b.quote_title || '',
+        b.outcome_heading || 'The Outcome', b.outcome_body || '',
+        b.outcome_metric1_value || '', b.outcome_metric1_label || '',
+        b.outcome_metric2_value || '', b.outcome_metric2_label || '',
+        b.sidebar_industry || '', b.sidebar_services || '',
+        b.sidebar_region || '', b.sidebar_tech_stack || '',
+        b.read_next1_category || '', b.read_next1_title || '', b.read_next1_excerpt || '',
+        b.read_next2_category || '', b.read_next2_title || '', b.read_next2_excerpt || '',
+        b.author || '', b.status, publishedAt,
+        b.meta_title || '', b.meta_description || '', b.keywords || '',
+        b.canonical_url || '', b.og_title || '', b.og_description || '',
+        b.og_image_url || '', b.json_ld || '', b.no_index || false,
+        b.hubspot_event_name || '', b.hubspot_form_guid || '',
+        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '',
+        req.params.id,
+      ]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);

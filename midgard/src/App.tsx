@@ -10,6 +10,7 @@ import { ResourcesOpsPage } from './pages/ResourcesOpsPage';
 import { PortfolioOpsPage } from './pages/PortfolioOpsPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { CaseStudiesOpsPage } from './pages/CaseStudiesOpsPage';
 import { getToken, getMe, clearToken } from './lib/api';
 
 const PUBLIC_VIEWS: ViewType[] = ['login', 'register', 'forgot-password'];
@@ -56,6 +57,7 @@ const App = () => {
   if (activeView === 'resources-ops') return <ResourcesOpsPage setView={guardedSetView} />;
   if (activeView === 'portfolio-ops') return <PortfolioOpsPage setView={guardedSetView} />;
   if (activeView === 'admin-approvals') return <AdminApprovalsPage setView={guardedSetView} />;
+  if (activeView === 'case-studies-ops') return <CaseStudiesOpsPage setView={guardedSetView} />;
   if (activeView === 'profile') return <ProfilePage setView={guardedSetView} />;
 
   return <LoginPage setView={setView} />;
