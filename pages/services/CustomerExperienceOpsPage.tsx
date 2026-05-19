@@ -7,7 +7,6 @@ import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_CX_TEAM } from '../../data';
 
 export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
@@ -29,66 +28,62 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
 
   const simplifiedCapabilities = [
     {
-      title: "Omnichannel Support",
-      desc: "Tier 1 & 2 coverage across email, chat, and voice with 98% resolution velocity.",
-      icon: MessageSquare,
-      metric: "98% CSAT"
-    },
-    {
-      title: "Managed AI Layer",
-      desc: "Proprietary AI routing and sentiment tools integrated into your existing stack.",
+      title: "AI Agents on First Contact",
+      desc: "We configure and manage AI agents for chat, email, and voice — handling your highest-volume ticket categories automatically, 24/7.",
       icon: BrainCircuit,
-      metric: "3.2x Faster"
+      metric: "70%+ Deflection"
     },
     {
-      title: "Embedded Teams",
-      desc: "Dedicated Philippine agents trained natively on your brand tone and SOPs.",
+      title: "PH-Based Human Escalation",
+      desc: "Complex, sensitive, and high-value cases escalate instantly to our trained Philippine-based specialists — seamlessly, with full context.",
       icon: Users,
       metric: "Top 1% Talent"
+    },
+    {
+      title: "Monthly CSAT Optimization",
+      desc: "Every month: CSAT and NPS reviewed, agents retrained, knowledge base updated, and a full CX scorecard delivered to your team.",
+      icon: MessageSquare,
+      metric: "24+ mo avg contract"
     }
   ];
 
   const cxIndustries = [
-    { 
-      name: 'E-commerce', 
+    {
+      name: 'E-Commerce',
       icon: ShoppingCart,
-      workflows: ['Refund & Return Automation', 'Order Status Tracking', 'Pre-sale Product Consultation', 'Live Chat Sales Conversion', 'Gorgias/Shopify Native Support']
+      tag: 'Order & returns at scale',
+      workflows: ['Order status & tracking', 'Return & refund automation', 'Pre-sale product queries', 'Cart abandonment follow-up', 'Gorgias/Shopify native support']
     },
-    { 
-      name: 'SaaS & Tech', 
+    {
+      name: 'SaaS & Technology',
       icon: Code,
-      workflows: ['Tier 1 Technical Triage', 'Feature Request Cataloging', 'User Onboarding Support', 'Intercom Activation Loops', 'Renewal Risk Monitoring']
+      tag: 'Onboarding & deflection',
+      workflows: ['AI-first onboarding support', 'Technical triage & deflection', 'Feature request logging', 'Renewal risk monitoring', 'Intercom activation loops']
     },
-    { 
-      name: 'Real Estate', 
-      icon: Building,
-      workflows: ['Leasing Lead Qualification', 'Maintenance Dispatch Desk', 'Tenant Support Lifecycle', 'Yardi/AppFolio Admin', 'Compliance Documents Triage']
-    },
-    { 
-      name: 'Fintech', 
-      icon: Landmark,
-      workflows: ['KYC/AML Document Vetting', 'Account Security Verifications', 'Fraud Alert Response', 'Dispute Management', 'High-Trust Chat Escalation']
-    },
-    { 
-      name: 'Healthcare', 
-      icon: HeartPulse,
-      workflows: ['Appointment Scheduling', 'Insurance Triage & Verification', 'HIPAA-Compliant Messaging', 'Patient Record Admin', 'Provider Help Desk']
-    },
-    { 
-      name: 'Consumer Services', 
+    {
+      name: 'Hospitality & Travel',
       icon: Megaphone,
-      workflows: ['Subscription Management', 'Promotional Campaign Support', 'Community Moderation', 'Loyalty Program Ops', 'Review & Reputation Management']
+      tag: 'Booking & complaint handling',
+      workflows: ['Booking & amendment handling', 'Complaint & refund resolution', 'Itinerary change support', 'Loyalty program queries', '24/7 guest support']
     },
-    { 
-      name: 'Logistics', 
-      icon: Truck,
-      workflows: ['Shipment Exception Handling', 'Driver Support Hotline', 'Warehouse/Carrier Liaison', 'Real-time Tracking Updates', 'Waybill Accuracy Checks']
+    {
+      name: 'Healthcare Adjacent',
+      icon: HeartPulse,
+      tag: 'Scheduling & patient queries',
+      workflows: ['Appointment scheduling', 'Patient query handling', 'Insurance verification triage', 'HIPAA-compliant messaging', 'Provider help desk']
     },
-    { 
-      name: 'Travel & EdTech', 
+    {
+      name: 'Financial Services',
+      icon: Landmark,
+      tag: 'Account inquiry & onboarding',
+      workflows: ['Account inquiry handling', 'Onboarding automation', 'KYC document support', 'Fraud alert response', 'Compliance-aware escalation']
+    },
+    {
+      name: 'Education',
       icon: GraduationCap,
-      workflows: ['Booking Amendment Desk', 'Student Success Liaisons', 'Course Material Access Ops', 'LMS Technical Troubleshooting', 'Global Itinerary Support']
-    }
+      tag: 'Student support & enrollment',
+      workflows: ['Enrollment queries', 'Student support desk', 'Course access issues', 'LMS troubleshooting', 'Payment & billing support']
+    },
   ];
 
   return (
@@ -115,24 +110,24 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <div className="text-left flex flex-col justify-between py-2">
               <div>
                 <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                  <span className="text-shine-white mt-[0px]">Smarter CX with Agentic Solutions</span>
+                  <span className="text-[#E61739] text-[62px]">We run your CX layer.</span><span className="text-shine-white text-[62px]"> AI first. Human when it matters.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                  Our agentic solutions combine autonomous AI agents with skilled specialists to handle complex interactions your bots can't solve alone. 
+                  AI agents on first contact, PH-based specialists on escalations, and continuous CSAT optimization every month — delivered as a fully managed retainer.
                 </p>
 
                 <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">AI agents handle calls and chat at scale</span>
+                    <span className="leading-snug">AI agents configured for chat, email, and voice — 24/5 or 24/7</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">Seamless escalation to human specialists</span>
+                    <span className="leading-snug">PH-based human specialists handle every escalation, with full context</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">Human oversight ensures continuous improvement</span>
+                    <span className="leading-snug">Monthly CSAT scorecard, agent retraining, and knowledge base updates</span>
                   </div>
                 </div>
               </div>
@@ -178,20 +173,20 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
             <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1 text-center">98%</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">CSAT Score</p>
-            </div>
-            <div className="text-center md:text-left">
-              <div className="text-xl md:text-2xl font-black mb-1 text-center">3.2x</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Faster Resolution</p>
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">70%+</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">AI Deflection Rate</p>
             </div>
             <div className="text-center md:text-left">
               <div className="text-xl md:text-2xl font-black mb-1 text-center">24/7</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Always-On Coverage</p>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Coverage Available</p>
+            </div>
+            <div className="text-center md:text-left">
+              <div className="text-xl md:text-2xl font-black mb-1 text-center">24+ mo</div>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Avg Client Lifetime</p>
             </div>
             <div className="text-center md:text-left">
               <div className="text-xl md:text-2xl font-black mb-1 text-center">Top 1%</div>
-              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Vetted CX Talent</p>
+              <p className="text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-widest">PH-Based Specialists</p>
             </div>
           </div>
         </div>
@@ -200,9 +195,9 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
       <section className="py-32 bg-white relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Intelligent Infrastructure</div>
-            <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[60px]">Purpose-Built AI that Elevates Your CX</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Accelerate resolutions with AI customer service agents, backed by top-tier human talent for complex interactions.</p>
+            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
+            <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[60px]">Three things. Every month. Guaranteed.</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">AI on first contact, humans on escalation, continuous optimization — delivered as one fully managed CX retainer.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-24">
@@ -225,8 +220,8 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[9px] font-black uppercase tracking-widest mb-4">
                   <Layers2 size={12} /> Tech Ecosystem
                </div>
-               <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">AI Solutions that Work with Your Favorite Support Platforms.</h3>
-               <p className="text-slate-400 mt-2 text-sm font-medium">Our agents are certified across the world's leading CX and contact center platforms.<br />No rip-and-replace, just seamless integration with the tools you already use.</p>
+               <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">Zendesk · Intercom · Freshdesk · Salesforce · Gorgias · Front · Retell AI</h3>
+               <p className="text-slate-400 mt-2 text-sm font-medium">We configure and manage AI agents directly in your existing helpdesk. No rip-and-replace — live in your stack within days.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -247,13 +242,14 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[56px]">Built for Your Toughest Business Challenges</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained in the specific toolsets and jargon of your industry vertical, ensuring seamless integration from day one.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cxIndustries.map((ind, i) => (
               <div key={i} className="bg-white p-8 rounded-[3rem] border border-black/[0.02] hover:shadow-2xl transition-all group h-full flex flex-col">
-                <div className="w-12 h-12 rounded-2xl bg-slate-50 shadow-sm flex items-center justify-center text-[#E61739] mb-6 group-hover:bg-[#E61739] group-hover:text-white transition-all duration-500">
+                <div className="w-12 h-12 rounded-2xl bg-slate-50 shadow-sm flex items-center justify-center text-[#E61739] mb-4 group-hover:bg-[#E61739] group-hover:text-white transition-all duration-500">
                   <ind.icon size={24} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 mb-6 leading-tight">{ind.name}</h4>
+                <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[#E61739] bg-[#E61739]/10 px-2 py-0.5 rounded-full mb-3 self-start">{ind.tag}</span>
+                <h4 className="text-xl font-bold text-slate-900 mb-5 leading-tight">{ind.name}</h4>
                 <div className="flex-grow">
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Targeted Workflows</div>
                   <ul className="space-y-3">
@@ -275,23 +271,25 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">Fully Operational in Under 14 Days.</h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[18px]">Get your agentic support system running fast, without sacrificing quality or oversight.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">Live and deflecting in <span className="text-[#E61739]">30 days.</span></h2>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[18px]">From audit to full AI + human launch in one month — then continuous improvement every month after.</p>
           </div>
-          <div className="grid md:grid-cols-5 gap-8 relative">
-            <div className="hidden md:block absolute top-[2.75rem] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-            
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 relative">
+            <div className="hidden lg:block absolute top-[2.75rem] left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
             {[
-              { step: "01", title: "Discovery", desc: "SLA & Stack definition.", icon: ScanSearch },
-              { step: "02", title: "Team Build", desc: "Top 1% talent selection.", icon: UsersRound },
-              { step: "03", title: "Deep Training", desc: "Brand tone immersion.", icon: GraduationCap },
-              { step: "04", title: "AI Setup", desc: "Workflow automation.", icon: BrainCircuit },
-              { step: "05", title: "Go Live", desc: "Continuous performance optimization.", icon: Rocket }
+              { step: "01", period: "Week 1",    title: "Audit",        desc: "Map current support stack, ticket types, and monthly volume.", icon: ScanSearch },
+              { step: "02", period: "Week 2",    title: "Configure AI", desc: "Configure AI agents for your top 10 highest-volume ticket categories.", icon: BrainCircuit },
+              { step: "03", period: "Week 3",    title: "Train Team",   desc: "Train PH-based escalation team on your brand, tone, and policies.", icon: UsersRound },
+              { step: "04", period: "Week 4",    title: "Soft Launch",  desc: "50% AI / 50% human split. Tune deflection thresholds in real time.", icon: Rocket },
+              { step: "05", period: "Month 2",   title: "Full Launch",  desc: "Target 70%+ AI deflection rate. Full hybrid operation goes live.", icon: Zap },
+              { step: "06", period: "Ongoing",   title: "Optimize",     desc: "Monthly CX scorecard, agent retraining, CSAT reviews, KB updates.", icon: Settings2 },
             ].map((s, idx) => (
               <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-14 h-14 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-8 group-hover:border-[#E61739] group-hover:bg-slate-900 transition-all shadow-lg">
+                <div className="w-14 h-14 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-6 group-hover:border-[#E61739] group-hover:bg-slate-900 transition-all shadow-lg">
                   <s.icon size={24} />
                 </div>
+                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.period}</div>
                 <div className="text-[#E61739] text-xs font-black uppercase tracking-[0.2em] mb-2">{s.step}</div>
                 <h4 className="text-lg font-bold mb-2">{s.title}</h4>
                 <p className="text-[11px] text-white/40 leading-relaxed font-medium">{s.desc}</p>
@@ -308,91 +306,80 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Flexible CX Plans.</h2>
-            <p className="text-white/40 text-lg font-medium">Pricing models that scale with your growth velocity.</p>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
+            <p className="text-white/40 text-lg font-medium">3-month minimum · Average client lifetime: 24+ months</p>
           </div>
 
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-white/5 p-1.5 rounded-full border border-white/10">
-              <button onClick={() => setPricingModel('outcomes')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'outcomes' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Outcomes</button>
-              <button onClick={() => setPricingModel('staff-aug')} className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${pricingModel === 'staff-aug' ? 'bg-[#E61739] text-white' : 'text-white/40 hover:text-white'}`}>Staff Augmentation</button>
-            </div>
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
+            {[
+              {
+                name: 'AI CX Starter',
+                price: '$3,500',
+                period: '/mo',
+                setup: '$2,000 setup fee',
+                volume: 'Up to 500 tickets/mo',
+                desc: 'AI-first coverage with human overflow for growing businesses handling moderate support volume across one or two channels.',
+                features: ['AI agents on chat & email', 'Human overflow for escalations', 'Up to 500 tickets/month', '24/5 coverage', 'Monthly CSAT report'],
+                featured: false,
+                cta: 'Get Started',
+              },
+              {
+                name: 'AI CX Core',
+                price: '$7,000',
+                period: '/mo',
+                setup: '$3,000 setup fee',
+                volume: 'Up to 2,000 tickets/mo',
+                desc: 'Full AI + human hybrid for scaling teams. Dedicated PH-based escalation team, multichannel coverage, and monthly optimization.',
+                features: ['AI agents on chat, email & voice', 'Dedicated PH escalation team', 'Up to 2,000 tickets/month', '24/7 coverage option', 'CSAT & NPS tracking', 'Knowledge base management', 'Monthly CX scorecard'],
+                featured: true,
+                cta: 'Most Popular',
+              },
+              {
+                name: 'AI CX Enterprise',
+                price: '$14,000+',
+                period: '/mo',
+                setup: 'Setup negotiated',
+                volume: 'Unlimited volume',
+                desc: 'Dedicated CX team, unlimited ticket volume, guaranteed SLAs, and full multichannel AI + human coverage for enterprise operations.',
+                features: ['Dedicated CX team', 'Unlimited ticket volume', 'SLA-guaranteed response times', 'Full multichannel coverage', 'Executive reporting & QBRs', 'Custom escalation design'],
+                featured: false,
+                cta: 'Book a Call',
+              },
+            ].map((plan, i) => (
+              <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
+                {plan.featured && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
+                )}
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
+                <div className="flex items-end gap-1 mb-1">
+                  <span className="text-3xl font-black text-white">{plan.price}</span>
+                  <span className="text-white/30 text-sm font-black mb-1">{plan.period}</span>
+                </div>
+                <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{plan.volume}</p>
+                <p className="text-white/30 text-xs font-medium mb-4">{plan.setup}</p>
+                <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
+                <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
+                  <ul className="space-y-3">
+                    {plan.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
+                        <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                  {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
+                </button>
+              </div>
+            ))}
           </div>
-
-          {pricingModel === 'outcomes' ? (
-            <div className="grid md:grid-cols-3 gap-5 items-stretch animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                { name: "Business Hours Coverage", price: "$1,800", period: "/mo", desc: "Standard 9-hour shift coverage, Mon-Fri.", features: ["Dedicated Agent", "SLA Compliance", "Weekly Reporting", "Native Tool Integration"], highlight: false },
-                { name: "24/7 Enterprise Hub", price: "Custom", period: "", desc: "Always-on global support pod.", features: ["Full 24/7 Roster", "Team Lead & QA", "Strategic CSAT Analysis", "Managed AI Layer"], highlight: true, badge: "Most Popular" },
-                { name: "AI Automation Suite", price: "$1,500", period: "/mo", desc: "Deflection bots & self-service setup.", features: ["Automated Routing", "Tagging & Sentiment", "Performance Dashboards", "Agent Assist Activation"], highlight: false },
-              ].map((plan, i) => (
-                <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.highlight ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
-                  {plan.badge && <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">{plan.badge}</div>}
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-3">{plan.period}</p>
-                  <p className="text-white/40 text-sm font-medium mb-6 leading-relaxed">{plan.desc}</p>
-                  <div className="border-t border-white/10 pt-6 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
-                    Request CX Quote
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              {[
-                {
-                  role: "CX Specialist", price: "$1,600", focus: "General", focusIcon: Users,
-                  features: ["Tier 1 email and live chat support", "Ticket logging and resolution tracking", "Customer satisfaction follow-ups"],
-                },
-                {
-                  role: "Technical Support", price: "$2,000", focus: "Tech", focusIcon: Zap,
-                  features: ["Product issue troubleshooting and escalation", "Bug documentation and dev handoff", "Knowledge base article creation"],
-                },
-                {
-                  role: "Fraud & Risk Analyst", price: "$1,900", focus: "Risk", focusIcon: ShieldCheck,
-                  features: ["Content moderation and policy enforcement", "Fraud detection and prevention workflows", "Account review and dispute resolution"],
-                },
-                {
-                  role: "Team Lead", price: "$2,500", focus: "Mgmt", focusIcon: UsersRound,
-                  features: ["Agent performance monitoring and QA", "Shift scheduling and capacity planning", "Coaching, feedback, and team reporting"],
-                },
-              ].map((plan, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 flex flex-col hover:bg-white/10 transition-all">
-                  <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">{plan.role}</p>
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 flex items-center gap-1.5"><plan.focusIcon size={12} />{plan.focus}</div>
-                  <div className="text-3xl font-black text-white mb-1">{plan.price}</div>
-                  <p className="text-white/30 text-xs font-black uppercase tracking-wide mb-4">/mo</p>
-                  <div className="border-t border-white/10 pt-5 mb-6 flex-grow">
-                    <ul className="space-y-3">
-                      {plan.features.map((f, fi) => (
-                        <li key={fi} className="flex items-start gap-3 text-sm font-semibold text-white/70">
-                          <CheckCircle2 size={14} className="text-[#E61739] shrink-0 mt-0.5" />{f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-white/10 border border-white/10 text-white font-bold text-sm hover:bg-[#E61739] hover:border-[#E61739] transition-all">Select Role</button>
-                </div>
-              ))}
-            </div>
-          )}
 
           <div className="mt-8 p-7 border border-white/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5">
             <div>
-              <h4 className="text-base font-bold text-white mb-1">Custom Squads?</h4>
-              <p className="text-sm text-white/40 font-medium">Build a dedicated pod with Team Leads and QA Managers.</p>
+              <h4 className="text-base font-bold text-white mb-1">Running more than 2,000 tickets a month?</h4>
+              <p className="text-sm text-white/40 font-medium">We build dedicated CX pods sized to your volume, channels, and SLA requirements.</p>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all">Request Custom Quote</button>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-white/10 border border-white/10 text-white rounded-2xl font-bold text-sm hover:bg-white/20 transition-all whitespace-nowrap">Request Custom Quote</button>
           </div>
         </div>
       </section>
