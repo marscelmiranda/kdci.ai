@@ -156,13 +156,13 @@ export const RESOURCES = [
 
 export const TOP_SERVICES = [
   {
-    id: 'ai-outbound',
-    name: 'AI Outbound & Lead Generation',
-    tag: 'Pipeline on Demand',
-    icon: TrendingUp,
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'We build and operate your entire outbound engine — ICP research, list building, AI-personalized sequences, and meeting booking.',
-    benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
+    id: 'ai-agent-monitoring',
+    name: 'AI Agent Monitoring',
+    tag: 'Managed AI Ops',
+    icon: Monitor,
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
+    desc: 'Daily monitoring, prompt optimization, and human oversight for your AI agents — as a fully managed service.',
+    benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
   },
   {
     id: 'ai-consulting',
@@ -184,15 +184,6 @@ export const TOP_SERVICES = [
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
   { 
-    id: 'agentic-recruitment',
-    name: 'AI Workforce Augmentation', 
-    tag: 'Talent Sourcing',
-    icon: Target,
-    image: IMG_RECRUITMENT_HERO,
-    desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
-    benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
-  },
-  { 
     id: 'creative-prod',
     name: 'AI Creative Studio', 
     tag: 'AI-Native Design',
@@ -202,13 +193,22 @@ export const TOP_SERVICES = [
     benefits: ['5-Day Turnaround', 'AI-Powered Output', 'Full Brand Consistency']
   },
   {
-    id: 'ai-agent-monitoring',
-    name: 'AI Agent Monitoring',
-    tag: 'Managed AI Ops',
-    icon: Monitor,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'Daily monitoring, prompt optimization, and human oversight for your AI agents — as a fully managed service.',
-    benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
+    id: 'ai-outbound',
+    name: 'AI Outbound & Lead Generation',
+    tag: 'Pipeline on Demand',
+    icon: TrendingUp,
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
+    desc: 'We build and operate your entire outbound engine — ICP research, list building, AI-personalized sequences, and meeting booking.',
+    benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
+  },
+  { 
+    id: 'agentic-recruitment',
+    name: 'AI Workforce Augmentation', 
+    tag: 'Talent Sourcing',
+    icon: Target,
+    image: IMG_RECRUITMENT_HERO,
+    desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
+    benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
 ];
 
