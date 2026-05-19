@@ -194,7 +194,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           <div className="grid lg:grid-cols-3 gap-6 items-stretch">
 
             {/* Big featured card */}
-            <div className="lg:col-span-2 bg-[#1D1D1F] rounded-[2.5rem] p-10 md:p-14 flex flex-col justify-between relative overflow-hidden min-h-[380px]">
+            <div className="lg:col-span-2 bg-[#1D1D1F] rounded-[20px] p-10 md:p-14 flex flex-col justify-between relative overflow-hidden min-h-[380px]">
               <div className="absolute top-0 right-0 w-72 h-72 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
@@ -224,7 +224,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                 <button
                   key={idx}
                   onClick={() => setActiveStory(idx)}
-                  className="flex-1 text-left bg-white rounded-[2rem] p-8 border border-black/[0.04] hover:shadow-xl hover:border-[#E61739]/20 transition-all duration-300 flex flex-col justify-between group"
+                  className="flex-1 text-left bg-white rounded-[20px] p-8 border border-black/[0.04] hover:shadow-xl hover:border-[#E61739]/20 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
