@@ -99,7 +99,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         </div>
       </div>
 
-      <section className="pt-20 pb-32 bg-white rounded-t-[5rem] relative z-10">
+      <section className="pt-20 pb-32 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Built for results.</h2>
