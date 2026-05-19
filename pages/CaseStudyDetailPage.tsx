@@ -108,7 +108,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.challengeHeading || 'The Challenge'}
                     </h2>
                     {study.challengeBody && (
-                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-8"
+                      <div className="rte-content mb-8"
                         dangerouslySetInnerHTML={{ __html: study.challengeBody }} />
                     )}
                     {challengeItems.length > 0 && (
@@ -131,11 +131,11 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.solutionHeading || 'The Solution'}
                     </h2>
                     {study.solutionBody1 && (
-                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-8"
+                      <div className="rte-content mb-8"
                         dangerouslySetInnerHTML={{ __html: study.solutionBody1 }} />
                     )}
                     {study.solutionBody2 && (
-                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-12"
+                      <div className="rte-content mb-12"
                         dangerouslySetInnerHTML={{ __html: study.solutionBody2 }} />
                     )}
                   </>
@@ -170,7 +170,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                       {study.outcomeHeading || 'The Outcome'}
                     </h2>
                     {study.outcomeBody && (
-                      <div className="prose prose-slate max-w-none prose-p:text-slate-500 prose-p:leading-loose prose-headings:text-slate-900 prose-headings:font-bold prose-strong:text-slate-700 prose-a:text-[#E61739] prose-li:text-slate-500 prose-blockquote:border-l-[#E61739] mb-6"
+                      <div className="rte-content mb-6"
                         dangerouslySetInnerHTML={{ __html: study.outcomeBody }} />
                     )}
                     {outcomeMetrics.length > 0 && (

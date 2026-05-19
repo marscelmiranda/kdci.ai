@@ -35,7 +35,7 @@ const ToolBtn = ({ onClick, active, title, children }: ToolBtnProps) => (
   </button>
 );
 
-const Divider = () => <div className="w-px h-4 bg-white/15 mx-1 self-center" />;
+const Sep = () => <div className="w-px h-4 bg-white/15 mx-1 self-center shrink-0" />;
 
 export const RichTextEditor = ({
   value,
@@ -87,16 +87,17 @@ export const RichTextEditor = ({
   };
 
   return (
-    <div className="border border-white/10 rounded-xl overflow-hidden focus-within:border-[#E61739]/60 transition-colors bg-[#0e0e0e]">
-      {/* ── Toolbar ─────────────────────────────────────────────── */}
-      <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 bg-[#111]/80 border-b border-white/8 backdrop-blur">
+    <div className="border border-white/10 rounded-xl focus-within:border-[#E61739]/60 transition-colors bg-[#0e0e0e]">
+
+      {/* ── Toolbar — always visible, never scrolls away ─────────── */}
+      <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 bg-[#111]/90 border-b border-white/8 rounded-t-xl">
 
         {/* Headings */}
         <ToolBtn onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} active={editor.isActive('heading', { level: 1 })} title="Heading 1">H1</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })} title="Heading 2">H2</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })} title="Heading 3">H3</ToolBtn>
 
-        <Divider />
+        <Sep />
 
         {/* Inline marks */}
         <ToolBtn onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold">
@@ -115,7 +116,7 @@ export const RichTextEditor = ({
           {'<>'}
         </ToolBtn>
 
-        <Divider />
+        <Sep />
 
         {/* Lists */}
         <ToolBtn onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} title="Bullet List">
@@ -125,7 +126,7 @@ export const RichTextEditor = ({
           1. List
         </ToolBtn>
 
-        <Divider />
+        <Sep />
 
         {/* Block types */}
         <ToolBtn onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive('blockquote')} title="Blockquote">
@@ -135,34 +136,37 @@ export const RichTextEditor = ({
           Code Block
         </ToolBtn>
 
-        <Divider />
+        <Sep />
 
         {/* Alignment */}
         <ToolBtn onClick={() => editor.chain().focus().setTextAlign('left').run()} active={editor.isActive({ textAlign: 'left' })} title="Align Left">⇤</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().setTextAlign('center').run()} active={editor.isActive({ textAlign: 'center' })} title="Center">⇔</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().setTextAlign('right').run()} active={editor.isActive({ textAlign: 'right' })} title="Align Right">⇥</ToolBtn>
 
-        <Divider />
+        <Sep />
 
         {/* Link */}
         <ToolBtn onClick={setLink} active={editor.isActive('link')} title="Insert / Edit Link">🔗 Link</ToolBtn>
 
-        <Divider />
+        <Sep />
 
-        {/* Utility */}
+        {/* Utilities */}
         <ToolBtn onClick={() => editor.chain().focus().setHorizontalRule().run()} active={false} title="Horizontal Rule">─ Rule</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().undo().run()} active={false} title="Undo">↩</ToolBtn>
         <ToolBtn onClick={() => editor.chain().focus().redo().run()} active={false} title="Redo">↪</ToolBtn>
 
-        <Divider />
+        <Sep />
 
         <ToolBtn onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()} active={false} title="Clear Formatting">
           ✕ Clear
         </ToolBtn>
       </div>
 
-      {/* ── Editor content area ──────────────────────────────────── */}
-      <div className="rte-wrap px-4 py-3" style={{ minHeight }}>
+      {/* ── Scrollable content area ───────────────────────────────── */}
+      <div
+        className="rte-wrap px-4 py-3 overflow-y-auto rounded-b-xl"
+        style={{ minHeight, maxHeight: '480px' }}
+      >
         <EditorContent editor={editor} />
       </div>
     </div>
