@@ -237,7 +237,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
               Maximize ROI and Efficiency through <span className="text-[#E61739] text-[48px]">AI implementation</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Our team works across your environment to ensure the successful implementation of agentic AI solutions. From readiness audit to retainer hand-off, we deploy AI copilots that maximize ROI and transform your workflows.</p>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Our team ensures the successful implementation of agentic AI solutions. From readiness audit to retainer hand-off, we deploy AI copilots that maximize ROI and transform your workflows.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICES.map((s, i) => (
