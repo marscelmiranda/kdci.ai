@@ -110,7 +110,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <div className="text-left flex flex-col justify-between py-2">
               <div>
                 <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
-                  AI-Augmented CX Support
+                  AI-Augmented<br />CX Support
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                   We combine AI-powered first-contact resolution with specialist escalation support and monthly CX performance optimization, all delivered as a managed service.
