@@ -128,7 +128,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "Real Estate",
       icon: Home,
       tag: "Listings & Brand",
-      workflows: ["Product catalog design & bulk product image editing", "Static and animated ad creative for Meta, Google, and TikTok", "Promotional banner design & seasonal campaign graphics", "Packaging design & brand refresh for retail and DTC", "Amazon A+ content design, PDP imagery & marketplace visuals"],
+      workflows: ["Property listing graphics, flyer design & digital brochures", "Real estate agent branding kits & agency brand identity design", "Social media content design for property listings", "Property video walkthroughs, reels & virtual tour graphics", "Sales proposal design & pitch deck templates"],
     },
     {
       name: "SaaS & Tech",
