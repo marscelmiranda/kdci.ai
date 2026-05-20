@@ -418,7 +418,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              Industries where<span className="text-[#E61739]"> AI agent monitoring<br /> isn't optional</span>
+              Industries where <span className="text-[#E61739]">AI agent <br/> monitoring</span> isn't optional
             </h2>
             <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">From lost revenue to regulatory risk — we specialize in the verticals where monitoring isn't optional.</p>
           </div>
