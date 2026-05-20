@@ -252,17 +252,17 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Everything your brand needs.</h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">AI-native production across every creative format — brand, social, ads, and video — from one dedicated Manila team.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Full-service creative design, branding, and content production.</h2>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">High-output creative production managed by our AI-powered Manila design team at a fraction of traditional agency cost.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Palette, title: "Brand Identity & Visual System", desc: "Logo, typography, colour system, and a full brand guide. Built from scratch or refreshed — consistent across every channel." },
-              { icon: Megaphone, title: "Social Media Content", desc: "Graphics, carousels, and reels produced on a weekly content calendar. On-brand, scroll-stopping, and ready to publish." },
-              { icon: ShoppingCart, title: "Product & Catalog Design at Scale", desc: "High-volume product imagery, catalog layouts, and e-commerce visuals — optimised for retail, DTC, and marketplace channels." },
-              { icon: Video, title: "Ad Creative — Static, Motion & Video", desc: "Performance-tested ad creative across static, animated, and short-form video formats for Meta, TikTok, Google, and YouTube." },
-              { icon: Presentation, title: "Presentation & Pitch Deck Design", desc: "Investor decks, sales presentations, and proposals designed to communicate clearly and close deals." },
-              { icon: ImageIcon, title: "AI-Generated Imagery", desc: "Brand-consistent AI imagery produced with Midjourney and Adobe Firefly — fully guided, no off-brand outputs." },
+              { icon: Megaphone, title: "Social Media Content", desc: "On-brand and ready-to-publish social media graphics, carousels, and reels produced on a weekly content calendar." },
+              { icon: ShoppingCart, title: "Product & Catalog Design at Scale", desc: "High-volume product image editing, catalog layout design, and e-commerce visuals optimized for retail, DTC storefronts, Amazon, and marketplace listings." },
+              { icon: Video, title: "Ad Creative Design", desc: "Performance-driven ad creative across static display banners, animated graphics, and short-form video ads for Meta, TikTok, and Youtube." },
+              { icon: Presentation, title: "Pitch Decks & Presentations", desc: "Custom pitch deck designs crafted to communicate your value proposition clearly and close deals faster." },
+              { icon: ImageIcon, title: "AI-Generated Imagery", desc: "Brand-safe AI Image generation using Midjourney and Adobe Firefly, fully guided, with locked style prompts to on-brand outputs." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
