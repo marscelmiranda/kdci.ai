@@ -446,7 +446,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               Our Stack
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
-              Platform-Agnostic. <span className="text-[#E61739]">Integration-Ready.</span>
+              Full Monitoring Services.<br/><span className="text-[#E61739]">Any Platform. Any Agent.</span>
             </h2>
             <p className="text-white/40 font-medium max-w-2xl text-[17px]">We monitor agents built on any platform and connect to the helpdesks, CRMs, and alerting tools your team already uses — no rip-and-replace required.</p>
           </div>
