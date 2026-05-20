@@ -314,7 +314,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                     num: '03',
                     icon: Users,
                     title: 'Human in the loop, always',
-                    desc: 'Every AI agent deployment is managed by a trained operations team who monitor performance, catch errors, and continuously improve your AI systems over time.',
+                    desc: 'Every AI agent deployed is managed by a trained operations team who monitor performance, catch errors, and continuously improve your AI systems over time.',
                   },
                 ].map((d, i) => (
                   <div key={i} className="flex items-start gap-4 py-6">
