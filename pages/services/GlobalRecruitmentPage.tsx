@@ -116,7 +116,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Proficient in AI tools such as Claude, GPT-4o, Midjourney, Zapier, and more</span>
+                  <span className="leading-snug">Proficient in AI tools such as Claude, Midjourney, Zapier, and more</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
