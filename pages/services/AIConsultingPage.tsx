@@ -140,7 +140,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 AI Consulting and Implementation Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                From ai consulting to long-term monitoring, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks.
+                From AI consulting to long-term monitoring, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
