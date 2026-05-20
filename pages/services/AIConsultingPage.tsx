@@ -466,7 +466,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Before we write a single line of code, we align on agreed performance targets. We hold ourselves <span style={{color:'#E61739'}}>accountable to outcomes, not just deliverables.</span>
             </p>
             <p className="text-white/40 text-base font-medium max-w-2xl">
-              Every engagement includes measurable performance targets agreed at onboarding. We price at a premium because we back it.
+              If we miss your goals once, you get a credit. If we fall short twice, you walk away free.
             </p>
           </div>
         </div>
