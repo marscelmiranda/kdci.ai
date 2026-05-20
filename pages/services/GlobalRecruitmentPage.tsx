@@ -106,7 +106,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
                 <span className="text-[#E61739]">Top Filipino Talents.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Build an ai-ready team, ranging from prompt engineers, AI ops specialists, data analytics, and AI-enabled VAs at a fraction of US hiring costs.
+                Build an AI-ready team, ranging from prompt engineers, AI ops specialists, data analytics, and AI-enabled VAs at a fraction of US hiring costs.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
