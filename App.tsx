@@ -30,7 +30,7 @@ import { SolutionsHubPage } from './pages/services/SolutionsHubPage';
 import { GraphicDesignStudioPage } from './pages/services/GraphicDesignStudioPage';
 import { CustomerExperienceOpsPage } from './pages/services/CustomerExperienceOpsPage';
 import { OffshoreStaffingPage } from './pages/services/OffshoreStaffingPage';
-import { GlobalRecruitmentPage } from './pages/services/GlobalRecruitmentPage';
+import { AIWorkforcePage } from './pages/services/AIWorkforcePage';
 
 import { AIConsultingPage } from './pages/services/AIConsultingPage';
 import { AIAgentMonitoringPage } from './pages/services/AIAgentMonitoringPage';
@@ -122,7 +122,7 @@ const App = () => {
         
         {/* Services */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
-        {activeView === 'agentic-recruitment' && <GlobalRecruitmentPage setView={setView} />}
+        {activeView === 'agentic-recruitment' && <AIWorkforcePage setView={setView} />}
 
         {activeView === 'customer-support' && <CustomerExperienceOpsPage setView={setView} />}
 
