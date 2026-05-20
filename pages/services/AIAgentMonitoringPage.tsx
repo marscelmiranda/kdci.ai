@@ -145,7 +145,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                 AI Agent Monitoring & Management
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and ( ).
+                Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and deployment management.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
