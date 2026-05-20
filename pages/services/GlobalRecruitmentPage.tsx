@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Sparkles, Briefcase, UserCheck, ClipboardCheck, Workflow, BrainCircuit, Globe2, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown, X, Users2, BarChart3, Settings2, HeartPulse, ShoppingCart, Laptop, Megaphone, RefreshCw } from 'lucide-react';
+import { ArrowRight, Sparkles, Briefcase, UserCheck, ClipboardCheck, Workflow, BrainCircuit, Globe2, CheckCircle2, Star, Award, Target, Shield, Zap, TrendingDown, X, Users2, BarChart3, Settings2, HeartPulse, ShoppingCart, Laptop, Megaphone, RefreshCw, Clock } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -263,29 +263,51 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* ── ONBOARDING TIMELINE ── */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Onboarding Timeline</div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Specialist live in 5–7 days.</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">From role brief to first productive day — a structured onboarding that gets your AI specialist embedded fast.</p>
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Onboarding Timeline
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+              Specialist live in 5–7 days.<br /><span className="text-[#E61739]">From brief to first productive day.</span>
+            </h2>
           </div>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { step: "01", period: "Day 1–2",  title: "Role Brief Call", desc: "Define tools, tasks, hours, and KPIs. We align on the exact profile needed before sourcing begins." },
-              { step: "02", period: "Day 3–5",  title: "Candidate Matching", desc: "Matching from KDCI.ai's talent pool of AI-trained specialists — pre-vetted and tool-proficient." },
-              { step: "03", period: "Day 6–7",  title: "Client Interviews", desc: "You interview shortlisted candidates, select and confirm your hire. We handle offer and acceptance." },
-              { step: "04", period: "Week 2",   title: "Onboarding", desc: "Tools access, workflow setup, and training aligned to your processes. Specialist is fully set up." },
-              { step: "05", period: "Week 3",   title: "First Full Week", desc: "First full productive week. Daily check-ins to ensure alignment, output quality, and tool usage." },
-              { step: "06", period: "Month 2+", title: "Full Integration", desc: "Full integration and monthly KPI review. Scale up additional seats as needs grow." },
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm flex flex-col">
-                <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">{s.period}</div>
-                <h4 className="text-base font-bold text-slate-900 mb-2">{s.title}</h4>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">{s.desc}</p>
+          <div className="relative">
+            <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {[
+                { n: '01', period: 'Day 1–2',  title: 'Role Brief Call',      desc: 'Define tools, tasks, hours, and KPIs. We align on the exact profile needed before sourcing begins.' },
+                { n: '02', period: 'Day 3–5',  title: 'Candidate Matching',   desc: 'Matching from KDCI.ai\'s talent pool of AI-trained specialists — pre-vetted and tool-proficient.' },
+                { n: '03', period: 'Day 6–7',  title: 'Client Interviews',    desc: 'You interview shortlisted candidates, select and confirm your hire. We handle offer and acceptance.' },
+                { n: '04', period: 'Week 2',   title: 'Onboarding',           desc: 'Tools access, workflow setup, and training aligned to your processes. Specialist is fully set up.' },
+                { n: '05', period: 'Week 3',   title: 'First Full Week',      desc: 'First full productive week. Daily check-ins to ensure alignment, output quality, and tool usage.' },
+                { n: '06', period: 'Month 2+', title: 'Full Integration',     desc: 'Full integration and monthly KPI review. Scale up additional seats as needs grow.' },
+              ].map((s, i) => (
+                <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {s.n}
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Clock size={18} className="text-[#E61739]" />
               </div>
-            ))}
+              <div>
+                <h4 className="font-black text-[#1D1D1F] text-sm mb-0.5">Ongoing from Month 2</h4>
+                <p className="text-[#86868b] text-sm font-medium">Monthly KPI reviews · 2-week replacement guarantee · scale seats as you grow</p>
+              </div>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+              Request Your First Specialist <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
