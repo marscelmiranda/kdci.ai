@@ -240,7 +240,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Vertical Specialization</div>
             <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[56px]">Vertical AI that speaks your industry's language from day one</h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your specific helpdesk toolset, product vocabulary, and customer service workflows, ensuring accurate, on-brand AI support automation from day one.</p>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your specific helpdesk toolset, product vocabulary, and CS workflows, ensuring accurate, on-brand AI support automation.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cxIndustries.map((ind, i) => (
