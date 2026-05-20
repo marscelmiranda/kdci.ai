@@ -9,7 +9,7 @@ const SERVICES = [
   {
     icon: Target,
     title: 'AI Readiness Audit',
-    desc: 'We assess every department — ops, support, sales, finance — and map where AI creates the highest-impact opportunities. Delivered as a structured report with a prioritized implementation roadmap.',
+    desc: 'We assess every department — ops, support, sales, finance — and map where AI solutions creates the highest-impact opportunities. Delivered as a structured report with a prioritized implementation roadmap.',
   },
   {
     icon: Cpu,
