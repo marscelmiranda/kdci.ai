@@ -399,7 +399,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
               <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI-Augmented Customer Experience</p>
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your CX pod, live<br/>in 14 days.</h3>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">Your AI CX pod, live in 30 days.</h3>
               <div className="flex flex-wrap gap-2 mt-5">
                 {['AI-Augmented', 'Omnichannel', '24/7 Coverage'].map((t, i) => (
                   <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
