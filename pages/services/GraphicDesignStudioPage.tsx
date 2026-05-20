@@ -474,8 +474,8 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Platforms & Tools</div>
-            <h3 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">AI-first. Human-guided.</h3>
-            <p className="text-white/40 text-lg max-w-2xl mx-auto">The best AI creative tools, in the hands of Manila's top 1% designers and motion artists.</p>
+            <h3 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">AI-Enabled. Human-Guided.</h3>
+            <p className="text-white/40 text-lg max-w-2xl mx-auto">AI image generation, video production tools, and professional design software all in the hands of Manila's Top 1% designers and motion artists.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {creativeTools.map((app, i) => (
