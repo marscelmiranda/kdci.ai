@@ -142,7 +142,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {[
                     { name: 'Apollo.io',  logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779240994/apollo_logo_l3tlxx.png',   imgH: '25px' },
-                    { name: 'Clay',       logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779237981/clay_ufl558.webp', imgH: '22px' },
+                    { name: 'Clay',       logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779237981/clay_ufl558.webp', imgH: '20px' },
                     { name: 'Instantly',  logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779241458/instantly_logo_rhr68i.svg', imgH: '22px' },
                     { name: 'HubSpot',    logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327928/Hubspot_Logo_skscda.png', imgH: '52px' },
                   ].map((app, i) => (
