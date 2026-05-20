@@ -4,6 +4,7 @@ import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import IMG_CONSULTING_HERO from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.png';
 
 const SERVICES = [
   {
@@ -170,7 +171,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png"
+                  src={IMG_CONSULTING_HERO}
                   alt="AI Consulting team"
                   className="w-full h-full object-cover"
                 />
