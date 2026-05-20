@@ -152,7 +152,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "Startups",
       icon: Sparkles,
       tag: "Full Brand Identity",
-      workflows: ["Brand identity from scratch", "Logo and visual system design", "Pitch deck for fundraising", "Social and ad creative launch kits", "Website and product visual assets"],
+      workflows: ["Brand identity design from scratch — logo, colours & typography", "Logo design & complete visual identity system", "Investor pitch deck design for fundraising rounds", "Social media graphic design & paid ad creative launch kits", "Website visual design, product illustrations & digital asset creation"],
     },
   ];
 
