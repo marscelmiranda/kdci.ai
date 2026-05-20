@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { Plus, Minus, Search, ArrowRight, Users, Terminal, Layers, FileText, Palette, BrainCircuit, Building2, UserCheck } from 'lucide-react';
+import { Plus, Minus, Search, ArrowRight, Users, Monitor, Cpu, Palette, TrendingUp, UserCheck } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -8,8 +8,42 @@ const HERO_IMG = "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto
 
 const SERVICE_CATEGORIES = [
   {
+    id: 'ai-monitoring',
+    label: 'AI Agent Monitoring',
+    icon: Monitor,
+    questions: [
+      { q: "What exactly counts as an 'AI agent' for monitoring purposes?", a: "Any automated system using a large language model (LLM) to handle customer interactions, internal queries, data processing, or decision support — including chatbots, voice agents, email bots, support agents on Intercom or Zendesk, and custom-built LLM workflows." },
+      { q: "How do you detect prompt drift?", a: "We run daily automated evaluation benchmarks against a set of baseline test cases established at kickoff. When accuracy scores fall below threshold — or when hallucination rates, escalation rates, or latency spikes are detected — our system flags the agent for human review and retraining." },
+      { q: "What's the response time when an issue is detected?", a: "Critical issues (agent failures, integration outages) are escalated within 4 business hours. Performance drift triggers a review within one business day, with optimization executed and tested within the same week." },
+      { q: "Do you need admin access to our AI platforms?", a: "We need read access to your agent configurations and, for optimization, the ability to update prompt templates. We document every change and require client approval for any structural modifications to an agent's logic." },
+      { q: "What AI platforms and helpdesks do you support?", a: "We support agents built on OpenAI, Anthropic, Google Gemini, and most LLM platforms. For integrations, we work with Intercom, Zendesk, Freshdesk, HubSpot, Salesforce, and custom API-based setups." },
+      { q: "How is pricing calculated — is it per agent?", a: "Pricing is tier-based, not strictly per-agent. Each tier covers a range (1–2, 3–5, or unlimited agents) and includes a standard set of services. For high-volume deployments, we build custom pricing around the complexity of your stack." },
+      { q: "What happens if an agent goes down completely?", a: "Full agent failures are treated as critical incidents. Your AI Ops Specialist is notified immediately, investigates root cause, and coordinates with your team or vendor to restore service. You receive an incident report within 24 hours." },
+      { q: "Can you monitor voice AI agents (e.g. Retell AI, Vapi)?", a: "Yes. We monitor voice agents for call completion rate, resolution rate, transfer rate, and sentiment patterns. We also review call transcripts to catch accuracy issues that automated scoring may miss." },
+      { q: "How is sensitive customer data handled during monitoring?", a: "All monitoring is conducted on anonymized or aggregated performance data wherever possible. If transcript review is required, we follow your data handling policy and can operate under NDA and DPA agreements." },
+      { q: "What's included in the monthly scorecard?", a: "The monthly scorecard includes: agent-by-agent accuracy scores, drift trend charts, escalation rate analysis, integration health status, prompt optimization summary, benchmark comparisons to your industry baseline, and a prioritized recommendation list for the next 30 days." },
+    ]
+  },
+  {
+    id: 'ai-consulting',
+    label: 'AI Consulting & Implementation',
+    icon: Cpu,
+    questions: [
+      { q: "What does AI Consulting & Implementation actually include?", a: "It covers the full lifecycle: discovery and process audit, AI strategy design, custom agent or workflow builds, integration into your existing systems, staff training, and ongoing optimisation. We don't just advise — we build and run the solution alongside your team until outcomes are proven." },
+      { q: "How long does it take to go from consultation to a live AI solution?", a: "Most clients are live with their first AI workflow within 21 business days. Discovery and scoping takes 3–5 days, build and configuration takes 10–14 days, and deployment with UAT takes 3–5 days. Complex multi-agent systems may take 4–6 weeks depending on integration depth." },
+      { q: "Do we need an existing AI strategy before KDCI can help us?", a: "No. Most clients come to us without one. Our first step is always a free 2-hour Operations Audit where we map your current workflows, identify the highest-ROI automation opportunities, and present a prioritised AI roadmap before any contract is signed." },
+      { q: "What AI platforms and frameworks does KDCI work with?", a: "We work with OpenAI (GPT-4o), Anthropic (Claude), Google Gemini, Mistral, and open-source LLMs. For agentic frameworks we use LangChain, CrewAI, n8n, Make, and Zapier. We also integrate with your existing stack — CRMs, ERPs, helpdesks, and data warehouses." },
+      { q: "Can KDCI build custom AI agents for our specific workflows?", a: "Yes. Our AI engineering team designs and deploys purpose-built agents for tasks like automated research, document classification, outreach sequencing, data extraction, report generation, and first-response triage. Every agent is built to your specific data schema and approval requirements." },
+      { q: "How do you handle hallucinations and accuracy in automated workflows?", a: "We implement human-in-the-loop checkpoints at every critical decision point. AI agents generate outputs that are reviewed by trained human operators before execution. We also run accuracy benchmarks weekly and retrain or reprompt when performance drifts below agreed thresholds." },
+      { q: "What business processes are most suited for AI augmentation?", a: "High-volume, rule-based tasks with structured inputs deliver the fastest ROI: document classification, data extraction, content generation at scale, email routing, lead scoring, invoice processing, and first-response support triage. We also handle complex multi-step research and synthesis workflows." },
+      { q: "How is AI performance monitored after implementation?", a: "We track accuracy rates, task completion rates, processing speed, and error rates through a monthly AI performance report. Dashboards are delivered weekly during the first 90 days. Models are retrained or updated as your data evolves or new LLM versions outperform the current stack." },
+      { q: "Is agentic AI safe to deploy in regulated industries like Fintech or Healthcare?", a: "Yes, with the right safeguards. We implement strict data governance, encrypted pipelines, audit logs, and human approval gates for any sensitive outputs. We have deployed AI solutions in HIPAA-compliant healthcare environments and SOC-2 certified Fintech infrastructure." },
+      { q: "What ROI should we expect and over what timeframe?", a: "Most clients see measurable ROI within 60–90 days of go-live. Typical outcomes: 40–80% reduction in manual processing time, 30–50% cost reduction versus purely human teams, and near-zero error rates on automated tasks. We define success metrics at kickoff and report against them monthly." },
+    ]
+  },
+  {
     id: 'cx',
-    label: 'Customer Support',
+    label: 'AI-Augmented Customer Experience',
     icon: Users,
     questions: [
       { q: "What customer support channels can KDCI cover?", a: "We support voice, email, live chat, social media DMs, SMS, and in-app messaging. Our agents are trained across multiple channels simultaneously, so you get a true omnichannel operation from a single managed team." },
@@ -25,128 +59,60 @@ const SERVICE_CATEGORIES = [
     ]
   },
   {
-    id: 'eng',
-    label: 'Software Engineering',
-    icon: Terminal,
-    questions: [
-      { q: "What tech stacks and languages does KDCI's engineering team cover?", a: "Our engineers are proficient in React, Vue, Angular, Node.js, Python, Java, Go, Ruby on Rails, .NET, Swift, Kotlin, and more. We also have specialists in DevOps (AWS, GCP, Azure), data engineering, and ML/AI pipelines." },
-      { q: "What is the 'Pod Model' for engineering teams?", a: "A Pod is a self-contained delivery unit — typically 3–8 engineers led by a Tech Lead, with an embedded QA Engineer and optionally a Product Manager. Pods operate like an internal squad within your org chart." },
-      { q: "How do KDCI engineers integrate with our existing team?", a: "Seamlessly. Our engineers join your Slack, attend your standups, commit to your GitHub/GitLab, and work within your sprint cycles. We are timezone-aligned and communicate proactively." },
-      { q: "How do you vet software engineers?", a: "Our engineering selection process has four stages: a technical logic screen, a domain-specific coding test, a live pair-programming session with a KDCI senior engineer, and a cultural-fit interview. We accept under 2% of applicants." },
-      { q: "Can KDCI take on a full project end-to-end, or only staff augmentation?", a: "Both. We offer pure staff augmentation (engineers embedded in your team), managed delivery pods (self-directed squads), and full project outsourcing (we scope, build, and deliver with defined milestones)." },
-      { q: "How do you handle IP and code ownership?", a: "All code produced by KDCI engineers is assigned to you via our standard MSA. We sign NDA and IP assignment clauses from day one, and your codebase never leaves your repositories." },
-      { q: "What is your experience with legacy system modernization?", a: "It's one of our specialties. We have delivered monolith-to-microservices migrations, mainframe data extractions, and cloud-lift-and-shift projects for enterprises across Logistics, Healthcare, and Fintech verticals." },
-      { q: "Can KDCI support startup-speed development (MVP in weeks)?", a: "Yes. We have a dedicated startup pod structure optimized for rapid prototyping. Our fastest MVP delivery was a full-stack web app with API integrations in 11 business days." },
-      { q: "Do you provide dedicated QA engineers?", a: "Yes. Every engineering pod includes at least one embedded QA engineer. We write automated regression suites in Playwright, Cypress, or Selenium and run CI/CD-integrated pipelines on every PR." },
-      { q: "How is engineering performance tracked and reported?", a: "We provide weekly sprint velocity reports, bug-rate tracking, PR merge rates, and deployment frequency dashboards. You get full visibility into output quality, not just activity." },
-    ]
-  },
-  {
-    id: 'staffaug',
-    label: 'Staff Augmentation',
-    icon: Layers,
-    questions: [
-      { q: "What roles can KDCI source for staff augmentation?", a: "We cover a broad spectrum: software engineers, QA engineers, data analysts, digital marketers, graphic designers, video editors, accountants, virtual assistants, customer support agents, HR coordinators, and more." },
-      { q: "How long does it take to source and onboard a new team member?", a: "For most roles, our time-to-placement is 5–10 business days. For highly specialized technical roles, expect 2–3 weeks. We maintain a pre-vetted talent bench to accelerate common requests." },
-      { q: "Who manages the day-to-day work of augmented staff?", a: "In our standard augmentation model, your team manages daily tasks, priorities, and deliverables. KDCI handles HR, payroll, compliance, equipment, facilities, and performance management in the background." },
-      { q: "Can I replace a staff member if they're not a good fit?", a: "Yes, within the first 30 days we provide a free replacement with no questions asked. After that period, we work collaboratively to address performance concerns through our managed HR process." },
-      { q: "Do augmented staff work exclusively for my company?", a: "Yes. All KDCI staff augmentation placements are 100% dedicated to your account. They use your tools, represent your brand, and do not work for other clients." },
-      { q: "What equipment and workspace does KDCI provide?", a: "We provide a fully equipped workstation (PC or Mac depending on role), high-speed primary and backup internet, a professional headset, an ergonomic workspace, and 24/7 IT support — all included in the monthly rate." },
-      { q: "How is compensation structured for the offshore staff?", a: "KDCI pays all salaries, benefits (HMO, 13th month pay, paid leaves), SSS, and government contributions in the Philippines. You pay one all-inclusive monthly fee to KDCI in USD." },
-      { q: "Can I scale staff up or down based on business needs?", a: "Yes. Our contracts allow for flexible scaling with 30-day notice for reductions and near-immediate scale-up from our bench. Enterprise clients can negotiate on-demand surge provisions." },
-      { q: "What is your staff retention rate?", a: "Our annual staff retention rate is 92%, significantly above the Philippine BPO industry average of 70%. We invest in career development, competitive compensation, and a strong team culture." },
-      { q: "Can I conduct my own interviews and select the candidates?", a: "Absolutely. We present a shortlist of 3–5 pre-screened candidates per role and you conduct final interviews. You make the hire decision — we handle the rest." },
-    ]
-  },
-  {
-    id: 'backoffice',
-    label: 'Back Office Operations',
-    icon: FileText,
-    questions: [
-      { q: "What types of back office functions does KDCI handle?", a: "We manage data entry, document processing, claims administration, invoice processing, accounts payable/receivable support, compliance documentation, report generation, CRM data hygiene, and administrative coordination." },
-      { q: "How do you ensure data accuracy in high-volume processing tasks?", a: "We use a dual-key verification system for critical data entry, automated validation rules, and random sample audits. Our documented accuracy rate across all data operations is 99.6%." },
-      { q: "Can KDCI handle document-heavy workflows like contracts or claims?", a: "Yes. We have dedicated document processing teams experienced in legal contracts, insurance claims, freight documentation, medical records, and financial statements. We use OCR + human review for maximum accuracy." },
-      { q: "Is KDCI equipped to handle confidential business data?", a: "Yes. We are SOC-2 ready and ISO 27001 certified. All data processing occurs in secure, monitored environments with strict access controls, audit logging, and NDAs signed at every level of engagement." },
-      { q: "Can you automate parts of our back office with AI?", a: "Yes. We layer AI tools onto existing workflows — intelligent document classification, automated data extraction via OCR, anomaly detection in financial data, and smart routing of work items. We don't just automate; we augment." },
-      { q: "How do you handle peak volume periods (end of month, quarter close)?", a: "We build surge capacity into back office contracts. For cyclical peaks, we pre-plan staffing adjustments 3–4 weeks in advance. Ad-hoc surges up to 25% above base can be accommodated with 48 hours notice." },
-      { q: "Can KDCI integrate with our ERP or accounting software?", a: "Yes. Our teams are trained on SAP, Oracle, NetSuite, QuickBooks, Xero, Microsoft Dynamics, and most major platforms. We can also operate through secure remote desktop or VDI environments." },
-      { q: "What industries do your back office teams specialize in?", a: "We have deep vertical expertise in Fintech, Healthcare (HIPAA-compliant), Real Estate, Logistics, Insurance, and Professional Services. Each vertical has a dedicated knowledge base and trained specialist team." },
-      { q: "How are back office KPIs tracked and reported?", a: "We deliver weekly performance dashboards covering throughput, error rate, turnaround time, and SLA compliance. Monthly business reviews include trend analysis and continuous improvement recommendations." },
-      { q: "Do you offer a pilot or proof-of-concept engagement?", a: "Yes. We offer a 30-day pilot for new back office engagements where we run a defined workflow in parallel with your existing process. This lets you validate quality and speed before full transition." },
-    ]
-  },
-  {
     id: 'creative',
     label: 'AI Creative Studio',
     icon: Palette,
     questions: [
-      { q: "What creative services does KDCI's production team provide?", a: "We offer graphic design, video editing and production, motion graphics, UI/UX design, social media content creation, copywriting, email design, ad creative (static and animated), and brand identity work." },
-      { q: "How does a managed creative pod work?", a: "A Creative Pod is a dedicated team of 2–6 creatives (Art Director, Designers, Video Editors, Copywriter) assigned exclusively to your account. They operate as your in-house team, just offshore." },
-      { q: "What design tools does your team use?", a: "Our designers work in Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere Pro, After Effects), Canva Pro, Webflow, and Framer. We adapt to whatever's in your existing workflow." },
-      { q: "Can KDCI maintain our brand guidelines at scale?", a: "Absolutely. We conduct a brand onboarding session in week one, build a shared asset library, and implement a style guide review step into every deliverable. Brand consistency is a core KPI for our creative teams." },
-      { q: "How do we manage revisions and feedback loops?", a: "We use a structured feedback process via Frame.io for video, Figma comments for design, and a project board (Asana, ClickUp, or Notion) for all task tracking. Most feedback cycles complete in under 24 hours." },
-      { q: "How quickly can KDCI produce content at scale?", a: "Our creative pods can produce 50–200+ social media assets per month, 10–30 video edits per month, and unlimited copy drafts depending on pod size. We're built for high-velocity creative output." },
-      { q: "Do your creatives have experience with performance marketing assets?", a: "Yes. We have a dedicated performance creative unit that specializes in direct-response ad creative for Meta, TikTok, Google, and YouTube. We understand hooks, CTAs, and creative testing frameworks." },
-      { q: "Can KDCI handle video production from raw footage?", a: "Yes. Our video editors work from your raw footage, stock footage, and motion graphics briefs. We produce polished edits for social, YouTube, webinars, product demos, and brand films." },
-      { q: "How do we share files and assets with the creative team?", a: "We work through whatever system you prefer — Google Drive, Dropbox, Frame.io, WeTransfer, or your DAM. We also maintain a KDCI-hosted asset management environment if you don't have one." },
-      { q: "What's the minimum team size for a creative engagement?", a: "You can start with a single dedicated creative (e.g., one Graphic Designer or one Video Editor) at a monthly flat rate. Most clients scale to full pods within 90 days after validating the initial hire." },
+      { q: "What makes KDCI's AI Creative Studio different from a traditional design agency?", a: "Our Manila team runs AI tools — Midjourney, Adobe Firefly, Runway ML, CapCut AI — at every stage of production. That means faster delivery, lower cost per asset, and consistent brand output without sacrificing quality. Traditional agencies bill hourly and have slower turnaround cycles. We operate on a production cadence model." },
+      { q: "What's included in each pricing tier?", a: "Content Pack ($2,500/mo + $1K setup): 20 social posts, 4 carousels, and monthly brand assets — ideal for brands that need consistent social output. Creative Retainer ($4,500/mo + $1.5K setup): dedicated designer, unlimited requests, 5-day turnaround. Full Studio ($7,500/mo + $2.5K setup): full team covering brand, ads, video, and social with a 3-day priority SLA." },
+      { q: "How quickly can we get started?", a: "We begin brand discovery within 48 hours of sign-off. Your first content batch is delivered by the end of Week 2. Full production cadence is live by Month 1. We're structured to move fast without skipping brand alignment." },
+      { q: "How does AI-generated imagery work without going off-brand?", a: "We build a brand prompt library in Week 1 — documenting your colour palette, visual style, subject matter rules, and tone. Every AI image generated goes through a brand consistency review before delivery. You'll never receive outputs that don't match your visual identity." },
+      { q: "Can you handle video and motion content?", a: "Yes. Our Full Studio tier includes a dedicated motion and video team. We use Runway ML for AI-assisted video, CapCut AI for short-form editing, and Adobe Premiere/After Effects for polished cuts. ElevenLabs handles voiceover where required." },
+      { q: "What's the minimum commitment?", a: "All plans require a 3-month minimum. This ensures we have enough runway to complete onboarding, establish a production rhythm, and deliver measurable results. Most clients stay well beyond the minimum — our average engagement is over 18 months." },
+      { q: "Can we start on a Content Pack and upgrade later?", a: "Absolutely — and this is the most common path. Many clients start with the Content Pack to validate quality and cadence, then move to the Creative Retainer or Full Studio as their creative needs scale. The upgrade is seamless because your brand guide and team are already in place." },
+      { q: "What industries do you specialise in?", a: "Our highest-volume verticals are E-Commerce & Retail, Real Estate, SaaS & Tech, Hospitality, Professional Services, and Startups. We have pre-built template systems and production playbooks for each that accelerate onboarding significantly." },
+      { q: "How do we manage revisions and feedback loops?", a: "We use a structured feedback process — Frame.io for video reviews, Figma comments for design assets, and a shared project board (Asana, ClickUp, or Notion) for all task tracking. Revision requests submitted before 12pm Manila time are typically turned around within the same business day." },
+      { q: "What design tools does your team use?", a: "Our team works in Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere Pro, After Effects), Canva Pro, Midjourney, Adobe Firefly, Runway ML, and CapCut AI. We adapt to whatever's already in your workflow and can operate within your existing DAM or asset library." },
     ]
   },
   {
-    id: 'ai',
-    label: 'AI Operations',
-    icon: BrainCircuit,
+    id: 'outbound',
+    label: 'AI Outbound & Lead Generation',
+    icon: TrendingUp,
     questions: [
-      { q: "What is 'AI Operations' and how does KDCI deliver it?", a: "AI Operations (AI Ops) is the integration of intelligent automation into business workflows — using large language models, OCR, computer vision, and process automation layered with human oversight. KDCI designs, deploys, and manages these hybrid human-AI systems for clients." },
-      { q: "Do I need to have my own AI tools for KDCI to work with?", a: "No. We bring our own AI stack including LLM integrations, workflow automation platforms, and proprietary QA tools. We can also integrate with your existing AI infrastructure or tools like OpenAI, Anthropic, or Google AI." },
-      { q: "Can KDCI build custom AI agents for my business processes?", a: "Yes. Our AI engineering team designs and deploys custom agentic workflows using LangChain, CrewAI, and similar frameworks. We build agents for tasks like automated research, document review, outreach sequencing, and data synthesis." },
-      { q: "How do you handle AI hallucinations and accuracy in automated workflows?", a: "We implement human-in-the-loop checkpoints at every critical step. Our AI agents generate outputs that are reviewed and approved by trained human operators before execution, ensuring accuracy without sacrificing speed." },
-      { q: "What business processes are best suited for AI augmentation?", a: "High-volume, rule-based tasks with structured inputs are ideal: document classification, data extraction, content generation, email routing, lead scoring, report generation, and first-response customer support triage." },
-      { q: "Can you help us identify automation opportunities in our current operations?", a: "Yes. We offer a free 2-hour Operations Audit session where our AI solutions architects map your existing workflows and identify the highest-ROI automation opportunities, ranked by effort and impact." },
-      { q: "How is AI performance monitored over time?", a: "We track accuracy rates, task completion rates, time savings, and error rates through a monthly AI Ops performance report. Models are retrained or updated as your data and processes evolve." },
-      { q: "Is agentic AI safe to deploy in regulated industries like Fintech or Healthcare?", a: "Yes, with the right safeguards. We implement strict data governance, encrypted pipelines, audit logs, and human approval gates for any sensitive outputs. We have deployed AI Ops solutions for HIPAA and SOC-2 environments." },
-      { q: "What is the typical ROI timeline for an AI Ops engagement?", a: "Most clients see measurable ROI within 60–90 days. Common outcomes include 40–80% reduction in manual processing time, 30–50% cost reduction versus purely human teams, and near-zero error rates on automated tasks." },
-      { q: "How does KDCI stay current with rapidly evolving AI technology?", a: "Our AI Labs team conducts weekly model evaluations, attends major AI research conferences, and has direct partnerships with leading AI vendors. We proactively upgrade client workflows when superior tools become available." },
+      { q: "What exactly is 'fully managed' outbound?", a: "It means we handle every component: ICP definition, prospect sourcing, Clay enrichment, sequence writing, domain setup, inbox warm-up, LinkedIn campaign management, reply handling, meeting booking, CRM updates, and weekly reporting. You review and approve the ICP and sequences, then we run the engine. Your only job is to show up to the meetings we book." },
+      { q: "Why is there a 6-week ramp before full performance?", a: "Cold email deliverability depends on sender reputation. Sending high volumes from a new domain immediately will land in spam. We use a structured warm-up protocol — starting with small batches, gradually increasing volume, monitoring bounce and spam rates — before scaling to full contact volume. Skipping this destroys your domain reputation. We don't skip it." },
+      { q: "How many meetings should we expect?", a: "Meetings booked depend on ICP quality, deal size, and market saturation. Typical benchmarks for our managed programmes: 8–15 meetings/month on the Launch Package, 15–30 on the Growth Engine, and 25–45+ on the Full Outbound Team. These are ranges — actual results depend on your market and offer." },
+      { q: "What's the difference between the Growth Engine and Full Outbound Team?", a: "The Growth Engine ($5,000/mo) runs 1,500 contacts/week across email and LinkedIn with multi-sequence testing — ideal for teams with a defined ICP who want to scale outbound. The Full Outbound Team ($8,000/mo) adds a dedicated SDR and researcher, 3,000+ contacts/week, Clay enrichment on every contact, and a weekly strategy call — it's a full outbound function, not just a campaign." },
+      { q: "Do you handle LinkedIn outreach as well as email?", a: "Yes — LinkedIn outreach is included from the Growth Engine tier upward. We use LinkedIn Sales Navigator to run connection requests, personalised InMail sequences, and profile engagement campaigns, coordinated with email so the outreach is multi-channel rather than repetitive." },
+      { q: "What CRM do you update and how?", a: "We natively integrate with HubSpot and Salesforce. Every qualified reply, booked meeting, and status change is logged in your CRM in real time. If you use a different CRM, we discuss integration options during onboarding — most standard CRMs can be connected via Zapier." },
+      { q: "Can we review and approve the sequences before launch?", a: "Yes — always. We write the first sequence and present it for your review and approval before a single email is sent. You can request edits, approve, or reject. We iterate until you're satisfied. The same applies to LinkedIn scripts and A/B test variants." },
+      { q: "What's the minimum commitment?", a: "All plans require a 3-month minimum. This gives the ramp period time to complete and delivers enough performance data to optimise. Most clients continue beyond 3 months — outbound compounds as we learn what resonates with your ICP and refine the sequences accordingly." },
+      { q: "How do you personalise email sequences at scale?", a: "We use Clay to pull live data signals for every contact — recent funding rounds, new hire announcements, job postings, product launches, LinkedIn activity — and feed those signals into AI-written sentence-level personalization. Every email reads like it was researched manually, even at 3,000 contacts per week." },
+      { q: "What happens if deliverability drops during a campaign?", a: "We monitor bounce rates, spam complaint rates, and inbox placement daily. If deliverability falls below our threshold, we pause sending immediately, investigate root cause (list quality, domain reputation, content triggers), remediate, and relaunch only after we've confirmed the issue is resolved. We never sacrifice your domain health for short-term volume." },
     ]
   },
   {
-    id: 'proptech',
-    label: 'Property Management',
-    icon: Building2,
-    questions: [
-      { q: "What property management tasks can KDCI's team handle remotely?", a: "We handle tenant inquiries, lease administration, maintenance request coordination, tenant onboarding and verification, rental payment tracking, vendor communication, move-in/move-out documentation, and portfolio reporting." },
-      { q: "Is KDCI experienced with property management software platforms?", a: "Yes. Our teams are trained on AppFolio, Buildium, Yardi, Rent Manager, DoorLoop, RealPage, and Property Meld, among others. We adapt to your existing PropTech stack." },
-      { q: "How does KDCI handle after-hours maintenance emergencies?", a: "We staff 24/7 maintenance coordination desks that receive and triage emergency calls, dispatch your approved vendor network, and provide tenants with real-time status updates — at a fraction of the cost of a local after-hours team." },
-      { q: "Can KDCI support tenant screening and verification?", a: "Yes. We process tenant applications, coordinate background and credit check submissions through your screening platform, verify employment and references, and produce a structured recommendation report for your review." },
-      { q: "How do you handle lease renewals and rent escalations?", a: "We manage the full renewal workflow: sending renewal notices at your configured lead time, collecting responses, preparing lease amendment documents, and updating your property management system upon execution." },
-      { q: "Can KDCI manage communication with vendors and contractors?", a: "Yes. We coordinate your approved vendor list, issue work orders, track completion, process invoices against work orders, and maintain a maintenance log for each property — keeping your operations audit-ready at all times." },
-      { q: "Is KDCI familiar with compliance requirements for residential and commercial property?", a: "Our teams are trained on common regulatory requirements including habitability standards, security deposit regulations, lease disclosure requirements, and Fair Housing Act compliance. We flag compliance risks and escalate to your team." },
-      { q: "How does KDCI handle high-volume leasing for large portfolios?", a: "We scale dedicated leasing desk teams proportional to your portfolio size. For portfolios of 1,000+ units, we implement AI-assisted inquiry triage and automated scheduling to handle volume without sacrificing response time." },
-      { q: "Can KDCI prepare financial reports for property portfolios?", a: "Yes. Our back office layer produces monthly income and expense reports, occupancy summaries, rent roll reports, and variance analyses — formatted to your specifications and ready for investor or owner distribution." },
-      { q: "What is your data security approach for tenant personal information?", a: "Tenant PII is handled under strict data governance protocols. We apply role-based access controls, encrypted storage, and access audit logging. All team members handling tenant data sign comprehensive data handling agreements." },
-    ]
-  },
-  {
-    id: 'recruitment',
+    id: 'workforce',
     label: 'AI Workforce Augmentation',
     icon: UserCheck,
     questions: [
-      { q: "What is 'Agentic Recruitment' and how is it different from traditional RPO?", a: "Agentic Recruitment combines AI-driven sourcing and screening with expert human recruiters to dramatically accelerate hiring. Unlike traditional RPO that relies purely on human effort, our system automates outreach, resume scoring, and initial qualification — delivering a curated shortlist in days, not weeks." },
-      { q: "What types of roles does KDCI's Agentic Recruitment cover?", a: "We specialize in technical roles (software engineers, data scientists, DevOps), operations roles (project managers, team leads, operations analysts), creative roles, and executive/leadership positions. We source globally with deep expertise in Southeast Asia, Latin America, and Eastern Europe." },
-      { q: "How fast can KDCI deliver a shortlist of qualified candidates?", a: "For mid-level roles, our AI sourcing layer identifies and pre-screens candidates within 48–72 hours. A curated shortlist of 3–5 interview-ready candidates typically lands in your inbox within 5 business days." },
-      { q: "Does KDCI handle the full recruitment lifecycle or just sourcing?", a: "We offer end-to-end: job brief → AI sourcing → initial screening → skills assessment → coordinated interviews → offer management → onboarding coordination. Or we can plug into specific stages of your existing process." },
-      { q: "How does the AI screening component work?", a: "Our AI layer parses resumes against your job requirements, scores candidates on defined criteria, and runs an automated async video or text screening. Human recruiters then review the AI-scored results and validate the shortlist." },
-      { q: "What is your placement success rate and time-to-fill?", a: "Our average time-to-fill for technical roles is 11 business days. Our 90-day retention rate for placements is 96%. We offer a free replacement guarantee within the first 60 days if a placement doesn't work out." },
-      { q: "Can KDCI run high-volume hiring campaigns?", a: "Yes. We have delivered hiring sprints of 50–200+ roles within 30–60 day windows for clients with aggressive scaling needs. Our AI infrastructure scales linearly with volume without sacrificing quality." },
-      { q: "How do you source passive candidates who aren't actively job-hunting?", a: "Our AI agents conduct multi-channel outreach across LinkedIn, GitHub, Behance, and industry communities with personalized messaging. We consistently achieve 35–45% response rates from passive candidates — 3x the industry average." },
-      { q: "Does KDCI help with employer branding for talent attraction?", a: "Yes. We offer an employer brand audit and can produce targeted content (team stories, culture posts, job-specific landing pages) to improve candidate response rates and quality of applicants for your open roles." },
-      { q: "How are recruiter fees structured — contingency or retained?", a: "We offer both models. For retained search (executive or specialized roles), we charge a 33% upfront engagement fee. For volume or mid-level roles, we operate on a success-based placement fee. Monthly flat-rate RPO subscriptions are also available for ongoing hiring pipelines." },
+      { q: "What makes KDCI.ai specialists different from a typical VA or offshore hire?", a: "Every specialist in our talent pool is AI-trained before placement — they arrive proficient in Claude, GPT-4o, Zapier, Midjourney, HubSpot, Notion AI, and other tools relevant to your role. You're not training someone on AI from scratch; you're embedding someone who already uses these tools in their daily workflow." },
+      { q: "How fast can a specialist be live and productive?", a: "Our standard onboarding timeline runs 5–7 business days from role brief to first productive day. Day 1–2: brief call and KPI definition. Day 3–5: candidate matching from our talent pool. Day 6–7: your interviews and hire confirmation. Week 2: full onboarding and setup. Week 3: first productive week with daily check-ins." },
+      { q: "What does the 2-week replacement guarantee mean?", a: "If a placed specialist isn't the right fit for any reason within the first 3 months, we find and onboard a replacement within 2 weeks at zero additional cost. No conditions, no rebooking fees." },
+      { q: "What's included in the monthly fee?", a: "Everything. The flat monthly rate covers the specialist's salary, HR administration, payroll processing, Philippine statutory benefits, compliance documentation, and KDCI.ai's management layer. There are no hidden markups or additional HR costs on your end." },
+      { q: "What's the difference between Part-Time and Full-Time plans?", a: "Part-Time ($2,000/mo) gives you 20 hours per week at a fixed schedule — ideal for focused AI ops or research roles. Full-Time ($3,500/mo) is a fully embedded team member at 40 hours per week. Both plans include all AI tools, HR management, and the 2-week replacement guarantee." },
+      { q: "How does the Team (3+ seats) plan work?", a: "Team pricing starts at $2,800/seat/month for 3 or more dedicated specialists, offering a volume discount over the individual full-time rate. At 5+ seats, a dedicated team lead is included to coordinate output, run daily standups, and manage KPI reporting across the team." },
+      { q: "What types of roles can we hire for?", a: "Our most in-demand AI-augmented roles include: Prompt Engineers, AI Ops Specialists, Data Analysts, AI-Enabled Executive VAs, Content Ops Managers, Social Media AI Specialists, CRM Admins (HubSpot/Salesforce), Research Analysts, and Catalog & Listing Managers. If your role isn't listed, contact us — we likely have a match in our talent pool." },
+      { q: "Is there a minimum commitment?", a: "All plans require a 3-month minimum. This ensures we have time to complete onboarding, validate performance, and deliver measurable results. Our average placement tenure is 14 months — most clients scale to additional seats well before the minimum expires." },
+      { q: "Do specialists work exclusively for our company?", a: "Yes. Every KDCI.ai specialist is 100% dedicated to your account. They work your hours, use your tools, follow your processes, and represent your brand. They are not shared across multiple clients — they are effectively your employee, just managed and supported by KDCI.ai." },
+      { q: "Can we conduct our own interviews before confirming a hire?", a: "Absolutely. We present a shortlist of 3–5 pre-screened, AI-proficiency-tested candidates. You conduct your own interviews, ask your own questions, and make the final hire decision. We handle the offer, onboarding, HR setup, and ongoing management from there." },
     ]
   },
 ];
 
 export const FaqPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [activeCategory, setActiveCategory] = useState('cx');
+  const [activeCategory, setActiveCategory] = useState('ai-monitoring');
   const [openIndex, setOpenIndex]           = useState<number | null>(null);
   const [searchQuery, setSearchQuery]       = useState('');
 
