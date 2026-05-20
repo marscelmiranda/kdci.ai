@@ -23,8 +23,8 @@ const SERVICES = [
   },
   {
     icon: Workflow,
-    title: 'Integration Setup with Existing Tools',
-    desc: 'We connect your new AI agents to the CRM, helpdesk, ERP, and data sources your team already uses — so outcomes flow into your existing systems from day one.',
+    title: 'Multi-Platform Integration & Setup',
+    desc: 'Connect and plug your new AI agents into your CRM, helpdesk, ERP, and data sources so outcomes flow into your existing systems from day one.',
   },
   {
     icon: GraduationCap,
@@ -34,7 +34,7 @@ const SERVICES = [
   {
     icon: ShieldCheck,
     title: '30-Day Post-Launch Monitoring Handoff',
-    desc: 'The engagement ends with a 30-day monitored handoff — catching edge cases, retraining on real-world data, and setting up the performance baseline before converting to a monitoring retainer.',
+    desc: 'We run 30 days of live monitoring before hand off, covering fixing edge cases, retraining on real data, and locking in a performance baseline before converting to a monitoring retainer.',
   },
 ];
 
