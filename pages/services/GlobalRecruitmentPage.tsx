@@ -270,7 +270,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              Specialist live in 5–7 days.<br /><span className="text-[#E61739]">From brief to first productive day.</span>
+              Your AI-Skilled Hire,<br /><span className="text-[#E61739]">Live in 5–7 Days.</span>
             </h2>
           </div>
           <div className="relative">
