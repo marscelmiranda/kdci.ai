@@ -235,7 +235,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               What we do
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
-              Everything you need to go from <span className="text-[#E61739] text-[48px]">zero to live AI.</span>
+              Maximize ROI and Efficiency through <span className="text-[#E61739] text-[48px]">AI implementation</span>
             </h2>
             <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Our team works across your environment to ensure the success implementation of agentic ai solutions. From AI-readiness audit to retainer hand-off, we deploy AI copilots that maximize ROI and transform your workflows.</p>
           </div>
