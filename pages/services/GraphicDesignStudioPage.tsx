@@ -290,7 +290,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              Fully operational creative design team onboarded in 30 days.
+              Fully operational creative design team<br /><span className="text-[#E61739]">onboarded in 30 days.</span>
             </h2>
           </div>
           <div className="relative">
