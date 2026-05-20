@@ -267,34 +267,51 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         </div>
       </section>
 
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">AI CX Agent live in just <span className="text-[#E61739]">1 month.</span></h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[18px]">Most AI customer service implementations take quarters. But we go from discovery to a live, deflecting AI support agent in just 30 days, with continuous optimization every month after.</p>
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Onboarding Timeline
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+              AI CX Agent live in just 1 month.<br /><span className="text-[#E61739]">Continuous optimization every month after.</span>
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 relative">
-            <div className="hidden lg:block absolute top-[2.75rem] left-[5%] right-[5%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
-            {[
-              { step: "01", period: "Week 1",    title: "Audit",        desc: "Map current support stack, ticket types, and monthly volume.", icon: ScanSearch },
-              { step: "02", period: "Week 2",    title: "Configure AI", desc: "Configure AI agents for your top 10 highest-volume ticket categories.", icon: BrainCircuit },
-              { step: "03", period: "Week 3",    title: "Train Team",   desc: "Train PH-based escalation team on your brand, tone, and policies.", icon: UsersRound },
-              { step: "04", period: "Week 4",    title: "Soft Launch",  desc: "50% AI / 50% human split. Tune deflection thresholds in real time.", icon: Rocket },
-              { step: "05", period: "Month 2",   title: "Full Launch",  desc: "Target 70%+ AI deflection rate. Full hybrid operation goes live.", icon: Zap },
-              { step: "06", period: "Ongoing",   title: "Optimize",     desc: "Monthly CX scorecard, agent retraining, CSAT reviews, KB updates.", icon: Settings2 },
-            ].map((s, idx) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
-                <div className="w-14 h-14 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-[#E61739] mb-6 group-hover:border-[#E61739] group-hover:bg-slate-900 transition-all shadow-lg">
-                  <s.icon size={24} />
+          <div className="relative">
+            <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {[
+                { n: '01', period: 'Week 1',  title: 'Audit',        desc: 'Map current support stack, ticket types, and monthly volume.' },
+                { n: '02', period: 'Week 2',  title: 'Configure AI', desc: 'Configure AI agents for your top 10 highest-volume ticket categories.' },
+                { n: '03', period: 'Week 3',  title: 'Train Team',   desc: 'Train PH-based escalation team on your brand, tone, and policies.' },
+                { n: '04', period: 'Week 4',  title: 'Soft Launch',  desc: '50% AI / 50% human split. Tune deflection thresholds in real time.' },
+                { n: '05', period: 'Month 2', title: 'Full Launch',  desc: 'Target 70%+ AI deflection rate. Full hybrid operation goes live.' },
+                { n: '06', period: 'Ongoing', title: 'Optimize',     desc: 'Monthly CX scorecard, agent retraining, CSAT reviews, KB updates.' },
+              ].map((s, i) => (
+                <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {s.n}
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
                 </div>
-                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-1">{s.period}</div>
-                <div className="text-[#E61739] text-xs font-black uppercase tracking-[0.2em] mb-2">{s.step}</div>
-                <h4 className="text-lg font-bold mb-2">{s.title}</h4>
-                <p className="text-[11px] text-white/40 leading-relaxed font-medium">{s.desc}</p>
+              ))}
+            </div>
+          </div>
+          <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Settings2 size={18} className="text-[#E61739]" />
               </div>
-            ))}
+              <div>
+                <h4 className="font-black text-[#1D1D1F] text-sm mb-0.5">Ongoing after Month 2</h4>
+                <p className="text-[#86868b] text-sm font-medium">Monthly CSAT scorecard · agent retraining · knowledge base updates</p>
+              </div>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+              Start Your 30-Day Onboarding <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
