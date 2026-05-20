@@ -169,9 +169,9 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             </div>
 
             {/* Right — image card */}
-            <div className="relative">
+            <div className="relative lg:h-full">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105" />
-              <div className="relative min-h-[400px] lg:h-[480px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
+              <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src="/ai-agent-monitoring-hero.jpeg"
                   alt="AI agent monitoring dashboard"
