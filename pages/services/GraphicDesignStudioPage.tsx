@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, BrainCircuit, Target, Laptop, CheckCircle2, Megaphone, Home, Quote, Video, Eye, ZoomIn, X, Shield, Star, ImageIcon, Layers, Building2, Briefcase, Sparkles, Palette } from 'lucide-react';
+import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, BrainCircuit, Target, Laptop, CheckCircle2, Megaphone, Home, Quote, Video, Eye, ZoomIn, X, Shield, Star, ImageIcon, Layers, Building2, Briefcase, Sparkles, Palette, Clock } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -284,29 +284,51 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       </section>
 
       {/* ── ONBOARDING TIMELINE ── */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Onboarding Timeline</div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Live in 30 days.</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">From brand discovery to full production cadence — a structured onboarding that gets content flowing fast.</p>
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Onboarding Timeline
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+              Live in 30 days.<br /><span className="text-[#E61739]">Full production cadence from month one.</span>
+            </h2>
           </div>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { step: "01", period: "Day 1–3", title: "Brand Discovery", desc: "Collect assets, brand voice, style preferences and existing guidelines." },
-              { step: "02", period: "Day 4–7", title: "Brand Guide", desc: "Create or audit your brand guide. Document colours, fonts, tone, and visual rules." },
-              { step: "03", period: "Week 2", title: "First Batch", desc: "First content delivered — feedback cycle begins. Revisions turned around in 48 hours." },
-              { step: "04", period: "Week 3", title: "Refine & Rhythm", desc: "Refine based on feedback. Establish the production rhythm and template systems." },
-              { step: "05", period: "Month 1", title: "Full Cadence Live", desc: "Full production cadence live. Content calendar set and weekly delivery begins." },
-              { step: "06", period: "Ongoing", title: "Weekly Delivery", desc: "Weekly asset delivery. Monthly creative review and planning session with your team." },
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm flex flex-col">
-                <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">{s.period}</div>
-                <h4 className="text-base font-bold text-slate-900 mb-2">{s.title}</h4>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">{s.desc}</p>
+          <div className="relative">
+            <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {[
+                { n: '01', period: 'Day 1–3',  title: 'Brand Discovery',  desc: 'Collect assets, brand voice, style preferences and existing guidelines.' },
+                { n: '02', period: 'Day 4–7',  title: 'Brand Guide',       desc: 'Create or audit your brand guide. Document colours, fonts, tone, and visual rules.' },
+                { n: '03', period: 'Week 2',   title: 'First Batch',       desc: 'First content delivered — feedback cycle begins. Revisions turned around in 48 hours.' },
+                { n: '04', period: 'Week 3',   title: 'Refine & Rhythm',   desc: 'Refine based on feedback. Establish the production rhythm and template systems.' },
+                { n: '05', period: 'Month 1',  title: 'Full Cadence Live', desc: 'Full production cadence live. Content calendar set and weekly delivery begins.' },
+                { n: '06', period: 'Ongoing',  title: 'Weekly Delivery',   desc: 'Weekly asset delivery. Monthly creative review and planning session with your team.' },
+              ].map((s, i) => (
+                <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {s.n}
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Clock size={18} className="text-[#E61739]" />
               </div>
-            ))}
+              <div>
+                <h4 className="font-black text-[#1D1D1F] text-sm mb-0.5">Ongoing after Month 1</h4>
+                <p className="text-[#86868b] text-sm font-medium">Weekly asset delivery · monthly creative review · continuous brand optimization</p>
+              </div>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+              Start Your 30-Day Onboarding <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
