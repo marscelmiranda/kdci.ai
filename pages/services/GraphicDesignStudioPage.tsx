@@ -197,21 +197,21 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 AI-Enabled Creative Design Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Faster output, lower cost, premium quality. Our Manila creative team produces at a pace no traditional agency can match — powered by AI tools at every step.
+                Faster output, lower cost, premium quality. Our dedicated Manila team combines human design talent with AI production tools to create your assets at the speed and cost no traditional design agency can replicate.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">AI-generated imagery with strict brand consistency — no off-brand outputs</span>
+                  <span className="leading-snug">Full-service creative output from one creative design team</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Social media, ads, video, and brand assets — one team, full coverage</span>
+                  <span className="leading-snug">On-brand AI generated collaterals consistent to your visual identity</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">First content delivered within 2 weeks — full production cadence live in 30 days</span>
+                  <span className="leading-snug">First design delivered within 2 weeks</span>
                 </div>
               </div>
 
