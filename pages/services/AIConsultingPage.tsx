@@ -136,8 +136,8 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
-              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739] text-[66px]">We audit, design, and build your AI stack.</span><span className="text-shine-white text-[66px]"> Then we monitor it for life.</span>
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
+                AI Consulting and Implementation Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 From ai consulting to long-term monitoring, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks.
