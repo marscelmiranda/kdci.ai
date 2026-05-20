@@ -196,8 +196,8 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[60px]">Better customer experience enhanced by AI agents.</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">KDCI.ai helps CX teams turn every customer touchpoint into a revenue opportunity. Led by AI on first contact, humans on escalation, and continuous optimization, delivered as one fully managed CX retainer.</p>
+            <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[60px]">CX support enhanced by AI agents.</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium ml-[232px] mr-[232px]">Led by AI on first contact, humans on escalation, and continuous optimization, delivered as one fully managed CX retainer.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-24">
