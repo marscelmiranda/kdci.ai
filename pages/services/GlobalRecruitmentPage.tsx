@@ -273,7 +273,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               Your AI-Skilled Hire,<br /><span className="text-[#E61739]">Live in 5–7 Days.</span>
             </h2>
             <p className="text-slate-500 text-lg font-medium max-w-3xl mx-auto leading-relaxed mt-6">
-              Dedicated specialists from the Philippines trained on AI tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.
+              We've got a proven onboarding framework that places future-ready talent inside your workflow, so they go from role brief to productive from day-one fast.
             </p>
           </div>
           <div className="relative">
