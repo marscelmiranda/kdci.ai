@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_CX_TEAM } from '../../data';
+import IMG_CX_HERO from '@/attached_assets/Gemini_Generated_Image_copuzrcopuzrcopu_1779320301879.png';
 
 export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
@@ -143,7 +144,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png?auto=format&fit=crop&q=80&w=1000&h=1000"
+                  src={IMG_CX_HERO}
                   alt="Filipino Customer Support Agent"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
