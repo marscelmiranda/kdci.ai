@@ -194,8 +194,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 Easy Sell · AI Creative Studio
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#ffffff]">AI-native</span><br/>
-                <span className="text-[#e61739]">Creative Studio.</span>
+                AI-Enabled Creative Design Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Faster output, lower cost, premium quality. Our Manila creative team produces at a pace no traditional agency can match — powered by AI tools at every step.
