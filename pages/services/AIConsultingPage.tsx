@@ -404,7 +404,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
               Industries where <span className="text-[#E61739]">AI Implementation</span><br /> delivers the fastest ROI
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We work in verticals where AI implementation meets urgent, real-life business needs.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We work in verticals where AI implementation meets urgent,<br /> real-life business needs.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
             {INDUSTRIES.map((ind, i) => (
