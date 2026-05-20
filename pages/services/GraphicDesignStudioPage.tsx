@@ -134,7 +134,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "SaaS & Tech",
       icon: Laptop,
       tag: "Product & Decks",
-      workflows: ["Product screenshots & UI mockups", "Investor and sales pitch decks", "Social media content at scale", "Onboarding and in-app visuals", "Ad creative for paid channels"],
+      workflows: ["Product screenshot design, UI mockups & app store graphics", "Investor pitch deck design & sales presentation templates", "Social media graphic design at scale for tech brands", "Onboarding flow visuals, in-app graphics & UX illustrations", "Ad creative design for paid social and SEM campaigns"],
     },
     {
       name: "Hospitality",
