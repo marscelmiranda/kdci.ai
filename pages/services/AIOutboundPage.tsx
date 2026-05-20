@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { ArrowRight, CheckCircle2, Star, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, Calendar, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, Calendar, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap, Clock } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -8,7 +8,7 @@ import { Captcha, CaptchaHandle } from '../../components/Captcha';
 const CONTACT_IMG = "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800";
 
 export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const captchaRef = useRef<CaptchaHandle>(null);
@@ -484,103 +484,112 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
       </section>
 
       {/* ── CONTACT FORM ── */}
-      <section className="py-20 px-6 bg-[#020202]">
-        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-[4rem] overflow-hidden relative border border-white/[0.07]">
-          <div className="absolute inset-0 z-0">
-            <img src={CONTACT_IMG} alt="AI Outbound Team" className="w-full h-full object-cover opacity-[0.05]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80" />
-          </div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
+      <section className="py-20 px-6 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
-          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
-
-            <div className="p-12 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Let's Build Your Pipeline
-                </div>
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Start booking<br /><span className="text-[#E61739]">meetings in 6 weeks.</span>
-                </h2>
-                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your ICP and revenue targets — we'll have a campaign architecture and pricing ready within 24 hours.
-                </p>
-              </div>
-              <div className="space-y-4 mt-12">
-                {[
-                  { icon: CheckCircle2, text: 'ICP workshop and sequence approval in week 1' },
-                  { icon: CheckCircle2, text: 'First test batch live by week 4 — full volume by month 2' },
-                  { icon: CheckCircle2, text: '3-month minimum · 6-week ramp to full performance' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <item.icon size={14} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
-                  </div>
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={CONTACT_IMG}
+              alt="KDCI AI Outbound specialist on a discovery call"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Outbound & Lead Generation</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
+                Ready to start booking<br />meetings in 6 weeks?
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['ICP workshop in week 1', 'Full volume by month 2', '3-month minimum'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
                 ))}
-                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
-                  {[
-                    { val: '$3,000', label: 'Starting/mo' },
-                    { val: '6 Weeks', label: 'To Performance' },
-                    { val: '7', label: 'Platforms Run' },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
-                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
+          </div>
 
-            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
-                    <CheckCircle2 size={30} className="text-white" />
-                  </div>
-                  <h3 className="text-2xl font-black text-white">Brief received!</h3>
-                  <p className="text-white/50 text-sm font-medium max-w-xs">Our outbound team will review your ICP and goals and reach out within 24 hours.</p>
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14">
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-16">
+                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                  <CheckCircle2 size={32} className="text-white" />
                 </div>
-              ) : (
-                <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
-                  <h3 className="text-lg font-black text-white mb-6">Send us your campaign brief</h3>
+                <h3 className="text-2xl font-black text-white mb-3">Brief received!</h3>
+                <p className="text-white/50 font-medium">Our outbound team will review your ICP and goals and reach out within 24 hours.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                    Free Discovery Call
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Send Us Your Campaign Brief</h2>
+                  <p className="text-white/40 text-sm font-medium">Tell us about your ICP and revenue targets — we'll have a campaign architecture and pricing ready within 24 hours.</p>
+                </div>
+                <form onSubmit={async e => {
+                  e.preventDefault();
+                  const ok = await captchaRef.current?.verify();
+                  if (!ok) return;
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ ...form, service: 'AI Outbound', source: 'ai-outbound-page' }),
+                    });
+                  } catch {}
+                  setSubmitted(true);
+                }} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
-                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name</label>
+                      <input required className={inp} placeholder="Jane" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
-                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Last Name</label>
+                      <input required className={inp} placeholder="Smith" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
-                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
+                      <input required className={inp} placeholder="Acme Corp" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email</label>
+                      <input required type="email" className={inp} placeholder="jane@acme.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
                       <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Target contacts/week</label>
+                      <select value={form.volume} onChange={e => setForm(f => ({ ...f, volume: e.target.value }))} className={`${inp} appearance-none`}>
+                        <option value="">Select…</option>
+                        <option value="under-500">Under 500</option>
+                        <option value="500-1500">500–1,500</option>
+                        <option value="1500-3000">1,500–3,000</option>
+                        <option value="3000+">3,000+</option>
+                        <option value="not-sure">Not sure yet</option>
+                      </select>
+                    </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Outbound Plan</label>
-                    <input required className={inp} placeholder="e.g. Launch Package, Growth Engine, Full Outbound Team" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
-                  </div>
-                  <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="ICP, target industries, average deal size, CRM in use..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
+                    <textarea rows={3} className={`${inp} resize-none`} placeholder="ICP, target industries, average deal size, CRM in use…" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
-                    Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                    Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
-                  <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
+                  <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 24 hours</p>
                 </form>
-              )}
-            </div>
-
+              </>
+            )}
           </div>
         </div>
       </section>
