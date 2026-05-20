@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { ArrowRight, CheckCircle2, Star, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, Calendar, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, Shield, Target, Mail, Linkedin, BarChart3, Search, Users2, Calendar, TrendingUp, ShoppingCart, Briefcase, Building2, Home, Landmark, Laptop, RefreshCw, Database, MessageSquare, Filter, Zap, Clock } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
@@ -220,32 +220,51 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
       </section>
 
       {/* ── ONBOARDING TIMELINE ── */}
-      <section className="py-24 bg-[#F5F5F7]">
+      <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Onboarding Timeline</div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">First meetings in 6 weeks.</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">A structured launch process that builds the right foundation before volume ramps — so deliverability holds and meetings actually show.</p>
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Onboarding Timeline
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+              First meetings in 6 weeks.<br /><span className="text-[#E61739]">Built right before volume ramps.</span>
+            </h2>
           </div>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { step: "01", period: "Week 1",   title: "ICP Workshop", desc: "Define target titles, industries, company signals. Build ICP scoring model and messaging brief." },
-              { step: "02", period: "Week 2",   title: "List Building", desc: "Source prospects via Apollo. Enrich via Clay. QA every contact before sequences touch them." },
-              { step: "03", period: "Week 3",   title: "Sequence Setup", desc: "Write and approve 5-touch email sequences. Set up sending domains. Domain warm-up begins." },
-              { step: "04", period: "Week 4",   title: "Test Launch", desc: "Warm inboxes. Launch first 100-contact test batch. Monitor deliverability and early reply signals." },
-              { step: "05", period: "Month 2",  title: "Full Volume", desc: "Full volume launch. A/B test subject lines and CTAs. LinkedIn campaign goes live in parallel." },
-              { step: "06", period: "Ongoing",  title: "Optimise Weekly", desc: "Weekly performance reports. Sequence optimisation. List refresh. Scale what works, cut what doesn't." },
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm flex flex-col">
-                <div className="text-[#E61739] text-[9px] font-black uppercase tracking-widest mb-1">{s.step}</div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">{s.period}</div>
-                <h4 className="text-base font-bold text-slate-900 mb-2">{s.title}</h4>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">{s.desc}</p>
+          <div className="relative">
+            <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {[
+                { n: '01', period: 'Week 1',  title: 'ICP Workshop',    desc: 'Define target titles, industries, company signals. Build ICP scoring model and messaging brief.' },
+                { n: '02', period: 'Week 2',  title: 'List Building',   desc: 'Source prospects via Apollo. Enrich via Clay. QA every contact before sequences touch them.' },
+                { n: '03', period: 'Week 3',  title: 'Sequence Setup',  desc: 'Write and approve 5-touch email sequences. Set up sending domains. Domain warm-up begins.' },
+                { n: '04', period: 'Week 4',  title: 'Test Launch',     desc: 'Warm inboxes. Launch first 100-contact test batch. Monitor deliverability and early reply signals.' },
+                { n: '05', period: 'Month 2', title: 'Full Volume',     desc: 'Full volume launch. A/B test subject lines and CTAs. LinkedIn campaign goes live in parallel.' },
+                { n: '06', period: 'Ongoing', title: 'Optimise Weekly', desc: 'Weekly performance reports. Sequence optimisation. List refresh. Scale what works, cut what doesn\'t.' },
+              ].map((s, i) => (
+                <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {s.n}
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{s.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <Clock size={18} className="text-[#E61739]" />
               </div>
-            ))}
-          </div>
-          <div className="mt-8 p-5 rounded-2xl bg-white border border-slate-100 text-center shadow-sm">
-            <p className="text-slate-500 text-sm font-medium"><span className="text-slate-900 font-bold">3-month minimum</span> · 6-week ramp before full performance · Sequences are paused and relaunched if deliverability drops below threshold</p>
+              <div>
+                <h4 className="font-black text-[#1D1D1F] text-sm mb-0.5">Ongoing after Month 2</h4>
+                <p className="text-[#86868b] text-sm font-medium">Weekly reports · sequence optimisation · list refresh · scale what works</p>
+              </div>
+            </div>
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+              Book a Pipeline Strategy Call <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
