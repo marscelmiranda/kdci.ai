@@ -140,13 +140,13 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 <span className="text-[#E61739] text-[66px]">We audit, design, and build your AI stack.</span><span className="text-shine-white text-[66px]"> Then we monitor it for life.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                From AI readiness audit to full agent implementation — delivered in 6 weeks and converted into a long-term monitoring retainer.
+                From ai consulting to long-term monitoring, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Readiness audit across all departments — delivered in week one</span>
+                  <span className="leading-snug">AI readiness audit in the first week</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
@@ -154,7 +154,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">30-day monitored handoff, then converts to an ongoing monitoring retainer</span>
+                  <span className="leading-snug">30-day monitored handoff then converted to an ongoing monitoring retainer</span>
                 </div>
               </div>
 
@@ -237,7 +237,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
               Everything you need to go from <span className="text-[#E61739] text-[48px]">zero to live AI.</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six deliverables, one engagement. We audit, design, build, integrate, train your team, and hand off a monitored system.</p>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Our team works across your environment to ensure the success implementation of agentic ai solutions. From AI-readiness audit to retainer hand-off, we deploy AI copilots that maximize ROI and transform your workflows.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICES.map((s, i) => (
