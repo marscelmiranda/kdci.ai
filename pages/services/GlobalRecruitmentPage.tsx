@@ -185,7 +185,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               <Sparkles size={12} /> What We Deliver
             </div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight tracking-tight">
-              Your AI-trained team member,<br/>embedded from day one.
+              Autonomous workforce productive from day one.
             </h2>
             <p className="text-white/40 text-lg font-medium max-w-3xl mx-auto leading-relaxed">
               Dedicated Philippines professionals who arrive AI-ready — with tools, training, and KPI accountability built in from the start.
