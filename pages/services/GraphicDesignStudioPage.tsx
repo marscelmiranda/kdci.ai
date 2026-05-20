@@ -122,7 +122,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "E-Commerce & Retail",
       icon: ShoppingCart,
       tag: "Catalog & Ads",
-      workflows: ["Product catalog design at scale", "Ad creative — static and motion", "Promotional graphics & seasonal campaigns", "Packaging design & brand refresh", "Amazon A+ and PDP imagery"],
+      workflows: ["Product catalog design & bulk product image editing", "Static and animated ad creative for Meta, Google, and TikTok", "Promotional banner design & seasonal campaign graphics", "Packaging design & brand refresh for retail and DTC", "Amazon A+ content design, PDP imagery & marketplace visuals"],
     },
     {
       name: "Real Estate",
@@ -336,8 +336,8 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       <section id="cp-portfolio" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Creative Services Portfolio</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">See how we help brands produce high-quality, on-brand creative assets at scale.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Creative Design Services Built for High-Growth Brands</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our AI-powered graphic design studio specialises in six industries where visual content volume, brand consistency, and fast turnaround matter most.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {portfolioItems.map((item) => (
