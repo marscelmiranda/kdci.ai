@@ -272,6 +272,9 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
               Your AI-Skilled Hire,<br /><span className="text-[#E61739]">Live in 5–7 Days.</span>
             </h2>
+            <p className="text-slate-500 text-lg font-medium max-w-3xl mx-auto leading-relaxed mt-6">
+              Dedicated specialists from the Philippines trained on AI tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.
+            </p>
           </div>
           <div className="relative">
             <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
