@@ -195,8 +195,8 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Users2,       title: "Dedicated Team Member", desc: "Full-time or part-time — one specialist embedded in your workflow, available on your schedule, aligned to your tools and processes." },
-              { icon: BrainCircuit, title: "AI Tool Proficiency Included", desc: "Every specialist arrives trained on Claude, GPT-4o, Midjourney, Zapier, and other relevant tools — no ramp-up cost on your side." },
-              { icon: Zap,          title: "Live in 5–7 Business Days", desc: "From role brief to first productive day in under two weeks. Candidate matching, interviews, and onboarding handled end-to-end." },
+              { icon: BrainCircuit, title: "Pre-Trained on Today's AI Stack", desc: "Every AI-ready hire comes fluent in Claude, GPT-4o, Midjourney, Zapier, and other enterprise AI tools." },
+              { icon: Zap,          title: "Live in 5–7 Business Days", desc: "Fully managed onboarding, live in under two weeks. Intelligent candidate matching…" },
               { icon: ClipboardCheck, title: "HR, Payroll & Compliance Managed", desc: "KDCI.ai handles all employment administration — payroll, statutory benefits, Philippine labor compliance, and HR documentation." },
               { icon: BarChart3,    title: "Monthly KPI Reviews", desc: "Monthly performance reviews with structured KPI tracking. You see what's working, what's not, and how to scale." },
               { icon: RefreshCw,    title: "2-Week Replacement Guarantee", desc: "If a placement doesn't work out for any reason, we find and onboard a replacement within two weeks at zero additional cost." },
