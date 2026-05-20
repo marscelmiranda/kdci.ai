@@ -146,7 +146,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "Professional Services",
       icon: Briefcase,
       tag: "Thought Leadership",
-      workflows: ["Proposal and report design", "Thought leadership content", "Presentation and deck templates", "LinkedIn content and infographics", "Brand identity and visual systems"],
+      workflows: ["Business proposal design, report layout & corporate document design", "Thought leadership content design & white paper formatting", "PowerPoint presentation design & branded deck templates", "LinkedIn graphic design, infographic creation & data visualisation", "Brand identity design & visual system development"],
     },
     {
       name: "Startups",
