@@ -154,7 +154,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">30-day monitored handoff then converted to an ongoing monitoring retainer</span>
+                  <span className="leading-snug">30-day monitored handoff then converted to a retainer</span>
                 </div>
               </div>
 
