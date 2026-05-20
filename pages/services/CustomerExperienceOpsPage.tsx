@@ -109,8 +109,8 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             <div className="text-left flex flex-col justify-between py-2">
               <div>
-                <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                  <span className="text-[#E61739] text-[62px]">We run your CX layer.</span><span className="text-shine-white text-[62px]"> AI first. Human when it matters.</span>
+                <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
+                  AI-Augmented CX Support
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                   AI agents on first contact, PH-based specialists on escalations, and continuous CSAT optimization every month — delivered as a fully managed retainer.
