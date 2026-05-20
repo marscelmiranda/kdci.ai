@@ -270,7 +270,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight text-left">
-              Your AI-Skilled Hire,<br /><span className="text-[#E61739]">Live in 5–7 Days.</span>
+              Your AI-Skilled Hire, <span className="text-[#E61739]">Live in 5–7 Days</span><span className="text-[#1D1D1F]">.</span>
             </h2>
             <p className="text-slate-500 text-lg font-medium max-w-3xl leading-relaxed mt-6 text-left">
               We've got a proven onboarding framework that places future-ready talent inside your workflow, so they go from role brief to productive from day-one fast.
