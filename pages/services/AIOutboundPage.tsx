@@ -143,7 +143,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
                   {[
                     { name: 'Apollo.io',  logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779240994/apollo_logo_l3tlxx.png',   imgH: '22px' },
                     { name: 'Clay',       logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779237981/clay_ufl558.webp', imgH: '22px' },
-                    { name: 'Instantly',  logo: 'https://logo.clearbit.com/instantly.ai', imgH: '22px' },
+                    { name: 'Instantly',  logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779241458/instantly_logo_rhr68i.svg', imgH: '22px' },
                     { name: 'HubSpot',    logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327928/Hubspot_Logo_skscda.png', imgH: '22px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
