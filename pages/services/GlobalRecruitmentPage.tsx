@@ -269,10 +269,10 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Onboarding Timeline
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight text-left">
               Your AI-Skilled Hire,<br /><span className="text-[#E61739]">Live in 5–7 Days.</span>
             </h2>
-            <p className="text-slate-500 text-lg font-medium max-w-3xl mx-auto leading-relaxed mt-6">
+            <p className="text-slate-500 text-lg font-medium max-w-3xl leading-relaxed mt-6 text-left">
               We've got a proven onboarding framework that places future-ready talent inside your workflow, so they go from role brief to productive from day-one fast.
             </p>
           </div>
