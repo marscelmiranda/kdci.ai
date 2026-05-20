@@ -188,7 +188,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
               Autonomous workforce productive from day one.
             </h2>
             <p className="text-white/40 text-lg font-medium max-w-3xl mx-auto leading-relaxed">
-              Dedicated Philippines professionals who arrive AI-ready — with tools, training, and KPI accountability built in from the start.
+              Dedicated specialists from the Philippines trained on AI tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.
             </p>
           </div>
 
