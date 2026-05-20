@@ -113,7 +113,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                   AI-Augmented CX Support
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                  AI agents on first contact, PH-based specialists on escalations, and continuous CSAT optimization every month — delivered as a fully managed retainer.
+                  We combine AI-powered first-contact resolution with specialist escalation support and monthly CX performance optimization, all delivered as a managed service.
                 </p>
 
                 <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
