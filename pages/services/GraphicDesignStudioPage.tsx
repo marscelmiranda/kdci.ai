@@ -443,8 +443,8 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Who We Serve</div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Built for brands that move fast.</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Six verticals where our AI creative studio delivers the highest impact.</p>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Creative Design Services Built for High-Growth Brands</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Our AI-powered graphic design studio specialises in six industries where visual content volume, brand consistency, and fast turnaround matter most.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industries.map((ind, i) => (
