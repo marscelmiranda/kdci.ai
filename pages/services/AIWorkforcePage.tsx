@@ -138,7 +138,7 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
                 <img
                   src={IMG_HERO_MEETING}
                   alt="KDCI AI Workforce Augmentation"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover scale-[0.85] origin-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
 
