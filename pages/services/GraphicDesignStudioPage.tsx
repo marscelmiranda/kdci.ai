@@ -137,7 +137,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       workflows: ["Product screenshot design, UI mockups & app store graphics", "Investor pitch deck design & sales presentation templates", "Social media graphic design at scale for tech brands", "Onboarding flow visuals, in-app graphics & UX illustrations", "Ad creative design for paid social and SEM campaigns"],
     },
     {
-      name: "Hospitality",
+      name: "Hospitality & venue brand design",
       icon: Building2,
       tag: "Brand & Social",
       workflows: ["Brand photography editing & visual imagery for hotels and venues", "Menu design, signage graphics & print collateral", "Social media content calendar design & hospitality content production", "Promotional campaign graphics for events & seasonal offers", "Email template design & landing page graphics"],
