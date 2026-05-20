@@ -413,7 +413,6 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   <ind.icon size={18} className="text-[#E61739]" />
                 </div>
                 <div>
-                  <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[#E61739] bg-[#E61739]/10 px-2 py-0.5 rounded-full mb-1.5">{ind.tag}</span>
                   <h4 className="font-black text-[#1D1D1F] text-sm mb-1">{ind.name}</h4>
                   <p className="text-[#86868b] text-xs font-medium leading-relaxed">{ind.desc}</p>
                 </div>
