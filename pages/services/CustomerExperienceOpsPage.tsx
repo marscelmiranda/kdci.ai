@@ -271,7 +271,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
         <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">Live and deflecting in <span className="text-[#E61739]">30 days.</span></h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-4">AI CX Agent live in just <span className="text-[#E61739]">1 month.</span></h2>
             <p className="text-white/40 max-w-3xl mx-auto font-medium text-[18px]">From audit to full AI + human launch in one month — then continuous improvement every month after.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 relative">
