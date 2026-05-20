@@ -107,7 +107,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
-              <div key={i} className="group flex flex-col bg-white rounded-[2.5rem] border border-black/[0.04] hover:shadow-2xl transition-all duration-500 p-7">
+              <div key={i} className="group flex flex-col bg-white rounded-[40px] border border-black/[0.04] hover:shadow-2xl transition-all duration-500 p-7">
                 <div className="flex items-center justify-between mb-5">
                   <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-all duration-300">
                     <s.icon size={22} />
