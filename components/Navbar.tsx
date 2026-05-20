@@ -25,6 +25,11 @@ const POPULAR_SEARCHES = [
   { label: 'Customer Experience', view: 'customer-support' },
 ];
 
+const highlightAI = (text: string) =>
+  text.split(/(AI)/).map((part, i) =>
+    part === 'AI' ? <span key={i} className="text-[#E61739]">{part}</span> : part
+  );
+
 export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView: (v: ViewType) => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -120,7 +125,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                           <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
                             <item.icon size={14} />
                           </div>
-                          <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">{item.name}</span>
+                          <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">{highlightAI(item.name)}</span>
                         </button>
                       ))}
                     </div>
