@@ -141,9 +141,8 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
-              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739] text-[62px]">We watch your AI agents</span>
-                <span className="text-shine-white text-[62px]"> so you don't have to.</span>
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
+                AI Agent Monitoring & Management
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and ( ). KDCI.ai delivers all three as a fully managed service.
