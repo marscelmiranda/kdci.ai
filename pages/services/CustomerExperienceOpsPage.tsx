@@ -221,7 +221,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                   <Layers2 size={12} /> Tech Ecosystem
                </div>
                <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">AI-powered customer support, live inside your helpdesk</h3>
-               <p className="text-slate-400 mt-2 text-sm font-medium">We configure and manage AI agents directly in your existing helpdesk. No rip-and-replace — live in your stack within days.</p>
+               <p className="text-slate-400 mt-2 text-sm font-medium ml-[232px] mr-[232px]">We configure and manage AI-powered support agents that resolve customer inquiries automatically  without need for new software, cutting resolution time and reducing support costs from day one.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
