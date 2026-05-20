@@ -6,7 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
-const IMG_HERO_MEETING = '/recruitment-hero-meeting.png';
+import IMG_HERO_MEETING from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.png';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
