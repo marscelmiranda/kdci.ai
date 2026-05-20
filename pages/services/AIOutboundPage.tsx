@@ -139,7 +139,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
                   </div>
                 </div>
 
-                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
+                <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-evenly">
                   {[
                     { name: 'Apollo.io',  logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779240994/apollo_logo_l3tlxx.png',   imgH: '25px' },
                     { name: 'Clay',       logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779237981/clay_ufl558.webp', imgH: '20px' },
