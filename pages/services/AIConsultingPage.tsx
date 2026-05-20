@@ -19,7 +19,7 @@ const SERVICES = [
   {
     icon: BrainCircuit,
     title: 'Agent Design, Prompt Engineering & Build',
-    desc: 'Skip out on the trial and error. We\'ll handle prompt engineering, model selection, testing, QA, and AI agent deployment. Handed over fully-documented and production-ready.',
+    desc: 'Skip out on trial and error. We\'ll handle prompt engineering, model selection, testing, QA, and AI agent deployment. Handed over fully-documented and production-ready.',
   },
   {
     icon: Workflow,
