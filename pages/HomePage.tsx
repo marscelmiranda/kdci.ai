@@ -5,6 +5,11 @@ import { ViewType } from '../types';
 import { HeroBackground } from '../components/HeroBackground';
 import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../data';
 
+const highlightAI = (text: string) =>
+  text.split(/(AI)/).map((part, i) =>
+    part === 'AI' ? <span key={i} className="text-[#E61739]">{part}</span> : part
+  );
+
 const STORIES = [
   {
     quote: "What started out as a few agents, has grown into an invaluable partnership with KDCI. With more than 40 team members, we are lucky enough to count as part of our Cedar Family. Thank you so much KDCI for making our Company better!",
@@ -116,7 +121,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                     {s.tag}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{s.name}</h3>
+                <h3 className="text-lg font-bold text-[#1D1D1F] mb-3">{highlightAI(s.name)}</h3>
                 <p className="text-[#86868b] text-sm leading-relaxed mb-6 flex-grow font-medium">{s.desc}</p>
                 <div className="w-full pt-5 border-t border-black/5 mb-6">
                   <div className="text-[10px] font-black uppercase tracking-widest text-[#1D1D1F] mb-3">Key Outcomes</div>
