@@ -140,7 +140,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       name: "Hospitality",
       icon: Building2,
       tag: "Brand & Social",
-      workflows: ["Brand imagery for properties & venues", "Menu design and signage", "Social content calendar production", "Campaign graphics for promotions", "Email design and landing pages"],
+      workflows: ["Brand photography editing & visual imagery for hotels and venues", "Menu design, signage graphics & print collateral", "Social media content calendar design & hospitality content production", "Promotional campaign graphics for events & seasonal offers", "Email template design & landing page graphics"],
     },
     {
       name: "Professional Services",
