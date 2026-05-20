@@ -471,7 +471,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               "We agree on AI agent benchmarks before we start. Miss them once, you <span style={{color:'#E61739'}}>get a credit</span>. Miss them twice, you <span style={{color:'#E61739'}}>walk away free</span>."
             </p>
             <p className="text-white/40 text-base font-medium max-w-2xl">
-              Every engagement includes measurable performance targets agreed at kickoff. We price at a premium because we back it with accountability.
+              If we miss your goals once, you get a credit. If we fall short twice, you walk away free. 
             </p>
           </div>
         </div>
