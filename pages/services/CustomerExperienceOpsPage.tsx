@@ -158,14 +158,9 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                 </div>
 
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
-                  {[
-                    { name: 'Claude',  logo: 'https://logo.clearbit.com/anthropic.com',  style: { maxHeight: '28px', maxWidth: '90px' } },
-                    { name: 'ChatGPT', logo: 'https://logo.clearbit.com/openai.com',      style: { maxHeight: '28px', maxWidth: '90px' } },
-                    { name: 'Grok',    logo: 'https://logo.clearbit.com/x.ai',            style: { maxHeight: '28px', maxWidth: '90px' } },
-                    { name: 'Gemini',  logo: 'https://logo.clearbit.com/google.com',      style: { maxHeight: '28px', maxWidth: '90px' } },
-                  ].map((app: any, i) => (
+                  {cxApps.slice(0, 4).map((app, i) => (
                     <div key={i} className="h-[41px] md:h-[51px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="object-contain max-h-7 max-w-[80px]" style={app.style ?? {}} referrerPolicy="no-referrer" />
+                      <img src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
