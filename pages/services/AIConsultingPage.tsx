@@ -173,7 +173,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                 <img
                   src={IMG_CONSULTING_HERO}
                   alt="AI Consulting team"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
 
