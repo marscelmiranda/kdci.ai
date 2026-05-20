@@ -469,7 +469,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-5xl mx-auto px-6">
           <div className="border-l-4 border-[#E61739] pl-10 py-4">
             <p className="text-2xl md:text-4xl font-black text-white leading-tight mb-6 max-w-3xl">
-              "We agree on ai agent benchmarks before we start. Miss them once, you get a credit. Miss them twice, you walk away free."
+              "We agree on ai agent benchmarks before we start. Miss them once, you <span style={{color:'#E61739'}}>get a credit</span>. Miss them twice, you <span style={{color:'#E61739'}}>walk away free</span>."
             </p>
             <p className="text-white/40 text-base font-medium max-w-2xl">
               Every engagement includes measurable performance targets agreed at kickoff. We price at a premium because we back it with accountability.
