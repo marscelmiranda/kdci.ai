@@ -402,7 +402,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              Industries where <span className="text-[#E61739]">AI Implementation</span> delivers the fastest ROI
+              Industries where <span className="text-[#E61739]">AI Implementation</span><br /> delivers the fastest ROI
             </h2>
             <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We work in verticals where AI implementation meets urgent, real-life business needs.</p>
           </div>
