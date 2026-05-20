@@ -241,7 +241,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
               AI Agent Observability <br/><span className="text-[#E61739] text-[48px]">that Actually Catches Issues</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six core deliverables, managed end-to-end. You deploy the AI, we make sure it keeps working.</p>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six core deliverables that guarantee your AI agents are working.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {DELIVERABLES.map((s, i) => (
