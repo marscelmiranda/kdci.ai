@@ -184,7 +184,7 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6">
               <Sparkles size={12} /> What We Deliver
             </div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight tracking-tight ml-[120px] mr-[120px]">
               Autonomous workforce productive from day one.
             </h2>
             <p className="text-white/40 text-lg font-medium max-w-3xl mx-auto leading-relaxed">
