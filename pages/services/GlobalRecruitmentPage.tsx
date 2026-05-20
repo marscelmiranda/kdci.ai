@@ -396,9 +396,9 @@ export const GlobalRecruitmentPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Industry Specialization.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Vertical Specialization. AI-Ready Workforce.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our AI-trained specialists understand the operational demands of your industry — covering 20+ verticals with pre-built role playbooks and tool configurations.
+              Our AI-trained specialists understand your industry's unique demands, covering 20+ verticals with pre-built role playbooks and tool configurations.
             </p>
           </div>
 
