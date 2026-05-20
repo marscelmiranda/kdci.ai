@@ -319,7 +319,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                     num: '01',
                     icon: Monitor,
                     title: 'We watch — you build',
-                    desc: 'Your team stays focused on growth while our AI Ops Specialists manage every agent across your stack. No internal headcount required.',
+                    desc: 'Our AI Ops Specialists monitor every agent across your stack so issues get caught before they cost you — no internal headcount required.',
                   },
                   {
                     num: '02',
@@ -330,8 +330,8 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                   {
                     num: '03',
                     icon: Users,
-                    title: 'Human in the loop, always',
-                    desc: 'Every AI system is managed by a trained specialist who monitors performance, catches drift, and continuously improves your agents over time.',
+                    title: 'An AI Ops Specialist behind every agent',
+                    desc: 'A trained specialist monitors every system, catches drift, and improves ai agent performance continuously.',
                   },
                 ].map((d, i) => (
                   <div key={i} className="flex items-start gap-4 py-6">
