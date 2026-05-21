@@ -237,20 +237,20 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-black/5 p-6 animate-in slide-in-from-top-2 shadow-xl max-h-[80vh] overflow-y-auto">
             <div className="flex flex-col text-sm font-bold text-[#1D1D1F]">
 
-              {/* What We Do accordion */}
-              <button
-                className="flex items-center justify-between py-3 border-b border-black/5"
-                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-              >
-                What We Do
-                <ChevronDown size={16} className={`transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isMobileServicesOpen && (
-                <div className="flex flex-col gap-1 py-2 pl-3 border-b border-black/5">
+              {/* What We Do — always expanded, header navigates to Solutions Hub */}
+              <div className="border-b border-black/5 pb-2">
+                <button
+                  className="flex items-center justify-between py-3 w-full"
+                  onClick={() => { setView('solutions-hub'); setIsMobileMenuOpen(false); }}
+                >
+                  <span>What We Do</span>
+                  <ArrowRight size={14} className="text-[#E61739]" />
+                </button>
+                <div className="flex flex-col gap-1 pl-3">
                   {TOP_SERVICES.map((item, idx) => (
                     <button
                       key={idx}
-                      onClick={() => { setView(item.id as ViewType); setIsMobileMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      onClick={() => { setView(item.id as ViewType); setIsMobileMenuOpen(false); }}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
                     >
                       <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
@@ -260,7 +260,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                     </button>
                   ))}
                 </div>
-              )}
+              </div>
 
               {/* Insights accordion */}
               <button
