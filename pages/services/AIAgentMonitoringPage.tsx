@@ -10,6 +10,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_vw4xh1vw4xh1vw4x_1779324429811.png';
 
 /* ─── Data ─────────────────────────────────────────────────────────── */
 
@@ -485,7 +486,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
-              src="/contact-section.png"
+              src={IMG_CONTACT}
               alt="KDCI AI Ops specialist on a discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
