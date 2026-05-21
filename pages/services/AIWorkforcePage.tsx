@@ -245,7 +245,7 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
       {/* ── TRUST STRIP ── */}
       <section className="py-12 bg-[#020202] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
             <div className="bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
               <div className="shrink-0">
