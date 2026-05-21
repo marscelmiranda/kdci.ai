@@ -4,6 +4,7 @@ import { Lightbulb, Target, ShieldCheck, UsersRound, Globe, MapPin, Quote, UserC
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { IMG_CX_TEAM, IMG_CX_TEAM2, IMG_DEV_TEAM } from '../data';
+import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.png';
 
 const STATS = [
   { value: '2011', label: 'Year Founded' },
@@ -67,9 +68,9 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src={IMG_CX_TEAM2}
+                  src={IMG_WHO_WE_ARE_HERO}
                   alt="KDCI team at their Manila headquarters"
-                  className="w-full h-full object-cover grayscale"
+                  className="w-full h-full object-cover object-right"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                 <div className="absolute top-6 left-6">
