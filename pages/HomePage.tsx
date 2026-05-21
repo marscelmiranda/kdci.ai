@@ -293,7 +293,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                     Start Scaling <br/><span className="text-shine-red">Smarter with KDCI.</span>
                   </h2>
                   <p className="text-xl md:text-2xl text-white/60 mb-14 font-medium leading-relaxed">
-                    Talk to our solutions architects today to build your offshore strategy powered by AI and world-class Philippine talent.
+                    Talk to our solutions architects today to build AI service strategy, combining agentic workflows and elite Philippine talent.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 justify-center">
                      <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
