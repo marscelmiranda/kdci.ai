@@ -173,7 +173,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Why Outbound Fails In-House</div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900">Most outbound programs stall because they're built on guesswork, not real prospect data.</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900">Most outbound programs stall because they're built on guesswork,<br/> not real prospect data.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
