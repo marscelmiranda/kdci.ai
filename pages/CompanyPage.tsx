@@ -186,26 +186,44 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               KDCI enables brands to streamline operations with offshore experts powered by AI. Our teams don't just use AI tools — they're trained to operate alongside them, amplifying output and accuracy across every function.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
             {[
               {
-                title: "AI-Assisted Design",
-                desc: "Our creative teams use Midjourney, Adobe Firefly, and other generative tools to auto-generate graphics and basic design elements, freeing designers to focus on strategy and refinement.",
+                icon: BrainCircuit,
+                title: "AI Consulting & Implementation",
+                desc: "We audit your operations, design your AI stack, and go live in 42 days. Strategy, agent builds, integrations, and post-launch monitoring — all under one roof.",
               },
               {
-                title: "AI-Augmented Support",
-                desc: "We develop and train chatbots with customer service experts ready to handle escalations. Our AI routing and sentiment tools integrate into your existing helpdesk stack.",
+                icon: ShieldCheck,
+                title: "AI Agent Monitoring & Management",
+                desc: "Daily oversight of every AI agent you deploy. We catch drift, hallucinations, and integration failures before your customers do — with monthly performance scorecards.",
               },
               {
-                title: "AI-Driven Marketing",
-                desc: "We use AI to analyze data, personalize campaigns, and produce content tailored to your target audiences — delivering better results with faster turnaround times.",
+                icon: Target,
+                title: "AI Outbound & Lead Generation",
+                desc: "A fully managed outbound engine: ICP research, Clay-enriched list building, AI-personalized sequences, LinkedIn outreach, and booked meetings — end to end.",
+              },
+              {
+                icon: UsersRound,
+                title: "AI Workforce Augmentation",
+                desc: "Pre-trained Filipino specialists — prompt engineers, AI ops leads, data analysts, and VAs — embedded in your team at up to 70% less than equivalent US hiring costs.",
+              },
+              {
+                icon: HeartPulse,
+                title: "AI-Augmented Customer Experience",
+                desc: "AI handles 70%+ of first-contact volume. Human escalation specialists in Manila handle everything else — with monthly CSAT optimization and CX scorecards.",
+              },
+              {
+                icon: Palette,
+                title: "AI Creative Studio",
+                desc: "Brand-grade design at production speed. Our Manila team uses Midjourney, Firefly, Runway ML, and Adobe CC to deliver assets faster and at lower cost than any traditional agency.",
               },
             ].map((item, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10 hover:bg-white/10 transition-all">
                 <div className="w-10 h-10 bg-[#E61739]/20 rounded-xl flex items-center justify-center mb-6">
-                  <BrainCircuit size={20} className="text-[#E61739]" />
+                  <item.icon size={20} className="text-[#E61739]" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                 <p className="text-white/50 font-medium leading-relaxed text-sm">{item.desc}</p>
               </div>
             ))}
@@ -250,10 +268,10 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Lightbulb, title: "AI-First Thinking", desc: "We default to automation and AI assistance to unlock human creativity and strategic capacity." },
-              { icon: Target, title: "Outcome Obsessed", desc: "We don't sell hours — we deliver business performance, efficiency, and measurable results." },
-              { icon: ShieldCheck, title: "Radical Transparency", desc: "Open communication, regular updates, and real-time visibility into every team member's output." },
-              { icon: UsersRound, title: "People First", desc: "We screen and hand-pick every team member for skills, expertise, and cultural compatibility." },
+              { icon: Lightbulb, title: "AI-First by Default", desc: "Before we add a headcount, we ask whether AI can handle it. Every specialist we place is trained on the tools that matter — Claude, GPT-4o, Zapier, Midjourney, and more." },
+              { icon: Target, title: "Outcome Obsessed", desc: "We agree on KPIs at kickoff — deflection rates, pipeline booked, output velocity — and report against them every month. Miss a target, you get a credit." },
+              { icon: ShieldCheck, title: "Radical Transparency", desc: "Real-time dashboards, weekly standups, and open access to your team's daily output. No black boxes, no hidden offshore markup, no surprises on your invoice." },
+              { icon: UsersRound, title: "People at the Core", desc: "Every specialist is hand-picked, AI-certified, and backed by KDCI's full HR, payroll, and compliance infrastructure — so you get elite talent without the admin burden." },
             ].map((value, i) => (
               <div key={i} className="group p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 transition-transform">
