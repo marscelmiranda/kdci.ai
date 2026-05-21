@@ -372,7 +372,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
               <div className="rounded-[40px] aspect-[4/5] overflow-hidden relative shadow-2xl">
-                <img src={IMG_BUILD_TEAMS} alt="KDCI team welcoming a new client" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={IMG_BUILD_TEAMS} alt="KDCI team welcoming a new client" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-10 rounded-[40px] shadow-2xl border border-white/50">
                   <Quote className="text-[#E61739] mb-4 opacity-50" size={32} />
                   <p className="text-xl font-heading font-bold text-slate-900 mb-2 italic">"The bench is deep."</p>
