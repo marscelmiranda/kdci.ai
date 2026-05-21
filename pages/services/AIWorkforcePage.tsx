@@ -425,7 +425,60 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-6 items-start">
+          {/* ── Mobile layout: horizontal pill strip + panel below ── */}
+          <div className="lg:hidden">
+            <div className="flex gap-2 overflow-x-auto pb-3 mb-4" style={{ scrollbarWidth: 'none' }}>
+              {INDUSTRIES.map((ind, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedInd(ind)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
+                    selectedInd.id === ind.id
+                      ? 'bg-[#E61739] text-white shadow-sm'
+                      : 'bg-white border border-black/10 text-slate-600'
+                  }`}
+                >
+                  <ind.icon size={13} className={selectedInd.id === ind.id ? 'text-white' : 'text-[#E61739]'} />
+                  {ind.name}
+                </button>
+              ))}
+            </div>
+
+            <div className="bg-slate-900 rounded-3xl p-6 text-white flex flex-col">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                  <selectedInd.icon size={24} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-black leading-tight">{selectedInd.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">Top AI-Augmented Roles</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
+                  <div key={idx} className="flex items-center gap-4 bg-white/5 rounded-2xl px-4 py-3 border border-white/5">
+                    <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-white leading-tight">{role}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
+                <button
+                  onClick={() => setView('contact')}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                >
+                  Hire in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Desktop layout: sidebar list + detail panel ── */}
+          <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-start">
             {/* Left: industry list */}
             <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
               <div className="space-y-0.5 max-h-[520px] overflow-y-auto pr-1">
