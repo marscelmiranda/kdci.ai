@@ -4,6 +4,7 @@ import { ArrowRight, PenTool, ShoppingCart, Play, Presentation, BrainCircuit, Ta
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
 import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
 import { portfolioItems, PortfolioItem } from './PortfolioData';
@@ -89,6 +90,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   const openLightbox = useCallback((src: string) => {
@@ -218,7 +220,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <button
-                  onClick={() => setView('contact')}
+                  onClick={() => setShowHeroModal(true)}
                   className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group"
                 >
                   Book a Creative Strategy Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -652,6 +654,28 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
             onClick={e => e.stopPropagation()}
           />
         </div>
+      )}
+
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'AI Creative Studio',
+            title: 'Tell us about your creative needs.',
+            subtitle: 'First content delivered within 14 days.',
+            inquiryType: 'AI Creative Design Services',
+            source: 'graphic-design-hero',
+            specificField: {
+              label: 'Service of Interest',
+              placeholder: 'e.g. Content Pack, Creative Retainer, Full Studio',
+              fieldKey: 'service',
+            },
+            notesPlaceholder: 'Volume, deadlines, brand guidelines, formats needed…',
+            submitLabel: 'Book a Creative Strategy Call',
+            successTitle: 'Message received!',
+            successMessage: 'Our creative leads will review your brief and get back to you within 24 hours to plan your first sprint.',
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import { ArrowRight, MessageSquare, BrainCircuit, Users, ShoppingCart, Code, Bui
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { IMG_CX_TEAM } from '../../data';
 import IMG_CX_HERO from '@/attached_assets/Gemini_Generated_Image_copuzrcopuzrcopu_1779320301879.png';
 import IMG_CX_CONTACT from '@/attached_assets/Gemini_Generated_Image_alu075alu075alu0_1779323597973.png';
@@ -13,6 +14,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   const cxApps = [
@@ -135,7 +137,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button onClick={() => setView('contact')} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -541,6 +543,28 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           </div>
         </div>
       </section>
+
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'Customer Experience Ops',
+            title: 'Tell us about your support needs.',
+            subtitle: 'AI CX pod live in 30 days. Response within 24 hours.',
+            inquiryType: 'Customer Experience Ops',
+            source: 'cx-ops-hero',
+            specificField: {
+              label: 'Support Channels Needed',
+              placeholder: 'e.g. Live Chat, Email, Voice, Social Media',
+              fieldKey: 'channels',
+            },
+            notesPlaceholder: 'Volume, operating hours, industry, current helpdesk platform…',
+            submitLabel: 'Build My CX Pod',
+            successTitle: "We'll be in touch!",
+            successMessage: 'Your brief has been received. Our CX team will reach out within 24 hours to map your support pod.',
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
+      )}
     </div>
   );
 };

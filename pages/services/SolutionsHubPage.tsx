@@ -4,6 +4,7 @@ import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
@@ -11,6 +12,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (captchaRef.current?.isBot()) return;
@@ -49,7 +51,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
               <a href="#industries" className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl">
                 Find Your Industry Fit
               </a>
-              <button onClick={() => setView('contact')} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">
+              <button onClick={() => setShowHeroModal(true)} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">
                 Talk to a Solutions Architect
               </button>
             </div>
@@ -192,6 +194,28 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
 
         </div>
       </section>
+
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'Solutions Hub',
+            title: 'Tell us what you need.',
+            subtitle: 'A solutions architect will respond within 1 business day.',
+            inquiryType: 'Solutions Hub Inquiry',
+            source: 'solutions-hub-hero',
+            specificField: {
+              label: 'Service of Interest',
+              placeholder: 'e.g. Offshore Staffing, AI Consulting, Customer Support',
+              fieldKey: 'service',
+            },
+            notesPlaceholder: 'Team size, timeline, budget range, and goals…',
+            submitLabel: 'Talk to a Solutions Architect',
+            successTitle: "We'll be in touch!",
+            successMessage: 'Your request has been received. A solutions architect will reach out within 1 business day.',
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
+      )}
     </div>
   );
 };

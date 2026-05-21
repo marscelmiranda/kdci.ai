@@ -4,6 +4,7 @@ import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import IMG_CONSULTING_HERO from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.png';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
 import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
@@ -118,6 +119,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   return (
@@ -162,7 +164,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button onClick={() => setView('contact')} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -622,6 +624,27 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         </div>
       </section>
 
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'AI Consulting',
+            title: 'Tell us about your automation goals.',
+            subtitle: 'Free 30-min discovery call. No commitment required.',
+            inquiryType: 'AI Consulting & Implementation',
+            source: 'ai-consulting-hero',
+            specificField: {
+              label: 'Department to Automate First',
+              placeholder: 'e.g. Support, Finance, Operations, HR',
+              fieldKey: 'department',
+            },
+            notesPlaceholder: 'Biggest operational pain points and current tools in use…',
+            submitLabel: 'Book a Discovery Call',
+            successTitle: 'Brief received!',
+            successMessage: 'Our AI consulting team will review your goals and reach out within 2 business hours to schedule your free discovery call.',
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
+      )}
     </div>
   );
 };

@@ -9,6 +9,7 @@ import {
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import IMG_HERO from '@/attached_assets/Gemini_Generated_Image_sk2jqjsk2jqjsk2j_1779333029410.png';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
 import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
@@ -122,6 +123,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', agents: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -165,7 +167,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <button onClick={() => setView('contact')} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -634,6 +636,27 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
       </section>
 
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'AI Agent Monitoring',
+            title: 'Tell us about your AI agents.',
+            subtitle: 'Free health check included. Response within 2 business hours.',
+            inquiryType: 'AI Agent Monitoring',
+            source: 'ai-agent-monitoring-hero',
+            specificField: {
+              label: 'Number of AI Agents',
+              placeholder: 'e.g. 5, 25, 100+',
+              fieldKey: 'agentCount',
+            },
+            notesPlaceholder: 'Current monitoring issues, integrations, uptime requirements…',
+            submitLabel: 'Book a Discovery Call',
+            successTitle: "We'll be in touch!",
+            successMessage: "Expect a response within 2 business hours. We'll include a free AI Agent Health Check on the call.",
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Shield, Target, Mail, Linkedin, BarChart3, Se
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.png';
 import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.png';
 
@@ -11,6 +12,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showHeroModal, setShowHeroModal] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -113,7 +115,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <button
-                  onClick={() => setView('contact')}
+                  onClick={() => setShowHeroModal(true)}
                   className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group"
                 >
                   Book a Pipeline Strategy Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -637,6 +639,27 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
         </div>
       </section>
 
+      {showHeroModal && (
+        <ServiceHeroModal
+          config={{
+            tag: 'AI Outbound',
+            title: 'Tell us about your pipeline targets.',
+            subtitle: 'Campaign brief reviewed within 24 hours.',
+            inquiryType: 'AI Outbound & Lead Generation',
+            source: 'ai-outbound-hero',
+            specificField: {
+              label: 'Monthly Meeting Target',
+              placeholder: 'e.g. 20 qualified meetings/month',
+              fieldKey: 'meetingTarget',
+            },
+            notesPlaceholder: 'ICP, target market, current outbound stack, ideal deal size…',
+            submitLabel: 'Book a Pipeline Strategy Call',
+            successTitle: 'Brief received!',
+            successMessage: 'Our outbound team will review your ICP and pipeline goals, and reach out within 24 hours to map your campaign strategy.',
+          }}
+          onClose={() => setShowHeroModal(false)}
+        />
+      )}
     </div>
   );
 };

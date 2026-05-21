@@ -281,7 +281,7 @@ app.post('/api/contact', async (req, res) => {
     // Common across all forms
     email, phone, company, role,
     // Extra service-specific fields
-    agents, department, channel,
+    agents, agentCount, department, channel, channels, meetingTarget,
   } = req.body;
 
   const resolvedName = name || [firstName, lastName].filter(Boolean).join(' ') || '';
@@ -332,9 +332,10 @@ app.post('/api/contact', async (req, res) => {
           ${row('Country', country)}
           ${row('Service', service && service !== resolvedType ? service : null)}
           ${row('Source Page', source)}
-          ${row('No. of AI Agents', agents)}
+          ${row('No. of AI Agents', agents || agentCount)}
           ${row('Department', department)}
-          ${row('Support Channels', channel)}
+          ${row('Support Channels', channel || channels)}
+          ${row('Monthly Meeting Target', meetingTarget)}
         </table>
         ${resolvedMessage ? `
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid #e5e5e5">
