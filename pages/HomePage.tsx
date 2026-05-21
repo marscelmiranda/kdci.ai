@@ -146,7 +146,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center mb-24">
             <div>
-              <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">The Differentiator</div>
+              <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">AI OPERATIONS ADVANTAGE</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-8 leading-tight">Beyond traditional <br/><span className="text-[#E61739]">outsourcing.</span></h2>
               <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most BPOs sell headcount. KDCI delivers managed AI operations. We combine elite Philippine talent with agentic AI workflows, and build AI-augmented teams that are 3x more efficient than traditional teams.</p>
             </div>
