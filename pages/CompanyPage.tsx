@@ -268,10 +268,10 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Lightbulb, title: "AI-First by Default", desc: "Before we add a headcount, we ask whether AI can handle it. Every specialist we place is trained on the tools that matter — Claude, GPT-4o, Zapier, Midjourney, and more." },
               { icon: Target, title: "Outcome Obsessed", desc: "We agree on KPIs at kickoff — deflection rates, pipeline booked, output velocity — and report against them every month. Miss a target, you get a credit." },
-              { icon: ShieldCheck, title: "Radical Transparency", desc: "Real-time dashboards, weekly standups, and open access to your team's daily output. No black boxes, no hidden offshore markup, no surprises on your invoice." },
               { icon: UsersRound, title: "People at the Core", desc: "Every specialist is hand-picked, AI-certified, and backed by KDCI's full HR, payroll, and compliance infrastructure — so you get elite talent without the admin burden." },
+              { icon: ShieldCheck, title: "Radical Transparency", desc: "Real-time dashboards, weekly standups, and open access to your team's daily output. No black boxes, no hidden offshore markup, no surprises on your invoice." },
+              { icon: ZapBolt, title: "Always Improving", desc: "We treat go-live as the starting line, not the finish. Every engagement includes monthly performance reviews, prompt retraining, and workflow refinement — so results compound over time." },
             ].map((value, i) => (
               <div key={i} className="group p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 transition-transform">
