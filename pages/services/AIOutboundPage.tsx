@@ -5,8 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.png';
-
-const CONTACT_IMG = "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800";
+import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.png';
 
 export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
