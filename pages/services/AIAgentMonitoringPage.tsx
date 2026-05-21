@@ -9,6 +9,7 @@ import {
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import IMG_HERO from '@/attached_assets/Gemini_Generated_Image_sk2jqjsk2jqjsk2j_1779333029410.png';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
 import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
 
@@ -175,7 +176,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105" />
               <div className="relative min-h-[400px] lg:h-[560px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="/ai-agent-monitoring-hero.jpeg"
+                  src={IMG_HERO}
                   alt="AI agent monitoring dashboard"
                   className="w-full h-full object-cover"
                 />
