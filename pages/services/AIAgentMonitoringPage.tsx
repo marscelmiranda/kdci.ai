@@ -131,7 +131,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
     <div className="min-h-screen bg-white">
 
       {/* ── SECTION 1 — HERO ──────────────────────────────────────────── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-52 md:pb-40">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
