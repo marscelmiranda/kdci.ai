@@ -18,9 +18,9 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
     <div className="min-h-screen bg-white">
       <section className={`relative bg-[#020202] overflow-hidden pt-48 pb-32`}>
         <div className="mesh-container">
-          <div className="blob blob-magenta opacity-40"></div>
-          <div className="blob blob-purple opacity-40"></div>
-          <div className="blob blob-violet opacity-30"></div>
+          <div className="blob blob-magenta opacity-30"></div>
+          <div className="blob blob-purple opacity-35" style={{ backgroundColor: '#E61739' }}></div>
+          <div className="blob blob-violet opacity-20" style={{ backgroundColor: '#7f0d1d' }}></div>
         </div>
         <div className="particle-canvas opacity-40"></div>
         
