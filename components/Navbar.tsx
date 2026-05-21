@@ -35,6 +35,8 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileInsightsOpen, setIsMobileInsightsOpen] = useState(false);
   
   // Search State
   const [isSearchMounted, setIsSearchMounted] = useState(false); // Controls DOM existence
@@ -232,12 +234,61 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
 
         {/* Mobile Menu Content */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-black/5 p-6 animate-in slide-in-from-top-2 shadow-xl">
-            <div className="flex flex-col gap-5 text-sm font-bold text-[#1D1D1F]">
-              <button className="flex items-center justify-between py-2 border-b border-black/5" onClick={() => { setView('solutions-hub'); setIsMobileMenuOpen(false); }}>What We Do <ChevronRight size={16} /></button>
-              <button className="flex items-center justify-between py-2 border-b border-black/5 text-left" onClick={() => { setView('blog'); setIsMobileMenuOpen(false); }}>Insights <ChevronRight size={16} /></button>
-              <button className="py-2 border-b border-black/5 text-left" onClick={() => { setView('company'); setIsMobileMenuOpen(false); }}>About Us</button>
-              <button className="py-2 border-b border-black/5 text-left" onClick={() => { setView('careers'); setIsMobileMenuOpen(false); }}>Careers</button>
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-black/5 p-6 animate-in slide-in-from-top-2 shadow-xl max-h-[80vh] overflow-y-auto">
+            <div className="flex flex-col text-sm font-bold text-[#1D1D1F]">
+
+              {/* What We Do accordion */}
+              <button
+                className="flex items-center justify-between py-3 border-b border-black/5"
+                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+              >
+                What We Do
+                <ChevronDown size={16} className={`transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMobileServicesOpen && (
+                <div className="flex flex-col gap-1 py-2 pl-3 border-b border-black/5">
+                  {TOP_SERVICES.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => { setView(item.id as ViewType); setIsMobileMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
+                    >
+                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
+                        <item.icon size={14} />
+                      </div>
+                      <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">{item.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {/* Insights accordion */}
+              <button
+                className="flex items-center justify-between py-3 border-b border-black/5"
+                onClick={() => setIsMobileInsightsOpen(!isMobileInsightsOpen)}
+              >
+                Insights
+                <ChevronDown size={16} className={`transition-transform duration-200 ${isMobileInsightsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMobileInsightsOpen && (
+                <div className="flex flex-col gap-1 py-2 pl-3 border-b border-black/5">
+                  {RESOURCES.map((res, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => { setView(res.id as ViewType); setIsMobileMenuOpen(false); setIsMobileInsightsOpen(false); }}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
+                    >
+                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
+                        <res.icon size={14} />
+                      </div>
+                      <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">{res.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <button className="py-3 border-b border-black/5 text-left" onClick={() => { setView('company'); setIsMobileMenuOpen(false); }}>About Us</button>
+              <button className="py-3 border-b border-black/5 text-left" onClick={() => { setView('careers'); setIsMobileMenuOpen(false); }}>Careers</button>
               <button onClick={() => { setView('contact'); setIsMobileMenuOpen(false); }} className="mt-4 w-full bg-[#E61739] text-white py-4 rounded-xl font-bold">Contact Us</button>
             </div>
           </div>
