@@ -250,7 +250,7 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
             <div className="bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
               <div className="shrink-0">
                 <div className="text-[4.5rem] font-black text-white leading-none">2</div>
-                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Week Guarantee</div>
+                <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Week<br />Guarantee</div>
               </div>
               <div className="border-l border-white/20 pl-6">
                 <p className="text-white/80 text-sm font-medium leading-relaxed">
