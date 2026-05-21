@@ -220,7 +220,7 @@ export const DIFFERENTIATORS = [
   },
   {
     icon: Users,
-    title: "Elite Philippines Talent",
+    title: "Elite Offshore Talent",
     desc: "Access the top 1% of Philippine talent- pre-vetted, AI-trained, and embedded into managed AI operations."
   },
   {
