@@ -880,7 +880,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                   <p className="text-white/40 font-medium text-[13px]">Every long-term offshore staffing engagement begins with a discovery call. Tell us what you need, and we'll match you with top Philippine professionals.</p>
                 </div>
                 <form onSubmit={handleForm} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
                       <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
@@ -890,7 +890,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                       <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Email</label>
                       <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
@@ -1050,7 +1050,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                 </div>
               ) : (
                 <form onSubmit={handleModalForm} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
                       <input required className={lightInp} placeholder="Jane Smith" value={modalForm.name} onChange={e => setModalForm(f => ({ ...f, name: e.target.value }))} />
@@ -1060,7 +1060,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                       <input required className={lightInp} placeholder="Acme Inc." value={modalForm.company} onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
                       <input required type="email" className={lightInp} placeholder="jane@company.com" value={modalForm.email} onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))} />

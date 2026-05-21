@@ -187,7 +187,7 @@ export const GovPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                            <div className="h-4 w-32 bg-white/10 rounded-full"></div>
                            <div className="h-8 w-20 bg-[#E61739]/40 rounded-lg"></div>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                            <div className="h-32 bg-white/5 rounded-3xl border border-white/5"></div>
                            <div className="h-32 bg-white/5 rounded-3xl border border-white/5"></div>
                         </div>
