@@ -73,7 +73,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           <h1 className="text-5xl md:text-7xl lg:text-9xl font-heading font-bold leading-[1] mb-10 tracking-tight drop-shadow-2xl">
             <span className="text-shine-white">Your Operational</span> <br/><span className="text-shine-red">Intelligence Partner.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">We provide the smart teams and automated systems so you can stay focused on strategy and growth.</p>
+          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">We provide AI-managed services across CX, creative, demand generation, and workforce augmentation, purpose-built for 20+ industry verticals.</p>
           <div className="flex flex-col items-center">
             <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
               See Our Solutions <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -107,8 +107,8 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
       <section className="pt-20 pb-32 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Built for results.</h2>
-            <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Select a capability to see how we transform operations into competitive advantages.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Built for Measurable AI Outcomes. </h2>
+            <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Explore our managed AI services and see how each capability turns operational complexity into a scalable competitive edge.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
@@ -148,7 +148,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <div>
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">The Differentiator</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-8 leading-tight">Beyond traditional <br/><span className="text-[#E61739]">outsourcing.</span></h2>
-              <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most BPOs focus on headcount. We focus on outcome. By merging high-end Philippine talent with agentic AI workflows, we create operational units that are 3x more efficient than traditional teams.</p>
+              <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most BPOs sell headcount. KDCI delivers managed AI operations. We combine elite Philippine talent with agentic AI workflows, and build AI-augmented teams that are 3x more efficient than traditional teams.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="p-8 bg-white rounded-[20px] shadow-sm">

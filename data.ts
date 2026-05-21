@@ -216,22 +216,22 @@ export const DIFFERENTIATORS = [
   {
     icon: Zap,
     title: "AI-Enhanced Workflows",
-    desc: "We don't just provide staff; we build custom AI agents and automated workflows that triple your team's output."
+    desc: "We deploy custom AI agents, agentic workflows, and autonomous process automation that triple your team's output."
   },
   {
     icon: Users,
     title: "Elite Philippines Talent",
-    desc: "Access the top 1% of talent in the Philippines, vetted for high-velocity environments and Western business culture."
+    desc: "Access the top 1% of Philippine talent- pre-vetted, AI-trained, and embedded into managed AI operations."
   },
   {
     icon: Target,
     title: "Flexible Engagement",
-    desc: "Scale up or down instantly. From outcome-based pricing to dedicated pods, our models align with your ROI."
+    desc: "Scale your managed AI operations up or down instantly. From outcome-based pricing to, dedicated pods, our models align with your ROI."
   },
   {
     icon: ShieldCheck,
     title: "Enterprise Compliance",
-    desc: "Industrial-grade security, SOC-2 readiness, and strict GDPR compliance integrated into every operational layer."
+    desc: "Industrial-grade security, SOC-2 readiness, and GDPR compliance built into every layer of our managed AI operations."
   },
   {
     icon: Layers,
@@ -241,6 +241,6 @@ export const DIFFERENTIATORS = [
   {
     icon: RefreshCw,
     title: "Native Tool Integration",
-    desc: "We work directly inside your existing tech stack—Slack, Jira, Salesforce, Yardi—maintaining zero data silos."
+    desc: "Our managed AI services integrate natively into your existing tech stack ensuring your operations run as one unified, intelligent system."
   }
 ];
