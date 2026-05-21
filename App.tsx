@@ -9,6 +9,7 @@ import { CaseStudiesProvider } from './store/caseStudiesStore';
 import { applySEO } from './lib/seo';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { CookieBanner } from './components/CookieBanner';
 import { HomePage } from './pages/HomePage';
 import { BlogLandingPage } from './pages/BlogLandingPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
@@ -202,6 +203,7 @@ const App = () => {
       </main>
       
       <Footer setView={setView} />
+      <CookieBanner setView={setView} />
     </div>
   );
 };
