@@ -141,28 +141,30 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       </section>
 
       {/* 4. Our Story / Evolution */}
-      <section className="py-32 bg-slate-50 border-y border-slate-100">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Our History</div>
-          <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">The KDCI Story.</h2>
-          <p className="text-slate-500 text-xl font-medium max-w-3xl mx-auto mb-16 leading-relaxed">
-            Established by seasoned executives with over 20 years of proven experience, KDCI was built with one goal: empowering brands with the best people. From a focused founding team to a 300-strong global operation, our growth has always been driven by people, not just process.
-          </p>
+      <section className="py-32 bg-[#F5F5F7]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              Our History
+            </div>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">The KDCI Story.</h2>
+          </div>
           <div className="relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 -translate-y-1/2"></div>
-            <div className="grid md:grid-cols-4 gap-8">
+            <div className="hidden md:block absolute top-7 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
               {[
                 { year: '2011', title: 'Founded', desc: 'Established with a mission to empower brands with the best offshore talent and expertise.' },
                 { year: '2015', title: 'Service Expansion', desc: 'Expanded beyond creative work into customer service, back office support, and web development.' },
                 { year: '2018', title: 'Rapid Growth', desc: 'Scaled to 20+ client accounts and 150+ team members across multiple service verticals.' },
                 { year: '2025', title: 'AI-Powered Operations', desc: 'Serving 50+ global clients with 300+ specialists, now fully integrating AI into every workflow.' },
               ].map((milestone, idx) => (
-                <div key={idx} className="relative z-10 bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
-                  <div className="w-14 h-7 rounded-full bg-slate-50 border-2 border-slate-100 flex items-center justify-center text-[#E61739] mx-auto mb-6 group-hover:bg-[#E61739] group-hover:text-white transition-all font-black text-xs">
-                    {milestone.year}
+                <div key={idx} className="relative flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="w-14 h-14 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                    {milestone.year.slice(2)}
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">{milestone.title}</h4>
-                  <p className="text-sm text-slate-500 font-medium leading-relaxed">{milestone.desc}</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{milestone.year}</p>
+                  <h4 className="font-black text-[#1D1D1F] text-sm mb-2">{milestone.title}</h4>
+                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{milestone.desc}</p>
                 </div>
               ))}
             </div>
