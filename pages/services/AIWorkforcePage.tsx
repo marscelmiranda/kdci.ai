@@ -84,7 +84,7 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
     <div className="min-h-screen bg-white">
 
       {/* ── HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-56 md:pb-40">
         <style>{`
           @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(32px); }
@@ -191,7 +191,7 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
 
         {/* Stats bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-6 md:flex md:flex-wrap md:justify-center md:gap-x-20 lg:gap-x-28 md:items-center text-white text-center">
             <div><div className="text-xl md:text-2xl font-black">5–7 Days</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Role Onboarding</p></div>
             <div><div className="text-xl md:text-2xl font-black">70%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Below US Hiring Cost</p></div>
             <div><div className="text-xl md:text-2xl font-black">14 Months</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Avg. Placement Tenure</p></div>

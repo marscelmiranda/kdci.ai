@@ -126,7 +126,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
     <div className="min-h-screen bg-white">
 
       {/* SECTION 1 — HERO */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-56 md:pb-40">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900"></div>
         </div>
@@ -206,7 +206,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-6 md:flex md:flex-wrap md:justify-center md:gap-x-20 lg:gap-x-28 md:items-center text-white text-center">
             <div><div className="text-xl md:text-2xl font-black">$3K</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Audit Starting Price</p></div>
             <div><div className="text-xl md:text-2xl font-black">6 Weeks</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Audit to Live Agents</p></div>
             <div><div className="text-xl md:text-2xl font-black">24+</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Platforms Supported</p></div>

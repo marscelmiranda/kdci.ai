@@ -173,7 +173,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40">
+      <section className="relative bg-[#020202] overflow-hidden pt-36 pb-56 md:pb-40">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-slate-900" />
         </div>
@@ -241,7 +241,7 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
 
         {/* Stats bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/5 border-t border-white/10 backdrop-blur-md py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-20 lg:gap-x-28 items-center text-white">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-6 md:flex md:flex-wrap md:justify-center md:gap-x-20 lg:gap-x-28 md:items-center text-white text-center">
             <div><div className="text-xl md:text-2xl font-black">5-Day</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Turnaround SLA</p></div>
             <div><div className="text-xl md:text-2xl font-black">7 AI Tools</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">In Every Workflow</p></div>
             <div><div className="text-xl md:text-2xl font-black">100%</div><p className="text-[10px] text-white/40 font-black uppercase tracking-widest">Brand Consistent</p></div>
