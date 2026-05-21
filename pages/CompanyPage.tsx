@@ -295,7 +295,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.25em] mb-4">Our Location</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Global Roots,<br /><span className="text-[#E61739]">Philippine Excellence.</span></h2>
               <p className="text-xl text-slate-500 font-medium leading-relaxed mb-12">
-                KDCI operates with a distributed mindset — keeping strategy close to our clients while maintaining a world-class operational hub in Metro Manila.
+                KDCI.ai operates with a distributed mindset — keeping strategy close to our clients while maintaining a world-class operational hub in Metro Manila.
               </p>
               <div className="space-y-8">
                 <div className="flex gap-6 items-start">
