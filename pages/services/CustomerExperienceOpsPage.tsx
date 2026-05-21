@@ -220,12 +220,10 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           </div>
 
           <div className="pt-20 border-t border-slate-100">
-            <div className="text-center mb-12">
-               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[9px] font-black uppercase tracking-widest mb-4">
-                  <Layers2 size={12} /> Tech Ecosystem
-               </div>
-               <h3 className="text-2xl md:text-3xl font-heading font-bold text-slate-900">AI-powered customer support, live inside your helpdesk</h3>
-               <p className="text-slate-400 mt-2 text-sm font-medium max-w-3xl mx-auto">We configure and manage AI-powered support agents that resolve customer inquiries automatically without need for new software, cutting resolution time and reducing support costs from day one.</p>
+            <div className="text-center mb-24">
+               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Tech Ecosystem</div>
+               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI-powered customer support, live inside your helpdesk</h2>
+               <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We configure and manage AI-powered support agents that resolve customer inquiries automatically without need for new software, cutting resolution time and reducing support costs from day one.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -241,10 +239,10 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
 
       <section className="py-24 bg-slate-50 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Vertical Specialization</div>
-            <h2 className="md:text-6xl font-heading font-bold text-slate-900 mb-6 text-[56px]">Vertical AI that speaks your industry's language from day one</h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your specific helpdesk toolset, product vocabulary, and CS workflows, ensuring accurate, on-brand AI support automation.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Vertical AI that speaks your industry's language from day one</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your specific helpdesk toolset, product vocabulary, and CS workflows, ensuring accurate, on-brand AI support automation.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cxIndustries.map((ind, i) => (
