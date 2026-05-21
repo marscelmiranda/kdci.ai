@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import IMG_CONSULTING_HERO from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.png';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
 
 const SERVICES = [
   {
@@ -481,7 +482,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
-              src="/contact-section.png"
+              src={IMG_CONTACT}
               alt="KDCI operations consultant on a live discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
