@@ -5,6 +5,7 @@ import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { IMG_CX_TEAM, IMG_CX_TEAM2, IMG_DEV_TEAM } from '../data';
 import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.png';
+import IMG_HQ_BUILDING from '@/attached_assets/Gemini_Generated_Image_8bu7sa8bu7sa8bu7_1779330338502.png';
 
 const STATS = [
   { value: '2011', label: 'Year Founded' },
@@ -319,30 +320,17 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-[4rem] p-12 border border-slate-100 shadow-xl">
-              <div className="text-center mb-10">
-                <GlobeIcon size={64} className="text-[#E61739] mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-slate-900">Offshore Savings</h3>
-                <p className="text-slate-500 text-sm font-medium mt-2">vs. equivalent US/EU hiring costs</p>
-              </div>
-              <div className="space-y-5">
-                {[
-                  { role: 'Customer Service Lead', saving: '65%' },
-                  { role: 'Full-Stack Developer', saving: '72%' },
-                  { role: 'Graphic Designer', saving: '68%' },
-                  { role: 'Executive VA', saving: '70%' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-slate-600">{item.role}</span>
-                    <div className="flex items-center gap-3">
-                      <div className="h-2 bg-slate-100 rounded-full w-28 overflow-hidden">
-                        <div className="h-full bg-[#E61739] rounded-full" style={{ width: item.saving }}></div>
-                      </div>
-                      <span className="text-sm font-black text-[#E61739] w-10 text-right">{item.saving}</span>
-                    </div>
-                  </div>
-                ))}
-                <p className="text-[10px] text-slate-400 font-medium text-center pt-2 uppercase tracking-widest">Average savings across roles</p>
+            <div className="relative rounded-[4rem] overflow-hidden min-h-[520px] shadow-xl">
+              <img
+                src={IMG_HQ_BUILDING}
+                alt="KDCI Philippine headquarters — One Corporate Centre, Ortigas Center, Manila"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/20 text-white text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
+                  <MapPin size={10} /> Ortigas Center, Metro Manila
+                </span>
               </div>
             </div>
           </div>
