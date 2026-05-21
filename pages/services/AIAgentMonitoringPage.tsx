@@ -228,7 +228,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               'Nobody on your team is watching for drift or failures',
               'Where your AI agents break, you find out from an angry customer',
             ].map((pain, i) => (
-              <div key={i} className="px-8 py-8 md:py-4 first:pl-0 last:pr-0">
+              <div key={i} className="px-8 py-8 md:py-4 first:pl-0 last:pr-0 text-center md:text-left">
                 <p className="text-xl md:text-2xl font-black text-[#1D1D1F] leading-snug">{pain}</p>
               </div>
             ))}
