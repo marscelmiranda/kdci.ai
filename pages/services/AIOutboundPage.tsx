@@ -281,10 +281,10 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
               </h2>
               <div className="space-y-6">
                 {[
-                  { icon: TrendingUp,  title: "Dedicated outbound specialists — not a SaaS tool", desc: "A human team runs every component: ICP researcher, list builder, copywriter, campaign manager, and CRM admin. You get a function, not a subscription." },
-                  { icon: RefreshCw,   title: "A/B testing is built into every campaign from week one", desc: "Subject lines, openers, CTAs, and sequence length are tested systematically — not guessed. Every Friday report includes what we're changing and why." },
-                  { icon: Filter,      title: "Deliverability-first infrastructure", desc: "Dedicated sending domains, inbox warm-up protocols, and bounce rate monitoring ensure your sequences land in primary inboxes — not spam." },
-                  { icon: Database,    title: "Clay enrichment adds personalisation at scale", desc: "Every prospect gets a data-rich profile before a message is sent — funding stage, tech stack, recent news, job changes — so personalisation is signal-based, not templated." },
+                  { icon: TrendingUp,  title: "Dedicated outbound specialists", desc: "A human team runs every component of your demand generation engine: ICP researcher, list builder, copywriter, campaign manager, and CRM admin. A function, not a subscription." },
+                  { icon: RefreshCw,   title: "A/B testing built into every campaign from week one", desc: "Subject lines, openers, CTAs, and sequence length tested systematically — not guessed. Every Friday report includes what we're changing and why." },
+                  { icon: Filter,      title: "Deliverability-first infrastructure for AI outbound", desc: "Dedicated sending domains, inbox warm-up protocols, and bounce rate monitoring ensure your sequences land in primary inboxes — not spam." },
+                  { icon: Database,    title: "Clay enrichment adds AI personalization at scale", desc: "Every prospect gets a data-rich profile before a message is sent — funding stage, tech stack, recent news, job changes — so personalization is signal-based, not templated." },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5 group">
                     <div className="w-11 h-11 bg-white rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] shadow-sm group-hover:bg-[#E61739] group-hover:text-white transition-all">
@@ -449,8 +449,8 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Platforms & Tools</div>
-            <h3 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">The modern outbound stack.</h3>
-            <p className="text-white/40 text-lg max-w-2xl mx-auto">Every tool in our stack is configured, managed, and optimised by our team — you never touch a dashboard.</p>
+            <h3 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">The modern AI demand generation stack.</h3>
+            <p className="text-white/40 text-lg max-w-2xl mx-auto">Every tool configured, managed, and optimized by our team — you get the output, never the overhead.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {tools.map((tool, i) => (
