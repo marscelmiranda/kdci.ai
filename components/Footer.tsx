@@ -56,7 +56,6 @@ const SERVICE_LINES = [
   'AI Creative Studio',
   'AI Outbound & Lead Generation',
   'AI Workforce Augmentation',
-  'Offshore Staffing',
 ];
 
 interface ModalForm {
