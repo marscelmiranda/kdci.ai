@@ -172,50 +172,6 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         </div>
       </section>
 
-      {/* 5. Core Service Areas */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Do</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Skilled Professionals.<br/>Specialized Expertise.</h2>
-            <p className="text-slate-500 text-xl font-medium max-w-2xl mx-auto">
-              KDCI takes pride in offering skilled professionals with specialized expertise that drives efficiency, innovation, and growth — now amplified by AI.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: UsersRound,
-                title: "Customer Service & Support",
-                desc: "Teams trained alongside AI-powered solutions, enhancing response times and handling complex queries with precision and empathy.",
-              },
-              {
-                icon: Code,
-                title: "Software Development",
-                desc: "Experienced developers specializing in AI-driven applications to enterprise solutions, helping you scale efficiently while cutting costs.",
-              },
-              {
-                icon: Palette,
-                title: "AI Creative Studio",
-                desc: "Graphic designers, video editors, and content creators who leverage the latest AI tools to produce brand-grade work at speed.",
-              },
-              {
-                icon: ClipboardList,
-                title: "Back Office & Admin Support",
-                desc: "Skilled virtual assistants, admin coordinators, and operations teams that reduce overhead while keeping your business running smoothly.",
-              },
-            ].map((svc, i) => (
-              <div key={i} className="group p-10 rounded-[3rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
-                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 transition-transform">
-                  <svc.icon size={28} />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{svc.title}</h3>
-                <p className="text-slate-500 font-medium leading-relaxed text-sm">{svc.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 6. AI Enablement */}
       <section className="py-32 bg-[#1D1D1F] text-white relative overflow-hidden">
