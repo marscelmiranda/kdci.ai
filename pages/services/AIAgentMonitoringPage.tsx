@@ -488,7 +488,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <img
               src={IMG_CONTACT}
               alt="KDCI AI Ops specialist on a discovery call"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-right"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
