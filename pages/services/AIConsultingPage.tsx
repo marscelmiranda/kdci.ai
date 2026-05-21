@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import IMG_CONSULTING_HERO from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.png';
+import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
 
 const SERVICES = [
   {
@@ -335,7 +336,7 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
             {/* Floating portrait image */}
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
               <img
-                src="/our-difference.png"
+                src={IMG_OUR_DIFFERENCE}
                 alt="KDCI AI consulting team reviewing performance dashboards"
                 className="w-full h-full object-cover object-center"
               />
