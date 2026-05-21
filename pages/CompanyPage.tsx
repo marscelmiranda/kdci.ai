@@ -61,7 +61,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 <span className="text-[#e61739]">AI Operations Partner.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed">
-                Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with the best people in creative design, customer service, back office support, software development, and offshore IT — now supercharged with AI.
+                Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with AI-augmented capabilities across creative design, customer service, back office support, software development, and managed IT operations.
               </p>
             </div>
 
