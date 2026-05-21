@@ -5,13 +5,16 @@ import { ViewType } from '../types';
 import { TOP_SERVICES, INDUSTRIES, RESOURCES } from '../data';
 import { Logo } from './Logo';
 
+const UNLISTED_RESOURCE_IDS = new Set(['webinars', 'ebooks', 'guides']);
+const NAV_RESOURCES = RESOURCES.filter(r => !UNLISTED_RESOURCE_IDS.has(r.id));
+
 const SEARCH_ITEMS = [
   // Services
   ...TOP_SERVICES.map(s => ({ title: s.name, type: 'Service', view: s.id })),
   // Industries
   ...INDUSTRIES.map(i => ({ title: `${i.name} Operations`, type: 'Industry', view: i.id })),
   // Resources
-  ...RESOURCES.map(r => ({ title: r.name, type: 'Resource', view: r.id })),
+  ...NAV_RESOURCES.map(r => ({ title: r.name, type: 'Resource', view: r.id })),
   // Key Pages
   { title: 'Careers & Jobs', type: 'Page', view: 'careers' },
   { title: 'About Company', type: 'Page', view: 'company' },
@@ -158,7 +161,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                     <div className="p-3 grid grid-cols-2 gap-x-2">
                       {/* Left column — first 4 */}
                       <div>
-                        {RESOURCES.slice(0, 4).map((res, idx) => (
+                        {NAV_RESOURCES.slice(0, 4).map((res, idx) => (
                           <button
                             key={idx}
                             onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
@@ -173,7 +176,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
                       </div>
                       {/* Right column — last 3 */}
                       <div>
-                        {RESOURCES.slice(4).map((res, idx) => (
+                        {NAV_RESOURCES.slice(4).map((res, idx) => (
                           <button
                             key={idx}
                             onClick={() => { setView(res.id as ViewType); setIsResourcesOpen(false); }}
@@ -272,7 +275,7 @@ export const Navbar = ({ activeView, setView }: { activeView: ViewType, setView:
               </button>
               {isMobileInsightsOpen && (
                 <div className="flex flex-col gap-1 py-2 pl-3 border-b border-black/5">
-                  {RESOURCES.map((res, idx) => (
+                  {NAV_RESOURCES.map((res, idx) => (
                     <button
                       key={idx}
                       onClick={() => { setView(res.id as ViewType); setIsMobileMenuOpen(false); setIsMobileInsightsOpen(false); }}
