@@ -10,7 +10,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_vw4xh1vw4xh1vw4x_1779324429811.png';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_vw4xh1vw4xh1vw4x2_1779325242301.png';
 
 /* ─── Data ─────────────────────────────────────────────────────────── */
 
