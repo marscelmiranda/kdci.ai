@@ -95,17 +95,17 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
                 <span className="text-[#E61739]">Outbound Engine.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                We build and operate your entire outbound engine — ICP research, list building, AI-personalized sequences, and meeting booking as a fully managed service.
+                We build and run your inbound and outbound pipeline; intent-based prospecting, AI-personalized sequences, and pipeline acceleration as a fully managed service.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">AI-personalized 5-touch sequences — not generic blasts</span>
+                  <span className="leading-snug">AI-personalized 5-touch sequences that convert using real prospect data</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">ICP research, list building, and Clay enrichment handled for you</span>
+                  <span className="leading-snug">Autonomous prospecting: ICP research, Clay enrichment, and list building</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
