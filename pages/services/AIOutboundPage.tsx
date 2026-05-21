@@ -178,9 +178,9 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Lists go stale before anyone sends", desc: "Building a quality prospect list takes 2–4 weeks. By the time sequences launch, contacts have changed roles, companies have pivoted, and deliverability has dropped." },
-              { title: "Sequences read like templates", desc: "Generic \"Hi {{FirstName}}\" emails get deleted on sight. AI personalization at scale — pulling company signals, job changes, and role-specific pain points — requires tools and a system most teams don't have." },
-              { title: "SDRs burn out before the engine scales", desc: "A single SDR managing ICP research, list building, inbox warm-up, sequence writing, and CRM updates is doing five jobs. Specialised functions, run by a managed team, produce 3–5× more meetings at lower cost." },
+              { title: "Prospect lists go stale before outreach launch", desc: "Manual prospecting takes 2–4 weeks. By launch, contacts have changed roles, intent signals have shifted, and deliverability has dropped." },
+              { title: "Sequences read like templates, not personalized", desc: "Generic emails get ignored. Real AI-personalized outreach pulls company signals, job changes, and role-specific pain points— most teams lack the tools." },
+              { title: "SDRs burn out before pipeline is generated", desc: "One SDR doing ICP research, list building, inbox warm-up, and CRM updates is doing five jobs. A managed AI demand generation engine produces 3–5× more meetings." },
             ].map((p, i) => (
               <div key={i} className="p-8 rounded-[2.5rem] bg-white border border-black/[0.04] shadow-sm">
                 <div className="w-8 h-8 rounded-full bg-[#E61739]/10 flex items-center justify-center mb-5">
