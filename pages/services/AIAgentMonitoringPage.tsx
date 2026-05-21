@@ -9,6 +9,7 @@ import {
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
 
 /* ─── Data ─────────────────────────────────────────────────────────── */
 
@@ -349,7 +350,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
 
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
               <img
-                src="/our-difference.png"
+                src={IMG_OUR_DIFFERENCE}
                 alt="KDCI AI operations team reviewing agent performance dashboards"
                 className="w-full h-full object-cover object-center"
               />
