@@ -204,7 +204,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Target,       title: "ICP Definition & Buyer Persona Mapping", desc: "We workshop your ideal customer profile — target titles, company sizes, industries, signals — and build a scoring model before a single contact is sourced." },
+              { icon: Target,       title: "ICP Definition & Buyer Persona Mapping", desc: "We workshop your ideal customer profile — target titles, company sizes, industries, and intent signals — and build a lead scoring model before a single contact is sourced." },
               { icon: Filter,       title: "Prospect List Building + Clay Enrichment", desc: "Apollo sourcing combined with Clay enrichment gives every prospect a data-rich profile — job title history, tech stack, funding stage, and custom triggers." },
               { icon: Mail,         title: "AI-Personalized 5-Touch Email Sequences", desc: "Five-step sequences where every touchpoint pulls personalized signals — recent funding, new hire announcements, product launches — written at scale by AI, reviewed by our team." },
               { icon: Linkedin,     title: "LinkedIn Outreach Campaign Management", desc: "Connection requests, InMail sequences, and profile engagement fully managed inside LinkedIn Sales Navigator — coordinated with email for a true multi-channel motion." },
