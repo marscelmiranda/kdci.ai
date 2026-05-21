@@ -235,12 +235,12 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
             <div className="hidden md:block absolute top-6 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-[#1D1D1F]/15 to-transparent" />
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
               {[
-                { n: '01', period: 'Week 1',  title: 'ICP Workshop',    desc: 'Define target titles, industries, company signals. Build ICP scoring model and messaging brief.' },
-                { n: '02', period: 'Week 2',  title: 'List Building',   desc: 'Source prospects via Apollo. Enrich via Clay. QA every contact before sequences touch them.' },
-                { n: '03', period: 'Week 3',  title: 'Sequence Setup',  desc: 'Write and approve 5-touch email sequences. Set up sending domains. Domain warm-up begins.' },
-                { n: '04', period: 'Week 4',  title: 'Test Launch',     desc: 'Warm inboxes. Launch first 100-contact test batch. Monitor deliverability and early reply signals.' },
-                { n: '05', period: 'Month 2', title: 'Full Volume',     desc: 'Full volume launch. A/B test subject lines and CTAs. LinkedIn campaign goes live in parallel.' },
-                { n: '06', period: 'Ongoing', title: 'Optimise Weekly', desc: 'Weekly performance reports. Sequence optimisation. List refresh. Scale what works, cut what doesn\'t.' },
+                { n: '01', period: 'Week 1',  title: 'ICP Workshop',    desc: 'Define target titles, industries, and buying signals. Build ICP scoring model and AI-personalized messaging brief.' },
+                { n: '02', period: 'Week 2',  title: 'List Building',   desc: 'Source prospects via Apollo. Enrich via Clay with intent data. QA every contact before sequences touch them.' },
+                { n: '03', period: 'Week 3',  title: 'Sequence Setup',  desc: 'Write and approve AI-personalized 5-touch sequences. Set up sending domains. Inbox warm-up begins.' },
+                { n: '04', period: 'Week 4',  title: 'Test Launch',     desc: 'Warm inboxes. Launch first 100-contact batch. Monitor deliverability and early intent reply signals.' },
+                { n: '05', period: 'Month 2', title: 'Full Volume',     desc: 'Full demand generation engine live. A/B test subject lines and CTAs. LinkedIn campaign runs in parallel.' },
+                { n: '06', period: 'Ongoing', title: 'Optimise Weekly', desc: 'Weekly performance reports. Sequence optimization. List refresh. Scale what converts, cut what doesn\'t.' },
               ].map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
                   <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
