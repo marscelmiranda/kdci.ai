@@ -57,8 +57,8 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 Trusted Offshore Partner Since 2011
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#E61739]">Your Trusted </span>
-                <span className="text-white">Offshore Partner.</span>
+                <span className="text-[#ffffff]">Your Trusted </span>
+                <span className="text-white">AI Operations Partner.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed">
                 Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with the best people in creative design, customer service, back office support, software development, and offshore IT — now supercharged with AI.
@@ -295,7 +295,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.25em] mb-4">Our Location</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Global Roots,<br /><span className="text-[#E61739]">Philippine Excellence.</span></h2>
               <p className="text-xl text-slate-500 font-medium leading-relaxed mb-12">
-                KDCI.ai operates with a distributed mindset — keeping strategy close to our clients while maintaining a world-class operational hub in Metro Manila.
+                KDCI.ai operates with a distributed mindset — strategy aligned to our clients, execution powered by a world-class AI operations team.
               </p>
               <div className="space-y-8">
                 <div className="flex gap-6 items-start">
