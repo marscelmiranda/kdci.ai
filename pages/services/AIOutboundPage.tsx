@@ -479,7 +479,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
             <p className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug mb-4">
               "We pause and rebuild any sequence that drops below our deliverability threshold — at no extra cost. Your sender reputation is our responsibility."
             </p>
-            <footer className="text-white/30 text-[11px] font-black uppercase tracking-widest">KDCI.ai Outbound Guarantee</footer>
+            <footer className="text-white/30 text-[11px] font-black uppercase tracking-widest">KDCI.AI AI-powered outbound guarantee.</footer>
           </div>
         </div>
       </section>
