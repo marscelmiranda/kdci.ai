@@ -39,6 +39,19 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   `).catch(() => {});
   // Ensure existing admin account is active
   await pool.query(`UPDATE users SET status='active', failed_attempts=0 WHERE status IS NULL OR status=''`).catch(() => {});
+  // Marketing subscribers table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS marketing_subscribers (
+      id SERIAL PRIMARY KEY,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      full_name VARCHAR(255),
+      contact_number VARCHAR(50),
+      service_interests TEXT[],
+      marketing_consent BOOLEAN NOT NULL DEFAULT FALSE,
+      subscribed_at TIMESTAMPTZ DEFAULT NOW(),
+      status VARCHAR(20) DEFAULT 'active'
+    )
+  `).catch(() => {});
 })();
 
 const app = express();
@@ -347,6 +360,34 @@ app.post('/api/contact', async (req, res) => {
   } catch (err: any) {
     console.error('[contact] Send error:', err.message);
     res.status(500).json({ error: 'Failed to send your message. Please try again or email us directly at info@kdci.co.' });
+  }
+});
+
+// ----- MARKETING SUBSCRIBE -----
+app.post('/api/subscribe', async (req, res) => {
+  const { email, fullName, contactNumber, serviceInterests, marketingConsent } = req.body;
+  if (!email || !fullName || !marketingConsent) {
+    res.status(400).json({ error: 'Email, full name and marketing consent are required.' });
+    return;
+  }
+  try {
+    await pool.query(
+      `INSERT INTO marketing_subscribers (email, full_name, contact_number, service_interests, marketing_consent)
+       VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (email) DO UPDATE
+         SET full_name = EXCLUDED.full_name,
+             contact_number = EXCLUDED.contact_number,
+             service_interests = EXCLUDED.service_interests,
+             marketing_consent = EXCLUDED.marketing_consent,
+             subscribed_at = NOW(),
+             status = 'active'`,
+      [email, fullName, contactNumber || null, serviceInterests || [], true]
+    );
+    console.log(`[subscribe] New subscriber: ${email}`);
+    res.json({ success: true });
+  } catch (err: any) {
+    console.error('[subscribe] DB error:', err.message);
+    res.status(500).json({ error: 'Failed to save subscription. Please try again.' });
   }
 });
 

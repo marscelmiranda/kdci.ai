@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { ChevronRight, MapPin, Globe2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronRight, MapPin, Globe2, X, CheckCircle2, Loader2, ArrowRight, Mail } from 'lucide-react';
 import { ViewType } from '../types';
 import { Logo } from './Logo';
 import { TOP_SERVICES, INDUSTRIES } from '../data';
@@ -49,20 +49,100 @@ const AdobePortfolioIcon = ({ size = 18, className = "" }: { size?: number, clas
   </svg>
 );
 
+const SERVICE_LINES = [
+  'AI Agent Monitoring',
+  'AI Consulting & Implementation',
+  'AI-Augmented Customer Experience',
+  'AI Creative Studio',
+  'AI Outbound & Lead Generation',
+  'AI Workforce Augmentation',
+  'Offshore Staffing',
+];
+
+interface ModalForm {
+  fullName: string;
+  contactNumber: string;
+  serviceInterests: string[];
+  marketingConsent: boolean;
+}
+
 export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalForm, setModalForm] = useState<ModalForm>({
+    fullName: '',
+    contactNumber: '',
+    serviceInterests: [],
+    marketingConsent: false,
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
+  const firstInputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => firstInputRef.current?.focus(), 80);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showModal]);
+
+  const openModal = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
+    if (!email) return;
+    setDone(false);
+    setError('');
+    setModalForm({ fullName: '', contactNumber: '', serviceInterests: [], marketingConsent: false });
+    setShowModal(true);
+  };
+
+  const toggleService = (s: string) => {
+    setModalForm(f => ({
+      ...f,
+      serviceInterests: f.serviceInterests.includes(s)
+        ? f.serviceInterests.filter(x => x !== s)
+        : [...f.serviceInterests, s],
+    }));
+  };
+
+  const handleModalSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!modalForm.marketingConsent) {
+      setError('Please confirm you agree to receive marketing emails to continue.');
+      return;
+    }
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          fullName: modalForm.fullName,
+          contactNumber: modalForm.contactNumber,
+          serviceInterests: modalForm.serviceInterests,
+          marketingConsent: modalForm.marketingConsent,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Subscription failed.');
+      setDone(true);
       setEmail('');
-      setTimeout(() => setSubscribed(false), 3000);
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
+  const closeModal = () => { setShowModal(false); setDone(false); setError(''); };
+
   return (
+    <>
     <footer className="bg-[#020202] text-white pt-24 pb-12 px-6 border-t border-white/5 relative overflow-hidden">
       {/* Background decoration */}
       <div className="mesh-container opacity-10 pointer-events-none">
@@ -172,17 +252,17 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
             <div className="p-6 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md">
               <h5 className="text-[11px] font-black uppercase tracking-widest mb-3 text-white">Scale Insights</h5>
               <p className="text-[11px] text-slate-400 mb-5 font-medium leading-relaxed">Join 5,000+ operations leaders receiving our weekly AGI playbook.</p>
-              
-              <form onSubmit={handleSubscribe} className="flex gap-2">
-                <input 
-                  type="email" 
+              <form onSubmit={openModal} className="flex gap-2">
+                <input
+                  type="email"
+                  required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Work email" 
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="Work email"
                   className="bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-2 text-xs w-full focus:outline-none focus:border-[#E61739]/50 transition-all font-bold placeholder:text-slate-600"
                 />
-                <button className="bg-[#E61739] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#c51431] transition-all shrink-0">
-                  {subscribed ? 'Joined' : 'Join'}
+                <button type="submit" className="bg-[#E61739] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#c51431] transition-all shrink-0">
+                  Join
                 </button>
               </form>
             </div>
@@ -207,5 +287,189 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
         </div>
       </div>
     </footer>
+
+      {/* ── SUBSCRIBE MODAL ── */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[9998] flex items-center justify-center p-4"
+          onClick={e => { if (e.target === e.currentTarget) closeModal(); }}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
+
+          {/* Card */}
+          <div className="relative w-full max-w-lg bg-[#0d0d0d] border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">
+                  Scale Insights
+                </div>
+                <h2 className="text-xl font-black text-white leading-tight">Complete your subscription</h2>
+                <p className="text-white/40 text-[13px] font-medium mt-1 flex items-center gap-1.5">
+                  <Mail size={12} className="shrink-0" />
+                  <span className="truncate">{email}</span>
+                </p>
+              </div>
+              <button
+                onClick={closeModal}
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all shrink-0"
+                aria-label="Close"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="px-8 py-8 max-h-[70vh] overflow-y-auto">
+              {done ? (
+                <div className="flex flex-col items-center justify-center text-center gap-5 py-10">
+                  <div className="w-16 h-16 rounded-2xl bg-[#E61739] flex items-center justify-center shadow-xl shadow-[#E61739]/30">
+                    <CheckCircle2 size={30} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-white">You're in!</h3>
+                  <p className="text-white/50 text-sm font-medium max-w-xs leading-relaxed">
+                    Welcome to Scale Insights. Your first AGI playbook lands in your inbox this week.
+                  </p>
+                  <button
+                    onClick={closeModal}
+                    className="mt-2 px-8 py-3 bg-white/5 border border-white/10 rounded-2xl text-white/70 text-sm font-bold hover:bg-white/10 transition-all"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleModalSubmit} className="space-y-6">
+
+                  {/* Full Name */}
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">
+                      Full Name <span className="text-[#E61739]">*</span>
+                    </label>
+                    <input
+                      ref={firstInputRef}
+                      required
+                      type="text"
+                      placeholder="Jane Smith"
+                      value={modalForm.fullName}
+                      onChange={e => setModalForm(f => ({ ...f, fullName: e.target.value }))}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors font-medium"
+                    />
+                  </div>
+
+                  {/* Contact Number */}
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">
+                      Contact Number <span className="text-white/25 font-medium normal-case tracking-normal text-[11px]">(optional)</span>
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="+1 555 000 0000"
+                      value={modalForm.contactNumber}
+                      onChange={e => setModalForm(f => ({ ...f, contactNumber: e.target.value }))}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors font-medium"
+                    />
+                  </div>
+
+                  {/* Service Interests */}
+                  <div>
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-3">
+                      Services of Interest <span className="text-white/25 font-medium normal-case tracking-normal text-[11px]">(select all that apply)</span>
+                    </label>
+                    <div className="space-y-2">
+                      {SERVICE_LINES.map(svc => {
+                        const checked = modalForm.serviceInterests.includes(svc);
+                        return (
+                          <label
+                            key={svc}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all select-none ${
+                              checked
+                                ? 'bg-[#E61739]/10 border-[#E61739]/40 text-white'
+                                : 'bg-white/3 border-white/8 text-white/50 hover:border-white/20 hover:text-white/70'
+                            }`}
+                          >
+                            <span
+                              className={`w-4 h-4 rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all ${
+                                checked ? 'bg-[#E61739] border-[#E61739]' : 'border-white/20 bg-transparent'
+                              }`}
+                            >
+                              {checked && (
+                                <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+                                  <path d="M1 3.5L3.5 6L8 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              )}
+                            </span>
+                            <input
+                              type="checkbox"
+                              className="sr-only"
+                              checked={checked}
+                              onChange={() => toggleService(svc)}
+                            />
+                            <span className="text-[13px] font-bold">{svc}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Marketing Consent */}
+                  <div className="pt-2 border-t border-white/8">
+                    <label className={`flex items-start gap-3 cursor-pointer group select-none`}>
+                      <span
+                        className={`mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
+                          modalForm.marketingConsent ? 'bg-[#E61739] border-[#E61739]' : 'border-white/25 bg-transparent group-hover:border-white/40'
+                        }`}
+                      >
+                        {modalForm.marketingConsent && (
+                          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                            <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        )}
+                      </span>
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={modalForm.marketingConsent}
+                        onChange={e => setModalForm(f => ({ ...f, marketingConsent: e.target.checked }))}
+                      />
+                      <span className="text-[13px] text-white/50 font-medium leading-relaxed group-hover:text-white/70 transition-colors">
+                        I agree to receive marketing emails from KDCI, including the Scale Insights newsletter, product updates, and promotions. I can unsubscribe at any time.{' '}
+                        <button type="button" onClick={closeModal} className="text-[#E61739] hover:underline font-semibold" tabIndex={-1}>
+                          Privacy Policy
+                        </button>
+                      </span>
+                    </label>
+                  </div>
+
+                  {/* Error */}
+                  {error && (
+                    <p className="text-[#E61739] text-[13px] font-semibold bg-[#E61739]/10 border border-[#E61739]/20 rounded-xl px-4 py-3">
+                      {error}
+                    </p>
+                  )}
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-xl shadow-[#E61739]/20 group"
+                  >
+                    {submitting ? (
+                      <><Loader2 size={16} className="animate-spin" /> Subscribing…</>
+                    ) : (
+                      <>Subscribe to Scale Insights <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
+                    )}
+                  </button>
+                  <p className="text-white/20 text-[11px] text-center font-medium">
+                    No spam · Unsubscribe any time · GDPR compliant
+                  </p>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
