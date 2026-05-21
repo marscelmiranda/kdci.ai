@@ -228,7 +228,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
-              First meetings in 6 weeks.<br /><span className="text-[#E61739]">Built right before volume ramps.</span>
+              First qualified meetings in 4 weeks.<br /><span className="text-[#E61739]">Your outbound engine built for scale, not sprints</span>
             </h2>
           </div>
           <div className="relative">
