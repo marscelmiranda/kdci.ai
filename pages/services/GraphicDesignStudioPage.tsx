@@ -526,7 +526,18 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                   <p className="text-white/50 text-sm font-medium max-w-xs">Our creative leads will review your brief and get back to you within 24 hours.</p>
                 </div>
               ) : (
-                <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={async e => {
+                  e.preventDefault();
+                  if (captchaRef.current?.isBot()) return;
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ ...form, inquiryType: 'AI Creative Design Services', source: 'graphic-design-page' }),
+                    });
+                  } catch {}
+                  setSubmitted(true);
+                }} className="space-y-4">
                   <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>

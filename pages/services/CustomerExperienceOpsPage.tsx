@@ -446,7 +446,18 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
                   <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your CX Pod Today</h2>
                   <p className="text-white/40 font-medium text-[13px]">Every engagement begins with a discovery call. Tell us what you need and we'll design your ideal support operation.</p>
                 </div>
-                <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={async e => {
+                  e.preventDefault();
+                  if (captchaRef.current?.isBot()) return;
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ ...form, inquiryType: 'Customer Experience Ops', source: 'cx-ops-page' }),
+                    });
+                  } catch {}
+                  setSubmitted(true);
+                }} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>

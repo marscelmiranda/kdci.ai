@@ -520,7 +520,18 @@ export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Ready to Build AI that Works?</h2>
                   <p className="text-white/40 text-sm font-medium">Book a free 30-minute discovery call. Let's map out your top AI implementation opportunities and identify the highest-impact AI opportunities — no obligation.</p>
                 </div>
-                <form onSubmit={e => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); }} className="space-y-4">
+                <form onSubmit={async e => {
+                  e.preventDefault();
+                  if (captchaRef.current?.isBot()) return;
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ ...form, inquiryType: 'AI Consulting', source: 'ai-consulting-page' }),
+                    });
+                  } catch {}
+                  setSubmitted(true);
+                }} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name</label>

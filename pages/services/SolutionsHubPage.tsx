@@ -11,7 +11,18 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
-  const handleForm = (e: React.FormEvent) => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); };
+  const handleForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (captchaRef.current?.isBot()) return;
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, inquiryType: 'Solutions Hub Inquiry', source: 'solutions-hub-page' }),
+      });
+    } catch {}
+    setSubmitted(true);
+  };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
   return (

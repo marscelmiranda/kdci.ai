@@ -42,9 +42,31 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
   const [modalSubmitted, setModalSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const modalCaptchaRef = useRef<CaptchaHandle>(null);
-  const handleModalForm = (e: React.FormEvent) => { e.preventDefault(); if (modalCaptchaRef.current?.isBot()) return; setModalSubmitted(true); };
+  const handleModalForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (modalCaptchaRef.current?.isBot()) return;
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...modalForm, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-modal' }),
+      });
+    } catch {}
+    setModalSubmitted(true);
+  };
   const closeModal = () => { setShowModal(false); setModalSubmitted(false); setModalForm({ name: '', company: '', email: '', phone: '', role: '', notes: '' }); };
-  const handleForm = (e: React.FormEvent) => { e.preventDefault(); if (captchaRef.current?.isBot()) return; setSubmitted(true); };
+  const handleForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (captchaRef.current?.isBot()) return;
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-page' }),
+      });
+    } catch {}
+    setSubmitted(true);
+  };
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors";
   const lightInp = "w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm";
 
