@@ -58,7 +58,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
                 <span className="text-[#ffffff]">Your Trusted </span>
-                <span className="text-white">AI Operations Partner.</span>
+                <span className="text-[#e61739]">AI Operations Partner.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed">
                 Founded by seasoned executives with over 20 years of proven experience, KDCI empowers brands with the best people in creative design, customer service, back office support, software development, and offshore IT — now supercharged with AI.
