@@ -200,7 +200,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">The full AI demand generation stack,<br/>fully managed.</h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">Every component of a high-performing outbound engine — research, enrichment, sequences, LinkedIn, booking, and reporting — run end-to-end by our team.</p>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">ICP research, enrichment, AI-personalized sequences, LinkedIn outreach, meeting booking, and pipeline reporting run end-to-end by our team.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
