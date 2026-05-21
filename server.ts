@@ -795,7 +795,9 @@ if (isDev) {
       ws: true,
       on: {
         error: (_err, _req, res) => {
-          (res as express.Response).status(503).send('Vite dev server starting up — please refresh in a moment.');
+          if (res && typeof (res as express.Response).status === 'function') {
+            (res as express.Response).status(503).send('Vite dev server starting up — please refresh in a moment.');
+          }
         },
       },
     })
