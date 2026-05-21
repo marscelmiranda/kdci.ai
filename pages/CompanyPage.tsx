@@ -270,7 +270,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Target, title: "Outcome Obsessed", desc: "We agree on KPIs at kickoff — deflection rates, pipeline booked, output velocity — and report against them every month. Miss a target, you get a credit." },
+              { icon: Target, title: "Outcome Obsessed", desc: "We align on KPIs at kickoff — deflection rates, pipeline booked, output velocity — and report against them every month. Miss a target, you get a credit." },
               { icon: UsersRound, title: "People at the Core", desc: "Every specialist is hand-picked, AI-certified, and backed by KDCI's full HR, payroll, and compliance infrastructure — so you get elite talent without the admin burden." },
               { icon: ShieldCheck, title: "Radical Transparency", desc: "Real-time dashboards, weekly standups, and open access to your team's daily output. No black boxes, no hidden offshore markup, no surprises on your invoice." },
               { icon: ZapBolt, title: "Always Improving", desc: "We treat go-live as the starting line, not the finish. Every engagement includes monthly performance reviews, prompt retraining, and workflow refinement — so results compound over time." },
