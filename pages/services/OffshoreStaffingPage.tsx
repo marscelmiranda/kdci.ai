@@ -174,7 +174,7 @@ export const OffshoreStaffingPage = ({ setView }: { setView: (v: ViewType) => vo
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
                 <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
