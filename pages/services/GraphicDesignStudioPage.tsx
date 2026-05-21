@@ -5,6 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
 import { portfolioItems, PortfolioItem } from './PortfolioData';
 import { PortfolioModal } from './PortfolioModal';
 
@@ -489,57 +490,33 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
       </section>
 
       {/* ── CONTACT FORM ── */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
-          <div className="absolute inset-0 z-0">
-            <img src={IMG_CREATIVE_TEAM} alt="AI Creative Studio Team" className="w-full h-full object-cover opacity-[0.06]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
-          </div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
+      <section className="py-20 px-6 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
-          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
-
-            {/* Left — headline + bullets */}
-            <div className="p-12 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Let's Talk Creative
-                </div>
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Launch your<br /><span className="text-[#E61739]">AI Creative Studio.</span>
-                </h2>
-                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm">
-                  Tell us about your brand and creative needs — we'll have a production plan and pricing ready within 24 hours.
-                </p>
-              </div>
-              <div className="space-y-4 mt-12">
-                {[
-                  { icon: CheckCircle2, text: 'First content batch delivered within 14 days of onboarding' },
-                  { icon: CheckCircle2, text: 'Full production cadence live within 30 days' },
-                  { icon: CheckCircle2, text: '3-month minimum · easy upsell from Content Pack to Full Studio' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <item.icon size={14} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
-                  </div>
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CONTACT}
+              alt="KDCI AI Creative Studio team"
+              className="absolute inset-0 w-full h-full object-cover object-right"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Creative Design</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
+                Launch your<br />AI Creative Studio.
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['First content in 14 days', 'Live in 30 days', '3-month minimum'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
                 ))}
-                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
-                  {[
-                    { val: '$2,500', label: 'Starting/mo' },
-                    { val: '14 Days', label: 'First Content' },
-                    { val: '7', label: 'AI Platforms' },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
-                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
+          </div>
 
-            {/* Right — contact form */}
-            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
                   <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
@@ -587,8 +564,6 @@ export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) =>
                 </form>
               )}
             </div>
-
-          </div>
         </div>
       </section>
 

@@ -7,6 +7,7 @@ import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
 import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.png';
 import IMG_HERO_MEETING from '@/attached_assets/Gemini_Generated_Image_bive4ebive4ebive_1779321572717.png';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
@@ -507,55 +508,33 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
       </section>
 
       {/* ── CONTACT FORM ── */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto bg-[#0A0A0A] rounded-3xl overflow-hidden relative border border-white/[0.07]">
-          <div className="absolute inset-0 z-0">
-            <img src={IMG_REC_HERO} alt="AI Workforce Augmentation Team" className="w-full h-full object-cover opacity-[0.06]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80"></div>
-          </div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none"></div>
+      <section className="py-20 px-6 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto bg-[#020202] rounded-[4rem] border border-white/5 flex flex-col lg:flex-row" style={{ overflow: 'hidden' }}>
 
-          <div className="relative z-10 grid lg:grid-cols-2 gap-0 items-stretch">
-
-            <div className="p-12 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8">
-                  <Star size={11} /> Let's Talk Augmentation
-                </div>
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white tracking-tight leading-[0.95] mb-6">
-                  Embed your first<br/><span className="text-[#E61739]">AI specialist.</span>
-                </h2>
-                <p className="text-white/45 text-base font-medium leading-relaxed max-w-sm" style={{ textWrap: 'balance' }}>
-                  Tell us about the role and tools needed — we'll have matched candidates ready within 3–5 business days.
-                </p>
-              </div>
-              <div className="space-y-4 mt-12">
-                {[
-                  { icon: CheckCircle2, text: 'Role live in 5–7 business days from brief' },
-                  { icon: CheckCircle2, text: 'AI tool proficiency: Claude, GPT-4o, Zapier, and more' },
-                  { icon: CheckCircle2, text: '2-week replacement guarantee, no conditions' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <item.icon size={14} className="text-[#E61739] shrink-0" />
-                    <span className="text-white/50 text-sm font-medium">{item.text}</span>
-                  </div>
+          {/* Left — image panel */}
+          <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
+            <img
+              src={IMG_CONTACT}
+              alt="KDCI AI Workforce team"
+              className="absolute inset-0 w-full h-full object-cover object-right"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10">
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Workforce</p>
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
+                Embed your first<br />AI specialist.
+              </h3>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Live in 5–7 days', '2-week guarantee', 'AI-ready talent'].map((t, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/10 border border-white/10 rounded-lg text-[10px] text-white/70 font-bold uppercase tracking-wider">{t}</span>
                 ))}
-                <div className="grid grid-cols-3 gap-4 pt-6 mt-2 border-t border-white/[0.07]">
-                  {[
-                    { val: '$2,000', label: 'Starting/mo' },
-                    { val: '5–7 Days', label: 'To Go Live' },
-                    { val: '14 mo', label: 'Avg Tenure' },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <div className="text-xl font-black text-white mb-0.5">{s.val}</div>
-                      <div className="text-[9px] text-white/25 font-black uppercase tracking-widest">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
+          </div>
 
-            <div className="border-l border-white/[0.07] p-12 md:p-16 flex flex-col justify-center">
+          {/* Right — form panel */}
+          <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
                   <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
@@ -605,8 +584,6 @@ export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void })
                 </form>
               )}
             </div>
-
-          </div>
         </div>
       </section>
 
