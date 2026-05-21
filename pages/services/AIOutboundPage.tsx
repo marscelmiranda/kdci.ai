@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Shield, Target, Mail, Linkedin, BarChart3, Se
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
+import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.png';
 
 const CONTACT_IMG = "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800";
 
@@ -126,9 +127,9 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000&h=1000"
+                  src={IMG_OUTBOUND_HERO}
                   alt="AI Outbound team"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-right"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
 
