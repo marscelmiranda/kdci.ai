@@ -6,6 +6,7 @@ import {
 
 import { ViewType } from './types';
 import { CaseStudiesProvider } from './store/caseStudiesStore';
+import { applySEO } from './lib/seo';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -80,6 +81,7 @@ const App = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    applySEO(activeView);
   }, [activeView]);
 
   // If viewing the login page, render it without Navbar/Footer for a clean auth experience

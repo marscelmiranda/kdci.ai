@@ -1,0 +1,237 @@
+
+export interface SEOMeta {
+  title: string;
+  description: string;
+  canonical: string;
+}
+
+const BASE = 'https://kdci.co';
+
+export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
+  home: {
+    title: 'Philippine Offshore Staffing | KDCI Outsourcing',
+    description: 'Hire dedicated, full-time offshore staff from the Philippines. KDCI provides expert-vetted talent across 200+ roles — customer service, software engineers, designers, accountants and more — at up to 70% less than US hiring costs.',
+    canonical: `${BASE}/`,
+  },
+
+  // ── Services ──────────────────────────────────────────────────────────
+  'solutions-hub': {
+    title: 'AI-Managed Solutions Hub | KDCI Outsourcing',
+    description: "Explore KDCI's full suite of AI-managed business solutions — from customer support and creative design to software engineering, recruitment, and AI consulting — all under one roof.",
+    canonical: `${BASE}/services/`,
+  },
+  'agentic-recruitment': {
+    title: 'AI-Ready Workforce & Agentic Recruitment | KDCI Outsourcing',
+    description: "Build AI-ready offshore teams with KDCI's agentic recruitment. Access top Filipino talent — prompt engineers, AI ops specialists, and more — at up to 70% less than US hiring costs.",
+    canonical: `${BASE}/services/agentic-recruitment/`,
+  },
+  'customer-support': {
+    title: 'AI-Augmented Customer Experience Ops | KDCI Outsourcing',
+    description: "Deliver world-class customer support with KDCI's AI-augmented CX teams. Managed solutions combining AI first-contact resolution with expert human escalation across every channel.",
+    canonical: `${BASE}/services/customer-support/`,
+  },
+  'creative-prod': {
+    title: 'AI-Enabled Creative Design Services | KDCI Outsourcing',
+    description: "Scale creative output with KDCI's Manila-based design studio. Human designers amplified by AI tools for faster, high-quality graphics, video, and brand asset production.",
+    canonical: `${BASE}/services/creative-production/`,
+  },
+  'staff-aug': {
+    title: 'Offshore Staff Augmentation | KDCI Outsourcing',
+    description: 'Extend your team with dedicated Filipino professionals. KDCI offshore staffing covers 200+ roles with all-in monthly pricing, AI-driven performance oversight, and fast 14–30 day onboarding.',
+    canonical: `${BASE}/services/staff-augmentation/`,
+  },
+  'ai-consulting': {
+    title: 'AI Consulting & Implementation Services | KDCI Outsourcing',
+    description: "Transform your business with KDCI's AI consulting services. From readiness audits and custom AI agent builds to long-term performance monitoring and optimization for enterprise teams.",
+    canonical: `${BASE}/services/ai-consulting/`,
+  },
+  'ai-agent-monitoring': {
+    title: 'AI Agent Monitoring & Management | KDCI Outsourcing',
+    description: "Keep your AI agents performing at peak accuracy with KDCI's 24/7 monitoring service. Daily performance tracking, prompt optimization, and continuous improvement built in.",
+    canonical: `${BASE}/services/ai-agent-monitoring/`,
+  },
+  'ai-outbound': {
+    title: 'AI-Powered Outbound Sales Engine | KDCI Outsourcing',
+    description: "Accelerate pipeline growth with KDCI's fully managed outbound engine. ICP research, precision list building, and AI-personalized outreach that books meetings directly into your calendar.",
+    canonical: `${BASE}/services/ai-outbound/`,
+  },
+
+  // ── Industries ────────────────────────────────────────────────────────
+  ecommerce: {
+    title: 'E-Commerce Offshore Operations | KDCI Outsourcing',
+    description: "Scale your online store faster with KDCI's e-commerce ops team. Expert offshore support for product listing, order management, customer service, and logistics operations.",
+    canonical: `${BASE}/industries/ecommerce/`,
+  },
+  fintech: {
+    title: 'Fintech Offshore Operations | KDCI Outsourcing',
+    description: 'Future-ready fintech ops with KDCI. SOC-2 compliant offshore support and back-office teams purpose-built for financial technology companies moving at high velocity.',
+    canonical: `${BASE}/industries/fintech/`,
+  },
+  healthcare: {
+    title: 'Healthcare Offshore Operations | KDCI Outsourcing',
+    description: 'HIPAA-compliant administrative and clinical support for digital health platforms and hospital networks. Patient-first offshore operations powered by KDCI.',
+    canonical: `${BASE}/industries/healthcare/`,
+  },
+  'marketing-ad': {
+    title: 'Marketing & Ad Agency Offshore Ops | KDCI Outsourcing',
+    description: "Brand-first marketing operations with KDCI. Dedicated creative, ad ops, and content pods for agencies and in-house marketing teams that demand quality at scale.",
+    canonical: `${BASE}/industries/marketing/`,
+  },
+  retail: {
+    title: 'Omnichannel Retail Offshore Operations | KDCI Outsourcing',
+    description: 'Unified retail ops across every channel with KDCI. Offshore support for customer service, inventory management, and catalog operations for modern retail brands.',
+    canonical: `${BASE}/industries/retail/`,
+  },
+  logistics: {
+    title: 'Logistics & Supply Chain Offshore Ops | KDCI Outsourcing',
+    description: "Supply chain velocity with KDCI's logistics ops teams. Back-office efficiency and dispatch support for freight forwarders, 3PLs, and transportation networks.",
+    canonical: `${BASE}/industries/logistics/`,
+  },
+  travel: {
+    title: 'Travel & Hospitality Offshore Ops | KDCI Outsourcing',
+    description: "Deliver 24/7 guest experiences with KDCI's travel ops team. Premium offshore support for booking management, reservations, and hospitality guest care.",
+    canonical: `${BASE}/industries/travel/`,
+  },
+  edtech: {
+    title: 'EdTech Offshore Operations | KDCI Outsourcing',
+    description: "Student success at scale with KDCI's EdTech ops. Scalable offshore support, enrollment operations, and LMS management for online learning platforms.",
+    canonical: `${BASE}/industries/edtech/`,
+  },
+  legal: {
+    title: 'Legal Process Outsourcing | KDCI Outsourcing',
+    description: 'Legal ops precision with KDCI. Confidential paralegal and administrative support for law firms and legal tech companies, delivered by expert offshore professionals.',
+    canonical: `${BASE}/industries/legal/`,
+  },
+  insurance: {
+    title: 'Insurance Offshore Operations | KDCI Outsourcing',
+    description: 'Digital-first insurance ops with KDCI. Accelerate claims processing and policy administration for carriers and InsurTechs with expert offshore teams.',
+    canonical: `${BASE}/industries/insurance/`,
+  },
+  media: {
+    title: 'Media & Content Offshore Operations | KDCI Outsourcing',
+    description: "Content velocity with KDCI's media ops teams. Managed content moderation and creative production for brand protection and content scaling at speed.",
+    canonical: `${BASE}/industries/media/`,
+  },
+  'consumer-tech': {
+    title: 'Consumer Tech Offshore Support | KDCI Outsourcing',
+    description: 'Support your users 24/7 with KDCI. Technical support and community management for hardware brands, apps, and connected devices — powered by offshore experts.',
+    canonical: `${BASE}/industries/consumer-tech/`,
+  },
+  telecom: {
+    title: 'Telecom Offshore Operations | KDCI Outsourcing',
+    description: "Connectivity at scale with KDCI's telecom ops. Customer retention and technical provisioning support for ISPs, mobile carriers, and network service providers.",
+    canonical: `${BASE}/industries/telecom/`,
+  },
+  auto: {
+    title: 'Automotive Offshore Operations | KDCI Outsourcing',
+    description: "Dealer success powered by KDCI's automotive ops. Offshore customer care and dealer support purpose-built for the modern automotive ecosystem.",
+    canonical: `${BASE}/industries/auto/`,
+  },
+  fashion: {
+    title: 'Fashion & Apparel Offshore Operations | KDCI Outsourcing',
+    description: "Style and speed with KDCI's fashion ops. Brand-aligned offshore support and visual merchandising for fashion labels that demand quality and fast turnaround.",
+    canonical: `${BASE}/industries/fashion/`,
+  },
+  energy: {
+    title: 'Energy & Utilities Offshore Operations | KDCI Outsourcing',
+    description: "Grid reliability with KDCI's utility ops teams. Customer service and field dispatch support for solar, renewable energy, and utility service providers.",
+    canonical: `${BASE}/industries/energy/`,
+  },
+  'prof-services': {
+    title: 'Professional Services Offshore Ops | KDCI Outsourcing',
+    description: 'Executive leverage with KDCI. Offshore executive support and research for consulting, accounting, architecture, and professional services firms.',
+    canonical: `${BASE}/industries/professional-services/`,
+  },
+  gov: {
+    title: 'Government & Public Sector Offshore Ops | KDCI Outsourcing',
+    description: 'Modernizing public service with KDCI. Secure administrative and constituent support for government agencies and public sector contractors.',
+    canonical: `${BASE}/industries/government/`,
+  },
+
+  // ── Company & Other ───────────────────────────────────────────────────
+  company: {
+    title: 'About KDCI | Your Trusted Offshore Partner Since 2011',
+    description: 'Learn how KDCI has been building elite offshore teams since 2011. Trusted by 500+ companies globally for our people-first culture, AI-enhanced operations, and outcome-obsessed delivery.',
+    canonical: `${BASE}/company/`,
+  },
+  contact: {
+    title: 'Contact KDCI | Talk to an Outsourcing Specialist',
+    description: 'Ready to build your offshore team? Contact KDCI today. Speak with an outsourcing specialist and get a custom staffing solution tailored to your business goals.',
+    canonical: `${BASE}/contact/`,
+  },
+  careers: {
+    title: 'Careers at KDCI | Join the Elite Intelligence',
+    description: "Join KDCI's team of elite offshore professionals. Explore career opportunities in AI, software engineering, creative design, customer support, and more in the Philippines.",
+    canonical: `${BASE}/careers/`,
+  },
+  blog: {
+    title: 'Blog | Offshore Staffing & AI Insights — KDCI Outsourcing',
+    description: "Explore KDCI's blog for expert insights on offshore staffing, AI operations, business process outsourcing, and the future of work from the Philippines.",
+    canonical: `${BASE}/blog/`,
+  },
+  'case-studies': {
+    title: 'Case Studies | Real Results — KDCI Outsourcing',
+    description: 'See how KDCI has helped 500+ companies reduce costs and scale operations. Real-world case studies across e-commerce, fintech, healthcare, and more industries.',
+    canonical: `${BASE}/resources/case-studies/`,
+  },
+  guides: {
+    title: 'Guides | Offshore Staffing Resources — KDCI Outsourcing',
+    description: "Download KDCI's expert guides on offshore staffing, AI implementation, and business process outsourcing. Practical resources for scaling your business effectively.",
+    canonical: `${BASE}/resources/guides/`,
+  },
+  webinars: {
+    title: 'Webinars | KDCI Outsourcing',
+    description: "Join KDCI's live and on-demand webinars. Expert sessions on AI operations, offshore staffing, and operational excellence for modern business leaders.",
+    canonical: `${BASE}/resources/webinars/`,
+  },
+  ebooks: {
+    title: 'Ebooks | Free Outsourcing Resources — KDCI Outsourcing',
+    description: 'Free ebooks from KDCI on offshore staffing, AI-powered operations, and business growth strategies. Download now and start building smarter, leaner teams.',
+    canonical: `${BASE}/resources/ebooks/`,
+  },
+  faqs: {
+    title: 'Frequently Asked Questions | KDCI Outsourcing',
+    description: "Get clear answers to common questions about KDCI's offshore staffing, all-in pricing, onboarding timeline, replacement guarantee, and AI-enhanced operations.",
+    canonical: `${BASE}/faqs/`,
+  },
+  glossary: {
+    title: 'Outsourcing & AI Glossary | KDCI Outsourcing',
+    description: 'A complete glossary of offshore staffing, BPO, and AI operations terms. Learn the language of modern outsourcing with KDCI.',
+    canonical: `${BASE}/glossary/`,
+  },
+  'privacy-policy': {
+    title: 'Privacy Policy | KDCI Outsourcing',
+    description: "Read KDCI Outsourcing's privacy policy. Learn how we collect, use, and protect your personal information in compliance with applicable data protection laws.",
+    canonical: `${BASE}/privacy-policy/`,
+  },
+  'terms-and-conditions': {
+    title: 'Terms and Conditions | KDCI Outsourcing',
+    description: "Read KDCI Outsourcing's terms and conditions governing use of our website and services.",
+    canonical: `${BASE}/terms-and-conditions/`,
+  },
+};
+
+export const DEFAULT_SEO: SEOMeta = SEO_CONFIG['home']!;
+
+export function applySEO(view: string): void {
+  const meta = SEO_CONFIG[view] ?? DEFAULT_SEO;
+
+  document.title = meta.title;
+
+  const setMeta = (selector: string, attr: string, value: string) => {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  };
+
+  setMeta('meta[name="description"]', 'content', meta.description);
+  setMeta('meta[property="og:title"]', 'content', meta.title);
+  setMeta('meta[property="og:description"]', 'content', meta.description);
+  setMeta('meta[property="og:url"]', 'content', meta.canonical);
+  setMeta('meta[name="twitter:title"]', 'content', meta.title);
+  setMeta('meta[name="twitter:description"]', 'content', meta.description);
+
+  let canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (canonicalEl) {
+    canonicalEl.href = meta.canonical;
+  }
+}
