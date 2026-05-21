@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import nodemailer from 'nodemailer';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -255,6 +256,77 @@ app.put('/api/admin/users/:id/unlock', requireAuth, async (req, res) => {
 // ----- HEALTH -----
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, ts: new Date().toISOString() });
+});
+
+// ----- CONTACT FORM -----
+app.post('/api/contact', async (req, res) => {
+  const { inquiryType, firstName, lastName, email, phone, company, role, country, message } = req.body;
+
+  if (!inquiryType || !firstName || !lastName || !email || !company || !country || !message) {
+    res.status(400).json({ error: 'Missing required fields.' });
+    return;
+  }
+
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+
+  if (!smtpHost || !smtpUser || !smtpPass) {
+    console.error('[contact] SMTP credentials not configured');
+    res.status(500).json({ error: 'Email service not configured. Please contact us directly at info@kdci.co.' });
+    return;
+  }
+
+  const smtpPort = parseInt(process.env.SMTP_PORT || '587');
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpPort === 465,
+    auth: { user: smtpUser, pass: smtpPass },
+  });
+
+  const row = (label: string, value: string | undefined) =>
+    value ? `<tr><td style="padding:8px 0;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;width:150px;vertical-align:top">${label}</td><td style="padding:8px 0;font-weight:600;color:#111">${value}</td></tr>` : '';
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;border:1px solid #eee;border-radius:8px;overflow:hidden">
+      <div style="background:#E61739;padding:24px 32px">
+        <h1 style="color:white;margin:0;font-size:18px;font-weight:700;letter-spacing:0.5px">New Website Inquiry — KDCI.co</h1>
+      </div>
+      <div style="padding:32px;background:#fafafa">
+        <table style="width:100%;border-collapse:collapse">
+          ${row('Inquiry Type', inquiryType)}
+          ${row('Name', `${firstName} ${lastName}`)}
+          ${row('Email', `<a href="mailto:${email}" style="color:#E61739">${email}</a>`)}
+          ${row('Phone', phone)}
+          ${row('Company', company)}
+          ${row('Role', role)}
+          ${row('Country', country)}
+        </table>
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid #e5e5e5">
+          <div style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Message</div>
+          <p style="white-space:pre-wrap;line-height:1.7;margin:0;color:#333">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+        </div>
+      </div>
+      <div style="padding:14px 32px;background:#111;color:#555;font-size:11px">
+        Submitted via kdci.co contact form · ${new Date().toUTCString()}
+      </div>
+    </div>`;
+
+  try {
+    await transporter.sendMail({
+      from: `"KDCI Website" <${process.env.SMTP_FROM || smtpUser}>`,
+      to: 'info@kdci.co',
+      replyTo: email,
+      subject: `[Website Inquiry] ${inquiryType} — ${firstName} ${lastName} (${company})`,
+      html,
+    });
+    console.log(`[contact] Email sent: ${email} — ${inquiryType}`);
+    res.json({ success: true });
+  } catch (err: any) {
+    console.error('[contact] Send error:', err.message);
+    res.status(500).json({ error: 'Failed to send your message. Please try again or email us directly at info@kdci.co.' });
+  }
 });
 
 // ----- ONE-TIME DEV→PROD SEED (remove after use) -----
