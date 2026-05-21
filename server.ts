@@ -315,7 +315,7 @@ app.post('/api/contact', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"KDCI Website" <${process.env.SMTP_FROM || smtpUser}>`,
+      from: `"KDCI Website" <${smtpUser}>`,
       to: 'info@kdci.co',
       replyTo: email,
       subject: `[Website Inquiry] ${inquiryType} — ${firstName} ${lastName} (${company})`,
