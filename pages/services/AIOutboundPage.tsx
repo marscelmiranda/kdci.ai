@@ -91,7 +91,7 @@ export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) 
                 High Demand · AI Outbound & Lead Generation
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-white">Your full</span><br/>
+                <span className="text-white">AI-Powered Demand Generation</span><br/>
                 <span className="text-[#E61739]">Outbound Engine.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
