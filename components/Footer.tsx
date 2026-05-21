@@ -306,7 +306,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">
                   Scale Insights
                 </div>
-                <h2 className="text-xl font-black text-white leading-tight">Complete your subscription</h2>
+                <h2 className="text-xl font-black text-white leading-tight">Complete your signup</h2>
                 <p className="text-white/40 text-[13px] font-medium mt-1 flex items-center gap-1.5">
                   <Mail size={12} className="shrink-0" />
                   <span className="truncate">{email}</span>
@@ -458,7 +458,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                     {submitting ? (
                       <><Loader2 size={16} className="animate-spin" /> Subscribing…</>
                     ) : (
-                      <>Subscribe to Scale Insights <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
+                      <>Subscribe <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
                     )}
                   </button>
                   <p className="text-white/20 text-[11px] text-center font-medium">
