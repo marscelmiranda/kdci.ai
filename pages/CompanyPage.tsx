@@ -289,7 +289,7 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       {/* 8. Global Footprint */}
       <section className="py-32 bg-[#F5F5F7] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-stretch">
             <div>
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.25em] mb-4">Our Location</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Global Roots,<br /><span className="text-[#E61739]">Philippine Excellence.</span></h2>
@@ -320,14 +320,14 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
               </div>
             </div>
-            <div className="relative rounded-[4rem] overflow-hidden min-h-[520px] shadow-xl">
+            <div className="relative rounded-[4rem] overflow-hidden shadow-xl">
               <img
                 src={IMG_HQ_BUILDING}
                 alt="KDCI Philippine headquarters — One Corporate Centre, Ortigas Center, Manila"
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-              <div className="absolute bottom-8 left-8 right-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              <div className="absolute top-8 left-8">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/20 text-white text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
                   <MapPin size={10} /> Ortigas Center, Metro Manila
                 </span>
