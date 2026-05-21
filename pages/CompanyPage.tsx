@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../components/Shared';
 import { IMG_CX_TEAM, IMG_CX_TEAM2, IMG_DEV_TEAM } from '../data';
 import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.png';
 import IMG_HQ_BUILDING from '@/attached_assets/Gemini_Generated_Image_8bu7sa8bu7sa8bu7_1779330338502.png';
+import IMG_BUILD_TEAMS from '@/attached_assets/Gemini_Generated_Image_oq625yoq625yoq62_1779330519874.png';
 
 const STATS = [
   { value: '2011', label: 'Year Founded' },
@@ -370,10 +371,9 @@ export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
-              <div className="bg-slate-200 rounded-[4rem] aspect-[4/5] overflow-hidden relative shadow-2xl">
-                <img src={IMG_DEV_TEAM} alt="KDCI Team" className="absolute inset-0 w-full h-full object-cover grayscale" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-10 rounded-[3rem] shadow-2xl border border-white/50">
+              <div className="rounded-[40px] aspect-[4/5] overflow-hidden relative shadow-2xl">
+                <img src={IMG_BUILD_TEAMS} alt="KDCI team welcoming a new client" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-10 rounded-[40px] shadow-2xl border border-white/50">
                   <Quote className="text-[#E61739] mb-4 opacity-50" size={32} />
                   <p className="text-xl font-heading font-bold text-slate-900 mb-2 italic">"The bench is deep."</p>
                   <p className="text-slate-500 text-sm font-medium">We vet for more than skills — we hire for leadership, curiosity, and cultural fit.</p>
