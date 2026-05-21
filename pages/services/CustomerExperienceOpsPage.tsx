@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_CX_TEAM } from '../../data';
 import IMG_CX_HERO from '@/attached_assets/Gemini_Generated_Image_copuzrcopuzrcopu_1779320301879.png';
+import IMG_CX_CONTACT from '@/attached_assets/Gemini_Generated_Image_alu075alu075alu0_1779323597973.png';
 
 export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
@@ -409,7 +410,7 @@ export const CustomerExperienceOpsPage = ({ setView }: { setView: (v: ViewType) 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
-              src={IMG_CX_TEAM}
+              src={IMG_CX_CONTACT}
               alt="KDCI CX Team"
               className="absolute inset-0 w-full h-full object-cover"
             />
