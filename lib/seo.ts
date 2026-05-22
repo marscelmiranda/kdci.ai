@@ -274,8 +274,4 @@ export function applySEO(view: string): void {
     canonicalEl.href = meta.canonical;
   }
 
-  const path = URL_PATHS[view];
-  if (path && window.location.pathname !== path) {
-    window.history.pushState({ view }, '', path);
-  }
 }
