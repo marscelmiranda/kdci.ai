@@ -8,7 +8,7 @@ import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.png';
 import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.png';
 
-export const AIOutboundPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);

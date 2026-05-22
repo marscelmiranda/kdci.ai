@@ -5,7 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_GOV_HERO as HERO_IMG, IMG_GOV_TEAM as TEAM_IMG } from '../../data';
 
-export const GovPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const GovernmentPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero Section */}

@@ -32,7 +32,7 @@ const INDUSTRY_ROLES: Record<string, string[]> = {
   'gov':            ['Data Entry Specialist', 'Records Management Specialist', 'Administrative Assistant', 'Research Analyst', 'Compliance Coordinator', 'Public Affairs Writer'],
 };
 
-export const AIWorkforcePage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedInd, setSelectedInd] = useState(INDUSTRIES[0]);
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', role: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);

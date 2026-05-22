@@ -5,7 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_AUTO_HERO as HERO_IMG, IMG_AUTO_TEAM as TEAM_IMG } from '../../data';
 
-export const AutoPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AutomotivePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [pricingModel, setPricingModel] = useState<'outcomes' | 'staff-aug'>('outcomes');
 
   return (

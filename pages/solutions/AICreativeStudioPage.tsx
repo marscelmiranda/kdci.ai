@@ -82,7 +82,7 @@ const ScrollingColumn = ({
   );
 };
 
-export const GraphicDesignStudioPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [selectedPortfolioItem, setSelectedPortfolioItem] = useState<PortfolioItem | null>(null);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);

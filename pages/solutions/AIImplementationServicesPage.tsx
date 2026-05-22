@@ -114,7 +114,7 @@ const TOOLS = [
   { name: '24+ Platforms',      category: 'Monitoring Ecosystem' },
 ];
 
-export const AIConsultingPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', department: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);

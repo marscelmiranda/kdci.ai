@@ -5,7 +5,7 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { IMG_PROF_SERVICES_HERO as HERO_IMG, IMG_PROF_SERVICES_TEAM as TEAM_IMG } from '../../data';
 
-export const ProfServicesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const ProfessionalServicesPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero Section */}

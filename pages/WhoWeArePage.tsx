@@ -33,7 +33,7 @@ const TESTIMONIALS = [
   },
 ];
 
-export const CompanyPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="min-h-screen bg-white">
 

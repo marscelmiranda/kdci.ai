@@ -11,9 +11,9 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
 import { HomePage } from './pages/HomePage';
-import { BlogLandingPage } from './pages/BlogLandingPage';
+import { BlogsPage } from './pages/BlogsPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
-import { CompanyPage } from './pages/CompanyPage';
+import { WhoWeArePage } from './pages/WhoWeArePage';
 import { ContactPage } from './pages/ContactPage';
 import { LoginPage } from './pages/LoginPage';
 import { PublisherDashboardPage } from './pages/PublisherDashboardPage';
@@ -26,17 +26,15 @@ import { CareersPage } from './pages/CareersPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
 
-// Services
-import { SolutionsHubPage } from './pages/services/SolutionsHubPage';
-
-import { GraphicDesignStudioPage } from './pages/services/GraphicDesignStudioPage';
-import { CustomerExperienceOpsPage } from './pages/services/CustomerExperienceOpsPage';
-import { OffshoreStaffingPage } from './pages/services/OffshoreStaffingPage';
-import { AIWorkforcePage } from './pages/services/AIWorkforcePage';
-
-import { AIConsultingPage } from './pages/services/AIConsultingPage';
-import { AIAgentMonitoringPage } from './pages/services/AIAgentMonitoringPage';
-import { AIOutboundPage } from './pages/services/AIOutboundPage';
+// Solutions
+import { SolutionsHubPage } from './pages/solutions/SolutionsHubPage';
+import { AICreativeStudioPage } from './pages/solutions/AICreativeStudioPage';
+import { AIAugmentedCXSupportPage } from './pages/solutions/AIAugmentedCXSupportPage';
+import { StaffAugmentationPage } from './pages/solutions/StaffAugmentationPage';
+import { AIWorkforceAugmentationPage } from './pages/solutions/AIWorkforceAugmentationPage';
+import { AIImplementationServicesPage } from './pages/solutions/AIImplementationServicesPage';
+import { AIAgentMonitoringPage } from './pages/solutions/AIAgentMonitoringPage';
+import { AIDemandGenerationPage } from './pages/solutions/AIDemandGenerationPage';
 
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
@@ -57,11 +55,11 @@ import { InsurancePage } from './pages/industries/InsurancePage';
 import { MediaPage } from './pages/industries/MediaPage';
 import { ConsumerTechPage } from './pages/industries/ConsumerTechPage';
 import { TelecomPage } from './pages/industries/TelecomPage';
-import { AutoPage } from './pages/industries/AutoPage';
+import { AutomotivePage } from './pages/industries/AutomotivePage';
 import { FashionPage } from './pages/industries/FashionPage';
 import { EnergyPage } from './pages/industries/EnergyPage';
-import { ProfServicesPage } from './pages/industries/ProfServicesPage';
-import { GovPage } from './pages/industries/GovPage';
+import { ProfessionalServicesPage } from './pages/industries/ProfessionalServicesPage';
+import { GovernmentPage } from './pages/industries/GovernmentPage';
 
 // Import Resource pages
 import { CaseStudiesPage } from './pages/CaseStudiesPage';
@@ -70,7 +68,7 @@ import { GuidesPage } from './pages/GuidesPage';
 import { WebinarsPage } from './pages/WebinarsPage';
 import { EbooksPage } from './pages/EbooksPage';
 import { EbookDetailPage } from './pages/EbookDetailPage';
-import { FaqPage } from './pages/FaqPage';
+import { FaqsPage } from './pages/FaqsPage';
 import { GlossaryPage } from './pages/GlossaryPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ComingSoonPage } from './pages/ComingSoonPage';
@@ -240,17 +238,15 @@ const App = () => {
       <main>
         {activeView === 'home' && <HomePage setView={setView} />}
         
-        {/* Services */}
+        {/* Solutions */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
-        {activeView === 'agentic-recruitment' && <AIWorkforcePage setView={setView} />}
-
-        {activeView === 'customer-support' && <CustomerExperienceOpsPage setView={setView} />}
-
-        {activeView === 'creative-prod' && <GraphicDesignStudioPage setView={setView} />}
-        {/* activeView === 'staff-aug' && <OffshoreStaffingPage setView={setView} /> */}
-        {activeView === 'ai-consulting' && <AIConsultingPage setView={setView} />}
+        {activeView === 'agentic-recruitment' && <AIWorkforceAugmentationPage setView={setView} />}
+        {activeView === 'customer-support' && <AIAugmentedCXSupportPage setView={setView} />}
+        {activeView === 'creative-prod' && <AICreativeStudioPage setView={setView} />}
+        {/* activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} /> */}
+        {activeView === 'ai-consulting' && <AIImplementationServicesPage setView={setView} />}
         {activeView === 'ai-agent-monitoring' && <AIAgentMonitoringPage setView={setView} />}
-        {activeView === 'ai-outbound' && <AIOutboundPage setView={setView} />}
+        {activeView === 'ai-outbound' && <AIDemandGenerationPage setView={setView} />}
         
         {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}
@@ -266,14 +262,14 @@ const App = () => {
         {activeView === 'media' && <MediaPage setView={setView} />}
         {activeView === 'consumer-tech' && <ConsumerTechPage setView={setView} />}
         {activeView === 'telecom' && <TelecomPage setView={setView} />}
-        {activeView === 'auto' && <AutoPage setView={setView} />}
+        {activeView === 'auto' && <AutomotivePage setView={setView} />}
         {activeView === 'fashion' && <FashionPage setView={setView} />}
         {activeView === 'energy' && <EnergyPage setView={setView} />}
-        {activeView === 'prof-services' && <ProfServicesPage setView={setView} />}
-        {activeView === 'gov' && <GovPage setView={setView} />}
+        {activeView === 'prof-services' && <ProfessionalServicesPage setView={setView} />}
+        {activeView === 'gov' && <GovernmentPage setView={setView} />}
 
         {/* Company & Others */}
-        {activeView === 'company' && <CompanyPage setView={setView} />}
+        {activeView === 'company' && <WhoWeArePage setView={setView} />}
         {activeView === 'contact' && <ContactPage setView={setView} />}
         {activeView === 'careers' && (
           <CareersPage
@@ -293,7 +289,7 @@ const App = () => {
         )}
 
         {activeView === 'blog' && (
-          <BlogLandingPage
+          <BlogsPage
             setView={setView}
             onSelectBlog={(id) => { setSelectedBlogId(id); setView('blog-detail'); }}
           />
@@ -317,7 +313,7 @@ const App = () => {
           />
         )}
         {activeView === 'ebook-detail' && <EbookDetailPage setView={setView} ebookId={selectedEbookId} />}
-        {activeView === 'faqs' && <FaqPage setView={setView} />}
+        {activeView === 'faqs' && <FaqsPage setView={setView} />}
         {activeView === 'glossary' && <GlossaryPage setView={setView} />}
 
         {/* Utility pages */}

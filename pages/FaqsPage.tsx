@@ -111,7 +111,7 @@ const SERVICE_CATEGORIES = [
   },
 ];
 
-export const FaqPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeCategory, setActiveCategory] = useState('ai-monitoring');
   const [openIndex, setOpenIndex]           = useState<number | null>(null);
   const [searchQuery, setSearchQuery]       = useState('');
