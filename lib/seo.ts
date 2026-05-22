@@ -90,7 +90,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-agent-monitoring/`,
   },
   'ai-outbound': {
-    title: 'AI Demand Generation | KDCI.ai',
+    title: 'AI-Powered Demand Generation Services | KDCI.ai',
     description: 'Grow your lead pipeline with AI-driven demand generation. Target smarter, send out personalized content, and get higher conversion rates.',
     canonical: `${BASE}/solutions/ai-demand-generation/`,
   },
