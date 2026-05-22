@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "-hgvbfJAtCLWYN0zo4R4y"
+uri = "file://KDCI_Logo_Audit.pdf"
+type = "pdf"
+title = "KDCI Logo Audit Report — Aedan Update #3.1"
