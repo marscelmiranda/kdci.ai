@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# Block Midgard employee portal
+Disallow: /midgard/
+
 # Block CMS and internal admin views (SPA hash/state routes)
 Disallow: /?view=login
 Disallow: /?view=publisher-dashboard
@@ -10,4 +13,4 @@ Disallow: /?view=cms-resources-ops
 Disallow: /?view=cms-portfolio-ops
 Disallow: /?view=cms-case-studies-ops
 
-Sitemap: https://kdci.co/sitemap.xml
+Sitemap: https://kdci.ai/sitemap.xml
