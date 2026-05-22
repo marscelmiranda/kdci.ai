@@ -70,8 +70,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-augmented-cx-support/`,
   },
   'creative-prod': {
-    title: 'AI Creative Studio | KDCI',
-    description: "Scale creative output with KDCI's Manila-based design studio. Human designers amplified by AI tools for faster, high-quality graphics, video, and brand asset production.",
+    title: 'AI Creative Design | KDCI.ai',
+    description: 'Unlock scalable AI-powered creative design solutions built for speed and consistency at a cost no traditional design agency can replicate.',
     canonical: `${BASE}/solutions/ai-creative-studio/`,
   },
   'staff-aug': {
