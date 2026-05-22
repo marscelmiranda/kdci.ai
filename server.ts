@@ -136,12 +136,15 @@ app.post('/api/auth/login', async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
-app.get('/api/auth/me', (req, res) => {
+app.get('/api/auth/me', async (req, res) => {
   const authHeader = req.headers['authorization'];
   if (!authHeader?.startsWith('Bearer ')) { res.status(401).json({ error: 'No token' }); return; }
   try {
     const payload = jwt.verify(authHeader.slice(7), JWT_SECRET) as any;
-    res.json({ id: payload.id, email: payload.email, name: payload.name, role: payload.role });
+    // Always fetch role live from the database so admin changes take effect immediately
+    const result = await pool.query('SELECT role FROM users WHERE id = $1', [payload.id]);
+    const liveRole = result.rows[0]?.role ?? payload.role;
+    res.json({ id: payload.id, email: payload.email, name: payload.name, role: liveRole });
   } catch { res.status(401).json({ error: 'Invalid or expired token' }); }
 });
 
