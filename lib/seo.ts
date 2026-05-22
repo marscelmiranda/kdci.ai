@@ -65,8 +65,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
   'customer-support': {
-    title: 'AI-Augmented CX Support | KDCI',
-    description: "Deliver world-class customer support with KDCI's AI-augmented CX teams. Managed solutions combining AI first-contact resolution with expert human escalation across every channel.",
+    title: 'AI Augmented CX Support | KDCI.ai',
+    description: "Elevate every customer interaction with AI-augmented CX support that's faster, smarter, and always on, all without losing the human touch.",
     canonical: `${BASE}/solutions/ai-augmented-cx-support/`,
   },
   'creative-prod': {
