@@ -61,7 +61,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   },
   'agentic-recruitment': {
     title: 'Build an AI-Skilled Workforce | KDCI.ai',
-    description: 'Build an AI-ready team trained on tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.',
+    description: 'Build an AI-skilled workforce trained on tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.',
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
   'customer-support': {
