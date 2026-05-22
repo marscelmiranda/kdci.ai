@@ -80,8 +80,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
   'ai-consulting': {
-    title: 'AI Implementation Services | KDCI',
-    description: "Transform your business with KDCI's AI consulting services. From readiness audits and custom AI agent builds to long-term performance monitoring and optimization for enterprise teams.",
+    title: 'AI Consultation and Implementation | KDCI.ai',
+    description: "Elevate every customer interaction with AI-augmented CX support that's faster, smarter, and always on, all without losing the human touch.",
     canonical: `${BASE}/solutions/ai-implementation-services/`,
   },
   'ai-agent-monitoring': {
