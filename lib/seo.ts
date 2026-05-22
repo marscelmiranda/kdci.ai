@@ -60,7 +60,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/`,
   },
   'agentic-recruitment': {
-    title: 'AI Workforce Augmentation | KDCI.ai',
+    title: 'Build an AI-Skilled Workforce | KDCI.ai',
     description: 'Build an AI-ready team trained on tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.',
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
