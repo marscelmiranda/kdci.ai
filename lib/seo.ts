@@ -70,7 +70,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-augmented-cx-support/`,
   },
   'creative-prod': {
-    title: 'AI Creative Design | KDCI.ai',
+    title: 'AI-Enabled Creative Design Services | KDCI.ai',
     description: 'Unlock scalable AI-powered creative design solutions built for speed and consistency at a cost no traditional design agency can replicate.',
     canonical: `${BASE}/solutions/ai-creative-studio/`,
   },
