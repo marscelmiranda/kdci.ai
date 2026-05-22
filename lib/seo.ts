@@ -81,7 +81,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   },
   'ai-consulting': {
     title: 'AI Consultation and Implementation | KDCI.ai',
-    description: "Elevate every customer interaction with AI-augmented CX support that's faster, smarter, and always on, all without losing the human touch.",
+    description: 'From AI consulting to hands-on implementation, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks— with 30-day monitored handoff.',
     canonical: `${BASE}/solutions/ai-implementation-services/`,
   },
   'ai-agent-monitoring': {
