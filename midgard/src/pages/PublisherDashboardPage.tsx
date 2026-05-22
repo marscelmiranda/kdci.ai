@@ -52,7 +52,7 @@ interface SidebarProfile {
   mobilePhone: string;
 }
 
-export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: ViewType) => void; userRole: string }) => {
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName]   = useState('');
   const [profile, setProfile]     = useState<SidebarProfile | null>(null);
@@ -275,14 +275,16 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             color="bg-teal-600"
             onClick={() => setView('case-studies-ops')}
           />
-          <DashboardCard
-            title="User Approvals"
-            description="Review and approve pending team member accounts, manage access and unlock locked accounts."
-            icon={<Users size={24} />}
-            actionText="Manage Users"
-            color="bg-red-600"
-            onClick={() => setView('admin-approvals')}
-          />
+          {userRole === 'admin' && (
+            <DashboardCard
+              title="User Approvals"
+              description="Review and approve pending team member accounts, manage access and unlock locked accounts."
+              icon={<Users size={24} />}
+              actionText="Manage Users"
+              color="bg-red-600"
+              onClick={() => setView('admin-approvals')}
+            />
+          )}
           <DashboardCard
             title="My Profile"
             description="View and update your employee profile, work information, contact details, and org chart position."

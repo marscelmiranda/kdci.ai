@@ -17,23 +17,25 @@ const PUBLIC_VIEWS: ViewType[] = ['login', 'register', 'forgot-password'];
 
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType | null>(null);
+  const [userRole, setUserRole] = useState<string>('');
 
   useEffect(() => {
     const token = getToken();
     if (!token) { setActiveView('login'); return; }
     getMe()
-      .then(() => setActiveView('dashboard'))
+      .then(u => { setUserRole(u.role || ''); setActiveView('dashboard'); })
       .catch(() => { clearToken(); setActiveView('login'); });
   }, []);
 
   const setView = (v: ViewType) => {
-    if (v === 'login') clearToken();
+    if (v === 'login') { clearToken(); setUserRole(''); }
     setActiveView(v);
     window.scrollTo(0, 0);
   };
 
   const guardedSetView = (v: ViewType) => {
     if (!PUBLIC_VIEWS.includes(v) && !getToken()) { setActiveView('login'); return; }
+    if (v === 'admin-approvals' && userRole !== 'admin') { setActiveView('dashboard'); return; }
     setView(v);
   };
 
@@ -51,7 +53,8 @@ const App = () => {
 
   if (!getToken()) return <LoginPage setView={setView} />;
 
-  if (activeView === 'dashboard') return <PublisherDashboardPage setView={guardedSetView} />;
+  if (activeView === 'admin-approvals' && userRole !== 'admin') return <PublisherDashboardPage setView={guardedSetView} userRole={userRole} />;
+  if (activeView === 'dashboard') return <PublisherDashboardPage setView={guardedSetView} userRole={userRole} />;
   if (activeView === 'blog-ops') return <BlogOpsPage setView={guardedSetView} />;
   if (activeView === 'career-ops') return <CareerOpsPage setView={guardedSetView} />;
   if (activeView === 'resources-ops') return <ResourcesOpsPage setView={guardedSetView} />;
