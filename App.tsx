@@ -69,6 +69,7 @@ import { CaseStudyDetailPage } from './pages/CaseStudyDetailPage';
 import { GuidesPage } from './pages/GuidesPage';
 import { WebinarsPage } from './pages/WebinarsPage';
 import { EbooksPage } from './pages/EbooksPage';
+import { EbookDetailPage } from './pages/EbookDetailPage';
 import { FaqPage } from './pages/FaqPage';
 import { GlossaryPage } from './pages/GlossaryPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -79,6 +80,7 @@ const App = () => {
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
+  const [selectedEbookId, setSelectedEbookId] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -193,7 +195,13 @@ const App = () => {
         {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} studyId={selectedCaseStudyId} />}
         {activeView === 'guides' && <GuidesPage setView={setView} />}
         {activeView === 'webinars' && <WebinarsPage setView={setView} />}
-        {activeView === 'ebooks' && <EbooksPage setView={setView} />}
+        {activeView === 'ebooks' && (
+          <EbooksPage
+            setView={setView}
+            onSelectEbook={(id) => { setSelectedEbookId(id); setView('ebook-detail'); }}
+          />
+        )}
+        {activeView === 'ebook-detail' && <EbookDetailPage setView={setView} ebookId={selectedEbookId} />}
         {activeView === 'faqs' && <FaqPage setView={setView} />}
         {activeView === 'glossary' && <GlossaryPage setView={setView} />}
 

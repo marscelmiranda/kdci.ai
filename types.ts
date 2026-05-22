@@ -71,6 +71,7 @@ export type ViewType =
   | 'guides'
   | 'webinars'
   | 'ebooks'
+  | 'ebook-detail'
   | 'faqs'
   | 'glossary'
   | 'privacy-policy'

@@ -1,32 +1,59 @@
 
-import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, X, Plus, ChevronDown, Globe, Cpu, ShieldCheck, TrendingUp, Users, BarChart3, BrainCircuit, Layers, FileText, Search } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, X, Plus, ChevronDown, Loader2, AlertCircle, Search } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
-const ebooks = [
-  { id: 1, icon: Globe, industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["AI Ops", "Operations"], thumb: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=800&h=420", title: "State of Global AI Operations 2025", desc: "An in-depth analysis of how 500+ enterprise leaders are integrating agentic AI into their workforce strategy.", metrics: [{ label: "Pages", value: "45" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 2, icon: Cpu, industry: "Technology", source: "KDCI Engineering", contentType: "Ebook" as const, tags: ["Software Dev", "AI Ops"], thumb: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=420", title: "The Ultimate Guide to QA Automation", desc: "Moving beyond manual testing: a framework for building self-healing regression suites with offshore teams.", metrics: [{ label: "Pages", value: "32" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 3, icon: ShieldCheck, industry: "Financial Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], thumb: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800&h=420", title: "Fintech Compliance: The Offshore Playbook", desc: "Navigating GDPR, SOC-2, and PCI-DSS when working with distributed financial operations teams globally.", metrics: [{ label: "Pages", value: "28" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 4, icon: TrendingUp, industry: "Retail", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Creative", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800&h=420", title: "ROI of Managed Creative Pods", desc: "Calculating the velocity and cost impact of switching from freelancers to dedicated creative units.", metrics: [{ label: "Pages", value: "18" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 5, icon: Users, industry: "Healthcare", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Back Office", "Operations"], thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=420", title: "Healthcare Data Management in a Distributed World", desc: "A comprehensive framework for HIPAA-compliant patient data workflows across multi-state offshore operations.", metrics: [{ label: "Pages", value: "36" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 6, icon: BarChart3, industry: "Technology", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Software Dev", "Staff Aug"], thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=420", title: "The Offshore Engineering Talent Report 2025", desc: "Benchmarks, salary data, and hiring trends for software engineers across Southeast Asia and Latin America.", metrics: [{ label: "Pages", value: "52" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 7, icon: BrainCircuit, industry: "Professional Services", source: "KDCI AI Labs", contentType: "Ebook" as const, tags: ["Customer Support", "AI Ops"], thumb: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800&h=420", title: "Agentic AI in Customer Operations", desc: "How intelligent automation is reshaping CX teams — from chatbots to fully autonomous resolution agents.", metrics: [{ label: "Pages", value: "24" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-  { id: 8, icon: Layers, industry: "Logistics", source: "KDCI Analytics", contentType: "Ebook" as const, tags: ["Data Entry", "Operations"], thumb: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800&h=420", title: "Logistics Digitization Benchmark Report", desc: "How top-performing freight companies are eliminating manual bottlenecks and achieving real-time visibility.", metrics: [{ label: "Pages", value: "22" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2024" }] },
-  { id: 9, icon: FileText, industry: "Professional Services", source: "KDCI Research Lab", contentType: "Ebook" as const, tags: ["Staff Aug", "Operations"], thumb: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800&h=420", title: "The Staff Augmentation Buyer's Guide", desc: "Everything procurement teams need to evaluate, negotiate, and onboard an offshore operations partner effectively.", metrics: [{ label: "Pages", value: "30" }, { label: "Format", value: "PDF" }, { label: "Year", value: "2025" }] },
-];
+interface ApiEbook {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  author: string;
+  category: string;
+  cover_image: string;
+  download_url: string;
+  page_count: number;
+  tags: string | string[];
+  status: string;
+  published_at: string;
+}
 
-const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', 'Retail', 'Real Estate', 'Healthcare', 'Professional Services'];
-const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Back Office', 'AI Ops', 'Operations', 'Creative'];
-const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
+const parseTags = (tags: string | string[]): string[] => {
+  if (Array.isArray(tags)) return tags.filter(Boolean);
+  if (!tags) return [];
+  try {
+    const p = JSON.parse(tags);
+    if (Array.isArray(p)) return p;
+  } catch {}
+  return tags.split(',').map(t => t.trim()).filter(Boolean);
+};
 
-export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [activeIndustry, setActiveIndustry]       = useState('All');
-  const [activeService, setActiveService]         = useState('All');
-  const [activeContentType, setActiveContentType] = useState('Ebook');
-  const [openPanel, setOpenPanel] = useState<'industry' | 'service' | 'content' | null>(null);
+const CATEGORIES = ['All', 'Technology', 'Financial Services', 'Healthcare', 'Marketing', 'Retail', 'Logistics', 'Professional Services', 'Other'];
+
+export const EbooksPage = ({
+  setView,
+  onSelectEbook,
+}: {
+  setView: (v: ViewType) => void;
+  onSelectEbook?: (id: number) => void;
+}) => {
+  const [ebooks, setEbooks] = useState<ApiEbook[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [openPanel, setOpenPanel] = useState<'category' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const filterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch('/api/ebooks')
+      .then(r => r.json())
+      .then((data: ApiEbook[]) => setEbooks(Array.isArray(data) ? data : []))
+      .catch(e => setFetchError(e.message))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -37,20 +64,14 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   }, []);
 
   const filtered = ebooks.filter(e => {
-    const industryOk    = activeIndustry    === 'All' || e.industry    === activeIndustry;
-    const serviceOk     = activeService     === 'All' || e.tags.includes(activeService);
-    const contentTypeOk = activeContentType === 'All' || e.contentType === activeContentType;
+    const cat = activeCategory === 'All' || e.category === activeCategory;
     const q = searchQuery.toLowerCase();
-    const searchOk = q === '' || e.title.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q);
-    return industryOk && serviceOk && contentTypeOk && searchOk;
+    const search = q === '' || e.title.toLowerCase().includes(q) || (e.description || '').toLowerCase().includes(q);
+    return cat && search;
   });
 
-  const industryLabel    = activeIndustry    === 'All' ? 'Industry'     : activeIndustry;
-  const serviceLabel     = activeService     === 'All' ? 'Service'      : activeService;
-  const contentTypeLabel = activeContentType === 'All' ? 'Content Type' : activeContentType;
-  const industryActive    = activeIndustry    !== 'All';
-  const serviceActive     = activeService     !== 'All';
-  const contentTypeActive = activeContentType !== 'All';
+  const categoryActive = activeCategory !== 'All';
+  const categoryLabel = activeCategory === 'All' ? 'Category' : activeCategory;
 
   return (
     <div className="min-h-screen bg-white">
@@ -80,7 +101,7 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                 type="text"
                 placeholder="Search ebooks, reports, or topics..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-11 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-medium text-white focus:ring-2 focus:ring-[#E61739]/40 focus:bg-white/15 focus:border-[#E61739]/60 transition-all placeholder:text-white/40 outline-none backdrop-blur-sm"
               />
             </div>
@@ -90,42 +111,27 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
 
       {/* ── FILTER BAR ── */}
       <div ref={filterRef} className="relative z-30 bg-white border-y border-slate-200 shadow-sm">
-        {/* Search row removed — now in hero */}
         <div className="max-w-7xl mx-auto flex divide-x divide-slate-200">
-          <button onClick={() => setOpenPanel(openPanel === 'industry' ? null : 'industry')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'industry' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
-            {industryActive ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveIndustry('All'); setOpenPanel(null); }} /> : <Plus size={16} className="text-slate-400 shrink-0" />}
-            <span className={`text-sm font-bold uppercase tracking-widest ${industryActive ? 'text-slate-900' : 'text-slate-500'}`}>{industryLabel}</span>
-            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'industry' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
-          </button>
-          <button onClick={() => setOpenPanel(openPanel === 'service' ? null : 'service')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'service' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
-            {serviceActive ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveService('All'); setOpenPanel(null); }} /> : <Plus size={16} className="text-slate-400 shrink-0" />}
-            <span className={`text-sm font-bold uppercase tracking-widest ${serviceActive ? 'text-slate-900' : 'text-slate-500'}`}>{serviceLabel}</span>
-            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'service' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
-          </button>
-          <button onClick={() => setOpenPanel(openPanel === 'content' ? null : 'content')}
-            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'content' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}>
-            {contentTypeActive ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveContentType('All'); setOpenPanel(null); }} /> : <Plus size={16} className="text-slate-400 shrink-0" />}
-            <span className={`text-sm font-bold uppercase tracking-widest ${contentTypeActive ? 'text-slate-900' : 'text-slate-500'}`}>{contentTypeLabel}</span>
-            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'content' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
+          <button
+            onClick={() => setOpenPanel(openPanel === 'category' ? null : 'category')}
+            className={`flex-1 flex items-center gap-3 px-8 py-5 transition-colors ${openPanel === 'category' ? 'bg-slate-50' : 'hover:bg-slate-50'}`}
+          >
+            {categoryActive
+              ? <X size={16} className="text-[#E61739] shrink-0" onClick={e => { e.stopPropagation(); setActiveCategory('All'); setOpenPanel(null); }} />
+              : <Plus size={16} className="text-slate-400 shrink-0" />}
+            <span className={`text-sm font-bold uppercase tracking-widest ${categoryActive ? 'text-slate-900' : 'text-slate-500'}`}>{categoryLabel}</span>
+            <ChevronDown size={14} className={`ml-auto transition-transform ${openPanel === 'category' ? 'rotate-180 text-slate-700' : 'text-slate-400'}`} />
           </button>
         </div>
-        {openPanel && (
+        {openPanel === 'category' && (
           <div className="absolute left-0 right-0 bg-white border-t border-slate-200 shadow-xl px-8 py-6 z-50">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
-              {openPanel === 'industry' ? 'Filter by Industry' : openPanel === 'service' ? 'Filter by Service' : 'Filter by Content Type'}
-            </p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">Filter by Category</p>
             <div className="flex flex-wrap gap-3">
-              {(openPanel === 'industry' ? INDUSTRIES : openPanel === 'service' ? SERVICES : CONTENT_TYPES).map(opt => {
-                const isActive = openPanel === 'industry' ? activeIndustry === opt : openPanel === 'service' ? activeService === opt : activeContentType === opt;
+              {CATEGORIES.map(opt => {
+                const isActive = activeCategory === opt;
                 return (
-                  <button key={opt} onClick={() => {
-                    if (openPanel === 'industry') setActiveIndustry(opt);
-                    else if (openPanel === 'service') setActiveService(opt);
-                    else setActiveContentType(opt);
-                    setOpenPanel(null);
-                  }} className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${isActive ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-300 hover:border-slate-900 hover:text-slate-900'}`}>
+                  <button key={opt} onClick={() => { setActiveCategory(opt); setOpenPanel(null); }}
+                    className={`px-5 py-2.5 text-sm font-bold uppercase tracking-widest border transition-all rounded-sm ${isActive ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-300 hover:border-slate-900 hover:text-slate-900'}`}>
                     {opt}
                   </button>
                 );
@@ -138,49 +144,76 @@ export const EbooksPage = ({ setView }: { setView: (v: ViewType) => void }) => {
       {/* ── CARDS GRID ── */}
       <section className="py-14 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
-          {filtered.length === 0 ? (
-            <div className="text-center py-24 text-slate-400 font-medium text-lg">No ebooks match the selected filters.</div>
+          {loading ? (
+            <div className="flex items-center justify-center py-32">
+              <Loader2 className="animate-spin text-[#E61739]" size={40} />
+            </div>
+          ) : fetchError ? (
+            <div className="flex flex-col items-center justify-center py-32 gap-4 text-slate-400">
+              <AlertCircle size={40} />
+              <p className="font-medium">{fetchError}</p>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-24 text-slate-400 font-medium text-lg">
+              {ebooks.length === 0 ? 'No ebooks published yet. Check back soon.' : 'No ebooks match the selected filters.'}
+            </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map(ebook => {
-                const Icon = ebook.icon;
+                const tags = parseTags(ebook.tags);
                 return (
-                  <div key={ebook.id} onClick={() => setView('contact')}
-                    className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
-
+                  <div
+                    key={ebook.id}
+                    onClick={() => onSelectEbook ? onSelectEbook(ebook.id) : setView('contact')}
+                    className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                  >
                     {/* Thumbnail */}
-                    <div className="relative h-44 overflow-hidden shrink-0">
-                      <img src={ebook.thumb} alt={ebook.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                        <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
-                          <Icon size={16} />
+                    <div className="relative h-52 overflow-hidden shrink-0 bg-[#F5F5F7]">
+                      {ebook.cover_image ? (
+                        <img src={ebook.cover_image} alt={ebook.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
+                          <span className="text-4xl font-heading font-black text-slate-300 tracking-tight px-6 text-center leading-tight line-clamp-3">{ebook.title}</span>
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{ebook.industry}</span>
-                      </div>
-                      <div className="absolute top-3 right-3 flex items-center gap-1.5">
-                        <span className="px-3 py-1 bg-[#E61739]/80 backdrop-blur-sm rounded-full text-[9px] font-black uppercase tracking-widest text-white border border-white/10">
-                          PDF · {ebook.metrics[0].value} pp
-                        </span>
-                      </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                      {ebook.category && (
+                        <div className="absolute bottom-3 left-4">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-white/90">{ebook.category}</span>
+                        </div>
+                      )}
+                      {ebook.page_count > 0 && (
+                        <div className="absolute top-3 right-3">
+                          <span className="px-3 py-1 bg-[#E61739]/80 backdrop-blur-sm rounded-full text-[9px] font-black uppercase tracking-widest text-white border border-white/10">
+                            PDF · {ebook.page_count} pp
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Content */}
                     <div className="p-8 flex flex-col flex-1">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="font-bold text-slate-500 text-xs">{ebook.source}</span>
-                        <span className="text-slate-300">·</span>
-                        <span className="text-xs text-slate-400">{ebook.metrics[2].value}</span>
+                        <span className="font-bold text-slate-500 text-xs">{ebook.author || 'KDCI Research'}</span>
+                        {ebook.published_at && (
+                          <>
+                            <span className="text-slate-300">·</span>
+                            <span className="text-xs text-slate-400">{new Date(ebook.published_at).getFullYear()}</span>
+                          </>
+                        )}
                       </div>
                       <h3 className="text-xl font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E61739] transition-colors">{ebook.title}</h3>
-                      <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow">{ebook.desc}</p>
-                      <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-black/5">
-                        {ebook.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
-                        ))}
-                      </div>
+                      <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6 flex-grow line-clamp-3">{ebook.description}</p>
+                      {tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-6 pt-5 border-t border-black/5">
+                          {tags.slice(0, 3).map((tag, i) => (
+                            <span key={i} className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-wide">{tag}</span>
+                          ))}
+                        </div>
+                      )}
                       <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
-                        Download PDF <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                        {ebook.download_url ? 'Download PDF' : 'View Report'}
+                        <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>

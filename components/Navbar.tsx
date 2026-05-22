@@ -5,7 +5,7 @@ import { ViewType } from '../types';
 import { TOP_SERVICES, INDUSTRIES, RESOURCES } from '../data';
 import { Logo } from './Logo';
 
-const UNLISTED_RESOURCE_IDS = new Set(['webinars', 'ebooks', 'guides']);
+const UNLISTED_RESOURCE_IDS = new Set(['webinars', 'guides']);
 const NAV_RESOURCES = RESOURCES.filter(r => !UNLISTED_RESOURCE_IDS.has(r.id));
 
 const SEARCH_ITEMS = [
