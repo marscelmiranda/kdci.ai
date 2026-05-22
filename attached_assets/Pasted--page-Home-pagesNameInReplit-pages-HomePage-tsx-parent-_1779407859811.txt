@@ -1,0 +1,107 @@
+[
+  {
+    "page": "Home",
+    "pagesNameInReplit": "pages/HomePage.tsx",
+    "parent": null,
+    "url": "kdci.ai/",
+    "canonical": "kdci.ai/"
+  },
+  {
+    "page": "What We Do",
+    "pagesNameInReplit": "pages/services/SolutionsHubPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions",
+    "canonical": "kdci.ai/solutions/"
+  },
+  {
+    "page": "AI Agent Monitoring",
+    "pagesNameInReplit": "pages/services/AIAgentMonitoringPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-agent-monitoring",
+    "canonical": "kdci.ai/solutions/ai-agent-monitoring/"
+  },
+  {
+    "page": "AI Consulting",
+    "pagesNameInReplit": "pages/services/AIConsultingPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-implementation-services",
+    "canonical": "kdci.ai/solutions/ai-implementation-services/"
+  },
+  {
+    "page": "AI-Augmented CX",
+    "pagesNameInReplit": "pages/services/CustomerExperienceOpsPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-augmented-cx-support",
+    "canonical": "kdci.ai/solutions/ai-augmented-cx-support/"
+  },
+  {
+    "page": "AI Creative Studio",
+    "pagesNameInReplit": "pages/services/GraphicDesignStudioPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-creative-studio",
+    "canonical": "kdci.ai/solutions/ai-creative-studio/"
+  },
+  {
+    "page": "AI Outbound and Lead Gen",
+    "pagesNameInReplit": "pages/services/AIOutboundPage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-demand-generation",
+    "canonical": "kdci.ai/solutions/ai-demand-generation/"
+  },
+  {
+    "page": "AI Workforce Augmentation",
+    "pagesNameInReplit": "pages/services/AIWorkforcePage.tsx",
+    "parent": "solutions/",
+    "url": "kdci.ai/solutions/ai-workforce-augmentation",
+    "canonical": "kdci.ai/solutions/ai-workforce-augmentation/"
+  },
+  {
+    "page": "Who We Are",
+    "pagesNameInReplit": "pages/CompanyPage.tsx",
+    "parent": "who-we-are/",
+    "url": "kdci.ai/who-we-are",
+    "canonical": "kdci.ai/who-we-are/"
+  },
+  {
+    "page": "Careers",
+    "pagesNameInReplit": "pages/CareersPage.tsx",
+    "parent": "careers/",
+    "url": "kdci.ai/careers",
+    "canonical": "kdci.ai/careers/"
+  },
+  {
+    "page": "Blogs",
+    "pagesNameInReplit": "pages/BlogLandingPage.tsx",
+    "parent": "kdci.ai/",
+    "url": "kdci.ai/blogs",
+    "canonical": "kdci.ai/blogs/"
+  },
+  {
+    "page": "Case Studies",
+    "pagesNameInReplit": "pages/CaseStudiesPage.tsx",
+    "parent": "kdci.ai/",
+    "url": "kdci.ai/case-studies",
+    "canonical": "kdci.ai/case-studies/"
+  },
+  {
+    "page": "FAQs",
+    "pagesNameInReplit": "pages/FaqPages.tsx",
+    "parent": "kdci.ai/",
+    "url": "kdci.ai/faqs",
+    "canonical": "kdci.ai/faqs/"
+  },
+  {
+    "page": "Glossary",
+    "pagesNameInReplit": "pages/GlossaryPage.tsx",
+    "parent": "kdci.ai/",
+    "url": "kdci.ai/glossary",
+    "canonical": "kdci.ai/glossary/"
+  },
+  {
+    "page": "Contact Us",
+    "pagesNameInReplit": "pages/ContactPage.tsx",
+    "parent": "kdci.ai/",
+    "url": "kdci.ai/contact-us",
+    "canonical": "kdci.ai/contact-us/"
+  }
+]
