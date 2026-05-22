@@ -171,7 +171,7 @@ function pathToView(pathname: string): ViewType | null {
 
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType>(() => {
-    return pathToView(window.location.pathname) ?? 'home';
+    return pathToView(window.location.pathname) ?? 'not-found';
   });
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
@@ -191,7 +191,7 @@ const App = () => {
   useEffect(() => {
     const onPop = () => {
       const view = pathToView(window.location.pathname);
-      setActiveView(view ?? 'home');
+      setActiveView(view ?? 'not-found');
     };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
