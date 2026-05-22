@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Cpu, Users, TrendingUp, Layers, Zap, CheckCircle2, ChevronRight, ChevronDown, ChevronLeft, Menu, X, Code, Search, Building2, Palette, MessageSquare, BarChart3, Globe, ArrowRight, ShieldCheck, ZapOff, MousePointer2, ScanSearch, BrainCircuit, Timer, UserCheck, ClipboardCheck, Settings, Activity, UsersRound, Play, Loader2, Sparkles, Command, Database, Network, Orbit, Binary, Target, Rocket, Gauge, Lightbulb, Workflow, ShieldAlert, Shield, RefreshCw, Handshake, Briefcase, Monitor, Layout, Factory, ShoppingCart, HeartPulse, Scale, Hotel, Truck, GraduationCap, Megaphone, HardHat, Stethoscope, Coins, ShieldPlus, Star, Terminal, FileCode2, Bug, History, Flag, MapPin, Phone, Mail, Lightbulb as Vision, Zap as ZapIcon, Briefcase as JobIcon, Heart, Globe2, Layers as LayersIcon, Cpu as CpuIcon, LineChart, UserPlus, Quote, Clock, ExternalLink, Award, PenTool, Image, Video, Presentation, CheckCircle, BarChart, Server, Layers as Layers3, Coffee, Headphones, UserCog, Smile, ShieldQuestion, LifeBuoy, MessageCircle, BarChart4, Key, Home, Wrench, FileText, CreditCard, Building, Smartphone, ShieldHalf, Landmark, Plane, Gavel, Newspaper, Shirt, Flame, UserCircle, Check, Headset, Zap as ZapBolt, BarChart as ChartBar, ShieldCheck as ComplianceShield, StarHalf, DatabaseZap, ShieldEllipsis, Layers2, Globe2 as GlobeIcon, Terminal as TerminalIcon, Database as DatabaseIcon, FileCode2 as ApiIcon, Workflow as PipelineIcon, Users2, Plus, CheckCircle as CheckIcon, CircleCheck, Settings2, Trello, Slack as SlackIcon, Laptop, Store, Package, Boxes, Truck as LogisticsIcon, Tag, Star as StarIcon, BookOpen, CircleHelp, FileJson, Linkedin, Twitter, Instagram, Facebook, Lock, Fingerprint, Wallet, PieChart, FileSearch, AlertCircle, Cloud, Calendar, User
 } from 'lucide-react';
@@ -75,12 +75,127 @@ import { GlossaryPage } from './pages/GlossaryPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 
+// ── URL ↔ ViewType mapping ──────────────────────────────────────────────────
+const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
+  'home': '/',
+  // Services
+  'solutions-hub': '/solutions/',
+  'agentic-recruitment': '/solutions/agentic-recruitment/',
+  'customer-support': '/solutions/customer-support/',
+  'creative-prod': '/solutions/creative-production/',
+  'staff-aug': '/solutions/staff-augmentation/',
+  'ai-consulting': '/solutions/ai-consulting/',
+  'ai-agent-monitoring': '/solutions/ai-agent-monitoring/',
+  'ai-outbound': '/solutions/ai-outbound/',
+  'outcome-models': '/solutions/outcome-models/',
+  // Industries
+  'ecommerce': '/industries/ecommerce/',
+  'fintech': '/industries/fintech/',
+  'healthcare': '/industries/healthcare/',
+  'marketing-ad': '/industries/marketing/',
+  'retail': '/industries/retail/',
+  'logistics': '/industries/logistics/',
+  'travel': '/industries/travel/',
+  'edtech': '/industries/edtech/',
+  'legal': '/industries/legal/',
+  'insurance': '/industries/insurance/',
+  'media': '/industries/media/',
+  'consumer-tech': '/industries/consumer-tech/',
+  'telecom': '/industries/telecom/',
+  'auto': '/industries/automotive/',
+  'fashion': '/industries/fashion/',
+  'energy': '/industries/energy/',
+  'prof-services': '/industries/professional-services/',
+  'gov': '/industries/government/',
+  // Resources
+  'blog': '/blog/',
+  'case-studies': '/resources/case-studies/',
+  'guides': '/resources/guides/',
+  'webinars': '/resources/webinars/',
+  'ebooks': '/resources/ebooks/',
+  'faqs': '/resources/faqs/',
+  'glossary': '/resources/glossary/',
+  // Company
+  'company': '/company/',
+  'contact': '/contact/',
+  'careers': '/careers/',
+  'privacy-policy': '/privacy-policy/',
+  'terms-and-conditions': '/terms-and-conditions/',
+  // Auth / CMS
+  'login': '/login/',
+  'publisher-dashboard': '/cms/',
+  'cms-career-ops': '/cms/career-ops/',
+  'cms-blog-ops': '/cms/blog-ops/',
+  'cms-resources-ops': '/cms/resources-ops/',
+  'cms-portfolio-ops': '/cms/portfolio-ops/',
+  'cms-case-studies-ops': '/cms/case-studies-ops/',
+  // Job posts
+  'job-prompt-engineer': '/careers/prompt-engineer/',
+  'job-full-stack-dev': '/careers/full-stack-developer/',
+  'job-devops-architect': '/careers/devops-architect/',
+  'job-data-scientist': '/careers/data-scientist/',
+  'job-qa-automation': '/careers/qa-automation/',
+  'job-python-backend': '/careers/python-backend/',
+  'job-ml-engineer': '/careers/ml-engineer/',
+  'job-ui-ux-designer': '/careers/ui-ux-designer/',
+  'job-motion-graphics': '/careers/motion-graphics/',
+  'job-art-director': '/careers/art-director/',
+  'job-video-editor': '/careers/video-editor/',
+  'job-customer-success': '/careers/customer-success/',
+  'job-tech-support': '/careers/tech-support/',
+  'job-ops-manager': '/careers/ops-manager/',
+  'job-fraud-analyst': '/careers/fraud-analyst/',
+  'job-wfm-analyst': '/careers/wfm-analyst/',
+  'job-solutions-architect': '/careers/solutions-architect/',
+  'job-account-executive': '/careers/account-executive/',
+  'job-hr-bp': '/careers/hr-bp/',
+  'job-tech-recruiter': '/careers/tech-recruiter/',
+  'job-finance-controller': '/careers/finance-controller/',
+  // Utility
+  'not-found': '/404/',
+  'coming-soon': '/coming-soon/',
+};
+
+// Reverse map: path → ViewType (both with and without trailing slash)
+const PATH_TO_VIEW: Record<string, ViewType> = {};
+for (const [view, path] of Object.entries(VIEW_TO_PATH)) {
+  PATH_TO_VIEW[path] = view as ViewType;
+  if (path !== '/') PATH_TO_VIEW[path.replace(/\/$/, '')] = view as ViewType;
+}
+
+function pathToView(pathname: string): ViewType | null {
+  const withSlash = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return PATH_TO_VIEW[withSlash] ?? PATH_TO_VIEW[pathname] ?? null;
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 const App = () => {
-  const [activeView, setView] = useState<ViewType>('home');
+  const [activeView, setActiveView] = useState<ViewType>(() => {
+    return pathToView(window.location.pathname) ?? 'home';
+  });
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
   const [selectedEbookId, setSelectedEbookId] = useState<number | null>(null);
+
+  // Navigate: update both React state and browser URL
+  const setView = useCallback((view: ViewType) => {
+    const path = VIEW_TO_PATH[view];
+    if (path && window.location.pathname !== path) {
+      window.history.pushState({ view }, '', path);
+    }
+    setActiveView(view);
+  }, []);
+
+  // Sync state when user hits back/forward
+  useEffect(() => {
+    const onPop = () => {
+      const view = pathToView(window.location.pathname);
+      setActiveView(view ?? 'home');
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
