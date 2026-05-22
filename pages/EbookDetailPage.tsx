@@ -139,20 +139,20 @@ const AccessModal = ({
     >
       <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
 
-      <div className="relative w-full max-w-lg bg-[#0d0d0d] border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden">
 
         {/* Header */}
-        <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/[0.08]">
+        <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-slate-100">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">
               Read the Report
             </div>
-            <h2 className="text-xl font-black text-white leading-tight">Get instant access</h2>
-            <p className="text-white/40 text-[13px] font-medium mt-1 line-clamp-1 max-w-[320px]">{ebook.title}</p>
+            <h2 className="text-xl font-black text-slate-900 leading-tight">Get instant access</h2>
+            <p className="text-slate-400 text-[13px] font-medium mt-1 line-clamp-1 max-w-[320px]">{ebook.title}</p>
           </div>
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all shrink-0"
+            className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 transition-all shrink-0 ml-4"
             aria-label="Close"
           >
             <X size={16} />
@@ -160,14 +160,14 @@ const AccessModal = ({
         </div>
 
         {/* Body */}
-        <div className="px-8 py-8 max-h-[70vh] overflow-y-auto">
+        <div className="px-8 py-8 max-h-[70vh] overflow-y-auto bg-slate-50/60">
           {done ? (
             <div className="flex flex-col items-center justify-center text-center gap-5 py-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#E61739] flex items-center justify-center shadow-xl shadow-[#E61739]/30">
+              <div className="w-16 h-16 rounded-2xl bg-[#E61739] flex items-center justify-center shadow-xl">
                 <CheckCircle2 size={30} className="text-white" />
               </div>
-              <h3 className="text-xl font-black text-white">You're all set!</h3>
-              <p className="text-white/50 text-sm font-medium max-w-xs leading-relaxed">
+              <h3 className="text-xl font-black text-slate-900">You're all set!</h3>
+              <p className="text-slate-500 text-sm font-medium max-w-xs leading-relaxed">
                 {ebook.download_url
                   ? 'Click below to download your copy of the report.'
                   : 'Thank you! Our team will reach out with access details shortly.'}
@@ -177,25 +177,25 @@ const AccessModal = ({
                   href={ebook.download_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all inline-flex items-center gap-2 shadow-xl shadow-[#E61739]/20"
+                  className="mt-2 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all inline-flex items-center gap-2 shadow-lg shadow-[#E61739]/20"
                 >
                   Download PDF <Download size={16} />
                 </a>
               ) : (
                 <button
                   onClick={onClose}
-                  className="mt-2 px-8 py-3 bg-white/5 border border-white/10 rounded-2xl text-white/70 text-sm font-bold hover:bg-white/10 transition-all"
+                  className="mt-2 px-8 py-3 bg-slate-100 rounded-2xl text-slate-700 text-sm font-bold hover:bg-slate-200 transition-all"
                 >
                   Close
                 </button>
               )}
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
 
               {/* Full Name */}
               <div>
-                <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
                   Full Name <span className="text-[#E61739]">*</span>
                 </label>
                 <input
@@ -205,13 +205,13 @@ const AccessModal = ({
                   placeholder="Jane Smith"
                   value={form.fullName}
                   onChange={e => setForm(f => ({ ...f, fullName: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors font-medium"
+                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                 />
               </div>
 
               {/* Work Email */}
               <div>
-                <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
                   Work Email <span className="text-[#E61739]">*</span>
                 </label>
                 <input
@@ -220,30 +220,30 @@ const AccessModal = ({
                   placeholder="jane@company.com"
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors font-medium"
+                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                 />
               </div>
 
               {/* Contact Number */}
               <div>
-                <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
                   Contact Number{' '}
-                  <span className="text-white/25 font-medium normal-case tracking-normal text-[11px]">(optional)</span>
+                  <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(optional)</span>
                 </label>
                 <input
                   type="tel"
                   placeholder="+1 555 000 0000"
                   value={form.contactNumber}
                   onChange={e => setForm(f => ({ ...f, contactNumber: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#E61739]/60 transition-colors font-medium"
+                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                 />
               </div>
 
               {/* Services of Interest */}
               <div>
-                <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-3">
+                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
                   Services of Interest{' '}
-                  <span className="text-white/25 font-medium normal-case tracking-normal text-[11px]">(select all that apply)</span>
+                  <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(select all that apply)</span>
                 </label>
                 <div className="space-y-2">
                   {SERVICE_LINES.map(svc => {
@@ -253,13 +253,13 @@ const AccessModal = ({
                         key={svc}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all select-none ${
                           checked
-                            ? 'bg-[#E61739]/10 border-[#E61739]/40 text-white'
-                            : 'bg-white/[0.03] border-white/[0.08] text-white/50 hover:border-white/20 hover:text-white/70'
+                            ? 'bg-[#E61739]/10 border-[#E61739]/40 text-slate-900'
+                            : 'bg-white border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700'
                         }`}
                       >
                         <span
                           className={`w-4 h-4 rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all ${
-                            checked ? 'bg-[#E61739] border-[#E61739]' : 'border-white/20 bg-transparent'
+                            checked ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent'
                           }`}
                         >
                           {checked && (
@@ -282,11 +282,11 @@ const AccessModal = ({
               </div>
 
               {/* Marketing Consent */}
-              <div className="pt-2 border-t border-white/[0.08]">
+              <div className="pt-2 border-t border-slate-100">
                 <label className="flex items-start gap-3 cursor-pointer group select-none">
                   <span
                     className={`mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                      form.marketingConsent ? 'bg-[#E61739] border-[#E61739]' : 'border-white/25 bg-transparent group-hover:border-white/40'
+                      form.marketingConsent ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
                     }`}
                   >
                     {form.marketingConsent && (
@@ -301,7 +301,7 @@ const AccessModal = ({
                     checked={form.marketingConsent}
                     onChange={e => setForm(f => ({ ...f, marketingConsent: e.target.checked }))}
                   />
-                  <span className="text-[13px] text-white/50 font-medium leading-relaxed group-hover:text-white/70 transition-colors">
+                  <span className="text-[13px] text-slate-500 font-medium leading-relaxed group-hover:text-slate-700 transition-colors">
                     I agree to receive marketing emails from KDCI, including the Scale Insights newsletter, product updates, and promotions. I can unsubscribe at any time.
                   </span>
                 </label>
@@ -309,7 +309,7 @@ const AccessModal = ({
 
               {/* Error */}
               {error && (
-                <p className="text-[#E61739] text-[13px] font-semibold bg-[#E61739]/10 border border-[#E61739]/20 rounded-xl px-4 py-3">
+                <p className="text-red-500 text-[13px] font-semibold bg-red-50 border border-red-100 rounded-xl px-4 py-3">
                   {error}
                 </p>
               )}
@@ -318,7 +318,7 @@ const AccessModal = ({
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-xl shadow-[#E61739]/20 group"
+                className="w-full flex items-center justify-center gap-2 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
               >
                 {submitting ? (
                   <><Loader2 size={16} className="animate-spin" /> Submitting…</>
@@ -326,7 +326,7 @@ const AccessModal = ({
                   <>Read the Report <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
                 )}
               </button>
-              <p className="text-white/20 text-[11px] text-center font-medium">
+              <p className="text-slate-400 text-[11px] text-center font-medium">
                 No spam · Unsubscribe any time · GDPR compliant
               </p>
             </form>
