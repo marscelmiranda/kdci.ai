@@ -60,8 +60,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/`,
   },
   'agentic-recruitment': {
-    title: 'AI Workforce Augmentation | KDCI',
-    description: "Build AI-ready offshore teams with KDCI's agentic recruitment. Access top Filipino talent — prompt engineers, AI ops specialists, and more — at up to 70% less than US hiring costs.",
+    title: 'AI Workforce Augmentation | KDCI.ai',
+    description: 'Build an AI-ready team trained on tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.',
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
   'customer-support': {
