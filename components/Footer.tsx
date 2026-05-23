@@ -59,7 +59,9 @@ const SERVICE_LINES = [
 ];
 
 interface ModalForm {
-  fullName: string;
+  firstName: string;
+  lastName: string;
+  company: string;
   contactNumber: string;
   serviceInterests: string[];
   marketingConsent: boolean;
@@ -69,7 +71,9 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalForm, setModalForm] = useState<ModalForm>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
+    company: '',
     contactNumber: '',
     serviceInterests: [],
     marketingConsent: false,
@@ -94,7 +98,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
     if (!email) return;
     setDone(false);
     setError('');
-    setModalForm({ fullName: '', contactNumber: '', serviceInterests: [], marketingConsent: false });
+    setModalForm({ firstName: '', lastName: '', company: '', contactNumber: '', serviceInterests: [], marketingConsent: false });
     setShowModal(true);
   };
 
@@ -121,7 +125,8 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
-          fullName: modalForm.fullName,
+          fullName: `${modalForm.firstName} ${modalForm.lastName}`.trim(),
+          company: modalForm.company,
           contactNumber: modalForm.contactNumber,
           serviceInterests: modalForm.serviceInterests,
           marketingConsent: modalForm.marketingConsent,
@@ -342,18 +347,48 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
               ) : (
                 <form onSubmit={handleModalSubmit} className="space-y-5">
 
-                  {/* Full Name */}
+                  {/* Name Row */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
+                        First Name <span className="text-[#E61739]">*</span>
+                      </label>
+                      <input
+                        ref={firstInputRef}
+                        required
+                        type="text"
+                        placeholder="Jane"
+                        value={modalForm.firstName}
+                        onChange={e => setModalForm(f => ({ ...f, firstName: e.target.value }))}
+                        className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
+                        Last Name <span className="text-[#E61739]">*</span>
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Smith"
+                        value={modalForm.lastName}
+                        onChange={e => setModalForm(f => ({ ...f, lastName: e.target.value }))}
+                        className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Company */}
                   <div>
                     <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
-                      Full Name <span className="text-[#E61739]">*</span>
+                      Company <span className="text-[#E61739]">*</span>
                     </label>
                     <input
-                      ref={firstInputRef}
                       required
                       type="text"
-                      placeholder="Jane Smith"
-                      value={modalForm.fullName}
-                      onChange={e => setModalForm(f => ({ ...f, fullName: e.target.value }))}
+                      placeholder="Acme Inc. or N/A"
+                      value={modalForm.company}
+                      onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))}
                       className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                     />
                   </div>

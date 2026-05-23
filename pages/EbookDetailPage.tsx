@@ -40,7 +40,9 @@ interface Ebook {
 }
 
 interface AccessForm {
-  fullName: string;
+  firstName: string;
+  lastName: string;
+  company: string;
   email: string;
   contactNumber: string;
   serviceInterests: string[];
@@ -75,7 +77,9 @@ const AccessModal = ({
   onClose: () => void;
 }) => {
   const [form, setForm] = useState<AccessForm>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
+    company: '',
     email: '',
     contactNumber: '',
     serviceInterests: [],
@@ -115,7 +119,8 @@ const AccessModal = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: form.email,
-          fullName: form.fullName,
+          fullName: `${form.firstName} ${form.lastName}`.trim(),
+          company: form.company,
           contactNumber: form.contactNumber,
           serviceInterests: form.serviceInterests,
           marketingConsent: form.marketingConsent,
@@ -193,18 +198,48 @@ const AccessModal = ({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
 
-              {/* Full Name */}
+              {/* Name Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
+                    First Name <span className="text-[#E61739]">*</span>
+                  </label>
+                  <input
+                    ref={firstInputRef}
+                    required
+                    type="text"
+                    placeholder="Jane"
+                    value={form.firstName}
+                    onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
+                    className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
+                    Last Name <span className="text-[#E61739]">*</span>
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Smith"
+                    value={form.lastName}
+                    onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
+                    className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                  />
+                </div>
+              </div>
+
+              {/* Company */}
               <div>
                 <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                  Full Name <span className="text-[#E61739]">*</span>
+                  Company <span className="text-[#E61739]">*</span>
                 </label>
                 <input
-                  ref={firstInputRef}
                   required
                   type="text"
-                  placeholder="Jane Smith"
-                  value={form.fullName}
-                  onChange={e => setForm(f => ({ ...f, fullName: e.target.value }))}
+                  placeholder="Acme Inc. or N/A"
+                  value={form.company}
+                  onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
                   className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                 />
               </div>

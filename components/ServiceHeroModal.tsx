@@ -25,7 +25,7 @@ interface Props {
 }
 
 export const ServiceHeroModal = ({ config, onClose }: Props) => {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', specific: '', notes: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', specific: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
@@ -51,7 +51,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
     setSubmitting(true);
     setError('');
     const payload: Record<string, string> = {
-      name: form.name,
+      name: `${form.firstName} ${form.lastName}`.trim(),
       company: form.company,
       email: form.email,
       phone: form.phone,
@@ -125,30 +125,40 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
+                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">First Name <span className="text-[#E61739]">*</span></label>
                   <input
                     ref={firstRef}
                     required
                     className={lightInp}
-                    placeholder="Jane Smith"
-                    value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    placeholder="Jane"
+                    value={form.firstName}
+                    onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Company</label>
+                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Last Name <span className="text-[#E61739]">*</span></label>
                   <input
                     required
                     className={lightInp}
-                    placeholder="Acme Inc."
-                    value={form.company}
-                    onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                    placeholder="Smith"
+                    value={form.lastName}
+                    onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
                   />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
+                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Company <span className="text-[#E61739]">*</span></label>
+                  <input
+                    required
+                    className={lightInp}
+                    placeholder="Acme Inc. or N/A"
+                    value={form.company}
+                    onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
                   <input
                     required
                     type="email"
@@ -158,6 +168,8 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   />
                 </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
                   <input

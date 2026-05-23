@@ -9,7 +9,7 @@ import { TOP_SERVICES, INDUSTRIES } from '../../data';
 import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.png';
 
 export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', service: '', notes: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', service: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const [showHeroModal, setShowHeroModal] = useState(false);
@@ -20,7 +20,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, inquiryType: 'Solutions Hub Inquiry', source: 'solutions-hub-page' }),
+        body: JSON.stringify({ ...form, name: `${form.firstName} ${form.lastName}`.trim(), inquiryType: 'Solutions Hub Inquiry', source: 'solutions-hub-page' }),
       });
     } catch {}
     setSubmitted(true);
@@ -156,19 +156,25 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                 <form onSubmit={handleForm} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
-                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name <span className="text-[#E61739]">*</span></label>
+                      <input required className={inp} placeholder="Jane" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
-                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Last Name <span className="text-[#E61739]">*</span></label>
+                      <input required className={inp} placeholder="Smith" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Email</label>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company <span className="text-[#E61739]">*</span></label>
+                      <input required className={inp} placeholder="Acme Inc. or N/A" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
                       <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
                       <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />

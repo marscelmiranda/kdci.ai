@@ -122,8 +122,16 @@ export const JobPost = ({ setView, title, department, location, type, descriptio
                   
                   <form className="space-y-4">
                     <div>
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2 block">Full Name</label>
-                      <input type="text" className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] transition-all font-bold" />
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2 block">First Name</label>
+                          <input type="text" className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] transition-all font-bold" />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2 block">Last Name</label>
+                          <input type="text" className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] transition-all font-bold" />
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2 block">Email</label>
