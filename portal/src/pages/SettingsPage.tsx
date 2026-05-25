@@ -120,9 +120,22 @@ export const SettingsPage = ({ setView, user }: Props) => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <NavBar setView={setView} activeView="settings" user={user} />
+      <NavBar setView={setView} user={user} />
 
       <main className="max-w-7xl mx-auto px-6 py-10">
+
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 mb-7">
+          <button
+            onClick={() => setView('dashboard')}
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#E61739] transition-colors group"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-0.5 transition-transform"><path d="M15 18l-6-6 6-6"/></svg>
+            Dashboard
+          </button>
+          <span className="text-slate-200 text-xs font-bold">›</span>
+          <span className="text-xs font-bold text-slate-700">Settings</span>
+        </div>
 
         {/* Page header */}
         <div className="mb-8">

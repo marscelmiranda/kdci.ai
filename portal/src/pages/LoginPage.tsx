@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
-import { Lock, Mail, ArrowRight, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Lock, Mail, ArrowRight, Loader2, ShieldCheck, AlertCircle, ArrowLeft } from 'lucide-react';
 import { login, setToken } from '../lib/api';
 
 interface Props {
@@ -62,7 +62,7 @@ export const LoginPage = ({ setView, setUser }: Props) => {
         }
         .shake { animation: shake 0.45s ease-in-out; }
       `}</style>
-      <div className="min-h-screen w-full bg-[#020202] flex items-center justify-center relative overflow-hidden px-6">
+      <div className="min-h-screen w-full bg-[#020202] flex flex-col items-center justify-center relative overflow-hidden px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
           <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[100px] animate-blob-float"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-pink-600/30 rounded-full blur-[100px] animate-blob-float-reverse"></div>
@@ -141,17 +141,28 @@ export const LoginPage = ({ setView, setUser }: Props) => {
               Microsoft 365
             </button>
 
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-center space-y-3">
               <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-green-600 bg-green-50 py-2 px-4 rounded-full w-fit mx-auto border border-green-100">
                 <ShieldCheck size={12} /> SSO Enabled
               </div>
-              <p className="text-[11px] text-slate-400 mt-4">
+              <p className="text-[11px] text-slate-400">
                 Need access?{' '}
                 <a href="mailto:portal@kdci.co" className="font-bold text-[#E61739] hover:underline">
                   Contact your account manager
                 </a>
               </p>
             </div>
+          </div>
+
+          {/* Back to kdci.ai */}
+          <div className="mt-6 text-center">
+            <a
+              href="https://kdci.ai"
+              className="inline-flex items-center gap-2 text-xs font-bold text-white/40 hover:text-white/70 transition-colors"
+            >
+              <ArrowLeft size={13} />
+              Back to kdci.ai
+            </a>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ export const DashboardPage = ({ setView, user }: Props) => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <NavBar setView={setView} activeView="dashboard" user={user} />
+      <NavBar setView={setView} user={user} />
 
       <main className="max-w-7xl mx-auto px-6 py-12">
 
