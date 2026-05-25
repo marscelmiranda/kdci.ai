@@ -643,9 +643,6 @@ export const ReportsPage = ({ setView, user }: Props) => {
                 {scheduleSaved ? <><CheckCircle2 size={15} /> Saved</> : <><Calendar size={15} /> Schedule</>}
               </button>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium mt-4">
-              Reports will be delivered as a PDF attachment. To include your logo and company name on exported reports, update your branding in <button type="button" onClick={() => setView('settings')} className="font-bold text-[#E61739] hover:underline">Settings → Profile</button>.
-            </p>
           </form>
         </div>
 
