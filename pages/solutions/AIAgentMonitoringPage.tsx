@@ -10,9 +10,9 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
-import IMG_HERO from '@/attached_assets/Gemini_Generated_Image_sk2jqjsk2jqjsk2j_1779333029410.png';
-import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.png';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.png';
+import IMG_HERO from '@/attached_assets/Gemini_Generated_Image_sk2jqjsk2jqjsk2j_1779333029410.webp';
+import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.webp';
+import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.webp';
 
 /* ─── Data ─────────────────────────────────────────────────────────── */
 

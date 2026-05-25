@@ -5,8 +5,8 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
-import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.png';
-import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.png';
+import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.webp';
+import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.webp';
 
 export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });

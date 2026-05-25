@@ -496,7 +496,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
             {/* Right — image */}
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
               <img
-                src="/kdci-challenge.png"
+                src="/kdci-challenge.webp"
                 alt="KDCI Solutions Architect"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectPosition: '0% top' }}

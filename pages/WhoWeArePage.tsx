@@ -4,9 +4,9 @@ import { Lightbulb, Target, ShieldCheck, UsersRound, Globe, MapPin, Quote, UserC
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { IMG_CX_TEAM, IMG_CX_TEAM2, IMG_DEV_TEAM } from '../data';
-import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.png';
-import IMG_HQ_BUILDING from '@/attached_assets/Gemini_Generated_Image_8bu7sa8bu7sa8bu7_1779330338502.png';
-import IMG_BUILD_TEAMS from '@/attached_assets/Gemini_Generated_Image_oq625yoq625yoq62_1779330519874.png';
+import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.webp';
+import IMG_HQ_BUILDING from '@/attached_assets/Gemini_Generated_Image_8bu7sa8bu7sa8bu7_1779330338502.webp';
+import IMG_BUILD_TEAMS from '@/attached_assets/Gemini_Generated_Image_oq625yoq625yoq62_1779330519874.webp';
 
 const STATS = [
   { value: '2011', label: 'Year Founded' },
