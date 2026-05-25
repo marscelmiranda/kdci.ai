@@ -924,6 +924,58 @@ app.get(['/midgard', '/midgard/*splat'], (_req, res) => {
   res.sendFile(path.join(midgardDist, 'index.html'));
 });
 
+// ===== Langfuse proxy — /portal/api/langfuse/* =====
+// Keeps LANGFUSE_PUBLIC_KEY + LANGFUSE_SECRET_KEY off the browser.
+// Set env vars to activate live observability; omit them to stay in preview mode.
+{
+  const LF_HOST   = process.env.LANGFUSE_HOST ?? 'https://cloud.langfuse.com';
+  const LF_PUB    = process.env.LANGFUSE_PUBLIC_KEY ?? '';
+  const LF_SECRET = process.env.LANGFUSE_SECRET_KEY ?? '';
+  const LF_AUTH   = () => 'Basic ' + Buffer.from(`${LF_PUB}:${LF_SECRET}`).toString('base64');
+
+  const lfConfigured = () => Boolean(LF_PUB && LF_SECRET);
+
+  /** Forward a GET to the Langfuse REST API and relay the JSON response. */
+  const lfProxy = async (req: any, res: any, lfPath: string) => {
+    if (!lfConfigured()) return res.status(400).json({ error: 'Langfuse not configured' });
+    try {
+      const qs  = new URLSearchParams(req.query as Record<string, string>).toString();
+      const url = `${LF_HOST}/api/public${lfPath}${qs ? '?' + qs : ''}`;
+      const r   = await fetch(url, { headers: { Authorization: LF_AUTH(), 'Content-Type': 'application/json' } });
+      const body = await r.json();
+      res.status(r.status).json(body);
+    } catch (err: any) {
+      res.status(502).json({ error: `Langfuse proxy error: ${err.message}` });
+    }
+  };
+
+  // Connection status — used by useLangfuseData hook to detect if credentials exist
+  app.get('/portal/api/langfuse/status', async (_req, res) => {
+    if (!lfConfigured()) return res.json({ configured: false });
+    try {
+      const r    = await fetch(`${LF_HOST}/api/public/projects`, { headers: { Authorization: LF_AUTH() } });
+      const body = await r.json() as any;
+      const proj = body?.data?.[0];
+      res.json({ configured: true, projectId: proj?.id, projectName: proj?.name, host: LF_HOST });
+    } catch (err: any) {
+      res.json({ configured: false, error: err.message });
+    }
+  });
+
+  // Traces  → Task Runs
+  app.get('/portal/api/langfuse/traces',                      (req, res) => lfProxy(req, res, '/traces'));
+  app.get('/portal/api/langfuse/traces/:id/observations',     (req, res) => lfProxy(req, res, `/traces/${req.params.id}/observations`));
+
+  // Sessions → Chat Sessions
+  app.get('/portal/api/langfuse/sessions',                    (req, res) => lfProxy(req, res, '/sessions'));
+
+  // Metrics  → Overview + Usage bars
+  app.get('/portal/api/langfuse/metrics/daily',               (req, res) => lfProxy(req, res, '/metrics/daily'));
+
+  // Scores   → Success-rate computation
+  app.get('/portal/api/langfuse/scores',                      (req, res) => lfProxy(req, res, '/scores'));
+}
+
 // Client Portal — always served as pre-built static files (no proxy)
 const portalDist = path.join(__dirname, 'portal', 'dist');
 app.use('/portal/assets', express.static(path.join(portalDist, 'assets'), { maxAge: '1y', immutable: true }));
