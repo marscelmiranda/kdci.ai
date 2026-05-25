@@ -5,10 +5,10 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
-import IMG_PH_TEAM from '../../attached_assets/Gemini_Generated_Image_8gr4nc8gr4nc8gr4_1777973290700.webp';
-import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.webp';
-import IMG_KDCI_OFFICE from '../../attached_assets/Gemini_Generated_Image_mhi0ftmhi0ftmhi0_1777992381262.webp';
-import IMG_HERO_HANDSHAKE from '../../attached_assets/Screenshot_2026-05-06_at_5.48.16_PM_1778060918147.webp';
+import IMG_PH_TEAM from '../../attached_assets/kdci-philippine-offshore-staffing-team.webp';
+import IMG_CONTACT from '../../attached_assets/kdci-offshore-staffing-consultation.webp';
+import IMG_KDCI_OFFICE from '../../attached_assets/kdci-operations-team-manila-office.webp';
+import IMG_HERO_HANDSHAKE from '../../attached_assets/kdci-team-onboarding-handshake.webp';
 
 const INDUSTRY_SAVINGS: Record<string, { role: string; ph: string; save: string }[]> = {
   'ecommerce':     [{ role: 'E-commerce Analyst',       ph: '$2,400', save: '65%' }, { role: 'Catalog Manager',         ph: '$2,160', save: '63%' }, { role: 'SEO Specialist',          ph: '$2,400', save: '67%' }, { role: 'CX Lead',                 ph: '$2,160', save: '62%' }, { role: 'Visual Merchandiser',     ph: '$2,280', save: '64%' }],
@@ -187,7 +187,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.webp"
-                  alt="KDCI team greeting a new client"
+                  alt="KDCI Philippine offshore staffing team greeting and onboarding a new global client"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
@@ -244,7 +244,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="lg:w-[46%] relative rounded-[3rem] overflow-hidden min-h-[560px] shrink-0">
               <img
                 src={IMG_PH_TEAM}
-                alt="Philippine offshore team at KDCI"
+                alt="KDCI Philippine offshore staffing team at Ortigas Center Manila headquarters"
                 className="absolute inset-0 w-full h-full object-cover"
               />
               {/* dark gradient overlay */}
@@ -460,7 +460,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="relative mb-10 rounded-3xl overflow-hidden shadow-lg" style={{ height: '400px' }}>
             <img
               src={IMG_KDCI_OFFICE}
-              alt="KDCI Operations team in Manila office"
+              alt="KDCI operations team working at their Manila, Philippines headquarters office"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -844,7 +844,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI offshore professional"
+              alt="KDCI offshore staffing professional consulting on a free discovery call"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

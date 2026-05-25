@@ -7,7 +7,7 @@ import {
   Binary, Activity, Rocket, Building, Plane, Newspaper, Shirt, Gavel,
   BookOpen, Video, FileText, CircleHelp, FileJson, Smartphone, Monitor
 } from 'lucide-react';
-import IMG_RECRUITMENT_HERO from './attached_assets/Untitled-1_1778062521021.webp';
+import IMG_RECRUITMENT_HERO from './attached_assets/kdci-ai-workforce-augmentation.webp';
 
 // --- Assets & Branding ---
 export const LOGO_SRC = "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23E61739'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M50 28C37.8497 28 28 37.8497 28 50C28 62.1503 37.8497 72 50 72C62.1503 72 72 62.1503 72 50H100V60H88V50H72C72 37.8497 62.1503 28 50 28ZM50 61C43.9249 61 39 56.0751 39 50C39 43.9249 43.9249 39 50 39C56.0751 39 61 43.9249 61 50C61 56.0751 56.0751 61 50 61Z' fill='white'/%3E%3C/svg%3E";

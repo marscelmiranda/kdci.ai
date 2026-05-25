@@ -6,8 +6,8 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { IMG_CX_TEAM } from '../../data';
-import IMG_CX_HERO from '@/attached_assets/Gemini_Generated_Image_copuzrcopuzrcopu_1779320301879.webp';
-import IMG_CX_CONTACT from '@/attached_assets/Gemini_Generated_Image_alu075alu075alu0_1779323597973.webp';
+import IMG_CX_HERO from '@/attached_assets/kdci-filipino-cx-support-agent.webp';
+import IMG_CX_CONTACT from '@/attached_assets/kdci-ai-cx-support-team.webp';
 
 export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
@@ -148,7 +148,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_CX_HERO}
-                  alt="Filipino Customer Support Agent"
+                  alt="KDCI Filipino customer support agent delivering AI-augmented CX operations"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -411,7 +411,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CX_CONTACT}
-              alt="KDCI CX Team"
+              alt="KDCI AI-augmented customer experience support team based in Manila, Philippines"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

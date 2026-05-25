@@ -497,7 +497,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
               <img
                 src="/kdci-challenge.webp"
-                alt="KDCI Solutions Architect"
+                alt="KDCI solutions architect offering a free AI business operations consultation"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectPosition: '0% top' }}
               />

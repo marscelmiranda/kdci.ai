@@ -29,7 +29,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
         <div className="absolute inset-0 z-0">
           <img 
             src={IMG_ECOM_HERO} 
-            alt="AI-Managed E-commerce Operations" 
+            alt="KDCI AI-managed e-commerce operations for global online retailers" 
             className="w-full h-full object-cover opacity-20 object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
@@ -302,7 +302,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
            <div className="absolute inset-0 z-0">
               <img 
                 src={IMG_ECOM_TEAM} 
-                alt="E-commerce Production Team" 
+                alt="KDCI e-commerce operations team managing AI-powered fulfillment and customer support" 
                 className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
               />
            </div>

@@ -6,7 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { IMG_CREATIVE_TEAM, PORTFOLIO_1, PORTFOLIO_2, PORTFOLIO_3, PORTFOLIO_4, PORTFOLIO_5, PORTFOLIO_6, PORTFOLIO_7, PORTFOLIO_8 } from '../../data';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.webp';
+import IMG_CONTACT from '@/attached_assets/kdci-solutions-specialist-discovery-call.webp';
 import { portfolioItems, PortfolioItem } from './PortfolioData';
 import { PortfolioModal } from './PortfolioModal';
 
@@ -499,7 +499,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI AI Creative Studio team"
+              alt="KDCI AI Creative Studio team producing marketing design and branded content"
               className="absolute inset-0 w-full h-full object-cover object-right"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

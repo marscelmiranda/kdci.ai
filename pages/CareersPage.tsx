@@ -342,7 +342,7 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
           <div className="absolute inset-0 z-0">
-            <img src={IMG_REC_HERO} alt="Careers Team" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
+            <img src={IMG_REC_HERO} alt="KDCI careers and talent recruitment team hiring top offshore professionals in Manila" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
           </div>
           <div className="mesh-container opacity-20 pointer-events-none">
             <div className="blob blob-purple opacity-30"></div>

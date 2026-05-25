@@ -5,8 +5,8 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
-import IMG_OUTBOUND_HERO from '@/attached_assets/Gemini_Generated_Image_nifntwnifntwnifn_1779321926573.webp';
-import CONTACT_IMG from '@/attached_assets/Gemini_Generated_Image_k8ex73k8ex73k8ex_1779328137397.webp';
+import IMG_OUTBOUND_HERO from '@/attached_assets/kdci-ai-outbound-demand-generation-team.webp';
+import CONTACT_IMG from '@/attached_assets/kdci-ai-demand-generation-outbound-specialists.webp';
 
 export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
@@ -128,7 +128,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_OUTBOUND_HERO}
-                  alt="AI Outbound team"
+                  alt="KDCI AI-powered outbound demand generation and sales development team"
                   className="w-full h-full object-cover object-right"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
@@ -300,7 +300,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
             <div className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5]">
-                <img src={CONTACT_IMG} alt="Outbound team at work" className="w-full h-full object-cover" />
+                <img src={CONTACT_IMG} alt="KDCI AI demand generation outbound specialists managing B2B lead generation" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                 <div className="absolute bottom-10 left-8 right-8 p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/10">
                   <blockquote className="border-l-4 border-[#E61739] pl-5">
@@ -492,7 +492,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={CONTACT_IMG}
-              alt="KDCI AI Outbound specialist on a discovery call"
+              alt="KDCI AI demand generation specialist on a free client discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

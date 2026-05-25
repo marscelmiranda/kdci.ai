@@ -4,9 +4,9 @@ import { Lightbulb, Target, ShieldCheck, UsersRound, Globe, MapPin, Quote, UserC
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { IMG_CX_TEAM, IMG_CX_TEAM2, IMG_DEV_TEAM } from '../data';
-import IMG_WHO_WE_ARE_HERO from '@/attached_assets/Gemini_Generated_Image_xt67ocxt67ocxt67_1779328636242.webp';
-import IMG_HQ_BUILDING from '@/attached_assets/Gemini_Generated_Image_8bu7sa8bu7sa8bu7_1779330338502.webp';
-import IMG_BUILD_TEAMS from '@/attached_assets/Gemini_Generated_Image_oq625yoq625yoq62_1779330519874.webp';
+import IMG_WHO_WE_ARE_HERO from '@/attached_assets/kdci-team-manila-headquarters.webp';
+import IMG_HQ_BUILDING from '@/attached_assets/kdci-philippine-hq-one-corporate-centre-ortigas.webp';
+import IMG_BUILD_TEAMS from '@/attached_assets/kdci-team-welcoming-new-offshore-client.webp';
 
 const STATS = [
   { value: '2011', label: 'Year Founded' },
@@ -71,7 +71,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_WHO_WE_ARE_HERO}
-                  alt="KDCI team at their Manila headquarters"
+                  alt="KDCI team collaborating at their Manila headquarters in Ortigas Center, Philippines"
                   className="w-full h-full object-cover object-right"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
@@ -372,7 +372,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
               <div className="rounded-[40px] aspect-[4/5] overflow-hidden relative shadow-2xl">
-                <img src={IMG_BUILD_TEAMS} alt="KDCI team welcoming a new client" className="absolute inset-0 w-full h-full object-cover object-center" />
+                <img src={IMG_BUILD_TEAMS} alt="KDCI leadership team welcoming and onboarding a new offshore client partner" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-10 rounded-[40px] shadow-2xl border border-white/50">
                   <Quote className="text-[#E61739] mb-4 opacity-50" size={32} />
                   <p className="text-xl font-heading font-bold text-slate-900 mb-2 italic">"The bench is deep."</p>
@@ -414,7 +414,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
           <div className="absolute inset-0 z-0">
             <img
               src={IMG_CX_TEAM}
-              alt="KDCI Team"
+              alt="KDCI AI solutions team at their Philippine offshore staffing headquarters"
               className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"
             />
           </div>

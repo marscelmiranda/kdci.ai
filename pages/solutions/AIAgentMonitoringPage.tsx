@@ -10,9 +10,9 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
-import IMG_HERO from '@/attached_assets/Gemini_Generated_Image_sk2jqjsk2jqjsk2j_1779333029410.webp';
-import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.webp';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.webp';
+import IMG_HERO from '@/attached_assets/kdci-ai-agent-monitoring-dashboard.webp';
+import IMG_OUR_DIFFERENCE from '@/attached_assets/kdci-ai-operations-team-performance-review.webp';
+import IMG_CONTACT from '@/attached_assets/kdci-solutions-specialist-discovery-call.webp';
 
 /* ─── Data ─────────────────────────────────────────────────────────── */
 
@@ -179,7 +179,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="relative min-h-[400px] lg:h-[560px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_HERO}
-                  alt="AI agent monitoring dashboard"
+                  alt="KDCI AI agent monitoring dashboard for real-time performance tracking"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -355,7 +355,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
               <img
                 src={IMG_OUR_DIFFERENCE}
-                alt="KDCI AI operations team reviewing agent performance dashboards"
+                alt="KDCI AI operations team reviewing agent performance dashboards in Manila, Philippines"
                 className="w-full h-full object-cover object-center"
               />
             </div>
@@ -490,7 +490,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI AI Ops specialist on a discovery call"
+              alt="KDCI AI agent monitoring specialist on a free discovery consultation call"
               className="absolute inset-0 w-full h-full object-cover object-right"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

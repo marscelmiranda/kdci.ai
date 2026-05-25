@@ -5,9 +5,9 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
-import IMG_CONSULTING_HERO from '@/attached_assets/Gemini_Generated_Image_obqsyoobqsyoobqs_1779292919455.webp';
-import IMG_OUR_DIFFERENCE from '@/attached_assets/Gemini_Generated_Image_3erodo3erodo3ero_1779322705239.webp';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.webp';
+import IMG_CONSULTING_HERO from '@/attached_assets/kdci-ai-implementation-consulting-team.webp';
+import IMG_OUR_DIFFERENCE from '@/attached_assets/kdci-ai-operations-team-performance-review.webp';
+import IMG_CONTACT from '@/attached_assets/kdci-solutions-specialist-discovery-call.webp';
 
 const SERVICES = [
   {
@@ -176,7 +176,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
               <div className="relative h-full min-h-[400px] lg:max-h-[520px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_CONSULTING_HERO}
-                  alt="AI Consulting team"
+                  alt="KDCI AI implementation services and consulting team"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
@@ -340,7 +340,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
               <img
                 src={IMG_OUR_DIFFERENCE}
-                alt="KDCI AI consulting team reviewing performance dashboards"
+                alt="KDCI AI implementation consulting team reviewing business performance dashboards"
                 className="w-full h-full object-cover object-center"
               />
             </div>
@@ -485,7 +485,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI operations consultant on a live discovery call"
+              alt="KDCI AI implementation consultant on a live free discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

@@ -6,7 +6,7 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
-import IMG_CONTACT from '../../attached_assets/Gemini_Generated_Image_alu075alu075alu0_1777983805487.webp';
+import IMG_CONTACT from '../../attached_assets/kdci-offshore-staffing-consultation.webp';
 
 export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', service: '', notes: '' });
@@ -126,7 +126,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI solutions team"
+              alt="KDCI AI solutions team ready to discuss your operational transformation"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />

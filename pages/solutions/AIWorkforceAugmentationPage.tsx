@@ -5,9 +5,9 @@ import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_REC_HERO, IMG_REC_VETTING, INDUSTRIES } from '../../data';
-import recIncludedImg from '@/attached_assets/Gemini_Generated_Image_x4lp18x4lp18x4lp_1777967577991.webp';
-import IMG_HERO_MEETING from '@/attached_assets/Gemini_Generated_Image_bive4ebive4ebive_1779321572717.webp';
-import IMG_CONTACT from '@/attached_assets/Gemini_Generated_Image_yt9qvlyt9qvlyt9q_1779325609284.webp';
+import recIncludedImg from '@/attached_assets/kdci-ai-workforce-recruitment-talent.webp';
+import IMG_HERO_MEETING from '@/attached_assets/kdci-ai-workforce-augmentation-team.webp';
+import IMG_CONTACT from '@/attached_assets/kdci-solutions-specialist-discovery-call.webp';
 
 const INDUSTRY_ROLES: Record<string, string[]> = {
   'ecommerce':      ['Growth Marketer', 'Catalog Manager', 'SEO Specialist', 'CX Lead', 'Visual Merchandiser', 'E-commerce Analyst'],
@@ -160,7 +160,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img
                   src={IMG_HERO_MEETING}
-                  alt="KDCI AI Workforce Augmentation"
+                  alt="KDCI AI workforce augmentation team meeting with offshore talent candidates"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
@@ -542,7 +542,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
               <div className="bg-slate-100 rounded-3xl aspect-[4/5] relative shadow-2xl" style={{ overflow: 'hidden' }}>
-                <img src={IMG_REC_VETTING} alt="AI Workforce team" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={IMG_REC_VETTING} alt="KDCI AI workforce augmentation team managing offshore talent vetting process" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
                   <div className="flex items-center gap-4">
@@ -590,7 +590,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img
               src={IMG_CONTACT}
-              alt="KDCI AI Workforce team"
+              alt="KDCI AI workforce augmentation specialist on a free client consultation call"
               className="absolute inset-0 w-full h-full object-cover object-right"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
