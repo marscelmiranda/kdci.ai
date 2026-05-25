@@ -1,1 +1,1 @@
-export type ViewType = 'login' | 'dashboard' | 'settings' | 'agents';
+export type ViewType = 'login' | 'dashboard' | 'settings' | 'agents' | 'reports';

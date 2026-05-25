@@ -10,8 +10,8 @@ interface Props {
 
 export const DashboardPage = ({ setView, user }: Props) => {
   const cards = [
-    { icon: Bot,      label: 'Agents',    desc: 'Monitor AI agents, chat sessions, task runs, usage, and audit logs.', color: 'bg-purple-50 text-purple-600', soon: false, action: () => setView('agents') },
-    { icon: FileText, label: 'Reports',   desc: 'View your monthly performance reports and analytics.',                  color: 'bg-blue-50 text-blue-600',    soon: true,  action: undefined },
+    { icon: Bot,      label: 'Agents',    desc: 'Monitor AI agents, chat sessions, task runs, usage, and audit logs.',  color: 'bg-purple-50 text-purple-600', soon: false, action: () => setView('agents') },
+    { icon: FileText, label: 'Reports',   desc: 'Executive summaries, ROI breakdowns, and agent performance reports.',   color: 'bg-blue-50 text-blue-600',    soon: false, action: () => setView('reports') },
     { icon: BarChart3, label: 'Analytics', desc: 'Real-time KPIs, SLA performance, and team metrics.',                  color: 'bg-green-50 text-green-600',   soon: true,  action: undefined },
     { icon: Settings,  label: 'Settings',  desc: 'Manage your profile, contract, agents, and billing.',                 color: 'bg-slate-50 text-slate-600',   soon: false, action: () => setView('settings') },
   ];

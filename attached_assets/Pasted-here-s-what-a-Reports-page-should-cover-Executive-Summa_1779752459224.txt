@@ -1,0 +1,29 @@
+here's what a Reports page should cover:
+
+Executive Summary Report
+A high-level snapshot clients can share internally — no technical detail, just outcomes. Fields to include: total tasks automated this period, time saved estimate, success rate, cost efficiency vs. manual work, and a one-paragraph AI-generated narrative summary.
+
+Agent Activity Report
+A breakdown of what the agents actually did. Fields: number of runs per agent, task categories handled, completion rate per agent, average duration, and most-used integrations/tools. Useful for clients who want to see ROI per workflow.
+
+Chat Interaction Report
+For clients using conversational AI. Fields: total sessions, average session length, most common topics or intents, escalation rate (how often a human had to step in), resolution rate, and CSAT or feedback scores if collected.
+
+Error & Reliability Report
+Builds trust by being transparent. Fields: total errors, error rate as a percentage, most common failure types in plain language, average time to resolution, and uptime percentage. Clients appreciate honesty here — it shows accountability.
+
+Usage & Growth Report
+Helps clients see adoption trends over time. Fields: month-over-month growth in tasks/sessions, user adoption across their team, peak usage periods, and plan utilization (how much of their quota they're using).
+
+ROI Summary Report
+The most compelling one for potential clients to share upward. Fields: hours saved (calculated from average task duration × runs), estimated dollar value saved (based on a configurable hourly rate), tasks that would have required manual effort, and a comparison to the previous period.
+
+Report Generation Features to build in
+Beyond the fields themselves, these are the features that make a Reports page feel polished for clients:
+
+Date range selector — this period, last 30 days, custom range, or by quarter
+Export options — PDF and CSV at minimum; Excel for more technical clients
+Scheduled delivery — let clients set up automatic email delivery weekly or monthly
+Branding — if this is white-labeled, allow a logo and company name on exported reports
+Comparison toggle — show current vs. previous period side by side
+AI-generated narrative — a 2–3 sentence plain-English summary auto-generated from the data, great for clients who need to present this to non-technical stakeholders
