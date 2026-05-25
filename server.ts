@@ -924,6 +924,19 @@ app.get(['/midgard', '/midgard/*splat'], (_req, res) => {
   res.sendFile(path.join(midgardDist, 'index.html'));
 });
 
+// Client Portal — always served as pre-built static files (no proxy)
+const portalDist = path.join(__dirname, 'portal', 'dist');
+app.use('/portal/assets', express.static(path.join(portalDist, 'assets'), { maxAge: '1y', immutable: true }));
+app.use('/portal', express.static(portalDist, { etag: false, lastModified: false, setHeaders: (res, filePath) => {
+  if (filePath.endsWith('index.html')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  }
+}}));
+app.get(['/portal', '/portal/*splat'], (_req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.sendFile(path.join(portalDist, 'index.html'));
+});
+
 if (isDev) {
   app.use(
     '/',
