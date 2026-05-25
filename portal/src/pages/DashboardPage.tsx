@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewType } from '../types';
 import { NavBar } from '../components/NavBar';
-import { FileText, MessageSquare, BarChart3, Settings, LayoutDashboard } from 'lucide-react';
+import { FileText, Bot, BarChart3, Settings, LayoutDashboard, MessageSquare } from 'lucide-react';
 
 interface Props {
   setView: (v: ViewType) => void;
@@ -10,10 +10,10 @@ interface Props {
 
 export const DashboardPage = ({ setView, user }: Props) => {
   const cards = [
-    { icon: FileText,      label: 'Reports',   desc: 'View your monthly performance reports and analytics.',    color: 'bg-blue-50 text-blue-600',    soon: true,  action: undefined },
-    { icon: MessageSquare, label: 'Messages',  desc: 'Communicate directly with your KDCI account team.',       color: 'bg-purple-50 text-purple-600', soon: true,  action: undefined },
-    { icon: BarChart3,     label: 'Analytics', desc: 'Real-time KPIs, SLA performance, and team metrics.',      color: 'bg-green-50 text-green-600',   soon: true,  action: undefined },
-    { icon: Settings,      label: 'Settings',  desc: 'Manage your profile, contract, agents, and billing.',     color: 'bg-slate-50 text-slate-600',   soon: false, action: () => setView('settings') },
+    { icon: Bot,      label: 'Agents',    desc: 'Monitor AI agents, chat sessions, task runs, usage, and audit logs.', color: 'bg-purple-50 text-purple-600', soon: false, action: () => setView('agents') },
+    { icon: FileText, label: 'Reports',   desc: 'View your monthly performance reports and analytics.',                  color: 'bg-blue-50 text-blue-600',    soon: true,  action: undefined },
+    { icon: BarChart3, label: 'Analytics', desc: 'Real-time KPIs, SLA performance, and team metrics.',                  color: 'bg-green-50 text-green-600',   soon: true,  action: undefined },
+    { icon: Settings,  label: 'Settings',  desc: 'Manage your profile, contract, agents, and billing.',                 color: 'bg-slate-50 text-slate-600',   soon: false, action: () => setView('settings') },
   ];
 
   return (

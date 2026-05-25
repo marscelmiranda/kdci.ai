@@ -3,6 +3,7 @@ import { ViewType } from './types';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { AgentsPage } from './pages/AgentsPage';
 import { getToken, getMe, clearToken } from './lib/api';
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
   if (activeView === 'login' || !getToken()) return <LoginPage setView={setView} setUser={setUser} />;
   if (activeView === 'dashboard') return <DashboardPage setView={setView} user={user} />;
   if (activeView === 'settings') return <SettingsPage setView={setView} user={user} />;
+  if (activeView === 'agents')   return <AgentsPage setView={setView} user={user} />;
 
   return <LoginPage setView={setView} setUser={setUser} />;
 };
