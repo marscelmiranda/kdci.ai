@@ -6,7 +6,7 @@ import {
   Eye, EyeOff, CheckCircle2, AlertCircle, XCircle,
   Loader2, ChevronRight, Building2, Phone, Mail,
   Briefcase, Calendar, Shield, Activity, TrendingUp,
-  Receipt, Download, BadgeCheck
+  Receipt, Download, BadgeCheck, Bot, UserCheck
 } from 'lucide-react';
 
 interface Props {
@@ -45,12 +45,12 @@ const MOCK_SERVICES = [
 ];
 
 const MOCK_AGENTS = [
-  { name: 'Maria Santos', role: 'CX Lead', team: 'CX Operations', status: 'active', since: 'Jan 2025' },
-  { name: 'James Reyes', role: 'Demand Gen Specialist', team: 'Sales Ops', status: 'active', since: 'Mar 2025' },
-  { name: 'Chloe Mendoza', role: 'Back Office Agent', team: 'Operations', status: 'inactive', since: 'Jun 2024' },
-  { name: 'Rico Bautista', role: 'Recruitment Coordinator', team: 'HR Ops', status: 'active', since: 'Feb 2025' },
-  { name: 'Ana Villanueva', role: 'Graphic Designer', team: 'Creative Ops', status: 'inactive', since: 'Nov 2024' },
-  { name: 'Paolo Cruz', role: 'CX Specialist', team: 'CX Operations', status: 'active', since: 'Jan 2025' },
+  { name: 'Maria Santos',   role: 'CX Lead',                  team: 'CX Operations', status: 'active',   since: 'Jan 2025', agentType: 'human-oversight' },
+  { name: 'James Reyes',    role: 'Demand Gen Specialist',     team: 'Sales Ops',     status: 'active',   since: 'Mar 2025', agentType: 'agentic-ai' },
+  { name: 'Chloe Mendoza',  role: 'Back Office Agent',         team: 'Operations',    status: 'inactive', since: 'Jun 2024', agentType: 'agentic-ai' },
+  { name: 'Rico Bautista',  role: 'Recruitment Coordinator',   team: 'HR Ops',        status: 'active',   since: 'Feb 2025', agentType: 'human-oversight' },
+  { name: 'Ana Villanueva', role: 'Graphic Designer',          team: 'Creative Ops',  status: 'inactive', since: 'Nov 2024', agentType: 'human-oversight' },
+  { name: 'Paolo Cruz',     role: 'CX Specialist',             team: 'CX Operations', status: 'active',   since: 'Jan 2025', agentType: 'agentic-ai' },
 ];
 
 const MOCK_INVOICES = [
@@ -418,8 +418,8 @@ export const SettingsPage = ({ setView, user }: Props) => {
           <div className="space-y-6">
 
             {/* Agent count cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              <div className="bg-[#020202] rounded-[40px] p-8 relative overflow-hidden">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+              <div className="bg-[#020202] rounded-[40px] p-8 relative overflow-hidden col-span-2 sm:col-span-1">
                 <div className="absolute bottom-[-40px] right-[-40px] w-[150px] h-[150px] bg-[#E61739]/20 rounded-full blur-[60px]" />
                 <div className="relative z-10">
                   <TrendingUp size={22} className="text-[#E61739] mb-4" />
@@ -429,13 +429,18 @@ export const SettingsPage = ({ setView, user }: Props) => {
               </div>
               <div className="bg-green-50 rounded-[40px] border border-green-100 p-8">
                 <CheckCircle2 size={22} className="text-green-600 mb-4" />
-                <p className="text-[10px] font-black uppercase tracking-widest text-green-600 mb-1">Active Agents</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-green-600 mb-1">Active</p>
                 <p className="text-5xl font-heading font-bold text-green-700">{activeAgents.length}</p>
               </div>
-              <div className="bg-slate-100 rounded-[40px] border border-slate-200 p-8">
-                <XCircle size={22} className="text-slate-400 mb-4" />
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Inactive Agents</p>
-                <p className="text-5xl font-heading font-bold text-slate-600">{inactiveAgents.length}</p>
+              <div className="bg-purple-50 rounded-[40px] border border-purple-100 p-8">
+                <Bot size={22} className="text-purple-600 mb-4" />
+                <p className="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-1">Agentic AI</p>
+                <p className="text-5xl font-heading font-bold text-purple-700">{MOCK_AGENTS.filter(a => a.agentType === 'agentic-ai').length}</p>
+              </div>
+              <div className="bg-blue-50 rounded-[40px] border border-blue-100 p-8">
+                <UserCheck size={22} className="text-blue-600 mb-4" />
+                <p className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-1">Human Oversight</p>
+                <p className="text-5xl font-heading font-bold text-blue-700">{MOCK_AGENTS.filter(a => a.agentType === 'human-oversight').length}</p>
               </div>
             </div>
 
@@ -467,7 +472,11 @@ export const SettingsPage = ({ setView, user }: Props) => {
                         <p className="text-slate-400 text-xs font-medium">{agent.role} · {agent.team}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 flex-wrap justify-end">
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${agent.agentType === 'agentic-ai' ? 'bg-purple-50 text-purple-700 border-purple-100' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                        {agent.agentType === 'agentic-ai' ? <Bot size={10} /> : <UserCheck size={10} />}
+                        {agent.agentType === 'agentic-ai' ? 'Agentic AI' : 'Human Oversight'}
+                      </span>
                       <div className="hidden sm:block text-right">
                         <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Since</p>
                         <p className="text-xs font-bold text-slate-700">{agent.since}</p>

@@ -65,8 +65,10 @@ export const LoginPage = ({ setView }: { setView: (v: ViewType) => void }) => {
         <div className="relative z-10 w-full max-w-md">
           <div className={`bg-white rounded-[2.5rem] p-10 shadow-2xl border border-white/10 ${shake ? 'shake' : ''}`}>
             <div className="text-center mb-10">
-              <div className="flex justify-center mb-6 scale-90">
-                <Logo isDarkHero={false} />
+              <div className="flex justify-center mb-6">
+                <div className="bg-[#1D1D1F] rounded-2xl px-5 py-3">
+                  <Logo isDarkHero={true} />
+                </div>
               </div>
               <h1 className="text-2xl font-heading font-bold text-slate-900">Midgard</h1>
               <p className="text-slate-500 text-sm mt-2 font-medium">Secure access for KDCI team members.</p>
