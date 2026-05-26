@@ -91,6 +91,18 @@ export const createGuide        = (data: any) => request('/api/guides',   { meth
 export const updateGuide        = (id: string | number, data: any) => request(`/api/guides/${id}`,{ method: 'PUT',  body: JSON.stringify(data) });
 export const deleteGuide        = (id: string | number) => request(`/api/guides/${id}`,{ method: 'DELETE' });
 
+// ---- Manpower Requests ----
+export const getAllManpowerRequests  = ()                       => request<any[]>('/api/manpower-requests');
+export const createManpowerRequest  = (data: any)              => request<any>('/api/manpower-requests', { method: 'POST', body: JSON.stringify(data) });
+export const assignManpowerRequest  = (id: string | number, data: { assigned_to_email: string; assigned_to_name: string }) =>
+  request<any>(`/api/manpower-requests/${id}/assign`,   { method: 'PUT', body: JSON.stringify(data) });
+export const unassignManpowerRequest = (id: string | number)  =>
+  request<any>(`/api/manpower-requests/${id}/unassign`, { method: 'PUT', body: JSON.stringify({}) });
+export const publishManpowerRequest = (id: string | number)   =>
+  request<any>(`/api/manpower-requests/${id}/publish`,  { method: 'PUT', body: JSON.stringify({}) });
+export const deleteManpowerRequest  = (id: string | number)   =>
+  request<any>(`/api/manpower-requests/${id}`,          { method: 'DELETE' });
+
 // ---- Webinars ----
 export const getPublishedWebinars = ()          => request('/api/webinars');
 export const getAllWebinars        = ()          => request('/api/webinars/all');

@@ -11,9 +11,11 @@ import { PortfolioOpsPage } from './pages/PortfolioOpsPage';
 import { AdminApprovalsPage } from './pages/AdminApprovalsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { CaseStudiesOpsPage } from './pages/CaseStudiesOpsPage';
+import { ManpowerRequestsPage } from './pages/ManpowerRequestsPage';
 import { getToken, getMe, clearToken } from './lib/api';
 
 const PUBLIC_VIEWS: ViewType[] = ['login', 'register', 'forgot-password'];
+const MANPOWER_ROLES = ['admin', 'recruitment', 'manager'];
 
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType | null>(null);
@@ -36,6 +38,7 @@ const App = () => {
   const guardedSetView = (v: ViewType) => {
     if (!PUBLIC_VIEWS.includes(v) && !getToken()) { setActiveView('login'); return; }
     if (v === 'admin-approvals' && userRole !== 'admin') { setActiveView('dashboard'); return; }
+    if (v === 'manpower-requests' && !MANPOWER_ROLES.includes(userRole)) { setActiveView('dashboard'); return; }
     setView(v);
   };
 
@@ -54,13 +57,15 @@ const App = () => {
   if (!getToken()) return <LoginPage setView={setView} />;
 
   if (activeView === 'admin-approvals' && userRole !== 'admin') return <PublisherDashboardPage setView={guardedSetView} userRole={userRole} />;
+  if (activeView === 'manpower-requests' && !MANPOWER_ROLES.includes(userRole)) return <PublisherDashboardPage setView={guardedSetView} userRole={userRole} />;
   if (activeView === 'dashboard') return <PublisherDashboardPage setView={guardedSetView} userRole={userRole} />;
   if (activeView === 'blog-ops') return <BlogOpsPage setView={guardedSetView} />;
-  if (activeView === 'career-ops') return <CareerOpsPage setView={guardedSetView} />;
+  if (activeView === 'career-ops') return <CareerOpsPage setView={guardedSetView} userRole={userRole} />;
   if (activeView === 'resources-ops') return <ResourcesOpsPage setView={guardedSetView} />;
   if (activeView === 'portfolio-ops') return <PortfolioOpsPage setView={guardedSetView} />;
   if (activeView === 'admin-approvals') return <AdminApprovalsPage setView={guardedSetView} />;
   if (activeView === 'case-studies-ops') return <CaseStudiesOpsPage setView={guardedSetView} />;
+  if (activeView === 'manpower-requests') return <ManpowerRequestsPage setView={guardedSetView} userRole={userRole} />;
   if (activeView === 'profile') return <ProfilePage setView={guardedSetView} />;
 
   return <LoginPage setView={setView} />;

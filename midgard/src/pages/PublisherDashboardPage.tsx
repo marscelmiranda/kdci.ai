@@ -5,7 +5,7 @@ import {
   Briefcase, FileText, BookOpen, BookMarked,
   Image as ImageIcon, Bell, Search, LogOut,
   ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2, MapPin, Building2,
-  Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle2, ShieldQuestion, X
+  Lock, Eye, EyeOff, Loader2, AlertCircle, CheckCircle2, ShieldQuestion, X, ClipboardList
 } from 'lucide-react';
 import { getMe, forgotPassword, verifySecret, resetPassword } from '../lib/api';
 
@@ -168,11 +168,12 @@ export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: Vie
   };
 
   // ---- Role-based card visibility ----
-  const show = (card: 'careers' | 'blogs' | 'resources' | 'portfolio' | 'casestudies' | 'approvals' | 'profile') => {
+  const show = (card: 'careers' | 'blogs' | 'resources' | 'portfolio' | 'casestudies' | 'approvals' | 'profile' | 'manpower') => {
     if (userRole === 'marketing')   return ['blogs','resources','casestudies','profile'].includes(card);
-    if (userRole === 'recruitment') return ['careers','profile'].includes(card);
+    if (userRole === 'recruitment') return ['careers','manpower','profile'].includes(card);
+    if (userRole === 'manager')     return ['manpower','profile'].includes(card);
     if (userRole === 'admin')       return true;
-    return card !== 'approvals';
+    return !['approvals','manpower'].includes(card);
   };
 
   return (
@@ -312,6 +313,16 @@ export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: Vie
               actionText="Manage Careers"
               color="bg-blue-600"
               onClick={() => setView('career-ops')}
+            />
+          )}
+          {show('manpower') && (
+            <DashboardCard
+              title="Manpower Requests"
+              description="Submit staffing requests for new hires. Recruiters will review, self-assign, and publish approved roles to the Careers page."
+              icon={<ClipboardList size={24} />}
+              actionText="Submit Request"
+              color="bg-amber-600"
+              onClick={() => setView('manpower-requests')}
             />
           )}
           {show('blogs') && (

@@ -9,4 +9,5 @@ export type ViewType =
   | 'portfolio-ops'
   | 'case-studies-ops'
   | 'admin-approvals'
+  | 'manpower-requests'
   | 'profile';

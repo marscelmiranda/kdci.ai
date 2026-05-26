@@ -52,6 +52,28 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
       status VARCHAR(20) DEFAULT 'active'
     )
   `).catch(() => {});
+  // Manpower requests table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS manpower_requests (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL,
+      department TEXT,
+      location TEXT,
+      employment_type TEXT,
+      description TEXT,
+      responsibilities TEXT,
+      requirements TEXT,
+      status TEXT DEFAULT 'pending',
+      requested_by_email TEXT,
+      requested_by_name TEXT,
+      assigned_to_email TEXT,
+      assigned_to_name TEXT,
+      job_listing_id INTEGER,
+      notes TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `).catch(() => {});
 })();
 
 const app = express();
@@ -533,6 +555,75 @@ app.delete('/api/jobs/:id', requireAuth, async (req, res) => {
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
+});
+
+// ===== MANPOWER REQUESTS =====
+app.get('/api/manpower-requests', requireAuth, async (_req, res) => {
+  try {
+    const { rows } = await pool.query('SELECT * FROM manpower_requests ORDER BY created_at DESC');
+    res.json(rows);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/manpower-requests', requireAuth, async (req, res) => {
+  const { title, department, location, employment_type, description, responsibilities, requirements, notes, requested_by_email, requested_by_name } = req.body;
+  try {
+    const { rows } = await pool.query(
+      `INSERT INTO manpower_requests (title,department,location,employment_type,description,responsibilities,requirements,notes,requested_by_email,requested_by_name,status,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'pending',NOW(),NOW()) RETURNING *`,
+      [title, department, location, employment_type, description, responsibilities, requirements, notes, requested_by_email, requested_by_name]
+    );
+    res.status(201).json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/manpower-requests/:id/assign', requireAuth, async (req, res) => {
+  const { assigned_to_email, assigned_to_name } = req.body;
+  try {
+    const { rows } = await pool.query(
+      `UPDATE manpower_requests SET status='assigned',assigned_to_email=$1,assigned_to_name=$2,updated_at=NOW() WHERE id=$3 RETURNING *`,
+      [assigned_to_email, assigned_to_name, req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/manpower-requests/:id/unassign', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      `UPDATE manpower_requests SET status='pending',assigned_to_email=NULL,assigned_to_name=NULL,updated_at=NOW() WHERE id=$1 RETURNING *`,
+      [req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
+    res.json(rows[0]);
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/manpower-requests/:id/publish', requireAuth, async (req, res) => {
+  try {
+    const { rows: reqRows } = await pool.query('SELECT * FROM manpower_requests WHERE id = $1', [req.params.id]);
+    if (!reqRows[0]) { res.status(404).json({ error: 'Not found' }); return; }
+    const r = reqRows[0];
+    const slug = r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now();
+    const { rows: jobRows } = await pool.query(
+      `INSERT INTO job_listings (title,slug,department,location,employment_type,description,responsibilities,requirements,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'active',NOW(),NOW(),NOW()) RETURNING *`,
+      [r.title, slug, r.department, r.location, r.employment_type, r.description, r.responsibilities, r.requirements]
+    );
+    await pool.query(
+      `UPDATE manpower_requests SET status='published',job_listing_id=$1,updated_at=NOW() WHERE id=$2`,
+      [jobRows[0].id, req.params.id]
+    );
+    res.json({ manpower_request: { ...r, status: 'published', job_listing_id: jobRows[0].id }, job_listing: jobRows[0] });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/manpower-requests/:id', requireAuth, async (req, res) => {
+  try {
+    await pool.query('DELETE FROM manpower_requests WHERE id = $1', [req.params.id]);
+    res.json({ success: true });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 // ===== BLOG POSTS =====

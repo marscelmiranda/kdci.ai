@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { RichTextEditor } from '../components/RichTextEditor';
-import { getAllJobs, createJob, updateJob, deleteJob } from '../lib/api';
+import { getAllJobs, createJob, updateJob, deleteJob, getMe, getAllManpowerRequests, assignManpowerRequest, unassignManpowerRequest, publishManpowerRequest } from '../lib/api';
 import {
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, BookMarked,
   Image as ImageIcon, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Eye, Save, Check, MapPin, Clock, Users, Zap, Sparkles,
   Calendar, ClipboardList, Activity, UserCheck, UserX, Linkedin, Mail, Link,
   MousePointerClick, MessageSquare, Bookmark, Archive, Layers, BarChart as BarChartIcon, Filter,
-  UserCircle2, CheckCircle2, ArrowRight, Quote
+  UserCircle2, CheckCircle2, ArrowRight, Quote, AlertCircle, Loader2
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer
@@ -79,14 +79,22 @@ const dbToJob = (row: any): JobListing => ({
   _raw: row,
 } as any);
 
-export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [viewState, setViewState] = useState<'list' | 'editor' | 'preview' | 'applicants' | 'analytics'>('list');
+export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewType) => void; userRole?: string }) => {
+  const [viewState, setViewState] = useState<'list' | 'editor' | 'preview' | 'applicants' | 'analytics' | 'pending-requests'>('list');
   const [jobs, setJobs] = useState<JobListing[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [applicants] = useState<Applicant[]>(MOCK_APPLICANTS);
   const [editingId, setEditingId] = useState<string | null>(null);
+
+  const [userEmail, setUserEmail]               = useState('');
+  const [userName, setUserName]                 = useState('');
+  const [pendingRequests, setPendingRequests]   = useState<any[]>([]);
+  const [pendingLoading, setPendingLoading]     = useState(false);
+  const [pendingError, setPendingError]         = useState<string | null>(null);
+  const [pendingActionId, setPendingActionId]   = useState<number | null>(null);
+  const [pendingSuccess, setPendingSuccess]     = useState<string | null>(null);
 
   const [analyticsMetric, setAnalyticsMetric] = useState<'published' | 'filled' | 'archived' | 'fillRate' | 'timeToFill' | 'timeToClose'>('published');
   const [analyticsFilter, setAnalyticsFilter] = useState<'week' | 'month' | 'quarter' | 'year' | 'custom'>('month');
@@ -113,6 +121,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
   }, []);
 
   useEffect(() => {
+    getMe().then(u => { setUserEmail(u.email); setUserName(u.name || ''); }).catch(() => {});
     setLoading(true);
     setApiError(null);
     (getAllJobs() as Promise<any[]>)
@@ -120,6 +129,19 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
       .catch(err => setApiError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  const fetchPendingRequests = () => {
+    setPendingLoading(true);
+    setPendingError(null);
+    getAllManpowerRequests()
+      .then(rows => setPendingRequests(rows.filter((r: any) => r.status !== 'published')))
+      .catch(err => setPendingError(err.message))
+      .finally(() => setPendingLoading(false));
+  };
+
+  useEffect(() => {
+    if (['admin','recruitment'].includes(userRole)) fetchPendingRequests();
+  }, [userRole]);
 
   const handleEdit = (job: JobListing) => {
     const raw = (job as any)._raw ?? {};
@@ -246,7 +268,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className={`grid grid-cols-1 ${['admin','recruitment'].includes(userRole) ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-6 mb-10`}>
           <div onClick={() => setViewState('list')} className={`bg-[#1a1a1a] border ${viewState === 'list' ? 'border-[#E61739]/50' : 'border-white/5'} rounded-2xl p-6 flex items-center gap-5 group hover:border-[#E61739]/30 transition-all cursor-pointer`}>
             <div className="w-14 h-14 rounded-xl bg-[#E61739]/10 flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform"><Briefcase size={28} /></div>
             <div>
@@ -268,6 +290,22 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
               <div className="text-3xl font-heading font-bold text-white">View</div>
             </div>
           </div>
+          {['admin','recruitment'].includes(userRole) && (
+            <div onClick={() => { fetchPendingRequests(); setViewState('pending-requests'); }} className={`bg-[#1a1a1a] border ${viewState === 'pending-requests' ? 'border-amber-500/50' : 'border-white/5'} rounded-2xl p-6 flex items-center gap-5 group hover:border-amber-500/30 transition-all cursor-pointer`}>
+              <div className="w-14 h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform relative">
+                <ClipboardList size={28} />
+                {pendingRequests.length > 0 && (
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#E61739] rounded-full text-[10px] font-black text-white flex items-center justify-center">
+                    {pendingRequests.length}
+                  </span>
+                )}
+              </div>
+              <div>
+                <div className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">Pending Requests</div>
+                <div className="text-3xl font-heading font-bold text-white">{pendingRequests.length}</div>
+              </div>
+            </div>
+          )}
         </div>
 
         {apiError && (
@@ -819,6 +857,204 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* PENDING REQUESTS VIEW */}
+        {viewState === 'pending-requests' && (
+          <div>
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="text-xl font-heading font-bold text-white">Pending Job Requests</h2>
+                <p className="text-white/40 text-sm mt-1">Manpower requests submitted by managers and admins. Assign yourself and publish to the Careers page.</p>
+              </div>
+              <button onClick={() => { fetchPendingRequests(); }} className="px-4 py-2 rounded-xl border border-white/10 text-xs font-bold text-white/50 hover:text-white hover:bg-white/5 transition-all flex items-center gap-2">
+                <Activity size={14} /> Refresh
+              </button>
+            </div>
+
+            {pendingError && (
+              <div className="mb-6 flex items-center gap-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl px-5 py-4 text-sm font-medium">
+                <AlertCircle size={16} className="shrink-0" />{pendingError}
+              </div>
+            )}
+            {pendingSuccess && (
+              <div className="mb-6 flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-400 rounded-xl px-5 py-4 text-sm font-medium">
+                <CheckCircle2 size={16} className="shrink-0" />{pendingSuccess}
+                <button className="ml-auto" onClick={() => setPendingSuccess(null)}><UserX size={14} /></button>
+              </div>
+            )}
+
+            {pendingLoading ? (
+              <div className="flex items-center justify-center py-24 text-white/40 font-bold text-sm gap-3">
+                <Loader2 size={20} className="animate-spin text-[#E61739]" /> Loading requests…
+              </div>
+            ) : pendingRequests.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-28 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-5 text-white/20"><ClipboardList size={32} /></div>
+                <p className="text-white/40 font-bold text-lg mb-2">No pending requests</p>
+                <p className="text-white/20 text-sm">All manpower requests have been handled or none have been submitted yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {pendingRequests.map(req => {
+                  const isAssignedToMe = req.assigned_to_email === userEmail;
+                  const badgeMap: Record<string, { label: string; cls: string }> = {
+                    pending:  { label: 'Pending',  cls: 'bg-amber-500/10  text-amber-400  border-amber-500/20'  },
+                    assigned: { label: 'Assigned', cls: 'bg-blue-500/10   text-blue-400   border-blue-500/20'   },
+                  };
+                  const badge = badgeMap[req.status] ?? badgeMap.pending;
+                  const fmtDate = (s: string) => s ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+
+                  return (
+                    <div key={req.id} className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-grow min-w-0">
+                          {/* Badges + Title */}
+                          <div className="flex items-center gap-3 mb-2 flex-wrap">
+                            <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${badge.cls}`}>
+                              {badge.label}
+                            </span>
+                            {req.department && (
+                              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">
+                                {req.department}
+                              </span>
+                            )}
+                            {req.employment_type && (
+                              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">
+                                {req.employment_type}
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="text-lg font-bold text-white mb-1">{req.title}</h3>
+                          <div className="flex items-center gap-4 text-xs text-white/30 flex-wrap mb-3">
+                            {req.location && <span className="flex items-center gap-1"><MapPin size={11} />{req.location}</span>}
+                            <span>Requested by <span className="text-white/50 font-bold">{req.requested_by_name || req.requested_by_email}</span></span>
+                            <span>on {fmtDate(req.created_at)}</span>
+                          </div>
+
+                          {/* Content preview */}
+                          {req.description && (
+                            <p className="text-sm text-white/30 line-clamp-2 mb-3">{req.description.replace(/<[^>]+>/g, '').slice(0, 160)}…</p>
+                          )}
+
+                          {/* Notes */}
+                          {req.notes && (
+                            <div className="bg-amber-500/5 border border-amber-500/15 rounded-xl px-4 py-3 text-xs text-amber-300/70 italic mb-3">
+                              <span className="font-black uppercase tracking-widest not-italic text-amber-400/60 mr-2">Note:</span>
+                              {req.notes}
+                            </div>
+                          )}
+
+                          {/* Assigned to */}
+                          {req.assigned_to_name && (
+                            <div className="flex items-center gap-2 text-xs text-blue-400">
+                              <UserCheck size={13} />
+                              <span>Assigned to <strong>{req.assigned_to_name}</strong>{isAssignedToMe && <span className="ml-1 text-white/30">(you)</span>}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex flex-col gap-2 shrink-0 min-w-[140px]">
+                          {req.status === 'pending' && (
+                            <button
+                              disabled={pendingActionId === req.id}
+                              onClick={async () => {
+                                setPendingActionId(req.id);
+                                setPendingError(null);
+                                try {
+                                  const updated = await assignManpowerRequest(req.id, { assigned_to_email: userEmail, assigned_to_name: userName });
+                                  setPendingRequests(prev => prev.map(r => r.id === req.id ? updated : r));
+                                  setPendingSuccess(`You've been assigned to "${req.title}".`);
+                                } catch (err: any) {
+                                  setPendingError(err.message);
+                                } finally {
+                                  setPendingActionId(null);
+                                }
+                              }}
+                              className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                            >
+                              {pendingActionId === req.id ? <Loader2 size={13} className="animate-spin" /> : <UserCheck size={13} />}
+                              Assign to Me
+                            </button>
+                          )}
+
+                          {req.status === 'assigned' && isAssignedToMe && (
+                            <>
+                              <button
+                                disabled={pendingActionId === req.id}
+                                onClick={async () => {
+                                  if (!confirm(`Publish "${req.title}" to the Careers page? This will create a live job posting.`)) return;
+                                  setPendingActionId(req.id);
+                                  setPendingError(null);
+                                  try {
+                                    await publishManpowerRequest(req.id);
+                                    setPendingRequests(prev => prev.filter(r => r.id !== req.id));
+                                    setJobs(prev => { setLoading(true); return prev; });
+                                    (getAllJobs() as Promise<any[]>).then(rows => setJobs(rows.map(dbToJob))).finally(() => setLoading(false));
+                                    setPendingSuccess(`"${req.title}" has been published to the Careers page.`);
+                                  } catch (err: any) {
+                                    setPendingError(err.message);
+                                  } finally {
+                                    setPendingActionId(null);
+                                  }
+                                }}
+                                className="px-4 py-2.5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                              >
+                                {pendingActionId === req.id ? <Loader2 size={13} className="animate-spin" /> : <Zap size={13} />}
+                                Publish to Careers
+                              </button>
+                              <button
+                                disabled={pendingActionId === req.id}
+                                onClick={async () => {
+                                  setPendingActionId(req.id);
+                                  try {
+                                    const updated = await unassignManpowerRequest(req.id);
+                                    setPendingRequests(prev => prev.map(r => r.id === req.id ? updated : r));
+                                  } catch (err: any) {
+                                    setPendingError(err.message);
+                                  } finally {
+                                    setPendingActionId(null);
+                                  }
+                                }}
+                                className="px-4 py-2.5 border border-white/10 text-white/40 hover:text-white hover:bg-white/5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                              >
+                                Unassign
+                              </button>
+                            </>
+                          )}
+
+                          {req.status === 'assigned' && !isAssignedToMe && userRole === 'admin' && (
+                            <button
+                              disabled={pendingActionId === req.id}
+                              onClick={async () => {
+                                if (!confirm(`Publish "${req.title}" to the Careers page?`)) return;
+                                setPendingActionId(req.id);
+                                try {
+                                  await publishManpowerRequest(req.id);
+                                  setPendingRequests(prev => prev.filter(r => r.id !== req.id));
+                                  (getAllJobs() as Promise<any[]>).then(rows => setJobs(rows.map(dbToJob)));
+                                  setPendingSuccess(`"${req.title}" has been published.`);
+                                } catch (err: any) {
+                                  setPendingError(err.message);
+                                } finally {
+                                  setPendingActionId(null);
+                                }
+                              }}
+                              className="px-4 py-2.5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                            >
+                              {pendingActionId === req.id ? <Loader2 size={13} className="animate-spin" /> : <Zap size={13} />}
+                              Publish
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </main>
