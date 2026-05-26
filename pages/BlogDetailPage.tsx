@@ -196,12 +196,12 @@ export const BlogDetailPage = ({ setView, blogId }: { setView: (v: ViewType) => 
                   <div className="p-8 rounded-[3rem] bg-[#1D1D1F] text-white shadow-2xl relative overflow-hidden group">
                     <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
                     <div className="relative z-10">
-                      <h4 className="text-2xl font-heading font-bold mb-4">Optimize Your Intelligence Layer.</h4>
+                      <h4 className="text-2xl font-heading font-bold mb-4">Let us know what you're building.</h4>
                       <p className="text-white/50 text-sm mb-10 leading-relaxed font-medium">
-                        Ready to build an AGI-ready operation? Talk to our architects today.
+                        Whether you're a startup finding your footing or an enterprise ready to scale, our architects are ready to walk you through the right agentic AI solutions for your team.
                       </p>
                       <button onClick={() => setView('contact')} className="w-full py-5 bg-[#E61739] hover:bg-[#c51431] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">
-                        Consult an Architect <ArrowRight size={18} />
+                        Send us your inquiry <ArrowRight size={18} />
                       </button>
                     </div>
                   </div>
@@ -313,9 +313,9 @@ export const BlogDetailPage = ({ setView, blogId }: { setView: (v: ViewType) => 
                   <div className="p-8 rounded-[3rem] bg-[#1D1D1F] text-white shadow-2xl relative overflow-hidden group">
                      <div className="mesh-container opacity-20 pointer-events-none"><div className="blob blob-purple"></div></div>
                      <div className="relative z-10">
-                        <h4 className="text-2xl font-heading font-bold mb-4">Optimize Your Intelligence Layer.</h4>
-                        <p className="text-white/50 text-sm mb-10 leading-relaxed font-medium">Is your offshore team ready for the AGI revolution? Talk to our architects today.</p>
-                        <button onClick={() => setView('contact')} className="w-full py-5 bg-[#E61739] hover:bg-[#c51431] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">Consult an Architect <ArrowRight size={18} /></button>
+                        <h4 className="text-2xl font-heading font-bold mb-4">Let us know what you're building.</h4>
+                        <p className="text-white/50 text-sm mb-10 leading-relaxed font-medium">Whether you're a startup finding your footing or an enterprise ready to scale, our architects are ready to walk you through the right agentic AI solutions for your team.</p>
+                        <button onClick={() => setView('contact')} className="w-full py-5 bg-[#E61739] hover:bg-[#c51431] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">Send us your inquiry <ArrowRight size={18} /></button>
                      </div>
                   </div>
                   <div className="p-8 rounded-[3rem] border border-slate-200 bg-[#F5F5F7] group cursor-pointer hover:bg-white hover:shadow-xl transition-all">
