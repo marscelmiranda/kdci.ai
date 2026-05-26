@@ -56,7 +56,23 @@ const renderBlocks = (contentStr: string) => {
         return (
           <div key={i} className="my-12 border-l-4 border-[#E61739] pl-10 py-4 relative">
             <Quote size={60} className="absolute -top-6 -left-6 text-slate-50 opacity-80 -z-10" />
-            <p className="text-2xl font-heading font-bold text-slate-900 leading-tight">{block.content?.quote || ''}</p>
+            <div className="text-2xl font-heading font-bold text-slate-900 leading-tight rte-content" dangerouslySetInnerHTML={{ __html: block.content?.quote || '' }} />
+            {block.content?.author && <p className="mt-4 text-sm font-bold text-[#E61739]">— {block.content.author}</p>}
+          </div>
+        );
+      case 'two_columns':
+        return (
+          <div key={i} className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {(['left', 'right'] as const).map(side => {
+              const col = block.content?.[side] || {};
+              if (col.type === 'image') return col.url ? (
+                <div key={side}>
+                  <img src={col.url} alt={col.caption || ''} className="w-full rounded-2xl object-cover" />
+                  {col.caption && <p className="text-center text-xs text-slate-400 mt-2">{col.caption}</p>}
+                </div>
+              ) : null;
+              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: col.text || '' }} />;
+            })}
           </div>
         );
       case 'cta':

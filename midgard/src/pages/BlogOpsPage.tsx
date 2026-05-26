@@ -60,7 +60,23 @@ const renderPreviewBlocks = (blocks: Block[]) =>
         return (
           <div key={i} className="my-12 border-l-4 border-[#E61739] pl-10 py-4 relative">
             <Quote size={60} className="absolute -top-6 -left-6 text-slate-100 opacity-80 -z-10" />
-            <p className="text-2xl font-bold text-slate-900 leading-tight">{block.content?.quote || ''}</p>
+            <div className="text-2xl font-bold text-slate-900 leading-tight rte-content" dangerouslySetInnerHTML={{ __html: block.content?.quote || '' }} />
+            {block.content?.author && <p className="mt-4 text-sm font-bold text-[#E61739]">— {block.content.author}</p>}
+          </div>
+        );
+      case 'two_columns':
+        return (
+          <div key={i} className="my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {(['left', 'right'] as const).map(side => {
+              const col = block.content?.[side] || {};
+              if (col.type === 'image') return col.url ? (
+                <div key={side}>
+                  <img src={col.url} alt={col.caption || ''} className="w-full rounded-2xl object-cover" />
+                  {col.caption && <p className="text-center text-xs text-slate-400 mt-2">{col.caption}</p>}
+                </div>
+              ) : <div key={side} className="rounded-2xl bg-slate-50 h-32 flex items-center justify-center text-slate-300 text-sm border border-slate-100">No image yet</div>;
+              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: col.text || '' }} />;
+            })}
           </div>
         );
       case 'cta':
@@ -248,8 +264,60 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         </div>
       );
       case 'pull_quote': return (
-        <textarea value={block.content.quote || ''} onChange={e => updateBlock(block.id, { ...block.content, quote: e.target.value })}
-          placeholder="Quote text..." className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none min-h-[80px]" />
+        <div className="space-y-3">
+          <RichTextEditor
+            key={block.id + '_pq'}
+            value={block.content.quote || ''}
+            onChange={html => updateBlock(block.id, { ...block.content, quote: html })}
+            placeholder="Enter pull quote text…"
+            minHeight="80px"
+          />
+          <input
+            type="text"
+            value={block.content.author || ''}
+            onChange={e => updateBlock(block.id, { ...block.content, author: e.target.value })}
+            placeholder="Author attribution (optional, e.g. Jane Smith, CEO)"
+            className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/25 focus:border-[#E61739] focus:outline-none"
+          />
+        </div>
+      );
+      case 'two_columns': return (
+        <div className="space-y-4">
+          {(['left', 'right'] as const).map(side => {
+            const col = block.content?.[side] || { type: 'text', text: '', url: '', caption: '' };
+            return (
+              <div key={side} className="border border-white/10 rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-white/40">{side === 'left' ? 'Left Column' : 'Right Column'}</span>
+                  <div className="flex gap-1">
+                    {(['text', 'image'] as const).map(t => (
+                      <button key={t} type="button"
+                        onClick={() => updateBlock(block.id, { ...block.content, [side]: { ...col, type: t } })}
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all ${col.type === t ? 'bg-[#E61739] text-white' : 'bg-white/5 text-white/40 hover:text-white'}`}>
+                        {t === 'text' ? '⊺ Text' : '⊞ Image'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {col.type === 'image' ? (
+                  <div className="space-y-2">
+                    <input type="text" value={col.url || ''} onChange={e => updateBlock(block.id, { ...block.content, [side]: { ...col, url: e.target.value } })} placeholder="Image URL" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
+                    <input type="text" value={col.caption || ''} onChange={e => updateBlock(block.id, { ...block.content, [side]: { ...col, caption: e.target.value } })} placeholder="Caption (optional)" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
+                    {col.url && <img src={col.url} alt="" className="max-h-32 object-contain mx-auto rounded-lg border border-white/10" />}
+                  </div>
+                ) : (
+                  <RichTextEditor
+                    key={block.id + '_' + side}
+                    value={col.text || ''}
+                    onChange={html => updateBlock(block.id, { ...block.content, [side]: { ...col, text: html } })}
+                    placeholder={`Write ${side} column content…`}
+                    minHeight="120px"
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
       );
       case 'cta': return (
         <div className="grid grid-cols-2 gap-4">
