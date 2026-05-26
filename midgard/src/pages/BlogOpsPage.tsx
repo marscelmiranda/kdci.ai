@@ -7,7 +7,8 @@ import {
   Image as ImageIcon, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Save, X, User, Check,
   ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2,
-  Quote, AppWindow, Minus, Activity, Loader2, AlertCircle, Users, UserCircle2
+  Quote, AppWindow, Minus, Activity, Loader2, AlertCircle, Users, UserCircle2,
+  Eye, Sparkles, Calendar
 } from 'lucide-react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
 
@@ -41,6 +42,43 @@ const BLOCK_TYPES: { type: BlockType; label: string; icon: React.ReactNode }[] =
   { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
 ];
 
+const renderPreviewBlocks = (blocks: Block[]) =>
+  blocks.map((block, i) => {
+    switch (block.type) {
+      case 'rich_text':
+        return <div key={i} className="rte-content" dangerouslySetInnerHTML={{ __html: block.content?.text || '' }} />;
+      case 'html':
+        return <div key={i} dangerouslySetInnerHTML={{ __html: block.content?.code || '' }} />;
+      case 'image':
+        return block.content?.url ? (
+          <div key={i} className="my-8">
+            <img src={block.content.url} alt={block.content.caption || ''} className="w-full rounded-3xl object-cover" />
+            {block.content.caption && <p className="text-center text-sm text-slate-400 mt-3">{block.content.caption}</p>}
+          </div>
+        ) : null;
+      case 'pull_quote':
+        return (
+          <div key={i} className="my-12 border-l-4 border-[#E61739] pl-10 py-4 relative">
+            <Quote size={60} className="absolute -top-6 -left-6 text-slate-100 opacity-80 -z-10" />
+            <p className="text-2xl font-bold text-slate-900 leading-tight">{block.content?.quote || ''}</p>
+          </div>
+        );
+      case 'cta':
+        return (
+          <div key={i} className="my-10 bg-[#1D1D1F] rounded-[2rem] p-10 text-center">
+            <h3 className="text-2xl font-bold text-white mb-4">{block.content?.headline || ''}</h3>
+            {block.content?.buttonText && (
+              <button type="button" className="px-8 py-3 bg-[#E61739] text-white rounded-xl font-bold">{block.content.buttonText}</button>
+            )}
+          </div>
+        );
+      case 'divider':
+        return <hr key={i} className="my-10 border-slate-100" />;
+      default:
+        return null;
+    }
+  });
+
 const emptyForm = () => ({
   title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', status: 'draft',
   blocks: [] as Block[],
@@ -49,7 +87,7 @@ const emptyForm = () => ({
 });
 
 export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [viewState, setViewState] = useState<'list' | 'editor'>('list');
+  const [viewState, setViewState] = useState<'list' | 'editor' | 'preview'>('list');
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -344,6 +382,113 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
         )}
 
+        {viewState === 'preview' && (
+          <div className="flex-grow flex flex-col min-h-screen overflow-y-auto bg-white">
+            {/* Preview banner */}
+            <div className="sticky top-0 z-50 bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center gap-4 shrink-0">
+              <button type="button" onClick={() => setViewState('editor')}
+                className="flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-900 transition-colors shrink-0">
+                <ChevronLeft size={14} /> Back to Editor
+              </button>
+              <div className="flex-1 text-center">
+                <span className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-amber-700">
+                  <Eye size={11} /> Preview Mode — this is how your article will appear when published
+                </span>
+              </div>
+              <span className={`shrink-0 text-[10px] font-black uppercase tracking-widest border px-2.5 py-1 rounded-full ${formData.status === 'published' ? 'text-green-600 bg-green-50 border-green-200' : 'text-white/50 bg-slate-800 border-slate-700'}`}>
+                {formData.status}
+              </span>
+            </div>
+
+            {/* Hero */}
+            <section className="relative bg-[#020202] pt-24 pb-20 overflow-hidden shrink-0">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -translate-y-1/2" />
+                <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-[#E61739]/8 rounded-full blur-[100px] -translate-y-1/2" />
+              </div>
+              <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="max-w-4xl mx-auto">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E61739]/10 text-[#E61739] text-[11px] font-black uppercase tracking-widest mb-8 border border-[#E61739]/30">
+                    <Sparkles size={12} /> {formData.category || 'Uncategorised'}
+                  </div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
+                    {formData.title || <span className="opacity-30 italic">Untitled article</span>}
+                  </h1>
+                  <div className="flex flex-wrap items-center gap-6 border-t border-white/10 pt-8 text-white/50 text-xs font-bold uppercase tracking-[0.15em]">
+                    {formData.author && (
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-[#E61739]/20 border border-[#E61739]/30 flex items-center justify-center text-[#E61739] font-black text-sm">
+                          {formData.author.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="text-white">{formData.author}</div>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2">
+                      <Calendar size={13} className="text-[#E61739]" />
+                      {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Cover image */}
+            {formData.imageUrl && (
+              <section className="relative -mt-12 z-20 px-6 shrink-0">
+                <div className="max-w-5xl mx-auto">
+                  <div className="relative rounded-[3rem] overflow-hidden shadow-[0_48px_100px_-20px_rgba(0,0,0,0.3)] bg-black">
+                    <img src={formData.imageUrl} alt={formData.title}
+                      className="w-full h-full object-cover aspect-[16/9] opacity-85" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Content + sidebar */}
+            <section className="bg-white flex-grow">
+              <div className="max-w-7xl mx-auto px-6 py-20">
+                {formData.blocks.length === 0 ? (
+                  <div className="text-center py-20 text-slate-300">
+                    <Eye size={36} className="mx-auto mb-4 opacity-40" />
+                    <p className="text-base font-medium">No content blocks yet. Add blocks in the Content tab to see them here.</p>
+                  </div>
+                ) : (
+                  <div className="grid lg:grid-cols-12 gap-16">
+                    {/* Article body */}
+                    <div className="lg:col-span-8 max-w-3xl">
+                      <div className="text-lg text-slate-600 leading-loose space-y-6">
+                        {renderPreviewBlocks(formData.blocks)}
+                      </div>
+                      {formData.tags && (
+                        <div className="mt-16 pt-10 border-t border-slate-100 flex flex-wrap gap-2">
+                          {formData.tags.split(',').map(t => t.trim()).filter(Boolean).map((tag, i) => (
+                            <span key={i} className="px-4 py-1.5 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-400">{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {/* Sidebar */}
+                    <div className="lg:col-span-4">
+                      <div className="sticky top-24 space-y-6">
+                        <div className="p-8 rounded-[3rem] bg-[#1D1D1F] text-white shadow-2xl">
+                          <h4 className="text-xl font-bold mb-3">Optimize Your Intelligence Layer.</h4>
+                          <p className="text-white/50 text-sm mb-8 leading-relaxed font-medium">Ready to build an AGI-ready operation? Talk to our architects today.</p>
+                          <div className="w-full py-4 bg-[#E61739] rounded-2xl font-bold text-center text-sm">Consult an Architect →</div>
+                        </div>
+                        <div className="p-6 rounded-[2rem] bg-amber-50 border border-amber-100">
+                          <p className="text-[11px] font-black uppercase tracking-widest text-amber-600 mb-1">Preview only</p>
+                          <p className="text-xs text-amber-700 font-medium leading-relaxed">The sidebar CTA and related articles will appear here on the live site.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+
         {viewState === 'editor' && (
           <form onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen">
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
@@ -361,6 +506,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               </div>
               <div className="flex items-center gap-3">
                 {error && <span className="text-red-400 text-xs font-bold">{error}</span>}
+                <button type="button" onClick={() => setViewState('preview')}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white/70 hover:text-white rounded-lg font-bold text-sm transition-all">
+                  <Eye size={15} /> Preview
+                </button>
                 <select value={formData.status} onChange={e => setFormData(p => ({ ...p, status: e.target.value }))}
                   className="bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#E61739]">
                   <option value="draft">Draft</option>
