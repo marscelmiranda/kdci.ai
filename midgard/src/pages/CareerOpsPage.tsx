@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { RichTextEditor } from '../components/RichTextEditor';
-import { getAllJobs, createJob, updateJob, deleteJob, getMe, getAllManpowerRequests, assignManpowerRequest, unassignManpowerRequest, publishManpowerRequest } from '../lib/api';
+import { getAllJobs, createJob, updateJob, deleteJob, getMe, getAllManpowerRequests, assignManpowerRequest, unassignManpowerRequest, publishManpowerRequest, updateManpowerRequest } from '../lib/api';
 import {
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, BookMarked,
   Image as ImageIcon, Search, Plus, LogOut, Settings,
@@ -95,6 +95,7 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
   const [pendingError, setPendingError]         = useState<string | null>(null);
   const [pendingActionId, setPendingActionId]   = useState<number | null>(null);
   const [pendingSuccess, setPendingSuccess]     = useState<string | null>(null);
+  const [recruiterFilter, setRecruiterFilter]   = useState('');
 
   const [analyticsMetric, setAnalyticsMetric] = useState<'published' | 'filled' | 'archived' | 'fillRate' | 'timeToFill' | 'timeToClose'>('published');
   const [analyticsFilter, setAnalyticsFilter] = useState<'week' | 'month' | 'quarter' | 'year' | 'custom'>('month');
@@ -112,7 +113,7 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
   const totalApplicants = jobs.reduce((sum, j) => sum + j.applicants, 0);
 
   const [formData, setFormData] = useState({
-    title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft'
+    title: '', department: 'AI Consulting', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft'
   });
 
   useEffect(() => {
@@ -129,6 +130,18 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
       .catch(err => setApiError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleMetricUpdate = async (id: number, field: 'applicants_total' | 'applicants_processed', value: number) => {
+    setPendingRequests(prev => prev.map(r => r.id === id ? { ...r, [field]: value } : r));
+    try {
+      const req = pendingRequests.find(r => r.id === id);
+      if (!req) return;
+      await updateManpowerRequest(id, {
+        applicants_total: field === 'applicants_total' ? value : (req.applicants_total ?? 0),
+        applicants_processed: field === 'applicants_processed' ? value : (req.applicants_processed ?? 0),
+      });
+    } catch {}
+  };
 
   const fetchPendingRequests = () => {
     setPendingLoading(true);
@@ -161,7 +174,7 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
 
   const handleCreateNew = () => {
     setEditingId(null);
-    setFormData({ title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft' });
+    setFormData({ title: '', department: 'AI Consulting', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft' });
     setViewState('editor');
   };
 
@@ -362,11 +375,12 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
                 </div>
                 <select value={deptFilter} onChange={(e) => setDeptFilter(e.target.value)} className="bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]">
                   <option value="All">All Departments</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="AI & Data">AI & Data</option>
-                  <option value="Creative">Creative</option>
-                  <option value="CX & Support">CX & Support</option>
-                  <option value="Operations">Operations</option>
+                  <option value="AI Consulting">AI Consulting</option>
+                  <option value="AI Creatives">AI Creatives</option>
+                  <option value="AI CX & Support">AI CX &amp; Support</option>
+                  <option value="AI Marketing & Lead Gen">AI Marketing &amp; Lead Gen</option>
+                  <option value="AI Workforce">AI Workforce</option>
+                  <option value="Internal">Internal</option>
                 </select>
                 <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]">
                   <option value="All">All Statuses</option>
@@ -669,7 +683,7 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Department</label>
                     <select value={formData.department} onChange={e => setFormData({ ...formData, department: e.target.value })} className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-bold appearance-none">
-                      <option>Engineering</option><option>AI & Data</option><option>Creative</option><option>CX & Support</option><option>Operations</option><option>Sales</option><option>Corporate</option>
+                      <option>AI Consulting</option><option>AI Creatives</option><option>AI CX &amp; Support</option><option>AI Marketing &amp; Lead Gen</option><option>AI Workforce</option><option>Internal</option>
                     </select>
                   </div>
                   <div className="space-y-2">
@@ -861,16 +875,40 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
         )}
 
         {/* PENDING REQUESTS VIEW */}
-        {viewState === 'pending-requests' && (
+        {viewState === 'pending-requests' && (() => {
+          const uniqueRecruiters = Array.from(new Set(
+            pendingRequests.filter(r => r.assigned_to_name).map(r => r.assigned_to_name)
+          )) as string[];
+          const filteredPending = recruiterFilter
+            ? pendingRequests.filter(r => r.assigned_to_name === recruiterFilter)
+            : pendingRequests;
+          const fmtDate = (s: string) => s ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+
+          return (
           <div>
-            <div className="flex items-center justify-between mb-8">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-xl font-heading font-bold text-white">Pending Job Requests</h2>
-                <p className="text-white/40 text-sm mt-1">Manpower requests submitted by managers and admins. Assign yourself and publish to the Careers page.</p>
+                <p className="text-white/40 text-sm mt-1">Assign yourself, track applicant metrics, and publish to Careers.</p>
               </div>
-              <button onClick={() => { fetchPendingRequests(); }} className="px-4 py-2 rounded-xl border border-white/10 text-xs font-bold text-white/50 hover:text-white hover:bg-white/5 transition-all flex items-center gap-2">
+              <button onClick={fetchPendingRequests} className="px-4 py-2 rounded-xl border border-white/10 text-xs font-bold text-white/50 hover:text-white hover:bg-white/5 transition-all flex items-center gap-2">
                 <Activity size={14} /> Refresh
               </button>
+            </div>
+
+            {/* Filters */}
+            <div className="flex items-center gap-3 mb-6">
+              <select
+                value={recruiterFilter}
+                onChange={e => setRecruiterFilter(e.target.value)}
+                className="bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#E61739] min-w-[180px]"
+              >
+                <option value="">All Recruiters</option>
+                <option value="__unassigned__">Unassigned</option>
+                {uniqueRecruiters.map(r => <option key={r} value={r}>{r}</option>)}
+              </select>
+              <span className="text-white/20 text-xs font-bold">{filteredPending.length} request{filteredPending.length !== 1 ? 's' : ''}</span>
             </div>
 
             {pendingError && (
@@ -889,89 +927,123 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
               <div className="flex items-center justify-center py-24 text-white/40 font-bold text-sm gap-3">
                 <Loader2 size={20} className="animate-spin text-[#E61739]" /> Loading requests…
               </div>
-            ) : pendingRequests.length === 0 ? (
+            ) : filteredPending.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-28 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-5 text-white/20"><ClipboardList size={32} /></div>
                 <p className="text-white/40 font-bold text-lg mb-2">No pending requests</p>
-                <p className="text-white/20 text-sm">All manpower requests have been handled or none have been submitted yet.</p>
+                <p className="text-white/20 text-sm">{recruiterFilter ? 'No requests match this recruiter filter.' : 'All manpower requests have been handled.'}</p>
               </div>
             ) : (
               <div className="space-y-4">
-                {pendingRequests.map(req => {
+                {filteredPending.map(req => {
                   const isAssignedToMe = req.assigned_to_email === userEmail;
                   const badgeMap: Record<string, { label: string; cls: string }> = {
-                    pending:  { label: 'Pending',  cls: 'bg-amber-500/10  text-amber-400  border-amber-500/20'  },
-                    assigned: { label: 'Assigned', cls: 'bg-blue-500/10   text-blue-400   border-blue-500/20'   },
+                    pending:  { label: 'Pending',  cls: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
+                    assigned: { label: 'Assigned', cls: 'bg-blue-500/10  text-blue-400  border-blue-500/20'  },
                   };
                   const badge = badgeMap[req.status] ?? badgeMap.pending;
-                  const fmtDate = (s: string) => s ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+                  const total     = req.applicants_total     ?? 0;
+                  const processed = req.applicants_processed ?? 0;
+                  const closeRate = total > 0 ? Math.round((processed / total) * 100) : null;
 
                   return (
                     <div key={req.id} className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all">
                       <div className="flex items-start gap-6">
                         <div className="flex-grow min-w-0">
-                          {/* Badges + Title */}
+
+                          {/* Status / Dept / Type badges */}
                           <div className="flex items-center gap-3 mb-2 flex-wrap">
-                            <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${badge.cls}`}>
-                              {badge.label}
-                            </span>
-                            {req.department && (
-                              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">
-                                {req.department}
-                              </span>
-                            )}
-                            {req.employment_type && (
-                              <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">
-                                {req.employment_type}
-                              </span>
-                            )}
+                            <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${badge.cls}`}>{badge.label}</span>
+                            {req.department && <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">{req.department}</span>}
+                            {req.employment_type && <span className="text-[10px] font-black uppercase tracking-widest text-white/30 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">{req.employment_type}</span>}
                           </div>
+
+                          {/* Title */}
                           <h3 className="text-lg font-bold text-white mb-1">{req.title}</h3>
+
+                          {/* Meta row */}
                           <div className="flex items-center gap-4 text-xs text-white/30 flex-wrap mb-3">
                             {req.location && <span className="flex items-center gap-1"><MapPin size={11} />{req.location}</span>}
                             <span>Requested by <span className="text-white/50 font-bold">{req.requested_by_name || req.requested_by_email}</span></span>
                             <span>on {fmtDate(req.created_at)}</span>
                           </div>
 
-                          {/* Content preview */}
+                          {/* Description preview */}
                           {req.description && (
-                            <p className="text-sm text-white/30 line-clamp-2 mb-3">{req.description.replace(/<[^>]+>/g, '').slice(0, 160)}…</p>
+                            <p className="text-sm text-white/30 line-clamp-2 mb-3">{req.description.replace(/<[^>]+>/g, '').slice(0, 180)}…</p>
                           )}
 
                           {/* Notes */}
                           {req.notes && (
                             <div className="bg-amber-500/5 border border-amber-500/15 rounded-xl px-4 py-3 text-xs text-amber-300/70 italic mb-3">
-                              <span className="font-black uppercase tracking-widest not-italic text-amber-400/60 mr-2">Note:</span>
-                              {req.notes}
+                              <span className="font-black uppercase tracking-widest not-italic text-amber-400/60 mr-2">Note:</span>{req.notes}
                             </div>
                           )}
 
-                          {/* Assigned to */}
-                          {req.assigned_to_name && (
-                            <div className="flex items-center gap-2 text-xs text-blue-400">
-                              <UserCheck size={13} />
-                              <span>Assigned to <strong>{req.assigned_to_name}</strong>{isAssignedToMe && <span className="ml-1 text-white/30">(you)</span>}</span>
+                          {/* Recruiter + Applicant Metrics row */}
+                          <div className="mt-4 pt-4 border-t border-white/5 flex flex-wrap items-center gap-6">
+
+                            {/* Recruiter */}
+                            <div className="flex items-center gap-2">
+                              <UserCheck size={14} className={req.assigned_to_name ? 'text-blue-400' : 'text-white/20'} />
+                              <div>
+                                <div className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-0.5">Recruiter</div>
+                                <div className={`text-xs font-bold ${req.assigned_to_name ? 'text-blue-400' : 'text-white/20 italic'}`}>
+                                  {req.assigned_to_name
+                                    ? <>{req.assigned_to_name}{isAssignedToMe && <span className="ml-1 text-white/30 font-normal">(you)</span>}</>
+                                    : 'Unassigned'}
+                                </div>
+                              </div>
                             </div>
-                          )}
+
+                            {/* Applicants Metric */}
+                            <div className="flex items-center gap-3">
+                              <div>
+                                <div className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">Applicants Processed / Total</div>
+                                <div className="flex items-center gap-2">
+                                  <input
+                                    type="number" min="0"
+                                    value={processed}
+                                    onChange={e => handleMetricUpdate(req.id, 'applicants_processed', parseInt(e.target.value) || 0)}
+                                    className="w-14 px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-xs font-bold text-white text-center focus:outline-none focus:border-[#E61739] transition-all"
+                                    title="Applicants processed"
+                                  />
+                                  <span className="text-white/30 text-xs font-bold">/</span>
+                                  <input
+                                    type="number" min="0"
+                                    value={total}
+                                    onChange={e => handleMetricUpdate(req.id, 'applicants_total', parseInt(e.target.value) || 0)}
+                                    className="w-14 px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-xs font-bold text-white text-center focus:outline-none focus:border-[#E61739] transition-all"
+                                    title="Total potential applicants"
+                                  />
+                                  {closeRate !== null && (
+                                    <div className="flex items-center gap-1.5 ml-1">
+                                      <div className="w-20 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                        <div className="h-full bg-[#E61739] rounded-full transition-all" style={{ width: `${Math.min(closeRate, 100)}%` }} />
+                                      </div>
+                                      <span className="text-[10px] font-black text-[#E61739]">{closeRate}%</span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
                         </div>
 
                         {/* Actions */}
-                        <div className="flex flex-col gap-2 shrink-0 min-w-[140px]">
+                        <div className="flex flex-col gap-2 shrink-0 min-w-[148px]">
                           {req.status === 'pending' && (
                             <button
                               disabled={pendingActionId === req.id}
                               onClick={async () => {
-                                setPendingActionId(req.id);
-                                setPendingError(null);
+                                setPendingActionId(req.id); setPendingError(null);
                                 try {
                                   const updated = await assignManpowerRequest(req.id, { assigned_to_email: userEmail, assigned_to_name: userName });
                                   setPendingRequests(prev => prev.map(r => r.id === req.id ? updated : r));
                                   setPendingSuccess(`You've been assigned to "${req.title}".`);
-                                } catch (err: any) {
-                                  setPendingError(err.message);
-                                } finally {
-                                  setPendingActionId(null);
-                                }
+                                } catch (err: any) { setPendingError(err.message); }
+                                finally { setPendingActionId(null); }
                               }}
                               className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                             >
@@ -986,19 +1058,15 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
                                 disabled={pendingActionId === req.id}
                                 onClick={async () => {
                                   if (!confirm(`Publish "${req.title}" to the Careers page? This will create a live job posting.`)) return;
-                                  setPendingActionId(req.id);
-                                  setPendingError(null);
+                                  setPendingActionId(req.id); setPendingError(null);
                                   try {
                                     await publishManpowerRequest(req.id);
                                     setPendingRequests(prev => prev.filter(r => r.id !== req.id));
-                                    setJobs(prev => { setLoading(true); return prev; });
+                                    setLoading(true);
                                     (getAllJobs() as Promise<any[]>).then(rows => setJobs(rows.map(dbToJob))).finally(() => setLoading(false));
                                     setPendingSuccess(`"${req.title}" has been published to the Careers page.`);
-                                  } catch (err: any) {
-                                    setPendingError(err.message);
-                                  } finally {
-                                    setPendingActionId(null);
-                                  }
+                                  } catch (err: any) { setPendingError(err.message); }
+                                  finally { setPendingActionId(null); }
                                 }}
                                 className="px-4 py-2.5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                               >
@@ -1012,11 +1080,8 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
                                   try {
                                     const updated = await unassignManpowerRequest(req.id);
                                     setPendingRequests(prev => prev.map(r => r.id === req.id ? updated : r));
-                                  } catch (err: any) {
-                                    setPendingError(err.message);
-                                  } finally {
-                                    setPendingActionId(null);
-                                  }
+                                  } catch (err: any) { setPendingError(err.message); }
+                                  finally { setPendingActionId(null); }
                                 }}
                                 className="px-4 py-2.5 border border-white/10 text-white/40 hover:text-white hover:bg-white/5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                               >
@@ -1036,11 +1101,8 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
                                   setPendingRequests(prev => prev.filter(r => r.id !== req.id));
                                   (getAllJobs() as Promise<any[]>).then(rows => setJobs(rows.map(dbToJob)));
                                   setPendingSuccess(`"${req.title}" has been published.`);
-                                } catch (err: any) {
-                                  setPendingError(err.message);
-                                } finally {
-                                  setPendingActionId(null);
-                                }
+                                } catch (err: any) { setPendingError(err.message); }
+                                finally { setPendingActionId(null); }
                               }}
                               className="px-4 py-2.5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                             >
@@ -1056,7 +1118,8 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
               </div>
             )}
           </div>
-        )}
+          );
+        })()}
       </main>
     </div>
   );

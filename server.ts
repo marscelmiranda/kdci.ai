@@ -52,6 +52,9 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
       status VARCHAR(20) DEFAULT 'active'
     )
   `).catch(() => {});
+  // Manpower requests — add metric columns if missing
+  await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_total INTEGER DEFAULT 0`).catch(() => {});
+  await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_processed INTEGER DEFAULT 0`).catch(() => {});
   // Manpower requests table
   await pool.query(`
     CREATE TABLE IF NOT EXISTS manpower_requests (
@@ -616,6 +619,18 @@ app.put('/api/manpower-requests/:id/publish', requireAuth, async (req, res) => {
       [jobRows[0].id, req.params.id]
     );
     res.json({ manpower_request: { ...r, status: 'published', job_listing_id: jobRows[0].id }, job_listing: jobRows[0] });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/manpower-requests/:id', requireAuth, async (req, res) => {
+  const { applicants_total, applicants_processed } = req.body;
+  try {
+    const { rows } = await pool.query(
+      `UPDATE manpower_requests SET applicants_total=$1, applicants_processed=$2, updated_at=NOW() WHERE id=$3 RETURNING *`,
+      [applicants_total ?? 0, applicants_processed ?? 0, req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
+    res.json(rows[0]);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 

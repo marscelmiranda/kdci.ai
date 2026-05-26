@@ -40,7 +40,7 @@ const STATUS_BADGE: Record<string, { label: string; classes: string }> = {
   published: { label: 'Published', classes: 'bg-green-500/10  text-green-400  border-green-500/20'  },
 };
 
-const DEPARTMENTS = ['Engineering','AI & Data','CX & Support','Creative','Marketing','HR & Talent','Finance','Operations','Legal','Product'];
+const DEPARTMENTS = ['AI Consulting','AI Creatives','AI CX & Support','AI Marketing & Lead Gen','AI Workforce','Internal'];
 const EMP_TYPES   = ['Full-Time','Part-Time','Contract','Freelance','Internship'];
 
 export const ManpowerRequestsPage = ({
@@ -62,7 +62,7 @@ export const ManpowerRequestsPage = ({
 
   const [form, setForm] = useState({
     title: '',
-    department: 'Engineering',
+    department: 'AI Consulting',
     location: '',
     employment_type: 'Full-Time',
     description: '',
@@ -351,48 +351,48 @@ export const ManpowerRequestsPage = ({
               </h2>
 
               <div className="space-y-2">
-                <label className="text-[11px] font-black uppercase tracking-widest text-white/40">Job Title <span className="text-[#E61739]">*</span></label>
+                <label className="text-[11px] font-black uppercase tracking-widest text-white/60">Job Title <span className="text-[#E61739]">*</span></label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Senior Software Engineer"
                   value={form.title}
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-                  className="w-full px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-xl text-sm font-bold text-white placeholder:text-white/20 focus:outline-none focus:border-[#E61739] transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-bold text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739] transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <label className="text-[11px] font-black uppercase tracking-widest text-white/40">Department</label>
+                  <label className="text-[11px] font-black uppercase tracking-widest text-white/60">Department</label>
                   <select
                     value={form.department}
                     onChange={e => setForm(f => ({ ...f, department: e.target.value }))}
-                    className="w-full px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-xl text-sm font-bold text-white focus:outline-none focus:border-[#E61739] transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-bold text-white focus:outline-none focus:border-[#E61739] transition-all"
                   >
-                    {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
+                    {DEPARTMENTS.map(d => <option key={d} value={d} className="bg-[#1a1a1a]">{d}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] font-black uppercase tracking-widest text-white/40">Employment Type</label>
+                  <label className="text-[11px] font-black uppercase tracking-widest text-white/60">Employment Type</label>
                   <select
                     value={form.employment_type}
                     onChange={e => setForm(f => ({ ...f, employment_type: e.target.value }))}
-                    className="w-full px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-xl text-sm font-bold text-white focus:outline-none focus:border-[#E61739] transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-bold text-white focus:outline-none focus:border-[#E61739] transition-all"
                   >
-                    {EMP_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+                    {EMP_TYPES.map(t => <option key={t} value={t} className="bg-[#1a1a1a]">{t}</option>)}
                   </select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[11px] font-black uppercase tracking-widest text-white/40">Location</label>
+                <label className="text-[11px] font-black uppercase tracking-widest text-white/60">Location</label>
                 <input
                   type="text"
                   placeholder="e.g. Manila (Hybrid), Remote, Pasig City"
                   value={form.location}
                   onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
-                  className="w-full px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-xl text-sm font-bold text-white placeholder:text-white/20 focus:outline-none focus:border-[#E61739] transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-bold text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739] transition-all"
                 />
               </div>
             </div>
@@ -445,7 +445,7 @@ export const ManpowerRequestsPage = ({
                 placeholder="Any internal context, urgency, headcount justification, or recruiter guidance…"
                 value={form.notes}
                 onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
-                className="w-full px-4 py-3 bg-[#0f0f0f] border border-white/10 rounded-xl text-sm font-medium text-white placeholder:text-white/20 focus:outline-none focus:border-amber-500/50 transition-all resize-none"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-sm font-medium text-white placeholder:text-white/30 focus:outline-none focus:border-amber-500/50 transition-all resize-none"
               />
             </div>
 

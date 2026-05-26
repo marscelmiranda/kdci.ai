@@ -100,6 +100,8 @@ export const unassignManpowerRequest = (id: string | number)  =>
   request<any>(`/api/manpower-requests/${id}/unassign`, { method: 'PUT', body: JSON.stringify({}) });
 export const publishManpowerRequest = (id: string | number)   =>
   request<any>(`/api/manpower-requests/${id}/publish`,  { method: 'PUT', body: JSON.stringify({}) });
+export const updateManpowerRequest  = (id: string | number, data: any) =>
+  request<any>(`/api/manpower-requests/${id}`,          { method: 'PUT',    body: JSON.stringify(data) });
 export const deleteManpowerRequest  = (id: string | number)   =>
   request<any>(`/api/manpower-requests/${id}`,          { method: 'DELETE' });
 
