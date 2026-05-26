@@ -68,7 +68,10 @@ const renderPreviewBlocks = (blocks: Block[]) =>
           <div key={i} className="my-10 bg-[#1D1D1F] rounded-[2rem] p-10 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">{block.content?.headline || ''}</h3>
             {block.content?.buttonText && (
-              <button type="button" className="px-8 py-3 bg-[#E61739] text-white rounded-xl font-bold">{block.content.buttonText}</button>
+              <a href={block.content?.buttonUrl || '/contact'} target={block.content?.buttonUrl?.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
+                className="inline-block px-8 py-3 bg-[#E61739] text-white rounded-xl font-bold hover:bg-[#c51431] transition-colors">
+                {block.content.buttonText}
+              </a>
             )}
           </div>
         );
@@ -253,10 +256,17 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           <div className="space-y-3">
             <input type="text" value={block.content.headline || ''} onChange={e => updateBlock(block.id, { ...block.content, headline: e.target.value })} placeholder="CTA Headline" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
             <input type="text" value={block.content.buttonText || ''} onChange={e => updateBlock(block.id, { ...block.content, buttonText: e.target.value })} placeholder="Button Text" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
+            <div className="relative">
+              <input type="url" value={block.content.buttonUrl || ''} onChange={e => updateBlock(block.id, { ...block.content, buttonUrl: e.target.value })} placeholder="https://… (leave blank → /contact)" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none font-mono" />
+              {!block.content.buttonUrl && (
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-black uppercase tracking-widest text-white/25">default</span>
+              )}
+            </div>
           </div>
           <div className="p-4 bg-[#E61739]/10 border border-[#E61739]/20 rounded-xl flex flex-col items-center justify-center text-center">
             <h4 className="font-bold text-lg mb-3">{block.content.headline || 'Your Headline'}</h4>
             <button type="button" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold">{block.content.buttonText || 'Click Here'}</button>
+            <p className="text-[9px] font-mono text-white/30 mt-2 truncate max-w-full">{block.content.buttonUrl || '/contact'}</p>
           </div>
         </div>
       );

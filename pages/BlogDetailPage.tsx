@@ -64,7 +64,10 @@ const renderBlocks = (contentStr: string) => {
           <div key={i} className="my-10 bg-[#1D1D1F] rounded-[2rem] p-10 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">{block.content?.headline || ''}</h3>
             {block.content?.buttonText && (
-              <button className="px-8 py-3 bg-[#E61739] text-white rounded-xl font-bold">{block.content.buttonText}</button>
+              <a href={block.content?.buttonUrl || '/contact'} target={block.content?.buttonUrl?.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
+                className="inline-block px-8 py-3 bg-[#E61739] text-white rounded-xl font-bold hover:bg-[#c51431] transition-colors">
+                {block.content.buttonText}
+              </a>
             )}
           </div>
         );
