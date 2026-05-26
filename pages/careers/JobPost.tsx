@@ -3,7 +3,24 @@ import React from 'react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
 import { MapPin, Clock, BrainCircuit, Code, Upload, ArrowRight, CheckCircle2, Check, Zap, Target, Briefcase } from 'lucide-react';
+
 import { JobData } from './jobsData';
+
+const BENEFITS = [
+  'Annual Performance Evaluation',
+  'Company-sponsored Trainings',
+  'Convertible Vacation Leave',
+  'Holiday Pay',
+  'Maternity/Paternity Leave',
+  'Medical & Dental Plan',
+  'Monthly Food Party',
+  'Night Differential',
+  'Overtime Pay',
+  'Paid Emergency Leave',
+  'Paid Sick Leave',
+  'Performance-based Bonuses',
+  'Referral Incentive Program',
+];
 
 interface JobPostProps extends JobData {
   setView: (v: ViewType) => void;
@@ -108,6 +125,21 @@ export const JobPost = ({ setView, title, department, location, type, descriptio
                   </ul>
                 </div>
               </div>
+            </div>
+
+            {/* Benefits */}
+            <div className="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm">
+              <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                <CheckCircle2 className="text-[#E61739]" /> Benefits
+              </h2>
+              <ul className="space-y-4">
+                {BENEFITS.map((benefit, i) => (
+                  <li key={i} className="flex items-center gap-4">
+                    <CheckCircle2 size={18} className="text-[#E61739] shrink-0" />
+                    <span className="text-slate-600 font-medium">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 

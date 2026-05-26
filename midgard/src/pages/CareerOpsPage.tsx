@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
+import { RichTextEditor } from '../components/RichTextEditor';
 import { getAllJobs, createJob, updateJob, deleteJob } from '../lib/api';
 import {
   LayoutGrid, Briefcase, FileText, TrendingUp, BookOpen, BookMarked,
@@ -8,7 +9,7 @@ import {
   ChevronLeft, Edit2, Trash2, Eye, Save, Check, MapPin, Clock, Users, Zap, Sparkles,
   Calendar, ClipboardList, Activity, UserCheck, UserX, Linkedin, Mail, Link,
   MousePointerClick, MessageSquare, Bookmark, Archive, Layers, BarChart as BarChartIcon, Filter,
-  UserCircle2
+  UserCircle2, CheckCircle2, ArrowRight, Quote
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer
@@ -79,7 +80,7 @@ const dbToJob = (row: any): JobListing => ({
 } as any);
 
 export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [viewState, setViewState] = useState<'list' | 'editor' | 'applicants' | 'analytics'>('list');
+  const [viewState, setViewState] = useState<'list' | 'editor' | 'preview' | 'applicants' | 'analytics'>('list');
   const [jobs, setJobs] = useState<JobListing[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -103,7 +104,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
   const totalApplicants = jobs.reduce((sum, j) => sum + j.applicants, 0);
 
   const [formData, setFormData] = useState({
-    title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', requirements: '', status: 'Draft'
+    title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft'
   });
 
   useEffect(() => {
@@ -129,6 +130,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
       location: raw.location ?? job.location,
       type: raw.employment_type ?? job.type,
       description: raw.description ?? '',
+      responsibilities: raw.responsibilities ?? '',
       requirements: raw.requirements ?? '',
       status: job.status,
     });
@@ -137,7 +139,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
 
   const handleCreateNew = () => {
     setEditingId(null);
-    setFormData({ title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', requirements: '', status: 'Draft' });
+    setFormData({ title: '', department: 'Engineering', location: '', type: 'Full-Time', description: '', responsibilities: '', requirements: '', status: 'Draft' });
     setViewState('editor');
   };
 
@@ -152,6 +154,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
       location: formData.location,
       employment_type: formData.type,
       description: formData.description,
+      responsibilities: formData.responsibilities,
       requirements: formData.requirements,
       status: formData.status.toLowerCase(),
     };
@@ -651,16 +654,41 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
               </div>
 
               <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-8 md:p-10">
-                <h3 className="text-lg font-bold text-white mb-8 flex items-center gap-2"><FileText className="text-[#E61739]" size={20} /> Content & Specs</h3>
-                <div className="space-y-8">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Job Description</label>
-                    <textarea rows={6} value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} placeholder="Describe the role, responsibilities, and team culture..." className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] text-sm leading-relaxed"></textarea>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Requirements (Bulleted)</label>
-                    <textarea rows={6} value={formData.requirements} onChange={e => setFormData({ ...formData, requirements: e.target.value })} placeholder="- 3+ years of experience in..." className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] text-sm leading-relaxed font-mono"></textarea>
-                  </div>
+                <h3 className="text-lg font-bold text-white mb-8 flex items-center gap-2"><FileText className="text-[#E61739]" size={20} /> Job Overview</h3>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Job Overview</label>
+                  <RichTextEditor
+                    value={formData.description}
+                    onChange={html => setFormData({ ...formData, description: html })}
+                    placeholder="Describe the role, team culture, and what makes this opportunity exciting…"
+                    minHeight="160px"
+                  />
+                </div>
+              </div>
+
+              <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-8 md:p-10">
+                <h3 className="text-lg font-bold text-white mb-8 flex items-center gap-2"><ClipboardList className="text-[#E61739]" size={20} /> Key Responsibilities</h3>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Key Responsibilities</label>
+                  <RichTextEditor
+                    value={formData.responsibilities}
+                    onChange={html => setFormData({ ...formData, responsibilities: html })}
+                    placeholder="List the day-to-day responsibilities and key outcomes expected from this role…"
+                    minHeight="160px"
+                  />
+                </div>
+              </div>
+
+              <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-8 md:p-10">
+                <h3 className="text-lg font-bold text-white mb-8 flex items-center gap-2"><Check className="text-[#E61739]" size={20} /> Job Requirements</h3>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Job Requirements</label>
+                  <RichTextEditor
+                    value={formData.requirements}
+                    onChange={html => setFormData({ ...formData, requirements: html })}
+                    placeholder="Specify experience, skills, education, or certifications required for this role…"
+                    minHeight="160px"
+                  />
                 </div>
               </div>
 
@@ -678,12 +706,110 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                 </div>
                 <div className="flex gap-4">
                   <button type="button" onClick={() => setViewState('list')} className="px-6 py-3 rounded-xl border border-white/10 text-white/60 font-bold text-sm hover:text-white hover:bg-white/5 transition-all">Cancel</button>
+                  <button type="button" onClick={() => setViewState('preview')} className="px-6 py-3 rounded-xl border border-white/10 text-white/60 font-bold text-sm hover:text-white hover:bg-white/5 transition-all flex items-center gap-2">
+                    <Eye size={16} /> Preview
+                  </button>
                   <button type="submit" disabled={saving} className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] disabled:opacity-60 text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2">
                     {saving ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving…</> : <><Save size={16} /> Save Job Post</>}
                   </button>
                 </div>
               </div>
             </form>
+          </div>
+        )}
+
+        {/* PREVIEW VIEW */}
+        {viewState === 'preview' && (
+          <div>
+            {/* Amber preview banner */}
+            <div className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 bg-amber-500 text-black text-sm font-black rounded-2xl mb-8 shadow-lg">
+              <div className="flex items-center gap-2">
+                <Eye size={16} />
+                Preview Mode — This is how the job post will appear publicly
+              </div>
+              <button type="button" onClick={() => setViewState('editor')} className="flex items-center gap-2 px-4 py-1.5 bg-black/10 hover:bg-black/20 rounded-lg transition-all">
+                <ChevronLeft size={14} /> Back to Editor
+              </button>
+            </div>
+
+            {/* Simulated public layout */}
+            <div className="bg-[#F5F5F7] rounded-[2rem] overflow-hidden">
+              {/* Dark hero */}
+              <div className="bg-[#020202] px-10 pt-12 pb-10">
+                <div className="flex items-center gap-2 mb-4">
+                  <Briefcase size={14} className="text-[#E61739]" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/40">{formData.department}</span>
+                </div>
+                <h1 className="text-4xl font-heading font-bold text-white mb-6 leading-tight">
+                  {formData.title.split(' ').slice(0, -2).join(' ')}{' '}
+                  <span className="text-[#E61739]">{formData.title.split(' ').slice(-2).join(' ') || formData.title}</span>
+                </h1>
+                <div className="flex flex-wrap gap-4 text-sm font-bold text-white/50">
+                  {formData.location && <span className="flex items-center gap-2"><MapPin size={14} className="text-[#E61739]" />{formData.location}</span>}
+                  {formData.type && <span className="flex items-center gap-2"><Clock size={14} className="text-[#E61739]" />{formData.type}</span>}
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-10 grid lg:grid-cols-3 gap-10">
+                <div className="lg:col-span-2 space-y-6">
+                  <div className="bg-white rounded-[2rem] p-10 border border-slate-200 shadow-sm">
+                    {formData.description && (
+                      <div className="mb-10">
+                        <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                          <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block" />Job Overview
+                        </h3>
+                        <div className="rte-content text-slate-600" dangerouslySetInnerHTML={{ __html: formData.description }} />
+                      </div>
+                    )}
+                    {formData.responsibilities && (
+                      <div className="mb-10">
+                        <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                          <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block" />Key Responsibilities
+                        </h3>
+                        <div className="rte-content text-slate-600" dangerouslySetInnerHTML={{ __html: formData.responsibilities }} />
+                      </div>
+                    )}
+                    {formData.requirements && (
+                      <div className="mb-10">
+                        <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                          <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block" />Job Requirements
+                        </h3>
+                        <div className="rte-content text-slate-600" dangerouslySetInnerHTML={{ __html: formData.requirements }} />
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block" />Benefits
+                      </h3>
+                      <ul className="space-y-3">
+                        {['Annual Performance Evaluation','Company-sponsored Trainings','Convertible Vacation Leave','Holiday Pay','Maternity/Paternity Leave','Medical & Dental Plan','Monthly Food Party','Night Differential','Overtime Pay','Paid Emergency Leave','Paid Sick Leave','Performance-based Bonuses','Referral Incentive Program'].map(b => (
+                          <li key={b} className="flex items-center gap-3 text-slate-600">
+                            <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
+                            <span className="font-medium">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-6">
+                  <div className="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm">
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Role Details</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-3"><Briefcase size={15} className="text-[#E61739] mt-0.5" /><div><p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Department</p><p className="text-sm font-bold text-slate-900">{formData.department}</p></div></div>
+                      <div className="flex items-start gap-3"><MapPin size={15} className="text-[#E61739] mt-0.5" /><div><p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Location</p><p className="text-sm font-bold text-slate-900">{formData.location || '—'}</p></div></div>
+                      <div className="flex items-start gap-3"><Clock size={15} className="text-[#E61739] mt-0.5" /><div><p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Employment Type</p><p className="text-sm font-bold text-slate-900">{formData.type}</p></div></div>
+                    </div>
+                  </div>
+                  <div className="bg-[#020202] rounded-[2rem] p-8 border border-white/5 text-center">
+                    <h3 className="text-xl font-bold text-white mb-3">Ready to Apply?</h3>
+                    <p className="text-white/50 text-sm mb-6 leading-relaxed">Join the top 1% of global talent driving the future of intelligent operations.</p>
+                    <div className="w-full px-6 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm flex items-center justify-center gap-2">Apply Now <ArrowRight size={16} /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </main>

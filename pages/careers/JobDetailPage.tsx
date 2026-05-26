@@ -25,10 +25,39 @@ interface ApiJob {
   created_at: string;
 }
 
+const BENEFITS = [
+  'Annual Performance Evaluation',
+  'Company-sponsored Trainings',
+  'Convertible Vacation Leave',
+  'Holiday Pay',
+  'Maternity/Paternity Leave',
+  'Medical & Dental Plan',
+  'Monthly Food Party',
+  'Night Differential',
+  'Overtime Pay',
+  'Paid Emergency Leave',
+  'Paid Sick Leave',
+  'Performance-based Bonuses',
+  'Referral Incentive Program',
+];
+
+const isHtml = (s: string) => s.trimStart().startsWith('<');
+
 const parseLines = (text: string): string[] =>
   text.split('\n').map(l => l.replace(/^[-•*]\s*/, '').trim()).filter(Boolean);
 
 const Section = ({ title, content }: { title: string; content: string }) => {
+  if (isHtml(content)) {
+    return (
+      <div className="mb-10">
+        <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
+          {title}
+        </h3>
+        <div className="rte-content text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
+    );
+  }
   const lines = parseLines(content);
   const isBullet = lines.length > 1 || content.trim().startsWith('-') || content.trim().startsWith('•');
   return (
@@ -163,9 +192,25 @@ export const JobDetailPage = ({
         {/* Main Content */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-[2rem] p-10 border border-slate-200 shadow-sm">
-            {job.description && <Section title="About the Role" content={job.description} />}
+            {job.description && <Section title="Job Overview" content={job.description} />}
             {job.responsibilities && <Section title="Key Responsibilities" content={job.responsibilities} />}
-            {job.requirements && <Section title="Requirements" content={job.requirements} />}
+            {job.requirements && <Section title="Job Requirements" content={job.requirements} />}
+
+            {/* Benefits — always shown */}
+            <div className="mb-2">
+              <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
+                Benefits
+              </h3>
+              <ul className="space-y-3">
+                {BENEFITS.map(benefit => (
+                  <li key={benefit} className="flex items-center gap-3 text-slate-600 leading-relaxed">
+                    <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
+                    <span className="font-medium">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
