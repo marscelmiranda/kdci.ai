@@ -782,14 +782,23 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                       <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block" />Benefits
                       </h3>
-                      <ul className="space-y-3">
-                        {['Annual Performance Evaluation','Company-sponsored Trainings','Convertible Vacation Leave','Holiday Pay','Maternity/Paternity Leave','Medical & Dental Plan','Monthly Food Party','Night Differential','Overtime Pay','Paid Emergency Leave','Paid Sick Leave','Performance-based Bonuses','Referral Incentive Program'].map(b => (
-                          <li key={b} className="flex items-center gap-3 text-slate-600">
-                            <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
-                            <span className="font-medium">{b}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {(() => {
+                        const benefits = ['Annual Performance Evaluation','Company-sponsored Trainings','Convertible Vacation Leave','Holiday Pay','Maternity/Paternity Leave','Medical & Dental Plan','Monthly Food Party','Night Differential','Overtime Pay','Paid Emergency Leave','Paid Sick Leave','Performance-based Bonuses','Referral Incentive Program'];
+                        return (
+                          <div className="grid grid-cols-2 gap-x-8">
+                            {[benefits.slice(0, 7), benefits.slice(7)].map((col, ci) => (
+                              <ul key={ci} className="space-y-3">
+                                {col.map(b => (
+                                  <li key={b} className="flex items-center gap-3 text-slate-600">
+                                    <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
+                                    <span className="font-medium">{b}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            ))}
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 </div>

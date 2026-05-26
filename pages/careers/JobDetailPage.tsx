@@ -202,14 +202,18 @@ export const JobDetailPage = ({
                 <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
                 Benefits
               </h3>
-              <ul className="space-y-3">
-                {BENEFITS.map(benefit => (
-                  <li key={benefit} className="flex items-center gap-3 text-slate-600 leading-relaxed">
-                    <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
-                    <span className="font-medium">{benefit}</span>
-                  </li>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                {[BENEFITS.slice(0, 7), BENEFITS.slice(7)].map((col, ci) => (
+                  <ul key={ci} className="space-y-3">
+                    {col.map(benefit => (
+                      <li key={benefit} className="flex items-center gap-3 text-slate-600 leading-relaxed">
+                        <CheckCircle2 size={16} className="text-[#E61739] shrink-0" />
+                        <span className="font-medium">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
