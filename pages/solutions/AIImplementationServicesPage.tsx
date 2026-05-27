@@ -145,7 +145,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
                 AI Consulting and Implementation Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                From AI consulting to long-term monitoring, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks.
+                Our AI consulting and strategy services identify opportunities for AI integration and deployment, mapping a clear path to ROI.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
@@ -155,7 +155,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Custom agent design, build, and integration with your existing tools</span>
+                  <span className="leading-snug">Custom agent design, build, and integration within 6 weeks</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
@@ -220,9 +220,9 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
             {[
-              "You've bought AI tools that went nowhere.",
-              "Your team doesn't know where to start.",
-              "Vendors sell software. Nobody manages the outcome.",
+              "You hired an AI vendor. Six months later, nothing's changed.",
+              "Your competitors are moving faster, but you're stuck in the planning stage.",
+              "You've got data, tools, and budget. But no one owns the results.",
             ].map((pain, i) => (
               <div key={i} className="px-8 py-8 md:py-4 md:first:pl-0 md:last:pr-0 text-left">
                 <p className="text-xl md:text-2xl font-black text-[#1D1D1F] leading-snug">{pain}</p>
