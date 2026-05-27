@@ -385,13 +385,13 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.25em] mb-4">How We Build Teams</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Elite Experts,<br />Not Just <span className="text-[#E61739]">Labor.</span></h2>
               <p className="text-xl text-slate-500 font-medium leading-relaxed mb-8">
-                When building your team with KDCI, every member is screened and hand-picked to seamlessly integrate into your organization — possessing not just the necessary experience, but the qualities that make them the best fit for your culture.
+                When building your team with KDCI, every KDCI team member is hand-picked to fit your culture and hit the ground running.
               </p>
               <div className="space-y-6">
                 {[
-                  { icon: UserCog, title: "Skills & Domain Match", desc: "Every role is filled by a specialist with verified domain expertise, not generalists handed a script." },
-                  { icon: ZapBolt, title: "Cultural Compatibility", desc: "Our screening process evaluates communication style, values alignment, and team fit alongside technical ability." },
-                  { icon: LifeBuoy, title: "Ongoing Development", desc: "Continuous training keeps our teams current with the latest tools, AI technologies, and industry best practices." },
+                  { icon: UserCog, title: "Skills & Domain Match", desc: "Specialists, not generalists. Every role is matched to verified domain experts with real agentic AI workflow experience." },
+                  { icon: ZapBolt, title: "Cultural Compatibility", desc: "Our screening evaluates communication style, values alignment, and team fit alongside technical ability, making sure your offshore AI team integrates like an internal hire." },
+                  { icon: LifeBuoy, title: "Ongoing Development", desc: "Our teams undergo continuous training to keep up with the latest AI tools, agentic technologies, and industry best practices." },
                 ].map((feat, idx) => (
                   <div key={idx} className="flex gap-4 group">
                     <div className="w-10 h-10 shrink-0 bg-white rounded-xl flex items-center justify-center text-[#E61739] border border-slate-200 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
