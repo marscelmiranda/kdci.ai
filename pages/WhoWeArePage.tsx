@@ -428,7 +428,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               Your AI Solutions Partner,<br /><span className="text-shine-red">Not Just a Vendor.</span>
             </h2>
             <p className="text-xl md:text-2xl text-white/60 mb-4 font-medium leading-relaxed">
-              Reduce operational costs by up to 70% while gaining access to top-tier offshore talent — now powered by AI.
+              KDCI delivers end-to-end AI solutions — agentic workflows, AI-trained operators, and intelligent automation — deployed as one managed system, at up to 70% less than in-house.
             </p>
             <p className="text-white/30 text-sm font-medium mb-12 uppercase tracking-widest">Trusted Since 2011 · 50+ Global Clients · 300+ Team Members</p>
             <button
