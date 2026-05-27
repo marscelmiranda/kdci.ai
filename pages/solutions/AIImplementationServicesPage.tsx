@@ -13,37 +13,37 @@ const SERVICES = [
   {
     icon: Target,
     title: 'AI Readiness Audit',
-    desc: 'We assess every department — ops, support, sales, finance — and map where AI solutions creates the highest-impact opportunities. Delivered as a structured report with a prioritized implementation roadmap.',
+    desc: 'Before recommending any technology, we assess your every department and identify where AI implementation creates the highest return. Receive a structured report and a prioritized AI roadmap tailored to your business, not a generic template.',
   },
   {
     icon: Cpu,
     title: 'Custom AI Stack Recommendation & Vendor Selection',
-    desc: 'We recommend the right platforms, models, and tools for your specific use case — without vendor bias. You get a complete stack design with rationale, cost estimates, and integration requirements.',
+    desc: 'Our AI strategy consulting is completely vendor-neutral. We recommend the right platforms, models, and tools for your specific use case — with full rationale, cost projections, and integration requirements. No upsells. No bias.',
   },
   {
     icon: BrainCircuit,
     title: 'Agent Design, Prompt Engineering & Build',
-    desc: 'Skip out on trial and error. We\'ll handle prompt engineering, model selection, testing, QA, and AI agent deployment. Handed over fully-documented and production-ready.',
+    desc: 'Skip the trial and error. Our specialists handle prompt engineering, model selection, QA, and full deployment. Get delivered agents that are production-ready and fully documented from handoff.',
   },
   {
     icon: Workflow,
     title: 'Multi-Platform Integration & Setup',
-    desc: 'Connect and plug your new AI agents into your CRM, helpdesk, ERP, and data sources so outcomes flow into your existing systems from day one.',
+    desc: 'We connect your AI agents directly into your CRM, helpdesk, ERP, and data infrastructure so intelligent automation flows into your existing systems from day one — no rip-and-replace required.',
   },
   {
     icon: GraduationCap,
     title: 'Team Training & Change Management',
-    desc: 'We run hands-on training sessions for every team that will interact with the new AI system, and deliver a runbook so your team can operate independently from day one.',
+    desc: 'Successful AI adoption isn\'t just technical — it\'s organizational. We run hands-on training for every team interacting with your new AI system and deliver a runbook so your people can operate independently.',
   },
   {
     icon: ShieldCheck,
     title: '30-Day Post-Launch Monitoring Handoff',
-    desc: 'We run 30 days of live monitoring before hand off, covering fixing edge cases, retraining on real data, and locking in a performance baseline before converting to a monitoring retainer.',
+    desc: 'Our AI consulting engagement doesn\'t end at go-live. We run 30 days of live monitoring, resolving edge cases, retraining on real-world data, and locking in a performance baseline before transitioning to a long-term monitoring retainer.',
   },
 ];
 
 const STEPS = [
-  { n: '01', period: 'Week 1',    title: 'Discovery',  desc: 'Audit current operations, map AI opportunities department by department, and agree on success metrics.' },
+  { n: '01', period: 'Week 1',    title: 'Discovery',  desc: 'We audit your current operations, map AI opportunities, and align on the KPIs that will define success for your AI transformation.' },
   { n: '02', period: 'Week 2',    title: 'Design',     desc: 'Select platforms, architect the agent stack, and finalize the integration plan with your existing tools.' },
   { n: '03', period: 'Week 3–4',  title: 'Build',      desc: 'Prompt engineering, agent configuration, integration setup, and full QA testing before go-live.' },
   { n: '04', period: 'Week 5',    title: 'Deploy',     desc: 'Go live with team training, runbook handoff, and a structured launch process managed by our team.' },
