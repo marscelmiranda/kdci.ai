@@ -447,7 +447,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
               Tool-Agnostic AI Consulting.<br /><span className="text-[#E61739]">Built Around Your Stack.</span>
             </h2>
-            <p className="text-white/40 font-medium max-w-2xl text-[17px]">KDCI.ai is tool-agnostic. We don't lock you into proprietary software. Rather, we build on the leading AI platforms and customize them around your workflows.</p>
+            <p className="text-white/40 font-medium max-w-2xl text-[17px]">Our work is built on AI platforms and customized tools and systems you already rely on, so your AI transformation extends your existing investment rather than replaces it.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {TOOLS.map((tool, i) => (
