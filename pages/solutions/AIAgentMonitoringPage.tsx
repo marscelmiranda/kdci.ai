@@ -20,32 +20,32 @@ const DELIVERABLES = [
   {
     icon: Activity,
     title: 'Daily Performance Monitoring',
-    desc: 'We track response accuracy, debug hallucinations, and latency spikes across your entire AI stack.',
+    desc: 'We track response accuracy, debug hallucinations, and flag latency spikes across your entire AI stack — giving you a real-time view of LLM observability metrics that matter.',
   },
   {
     icon: RefreshCw,
     title: 'Prompt Retraining on Drift',
-    desc: 'Detect and respond to deviations in AI agent behavior—wrong answers, off-script responses, degrading quality—before it impacts your customers.',
+    desc: 'We detect behavioral drift — wrong answers, off-script responses, degrading output quality — and retrain affected prompts automatically before it reaches your customers.',
   },
   {
     icon: AlertCircle,
     title: 'Escalation Path Design & Management',
-    desc: 'We design and manage the human handoff layer so the right issues reach the right people, every time. No missed escalations, no frustrated customers.',
+    desc: 'We design and manage the human handoff layer so the right issues reach the right people. No missed escalations. No frustrated customers falling through a gap in your agentic trust controls.',
   },
   {
     icon: Settings,
     title: 'Integration Health Checks',
-    desc: 'Conduct regular checks across your CRM, helpdesk, and API connections to sync failures, broken webhooks, and stale data, and get these issues fixed before cascade.',
+    desc: 'Regular audits across your CRM, helpdesk, and API connections to surface sync failures, broken webhooks, and stale data — caught and fixed before they cascade into larger AI system failures.',
   },
   {
     icon: BarChart3,
     title: 'Monthly Scorecard & Recommendations',
-    desc: 'Score your ai agent\'s monthly performance. Benchmarks, trends, improvements, recommendations, and next actions—get a full performance report every month.',
+    desc: 'A full AI performance report every month: benchmarks, behavioral trends, governance checkpoints, and a prioritized action plan for Month 2 — so you always know where your agents stand.',
   },
   {
     icon: Users,
     title: 'Dedicated AI Ops Specialist',
-    desc: 'Your AI agents create dense outputs that make debugging hard by yourself, so we have a dedicated AI Ops Specialist onboard to help give you clear visibility into every step of what your agent is doing.',
+    desc: 'AI agents produce dense, opaque outputs that make debugging hard alone. Your dedicated specialist provides the human layer of AI system transparency — clear visibility into every decision your agent makes.',
   },
 ];
 
@@ -246,7 +246,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
               AI Agent Observability <br/><span className="text-[#E61739] text-[48px]">that Actually Catches Issues</span>
             </h2>
-            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six core deliverables that guarantee your AI agents are working.</p>
+            <p className="text-white/50 text-lg font-medium mt-4 max-w-2xl">Six core deliverables that give you complete visibility into every AI agent across your stack — with the governance layer to act on what you find.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-5">
             {DELIVERABLES.map((s, i) => (
