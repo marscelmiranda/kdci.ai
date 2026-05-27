@@ -255,7 +255,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Full-service creative design, branding, and content production.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">AI-Enabled. Human-Guided.<br />Built for Brand Consistency.</h2>
             <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">Everything your brand needs to look exceptional — produced at high volume by our AI-powered design team. Our AI graphic design services cover every visual touchpoint, from brand identity to performance ad creative.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
