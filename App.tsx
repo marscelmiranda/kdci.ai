@@ -167,13 +167,17 @@ function pathToView(pathname: string): ViewType | null {
 }
 // ────────────────────────────────────────────────────────────────────────────
 
-const BLOG_SLUG_RE = /^\/blogs\/([^/]+)\/?$/;
+const BLOG_SLUG_RE        = /^\/blogs\/([^/]+)\/?$/;
+const CASE_STUDY_SLUG_RE  = /^\/case-studies\/([^/]+)\/?$/;
+const EBOOK_SLUG_RE       = /^\/ebooks\/([^/]+)\/?$/;
 
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType>(() => {
     const view = pathToView(window.location.pathname);
     if (view) return view;
-    if (BLOG_SLUG_RE.test(window.location.pathname)) return 'blog-detail';
+    if (BLOG_SLUG_RE.test(window.location.pathname))       return 'blog-detail';
+    if (CASE_STUDY_SLUG_RE.test(window.location.pathname)) return 'case-study-detail';
+    if (EBOOK_SLUG_RE.test(window.location.pathname))      return 'ebook-detail';
     return 'not-found';
   });
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
@@ -183,7 +187,15 @@ const App = () => {
     return m ? m[1] : null;
   });
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
+  const [selectedCaseStudySlug, setSelectedCaseStudySlug] = useState<string | null>(() => {
+    const m = window.location.pathname.match(CASE_STUDY_SLUG_RE);
+    return m ? m[1] : null;
+  });
   const [selectedEbookId, setSelectedEbookId] = useState<number | null>(null);
+  const [selectedEbookSlug, setSelectedEbookSlug] = useState<string | null>(() => {
+    const m = window.location.pathname.match(EBOOK_SLUG_RE);
+    return m ? m[1] : null;
+  });
 
   // Navigate: update both React state and browser URL
   const setView = useCallback((view: ViewType) => {
@@ -199,8 +211,12 @@ const App = () => {
     const onPop = () => {
       const view = pathToView(window.location.pathname);
       if (view) { setActiveView(view); return; }
-      const m = window.location.pathname.match(BLOG_SLUG_RE);
-      if (m) { setSelectedBlogSlug(m[1]); setActiveView('blog-detail'); return; }
+      const bm = window.location.pathname.match(BLOG_SLUG_RE);
+      if (bm) { setSelectedBlogSlug(bm[1]); setActiveView('blog-detail'); return; }
+      const cm = window.location.pathname.match(CASE_STUDY_SLUG_RE);
+      if (cm) { setSelectedCaseStudySlug(cm[1]); setActiveView('case-study-detail'); return; }
+      const em = window.location.pathname.match(EBOOK_SLUG_RE);
+      if (em) { setSelectedEbookSlug(em[1]); setActiveView('ebook-detail'); return; }
       setActiveView('not-found');
     };
     window.addEventListener('popstate', onPop);
@@ -321,19 +337,37 @@ const App = () => {
         {activeView === 'case-studies' && (
           <CaseStudiesPage
             setView={setView}
-            onStudyClick={(id) => { setSelectedCaseStudyId(id); setView('case-study-detail'); }}
+            onStudyClick={(id, slug) => {
+              setSelectedCaseStudyId(id);
+              setSelectedCaseStudySlug(slug || null);
+              if (slug) {
+                window.history.pushState({ view: 'case-study-detail', slug }, '', `/case-studies/${slug}/`);
+                setActiveView('case-study-detail');
+              } else {
+                setView('case-study-detail');
+              }
+            }}
           />
         )}
-        {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} studyId={selectedCaseStudyId} />}
+        {activeView === 'case-study-detail' && <CaseStudyDetailPage setView={setView} studyId={selectedCaseStudyId} studySlug={selectedCaseStudySlug} />}
         {activeView === 'guides' && <GuidesPage setView={setView} />}
         {activeView === 'webinars' && <WebinarsPage setView={setView} />}
         {activeView === 'ebooks' && (
           <EbooksPage
             setView={setView}
-            onSelectEbook={(id) => { setSelectedEbookId(id); setView('ebook-detail'); }}
+            onSelectEbook={(id, slug) => {
+              setSelectedEbookId(id);
+              setSelectedEbookSlug(slug || null);
+              if (slug) {
+                window.history.pushState({ view: 'ebook-detail', slug }, '', `/ebooks/${slug}/`);
+                setActiveView('ebook-detail');
+              } else {
+                setView('ebook-detail');
+              }
+            }}
           />
         )}
-        {activeView === 'ebook-detail' && <EbookDetailPage setView={setView} ebookId={selectedEbookId} />}
+        {activeView === 'ebook-detail' && <EbookDetailPage setView={setView} ebookId={selectedEbookId} ebookSlug={selectedEbookSlug} />}
         {activeView === 'faqs' && <FaqsPage setView={setView} />}
         {activeView === 'glossary' && <GlossaryPage setView={setView} />}
 

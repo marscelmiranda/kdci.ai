@@ -217,7 +217,7 @@ const BASE_INDUSTRIES = ['Financial Services', 'Logistics', 'Technology', 'Retai
 const SERVICES        = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Social Media', 'Back Office', 'AI Ops', 'Creative'];
 const CONTENT_TYPES   = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
-export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewType) => void; onStudyClick?: (id: string) => void }) => {
+export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewType) => void; onStudyClick?: (id: string, slug?: string) => void }) => {
   const { studies: cmsStudies } = useCaseStudies();
 
   const cmsCards = cmsStudies
@@ -453,7 +453,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
 
                     <button
                       onClick={() => {
-                        if (onStudyClick) onStudyClick(study.id.toString());
+                        if (onStudyClick) onStudyClick(study.id.toString(), study.slug);
                         else setView('case-study-detail');
                       }}
                       className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"

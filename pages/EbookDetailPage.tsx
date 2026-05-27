@@ -376,9 +376,11 @@ const AccessModal = ({
 export const EbookDetailPage = ({
   setView,
   ebookId,
+  ebookSlug,
 }: {
   setView: (v: ViewType) => void;
   ebookId: number | null;
+  ebookSlug?: string | null;
 }) => {
   const [ebook, setEbook] = useState<Ebook | null>(null);
   const [loading, setLoading] = useState(true);
@@ -388,17 +390,19 @@ export const EbookDetailPage = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!ebookId) { setError('Ebook not found.'); setLoading(false); return; }
+    if (!ebookId && !ebookSlug) { setError('Ebook not found.'); setLoading(false); return; }
     fetch('/api/ebooks')
       .then(r => r.json())
       .then((data: Ebook[]) => {
-        const found = data.find(e => e.id === ebookId);
+        const found = ebookSlug
+          ? data.find(e => e.slug === ebookSlug)
+          : data.find(e => e.id === ebookId);
         if (!found) throw new Error('This ebook could not be found.');
         setEbook(found);
       })
       .catch(e => setError(e.message))
       .finally(() => setLoading(false));
-  }, [ebookId]);
+  }, [ebookId, ebookSlug]);
 
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center">

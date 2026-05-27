@@ -438,12 +438,14 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
 };
 
 /* ─── Main export ─── */
-export const CaseStudyDetailPage = ({ setView, studyId }: { setView: (v: ViewType) => void; studyId?: string | null }) => {
+export const CaseStudyDetailPage = ({ setView, studyId, studySlug }: { setView: (v: ViewType) => void; studyId?: string | null; studySlug?: string | null }) => {
   const { studies } = useCaseStudies();
 
-  const cmsStudy = studyId?.startsWith('cms-')
-    ? studies.find(s => `cms-${s.id}` === studyId)
-    : null;
+  const cmsStudy = studySlug
+    ? studies.find(s => s.slug === studySlug)
+    : studyId?.startsWith('cms-')
+      ? studies.find(s => `cms-${s.id}` === studyId)
+      : null;
 
   if (cmsStudy) {
     return <CmsStudyDetail study={cmsStudy} setView={setView} />;

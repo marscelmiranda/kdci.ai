@@ -36,7 +36,7 @@ export const EbooksPage = ({
   onSelectEbook,
 }: {
   setView: (v: ViewType) => void;
-  onSelectEbook?: (id: number) => void;
+  onSelectEbook?: (id: number, slug?: string) => void;
 }) => {
   const [ebooks, setEbooks] = useState<ApiEbook[]>([]);
   const [loading, setLoading] = useState(true);
@@ -164,7 +164,7 @@ export const EbooksPage = ({
                 return (
                   <div
                     key={ebook.id}
-                    onClick={() => onSelectEbook ? onSelectEbook(ebook.id) : setView('contact')}
+                    onClick={() => onSelectEbook ? onSelectEbook(ebook.id, ebook.slug) : setView('contact')}
                     className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer"
                   >
                     {/* Thumbnail */}
