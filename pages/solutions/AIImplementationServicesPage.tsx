@@ -85,12 +85,12 @@ const PRICING = [
 ];
 
 const INDUSTRIES = [
-  { icon: Building2,    name: 'Professional Services', tag: 'Highest willingness to pay', desc: 'Clear ROI on implementation — consulting, accounting, and agency firms are fast-movers with strong budgets.' },
-  { icon: HeartPulse,  name: 'Healthcare & Telehealth', tag: 'Complex workflows', desc: 'Patient intake, scheduling, billing, and compliance workflows demand expert AI design — not off-the-shelf tools.' },
-  { icon: Scale,        name: 'Legal Services', tag: 'Trusted partner needed', desc: 'Risk-averse buyers who need a proven implementation partner — not a vendor. Document review, intake, and billing automation.' },
-  { icon: Truck,        name: 'Logistics', tag: 'Massive ops savings', desc: 'Exception handling agents — for dispatch, freight, and claims — deliver some of the highest measurable ROI of any vertical.' },
-  { icon: Landmark,     name: 'Financial Services', tag: 'Compliance-aware', desc: 'Compliance-aware AI implementation is rare and highly valued. KYC, fraud detection, and customer ops with full audit trails.' },
-  { icon: GraduationCap, name: 'Education', tag: 'Growing demand', desc: 'Enrollment automation and student support agent demand is growing fast across higher ed and online learning platforms.' },
+  { icon: Building2,    name: 'Professional Services', tag: 'Highest willingness to pay', desc: 'Consulting, accounting, and agency firms with strong implementation budgets and clear ROI benchmarks.' },
+  { icon: HeartPulse,  name: 'Healthcare & Telehealth', tag: 'Complex workflows', desc: 'Patient intake, scheduling, billing, and compliance workflows that demand purpose-built AI design — not off-the-shelf tools.' },
+  { icon: Scale,        name: 'Legal Services', tag: 'Trusted partner needed', desc: 'Document review, intake automation, and billing optimization for risk-averse buyers who need a trusted implementation partner.' },
+  { icon: Truck,        name: 'Logistics', tag: 'Massive ops savings', desc: 'Exception-handling agents for dispatch, freight, and claims processing — some of the highest measurable ROI of any vertical.' },
+  { icon: Landmark,     name: 'Financial Services', tag: 'Compliance-aware', desc: 'Compliance-aware AI consulting covering KYC, fraud detection, and customer operations with full audit trails.' },
+  { icon: GraduationCap, name: 'Education', tag: 'Growing demand', desc: 'Enrollment automation and student support agents for higher ed and online learning platforms scaling rapidly.' },
 ];
 
 const DEPARTMENTS = [
