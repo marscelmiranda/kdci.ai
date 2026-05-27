@@ -7,6 +7,7 @@ import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import IMG_OUTBOUND_HERO from '@/attached_assets/kdci-ai-outbound-demand-generation-team.webp';
 import CONTACT_IMG from '@/attached_assets/kdci-ai-demand-generation-outbound-specialists.webp';
+import IMG_LEAD_GEN_DASHBOARD from '@/attached_assets/ai-lead-gen-dashboard_1779920399111.webp';
 
 export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
@@ -300,7 +301,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
             <div className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5]">
-                <img src={CONTACT_IMG} alt="KDCI AI demand generation outbound specialists managing B2B lead generation" className="w-full h-full object-cover" />
+                <img src={IMG_LEAD_GEN_DASHBOARD} alt="KDCI AI demand generation outbound specialists managing B2B lead generation" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                 <div className="absolute bottom-10 left-8 right-8 p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/10">
                   <blockquote className="border-l-4 border-[#E61739] pl-5">
