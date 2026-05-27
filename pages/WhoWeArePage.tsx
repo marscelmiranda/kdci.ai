@@ -122,7 +122,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                 <Target size={12} /> Our Mission
               </div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-slate-900 mb-6 leading-tight">
-                To provide the best work through the continuous improvement of our people, process, and technology.
+                To provide the best work through combining intelligent outsourcing and AI-powered operations built for real business outcomes.
               </h2>
             </div>
 
@@ -185,7 +185,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
             </div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Human Expertise,<br /><span className="text-[#E61739]">Powered by AI.</span></h2>
             <p className="text-white/50 text-xl font-medium max-w-3xl mx-auto leading-relaxed">
-              KDCI enables brands to streamline operations with offshore experts powered by AI. Our teams don't just use AI tools — they're trained to operate alongside them, amplifying output and accuracy across every function.
+              KDCI enables brands to streamline operations with offshore experts delivering end-to-end AI solutions. Our teams are trained to operate alongside them, boosting output, accuracy, and results across every function.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
@@ -204,6 +204,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                 icon: Target,
                 title: "AI Outbound & Lead Generation",
                 desc: "A fully managed outbound engine: ICP research, Clay-enriched list building, AI-personalized sequences, LinkedIn outreach, and booked meetings — end to end.",
+
               },
               {
                 icon: UsersRound,
@@ -295,7 +296,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.25em] mb-4">Our Location</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-8 leading-tight">Global Roots,<br /><span className="text-[#E61739]">Philippine Excellence.</span></h2>
               <p className="text-xl text-slate-500 font-medium leading-relaxed mb-12">
-                KDCI.ai operates with a distributed mindset — strategy aligned to our clients, execution powered by a world-class AI operations team.
+                KDCI.ai operates with a distributed mindset–AI-powered operations from the Philippines, covering US, Europe, and beyond — zero gaps, full time zone coverage.
               </p>
               <div className="space-y-8">
                 <div className="flex gap-6 items-start">
