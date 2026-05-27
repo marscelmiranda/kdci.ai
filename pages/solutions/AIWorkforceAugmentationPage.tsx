@@ -129,21 +129,21 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
                 <span className="text-[#FFFFFF]">Top Filipino Talents.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Build an AI-ready team, ranging from prompt engineers, AI ops specialists, data analytics, and AI-enabled VAs at a fraction of US hiring costs.
+                Hire prompt engineers, AI ops specialists, data analysts, and AI-enabled virtual assistants from the Philippines — at a fraction of US hiring costs. Role live in 5–7 business days, fully managed by KDCI.ai.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Role onboarding within 5 to 7 business days</span>
+                  <span className="leading-snug">Role onboarding in 5–7 business days</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Proficient in AI tools such as Claude, Midjourney, Zapier, and more</span>
+                  <span className="leading-snug">Proficient in Claude, Midjourney, Zapier & more</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">HR, payroll, and compliance fully managed by KDCI.ai</span>
+                  <span className="leading-snug">HR, payroll & compliance fully managed</span>
                 </div>
               </div>
 
@@ -211,18 +211,18 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
               Autonomous workforce productive from day one.
             </h2>
             <p className="text-white/40 text-lg font-medium max-w-3xl mx-auto leading-relaxed">
-              Dedicated specialists from the Philippines trained on AI tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.
+              Dedicated specialists from the Philippines, trained on intelligent workflows, enterprise AI tools, and the accountability frameworks that power high-performing distributed teams.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Users2,       title: "Dedicated Team Member", desc: "Full-time or part-time — one specialist embedded in your workflow, available on your schedule, aligned to your tools and processes." },
-              { icon: BrainCircuit, title: "Pre-Trained on Today's AI Stack", desc: "Every AI-ready hire comes fluent in Claude, GPT-4o, Midjourney, Zapier, and other enterprise AI tools." },
-              { icon: Zap,          title: "Live in 5–7 Business Days", desc: "Fully managed onboarding, live in under two weeks. Intelligent candidate matching…" },
-              { icon: ClipboardCheck, title: "HR, Payroll & Compliance Managed", desc: "KDCI.ai handles all employment administration — payroll, statutory benefits, Philippine labor compliance, and HR documentation." },
-              { icon: BarChart3,    title: "Monthly KPI Reviews", desc: "Monthly performance reviews with structured KPI tracking. You see what's working, what's not, and how to scale." },
-              { icon: RefreshCw,    title: "2-Week Replacement Guarantee", desc: "If a placement doesn't work out for any reason, we find and onboard a replacement within two weeks at zero additional cost." },
+              { icon: Users2,       title: "Your dedicated AI staffing hire", desc: "Full-time or part-time — one specialist embedded in your workflow, aligned to your tools, schedule, and processes." },
+              { icon: BrainCircuit, title: "Pre-Trained on Today's AI Stack", desc: "Every AI staff hire comes fluent in Claude, GPT-4o, Midjourney, Zapier, and other enterprise automation tools." },
+              { icon: Zap,          title: "AI talent, live in 5–7 business days", desc: "Fully managed onboarding with intelligent candidate matching. Your specialist is productive in under two weeks." },
+              { icon: ClipboardCheck, title: "Zero admin. HR fully managed.", desc: "KDCI.ai handles payroll, statutory benefits, Philippine labor compliance, and all HR documentation end-to-end." },
+              { icon: BarChart3,    title: "Monthly KPI Reviews", desc: "Structured performance tracking every month. You see what's working, what's not, and where to scale your remote workforce." },
+              { icon: RefreshCw,    title: "2-week replacement guarantee", desc: "Wrong fit? We find and onboard a replacement AI staffing specialist within two weeks — at zero additional cost." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
@@ -296,7 +296,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
               Your AI-Skilled Hire, <span className="text-[#E61739]">Live in 5–7 Days</span><span className="text-[#1D1D1F]">.</span>
             </h2>
             <p className="text-slate-500 text-lg font-medium max-w-3xl leading-relaxed mt-6 text-left">
-              We've got a proven onboarding framework that places future-ready talent inside your workflow, so they go from role brief to productive from day-one fast.
+              A proven workforce onboarding framework that places AI-trained talent inside your workflow fast — from role brief to fully productive, with no guesswork.
             </p>
           </div>
           <div className="relative">
@@ -419,9 +419,9 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Vertical Specialization. AI-Ready Workforce.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI staffing and professional services built for your industry.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our AI-trained specialists understand your industry's unique demands, covering 20+ verticals with pre-built role playbooks and tool configurations.
+              Our AI-trained specialists understand your vertical's unique demands — covering 20+ industries with pre-built role playbooks and tool configurations.
             </p>
           </div>
 
@@ -622,7 +622,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
                 </div>
               ) : (
                 <form onSubmit={handleForm} className="space-y-4">
-                  <h3 className="text-lg font-black text-white mb-6">Send us your role brief</h3>
+                  <h3 className="text-lg font-black text-white mb-6">Ready to build your AI-ready team?</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
