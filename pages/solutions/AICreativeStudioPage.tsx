@@ -339,7 +339,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
       <section id="cp-portfolio" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">Creative Design Services Built for High-Growth Brands</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-4">AI Graphic Design Services<br />Built for High-Growth Brands</h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto">Our AI-powered graphic design studio specialises in six industries where visual content volume, brand consistency, and fast turnaround matter most.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -446,7 +446,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Who We Serve</div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">Creative Design Services Built for High-Growth Brands</h2>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-4">AI Graphic Design Services<br />Built for High-Growth Brands</h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Our AI-powered graphic design studio specialises in six industries where visual content volume, brand consistency, and fast turnaround matter most.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
