@@ -44,10 +44,10 @@ const SERVICES = [
 
 const STEPS = [
   { n: '01', period: 'Week 1',    title: 'Discovery',  desc: 'We audit your current operations, map AI opportunities, and align on the KPIs that will define success for your AI transformation.' },
-  { n: '02', period: 'Week 2',    title: 'Design',     desc: 'Select platforms, architect the agent stack, and finalize the integration plan with your existing tools.' },
-  { n: '03', period: 'Week 3–4',  title: 'Build',      desc: 'Prompt engineering, agent configuration, integration setup, and full QA testing before go-live.' },
-  { n: '04', period: 'Week 5',    title: 'Deploy',     desc: 'Go live with team training, runbook handoff, and a structured launch process managed by our team.' },
-  { n: '05', period: 'Week 6',    title: 'Monitor',    desc: '30-day post-launch review — real-world retraining, edge case resolution, and performance baseline set.' },
+  { n: '02', period: 'Week 2',    title: 'Design',     desc: 'We select platforms, architect your agent stack, and finalize an integration plan that fits your existing tools.' },
+  { n: '03', period: 'Week 3–4',  title: 'Build',      desc: 'Prompt engineering, agent configuration, integration setup, and rigorous QA testing. Nothing goes live until it performs.' },
+  { n: '04', period: 'Week 5',    title: 'Deploy',     desc: 'Go live with structured team training, runbook handoff, and a managed launch process, so your organization adopts the system with confidence.' },
+  { n: '05', period: 'Week 6',    title: 'Monitor',    desc: '30 days of performance monitoring: retraining on live data, resolving edge cases, and establishing a performance baseline your business can rely on.' },
   { n: '06', period: 'Month 2+',  title: 'Convert',    desc: 'Transition to an AI Observability and Governance retainer — continuous oversight, prompt optimization, and monthly reporting.' },
 ];
 
