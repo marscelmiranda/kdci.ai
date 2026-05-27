@@ -425,7 +425,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
           </div>
           <div className="relative z-10 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">
-              Scale with a <br /><span className="text-shine-red">Partner, Not a BPO.</span>
+              Your AI Solutions Partner,<br /><span className="text-shine-red">Not Just a Vendor.</span>
             </h2>
             <p className="text-xl md:text-2xl text-white/60 mb-4 font-medium leading-relaxed">
               Reduce operational costs by up to 70% while gaining access to top-tier offshore talent — now powered by AI.
