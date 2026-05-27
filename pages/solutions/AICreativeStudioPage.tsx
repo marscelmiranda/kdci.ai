@@ -200,21 +200,21 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
                 AI-Enabled Creative Design Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Faster output, lower cost, premium quality. Our dedicated Manila team combines human design talent with AI production tools to create your assets at the speed and cost no traditional design agency can replicate.
+                Our dedicated design team pairs human creative talent with advanced AI production tools to deliver your brand assets faster and more affordably. Our AI graphic design services give high-growth brands an unfair production advantage.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">Full-service creative output from one creative design team</span>
+                  <span className="leading-snug">Full-service creative output from a single, embedded design team</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">On-brand AI generated collaterals consistent to your visual identity</span>
+                  <span className="leading-snug">On-brand, AI-assisted collateral consistent with your visual identity</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                  <span className="leading-snug">First design delivered within 2 weeks</span>
+                  <span className="leading-snug">First design batch delivered within 2 weeks of onboarding</span>
                 </div>
               </div>
 
