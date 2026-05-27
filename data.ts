@@ -161,7 +161,7 @@ export const TOP_SERVICES = [
     tag: 'Managed AI Ops',
     icon: Monitor,
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'Daily monitoring, prompt optimization, and human oversight for your AI agents — as a fully managed service.',
+    desc: 'We handle the full cycle management of your AI Agents: setup, deployment, monitoring and optimization, and catch errors before your customers do.',
     benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
   },
   {
@@ -170,7 +170,7 @@ export const TOP_SERVICES = [
     tag: 'AI Strategy & Build',
     icon: Cpu,
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
-    desc: 'End-to-end AI strategy, custom agent builds, and managed deployments with KPI-backed outcomes.',
+    desc: 'End-to-end AI strategy and deployment, from roadmap design to agentic workflow integration across your existing tech stack.',
     benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
   },
   { 
@@ -180,7 +180,7 @@ export const TOP_SERVICES = [
     icon: Activity,
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png',
     imagePosition: 'top',
-    desc: 'Modern support teams powered by AI workflows for faster, better customer experiences.',
+    desc: 'Intelligent customer service operations powered by AI Agents. Deliver faster resolution, smarter personalization, and always-on support.',
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
   { 
@@ -189,7 +189,7 @@ export const TOP_SERVICES = [
     tag: 'AI-Native Design',
     icon: Sparkles,
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'AI-native design and content production — faster output, lower cost, premium quality from our Manila creative team.',
+    desc: 'Branded content and design powered by AI. Produce at scale with human creative direction and quality control, at a cost no traditional design agency can replicate.',
     benefits: ['5-Day Turnaround', 'AI-Powered Output', 'Full Brand Consistency']
   },
   {
@@ -198,7 +198,7 @@ export const TOP_SERVICES = [
     tag: 'Pipeline on Demand',
     icon: TrendingUp,
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'We build and operate your entire outbound engine — ICP research, list building, AI-personalized sequences, and meeting booking.',
+    desc: 'Agentic demand generation pipelines that research, personalize, sequence, and qualify leads. Convert your inbound and outbound activities into predictable revenue!',
     benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
   },
   { 
@@ -207,7 +207,7 @@ export const TOP_SERVICES = [
     tag: 'Talent Sourcing',
     icon: Target,
     image: IMG_RECRUITMENT_HERO,
-    desc: 'Technology-first sourcing to find and vet the top 1% of global talent for your business.',
+    desc: 'Embed AI-trained specialists directly into your operations. Get intelligent managed talent that scales on demand.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
 ];
@@ -216,31 +216,31 @@ export const DIFFERENTIATORS = [
   {
     icon: Zap,
     title: "AI-Enhanced Workflows",
-    desc: "We deploy custom AI agents, agentic workflows, and autonomous process automation that triple your team's output."
+    desc: "Replace repetitive manual work with intelligent, self-operating systems. We deploy custom AI agents, agentic workflows, and autonomous process automation that triple your team's output."
   },
   {
     icon: Users,
-    title: "Elite Offshore Talent",
-    desc: "Access the top 1% pre-vetted talent — AI-trained and integrated into intelligent managed operations that work around the clock."
+    title: "AI-Ready Talent",
+    desc: "Access the top 1% of pre-vetted, AI-trained specialists integrated into intelligent managed operations that work around the clock without the overhead of traditional hiring."
   },
   {
     icon: Target,
     title: "Flexible Engagement",
-    desc: "Scale your managed AI operations up or down instantly. From outcome-based pricing to, dedicated pods, our models align with your ROI."
+    desc: "Scale your managed AI operations up or down instantly. From outcome-based pricing to dedicated agentic pods — every engagement model is aligned to your ROI, not our headcount."
   },
   {
     icon: ShieldCheck,
     title: "Enterprise Compliance",
-    desc: "Industrial-grade security, SOC-2 readiness, and GDPR compliance built into every layer of our managed AI operations."
+    desc: "SOC-2 readiness, GDPR compliance, and industrial-grade security are built into every layer of our AI service delivery. Scale without exposing your business to operational or regulatory risk."
   },
   {
     icon: Layers,
     title: "Proven Industry Depth",
-    desc: "Specialized benches with deep experience across SaaS, E-commerce, Real Estate, and Global Logistics."
+    desc: "Specialized benches with deep domain experience across SaaS, E-commerce, Real Estate, and Global Logistics — AI managed services team hits the ground running, not just learning."
   },
   {
     icon: RefreshCw,
     title: "Native Tool Integration",
-    desc: "Our managed AI services integrate natively into your existing tech stack ensuring your operations run as one unified, intelligent system."
+    desc: "Our AI integration services connect natively into your existing tech stack — CRM, ERP, support platforms, and more — so your AI-augmented operations run as one unified, intelligent system from day one."
   }
 ];

@@ -73,7 +73,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           <h1 className="text-5xl md:text-7xl lg:text-9xl font-heading font-bold leading-[1] mb-10 tracking-tight drop-shadow-2xl">
             <span className="text-shine-white">Your Operational</span> <br/><span className="text-shine-red">Intelligence Partner.</span>
           </h1>
-          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">We provide AI-managed services across CX, creative, demand generation, and workforce augmentation, purpose-built for 20+ industry verticals.</p>
+          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">KDCI.ai is an AI-managed services provider delivering custom agentic solutions across CX, creative, demand generation, and staff augmentation purpose-built for 20+ industry verticals.</p>
           <div className="flex flex-col items-center">
             <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
               See Our Solutions <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -107,8 +107,8 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
       <section className="pt-20 pb-32 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">Built for Measurable AI Outcomes. </h2>
-            <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Explore our managed AI services and see how each capability turns operational complexity into a scalable competitive edge.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">AI Managed Services Built for Measurable Outcomes</h2>
+            <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Explore our full suite of managed AI services and see how each capability is designed to turn operational complexity into a scalable competitive edge.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {TOP_SERVICES.map((s, i) => (
@@ -148,7 +148,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
             <div>
               <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">AI OPERATIONS ADVANTAGE</div>
               <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-8 leading-tight">Beyond traditional <br/><span className="text-[#E61739]">outsourcing.</span></h2>
-              <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most BPOs sell headcount. KDCI delivers managed AI operations. We combine elite Philippine talent with agentic AI workflows, and build AI-augmented teams that are 3x more efficient than traditional teams.</p>
+              <p className="text-xl text-[#86868b] font-medium leading-relaxed">Most service providers sell headcount. As an end-to-end AI managed services provider, KDCI delivers managed AI solutions, combining elite talent with agentic workflows to build teams that are 3× more efficient than traditional models.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="p-8 bg-white rounded-[20px] shadow-sm">
@@ -192,7 +192,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Client Success Stories</div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4 tracking-tight">Our Clients Love Working With Us.</h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-2xl mx-auto">Real stories from the businesses we've helped scale, streamline, and grow.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-2xl mx-auto">Real results from businesses that chose a smarter AI managed services partner to scale, streamline, and grow.</p>
           </div>
 
           {/* Main layout: big card + 2 side cards */}
@@ -293,7 +293,7 @@ export const HomePage = ({ setView }: { setView: (v: ViewType) => void }) => {
                     Start Scaling <br/><span className="text-shine-red">Smarter with KDCI.</span>
                   </h2>
                   <p className="text-xl md:text-2xl text-white/60 mb-14 font-medium leading-relaxed">
-                    Talk to our solutions architects today to build AI service strategy, combining agentic workflows and elite AI-trained operations talent.
+                    Talk to our solutions architect today to get solutions built around your growth goals. Design an AI service strategy that combines agentic workflows with elite AI-trained operations talent.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 justify-center">
                      <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
