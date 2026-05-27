@@ -50,7 +50,7 @@ const AdobePortfolioIcon = ({ size = 18, className = "" }: { size?: number, clas
 );
 
 const SERVICE_LINES = [
-  'AI Agent Monitoring',
+  'AI Observability and Governance',
   'AI Consulting & Implementation',
   'AI-Augmented Customer Experience',
   'AI Creative Studio',

@@ -141,13 +141,13 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs setView={setView} currentName="AI Agent Monitoring" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
+          <Breadcrumbs setView={setView} currentName="AI Observability and Governance" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
-                AI Agent Monitoring & Management
+                AI Observability and Governance
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and deployment management.
@@ -496,7 +496,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
-              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Agent Monitoring</p>
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Observability and Governance</p>
               <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
                 Ready to stop worrying<br />about your agents?
               </h3>
@@ -535,7 +535,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, service: 'AI Agent Monitoring', source: 'ai-agent-monitoring-page' }),
+                      body: JSON.stringify({ ...form, service: 'AI Observability and Governance', source: 'ai-agent-monitoring-page' }),
                     });
                   } catch {}
                   setSubmitted(true);
@@ -639,10 +639,10 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
       {showHeroModal && (
         <ServiceHeroModal
           config={{
-            tag: 'AI Agent Monitoring',
+            tag: 'AI Observability and Governance',
             title: 'Tell us about your AI agents.',
             subtitle: 'Free health check included. Response within 2 business hours.',
-            inquiryType: 'AI Agent Monitoring',
+            inquiryType: 'AI Observability and Governance',
             source: 'ai-agent-monitoring-hero',
             specificField: {
               label: 'Number of AI Agents',

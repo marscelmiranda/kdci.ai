@@ -197,7 +197,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               },
               {
                 icon: ShieldCheck,
-                title: "AI Agent Monitoring & Management",
+                title: "AI Observability and Governance",
                 desc: "Daily oversight of every AI agent you deploy. We catch drift, hallucinations, and integration failures before your customers do — with monthly performance scorecards.",
               },
               {

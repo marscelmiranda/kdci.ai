@@ -50,7 +50,7 @@ interface AccessForm {
 }
 
 const SERVICE_LINES = [
-  'AI Agent Monitoring',
+  'AI Observability and Governance',
   'AI Consulting & Implementation',
   'AI-Augmented Customer Experience',
   'AI Creative Studio',

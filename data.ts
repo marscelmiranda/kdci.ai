@@ -157,7 +157,7 @@ export const RESOURCES = [
 export const TOP_SERVICES = [
   {
     id: 'ai-agent-monitoring',
-    name: 'AI Agent Monitoring',
+    name: 'AI Observability and Governance',
     tag: 'Managed AI Ops',
     icon: Monitor,
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
