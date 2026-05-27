@@ -57,7 +57,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                 Trusted Offshore Partner Since 2011
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-[#ffffff]">Your Trusted </span>
+                <span className="text-[#ffffff]">Your Dedicated </span>
                 <span className="text-[#e61739]">AI Operations Partner.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed">

@@ -55,7 +55,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
   // ── Services ──────────────────────────────────────────────────────────
   'solutions-hub': {
-    title: 'Your Trusted AI Operations Partner | KDCI.ai',
+    title: 'Your Dedicated AI Operations Partner | KDCI.ai',
     description: 'We offer a full suite of AI managed solutions designed to streamline operations, reduce risk, and drive measurable business outcomes.',
     canonical: `${BASE}/solutions/`,
   },
