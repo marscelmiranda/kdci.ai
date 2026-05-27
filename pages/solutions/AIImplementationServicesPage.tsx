@@ -407,7 +407,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              AI Consulting for Industries Where <span className="text-[#E61739]">Speed to ROI</span> Matters Most
+              AI Consulting for Industries<br /><span className="text-[#E61739]">Speed to ROI</span> Matters Most
             </h2>
             <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We work in verticals where AI implementation meets urgent,<br /> real-life business needs.</p>
           </div>
