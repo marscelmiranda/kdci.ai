@@ -256,16 +256,16 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">Full-service creative design, branding, and content production.</h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">High-output creative production managed by our AI-powered Manila design team at a fraction of traditional agency cost.</p>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">Everything your brand needs to look exceptional — produced at high volume by our AI-powered design team. Our AI graphic design services cover every visual touchpoint, from brand identity to performance ad creative.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Palette, title: "Brand Identity & Visual System", desc: "Logo, typography, colour system, and a full brand guide. Built from scratch or refreshed — consistent across every channel." },
-              { icon: Megaphone, title: "Social Media Content", desc: "On-brand and ready-to-publish social media graphics, carousels, and reels produced on a weekly content calendar." },
-              { icon: ShoppingCart, title: "Product & Catalog Design at Scale", desc: "High-volume product image editing, catalog layout design, and e-commerce visuals optimized for retail, DTC storefronts, Amazon, and marketplace listings." },
-              { icon: Video, title: "Ad Creative Design", desc: "Performance-driven ad creative across static display banners, animated graphics, and short-form video ads for Meta, TikTok, and Youtube." },
-              { icon: Presentation, title: "Pitch Decks & Presentations", desc: "Custom pitch deck designs crafted to communicate your value proposition clearly and close deals faster." },
-              { icon: ImageIcon, title: "AI-Generated Imagery", desc: "Brand-safe AI Image generation using Midjourney and Adobe Firefly, fully guided, with locked style prompts to on-brand outputs." },
+              { icon: Palette, title: "Brand Identity & Visual System", desc: "Logo, typography, color system, and a complete brand guide built from scratch or refreshed for consistency across every channel." },
+              { icon: Megaphone, title: "Social Media Content", desc: "On-brand graphics, carousels, and reels produced on a weekly content calendar. Scroll-stopping visual content, delivered consistently." },
+              { icon: ShoppingCart, title: "Product & Catalog Design", desc: "High-volume image editing and catalogue layouts for retail, DTC storefronts, Amazon, and marketplace listings. Automated design workflow." },
+              { icon: Video, title: "Ad Creative Design", desc: "Performance-driven static banners, animated graphics, and short-form video ads for Meta, TikTok, and YouTube. Built for click-through." },
+              { icon: Presentation, title: "Pitch Decks & Presentations", desc: "Custom presentation design that communicates your value proposition clearly and moves investor and client deals forward." },
+              { icon: ImageIcon, title: "AI-Generated Imagery", desc: "Brand-safe AI image generation using Midjourney and Adobe Firefly, guided by our designers with locked style prompts for on-brand outputs." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
@@ -302,10 +302,10 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
               {[
                 { n: '01', period: 'Day 1–3',  title: 'Brand Discovery',  desc: 'Collect assets, brand voice, style preferences and existing guidelines.' },
                 { n: '02', period: 'Day 4–7',  title: 'Brand Guide',       desc: 'Create or audit your brand guide. Document colours, fonts, tone, and visual rules.' },
-                { n: '03', period: 'Week 2',   title: 'First Batch',       desc: 'First content delivered — feedback cycle begins. Revisions turned around in 48 hours.' },
-                { n: '04', period: 'Week 3',   title: 'Refine & Rhythm',   desc: 'Refine based on feedback. Establish the production rhythm and template systems.' },
-                { n: '05', period: 'Month 1',  title: 'Full Cadence Live', desc: 'Full production cadence live. Content calendar set and weekly delivery begins.' },
-                { n: '06', period: 'Ongoing',  title: 'Weekly Delivery',   desc: 'Weekly asset delivery. Monthly creative review and planning session with your team.' },
+                { n: '03', period: 'Week 2',   title: 'First Batch',       desc: 'First creative assets delivered. Feedback cycle begins. Revisions turned around within 48 hours.' },
+                { n: '04', period: 'Week 3',   title: 'Refine & Rhythm',   desc: 'Refine based on feedback. Lock in templates and creative systems for consistent, high-volume digital asset creation.' },
+                { n: '05', period: 'Month 1',  title: 'Full Cadence Live', desc: 'Full creative production is live. Content calendar set. Weekly delivery begins. Team operates as your design pod.' },
+                { n: '06', period: 'Ongoing',  title: 'Weekly Delivery',   desc: 'Weekly asset delivery. Monthly creative reviews keep your visual content strategy aligned to business goals.' },
               ].map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
                   <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
