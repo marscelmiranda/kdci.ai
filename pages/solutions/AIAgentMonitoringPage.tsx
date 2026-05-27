@@ -150,14 +150,14 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                 AI Observability and Governance
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                Catch AI issues before your customers do. Trace your every agent, from daily monitoring, prompt optimization, and deployment management.
+                We give your AI systems the continuous monitoring, audit trails, and governance controls they need to stay accurate, compliant, and trustworthy.
               </p>
 
               <div className="flex flex-col gap-4 mb-8 text-white/90 text-sm md:text-base font-medium">
                 {[
-                  'Daily performance monitoring across every AI agent',
-                  'Prompt retaining triggered automatically on drift detection',
-                  'With a dedicated AI Ops Specialist onboard every account',
+                  'Daily agent monitoring',
+                  'Drift detection and retraining',
+                  'Dedicated AI Ops Specialist',
                 ].map((pt, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
