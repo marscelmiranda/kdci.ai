@@ -167,12 +167,21 @@ function pathToView(pathname: string): ViewType | null {
 }
 // ────────────────────────────────────────────────────────────────────────────
 
+const BLOG_SLUG_RE = /^\/blogs\/([^/]+)\/?$/;
+
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType>(() => {
-    return pathToView(window.location.pathname) ?? 'not-found';
+    const view = pathToView(window.location.pathname);
+    if (view) return view;
+    if (BLOG_SLUG_RE.test(window.location.pathname)) return 'blog-detail';
+    return 'not-found';
   });
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
+  const [selectedBlogSlug, setSelectedBlogSlug] = useState<string | null>(() => {
+    const m = window.location.pathname.match(BLOG_SLUG_RE);
+    return m ? m[1] : null;
+  });
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
   const [selectedEbookId, setSelectedEbookId] = useState<number | null>(null);
 
@@ -189,7 +198,10 @@ const App = () => {
   useEffect(() => {
     const onPop = () => {
       const view = pathToView(window.location.pathname);
-      setActiveView(view ?? 'not-found');
+      if (view) { setActiveView(view); return; }
+      const m = window.location.pathname.match(BLOG_SLUG_RE);
+      if (m) { setSelectedBlogSlug(m[1]); setActiveView('blog-detail'); return; }
+      setActiveView('not-found');
     };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
@@ -291,10 +303,19 @@ const App = () => {
         {activeView === 'blog' && (
           <BlogsPage
             setView={setView}
-            onSelectBlog={(id) => { setSelectedBlogId(id); setView('blog-detail'); }}
+            onSelectBlog={(id, slug) => {
+              setSelectedBlogId(id);
+              setSelectedBlogSlug(slug || null);
+              if (slug) {
+                window.history.pushState({ view: 'blog-detail', slug }, '', `/blogs/${slug}/`);
+                setActiveView('blog-detail');
+              } else {
+                setView('blog-detail');
+              }
+            }}
           />
         )}
-        {activeView === 'blog-detail' && <BlogDetailPage setView={setView} blogId={selectedBlogId} />}
+        {activeView === 'blog-detail' && <BlogDetailPage setView={setView} blogId={selectedBlogId} blogSlug={selectedBlogSlug} />}
         
         {/* Resource Pages */}
         {activeView === 'case-studies' && (

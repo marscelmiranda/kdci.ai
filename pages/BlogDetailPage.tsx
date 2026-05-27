@@ -95,21 +95,23 @@ const renderBlocks = (contentStr: string) => {
   });
 };
 
-export const BlogDetailPage = ({ setView, blogId }: { setView: (v: ViewType) => void; blogId: number | null }) => {
+export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: ViewType) => void; blogId: number | null; blogSlug?: string | null }) => {
   const [post, setPost] = useState<LivePost | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const identifier = blogSlug || blogId;
+
   useEffect(() => {
-    if (!blogId) return;
+    if (!identifier) return;
     setLoading(true);
     setError(null);
-    fetch(`/api/blog/${blogId}`)
+    fetch(`/api/blog/${identifier}`)
       .then(r => r.ok ? r.json() : Promise.reject('Post not found'))
       .then(setPost)
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
-  }, [blogId]);
+  }, [identifier]);
 
   if (loading) {
     return (

@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../components/Shared';
 
 interface BlogCard {
   id: number | string;
+  slug?: string;
   title: string;
   excerpt: string;
   industry: string;
@@ -106,7 +107,7 @@ const INDUSTRIES    = ['All', 'Financial Services', 'Logistics', 'Technology', '
 const SERVICES      = ['All', 'Customer Support', 'Data Entry', 'Software Dev', 'Staff Aug', 'Back Office', 'AI Ops', 'Operations'];
 const CONTENT_TYPES = ['All', 'Blog', 'Case Study', 'Guide & Playbooks', 'Webinar', 'Ebook', 'FAQ', 'Glossary'];
 
-export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) => void; onSelectBlog?: (id: number | null) => void }) => {
+export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) => void; onSelectBlog?: (id: number | null, slug?: string) => void }) => {
   const [activeIndustry, setActiveIndustry]       = useState('All');
   const [activeService, setActiveService]         = useState('All');
   const [activeContentType, setActiveContentType] = useState('Blog');
@@ -130,6 +131,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
       .then((data: any[]) => {
         setLivePosts(data.map((p, i) => ({
           id: p.id,
+          slug: p.slug || '',
           title: p.title,
           excerpt: p.excerpt || '',
           industry: 'Technology',
@@ -137,7 +139,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
           contentType: 'Blog' as const,
           tags: ['AI Ops', 'Operations'],
           icon: BrainCircuit,
-          thumb: FALLBACK_THUMBS[i % FALLBACK_THUMBS.length],
+          thumb: p.cover_image || FALLBACK_THUMBS[i % FALLBACK_THUMBS.length],
           isLive: true,
           metrics: [
             { label: "Read Time", value: "5 min" },
@@ -270,7 +272,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
                 const Icon = card.icon;
                 return (
                   <div key={card.id}
-                    onClick={() => { if (card.isLive && onSelectBlog) onSelectBlog(Number(card.id)); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
+                    onClick={() => { if (card.isLive && onSelectBlog) onSelectBlog(Number(card.id), card.slug); else if (onSelectBlog) onSelectBlog(null); setView('blog-detail'); }}
                     className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
 
                     {/* Thumbnail */}
