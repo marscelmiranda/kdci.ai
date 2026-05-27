@@ -94,7 +94,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
                 <span className="text-white">AI-Powered Demand Generation</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                We build and run your inbound and outbound pipeline; intent-based prospecting, AI-personalized sequences, and pipeline acceleration as a fully managed service.
+                KDCI.ai deploys AI agents for lead generation that research prospects, build enriched contact lists, and run personalized multi-touch sequences. First qualified meetings in four weeks.
               </p>
 
               <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
@@ -177,9 +177,9 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Prospect lists go stale before outreach launch", desc: "Manual prospecting takes 2–4 weeks. By launch, contacts have changed roles, intent signals have shifted, and deliverability has dropped." },
-              { title: "Sequences read like templates, not personalized", desc: "Generic emails get ignored. Real AI-personalized outreach pulls company signals, job changes, and role-specific pain points— most teams lack the tools." },
-              { title: "SDRs burn out before pipeline is generated", desc: "One SDR doing ICP research, list building, inbox warm-up, and CRM updates is doing five jobs. A managed AI demand generation engine produces 3–5× more meetings." },
+              { title: "Prospect lists expire before outreach begins", desc: "Manual list building takes 2–4 weeks. By the time sequences launch, contacts have changed roles, buyer intent signals have shifted, and deliverability has eroded." },
+              { title: "Templates get ignored. Signal-based personalization converts", desc: "Generic emails fail because they treat every prospect identically. Real AI-personalized outreach pulls company signals and writes to the specific pain points of each role." },
+              { title: "One SDR cannot run a full demand generation engine alone", desc: "ICP research, list building, inbox warm-up, objection handling, and CRM updates are five distinct functions. A fully managed AI SDR model generates 3–5× more meetings for the same cost." },
             ].map((p, i) => (
               <div key={i} className="p-8 rounded-[2.5rem] bg-white border border-black/[0.04] shadow-sm">
                 <div className="w-8 h-8 rounded-full bg-[#E61739]/10 flex items-center justify-center mb-5">
