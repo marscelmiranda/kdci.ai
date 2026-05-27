@@ -33,19 +33,19 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
   const simplifiedCapabilities = [
     {
       title: "AI Agents on First Contact",
-      desc: "We configure and manage AI agents for chat, email, and voice — handling your highest-volume ticket categories automatically, 24/7.",
+      desc: "Automated customer service agents handle your highest-volume inquiries across chat, email, and voice — resolving tickets instantly, around the clock.",
       icon: BrainCircuit,
       metric: "70%+ Deflection"
     },
     {
-      title: "PH-Based Human Escalation",
-      desc: "Complex, sensitive, and high-value cases escalate instantly to our trained Philippine-based specialists — seamlessly, with full context.",
+      title: "Human Escalation",
+      desc: "Complex, sensitive, or high-value cases route instantly to our trained Philippine-based specialists — with full conversation context carried over, no repeating required.",
       icon: Users,
       metric: "Top 1% Talent"
     },
     {
       title: "Monthly CSAT Optimization",
-      desc: "Every month: CSAT and NPS reviewed, agents retrained, knowledge base updated, and a full CX scorecard delivered to your team.",
+      desc: "Every month we review CSAT and NPS scores, retrain your AI agents, refresh the knowledge base, and deliver a full CX performance scorecard.",
       icon: MessageSquare,
       metric: "24+ mo avg contract"
     }
@@ -117,21 +117,21 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
                   AI-Augmented<br />CX Support
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
-                  We combine AI-powered first-contact resolution with specialist escalation support and monthly CX performance optimization, all delivered as a managed service.
+                  We combine conversational AI customer service agents on first contact, with Philippine-based specialist escalation and continuous CX optimization, delivered as a managed service.
                 </p>
 
                 <div className="flex flex-col gap-4 mb-12 text-white/90 text-sm md:text-base font-medium">
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">AI agents configured for chat, email, and voice — 24/5 or 24/7</span>
+                    <span className="leading-snug">AI agents configured for chat, email, and voice 24/5 or 24/7</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">PH-based human specialists handle every escalation, with full context</span>
+                    <span className="leading-snug">PH-based specialist to handle full-context escalation</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle2 size={20} className="text-[#E61739] shrink-0 mt-0.5" />
-                    <span className="leading-snug">Monthly CSAT scorecard, agent retraining, and knowledge base updates</span>
+                    <span className="leading-snug">No new software required</span>
                   </div>
                 </div>
               </div>
@@ -200,8 +200,8 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">CX support enhanced by AI agents.</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Led by AI on first contact, humans on escalation, and continuous optimization, delivered as one fully managed CX retainer.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">End-to-end CX support, powered by AI agents and human specialists</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Our managed service layers intelligent virtual agents, trained human escalation, and monthly performance optimization into one seamless support operation.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-24">
@@ -222,8 +222,8 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
           <div className="pt-20 border-t border-slate-100">
             <div className="text-center mb-24">
                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Tech Ecosystem</div>
-               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI-powered customer support, live inside your helpdesk</h2>
-               <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We configure and manage AI-powered support agents that resolve customer inquiries automatically without need for new software, cutting resolution time and reducing support costs from day one.</p>
+               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI-powered support, live inside your existing helpdesk</h2>
+               <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We configure and manage intelligent support agents directly within your current stack. No new software, no migration headaches. Automated ticket resolution starts from day one, cutting costs and response times immediately.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -241,8 +241,8 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Vertical Specialization</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Vertical AI that speaks your industry's language from day one</h2>
-            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your specific helpdesk toolset, product vocabulary, and CS workflows, ensuring accurate, on-brand AI support automation.</p>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI customer service agents that speak your industry's language from day one</h2>
+            <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your helpdesk toolset, product vocabulary, and support workflows, helping you deliver accurate, on-brand responses without a lengthy ramp-up.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cxIndustries.map((ind, i) => (
@@ -443,8 +443,8 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Consultation
                   </div>
-                  <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your CX Pod Today</h2>
-                  <p className="text-white/40 font-medium text-[13px]">Every engagement begins with a discovery call. Tell us what you need and we'll design your ideal support operation.</p>
+                  <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Ready to deploy AI customer service agents?</h2>
+                  <p className="text-white/40 font-medium text-[13px]">See how automated first-contact resolution and expert human escalation work together in your helpdesk.</p>
                 </div>
                 <form onSubmit={async e => {
                   e.preventDefault();
