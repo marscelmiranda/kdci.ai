@@ -199,16 +199,16 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">The Full AI Lead Generation Stack, Fully Managed</h2>
-            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">ICP research, enrichment, AI-personalized sequences, LinkedIn outreach, meeting booking, and pipeline reporting run end-to-end by our team.</p>
+            <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">Our AI agents for lead generation run every stage of your outbound pipeline — from ICP targeting to meeting booked — so your team focuses on closing, not prospecting.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Target,       title: "ICP Definition & Buyer Persona Mapping", desc: "We workshop your ideal customer profile — target titles, company sizes, industries, and intent signals — and build a lead scoring model before a single contact is sourced." },
-              { icon: Filter,       title: "Prospect List Building + Clay Enrichment", desc: "Apollo sourcing combined with Clay enrichment gives every prospect a data-rich profile — job title history, tech stack, funding stage, and custom intent triggers." },
-              { icon: Mail,         title: "AI-Personalized 5-Touch Email Sequences", desc: "Five-step sequences where every touchpoint pulls live buying signals — funding rounds, new hires, product launches — written at scale by AI, reviewed by our team." },
-              { icon: Linkedin,     title: "LinkedIn Outreach Campaign Management", desc: "Connection requests, InMail sequences, and profile engagement fully managed inside LinkedIn Sales Navigator — coordinated with email for a true multi-channel motion." },
-              { icon: Calendar,     title: "Meeting Booking & CRM Pipeline Updates", desc: "Qualified replies handled, objections managed, meetings booked directly to your calendar. HubSpot or Salesforce updated in real time for full pipeline visibility." },
-              { icon: BarChart3,    title: "Weekly Reports + A/B Test Results", desc: "Every Friday: open rates, reply rates, meeting counts, and sequence-level breakdowns — plus A/B test results and recommended optimizations for the week ahead." },
+              { icon: Target,       title: "ICP Definition & Buyer Persona Mapping", desc: "We define your ideal customer profile, map target titles and industries, and build a lead scoring model grounded in real buying signals — not assumptions." },
+              { icon: Filter,       title: "Prospect List Building + Clay Enrichment", desc: "Apollo sourcing combined with Clay enrichment gives every contact a full profile: job history, tech stack, funding stage, and custom intent triggers for precise intent-based targeting." },
+              { icon: Mail,         title: "AI-Personalized 5-Touch Email Sequences", desc: "Every touchpoint pulls live buying signals and writes to role-specific pain points. Outbound automation at the messaging layer — reviewed by our team before it sends." },
+              { icon: Linkedin,     title: "LinkedIn Outreach Campaign Management", desc: "Connection requests, InMail sequences, and profile engagement — fully managed inside LinkedIn Sales Navigator and coordinated with email for a unified sales pipeline automation flow." },
+              { icon: Calendar,     title: "Meeting Booking & CRM Pipeline Updates", desc: "Replies handled, objections managed, meetings booked directly to your calendar. HubSpot or Salesforce updated in real time for complete pipeline visibility." },
+              { icon: BarChart3,    title: "Weekly Reports + A/B Test Results", desc: "Open rates, reply rates, meeting counts, and sequence-level breakdowns — plus A/B results and the specific changes we're making the following week." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
                 <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
