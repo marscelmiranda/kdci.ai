@@ -198,7 +198,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">The full AI demand generation stack,<br/>fully managed.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">The Full AI Lead Generation Stack, Fully Managed</h2>
             <p className="text-white/40 max-w-3xl mx-auto font-medium text-[17px]">ICP research, enrichment, AI-personalized sequences, LinkedIn outreach, meeting booking, and pipeline reporting run end-to-end by our team.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
