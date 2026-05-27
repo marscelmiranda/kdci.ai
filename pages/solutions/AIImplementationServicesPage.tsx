@@ -307,19 +307,19 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
                     num: '01',
                     icon: Cpu,
                     title: 'We build in-house',
-                    desc: 'Behind every AI system configured is an AI specialist with deep industry knowledge and experience, exercising full control over quality, speed, and customization.',
+                    desc: 'Every AI system we configure is built by an AI specialist with deep industry experience. That means full control over quality, speed, and customization that actually fits your workflows.',
                   },
                   {
                     num: '02',
                     icon: BarChart3,
                     title: 'KPI-backed accountability',
-                    desc: 'We agree on outcomes that focus on delivering measurable return on your investments and report against them every month. You get a credit for any targets we miss.',
+                    desc: 'Our AI strategy consulting is tied directly to your business outcomes. We agree on measurable ROI targets upfront and report against them every month. Miss a target? You get a credit. Our incentives are aligned with yours.',
                   },
                   {
                     num: '03',
                     icon: Users,
                     title: 'Human in the loop, always',
-                    desc: 'Every AI agent deployed is managed by a trained operations team who monitor performance, catch errors, and continuously improve your AI systems over time.',
+                    desc: 'Intelligent automation works best when it\'s actively managed. Every AI agent we deploy is overseen by a trained operations team who monitor performance, catch errors, and continuously optimize your systems over time.',
                   },
                 ].map((d, i) => (
                   <div key={i} className="flex items-start gap-4 py-6">
