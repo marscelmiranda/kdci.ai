@@ -298,8 +298,8 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
                 Our Difference
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
-                Built to deliver outcomes,<br />
-                <span className="text-[#E61739]">not slide decks.</span>
+                An AI strategy without execution is just advice.<br />
+                <span className="text-[#E61739]">We do both.</span>
               </h2>
               <div className="divide-y divide-black/10">
                 {[
