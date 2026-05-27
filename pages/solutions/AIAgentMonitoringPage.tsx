@@ -225,7 +225,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1D1D1F]/10">
             {[
               'Your AI Agents were set up once and never touched again',
-              'Nobody on your team is watching for drift or failures',
+              'Your AI agents were deployed without model governance controls in place.',
               'Where your AI agents break, you find out from an angry customer',
             ].map((pain, i) => (
               <div key={i} className="px-8 py-8 md:py-4 md:first:pl-0 md:last:pr-0 text-left">
