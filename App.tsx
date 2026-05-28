@@ -264,7 +264,26 @@ const App = () => {
       <Navbar activeView={activeView} setView={setView} />
       
       <main>
-        {activeView === 'home' && <HomePage setView={setView} />}
+        {activeView === 'home' && (
+          <HomePage
+            setView={setView}
+            onNavigateToContent={(type, slug) => {
+              if (type === 'blog') {
+                setSelectedBlogSlug(slug);
+                window.history.pushState({ view: 'blog-detail', slug }, '', `/blogs/${slug}/`);
+                setActiveView('blog-detail');
+              } else if (type === 'case-study') {
+                setSelectedCaseStudySlug(slug);
+                window.history.pushState({ view: 'case-study-detail', slug }, '', `/case-studies/${slug}/`);
+                setActiveView('case-study-detail');
+              } else if (type === 'ebook') {
+                setSelectedEbookSlug(slug);
+                window.history.pushState({ view: 'ebook-detail', slug }, '', `/ebooks/${slug}/`);
+                setActiveView('ebook-detail');
+              }
+            }}
+          />
+        )}
         
         {/* Solutions */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
