@@ -35,7 +35,7 @@ import { StaffAugmentationPage } from './pages/solutions/StaffAugmentationPage';
 import { AIStaffingSolutionsPage } from './pages/solutions/AIStaffingSolutionsPage';
 import { AIConsultingAndStrategyPage } from './pages/solutions/AIConsultingAndStrategyPage';
 import { AIAgentOperationsPage } from './pages/solutions/AIAgentOperationsPage';
-import { AIDemandGenerationPage } from './pages/solutions/AIDemandGenerationPage';
+import { AILeadGenerationPage } from './pages/solutions/AILeadGenerationPage';
 
 // Import Job Post Components and Data
 import { JobPost } from './pages/careers/JobPost';
@@ -87,7 +87,7 @@ const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'staff-aug': '/solutions/staff-augmentation/',
   'ai-consulting': '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
-  'ai-outbound': '/solutions/ai-demand-generation/',
+  'ai-outbound': '/solutions/ai-lead-generation/',
   'outcome-models': '/solutions/outcome-models/',
   // Industries
   'ecommerce': '/industries/ecommerce/',
@@ -301,7 +301,7 @@ const App = () => {
         {/* activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} /> */}
         {activeView === 'ai-consulting' && <AIConsultingAndStrategyPage setView={setView} />}
         {activeView === 'ai-agent-monitoring' && <AIAgentOperationsPage setView={setView} />}
-        {activeView === 'ai-outbound' && <AIDemandGenerationPage setView={setView} />}
+        {activeView === 'ai-outbound' && <AILeadGenerationPage setView={setView} />}
         
         {/* Industries */}
         {activeView === 'ecommerce' && <ECommercePage setView={setView} />}

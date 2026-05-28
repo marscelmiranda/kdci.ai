@@ -9,7 +9,7 @@ import IMG_OUTBOUND_HERO from '@/attached_assets/kdci-ai-outbound-demand-generat
 import CONTACT_IMG from '@/attached_assets/kdci-ai-demand-generation-outbound-specialists.webp';
 import IMG_LEAD_GEN_DASHBOARD from '@/attached_assets/ai-lead-gen-dashboard_1779920399111.webp';
 
-export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AILeadGenerationPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', volume: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);

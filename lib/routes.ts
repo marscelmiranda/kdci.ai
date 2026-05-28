@@ -10,7 +10,7 @@ export const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'staff-aug': '/solutions/staff-augmentation/',
   'ai-consulting': '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
-  'ai-outbound': '/solutions/ai-demand-generation/',
+  'ai-outbound': '/solutions/ai-lead-generation/',
   'outcome-models': '/solutions/outcome-models/',
   // Industries
   'ecommerce': '/industries/ecommerce/',

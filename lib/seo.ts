@@ -16,7 +16,7 @@ const URL_PATHS: Record<string, string> = {
   'staff-aug':         '/solutions/ai-workforce-augmentation/',
   'ai-consulting':     '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
-  'ai-outbound':       '/solutions/ai-demand-generation/',
+  'ai-outbound':       '/solutions/ai-lead-generation/',
   company:             '/who-we-are/',
   contact:             '/contact-us/',
   careers:             '/careers/',
@@ -92,7 +92,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   'ai-outbound': {
     title: 'AI Lead Generation - Inbound & Outbound Sales | KDCI.ai',
     description: 'Grow your lead pipeline with AI-driven lead generation services. Target smarter, send out personalized content, and get higher conversion rates.',
-    canonical: `${BASE}/solutions/ai-demand-generation/`,
+    canonical: `${BASE}/solutions/ai-lead-generation/`,
   },
 
   // ── Industries ────────────────────────────────────────────────────────
