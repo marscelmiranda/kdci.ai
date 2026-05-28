@@ -183,7 +183,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
           <div className="blob blob-magenta opacity-20" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Insights Hub" />
+          <Breadcrumbs setView={setView} currentName="Blog" parent={{ name: 'Insights', view: 'insights' }} />
           <div className="mt-6">
             <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
               <span className="text-shine-white">Operational</span>{' '}

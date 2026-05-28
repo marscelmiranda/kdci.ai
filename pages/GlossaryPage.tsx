@@ -151,7 +151,7 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
            <div className="blob blob-magenta opacity-30"></div>
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Breadcrumbs setView={setView} currentName="Glossary" />
+          <Breadcrumbs setView={setView} currentName="Glossary" parent={{ name: 'Insights', view: 'insights' }} />
           <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
             <span className="text-shine-white">Operational</span><br/>
             <span className="text-[#E61739]">Lexicon.</span>
