@@ -240,35 +240,34 @@ export const HomePage = ({
 
           </div>
 
-          {/* Loading skeleton — full-bleed scroll area */}
+          {/* Loading skeleton */}
           {contentLoading && (
-            <div className="flex gap-5 px-6 overflow-hidden" style={{ maxWidth: '100vw' }}>
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="rounded-[20px] bg-white border border-black/[0.04] overflow-hidden animate-pulse shrink-0 w-[340px]">
-                  <div className="aspect-[16/9] bg-black/[0.04]" />
-                  <div className="p-5 space-y-3">
-                    <div className="h-3 bg-black/[0.05] rounded w-1/3" />
-                    <div className="h-5 bg-black/[0.06] rounded w-5/6" />
-                    <div className="h-4 bg-black/[0.04] rounded w-full" />
-                    <div className="h-4 bg-black/[0.04] rounded w-4/5" />
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="flex gap-5 overflow-hidden">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="rounded-[20px] bg-white border border-black/[0.04] overflow-hidden animate-pulse shrink-0"
+                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)' }}>
+                    <div className="aspect-[16/9] bg-black/[0.04]" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-3 bg-black/[0.05] rounded w-1/3" />
+                      <div className="h-5 bg-black/[0.06] rounded w-5/6" />
+                      <div className="h-4 bg-black/[0.04] rounded w-full" />
+                      <div className="h-4 bg-black/[0.04] rounded w-4/5" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
 
-          {/* Horizontal scroll track */}
+          {/* Horizontal scroll track — 3 cards visible, rest scroll */}
           {!contentLoading && latestItems.length > 0 && (
-            <div
-              ref={scrollRef}
-              className="flex gap-5 overflow-x-auto scroll-smooth pb-4"
-              style={{
-                paddingLeft: 'max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem))',
-                paddingRight: 'max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem))',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-              }}
-            >
+            <div className="max-w-7xl mx-auto px-6">
+              <div
+                ref={scrollRef}
+                className="flex gap-5 overflow-x-auto scroll-smooth pb-4"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
               {latestItems.map((item, i) => {
                 const meta = TYPE_META[item.type];
                 const Icon = meta.icon;
@@ -283,7 +282,8 @@ export const HomePage = ({
                   <button
                     key={i}
                     onClick={handleClick}
-                    className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0 w-[340px]"
+                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)' }}
+                    className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0"
                   >
                     {/* Cover image */}
                     <div className="aspect-[16/9] overflow-hidden bg-[#F5F5F7] shrink-0 relative">
@@ -327,6 +327,7 @@ export const HomePage = ({
                   </button>
                 );
               })}
+              </div>
             </div>
           )}
 
