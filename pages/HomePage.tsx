@@ -243,10 +243,10 @@ export const HomePage = ({
           {/* Loading skeleton */}
           {contentLoading && (
             <div className="max-w-7xl mx-auto px-6">
-              <div className="flex gap-5 overflow-hidden">
+              <div className="flex gap-6 overflow-hidden">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="rounded-[20px] bg-white border border-black/[0.04] overflow-hidden animate-pulse shrink-0"
-                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)' }}>
+                    style={{ minWidth: 'calc((100% - 3rem) / 3)' }}>
                     <div className="aspect-[16/9] bg-black/[0.04]" />
                     <div className="p-5 space-y-3">
                       <div className="h-3 bg-black/[0.05] rounded w-1/3" />
@@ -265,7 +265,7 @@ export const HomePage = ({
             <div className="max-w-7xl mx-auto px-6">
               <div
                 ref={scrollRef}
-                className="flex gap-5 overflow-x-auto scroll-smooth pb-4"
+                className="flex gap-6 overflow-x-auto scroll-smooth pb-4"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
               {latestItems.map((item, i) => {
@@ -282,7 +282,7 @@ export const HomePage = ({
                   <button
                     key={i}
                     onClick={handleClick}
-                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)', maxHeight: '460px' }}
+                    style={{ minWidth: 'calc((100% - 3rem) / 3)', maxWidth: 'calc((100% - 3rem) / 3)' }}
                     className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0"
                   >
                     {/* Cover image */}
