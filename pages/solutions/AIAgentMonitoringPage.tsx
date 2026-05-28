@@ -323,19 +323,19 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                     num: '01',
                     icon: Monitor,
                     title: 'We watch — you build',
-                    desc: 'Our AI Ops Specialists monitor every agent across your stack so issues get caught before they cost you — no internal headcount required.',
+                    desc: 'Our AI Ops Specialists handle the full spectrum of AI agent operations: knowledge base maintenance, hallucination catching, QA sampling, prompt tuning, and continuous model monitoring across your entire stack.',
                   },
                   {
                     num: '02',
                     icon: BarChart3,
                     title: 'Scorecard-backed accountability',
-                    desc: 'We agree on performance benchmarks before we start and report against them every month. If we miss a target, we own the fix.',
+                    desc: 'We agree on AI performance benchmarks before we start. Every monthly report — and every strategy review — is measured against them. If we miss a target, we own the fix. Full AI governance accountability, not just reporting.',
                   },
                   {
                     num: '03',
                     icon: Users,
                     title: 'An AI Ops Specialist behind every agent',
-                    desc: 'A trained specialist monitors every system, catches drift, and improves ai agent performance continuously.',
+                    desc: 'A trained AI Ops Specialist runs monitoring, incident response, and continuous improvement for every system we manage. This is the human side of responsible AI deployment, and it\'s what separates true AI agent operations management.',
                   },
                 ].map((d, i) => (
                   <div key={i} className="flex items-start gap-4 py-6">
