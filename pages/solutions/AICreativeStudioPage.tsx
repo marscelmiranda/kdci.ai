@@ -66,7 +66,7 @@ const ScrollingColumn = ({
             style={{ height: i % 2 === 0 ? '150px' : '240px' }}
             onClick={() => onImageClick?.(tile.full)}
           >
-            <img
+            <img loading="lazy"
               src={tile.thumb}
               alt=""
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -349,7 +349,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
                 className="group relative rounded-[2rem] overflow-hidden shadow-sm aspect-[4/3] cursor-pointer bg-slate-50"
                 onClick={() => setSelectedPortfolioItem(item)}
               >
-                <img src={item.thumbnail} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img loading="lazy" src={item.thumbnail} alt={item.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-x-0 bottom-0 pt-32 pb-6 px-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end">
                   <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-200 mb-1 drop-shadow-md">{item.tag}</div>
                   <h4 className="text-white font-bold text-lg drop-shadow-md hover:underline underline-offset-4 inline-block">{item.title}</h4>
@@ -483,7 +483,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {creativeTools.map((app, i) => (
               <div key={i} className="p-5 h-20 rounded-2xl bg-white/[0.04] border border-white/[0.07] flex flex-col items-center justify-center gap-2 hover:bg-white/[0.08] transition-all duration-300 cursor-pointer">
-                <img src={app.logo} alt={app.name} className="h-7 max-w-full object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300" referrerPolicy="no-referrer" />
+                <img loading="lazy" src={app.logo} alt={app.name} className="h-7 max-w-full object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300" referrerPolicy="no-referrer" />
                 <span className="text-[9px] text-white/25 font-black uppercase tracking-widest text-center leading-tight">{app.name}</span>
               </div>
             ))}
@@ -497,7 +497,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI AI Creative Studio team producing marketing design and branded content"
               className="absolute inset-0 w-full h-full object-cover object-right"
@@ -642,7 +642,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
           >
             <X size={20} />
           </button>
-          <img
+          <img loading="lazy"
             src={lightboxSrc}
             alt="Artwork preview"
             className="max-w-[90vw] max-h-[90vh] rounded-2xl shadow-2xl object-contain"

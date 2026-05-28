@@ -381,7 +381,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                         <div className="space-y-2">
                           <label className={labelCls}>Hero Background Image URL</label>
                           <input type="text" value={formData.heroImageUrl} onChange={e => field('heroImageUrl', e.target.value)} placeholder="https://images.unsplash.com/..." className={inputCls} />
-                          {formData.heroImageUrl && <img src={formData.heroImageUrl} alt="Hero preview" className="w-full h-32 object-cover rounded-xl border border-white/10 mt-2" />}
+                          {formData.heroImageUrl && <img loading="lazy" src={formData.heroImageUrl} alt="Hero preview" className="w-full h-32 object-cover rounded-xl border border-white/10 mt-2" />}
                         </div>
                         <div className="space-y-2">
                           <label className={labelCls}>Category Tags (used in hero breadcrumb row)</label>
@@ -706,7 +706,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                     {formData.heroImageUrl && (
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-white/40">Hero Image Preview</label>
-                        <img src={formData.heroImageUrl} alt="Hero" className="w-full h-auto aspect-video object-cover rounded-lg border border-white/10" />
+                        <img loading="lazy" src={formData.heroImageUrl} alt="Hero" className="w-full h-auto aspect-video object-cover rounded-lg border border-white/10" />
                       </div>
                     )}
                   </div>

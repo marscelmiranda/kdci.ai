@@ -12,30 +12,27 @@ import {
 import { ViewType } from "../types";
 import { TOP_SERVICES, INDUSTRIES, RESOURCES } from "../data";
 import { Logo } from "./Logo";
+import { getPath } from "../lib/routes";
 
 const UNLISTED_RESOURCE_IDS = new Set(["webinars", "guides"]);
 const NAV_RESOURCES = RESOURCES.filter((r) => !UNLISTED_RESOURCE_IDS.has(r.id));
 
 const SEARCH_ITEMS = [
-  // Services
   ...TOP_SERVICES.map((s) => ({ title: s.name, type: "Service", view: s.id })),
-  // Industries
   ...INDUSTRIES.map((i) => ({
     title: `${i.name} Operations`,
     type: "Industry",
     view: i.id,
   })),
-  // Resources
   ...NAV_RESOURCES.map((r) => ({
     title: r.name,
     type: "Resource",
     view: r.id,
   })),
-  // Key Pages
   { title: "Careers & Jobs", type: "Page", view: "careers" },
   { title: "About Company", type: "Page", view: "company" },
   { title: "Contact Us", type: "Page", view: "contact" },
-  { title: "Publisher Dashboard", type: "Portal", view: "login" }, // Hidden gem for employees
+  { title: "Publisher Dashboard", type: "Portal", view: "login" },
 ];
 
 const POPULAR_SEARCHES = [
@@ -69,9 +66,8 @@ export const Navbar = ({
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileInsightsOpen, setIsMobileInsightsOpen] = useState(false);
 
-  // Search State
-  const [isSearchMounted, setIsSearchMounted] = useState(false); // Controls DOM existence
-  const [isSearchVisible, setIsSearchVisible] = useState(false); // Controls CSS opacity/transition
+  const [isSearchMounted, setIsSearchMounted] = useState(false);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -84,26 +80,22 @@ export const Navbar = ({
   useEffect(() => {
     if (isSearchMounted) {
       document.body.style.overflow = "hidden";
-      // Focus input after animation starts
       setTimeout(() => searchInputRef.current?.focus(), 100);
     } else {
       document.body.style.overflow = "unset";
     }
   }, [isSearchMounted]);
 
-  // Animation Handlers
   const handleOpenSearch = () => {
     setIsSearchMounted(true);
-    // Small delay to ensure DOM is mounted before adding the visible class for transition
     setTimeout(() => setIsSearchVisible(true), 10);
   };
 
   const handleCloseSearch = () => {
     setIsSearchVisible(false);
-    // Wait for the duration-300 transition to finish before unmounting
     setTimeout(() => {
       setIsSearchMounted(false);
-      setSearchQuery(""); // Reset query on close
+      setSearchQuery("");
     }, 300);
   };
 
@@ -112,7 +104,6 @@ export const Navbar = ({
     handleCloseSearch();
   };
 
-  // Handle ESC key to close search
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isSearchMounted) handleCloseSearch();
@@ -125,8 +116,13 @@ export const Navbar = ({
     item.title.toLowerCase().includes(searchQuery.toLowerCase()),
   ).slice(0, 6);
 
-  // All pages now feature a dark hero section, so we default to dark hero style when not scrolled.
   const isDarkHero = !isScrolled && !isSearchMounted;
+
+  const nav = (e: React.MouseEvent, view: ViewType, ...closers: (() => void)[]) => {
+    e.preventDefault();
+    setView(view);
+    closers.forEach(fn => fn());
+  };
 
   return (
     <>
@@ -134,13 +130,16 @@ export const Navbar = ({
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-nav border-b border-black/5 py-3" : "bg-transparent py-5"}`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <button
-            onClick={() => setView("home")}
+          {/* Logo */}
+          <a
+            href="/"
+            onClick={e => nav(e, "home")}
             className="group z-50 relative"
           >
             <Logo isDarkHero={isDarkHero} />
-          </button>
+          </a>
 
+          {/* Desktop Nav */}
           <div
             className={`hidden md:flex items-center gap-8 text-sm font-medium relative transition-colors ${isDarkHero ? "text-white/80" : "text-[#1D1D1F]/70"}`}
           >
@@ -150,8 +149,9 @@ export const Navbar = ({
               onMouseEnter={() => setIsSolutionsOpen(true)}
               onMouseLeave={() => setIsSolutionsOpen(false)}
             >
-              <button
-                onClick={() => setView("solutions-hub")}
+              <a
+                href="/solutions/"
+                onClick={e => nav(e, "solutions-hub")}
                 className={`flex items-center gap-1.5 transition-colors ${isSolutionsOpen || activeView === "solutions-hub" ? "text-[#E61739]" : "hover:text-[#E61739]"}`}
               >
                 What We Do{" "}
@@ -159,19 +159,16 @@ export const Navbar = ({
                   size={14}
                   className={`transition-transform duration-300 ${isSolutionsOpen ? "rotate-180" : ""}`}
                 />
-              </button>
+              </a>
               {isSolutionsOpen && (
                 <div className="absolute top-full left-0 pt-3 w-[380px] animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
-                    {/* Service list */}
                     <div className="p-3">
                       {TOP_SERVICES.map((item, idx) => (
-                        <button
+                        <a
                           key={idx}
-                          onClick={() => {
-                            setView(item.id as ViewType);
-                            setIsSolutionsOpen(false);
-                          }}
+                          href={getPath(item.id as ViewType)}
+                          onClick={e => nav(e, item.id as ViewType, () => setIsSolutionsOpen(false))}
                           className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/sol"
                         >
                           <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
@@ -180,38 +177,35 @@ export const Navbar = ({
                           <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">
                             {highlightAI(item.name)}
                           </span>
-                        </button>
+                        </a>
                       ))}
                     </div>
-
-                    {/* Footer CTA */}
                     <div className="border-t border-black/5 px-4 py-3 flex items-center justify-between bg-[#F9F9F9]">
                       <p className="text-[11px] text-[#86868b] font-medium">
                         Not sure where to start?
                       </p>
-                      <button
-                        onClick={() => {
-                          setView("contact");
-                          setIsSolutionsOpen(false);
-                        }}
+                      <a
+                        href="/contact-us/"
+                        onClick={e => nav(e, "contact", () => setIsSolutionsOpen(false))}
                         className="text-[11px] font-bold text-[#E61739] flex items-center gap-1 hover:gap-2 transition-all"
                       >
                         Talk to us <ArrowRight size={10} />
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Resources Dropdown */}
+            {/* Resources / Insights Dropdown */}
             <div
               className="relative group py-2"
               onMouseEnter={() => setIsResourcesOpen(true)}
               onMouseLeave={() => setIsResourcesOpen(false)}
             >
-              <button
-                onClick={() => { setView("insights"); setIsResourcesOpen(false); }}
+              <a
+                href="/insights/"
+                onClick={e => nav(e, "insights", () => setIsResourcesOpen(false))}
                 className={`flex items-center gap-1.5 transition-colors ${isResourcesOpen || activeView === "insights" ? "text-[#E61739]" : "hover:text-[#E61739]"}`}
               >
                 Insights{" "}
@@ -219,21 +213,18 @@ export const Navbar = ({
                   size={14}
                   className={`transition-transform duration-300 ${isResourcesOpen ? "rotate-180" : ""}`}
                 />
-              </button>
+              </a>
               {isResourcesOpen && (
                 <div className="absolute top-full left-0 pt-3 w-[480px] animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white rounded-[1.5rem] border border-black/10 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.18)] overflow-hidden">
-                    {/* Resource list — 2 columns: 4 left, 3 right */}
                     <div className="p-3 grid grid-cols-2 gap-x-2">
-                      {/* Left column — first 4 */}
+                      {/* Left column */}
                       <div>
                         {NAV_RESOURCES.slice(0, 4).map((res, idx) => (
-                          <button
+                          <a
                             key={idx}
-                            onClick={() => {
-                              setView(res.id as ViewType);
-                              setIsResourcesOpen(false);
-                            }}
+                            href={getPath(res.id as ViewType)}
+                            onClick={e => nav(e, res.id as ViewType, () => setIsResourcesOpen(false))}
                             className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
                           >
                             <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
@@ -242,18 +233,16 @@ export const Navbar = ({
                             <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">
                               {res.name}
                             </span>
-                          </button>
+                          </a>
                         ))}
                       </div>
-                      {/* Right column — last 3 */}
+                      {/* Right column */}
                       <div>
                         {NAV_RESOURCES.slice(4).map((res, idx) => (
-                          <button
+                          <a
                             key={idx}
-                            onClick={() => {
-                              setView(res.id as ViewType);
-                              setIsResourcesOpen(false);
-                            }}
+                            href={getPath(res.id as ViewType)}
+                            onClick={e => nav(e, res.id as ViewType, () => setIsResourcesOpen(false))}
                             className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
                           >
                             <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
@@ -262,43 +251,41 @@ export const Navbar = ({
                             <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">
                               {res.name}
                             </span>
-                          </button>
+                          </a>
                         ))}
                       </div>
                     </div>
-
-                    {/* Footer CTA */}
                     <div className="border-t border-black/5 px-4 py-3 flex items-center justify-between bg-[#F9F9F9]">
                       <p className="text-[11px] text-[#86868b] font-medium">
                         Looking for something specific?
                       </p>
-                      <button
-                        onClick={() => {
-                          setView("contact");
-                          setIsResourcesOpen(false);
-                        }}
+                      <a
+                        href="/contact-us/"
+                        onClick={e => nav(e, "contact", () => setIsResourcesOpen(false))}
                         className="text-[11px] font-bold text-[#E61739] flex items-center gap-1 hover:gap-2 transition-all"
                       >
                         Ask us <ArrowRight size={10} />
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            <button
-              onClick={() => setView("company")}
+            <a
+              href="/who-we-are/"
+              onClick={e => nav(e, "company")}
               className={`hover:text-[#E61739] transition-colors ${activeView === "company" ? "text-[#E61739]" : ""}`}
             >
               Who We Are
-            </button>
-            <button
-              onClick={() => setView("careers")}
+            </a>
+            <a
+              href="/careers/"
+              onClick={e => nav(e, "careers")}
               className={`hover:text-[#E61739] transition-colors ${activeView === "careers" ? "text-[#E61739]" : ""}`}
             >
               Careers
-            </button>
+            </a>
 
             {/* Search Trigger */}
             <button
@@ -309,12 +296,13 @@ export const Navbar = ({
               <Search size={18} />
             </button>
 
-            <button
-              onClick={() => setView("contact")}
+            <a
+              href="/contact-us/"
+              onClick={e => nav(e, "contact")}
               className={`px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-lg ${isDarkHero ? "bg-white text-black hover:bg-white/90" : "bg-[#E61739] text-white hover:bg-[#c51431]"}`}
             >
               Contact Us
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -334,30 +322,26 @@ export const Navbar = ({
           </div>
         </div>
 
-        {/* Mobile Menu Content */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-black/5 p-6 animate-in slide-in-from-top-2 shadow-xl max-h-[80vh] overflow-y-auto">
             <div className="flex flex-col text-sm font-bold text-[#1D1D1F]">
-              {/* What We Do — always expanded, header navigates to Solutions Hub */}
+              {/* What We Do */}
               <div className="border-b border-black/5 pb-2">
-                <button
+                <a
+                  href="/solutions/"
+                  onClick={e => nav(e, "solutions-hub", () => setIsMobileMenuOpen(false))}
                   className="flex items-center justify-between py-3 w-full"
-                  onClick={() => {
-                    setView("solutions-hub");
-                    setIsMobileMenuOpen(false);
-                  }}
                 >
                   <span>What We Do</span>
                   <ArrowRight size={14} className="text-[#E61739]" />
-                </button>
+                </a>
                 <div className="flex flex-col gap-1 pl-3">
                   {TOP_SERVICES.map((item, idx) => (
-                    <button
+                    <a
                       key={idx}
-                      onClick={() => {
-                        setView(item.id as ViewType);
-                        setIsMobileMenuOpen(false);
-                      }}
+                      href={getPath(item.id as ViewType)}
+                      onClick={e => nav(e, item.id as ViewType, () => setIsMobileMenuOpen(false))}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
                     >
                       <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
@@ -366,7 +350,7 @@ export const Navbar = ({
                       <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">
                         {item.name}
                       </span>
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -385,13 +369,10 @@ export const Navbar = ({
               {isMobileInsightsOpen && (
                 <div className="flex flex-col gap-1 py-2 pl-3 border-b border-black/5">
                   {NAV_RESOURCES.map((res, idx) => (
-                    <button
+                    <a
                       key={idx}
-                      onClick={() => {
-                        setView(res.id as ViewType);
-                        setIsMobileMenuOpen(false);
-                        setIsMobileInsightsOpen(false);
-                      }}
+                      href={getPath(res.id as ViewType)}
+                      onClick={e => nav(e, res.id as ViewType, () => { setIsMobileMenuOpen(false); setIsMobileInsightsOpen(false); })}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
                     >
                       <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
@@ -400,49 +381,42 @@ export const Navbar = ({
                       <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">
                         {res.name}
                       </span>
-                    </button>
+                    </a>
                   ))}
                 </div>
               )}
 
-              <button
-                className="py-3 border-b border-black/5 text-left"
-                onClick={() => {
-                  setView("company");
-                  setIsMobileMenuOpen(false);
-                }}
+              <a
+                href="/who-we-are/"
+                onClick={e => nav(e, "company", () => setIsMobileMenuOpen(false))}
+                className="block py-3 border-b border-black/5 text-left"
               >
                 Who We Are
-              </button>
-              <button
-                className="py-3 border-b border-black/5 text-left"
-                onClick={() => {
-                  setView("careers");
-                  setIsMobileMenuOpen(false);
-                }}
+              </a>
+              <a
+                href="/careers/"
+                onClick={e => nav(e, "careers", () => setIsMobileMenuOpen(false))}
+                className="block py-3 border-b border-black/5 text-left"
               >
                 Careers
-              </button>
-              <button
-                onClick={() => {
-                  setView("contact");
-                  setIsMobileMenuOpen(false);
-                }}
-                className="mt-4 w-full bg-[#E61739] text-white py-4 rounded-xl font-bold"
+              </a>
+              <a
+                href="/contact-us/"
+                onClick={e => nav(e, "contact", () => setIsMobileMenuOpen(false))}
+                className="mt-4 w-full bg-[#E61739] text-white py-4 rounded-xl font-bold flex items-center justify-center"
               >
                 Contact Us
-              </button>
+              </a>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Full Screen Search Modal - Dark Themed with Smooth Fade In/Out */}
+      {/* Full Screen Search Modal */}
       {isSearchMounted && (
         <div
           className={`fixed inset-0 z-[60] bg-[#1A1423]/90 backdrop-blur-md flex flex-col transition-all duration-300 ease-in-out ${isSearchVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"}`}
         >
-          {/* Close Button Header */}
           <div className="max-w-7xl mx-auto w-full px-6 py-6 flex justify-end">
             <button
               onClick={handleCloseSearch}
@@ -455,7 +429,6 @@ export const Navbar = ({
             </button>
           </div>
 
-          {/* Search Content */}
           <div className="flex-grow flex flex-col items-center pt-20 px-6 max-w-4xl mx-auto w-full">
             <h2
               className={`text-4xl md:text-5xl font-heading font-bold text-white mb-8 text-center transition-all duration-500 delay-100 ${isSearchVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -480,7 +453,6 @@ export const Navbar = ({
             </div>
 
             {searchQuery ? (
-              // Live Results
               <div
                 className={`w-full transition-all duration-300 ${isSearchVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               >
@@ -490,9 +462,10 @@ export const Navbar = ({
                 <div className="grid gap-4">
                   {filteredResults.length > 0 ? (
                     filteredResults.map((result, idx) => (
-                      <button
+                      <a
                         key={idx}
-                        onClick={() => handleSearchNav(result.view)}
+                        href={getPath(result.view as ViewType)}
+                        onClick={e => { e.preventDefault(); handleSearchNav(result.view); }}
                         className="flex items-center justify-between p-6 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 group transition-all text-left"
                       >
                         <div>
@@ -507,7 +480,7 @@ export const Navbar = ({
                           size={20}
                           className="text-white/20 group-hover:text-[#E61739] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
                         />
-                      </button>
+                      </a>
                     ))
                   ) : (
                     <div className="text-center py-12 text-white/40 font-medium text-lg">
@@ -517,7 +490,6 @@ export const Navbar = ({
                 </div>
               </div>
             ) : (
-              // Popular Searches / Quick Links
               <div
                 className={`w-full transition-all duration-500 delay-300 ${isSearchVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               >
@@ -526,17 +498,15 @@ export const Navbar = ({
                 </h3>
                 <div className="flex flex-wrap justify-center gap-4">
                   {POPULAR_SEARCHES.map((item, idx) => (
-                    <button
+                    <a
                       key={idx}
-                      onClick={() => handleSearchNav(item.view)}
+                      href={getPath(item.view as ViewType)}
+                      onClick={e => { e.preventDefault(); handleSearchNav(item.view); }}
                       className="px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#E61739] hover:text-[#E61739] text-white/70 font-bold text-sm transition-all flex items-center gap-2 group"
                     >
-                      <TrendingUp
-                        size={14}
-                        className="text-white/40 group-hover:text-[#E61739]"
-                      />
+                      <TrendingUp size={14} className="text-white/40 group-hover:text-[#E61739] transition-colors" />
                       {item.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               </div>

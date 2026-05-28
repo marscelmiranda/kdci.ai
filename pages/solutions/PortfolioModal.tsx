@@ -59,7 +59,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose })
             {item.media.map((mediaItem, idx) => (
               <div key={idx} className="overflow-hidden shadow-lg bg-white border border-slate-100 w-full">
                 {mediaItem.type === 'image' && (
-                  <img 
+                  <img loading="lazy" 
                     src={mediaItem.url} 
                     alt={`${item.title} - Media ${idx + 1}`} 
                     className="w-full h-auto object-cover"

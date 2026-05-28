@@ -69,7 +69,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
             <div className="relative lg:h-full">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_WHO_WE_ARE_HERO}
                   alt="KDCI team collaborating at their Manila headquarters in Ortigas Center, Philippines"
                   className="w-full h-full object-cover object-right"
@@ -252,7 +252,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                 { name: 'HubSpot', imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Cib-hubspot_%28CoreUI_Icons_v1.0.0%29.svg', cat: 'CRM & Sales' },
               ].map((tool, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center hover:bg-white/10 transition-all group">
-                  <img src={tool.imgSrc} alt={tool.name} className="w-8 h-8 object-contain opacity-40 group-hover:opacity-80 transition-all grayscale group-hover:grayscale-0 mb-2" />
+                  <img loading="lazy" src={tool.imgSrc} alt={tool.name} className="w-8 h-8 object-contain opacity-40 group-hover:opacity-80 transition-all grayscale group-hover:grayscale-0 mb-2" />
                   <div className="text-[10px] font-bold text-white/50 group-hover:text-white/80 transition-colors text-center">{tool.name}</div>
                 </div>
               ))}
@@ -323,7 +323,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               </div>
             </div>
             <div className="relative rounded-[4rem] overflow-hidden shadow-xl">
-              <img
+              <img loading="lazy"
                 src={IMG_HQ_BUILDING}
                 alt="KDCI Philippine headquarters — One Corporate Centre, Ortigas Center, Manila"
                 className="absolute inset-0 w-full h-full object-cover object-center"
@@ -373,7 +373,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
               <div className="rounded-[40px] aspect-[4/5] overflow-hidden relative shadow-2xl">
-                <img src={IMG_BUILD_TEAMS} alt="KDCI leadership team welcoming and onboarding a new offshore client partner" className="absolute inset-0 w-full h-full object-cover object-center" />
+                <img loading="lazy" src={IMG_BUILD_TEAMS} alt="KDCI leadership team welcoming and onboarding a new offshore client partner" className="absolute inset-0 w-full h-full object-cover object-center" />
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-10 rounded-[40px] shadow-2xl border border-white/50">
                   <Quote className="text-[#E61739] mb-4 opacity-50" size={32} />
                   <p className="text-xl font-heading font-bold text-slate-900 mb-2 italic">"The bench is deep."</p>
@@ -413,7 +413,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
           <div className="absolute inset-0 z-0">
-            <img
+            <img loading="lazy"
               src={IMG_CX_TEAM}
               alt="KDCI AI solutions team at their Philippine offshore staffing headquarters"
               className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"

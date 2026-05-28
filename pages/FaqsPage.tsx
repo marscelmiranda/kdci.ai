@@ -138,7 +138,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
       {/* ── HERO ── */}
       <section className="relative pt-36 pb-16 overflow-hidden bg-[#020202]">
         <div className="absolute inset-0 z-0">
-          <img src={HERO_IMG} alt="KDCI AI solutions frequently asked questions and offshore staffing knowledge base" className="w-full h-full object-cover opacity-20 object-center" />
+          <img loading="lazy" src={HERO_IMG} alt="KDCI AI solutions frequently asked questions and offshore staffing knowledge base" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black" />
         </div>
         <div className="mesh-container opacity-40">
@@ -283,7 +283,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
               </div>
             </div>
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img src="/kdci-challenge.webp" alt="KDCI AI solutions team ready to answer your offshore staffing questions" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
+              <img loading="lazy" src="/kdci-challenge.webp" alt="KDCI AI solutions team ready to answer your offshore staffing questions" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
               <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>

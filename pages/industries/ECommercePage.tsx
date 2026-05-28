@@ -27,7 +27,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
       {/* 1. Hero Section */}
       <section className={`relative bg-[#020202] overflow-hidden pt-36 pb-32 md:pb-40`}>
         <div className="absolute inset-0 z-0">
-          <img 
+          <img loading="lazy" 
             src={IMG_ECOM_HERO} 
             alt="KDCI AI-managed e-commerce operations for global online retailers" 
             className="w-full h-full object-cover opacity-20 object-center"
@@ -300,7 +300,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
            <div className="absolute inset-0 z-0">
-              <img 
+              <img loading="lazy" 
                 src={IMG_ECOM_TEAM} 
                 alt="KDCI e-commerce operations team managing AI-powered fulfillment and customer support" 
                 className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"

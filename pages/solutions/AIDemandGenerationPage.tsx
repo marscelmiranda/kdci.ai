@@ -127,7 +127,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             <div className="relative lg:h-full hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_OUTBOUND_HERO}
                   alt="KDCI AI-powered outbound demand generation and sales development team"
                   className="w-full h-full object-cover object-right"
@@ -149,7 +149,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
                     { name: 'HubSpot',    logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774327928/Hubspot_Logo_skscda.png', imgH: '52px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="object-contain" style={{ height: app.imgH }} referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="object-contain" style={{ height: app.imgH }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -301,7 +301,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             </div>
             <div className="relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5]">
-                <img src={IMG_LEAD_GEN_DASHBOARD} alt="KDCI AI demand generation outbound specialists managing B2B lead generation" className="w-full h-full object-cover" />
+                <img loading="lazy" src={IMG_LEAD_GEN_DASHBOARD} alt="KDCI AI demand generation outbound specialists managing B2B lead generation" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                 <div className="absolute bottom-10 left-8 right-8 p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/10">
                   <blockquote className="border-l-4 border-[#E61739] pl-5">
@@ -491,7 +491,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={CONTACT_IMG}
               alt="KDCI AI demand generation specialist on a free client discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"

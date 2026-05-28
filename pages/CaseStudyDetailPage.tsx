@@ -36,7 +36,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
       {/* 1. Hero */}
       <section className="relative h-[85vh] flex items-center bg-[#020202] overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
+          <img loading="lazy"
             src={study.heroImageUrl || DEFAULT_HERO}
             alt={study.title}
             className="w-full h-full object-cover opacity-30 object-center"
@@ -323,7 +323,7 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
     <div className="min-h-screen bg-white">
       <section className="relative h-[85vh] flex items-center bg-[#020202] overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={HERO_IMG} alt="KDCI AI-managed business operations case study success story" className="w-full h-full object-cover opacity-30 object-center" />
+          <img loading="lazy" src={HERO_IMG} alt="KDCI AI-managed business operations case study success story" className="w-full h-full object-cover opacity-30 object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
         </div>
         <div className="mesh-container opacity-40"><div className="blob blob-purple" /><div className="blob blob-magenta opacity-30" /></div>

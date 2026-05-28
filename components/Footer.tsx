@@ -4,6 +4,7 @@ import { ChevronRight, MapPin, Globe2, X, CheckCircle2, Loader2, ArrowRight, Mai
 import { ViewType } from '../types';
 import { Logo } from './Logo';
 import { TOP_SERVICES, INDUSTRIES } from '../data';
+import { getPath } from '../lib/routes';
 
 // Solid / Filled Social Media Icons
 
@@ -158,9 +159,9 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
           
           {/* Column 1: Branding */}
           <div className="lg:col-span-4">
-            <button onClick={() => setView('home')} className="group block mb-8">
+            <a href="/" onClick={e => { e.preventDefault(); setView('home'); }} className="group block mb-8">
               <Logo isDarkHero={true} />
-            </button>
+            </a>
             <p className="text-slate-400 text-[15px] font-medium leading-relaxed max-w-sm mb-10">
               The managed intelligence partner for high-growth tech and enterprise firms. We synthesize elite talent with agentic AI to drive unfair advantages.
             </p>
@@ -192,12 +193,13 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
             <ul className="space-y-4">
               {TOP_SERVICES.map(s => (
                 <li key={s.id}>
-                  <button 
-                    onClick={() => setView(s.id as ViewType)} 
-                    className="text-[13px] font-bold text-slate-400 hover:text-white transition-colors text-left"
+                  <a
+                    href={getPath(s.id as ViewType)}
+                    onClick={e => { e.preventDefault(); setView(s.id as ViewType); }}
+                    className="text-[13px] font-bold text-slate-400 hover:text-white transition-colors"
                   >
                     {s.name}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -209,21 +211,23 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
             <ul className="space-y-4">
               {INDUSTRIES.slice(0, 6).map(ind => (
                 <li key={ind.id}>
-                  <button 
-                    onClick={() => setView(ind.id as ViewType)} 
-                    className="text-[13px] font-bold text-slate-400 hover:text-white transition-colors text-left"
+                  <a
+                    href={getPath(ind.id as ViewType)}
+                    onClick={e => { e.preventDefault(); setView(ind.id as ViewType); }}
+                    className="text-[13px] font-bold text-slate-400 hover:text-white transition-colors"
                   >
                     {ind.name}
-                  </button>
+                  </a>
                 </li>
               ))}
               <li>
-                <button 
-                  onClick={() => setView('solutions-hub')} 
+                <a
+                  href="/solutions/"
+                  onClick={e => { e.preventDefault(); setView('solutions-hub'); }}
                   className="text-[13px] font-bold text-[#E61739] hover:underline flex items-center gap-1.5"
                 >
                   View All Verticals <ChevronRight size={14} />
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -278,8 +282,8 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest">© 2025 KDCI Operations LLC.</p>
             <div className="flex gap-6 text-[11px] text-slate-500 font-bold uppercase tracking-widest">
-              <button onClick={() => setView('privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</button>
-              <button onClick={() => setView('terms-and-conditions')} className="hover:text-white transition-colors">Terms of Service</button>
+              <a href="/privacy-policy/" onClick={e => { e.preventDefault(); setView('privacy-policy'); }} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms-and-conditions/" onClick={e => { e.preventDefault(); setView('terms-and-conditions'); }} className="hover:text-white transition-colors">Terms of Service</a>
               <button className="hover:text-white transition-colors">Security Compliance</button>
             </div>
           </div>

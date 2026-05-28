@@ -99,7 +99,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           {/* Profile Photo & Basics */}
           <div className="flex flex-col items-center flex-shrink-0">
             <div className="w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-white/10 mb-4 overflow-hidden relative group">
-              <img 
+              <img loading="lazy" 
                 src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1777595870/468598394_10162265374063293_2142667036521414352_n_krsqc5.jpg?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
                 alt="Profile" 
                 className="w-full h-full object-cover"

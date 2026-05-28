@@ -13,7 +13,7 @@ export const EdTechPage = ({ setView }: { setView: (v: ViewType) => void }) => {
       {/* 1. Hero Section */}
       <section className={`relative bg-[#020202] overflow-hidden pt-48 pb-32 md:pb-40`}>
         <div className="absolute inset-0 z-0">
-          <img src={HERO_IMG} alt="KDCI AI-powered EdTech operations and student support solutions" className="w-full h-full object-cover opacity-20 object-center" />
+          <img loading="lazy" src={HERO_IMG} alt="KDCI AI-powered EdTech operations and student support solutions" className="w-full h-full object-cover opacity-20 object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
         </div>
         
@@ -345,7 +345,7 @@ export const EdTechPage = ({ setView }: { setView: (v: ViewType) => void }) => {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-20 md:p-24 text-center group">
            <div className="absolute inset-0 z-0">
-              <img src={IMG_EDTECH_TEAM} alt="KDCI EdTech support team delivering AI-managed educational operations" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
+              <img loading="lazy" src={IMG_EDTECH_TEAM} alt="KDCI EdTech support team delivering AI-managed educational operations" className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
            </div>
            <div className="mesh-container opacity-20 pointer-events-none">
               <div className="blob blob-purple opacity-30"></div>

@@ -1,87 +1,82 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { ViewType } from '../types';
+import { getPath } from '../lib/routes';
 
-export const ParticleBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+    {children}
+  </div>
+);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+export const SectionHeading = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => (
+  <h2 className={`text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight ${className}`}>
+    {children}
+  </h2>
+);
 
-    let animationFrameId: number;
-    let particles: any[] = [];
-    let time = 0;
-    const particleCount = window.innerWidth < 768 ? 200 : 500;
+export const SectionSubheading = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-lg text-[#86868b] font-medium leading-relaxed max-w-2xl">
+    {children}
+  </p>
+);
 
-    class Particle {
-      x: number; y: number; size: number; velocity: number; opacity: number; color: string; angle: number;
-      constructor() { 
-        this.x = Math.random() * canvas!.width; 
-        this.y = Math.random() * canvas!.height; 
-        this.size = Math.random() * 1.2 + 0.3;
-        this.velocity = Math.random() * 0.4 + 0.1;
-        this.opacity = Math.random() * 0.3 + 0.05;
-        this.angle = 0;
-        const colors = ['rgba(230, 23, 57,', 'rgba(126, 34, 206,', 'rgba(255, 255, 255,'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-      reset() {
-        this.x = Math.random() * canvas!.width;
-        this.y = Math.random() * canvas!.height;
-      }
-      update(time: number) {
-        const noiseScale = 0.002;
-        this.angle = (Math.sin(this.x * noiseScale + time * 0.0005) + Math.cos(this.y * noiseScale + time * 0.0005)) * Math.PI * 2;
-        this.x += Math.cos(this.angle) * this.velocity;
-        this.y += Math.sin(this.angle) * this.velocity;
-        if (this.x > canvas!.width || this.x < 0 || this.y > canvas!.height || this.y < 0) this.reset();
-      }
-      draw() {
-        ctx!.beginPath(); ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx!.fillStyle = `${this.color}${this.opacity})`; ctx!.fill();
-      }
-    }
+export const Card = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => (
+  <div className={`bg-white rounded-3xl p-8 border border-black/5 hover:shadow-xl transition-shadow ${className}`}>
+    {children}
+  </div>
+);
 
-    const init = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particles = [];
-      for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-    };
+export const Tag = ({ children }: { children: React.ReactNode }) => (
+  <span className="inline-block px-3 py-1 rounded-full bg-[#E61739]/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
+    {children}
+  </span>
+);
 
-    const animate = () => {
-      ctx.fillStyle = 'rgba(2, 2, 2, 0.1)'; 
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      time++;
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update(time);
-        particles[i].draw();
-      }
-      animationFrameId = requestAnimationFrame(animate);
-    };
+export const StatCard = ({ value, label, sub }: { value: string, label: string, sub?: string }) => (
+  <div className="text-center p-6 rounded-3xl bg-white/5 border border-white/10">
+    <div className="text-4xl md:text-5xl font-heading font-bold text-white mb-2">{value}</div>
+    <div className="text-sm font-bold text-white/70">{label}</div>
+    {sub && <div className="text-xs text-white/40 mt-1">{sub}</div>}
+  </div>
+);
 
-    init(); animate();
-    const handleResize = () => init();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+export const Divider = () => (
+  <div className="h-px bg-gradient-to-r from-transparent via-black/10 to-transparent my-16" />
+);
 
-  return <canvas ref={canvasRef} className="particle-canvas" />;
-};
-
-export const Breadcrumbs = ({ setView, currentName, parent, align = 'center' }: { setView: (v: ViewType) => void, currentName: string, parent?: { name: string, view: ViewType }, align?: 'center' | 'left' }) => (
-  <nav className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8 ${align === 'left' ? 'justify-start' : 'justify-center'}`}>
-    <button onClick={() => setView('home')} className="hover:text-white transition-colors">Home</button>
+export const Breadcrumbs = ({
+  setView,
+  currentName,
+  parent,
+  align = 'center',
+}: {
+  setView: (v: ViewType) => void;
+  currentName: string;
+  parent?: { name: string; view: ViewType };
+  align?: 'center' | 'left';
+}) => (
+  <nav
+    aria-label="Breadcrumb"
+    className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-8 ${align === 'left' ? 'justify-start' : 'justify-center'}`}
+  >
+    <a
+      href="/"
+      onClick={e => { e.preventDefault(); setView('home'); }}
+      className="hover:text-white transition-colors"
+    >
+      Home
+    </a>
     {parent && (
       <>
         <span className="opacity-50">/</span>
-        <button onClick={() => setView(parent.view)} className="hover:text-white transition-colors">{parent.name}</button>
+        <a
+          href={getPath(parent.view)}
+          onClick={e => { e.preventDefault(); setView(parent.view); }}
+          className="hover:text-white transition-colors"
+        >
+          {parent.name}
+        </a>
       </>
     )}
     <span className="opacity-50">/</span>

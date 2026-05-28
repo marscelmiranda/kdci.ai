@@ -177,7 +177,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="relative hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105" />
               <div className="relative min-h-[400px] lg:h-[560px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_HERO}
                   alt="KDCI AI agent monitoring dashboard for real-time performance tracking"
                   className="w-full h-full object-cover"
@@ -199,7 +199,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                     { name: 'HubSpot',      logo: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779174606/hubspot-logo-black-and-white_joijyn.png' },
                   ].map((app: any, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform">
-                      <img src={app.logo} alt={app.name} className="object-contain max-h-7 max-w-[80px]" style={app.style ?? {}} referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="object-contain max-h-7 max-w-[80px]" style={app.style ?? {}} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -353,7 +353,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             </div>
 
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
-              <img
+              <img loading="lazy"
                 src={IMG_OUR_DIFFERENCE}
                 alt="KDCI AI operations team reviewing agent performance dashboards in Manila, Philippines"
                 className="w-full h-full object-cover object-center"
@@ -488,7 +488,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI AI agent monitoring specialist on a free discovery consultation call"
               className="absolute inset-0 w-full h-full object-cover object-right"

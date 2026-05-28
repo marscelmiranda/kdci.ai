@@ -48,7 +48,7 @@ const renderBlocks = (contentStr: string) => {
       case 'image':
         return block.content?.url ? (
           <div key={i} className="my-8">
-            <img src={block.content.url} alt={block.content.caption || ''} className="w-full rounded-3xl object-cover" />
+            <img loading="lazy" src={block.content.url} alt={block.content.caption || ''} className="w-full rounded-3xl object-cover" />
             {block.content.caption && <p className="text-center text-sm text-slate-400 mt-3">{block.content.caption}</p>}
           </div>
         ) : null;
@@ -67,7 +67,7 @@ const renderBlocks = (contentStr: string) => {
               const col = block.content?.[side] || {};
               if (col.type === 'image') return col.url ? (
                 <div key={side}>
-                  <img src={col.url} alt={col.caption || ''} className="w-full rounded-2xl object-cover" />
+                  <img loading="lazy" src={col.url} alt={col.caption || ''} className="w-full rounded-2xl object-cover" />
                   {col.caption && <p className="text-center text-xs text-slate-400 mt-2">{col.caption}</p>}
                 </div>
               ) : null;
@@ -186,7 +186,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
         <section className="relative -mt-16 z-20 px-6">
           <div className="max-w-5xl mx-auto">
             <div className="relative rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_48px_100px_-20px_rgba(0,0,0,0.3)] group bg-black">
-              <img src={coverImg} alt={post.title}
+              <img loading="lazy" src={coverImg} alt={post.title}
                 className="w-full h-full object-cover aspect-[16/9] opacity-80 group-hover:scale-105 transition-transform duration-[3s] ease-out" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
@@ -272,7 +272,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
             </h1>
             <div className="flex flex-wrap items-center gap-8 border-t border-white/10 pt-10 text-white/50 text-xs font-bold uppercase tracking-[0.15em]">
                <div className="flex items-center gap-3">
-                  <img src={AUTHOR_1} alt="Elena Vance, KDCI AI content and operations author" className="w-10 h-10 rounded-full border border-white/20" />
+                  <img loading="lazy" src={AUTHOR_1} alt="Elena Vance, KDCI AI content and operations author" className="w-10 h-10 rounded-full border border-white/20" />
                   <div><div className="text-white">Elena Vance</div><div className="text-[9px] opacity-60">Director of AI Strategy</div></div>
                </div>
                <div className="h-8 w-[1px] bg-white/10 hidden sm:block"></div>
@@ -286,7 +286,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
       <section className="relative -mt-16 z-20 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="relative rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_48px_100px_-20px_rgba(0,0,0,0.3)] group bg-black">
-             <img src={IMG_BLOG_HERO} alt="KDCI blog on AGI operations and AI-managed business workflow automation" className="w-full h-full object-cover aspect-[16/9] opacity-80 group-hover:scale-105 transition-transform duration-[3s] ease-out" />
+             <img loading="lazy" src={IMG_BLOG_HERO} alt="KDCI blog on AGI operations and AI-managed business workflow automation" className="w-full h-full object-cover aspect-[16/9] opacity-80 group-hover:scale-105 transition-transform duration-[3s] ease-out" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
           </div>
         </div>
@@ -368,7 +368,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
             </div>
             <div className="grid md:grid-cols-2 gap-10">
                <article onClick={() => setView('blog-detail')} className="group cursor-pointer bg-white rounded-[3.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col md:flex-row h-full">
-                  <div className="md:w-2/5 relative overflow-hidden min-h-[200px]"><img src={IMG_BLOG_1} alt="KDCI AI blog related article preview" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+                  <div className="md:w-2/5 relative overflow-hidden min-h-[200px]"><img loading="lazy" src={IMG_BLOG_1} alt="KDCI AI blog related article preview" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
                   <div className="md:w-3/5 p-10 flex flex-col h-full">
                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Engineering</div>
                      <h4 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#E61739] transition-colors leading-tight">Why the Philippines is the New Epicenter for AI Engineering</h4>
@@ -376,7 +376,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
                   </div>
                </article>
                <article onClick={() => setView('blog-detail')} className="group cursor-pointer bg-white rounded-[3.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col md:flex-row h-full">
-                  <div className="md:w-2/5 relative overflow-hidden min-h-[200px]"><img src={IMG_BLOG_3} alt="KDCI AI blog related article preview" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
+                  <div className="md:w-2/5 relative overflow-hidden min-h-[200px]"><img loading="lazy" src={IMG_BLOG_3} alt="KDCI AI blog related article preview" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /></div>
                   <div className="md:w-3/5 p-10 flex flex-col h-full">
                      <div className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4">Case Studies</div>
                      <h4 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#E61739] transition-colors leading-tight">Scaling to 500+ Agents: A Case Study in Fintech</h4>

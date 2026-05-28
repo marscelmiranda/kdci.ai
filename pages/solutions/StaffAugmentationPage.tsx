@@ -185,7 +185,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="relative lg:h-full hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778557509/PH_Offshore_Staffing_dfqlgx.webp"
                   alt="KDCI Philippine offshore staffing team greeting and onboarding a new global client"
                   className="w-full h-full object-cover"
@@ -207,7 +207,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     { name: "HireVue",   logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778626347/hirevue-logo_cv5sqa.svg", imgH: '14px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="object-contain" style={(app as any).imgH ? { height: (app as any).imgH, width: (app as any).imgW || 'auto', marginTop: (app as any).imgMT || 0, marginBottom: (app as any).imgMB || 0 } : { maxHeight: '100%' }} referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="object-contain" style={(app as any).imgH ? { height: (app as any).imgH, width: (app as any).imgW || 'auto', marginTop: (app as any).imgMT || 0, marginBottom: (app as any).imgMB || 0 } : { maxHeight: '100%' }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -242,7 +242,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
             {/* LEFT — image column */}
             <div className="lg:w-[46%] relative rounded-[3rem] overflow-hidden min-h-[560px] shrink-0">
-              <img
+              <img loading="lazy"
                 src={IMG_PH_TEAM}
                 alt="KDCI Philippine offshore staffing team at Ortigas Center Manila headquarters"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -458,7 +458,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           {/* Office team photo */}
           <div className="relative mb-10 rounded-3xl overflow-hidden shadow-lg" style={{ height: '400px' }}>
-            <img
+            <img loading="lazy"
               src={IMG_KDCI_OFFICE}
               alt="KDCI operations team working at their Manila, Philippines headquarters office"
               className="w-full h-full object-cover object-center"
@@ -842,7 +842,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI offshore staffing professional consulting on a free discovery call"
               className="absolute inset-0 w-full h-full object-cover"

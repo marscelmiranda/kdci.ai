@@ -135,7 +135,7 @@ export const InsightsPage = ({
         className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer"
       >
         <div className="relative h-44 overflow-hidden shrink-0">
-          <img
+          <img loading="lazy"
             src={item.image}
             alt={item.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -342,7 +342,7 @@ export const InsightsPage = ({
                   className="group rounded-[2.5rem] overflow-hidden border border-black/[0.04] bg-[#F5F5F7] hover:shadow-xl transition-all duration-500 flex flex-col"
                 >
                   <div className="relative h-48 overflow-hidden shrink-0">
-                    <img
+                    <img loading="lazy"
                       src={sec.heroImage}
                       alt={sec.label}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -399,7 +399,7 @@ export const InsightsPage = ({
               </div>
             </div>
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img
+              <img loading="lazy"
                 src="/kdci-challenge.webp"
                 alt="KDCI solutions architect consultation"
                 className="absolute inset-0 w-full h-full object-cover"

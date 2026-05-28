@@ -184,7 +184,7 @@ export const HomePage = ({
           <div className="flex w-max animate-ticker items-center">
             {[...TECH_PARTNERS, ...TECH_PARTNERS].map((partner, idx) => (
               <div key={idx} className="flex items-center justify-center mx-12 shrink-0">
-                <img
+                <img loading="lazy"
                   src={partner.logo}
                   alt={partner.name}
                   className="h-[44px] md:h-[46px] w-auto object-contain opacity-70 grayscale invert brightness-200 hover:opacity-100 transition-all duration-500 cursor-default"
@@ -288,7 +288,7 @@ export const HomePage = ({
                     {/* Cover image */}
                     <div className="aspect-[16/9] overflow-hidden bg-[#F5F5F7] shrink-0 relative">
                       {item.image ? (
-                        <img
+                        <img loading="lazy"
                           src={item.image}
                           alt={item.imageAlt}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -508,7 +508,7 @@ export const HomePage = ({
          <div className="max-w-7xl mx-auto">
             <div className="bg-[#020202] rounded-[5rem] overflow-hidden relative border border-white/5 px-6 py-24 md:p-32 text-center group">
                <div className="absolute inset-0 z-0">
-                  <img 
+                  <img loading="lazy" 
                     src={IMG_DEV_TEAM} 
                     alt="KDCI Team" 
                     className="w-full h-full object-cover opacity-10 group-hover:opacity-20 transition-opacity duration-700"

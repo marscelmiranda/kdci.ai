@@ -221,7 +221,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
             <input type="text" value={block.content.alt || ''} onChange={e => updateBlock(block.id, { ...block.content, alt: e.target.value })} placeholder="Alt text" className="flex-1 bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
             <input type="text" value={block.content.caption || ''} onChange={e => updateBlock(block.id, { ...block.content, caption: e.target.value })} placeholder="SEO Caption" className="flex-1 bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
           </div>
-          {block.content.url && <div className="mt-4 p-2 border border-white/10 rounded-lg"><img src={block.content.url} alt={block.content.alt} className="max-h-48 object-contain mx-auto" /></div>}
+          {block.content.url && <div className="mt-4 p-2 border border-white/10 rounded-lg"><img loading="lazy" src={block.content.url} alt={block.content.alt} className="max-h-48 object-contain mx-auto" /></div>}
         </div>
       );
       case 'video': return (
@@ -692,7 +692,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-white/40 ml-1">Cover Image</label>
                         <input type="text" value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} placeholder="URL..." className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-xs text-white mb-2" />
-                        {formData.imageUrl && <img src={formData.imageUrl} alt="Cover" className="w-full h-auto aspect-video object-cover rounded-lg border border-white/10" />}
+                        {formData.imageUrl && <img loading="lazy" src={formData.imageUrl} alt="Cover" className="w-full h-auto aspect-video object-cover rounded-lg border border-white/10" />}
                       </div>
                       <div className="pt-2 flex items-center gap-2">
                         <input type="checkbox" id="featured" checked={formData.featured} onChange={e => setFormData({...formData, featured: e.target.checked})} className="accent-[#E61739]" />

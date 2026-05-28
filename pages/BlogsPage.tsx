@@ -277,7 +277,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
 
                     {/* Thumbnail */}
                     <div className="relative h-44 overflow-hidden shrink-0">
-                      <img src={card.thumb} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <img loading="lazy" src={card.thumb} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                       <div className="absolute bottom-3 left-4 flex items-center gap-2">
                         <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
@@ -342,7 +342,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
               </div>
             </div>
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
+              <img loading="lazy" src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
               <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>

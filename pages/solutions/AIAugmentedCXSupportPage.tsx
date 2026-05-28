@@ -146,7 +146,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
             <div className="relative lg:h-full hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_CX_HERO}
                   alt="KDCI Filipino customer support agent delivering AI-augmented CX operations"
                   className="w-full h-full object-cover"
@@ -164,7 +164,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-3xl bg-white/60 backdrop-blur-md border border-white/40 shadow-xl flex items-center justify-around">
                   {cxApps.slice(0, 4).map((app, i) => (
                     <div key={i} className="h-[41px] md:h-[51px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="max-w-full max-h-full object-contain" referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -229,7 +229,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {cxApps.map((app, i) => (
                 <div key={i} className="p-6 h-24 rounded-2xl bg-white border border-slate-100 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md grayscale hover:grayscale-0 opacity-70 hover:opacity-100 cursor-pointer">
-                  <img src={app.logo} alt={app.name} className="w-[140px] max-h-full object-contain" referrerPolicy="no-referrer" />
+                  <img loading="lazy" src={app.logo} alt={app.name} className="w-[140px] max-h-full object-contain" referrerPolicy="no-referrer" />
                 </div>
               ))}
             </div>
@@ -409,7 +409,7 @@ export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) =
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CX_CONTACT}
               alt="KDCI AI-augmented customer experience support team based in Manila, Philippines"
               className="absolute inset-0 w-full h-full object-cover"

@@ -149,7 +149,7 @@ export const WebinarsPage = ({ setView }: { setView: (v: ViewType) => void }) =>
                     className="group flex flex-col h-full bg-white rounded-[2.5rem] overflow-hidden border border-black/[0.04] hover:shadow-2xl transition-all duration-500 cursor-pointer">
                     {/* Thumbnail */}
                     <div className="relative aspect-video overflow-hidden">
-                      <img src={webinar.thumb} alt={webinar.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <img loading="lazy" src={webinar.thumb} alt={webinar.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <Play size={48} className="text-white drop-shadow-lg group-hover:scale-110 transition-transform" fill="white" />
@@ -218,7 +218,7 @@ export const WebinarsPage = ({ setView }: { setView: (v: ViewType) => void }) =>
               </div>
             </div>
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
+              <img loading="lazy" src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
               <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>

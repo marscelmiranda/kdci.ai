@@ -170,7 +170,7 @@ export const EbooksPage = ({
                     {/* Thumbnail */}
                     <div className="relative h-52 overflow-hidden shrink-0 bg-[#F5F5F7]">
                       {ebook.cover_image ? (
-                        <img src={ebook.cover_image} alt={ebook.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <img loading="lazy" src={ebook.cover_image} alt={ebook.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
                           <span className="text-4xl font-heading font-black text-slate-300 tracking-tight px-6 text-center leading-tight line-clamp-3">{ebook.title}</span>
@@ -247,7 +247,7 @@ export const EbooksPage = ({
               </div>
             </div>
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
+              <img loading="lazy" src="/kdci-challenge.webp" alt="KDCI solutions architect offering a free AI business operations consultation" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '0% top' }} />
               <div className="absolute inset-0 bg-gradient-to-r from-[#020202] via-[#020202]/30 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#020202]/60 via-transparent to-transparent" />
             </div>

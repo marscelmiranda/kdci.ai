@@ -174,7 +174,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
             <div className="relative lg:h-full hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] lg:max-h-[520px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_CONSULTING_HERO}
                   alt="KDCI AI implementation services and consulting team"
                   className="w-full h-full object-cover object-center"
@@ -196,7 +196,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
                     { name: "Grok",      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Grok-feb-2025-logo.svg/330px-Grok-feb-2025-logo.svg.png", imgH: '28px' },
                   ].map((app, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="object-contain" style={(app as any).imgH ? { height: (app as any).imgH } : { maxHeight: '100%', maxWidth: '100%' }} referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="object-contain" style={(app as any).imgH ? { height: (app as any).imgH } : { maxHeight: '100%', maxWidth: '100%' }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -338,7 +338,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
 
             {/* Floating portrait image */}
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] w-full">
-              <img
+              <img loading="lazy"
                 src={IMG_OUR_DIFFERENCE}
                 alt="KDCI AI implementation consulting team reviewing business performance dashboards"
                 className="w-full h-full object-cover object-center"
@@ -483,7 +483,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI AI implementation consultant on a live free discovery call"
               className="absolute inset-0 w-full h-full object-cover object-center"

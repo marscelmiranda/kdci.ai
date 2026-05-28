@@ -159,7 +159,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
             <div className="relative lg:h-full hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#E61739]/20 to-transparent rounded-[2rem] blur-3xl transform -rotate-6 scale-105"></div>
               <div className="relative h-full min-h-[400px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
-                <img
+                <img loading="lazy"
                   src={IMG_HERO_MEETING}
                   alt="KDCI AI workforce augmentation team meeting with offshore talent candidates"
                   className="w-full h-full object-cover"
@@ -181,7 +181,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
                     { name: "Grok",    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Grok-feb-2025-logo.svg/330px-Grok-feb-2025-logo.svg.png", imgH: '28px' },
                   ].map((app: any, i) => (
                     <div key={i} className="h-[37px] md:h-[46px] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer">
-                      <img src={app.logo} alt={app.name} className="object-contain" style={{ height: app.imgH }} referrerPolicy="no-referrer" />
+                      <img loading="lazy" src={app.logo} alt={app.name} className="object-contain" style={{ height: app.imgH }} referrerPolicy="no-referrer" />
                     </div>
                   ))}
                 </div>
@@ -543,7 +543,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="relative">
               <div className="bg-slate-100 rounded-3xl aspect-[4/5] relative shadow-2xl" style={{ overflow: 'hidden' }}>
-                <img src={IMG_AI_STAFFING_CONTACT} alt="KDCI AI workforce augmentation team managing offshore talent vetting process" className="absolute inset-0 w-full h-full object-cover" />
+                <img loading="lazy" src={IMG_AI_STAFFING_CONTACT} alt="KDCI AI workforce augmentation team managing offshore talent vetting process" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
                   <div className="flex items-center gap-4">
@@ -589,7 +589,7 @@ export const AIWorkforceAugmentationPage = ({ setView }: { setView: (v: ViewType
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI AI workforce augmentation specialist on a free client consultation call"
               className="absolute inset-0 w-full h-full object-cover object-right"

@@ -414,7 +414,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
                 >
                   {/* Thumbnail */}
                   <div className="relative h-44 overflow-hidden shrink-0">
-                    <img src={study.thumb} alt={study.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <img loading="lazy" src={study.thumb} alt={study.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-4 flex items-center gap-2">
                       <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white border border-white/30">
@@ -495,7 +495,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
             </div>
             {/* Right — image */}
             <div className="lg:w-[777px] shrink-0 relative min-h-[260px]">
-              <img
+              <img loading="lazy"
                 src="/kdci-challenge.webp"
                 alt="KDCI solutions architect offering a free AI business operations consultation"
                 className="absolute inset-0 w-full h-full object-cover"

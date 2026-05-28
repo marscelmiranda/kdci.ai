@@ -124,7 +124,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
 
           {/* Left — image panel */}
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
-            <img
+            <img loading="lazy"
               src={IMG_CONTACT}
               alt="KDCI AI solutions team ready to discuss your operational transformation"
               className="absolute inset-0 w-full h-full object-cover"

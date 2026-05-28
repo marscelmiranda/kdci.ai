@@ -511,7 +511,7 @@ export const EbookDetailPage = ({
               <div className="flex justify-center lg:justify-end items-end">
                 {ebook.cover_image ? (
                   <div className="relative w-full max-w-[320px] rounded-t-[2rem] overflow-hidden shadow-2xl border border-white/10">
-                    <img
+                    <img loading="lazy"
                       src={ebook.cover_image}
                       alt={ebook.title}
                       className="w-full aspect-[3/4] object-cover"
