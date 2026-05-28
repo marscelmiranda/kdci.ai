@@ -167,11 +167,11 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
             </p>
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: LinkedinIcon, href: "https://www.linkedin.com/company/key-discovery-consulting-inc" },
-                { icon: InstagramIcon, href: "https://www.instagram.com/kdci_outsourcing" },
-                { icon: FacebookIcon, href: "https://www.facebook.com/kdci.official.page/" },
+                { icon: LinkedinIcon, href: "https://www.linkedin.com/company/kdciai" },
+                { icon: InstagramIcon, href: "https://www.instagram.com/kdciai/" },
+                { icon: FacebookIcon, href: "https://www.facebook.com/kdciai/" },
                 { icon: TiktokIcon, href: "https://www.tiktok.com/@kdci_outsourcing" },
-                { icon: YoutubeIcon, href: "https://www.youtube.com/@kdcioutsourcing" },
+                { icon: YoutubeIcon, href: "https://www.youtube.com/@kdci_ai" },
                 { icon: BehanceIcon, href: "https://www.behance.net/kdcico" },
                 { icon: AdobePortfolioIcon, href: "https://kdci.myportfolio.com/" }
               ].map((social, i) => (
