@@ -11,6 +11,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CookieBanner } from './components/CookieBanner';
 import { HomePage } from './pages/HomePage';
+import { HomePageV2 } from './pages/HomePageV2';
 import { BlogsPage } from './pages/BlogsPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
 import { WhoWeArePage } from './pages/WhoWeArePage';
@@ -77,6 +78,7 @@ import { ComingSoonPage } from './pages/ComingSoonPage';
 // ── URL ↔ ViewType mapping ──────────────────────────────────────────────────
 const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'home': '/',
+  'home-v2': '/home-v2/',
   // Services
   'solutions-hub': '/solutions/',
   'agentic-recruitment': '/solutions/ai-workforce-augmentation/',
@@ -267,7 +269,11 @@ const App = () => {
       
       <main>
         {activeView === 'home' && (
-          <HomePage
+          <HomePage setView={setView} />
+        )}
+
+        {activeView === 'home-v2' && (
+          <HomePageV2
             setView={setView}
             onNavigateToContent={(type, slug) => {
               if (type === 'blog') {
@@ -286,7 +292,7 @@ const App = () => {
             }}
           />
         )}
-        
+
         {/* Solutions */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
         {activeView === 'agentic-recruitment' && <AIWorkforceAugmentationPage setView={setView} />}

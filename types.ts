@@ -23,7 +23,8 @@ export interface SiteMapNode {
 }
 
 export type ViewType = 
-  | 'home' 
+  | 'home'
+  | 'home-v2'
   | 'solutions-hub' 
   | 'agentic-recruitment' 
 

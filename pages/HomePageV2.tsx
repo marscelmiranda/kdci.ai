@@ -1,9 +1,22 @@
 
-import React, { useState } from 'react';
-import { Cpu, ChevronRight, CheckCircle2, Quote, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Cpu, ChevronRight, CheckCircle2, Quote, ArrowRight, BookOpen, Briefcase, BookMarked, ChevronLeft } from 'lucide-react';
 import { ViewType } from '../types';
 import { HeroBackground } from '../components/HeroBackground';
 import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../data';
+
+interface ContentItem {
+  type: 'Blog' | 'Case Study' | 'Ebook';
+  title: string;
+  slug: string;
+  excerpt: string;
+  image: string;
+  imageAlt: string;
+  category: string;
+  rawDate: string;
+  displayDate: string;
+  byline: string;
+}
 
 const highlightAI = (text: string) =>
   text.split(/(AI)/).map((part, i) =>
@@ -55,15 +68,103 @@ const STORIES = [
   },
 ];
 
-export const HomePage = ({
+const TYPE_META = {
+  'Blog':       { icon: BookOpen,    bg: 'bg-[#E61739]/10', text: 'text-[#E61739]',   view: 'blog'          as ViewType },
+  'Case Study': { icon: Briefcase,   bg: 'bg-blue-500/10',  text: 'text-blue-400',    view: 'case-studies'  as ViewType },
+  'Ebook':      { icon: BookMarked,  bg: 'bg-purple-500/10',text: 'text-purple-400',  view: 'ebooks'        as ViewType },
+};
+
+const fmtDate = (iso: string) => {
+  if (!iso) return '';
+  try { return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+  catch { return ''; }
+};
+
+export const HomePageV2 = ({
   setView,
+  onNavigateToContent,
 }: {
   setView: (v: ViewType) => void;
+  onNavigateToContent?: (type: 'blog' | 'case-study' | 'ebook', slug: string) => void;
 }) => {
   const [activeStory, setActiveStory] = useState(0);
   const prev2 = (activeStory + STORIES.length - 2) % STORIES.length;
   const prev1 = (activeStory + STORIES.length - 1) % STORIES.length;
   const sideIndices = [prev2, prev1];
+
+  const [latestItems, setLatestItems] = useState<ContentItem[]>([]);
+  const [contentLoading, setContentLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -380 : 380, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    meta.setAttribute('data-home-v2-noindex', 'true');
+    document.head.appendChild(meta);
+    return () => {
+      document.querySelector('meta[data-home-v2-noindex]')?.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    setContentLoading(true);
+    Promise.all([
+      fetch('/api/blog').then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch('/api/cases').then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch('/api/ebooks').then(r => r.ok ? r.json() : []).catch(() => []),
+    ]).then(([blogs, cases, ebooks]) => {
+      const items: ContentItem[] = [
+        ...(Array.isArray(blogs) ? blogs : []).map((b: any) => ({
+          type: 'Blog' as const,
+          title: b.title || '',
+          slug: b.slug || '',
+          excerpt: b.excerpt || '',
+          image: b.cover_image || '',
+          imageAlt: b.cover_image_alt || b.title || '',
+          category: b.category || 'Article',
+          rawDate: b.published_at || b.created_at || '',
+          displayDate: fmtDate(b.published_at || b.created_at || ''),
+          byline: b.author || '',
+        })),
+        ...(Array.isArray(cases) ? cases : []).map((c: any) => ({
+          type: 'Case Study' as const,
+          title: c.title || '',
+          slug: c.slug || '',
+          excerpt: c.subtitle || c.in_brief || '',
+          image: c.hero_image_url || '',
+          imageAlt: c.hero_image_alt || c.title || '',
+          category: c.category1 || 'Case Study',
+          rawDate: c.published_at || c.created_at || '',
+          displayDate: fmtDate(c.published_at || c.created_at || ''),
+          byline: c.client || c.author || '',
+        })),
+        ...(Array.isArray(ebooks) ? ebooks : []).map((e: any) => ({
+          type: 'Ebook' as const,
+          title: e.title || '',
+          slug: e.slug || '',
+          excerpt: e.description || '',
+          image: e.cover_image || '',
+          imageAlt: e.cover_image_alt || e.title || '',
+          category: e.category || 'Ebook',
+          rawDate: e.published_at || e.created_at || '',
+          displayDate: fmtDate(e.published_at || e.created_at || ''),
+          byline: e.author || '',
+        })),
+      ];
+      items.sort((a, b) => {
+        const ta = a.rawDate ? new Date(a.rawDate).getTime() : 0;
+        const tb = b.rawDate ? new Date(b.rawDate).getTime() : 0;
+        return tb - ta;
+      });
+      setLatestItems(items.slice(0, 6));
+      setContentLoading(false);
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0A0A1A]">
@@ -107,6 +208,142 @@ export const HomePage = ({
           </div>
         </div>
       </div>
+
+      {/* ── LATEST CONTENT ── */}
+      {(contentLoading || latestItems.length > 0) && (
+        <section className="bg-[#F5F5F7] py-20">
+          <div className="max-w-7xl mx-auto px-6">
+
+            {/* Header row */}
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+              <div>
+                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-3">Fresh From KDCI</div>
+                <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
+                  Latest Insights &amp; Resources
+                </h2>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button onClick={() => setView('blog')}
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
+                  Blog
+                </button>
+                <button onClick={() => setView('case-studies')}
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
+                  Case Studies
+                </button>
+                <button onClick={() => setView('ebooks')}
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
+                  Ebooks
+                </button>
+                {/* Scroll arrows */}
+                <div className="flex items-center gap-1 ml-2">
+                  <button onClick={() => scroll('left')}
+                    className="w-9 h-9 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 transition-all shadow-sm">
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button onClick={() => scroll('right')}
+                    className="w-9 h-9 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 transition-all shadow-sm">
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Loading skeleton */}
+          {contentLoading && (
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="flex gap-6 overflow-hidden">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="rounded-[20px] bg-white border border-black/[0.04] overflow-hidden animate-pulse shrink-0"
+                    style={{ minWidth: 'calc((100% - 3rem) / 3)' }}>
+                    <div className="aspect-[16/9] bg-black/[0.04]" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-3 bg-black/[0.05] rounded w-1/3" />
+                      <div className="h-5 bg-black/[0.06] rounded w-5/6" />
+                      <div className="h-4 bg-black/[0.04] rounded w-full" />
+                      <div className="h-4 bg-black/[0.04] rounded w-4/5" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Horizontal scroll track — 3 cards visible, rest scroll */}
+          {!contentLoading && latestItems.length > 0 && (
+            <div className="max-w-7xl mx-auto px-6">
+              <div
+                ref={scrollRef}
+                className="flex gap-6 overflow-x-auto scroll-smooth pb-4"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+              {latestItems.map((item, i) => {
+                const meta = TYPE_META[item.type];
+                const Icon = meta.icon;
+                const handleClick = () => {
+                  if (!item.slug) { setView(meta.view); return; }
+                  if (item.type === 'Blog' && onNavigateToContent)             onNavigateToContent('blog', item.slug);
+                  else if (item.type === 'Case Study' && onNavigateToContent)  onNavigateToContent('case-study', item.slug);
+                  else if (item.type === 'Ebook' && onNavigateToContent)       onNavigateToContent('ebook', item.slug);
+                  else setView(meta.view);
+                };
+                return (
+                  <button
+                    key={i}
+                    onClick={handleClick}
+                    style={{ minWidth: 'calc((100% - 3rem) / 3)', maxWidth: 'calc((100% - 3rem) / 3)' }}
+                    className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0"
+                  >
+                    {/* Cover image */}
+                    <div className="aspect-[16/9] overflow-hidden bg-[#F5F5F7] shrink-0 relative">
+                      {item.image ? (
+                        <img loading="lazy"
+                          src={item.image}
+                          alt={item.imageAlt}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon size={32} className="text-black/10" />
+                        </div>
+                      )}
+                      <div className={`absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${meta.bg} ${meta.text} backdrop-blur-sm border border-black/[0.06]`}>
+                        <Icon size={10} />
+                        {item.type}
+                      </div>
+                    </div>
+
+                    {/* Card body */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-2">{item.category}</p>
+                      <h3 className="text-[#1D1D1F] font-bold text-base leading-snug mb-3 line-clamp-2 group-hover:text-[#E61739] transition-colors">
+                        {item.title}
+                      </h3>
+                      {item.excerpt && (
+                        <p className="text-[#86868b] text-sm leading-relaxed line-clamp-2 mb-4 flex-grow font-medium">
+                          {item.excerpt}
+                        </p>
+                      )}
+                      <div className="flex items-center justify-between pt-4 border-t border-black/[0.05] mt-auto">
+                        <div className="text-[#86868b] text-[11px] font-bold">
+                          {item.byline && <span className="mr-2 text-[#1D1D1F]">{item.byline}</span>}
+                          {item.displayDate}
+                        </div>
+                        <ArrowRight size={14} className="text-black/20 group-hover:text-[#E61739] group-hover:translate-x-1 transition-all" />
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+              </div>
+            </div>
+          )}
+
+        </section>
+      )}
 
       <section className="pt-20 pb-32 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-6">
