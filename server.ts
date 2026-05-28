@@ -7,10 +7,23 @@ import { fileURLToPath } from 'url';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
+import multer from 'multer';
+import fs from 'fs';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const uploadsDir = path.join(__dirname, 'public', 'uploads');
+fs.mkdirSync(uploadsDir, { recursive: true });
+const uploadStorage = multer.diskStorage({
+  destination: uploadsDir,
+  filename: (_req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    cb(null, `${Date.now()}-${Math.random().toString(36).substr(2, 6)}${ext}`);
+  },
+});
+const upload = multer({ storage: uploadStorage, limits: { fileSize: 15 * 1024 * 1024 } });
 
 // ----- DB migrations -----
 (async () => {
@@ -673,12 +686,12 @@ app.get('/api/blog/:id', async (req, res) => {
 });
 
 app.post('/api/blog', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO blog_posts (title,slug,excerpt,content,author,category,cover_image,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,NOW(),NOW()) RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO blog_posts (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, status === 'published' ? new Date() : null]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) {
@@ -687,11 +700,11 @@ app.post('/api/blog', requireAuth, async (req, res) => {
 });
 
 app.put('/api/blog/:id', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `UPDATE blog_posts SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,tags=$8,status=$9,updated_at=NOW() WHERE id=$10 RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, tags || [], status, req.params.id]
+      `UPDATE blog_posts SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
@@ -769,13 +782,13 @@ app.post('/api/cases', requireAuth, async (req, res) => {
         author, status, published_at,
         meta_title, meta_description, keywords, canonical_url,
         og_title, og_description, og_image_url, json_ld, no_index,
-        hubspot_event_name, hubspot_form_guid, utm_source, utm_medium, utm_campaign,
+        hubspot_event_name, hubspot_form_guid, utm_source, utm_medium, utm_campaign, hero_image_alt,
         created_at, updated_at
       ) VALUES (
         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,
         $21,$22,$23,$24,$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38,
         $39,$40,$41,$42,$43,$44,$45,$46,$47,$48,$49,$50,$51,$52,$53,$54,$55,$56,
-        $57,$58,$59,$60,$61,NOW(),NOW()
+        $57,$58,$59,$60,$61,$62,NOW(),NOW()
       ) RETURNING *`,
       [
         b.title, b.slug, b.subtitle, b.hero_image_url, b.client,
@@ -800,7 +813,7 @@ app.post('/api/cases', requireAuth, async (req, res) => {
         b.canonical_url || '', b.og_title || '', b.og_description || '',
         b.og_image_url || '', b.json_ld || '', b.no_index || false,
         b.hubspot_event_name || '', b.hubspot_form_guid || '',
-        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '',
+        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '', b.hero_image_alt || '',
       ]
     );
     res.status(201).json(rows[0]);
@@ -836,9 +849,9 @@ app.put('/api/cases/:id', requireAuth, async (req, res) => {
         meta_title=$48, meta_description=$49, keywords=$50, canonical_url=$51,
         og_title=$52, og_description=$53, og_image_url=$54, json_ld=$55, no_index=$56,
         hubspot_event_name=$57, hubspot_form_guid=$58,
-        utm_source=$59, utm_medium=$60, utm_campaign=$61,
+        utm_source=$59, utm_medium=$60, utm_campaign=$61, hero_image_alt=$62,
         updated_at=NOW()
-      WHERE id=$62 RETURNING *`,
+      WHERE id=$63 RETURNING *`,
       [
         b.title, b.slug, b.subtitle || '', b.hero_image_url || '', b.client || '',
         b.category1 || 'Case Study', b.category2 || '', b.category3 || '',
@@ -861,7 +874,7 @@ app.put('/api/cases/:id', requireAuth, async (req, res) => {
         b.canonical_url || '', b.og_title || '', b.og_description || '',
         b.og_image_url || '', b.json_ld || '', b.no_index || false,
         b.hubspot_event_name || '', b.hubspot_form_guid || '',
-        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '',
+        b.utm_source || '', b.utm_medium || '', b.utm_campaign || '', b.hero_image_alt || '',
         req.params.id,
       ]
     );
@@ -893,23 +906,23 @@ app.get('/api/ebooks/all', async (_req, res) => {
 });
 
 app.post('/api/ebooks', requireAuth, async (req, res) => {
-  const { title, slug, description, author, category, cover_image, download_url, page_count, tags, status } = req.body;
+  const { title, slug, description, author, category, cover_image, cover_image_alt, download_url, page_count, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO ebooks (title,slug,description,author,category,cover_image,download_url,page_count,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
-      [title, slug, description, author, category, cover_image, download_url, page_count, tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO ebooks (title,slug,description,author,category,cover_image,cover_image_alt,download_url,page_count,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,NOW(),NOW()) RETURNING *`,
+      [title, slug, description, author, category, cover_image, cover_image_alt || '', download_url, page_count, tags || [], status, status === 'published' ? new Date() : null]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 app.put('/api/ebooks/:id', requireAuth, async (req, res) => {
-  const { title, slug, description, author, category, cover_image, download_url, page_count, tags, status } = req.body;
+  const { title, slug, description, author, category, cover_image, cover_image_alt, download_url, page_count, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `UPDATE ebooks SET title=$1,slug=$2,description=$3,author=$4,category=$5,cover_image=$6,download_url=$7,page_count=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
-      [title, slug, description, author, category, cover_image, download_url, page_count, tags || [], status, req.params.id]
+      `UPDATE ebooks SET title=$1,slug=$2,description=$3,author=$4,category=$5,cover_image=$6,cover_image_alt=$7,download_url=$8,page_count=$9,tags=$10,status=$11,updated_at=NOW() WHERE id=$12 RETURNING *`,
+      [title, slug, description, author, category, cover_image, cover_image_alt || '', download_url, page_count, tags || [], status, req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
@@ -939,23 +952,23 @@ app.get('/api/guides/all', async (_req, res) => {
 });
 
 app.post('/api/guides', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO guides (title,slug,excerpt,content,author,category,cover_image,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,NOW(),NOW()) RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO guides (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, status === 'published' ? new Date() : null]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 app.put('/api/guides/:id', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `UPDATE guides SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,tags=$8,status=$9,updated_at=NOW() WHERE id=$10 RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, tags || [], status, req.params.id]
+      `UPDATE guides SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
@@ -985,23 +998,23 @@ app.get('/api/webinars/all', async (_req, res) => {
 });
 
 app.post('/api/webinars', requireAuth, async (req, res) => {
-  const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags, status } = req.body;
+  const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO webinars (title,slug,description,host,event_date,duration_minutes,recording_url,cover_image,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
-      [title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO webinars (title,slug,description,host,event_date,duration_minutes,recording_url,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,NOW(),NOW()) RETURNING *`,
+      [title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, cover_image_alt || '', tags || [], status, status === 'published' ? new Date() : null]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
 app.put('/api/webinars/:id', requireAuth, async (req, res) => {
-  const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags, status } = req.body;
+  const { title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `UPDATE webinars SET title=$1,slug=$2,description=$3,host=$4,event_date=$5,duration_minutes=$6,recording_url=$7,cover_image=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
-      [title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, tags || [], status, req.params.id]
+      `UPDATE webinars SET title=$1,slug=$2,description=$3,host=$4,event_date=$5,duration_minutes=$6,recording_url=$7,cover_image=$8,cover_image_alt=$9,tags=$10,status=$11,updated_at=NOW() WHERE id=$12 RETURNING *`,
+      [title, slug, description, host, event_date, duration_minutes, recording_url, cover_image, cover_image_alt || '', tags || [], status, req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
@@ -1013,6 +1026,25 @@ app.delete('/api/webinars/:id', requireAuth, async (req, res) => {
     await pool.query(`DELETE FROM webinars WHERE id = $1`, [req.params.id]);
     res.json({ success: true });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+// ===== FILE UPLOAD =====
+app.use('/uploads', express.static(uploadsDir));
+
+app.post('/api/upload', requireAuth, upload.single('file'), (req: any, res: any) => {
+  if (!req.file) { res.status(400).json({ error: 'No file uploaded' }); return; }
+  res.json({ url: `/uploads/${req.file.filename}` });
+});
+
+app.get('/api/media', requireAuth, (_req, res) => {
+  try {
+    const files = fs.readdirSync(uploadsDir)
+      .filter(f => /\.(jpg|jpeg|png|gif|webp|svg|avif)$/i.test(f))
+      .sort()
+      .reverse()
+      .map(f => ({ url: `/uploads/${f}`, name: f }));
+    res.json(files);
+  } catch { res.json([]); }
 });
 
 // ===== robots.txt — block crawlers from private portals =====

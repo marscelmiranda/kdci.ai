@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ImagePicker } from '../components/ImagePicker';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { RichTextEditor } from '../components/RichTextEditor';
@@ -40,6 +41,7 @@ const emptyForm = () => ({
   meta_title: '', meta_description: '', keywords: '', canonical_url: '',
   og_title: '', og_description: '', og_image_url: '', json_ld: '', no_index: false,
   hubspot_event_name: '', hubspot_form_guid: '', utm_source: '', utm_medium: '', utm_campaign: '',
+  hero_image_alt: '',
 });
 
 type FormData = ReturnType<typeof emptyForm>;
@@ -169,6 +171,7 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
         utm_source: full.utm_source || '',
         utm_medium: full.utm_medium || '',
         utm_campaign: full.utm_campaign || '',
+        hero_image_alt: full.hero_image_alt || '',
       });
     } catch {
       setFormData({ ...emptyForm(), title: c.title, client: c.client, author: c.author, status: c.status });
@@ -391,14 +394,18 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
                   <div><label className={labelCls}>Subtitle / Hero Tagline</label>
                     <input type="text" value={formData.subtitle} onChange={e => set('subtitle', e.target.value)} className={inputCls} placeholder="One-line outcome summary shown below the title…" /></div>
                   <div className="grid grid-cols-2 gap-6">
-                    <div><label className={labelCls}>Hero Image URL</label>
-                      <input type="text" value={formData.hero_image_url} onChange={e => set('hero_image_url', e.target.value)} className={inputCls} placeholder="https://…" /></div>
+                    <div>
+                      <ImagePicker
+                        label="Hero Image"
+                        value={formData.hero_image_url}
+                        onChange={url => set('hero_image_url', url)}
+                        altText={formData.hero_image_alt}
+                        onAltChange={alt => set('hero_image_alt', alt)}
+                      />
+                    </div>
                     <div><label className={labelCls}>Client / Company Name</label>
                       <input type="text" value={formData.client} onChange={e => set('client', e.target.value)} className={inputCls} placeholder="e.g. Acme Corp" /></div>
                   </div>
-                  {formData.hero_image_url && (
-                    <img src={formData.hero_image_url} alt="" className="max-h-40 object-cover rounded-xl border border-white/10" />
-                  )}
 
                   {/* Categories */}
                   <p className={sectionHeadingCls}>Breadcrumb Categories</p>

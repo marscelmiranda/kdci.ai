@@ -11,6 +11,7 @@ import {
   Eye, Sparkles, Calendar
 } from 'lucide-react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
+import { ImagePicker } from '../components/ImagePicker';
 
 interface BlogPost {
   id: string;
@@ -99,7 +100,7 @@ const renderPreviewBlocks = (blocks: Block[]) =>
   });
 
 const emptyForm = () => ({
-  title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', status: 'draft',
+  title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', imageAlt: '', status: 'draft',
   blocks: [] as Block[],
   metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
   hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
@@ -172,7 +173,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       const full: any = await (await fetch(`/api/blog/${post.id}`)).json();
       setFormData({
         title: full.title || '', slug: full.slug || '', category: full.category || 'AI Operations',
-        author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '',
+        author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
         metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
@@ -202,6 +203,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         author: formData.author,
         category: formData.category,
         cover_image: formData.imageUrl,
+        cover_image_alt: formData.imageAlt,
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
         status: formData.status,
       };
@@ -258,10 +260,12 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-green-400 font-mono text-xs focus:outline-none focus:border-[#E61739] min-h-[150px]" placeholder="<div>Custom HTML...</div>" />
       );
       case 'image': return (
-        <div className="space-y-3">
-          <input type="text" value={block.content.url || ''} onChange={e => updateBlock(block.id, { ...block.content, url: e.target.value })} placeholder="Image URL" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
-          {block.content.url && <img src={block.content.url} alt="" className="max-h-48 object-contain mx-auto border border-white/10 rounded-lg" />}
-        </div>
+        <ImagePicker
+          value={block.content.url || ''}
+          onChange={url => updateBlock(block.id, { ...block.content, url })}
+          altText={block.content.alt || ''}
+          onAltChange={alt => updateBlock(block.id, { ...block.content, alt })}
+        />
       );
       case 'pull_quote': return (
         <div className="space-y-3">
@@ -301,9 +305,13 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
                 {col.type === 'image' ? (
                   <div className="space-y-2">
-                    <input type="text" value={col.url || ''} onChange={e => updateBlock(block.id, { ...block.content, [side]: { ...col, url: e.target.value } })} placeholder="Image URL" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
+                    <ImagePicker
+                      value={col.url || ''}
+                      onChange={url => updateBlock(block.id, { ...block.content, [side]: { ...col, url } })}
+                      altText={col.alt || ''}
+                      onAltChange={alt => updateBlock(block.id, { ...block.content, [side]: { ...col, alt } })}
+                    />
                     <input type="text" value={col.caption || ''} onChange={e => updateBlock(block.id, { ...block.content, [side]: { ...col, caption: e.target.value } })} placeholder="Caption (optional)" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
-                    {col.url && <img src={col.url} alt="" className="max-h-32 object-contain mx-auto rounded-lg border border-white/10" />}
                   </div>
                 ) : (
                   <RichTextEditor
@@ -628,10 +636,14 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <input type="text" value={formData.slug} onChange={e => setFormData(p => ({ ...p, slug: e.target.value }))}
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder="url-slug" />
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Cover Image URL</label>
-                      <input type="text" value={formData.imageUrl} onChange={e => setFormData(p => ({ ...p, imageUrl: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
+                    <div>
+                      <ImagePicker
+                        label="Cover Image"
+                        value={formData.imageUrl}
+                        onChange={url => setFormData(p => ({ ...p, imageUrl: url }))}
+                        altText={formData.imageAlt}
+                        onAltChange={alt => setFormData(p => ({ ...p, imageAlt: alt }))}
+                      />
                     </div>
                   </div>
                   <div className="space-y-1.5">

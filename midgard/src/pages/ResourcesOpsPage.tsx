@@ -8,6 +8,7 @@ import {
   Users, UserCircle2, Loader2, AlertCircle, BookMarked, Download, Tag, Calendar
 } from 'lucide-react';
 import { getAllEbooks, createEbook, updateEbook, deleteEbook } from '../lib/api';
+import { ImagePicker } from '../components/ImagePicker';
 
 interface Resource {
   id: string;
@@ -27,6 +28,7 @@ interface DbEbook {
   author: string;
   category: string;
   cover_image: string;
+  cover_image_alt: string;
   download_url: string;
   page_count: number;
   tags: string;
@@ -56,7 +58,7 @@ const EBOOK_CATEGORIES = [
 
 const EMPTY_EBOOK = {
   title: '', slug: '', description: '', author: '', category: '',
-  cover_image: '', download_url: '', page_count: '', tags: '', status: 'Draft',
+  cover_image: '', cover_image_alt: '', download_url: '', page_count: '', tags: '', status: 'Draft',
 };
 
 export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -77,7 +79,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
   // ---- Generic resource form (cases/webinars) ----
   const [formData, setFormData] = useState({
-    title: '', slug: '', type: 'cases', author: '', readTime: '10 min', resourceUrl: '', tags: '', featured: false, imageUrl: '', status: 'Draft',
+    title: '', slug: '', type: 'cases', author: '', readTime: '10 min', resourceUrl: '', tags: '', featured: false, imageUrl: '', imageAlt: '', status: 'Draft',
     blocks: [] as Block[],
     metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
     hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
@@ -129,6 +131,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
       author: ebook.author || '',
       category: ebook.category || '',
       cover_image: ebook.cover_image || '',
+      cover_image_alt: ebook.cover_image_alt || '',
       download_url: ebook.download_url || '',
       page_count: ebook.page_count ? String(ebook.page_count) : '',
       tags: Array.isArray(ebook.tags)
@@ -162,6 +165,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
         author: ebookForm.author,
         category: ebookForm.category,
         cover_image: ebookForm.cover_image,
+        cover_image_alt: ebookForm.cover_image_alt,
         download_url: ebookForm.download_url,
         page_count: ebookForm.page_count ? parseInt(ebookForm.page_count) : null,
         tags: ebookForm.tags
@@ -197,7 +201,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
   const handleCreateNew = () => {
     setEditingId(null);
-    setFormData({ title: '', slug: '', type: activeTab, author: '', readTime: '', resourceUrl: '', tags: '', featured: false, imageUrl: '', status: 'Draft', blocks: [], metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: '' });
+    setFormData({ title: '', slug: '', type: activeTab, author: '', readTime: '', resourceUrl: '', tags: '', featured: false, imageUrl: '', imageAlt: '', status: 'Draft', blocks: [], metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: '' });
     setViewState('editor');
     setEditorTab('content');
   };
@@ -255,8 +259,12 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
           placeholder="<div>Custom code...</div>" />
       );
       case 'image': return (
-        <input type="text" value={block.content.url || ''} onChange={e => updateBlock(block.id, { ...block.content, url: e.target.value })}
-          placeholder="Image URL" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
+        <ImagePicker
+          value={block.content.url || ''}
+          onChange={url => updateBlock(block.id, { ...block.content, url })}
+          altText={block.content.alt || ''}
+          onAltChange={alt => updateBlock(block.id, { ...block.content, alt })}
+        />
       );
       case 'divider': return <div className="py-4"><hr className="border-white/10" /></div>;
       default: return null;
@@ -553,10 +561,15 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                 </h2>
                 <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6 space-y-5">
                   <div className="grid grid-cols-2 gap-5">
-                    <div className="space-y-1.5">
-                      <label className={lbl}>Cover Image URL</label>
-                      <input type="url" value={ef.cover_image} onChange={e => setEf({ cover_image: e.target.value })} className={inp} placeholder="https://..." />
-                      <p className="text-[10px] text-white/20">Displayed on the ebook card and detail page. Ideal: portrait 3:4 ratio.</p>
+                    <div>
+                      <ImagePicker
+                        label="Cover Image"
+                        value={ef.cover_image}
+                        onChange={url => setEf({ cover_image: url })}
+                        altText={ef.cover_image_alt}
+                        onAltChange={alt => setEf({ cover_image_alt: alt })}
+                        hint="Displayed on the ebook card and detail page. Ideal: portrait 3:4 ratio."
+                      />
                     </div>
                     <div className="space-y-1.5">
                       <label className={lbl}>PDF Download URL</label>
@@ -564,16 +577,6 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                       <p className="text-[10px] text-white/20">Direct link to the PDF file. Leave blank to show a "Request Access" button instead.</p>
                     </div>
                   </div>
-
-                  {/* Cover preview */}
-                  {ef.cover_image && (
-                    <div className="pt-2">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-2">Cover Preview</p>
-                      <div className="w-32 h-44 rounded-xl overflow-hidden border border-white/10">
-                        <img src={ef.cover_image} alt="cover preview" className="w-full h-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
 
@@ -665,10 +668,14 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                         <input type="text" value={formData.slug} onChange={e => setFormData(p => ({ ...p, slug: e.target.value }))}
                           className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder="url-slug" />
                       </div>
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Cover Image URL</label>
-                        <input type="text" value={formData.imageUrl} onChange={e => setFormData(p => ({ ...p, imageUrl: e.target.value }))}
-                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
+                      <div>
+                        <ImagePicker
+                          label="Cover Image"
+                          value={formData.imageUrl}
+                          onChange={url => setFormData(p => ({ ...p, imageUrl: url }))}
+                          altText={formData.imageAlt}
+                          onAltChange={alt => setFormData(p => ({ ...p, imageAlt: alt }))}
+                        />
                       </div>
                     </div>
                     <div className="space-y-4">
