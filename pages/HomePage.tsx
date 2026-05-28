@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
-import { Cpu, ChevronRight, CheckCircle2, Quote, ArrowRight, BookOpen, Briefcase, BookMarked, Loader2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Cpu, ChevronRight, CheckCircle2, Quote, ArrowRight, BookOpen, Briefcase, BookMarked, ChevronLeft } from 'lucide-react';
 import { ViewType } from '../types';
 import { HeroBackground } from '../components/HeroBackground';
 import { TECH_PARTNERS, TOP_SERVICES, DIFFERENTIATORS, IMG_DEV_TEAM } from '../data';
@@ -94,6 +94,11 @@ export const HomePage = ({
 
   const [latestItems, setLatestItems] = useState<ContentItem[]>([]);
   const [contentLoading, setContentLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -380 : 380, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     setContentLoading(true);
@@ -195,116 +200,136 @@ export const HomePage = ({
 
       {/* ── LATEST CONTENT ── */}
       {(contentLoading || latestItems.length > 0) && (
-        <section className="bg-[#07071a] py-20 border-b border-white/[0.06]">
+        <section className="bg-[#F5F5F7] py-20">
           <div className="max-w-7xl mx-auto px-6">
 
             {/* Header row */}
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
               <div>
                 <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-3">Fresh From KDCI</div>
-                <h2 className="text-3xl md:text-5xl font-heading font-bold text-white leading-tight">
+                <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
                   Latest Insights &amp; Resources
                 </h2>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 <button onClick={() => setView('blog')}
-                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 text-xs font-black uppercase tracking-widest transition-all">
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
                   Blog
                 </button>
                 <button onClick={() => setView('case-studies')}
-                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 text-xs font-black uppercase tracking-widest transition-all">
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
                   Case Studies
                 </button>
                 <button onClick={() => setView('ebooks')}
-                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 text-xs font-black uppercase tracking-widest transition-all">
+                  className="px-4 py-2 rounded-xl bg-white border border-black/[0.06] text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 text-xs font-black uppercase tracking-widest transition-all shadow-sm">
                   Ebooks
                 </button>
+                {/* Scroll arrows */}
+                <div className="flex items-center gap-1 ml-2">
+                  <button onClick={() => scroll('left')}
+                    className="w-9 h-9 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 transition-all shadow-sm">
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button onClick={() => scroll('right')}
+                    className="w-9 h-9 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-[#86868b] hover:text-[#1D1D1F] hover:border-black/20 transition-all shadow-sm">
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Loading skeleton */}
-            {contentLoading && (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="rounded-[20px] bg-white/[0.03] border border-white/[0.06] overflow-hidden animate-pulse">
-                    <div className="aspect-[16/9] bg-white/[0.05]" />
-                    <div className="p-6 space-y-3">
-                      <div className="h-3 bg-white/[0.07] rounded w-1/3" />
-                      <div className="h-5 bg-white/[0.07] rounded w-5/6" />
-                      <div className="h-4 bg-white/[0.05] rounded w-full" />
-                      <div className="h-4 bg-white/[0.05] rounded w-4/5" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Content grid */}
-            {!contentLoading && latestItems.length > 0 && (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {latestItems.map((item, i) => {
-                  const meta = TYPE_META[item.type];
-                  const Icon = meta.icon;
-                  const handleClick = () => {
-                    if (!item.slug) { setView(meta.view); return; }
-                    if (item.type === 'Blog' && onNavigateToContent)         onNavigateToContent('blog', item.slug);
-                    else if (item.type === 'Case Study' && onNavigateToContent) onNavigateToContent('case-study', item.slug);
-                    else if (item.type === 'Ebook' && onNavigateToContent)   onNavigateToContent('ebook', item.slug);
-                    else setView(meta.view);
-                  };
-                  return (
-                    <button
-                      key={i}
-                      onClick={handleClick}
-                      className="group text-left rounded-[20px] bg-white/[0.03] border border-white/[0.06] hover:border-white/20 hover:bg-white/[0.06] overflow-hidden transition-all duration-300 flex flex-col"
-                    >
-                      {/* Cover image */}
-                      <div className="aspect-[16/9] overflow-hidden bg-white/[0.04] shrink-0 relative">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.imageAlt}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <Icon size={32} className="text-white/10" />
-                          </div>
-                        )}
-                        {/* Type pill over image */}
-                        <div className={`absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${meta.bg} ${meta.text} backdrop-blur-sm border border-white/10`}>
-                          <Icon size={10} />
-                          {item.type}
-                        </div>
-                      </div>
-
-                      {/* Card body */}
-                      <div className="p-6 flex flex-col flex-grow">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-2">{item.category}</p>
-                        <h3 className="text-white font-bold text-base leading-snug mb-3 line-clamp-2 group-hover:text-[#E61739] transition-colors">
-                          {item.title}
-                        </h3>
-                        {item.excerpt && (
-                          <p className="text-white/40 text-sm leading-relaxed line-clamp-2 mb-4 flex-grow font-medium">
-                            {item.excerpt}
-                          </p>
-                        )}
-                        <div className="flex items-center justify-between pt-4 border-t border-white/[0.06] mt-auto">
-                          <div className="text-white/25 text-[11px] font-bold">
-                            {item.byline && <span className="mr-2">{item.byline}</span>}
-                            {item.displayDate}
-                          </div>
-                          <ArrowRight size={14} className="text-white/20 group-hover:text-[#E61739] group-hover:translate-x-1 transition-all" />
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
           </div>
+
+          {/* Loading skeleton — full-bleed scroll area */}
+          {contentLoading && (
+            <div className="flex gap-5 px-6 overflow-hidden" style={{ maxWidth: '100vw' }}>
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="rounded-[20px] bg-white border border-black/[0.04] overflow-hidden animate-pulse shrink-0 w-[340px]">
+                  <div className="aspect-[16/9] bg-black/[0.04]" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-3 bg-black/[0.05] rounded w-1/3" />
+                    <div className="h-5 bg-black/[0.06] rounded w-5/6" />
+                    <div className="h-4 bg-black/[0.04] rounded w-full" />
+                    <div className="h-4 bg-black/[0.04] rounded w-4/5" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Horizontal scroll track */}
+          {!contentLoading && latestItems.length > 0 && (
+            <div
+              ref={scrollRef}
+              className="flex gap-5 overflow-x-auto scroll-smooth pb-4"
+              style={{
+                paddingLeft: 'max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem))',
+                paddingRight: 'max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem))',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
+              {latestItems.map((item, i) => {
+                const meta = TYPE_META[item.type];
+                const Icon = meta.icon;
+                const handleClick = () => {
+                  if (!item.slug) { setView(meta.view); return; }
+                  if (item.type === 'Blog' && onNavigateToContent)             onNavigateToContent('blog', item.slug);
+                  else if (item.type === 'Case Study' && onNavigateToContent)  onNavigateToContent('case-study', item.slug);
+                  else if (item.type === 'Ebook' && onNavigateToContent)       onNavigateToContent('ebook', item.slug);
+                  else setView(meta.view);
+                };
+                return (
+                  <button
+                    key={i}
+                    onClick={handleClick}
+                    className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0 w-[340px]"
+                  >
+                    {/* Cover image */}
+                    <div className="aspect-[16/9] overflow-hidden bg-[#F5F5F7] shrink-0 relative">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.imageAlt}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon size={32} className="text-black/10" />
+                        </div>
+                      )}
+                      <div className={`absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${meta.bg} ${meta.text} backdrop-blur-sm border border-black/[0.06]`}>
+                        <Icon size={10} />
+                        {item.type}
+                      </div>
+                    </div>
+
+                    {/* Card body */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-2">{item.category}</p>
+                      <h3 className="text-[#1D1D1F] font-bold text-base leading-snug mb-3 line-clamp-2 group-hover:text-[#E61739] transition-colors">
+                        {item.title}
+                      </h3>
+                      {item.excerpt && (
+                        <p className="text-[#86868b] text-sm leading-relaxed line-clamp-2 mb-4 flex-grow font-medium">
+                          {item.excerpt}
+                        </p>
+                      )}
+                      <div className="flex items-center justify-between pt-4 border-t border-black/[0.05] mt-auto">
+                        <div className="text-[#86868b] text-[11px] font-bold">
+                          {item.byline && <span className="mr-2 text-[#1D1D1F]">{item.byline}</span>}
+                          {item.displayDate}
+                        </div>
+                        <ArrowRight size={14} className="text-black/20 group-hover:text-[#E61739] group-hover:translate-x-1 transition-all" />
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
         </section>
       )}
 
