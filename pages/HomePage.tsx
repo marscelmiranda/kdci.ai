@@ -282,7 +282,7 @@ export const HomePage = ({
                   <button
                     key={i}
                     onClick={handleClick}
-                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)' }}
+                    style={{ minWidth: 'calc((100% - 2.5rem) / 3)', maxHeight: '460px' }}
                     className="group text-left rounded-[20px] bg-white border border-black/[0.04] hover:border-[#E61739]/25 hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col shrink-0"
                   >
                     {/* Cover image */}
