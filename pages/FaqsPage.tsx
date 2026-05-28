@@ -9,7 +9,7 @@ const HERO_IMG = "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto
 const SERVICE_CATEGORIES = [
   {
     id: 'ai-monitoring',
-    label: 'AI Observability and Governance',
+    label: 'AI Agent Operations',
     icon: Monitor,
     questions: [
       { q: "What exactly counts as an 'AI agent' for monitoring purposes?", a: "Any automated system using a large language model (LLM) to handle customer interactions, internal queries, data processing, or decision support — including chatbots, voice agents, email bots, support agents on Intercom or Zendesk, and custom-built LLM workflows." },

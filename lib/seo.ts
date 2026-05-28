@@ -85,7 +85,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-implementation-services/`,
   },
   'ai-agent-monitoring': {
-    title: 'AI Observability and Governance | KDCI.ai',
+    title: 'AI Agent Operations | KDCI.ai',
     description: 'Real-time AI agent monitoring so you detect anomalies, ensure reliability, and maintain performance across every workflow before your customers do.',
     canonical: `${BASE}/solutions/ai-agent-monitoring/`,
   },
