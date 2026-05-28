@@ -20,7 +20,7 @@ const DELIVERABLES = [
   {
     icon: Activity,
     title: 'Daily Performance Monitoring',
-    desc: 'We track response accuracy, debug hallucinations, and flag latency spikes across your entire AI stack — giving you a real-time view of LLM observability metrics that matter.',
+    desc: 'We track response accuracy, debug hallucinations, and flag latency spikes across your entire AI agent environment.',
   },
   {
     icon: RefreshCw,
@@ -40,12 +40,12 @@ const DELIVERABLES = [
   {
     icon: BarChart3,
     title: 'Monthly Scorecard & Recommendations',
-    desc: 'A full AI performance report every month: benchmarks, behavioral trends, governance checkpoints, and a prioritized action plan for Month 2 — so you always know where your agents stand.',
+    desc: 'A full AI operations report every month: benchmarks, behavioral trends, governance checkpoints, and a prioritized action plan for the next 30 days.',
   },
   {
     icon: Users,
     title: 'Dedicated AI Ops Specialist',
-    desc: 'AI agents produce dense, opaque outputs that make debugging hard alone. Your dedicated specialist provides the human layer of AI system transparency — clear visibility into every decision your agent makes.',
+    desc: 'Your dedicated specialist is the human layer of AI system transparency — providing clear visibility into every decision your agents make, across every platform they touch.',
   },
 ];
 
