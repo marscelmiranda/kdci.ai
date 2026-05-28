@@ -315,7 +315,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
                 Our Difference
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
-                Built to keep your agents performing under <span className="text-[#E61739]">agentic trust controls</span>
+                Managed AI agent operations that makes your platforms work correctly.
               </h2>
               <div className="divide-y divide-black/10">
                 {[
