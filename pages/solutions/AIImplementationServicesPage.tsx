@@ -136,7 +136,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <Breadcrumbs setView={setView} currentName="AI Consulting & Implementation" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
+          <Breadcrumbs setView={setView} currentName="AI Consulting and Strategy" parent={{ name: 'Solutions', view: 'solutions-hub' }} align="left" />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
@@ -630,7 +630,7 @@ export const AIImplementationServicesPage = ({ setView }: { setView: (v: ViewTyp
             tag: 'AI Consulting',
             title: 'Tell us about your automation goals.',
             subtitle: 'Free 30-min discovery call. No commitment required.',
-            inquiryType: 'AI Consulting & Implementation',
+            inquiryType: 'AI Consulting and Strategy',
             source: 'ai-consulting-hero',
             specificField: {
               label: 'Department to Automate First',

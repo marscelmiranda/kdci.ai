@@ -185,7 +185,7 @@ export const AICreativeStudioPage = ({ setView }: { setView: (v: ViewType) => vo
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs
             setView={setView}
-            currentName="AI Creative Studio"
+            currentName="AI Graphic Design Services"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
             align="left"
           />

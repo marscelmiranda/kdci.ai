@@ -37,7 +37,7 @@ const SEARCH_ITEMS = [
 
 const POPULAR_SEARCHES = [
   { label: "Generative AI", view: "solutions-hub" },
-  { label: "AI Outbound & Lead Generation", view: "ai-outbound" },
+  { label: "AI Lead Generation", view: "ai-outbound" },
   { label: "Customer Experience", view: "customer-support" },
 ];
 

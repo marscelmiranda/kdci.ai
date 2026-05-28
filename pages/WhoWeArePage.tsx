@@ -192,7 +192,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
             {[
               {
                 icon: BrainCircuit,
-                title: "AI Consulting & Implementation",
+                title: "AI Consulting and Strategy",
                 desc: "We audit your operations, design your AI stack, and go live in 42 days. Strategy, agent builds, integrations, and post-launch monitoring — all under one roof.",
               },
               {
@@ -202,23 +202,23 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               },
               {
                 icon: Target,
-                title: "AI Outbound & Lead Generation",
+                title: "AI Lead Generation",
                 desc: "A fully managed outbound engine: ICP research, Clay-enriched list building, AI-personalized sequences, LinkedIn outreach, and booked meetings — end to end.",
 
               },
               {
                 icon: UsersRound,
-                title: "AI Workforce Augmentation",
+                title: "AI Staffing Solutions",
                 desc: "Pre-trained Filipino specialists — prompt engineers, AI ops leads, data analysts, and VAs — embedded in your team at up to 70% less than equivalent US hiring costs.",
               },
               {
                 icon: HeartPulse,
-                title: "AI-Augmented Customer Experience",
+                title: "AI in Customer Service",
                 desc: "AI handles 70%+ of first-contact volume. Human escalation specialists in Manila handle everything else — with monthly CSAT optimization and CX scorecards.",
               },
               {
                 icon: Palette,
-                title: "AI Creative Studio",
+                title: "AI Graphic Design Services",
                 desc: "Brand-grade design at production speed. Our Manila team uses Midjourney, Firefly, Runway ML, and Adobe CC to deliver assets faster and at lower cost than any traditional agency.",
               },
             ].map((item, i) => (

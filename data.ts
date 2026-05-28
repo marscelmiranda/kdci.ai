@@ -166,7 +166,7 @@ export const TOP_SERVICES = [
   },
   {
     id: 'ai-consulting',
-    name: 'AI Consulting & Implementation',
+    name: 'AI Consulting and Strategy',
     tag: 'AI Strategy & Build',
     icon: Cpu,
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
@@ -175,7 +175,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'customer-support',
-    name: 'AI-Augmented Customer Experience', 
+    name: 'AI in Customer Service', 
     tag: '24/7 Global Ops',
     icon: Activity,
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1774495868/Gemini_Generated_Image_bem5d9bem5d9bem5-3_gcazem.png',
@@ -185,7 +185,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'creative-prod',
-    name: 'AI Creative Studio', 
+    name: 'AI Graphic Design Services', 
     tag: 'AI-Native Design',
     icon: Sparkles,
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
@@ -194,7 +194,7 @@ export const TOP_SERVICES = [
   },
   {
     id: 'ai-outbound',
-    name: 'AI Outbound & Lead Generation',
+    name: 'AI Lead Generation',
     tag: 'Pipeline on Demand',
     icon: TrendingUp,
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
@@ -203,7 +203,7 @@ export const TOP_SERVICES = [
   },
   { 
     id: 'agentic-recruitment',
-    name: 'AI Workforce Augmentation', 
+    name: 'AI Staffing Solutions', 
     tag: 'Talent Sourcing',
     icon: Target,
     image: IMG_RECRUITMENT_HERO,

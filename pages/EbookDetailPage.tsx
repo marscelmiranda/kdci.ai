@@ -51,11 +51,11 @@ interface AccessForm {
 
 const SERVICE_LINES = [
   'AI Agent Operations',
-  'AI Consulting & Implementation',
-  'AI-Augmented Customer Experience',
-  'AI Creative Studio',
-  'AI Outbound & Lead Generation',
-  'AI Workforce Augmentation',
+  'AI Consulting and Strategy',
+  'AI in Customer Service',
+  'AI Graphic Design Services',
+  'AI Lead Generation',
+  'AI Staffing Solutions',
 ];
 
 const parseTags = (tags: string | string[]): string[] => {

@@ -26,7 +26,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'ai-consulting',
-    label: 'AI Consulting & Implementation',
+    label: 'AI Consulting and Strategy',
     icon: Cpu,
     questions: [
       { q: "What does AI Consulting & Implementation actually include?", a: "It covers the full lifecycle: discovery and process audit, AI strategy design, custom agent or workflow builds, integration into your existing systems, staff training, and ongoing optimisation. We don't just advise — we build and run the solution alongside your team until outcomes are proven." },
@@ -43,7 +43,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'cx',
-    label: 'AI-Augmented Customer Experience',
+    label: 'AI in Customer Service',
     icon: Users,
     questions: [
       { q: "What customer support channels can KDCI cover?", a: "We support voice, email, live chat, social media DMs, SMS, and in-app messaging. Our agents are trained across multiple channels simultaneously, so you get a true omnichannel operation from a single managed team." },
@@ -60,7 +60,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'creative',
-    label: 'AI Creative Studio',
+    label: 'AI Graphic Design Services',
     icon: Palette,
     questions: [
       { q: "What makes KDCI's AI Creative Studio different from a traditional design agency?", a: "Our Manila team runs AI tools — Midjourney, Adobe Firefly, Runway ML, CapCut AI — at every stage of production. That means faster delivery, lower cost per asset, and consistent brand output without sacrificing quality. Traditional agencies bill hourly and have slower turnaround cycles. We operate on a production cadence model." },
@@ -77,7 +77,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'outbound',
-    label: 'AI Outbound & Lead Generation',
+    label: 'AI Lead Generation',
     icon: TrendingUp,
     questions: [
       { q: "What exactly is 'fully managed' outbound?", a: "It means we handle every component: ICP definition, prospect sourcing, Clay enrichment, sequence writing, domain setup, inbox warm-up, LinkedIn campaign management, reply handling, meeting booking, CRM updates, and weekly reporting. You review and approve the ICP and sequences, then we run the engine. Your only job is to show up to the meetings we book." },
@@ -94,7 +94,7 @@ const SERVICE_CATEGORIES = [
   },
   {
     id: 'workforce',
-    label: 'AI Workforce Augmentation',
+    label: 'AI Staffing Solutions',
     icon: UserCheck,
     questions: [
       { q: "What makes KDCI.ai specialists different from a typical VA or offshore hire?", a: "Every specialist in our talent pool is AI-trained before placement — they arrive proficient in Claude, GPT-4o, Zapier, Midjourney, HubSpot, Notion AI, and other tools relevant to your role. You're not training someone on AI from scratch; you're embedding someone who already uses these tools in their daily workflow." },

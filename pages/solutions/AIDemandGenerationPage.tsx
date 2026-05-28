@@ -80,7 +80,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <Breadcrumbs
             setView={setView}
-            currentName="AI Outbound & Lead Generation"
+            currentName="AI Lead Generation"
             parent={{ name: 'Solutions', view: 'solutions-hub' }}
             align="left"
           />
@@ -499,7 +499,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
-              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Outbound & Lead Generation</p>
+              <p className="text-[11px] text-white/40 font-black uppercase tracking-widest mb-2">AI Lead Generation</p>
               <h3 className="text-2xl md:text-3xl font-heading font-bold text-white leading-snug">
                 Ready to start booking<br />meetings in 6 weeks?
               </h3>
@@ -645,7 +645,7 @@ export const AIDemandGenerationPage = ({ setView }: { setView: (v: ViewType) => 
             tag: 'AI Outbound',
             title: 'Tell us about your pipeline targets.',
             subtitle: 'Campaign brief reviewed within 24 hours.',
-            inquiryType: 'AI Outbound & Lead Generation',
+            inquiryType: 'AI Lead Generation',
             source: 'ai-outbound-hero',
             specificField: {
               label: 'Monthly Meeting Target',

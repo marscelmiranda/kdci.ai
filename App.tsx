@@ -81,12 +81,12 @@ const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'home-v2': '/home-v2/',
   // Services
   'solutions-hub': '/solutions/',
-  'agentic-recruitment': '/solutions/ai-workforce-augmentation/',
-  'customer-support': '/solutions/ai-augmented-cx-support/',
-  'creative-prod': '/solutions/ai-creative-studio/',
+  'agentic-recruitment': '/solutions/ai-staffing-solutions/',
+  'customer-support': '/solutions/ai-consulting-and-strategy/',
+  'creative-prod': '/solutions/ai-graphic-design/',
   'staff-aug': '/solutions/staff-augmentation/',
-  'ai-consulting': '/solutions/ai-implementation-services/',
-  'ai-agent-monitoring': '/solutions/ai-agent-monitoring/',
+  'ai-consulting': '/solutions/ai-consultation-and-strategy/',
+  'ai-agent-monitoring': '/solutions/ai-agent-operations/',
   'ai-outbound': '/solutions/ai-demand-generation/',
   'outcome-models': '/solutions/outcome-models/',
   // Industries
