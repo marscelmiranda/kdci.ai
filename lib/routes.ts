@@ -8,7 +8,7 @@ export const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'customer-support': '/solutions/ai-consulting-and-strategy/',
   'creative-prod': '/solutions/ai-graphic-design/',
   'staff-aug': '/solutions/staff-augmentation/',
-  'ai-consulting': '/solutions/ai-consultation-and-strategy/',
+  'ai-consulting': '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
   'ai-outbound': '/solutions/ai-demand-generation/',
   'outcome-models': '/solutions/outcome-models/',

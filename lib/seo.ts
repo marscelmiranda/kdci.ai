@@ -14,7 +14,7 @@ const URL_PATHS: Record<string, string> = {
   'customer-support':  '/solutions/ai-consulting-and-strategy/',
   'creative-prod':     '/solutions/ai-graphic-design/',
   'staff-aug':         '/solutions/ai-workforce-augmentation/',
-  'ai-consulting':     '/solutions/ai-consultation-and-strategy/',
+  'ai-consulting':     '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
   'ai-outbound':       '/solutions/ai-demand-generation/',
   company:             '/who-we-are/',
@@ -82,7 +82,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   'ai-consulting': {
     title: 'AI Consulting and Strategy Services | KDCI.ai',
     description: 'End-to-end AI consulting and strategy services, from readiness audit to live agent deployment within 42 days. KPI-backed. Built in-house. ROI-guaranteed.',
-    canonical: `${BASE}/solutions/ai-consultation-and-strategy/`,
+    canonical: `${BASE}/solutions/ai-consulting-and-strategy/`,
   },
   'ai-agent-monitoring': {
     title: 'AI Agent Operations for Always-On Performance | KDCI.ai',

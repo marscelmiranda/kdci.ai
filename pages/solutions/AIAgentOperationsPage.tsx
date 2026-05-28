@@ -119,7 +119,7 @@ const PRICING = [
 
 /* ─── Component ─────────────────────────────────────────────────────── */
 
-export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', agents: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);

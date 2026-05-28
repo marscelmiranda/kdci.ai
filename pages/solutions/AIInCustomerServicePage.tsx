@@ -9,7 +9,7 @@ import { IMG_CX_TEAM } from '../../data';
 import IMG_CX_HERO from '@/attached_assets/kdci-filipino-cx-support-agent.webp';
 import IMG_CX_CONTACT from '@/attached_assets/kdci-ai-cx-support-team.webp';
 
-export const AIAugmentedCXSupportPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);

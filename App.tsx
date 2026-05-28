@@ -29,12 +29,12 @@ import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
 
 // Solutions
 import { SolutionsHubPage } from './pages/solutions/SolutionsHubPage';
-import { AICreativeStudioPage } from './pages/solutions/AICreativeStudioPage';
-import { AIAugmentedCXSupportPage } from './pages/solutions/AIAugmentedCXSupportPage';
+import { AIGraphicDesignPage } from './pages/solutions/AIGraphicDesignPage';
+import { AIInCustomerServicePage } from './pages/solutions/AIInCustomerServicePage';
 import { StaffAugmentationPage } from './pages/solutions/StaffAugmentationPage';
-import { AIWorkforceAugmentationPage } from './pages/solutions/AIWorkforceAugmentationPage';
-import { AIImplementationServicesPage } from './pages/solutions/AIImplementationServicesPage';
-import { AIAgentMonitoringPage } from './pages/solutions/AIAgentMonitoringPage';
+import { AIStaffingSolutionsPage } from './pages/solutions/AIStaffingSolutionsPage';
+import { AIConsultingAndStrategyPage } from './pages/solutions/AIConsultingAndStrategyPage';
+import { AIAgentOperationsPage } from './pages/solutions/AIAgentOperationsPage';
 import { AIDemandGenerationPage } from './pages/solutions/AIDemandGenerationPage';
 
 // Import Job Post Components and Data
@@ -85,7 +85,7 @@ const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'customer-support': '/solutions/ai-consulting-and-strategy/',
   'creative-prod': '/solutions/ai-graphic-design/',
   'staff-aug': '/solutions/staff-augmentation/',
-  'ai-consulting': '/solutions/ai-consultation-and-strategy/',
+  'ai-consulting': '/solutions/ai-consulting-and-strategy/',
   'ai-agent-monitoring': '/solutions/ai-agent-operations/',
   'ai-outbound': '/solutions/ai-demand-generation/',
   'outcome-models': '/solutions/outcome-models/',
@@ -295,12 +295,12 @@ const App = () => {
 
         {/* Solutions */}
         {activeView === 'solutions-hub' && <SolutionsHubPage setView={setView} />}
-        {activeView === 'agentic-recruitment' && <AIWorkforceAugmentationPage setView={setView} />}
-        {activeView === 'customer-support' && <AIAugmentedCXSupportPage setView={setView} />}
-        {activeView === 'creative-prod' && <AICreativeStudioPage setView={setView} />}
+        {activeView === 'agentic-recruitment' && <AIStaffingSolutionsPage setView={setView} />}
+        {activeView === 'customer-support' && <AIInCustomerServicePage setView={setView} />}
+        {activeView === 'creative-prod' && <AIGraphicDesignPage setView={setView} />}
         {/* activeView === 'staff-aug' && <StaffAugmentationPage setView={setView} /> */}
-        {activeView === 'ai-consulting' && <AIImplementationServicesPage setView={setView} />}
-        {activeView === 'ai-agent-monitoring' && <AIAgentMonitoringPage setView={setView} />}
+        {activeView === 'ai-consulting' && <AIConsultingAndStrategyPage setView={setView} />}
+        {activeView === 'ai-agent-monitoring' && <AIAgentOperationsPage setView={setView} />}
         {activeView === 'ai-outbound' && <AIDemandGenerationPage setView={setView} />}
         
         {/* Industries */}
