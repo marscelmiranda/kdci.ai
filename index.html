@@ -1,220 +1,295 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LZHY60CXR"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9LZHY60CXR"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9LZHY60CXR');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-9LZHY60CXR");
     </script>
 
     <title>AI Managed Services Provider | KDCI.ai</title>
     <script>
-    (function(){
-      var titles = {
-        '/': 'AI Managed Services Provider | KDCI.ai',
-        '/solutions/': 'Your Trusted AI Operations Partner | KDCI.ai',
-        '/solutions/ai-agent-monitoring/': 'AI Agent Monitoring & Management | KDCI.ai',
-        '/solutions/ai-implementation-services/': 'AI Consultation and Implementation | KDCI.ai',
-        '/solutions/ai-augmented-cx-support/': 'AI Augmented CX Support | KDCI.ai',
-        '/solutions/ai-creative-studio/': 'AI-Powered Demand Generation Services | KDCI.ai',
-        '/solutions/ai-demand-generation/': 'AI-Powered Demand Generation Services | KDCI.ai',
-        '/solutions/ai-workforce-augmentation/': 'Build an AI-Skilled Workforce | KDCI.ai',
-        '/who-we-are/': 'Who We Are | KDCI',
-        '/careers/': 'Careers at KDCI | Join the Elite Intelligence',
-        '/blogs/': 'Blog | Offshore Staffing & AI Insights — KDCI',
-        '/blog/': 'Blog | Offshore Staffing & AI Insights — KDCI',
-        '/case-studies/': 'Case Studies | Real Results — KDCI',
-        '/faqs/': 'Frequently Asked Questions | KDCI',
-        '/glossary/': 'Outsourcing & AI Glossary | KDCI',
-        '/contact-us/': 'Contact Us | KDCI',
-        '/guides/': 'Guides | Offshore Staffing Resources — KDCI',
-        '/webinars/': 'Webinars | KDCI',
-        '/ebooks/': 'Ebooks | Free Outsourcing Resources — KDCI',
-        '/privacy-policy/': 'Privacy Policy | KDCI',
-        '/terms-and-conditions/': 'Terms and Conditions | KDCI',
-        '/industries/ecommerce/': 'E-Commerce Offshore Operations | KDCI',
-        '/industries/fintech/': 'Fintech Offshore Operations | KDCI',
-        '/industries/healthcare/': 'Healthcare Offshore Operations | KDCI',
-        '/industries/marketing/': 'Marketing & Ad Agency Offshore Ops | KDCI',
-        '/industries/retail/': 'Omnichannel Retail Offshore Operations | KDCI',
-        '/industries/logistics/': 'Logistics & Supply Chain Offshore Ops | KDCI',
-        '/industries/travel/': 'Travel & Hospitality Offshore Ops | KDCI',
-        '/industries/edtech/': 'EdTech Offshore Operations | KDCI',
-        '/industries/legal/': 'Legal Process Outsourcing | KDCI',
-        '/industries/insurance/': 'Insurance Offshore Operations | KDCI',
-        '/industries/media/': 'Media & Content Offshore Operations | KDCI',
-        '/industries/consumer-tech/': 'Consumer Tech Offshore Support | KDCI',
-        '/industries/telecom/': 'Telecom Offshore Operations | KDCI',
-        '/industries/automotive/': 'Automotive Offshore Operations | KDCI',
-        '/industries/fashion/': 'Fashion & Apparel Offshore Operations | KDCI',
-        '/industries/energy/': 'Energy & Utilities Offshore Operations | KDCI',
-        '/industries/professional-services/': 'Professional Services Offshore Ops | KDCI',
-        '/industries/government/': 'Government & Public Sector Offshore Ops | KDCI'
-      };
-      var p = window.location.pathname;
-      if (p !== '/' && !p.endsWith('/')) p = p + '/';
-      if (titles[p]) document.title = titles[p];
-    })();
+      (function () {
+        var titles = {
+          "/": "AI Managed Services Provider | KDCI.ai",
+          "/solutions/": "Your Trusted AI Operations Partner | KDCI.ai",
+          "/solutions/ai-agent-monitoring/":
+            "AI Agent Monitoring & Management | KDCI.ai",
+          "/solutions/ai-implementation-services/":
+            "AI Consultation and Implementation | KDCI.ai",
+          "/solutions/ai-augmented-cx-support/":
+            "AI Augmented CX Support | KDCI.ai",
+          "/solutions/ai-creative-studio/":
+            "AI-Powered Demand Generation Services | KDCI.ai",
+          "/solutions/ai-demand-generation/":
+            "AI-Powered Demand Generation Services | KDCI.ai",
+          "/solutions/ai-workforce-augmentation/":
+            "Build an AI-Skilled Workforce | KDCI.ai",
+          "/who-we-are/": "Who We Are | KDCI.ai",
+          "/careers/": "Careers at KDCI | Join the Elite Intelligence",
+          "/blogs/": "Blog | Offshore Staffing & AI Insights — KDCI.ai",
+          "/blog/": "Blog | Offshore Staffing & AI Insights — KDCI.ai",
+          "/case-studies/": "Case Studies | Real Results — KDCI.ai",
+          "/faqs/": "Frequently Asked Questions | KDCI.ai",
+          "/glossary/": "Outsourcing & AI Glossary | KDCI.ai",
+          "/contact-us/": "Contact Us | KDCI.ai",
+          "/guides/": "Guides | Offshore Staffing Resources — KDCI.ai",
+          "/webinars/": "Webinars | KDCI.ai",
+          "/ebooks/": "Ebooks | Free Outsourcing Resources — KDCI.ai",
+          "/privacy-policy/": "Privacy Policy | KDCI.ai",
+          "/terms-and-conditions/": "Terms and Conditions | KDCI.ai",
+          "/industries/ecommerce/": "E-Commerce Offshore Operations | KDCI.ai",
+          "/industries/fintech/": "Fintech Offshore Operations | KDCI.ai",
+          "/industries/healthcare/": "Healthcare Offshore Operations | KDCI.ai",
+          "/industries/marketing/":
+            "Marketing & Ad Agency Offshore Ops | KDCI.ai",
+          "/industries/retail/":
+            "Omnichannel Retail Offshore Operations | KDCI.ai",
+          "/industries/logistics/":
+            "Logistics & Supply Chain Offshore Ops | KDCI.ai",
+          "/industries/travel/": "Travel & Hospitality Offshore Ops | KDCI.ai",
+          "/industries/edtech/": "EdTech Offshore Operations | KDCI.ai",
+          "/industries/legal/": "Legal Process Outsourcing | KDCI.ai",
+          "/industries/insurance/": "Insurance Offshore Operations | KDCI.ai",
+          "/industries/media/": "Media & Content Offshore Operations | KDCI.ai",
+          "/industries/consumer-tech/":
+            "Consumer Tech Offshore Support | KDCI.ai",
+          "/industries/telecom/": "Telecom Offshore Operations | KDCI.ai",
+          "/industries/automotive/": "Automotive Offshore Operations | KDCI.ai",
+          "/industries/fashion/":
+            "Fashion & Apparel Offshore Operations | KDCI.ai",
+          "/industries/energy/":
+            "Energy & Utilities Offshore Operations | KDCI.ai",
+          "/industries/professional-services/":
+            "Professional Services Offshore Ops | KDCI.ai",
+          "/industries/government/":
+            "Government & Public Sector Offshore Ops | KDCI.ai",
+        };
+        var p = window.location.pathname;
+        if (p !== "/" && !p.endsWith("/")) p = p + "/";
+        if (titles[p]) document.title = titles[p];
+      })();
     </script>
-    <meta name="description" content="KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="KDCI Outsourcing">
-    <link rel="canonical" href="https://kdci.ai/">
+    <meta
+      name="description"
+      content="KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="KDCI.ai" />
+    <link rel="canonical" href="https://kdci.ai/" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="KDCI Outsourcing">
-    <meta property="og:title" content="AI Managed Services Provider | KDCI.ai">
-    <meta property="og:description" content="Build dedicated, full-time offshore teams in the Philippines. 200+ roles, all-in pricing, 14–30 day onboarding. Trusted by 500+ companies across North America, Australia and Europe.">
-    <meta property="og:url" content="https://kdci.ai/">
-    <meta property="og:image" content="https://cdn.prod.website-files.com/64d5a3ffa7b505860e94b34d/65d2c675ea63792f423b2cee_KDCI-Outsourcing-Logo-p-500.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="KDCI.ai" />
+    <meta
+      property="og:title"
+      content="AI Managed Services Provider | KDCI.ai"
+    />
+    <meta
+      property="og:description"
+      content="KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries."
+    />
+    <meta property="og:url" content="https://kdci.ai/" />
+    <meta
+      property="og:image"
+      content="https://cdn.prod.website-files.com/64d5a3ffa7b505860e94b34d/65d2c675ea63792f423b2cee_KDCI-Outsourcing-Logo-p-500.png"
+    />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AI Managed Services Provider | KDCI.ai">
-    <meta name="twitter:description" content="Hire full-time offshore staff from the Philippines. Expert-vetted, all-in pricing, onboarded in 14–30 days.">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Managed Services Provider | KDCI.ai"
+    />
+    <meta
+      name="twitter:description"
+      content="KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries."
+    />
 
     <!-- JSON-LD: Organization -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "KDCI Outsourcing",
-      "url": "https://kdci.co",
-      "logo": "https://cdn.prod.website-files.com/64d5a3ffa7b505860e94b34d/65d2c675ea63792f423b2cee_KDCI-Outsourcing-Logo-p-500.png",
-      "description": "KDCI is a leading offshore staffing company in the Philippines, providing dedicated full-time staff across 200+ roles to companies across North America, Australia, and Europe.",
-      "foundingDate": "2011",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "552 E Carson St. Suite 104",
-        "addressLocality": "Carson",
-        "addressRegion": "CA",
-        "postalCode": "90745",
-        "addressCountry": "US"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+1-213-460-4240",
-        "contactType": "sales",
-        "email": "info@kdci.co"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/kdci-outsourcing",
-        "https://www.facebook.com/kdcioutsourcing"
-      ],
-      "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
-      "numberOfEmployees": {
-        "@type": "QuantitativeValue",
-        "minValue": 50,
-        "maxValue": 249
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "KDCI.ai",
+        "url": "https://kdci.co",
+        "logo": "https://cdn.prod.website-files.com/64d5a3ffa7b505860e94b34d/65d2c675ea63792f423b2cee_KDCI-Outsourcing-Logo-p-500.png",
+        "description": "KDCI.ai is a leading offshore staffing company in the Philippines, providing dedicated full-time staff across 200+ roles to companies across North America, Australia, and Europe.",
+        "foundingDate": "2011",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "552 E Carson St. Suite 104",
+          "addressLocality": "Carson",
+          "addressRegion": "CA",
+          "postalCode": "90745",
+          "addressCountry": "US"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-213-460-4240",
+          "contactType": "sales",
+          "email": "info@kdci.co"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/kdci-outsourcing",
+          "https://www.facebook.com/kdcioutsourcing"
+        ],
+        "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "minValue": 50,
+          "maxValue": 249
+        }
       }
-    }
     </script>
 
     <!-- JSON-LD: Service -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Philippine Offshore Staffing",
-      "provider": {
-        "@type": "Organization",
-        "name": "KDCI Outsourcing",
-        "url": "https://kdci.co"
-      },
-      "description": "Dedicated full-time offshore staff from the Philippines across 200+ roles. All-in monthly pricing covering salary, benefits, office, equipment, HR, and AI performance monitoring.",
-      "areaServed": "Worldwide",
-      "serviceType": "Offshore Staffing",
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "lowPrice": "850",
-        "highPrice": "4000",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "850",
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Philippine Offshore Staffing",
+        "provider": {
+          "@type": "Organization",
+          "name": "KDCI Outsourcing",
+          "url": "https://kdci.co"
+        },
+        "description": "Dedicated full-time offshore staff from the Philippines across 200+ roles. All-in monthly pricing covering salary, benefits, office, equipment, HR, and AI performance monitoring.",
+        "areaServed": "Worldwide",
+        "serviceType": "Offshore Staffing",
+        "offers": {
+          "@type": "AggregateOffer",
           "priceCurrency": "USD",
-          "unitText": "month"
+          "lowPrice": "850",
+          "highPrice": "4000",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "850",
+            "priceCurrency": "USD",
+            "unitText": "month"
+          }
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Offshore Roles",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Customer Service Agent"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Virtual Assistant" }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Graphic Designer" }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Software Engineer" }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Accountant" }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": { "@type": "Service", "name": "Digital Marketer" }
+            }
+          ]
         }
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Offshore Roles",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Customer Service Agent" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Virtual Assistant" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Graphic Designer" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software Engineer" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Accountant" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketer" } }
-        ]
       }
-    }
     </script>
 
     <!-- JSON-LD: FAQPage -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How quickly can I get an offshore team up and running?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Common roles are placed and onboarded within 14 days. Specialized or senior roles take up to 30 days. KDCI handles all sourcing, vetting, and HR setup." }
-        },
-        {
-          "@type": "Question",
-          "name": "What is included in the all-in monthly rate?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Your monthly rate covers the employee salary, SSS/PhilHealth/Pag-IBIG benefits, 13th month pay, paid leave, office space, IT equipment, HR management, AI performance monitoring, and a dedicated account manager." }
-        },
-        {
-          "@type": "Question",
-          "name": "Are KDCI offshore staff dedicated or shared?",
-          "acceptedAnswer": { "@type": "Answer", "text": "All KDCI staff are fully dedicated to your business only. They work your hours, follow your processes, and are not shared across multiple clients." }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens if a hire isn't the right fit?",
-          "acceptedAnswer": { "@type": "Answer", "text": "KDCI offers a free replacement guarantee within the first 90 days. A replacement is found and onboarded at no additional cost." }
-        },
-        {
-          "@type": "Question",
-          "name": "How much can I save by hiring offshore in the Philippines?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Most clients save 50–70% compared to equivalent US hiring costs when factoring in salary, benefits, office, equipment, and HR overhead." }
-        }
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How quickly can I get an offshore team up and running?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Common roles are placed and onboarded within 14 days. Specialized or senior roles take up to 30 days. KDCI handles all sourcing, vetting, and HR setup."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is included in the all-in monthly rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your monthly rate covers the employee salary, SSS/PhilHealth/Pag-IBIG benefits, 13th month pay, paid leave, office space, IT equipment, HR management, AI performance monitoring, and a dedicated account manager."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are KDCI offshore staff dedicated or shared?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "All KDCI staff are fully dedicated to your business only. They work your hours, follow your processes, and are not shared across multiple clients."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if a hire isn't the right fit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "KDCI offers a free replacement guarantee within the first 90 days. A replacement is found and onboarded at no additional cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much can I save by hiring offshore in the Philippines?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most clients save 50–70% compared to equivalent US hiring costs when factoring in salary, benefits, office, equipment, and HR overhead."
+            }
+          }
+        ]
+      }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "clsx": "https://esm.sh/clsx",
-    "tailwind-merge": "https://esm.sh/tailwind-merge",
-    "class-variance-authority": "https://esm.sh/class-variance-authority"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@^19.2.3",
+          "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+          "react/": "https://esm.sh/react@^19.2.3/",
+          "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+          "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+          "clsx": "https://esm.sh/clsx",
+          "tailwind-merge": "https://esm.sh/tailwind-merge",
+          "class-variance-authority": "https://esm.sh/class-variance-authority"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+  <body>
     <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
