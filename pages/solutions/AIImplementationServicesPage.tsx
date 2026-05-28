@@ -48,7 +48,7 @@ const STEPS = [
   { n: '03', period: 'Week 3–4',  title: 'Build',      desc: 'Prompt engineering, agent configuration, integration setup, and rigorous QA testing. Nothing goes live until it performs.' },
   { n: '04', period: 'Week 5',    title: 'Deploy',     desc: 'Go live with structured team training, runbook handoff, and a managed launch process, so your organization adopts the system with confidence.' },
   { n: '05', period: 'Week 6',    title: 'Monitor',    desc: '30 days of performance monitoring: retraining on live data, resolving edge cases, and establishing a performance baseline your business can rely on.' },
-  { n: '06', period: 'Month 2+',  title: 'Convert',    desc: 'Transition to an ongoing AI Agent Monitoring retainer — continuous oversight, prompt optimization, and monthly reporting against agreed KPIs.' },
+  { n: '06', period: 'Month 2+',  title: 'Convert',    desc: 'Transition to an ongoing AI Agent Operations retainer — continuous oversight, prompt optimization, and monthly reporting against agreed KPIs.' },
 ];
 
 const PRICING = [

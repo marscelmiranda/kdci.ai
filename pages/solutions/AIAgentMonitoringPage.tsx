@@ -179,7 +179,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               <div className="relative min-h-[400px] lg:h-[560px] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-slate-800">
                 <img loading="lazy"
                   src={IMG_HERO}
-                  alt="KDCI AI agent monitoring dashboard for real-time performance tracking"
+                  alt="KDCI AI agent operations dashboard for real-time performance tracking"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -422,9 +422,9 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              Industries where <span className="text-[#E61739]">AI agent <br/> monitoring</span> isn't optional
+              Industries where <span className="text-[#E61739]">AI agent <br/> operations</span> isn't optional
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We specialize in the verticals where AI agent monitoring protects what matters most.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We specialize in the verticals where AI agent operations protects what matters most.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-4">
             {INDUSTRIES.map((ind, i) => (
@@ -490,7 +490,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="lg:w-[45%] relative min-h-[400px] lg:min-h-0 shrink-0">
             <img loading="lazy"
               src={IMG_CONTACT}
-              alt="KDCI AI agent monitoring specialist on a free discovery consultation call"
+              alt="KDCI AI agent operations specialist on a free discovery consultation call"
               className="absolute inset-0 w-full h-full object-cover object-right"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
