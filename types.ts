@@ -64,6 +64,7 @@ export type ViewType =
   | 'job-hr-bp'
   | 'job-tech-recruiter'
   | 'job-finance-controller'
+  | 'insights'
   | 'blog'
   | 'blog-detail'
   | 'case-studies'

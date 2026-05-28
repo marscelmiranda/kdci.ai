@@ -70,6 +70,7 @@ import { EbooksPage } from './pages/EbooksPage';
 import { EbookDetailPage } from './pages/EbookDetailPage';
 import { FaqsPage } from './pages/FaqsPage';
 import { GlossaryPage } from './pages/GlossaryPage';
+import { InsightsPage } from './pages/InsightsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 
@@ -106,6 +107,7 @@ const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   'prof-services': '/industries/professional-services/',
   'gov': '/industries/government/',
   // Resources
+  'insights': '/insights/',
   'blog': '/blogs/',
   'case-studies': '/case-studies/',
   'guides': '/guides/',
@@ -333,6 +335,27 @@ const App = () => {
         {/* Dynamic Job Posts Routing */}
         {activeView.startsWith('job-') && jobsData[activeView] && (
           <JobPost setView={setView} {...jobsData[activeView]} />
+        )}
+
+        {activeView === 'insights' && (
+          <InsightsPage
+            setView={setView}
+            onNavigateToContent={(type, slug) => {
+              if (type === 'blog') {
+                setSelectedBlogSlug(slug);
+                window.history.pushState({ view: 'blog-detail', slug }, '', `/blogs/${slug}/`);
+                setActiveView('blog-detail');
+              } else if (type === 'case-study') {
+                setSelectedCaseStudySlug(slug);
+                window.history.pushState({ view: 'case-study-detail', slug }, '', `/case-studies/${slug}/`);
+                setActiveView('case-study-detail');
+              } else if (type === 'ebook') {
+                setSelectedEbookSlug(slug);
+                window.history.pushState({ view: 'ebook-detail', slug }, '', `/ebooks/${slug}/`);
+                setActiveView('ebook-detail');
+              }
+            }}
+          />
         )}
 
         {activeView === 'blog' && (
