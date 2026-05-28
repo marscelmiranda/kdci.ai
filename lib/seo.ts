@@ -11,7 +11,7 @@ const URL_PATHS: Record<string, string> = {
   home:                '/',
   'solutions-hub':     '/solutions/',
   'agentic-recruitment': '/solutions/ai-staffing-solutions/',
-  'customer-support':  '/solutions/ai-consulting-and-strategy/',
+  'customer-support':  '/solutions/ai-customer-service-agents/',
   'creative-prod':     '/solutions/ai-graphic-design/',
   'staff-aug':         '/solutions/ai-workforce-augmentation/',
   'ai-consulting':     '/solutions/ai-consulting-and-strategy/',
@@ -55,19 +55,19 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
   // ── Services ──────────────────────────────────────────────────────────
   'solutions-hub': {
-    title: 'Your Trusted AI Operations Partner | KDCI.ai',
-    description: 'We offer a full suite of AI managed solutions designed to streamline operations, reduce risk, and drive measurable business outcomes.',
+    title: 'AI Solutions Partner for Global Businesses | KDCI.ai',
+    description: 'KDCI.ai delivers AI solutions built on combining offshore specialists and agentic workflows to cut operational costs by up to 70% across 20+ industries.',
     canonical: `${BASE}/solutions/`,
   },
   'agentic-recruitment': {
     title: 'Hire AI-Ready Talent - AI Staffing Solutions | KDCI.ai',
-    description: 'We provide end-to-end AI staffing services that connects you with prompt engineers, AI ops, data analysts, and AI-enabled VAs. Go live within 5 to 7 days.',
+    description: 'We provide end-to-end AI staffing solutions that connects you with prompt engineers, AI ops, data analysts, and AI-enabled VAs. Go live within 5 to 7 days.',
     canonical: `${BASE}/solutions/ai-staffing-solutions/`,
   },
   'customer-support': {
     title: 'CX Automation - AI Customer Service Agents | KDCI.ai',
-    description: "Elevate every customer interaction with AI-augmented CX support that's faster, smarter, and always on, all without losing the human touch.",
-    canonical: `${BASE}/solutions/ai-consulting-and-strategy/`,
+    description: "Elevate every customer interaction with AI customer service agents that are faster, smarter, and always on, all without losing the human touch.",
+    canonical: `${BASE}/solutions/ai-customer-service-agents/`,
   },
   'creative-prod': {
     title: 'AI-Powered Graphic Design Services | KDCI.ai',

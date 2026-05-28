@@ -1,0 +1,39 @@
+Page name: Home
+Page link: https://kdci.ai/
+Meta Title: AI Managed Services Provider | KDCI.ai
+Meta Description: KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries.
+
+Page name: What We Do
+Page link: https://kdci.ai/solutions/
+Meta Title: AI Solutions Partner for Global Businesses | KDCI.ai
+Meta Description: KDCI.ai delivers AI solutions built on combining offshore specialists and agentic workflows to cut operational costs by up to 70% across 20+ industries.
+
+Page name: AI Agent Operations
+Page link: https://kdci.ai/solutions/ai-agent-operations/
+Meta Title: AI Agent Operations for Always-On Performance | KDCI.ai
+Meta Description: KDCI.ai runs the full AI agent operations lifecycle, from setup and go-live to prompt tuning, and continuous improvement. Platform-agnostic. Always on.
+
+Page name: AI Consulting and Strategy
+Page link: https://kdci.ai/solutions/ai-consulting-and-strategy/
+Meta Title: AI Consulting and Strategy Services | KDCI.ai
+Meta Description: End-to-end AI consulting and strategy services, from readiness audit to live agent deployment within 42 days. KPI-backed. Built in-house. ROI-guaranteed.
+
+Page name: AI in Customer Service
+Page link: kdci.ai/solutions/ai-customer-service-agents
+Meta Title: CX Automation - AI Customer Service Agents | KDCI.ai
+Meta Description: Elevate every customer interaction with AI customer service agents that are faster, smarter, and always on, all without losing the human touch.
+
+Page name: AI Graphic Design Services
+Page link: https://kdci.ai/solutions/ai-graphic-design/
+Meta Title: AI-Powered Graphic Design Services | KDCI.ai
+Meta Description: Full-service AI graphic design services. Get on-brand assets, faster turnaround, at a cost lower than a traditional agency. First delivery in 2 weeks.
+
+Page name: AI Lead Generation
+Page link: https://kdci.ai/solutions/ai-lead-generation/
+Meta Title: AI Lead Generation - Inbound & Outbound Sales | KDCI.ai
+Meta Description: Grow your lead pipeline with AI-driven lead generation services. Target smarter, send out personalized content, and get higher conversion rates.
+
+Page name: AI Staffing Solutions
+Page link: https://kdci.ai/solutions/ai-staffing-solutions/
+Meta Title: Hire AI-Ready Talent - AI Staffing Solutions | KDCI.ai
+Meta Description: We provide end-to-end AI staffing solutions that connects you with prompt engineers, AI ops, data analysts, and AI-enabled VAs. Go live within 5 to 7 days.

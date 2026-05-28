@@ -82,7 +82,7 @@ const VIEW_TO_PATH: Partial<Record<ViewType, string>> = {
   // Services
   'solutions-hub': '/solutions/',
   'agentic-recruitment': '/solutions/ai-staffing-solutions/',
-  'customer-support': '/solutions/ai-consulting-and-strategy/',
+  'customer-support': '/solutions/ai-customer-service-agents/',
   'creative-prod': '/solutions/ai-graphic-design/',
   'staff-aug': '/solutions/staff-augmentation/',
   'ai-consulting': '/solutions/ai-consulting-and-strategy/',
