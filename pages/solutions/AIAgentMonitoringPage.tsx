@@ -424,7 +424,7 @@ export const AIAgentMonitoringPage = ({ setView }: { setView: (v: ViewType) => v
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
               Industries where <span className="text-[#E61739]">AI agent <br/> operations</span> isn't optional
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We specialize in the verticals where AI agent operations protects what matters most.</p>
+            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We specialize in verticals where AI agents touch customer outcomes and model failures have real consequences.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-4">
             {INDUSTRIES.map((ind, i) => (
