@@ -55,24 +55,24 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
   // ── Services ──────────────────────────────────────────────────────────
   'solutions-hub': {
-    title: 'Your Dedicated AI Operations Partner | KDCI.ai',
+    title: 'Your Trusted AI Operations Partner | KDCI.ai',
     description: 'We offer a full suite of AI managed solutions designed to streamline operations, reduce risk, and drive measurable business outcomes.',
     canonical: `${BASE}/solutions/`,
   },
   'agentic-recruitment': {
-    title: 'Build an AI-Skilled Workforce | KDCI.ai',
-    description: 'Build an AI-skilled workforce trained on tools, intelligent workflows, and accountability frameworks that power modern, high-performing remote teams.',
-    canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
+    title: 'Hire AI-Ready Talent - AI Staffing Solutions | KDCI.ai',
+    description: 'We provide end-to-end AI staffing services that connects you with prompt engineers, AI ops, data analysts, and AI-enabled VAs. Go live within 5 to 7 days.',
+    canonical: `${BASE}/solutions/ai-staffing-solutions/`,
   },
   'customer-support': {
-    title: 'AI Augmented CX Support | KDCI.ai',
+    title: 'CX Automation - AI Customer Service Agents | KDCI.ai',
     description: "Elevate every customer interaction with AI-augmented CX support that's faster, smarter, and always on, all without losing the human touch.",
-    canonical: `${BASE}/solutions/ai-augmented-cx-support/`,
+    canonical: `${BASE}/solutions/ai-consulting-and-strategy/`,
   },
   'creative-prod': {
-    title: 'AI-Powered Demand Generation Services | KDCI.ai',
-    description: 'Unlock scalable AI-powered creative design solutions built for speed and consistency at a cost no traditional design agency can replicate.',
-    canonical: `${BASE}/solutions/ai-creative-studio/`,
+    title: 'AI-Powered Graphic Design Services | KDCI.ai',
+    description: 'Full-service AI graphic design services. Get on-brand assets, faster turnaround, at a cost lower than a traditional agency. First delivery in 2 weeks.',
+    canonical: `${BASE}/solutions/ai-graphic-design/`,
   },
   'staff-aug': {
     title: 'Offshore Staff Augmentation | KDCI',
@@ -80,18 +80,18 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/solutions/ai-workforce-augmentation/`,
   },
   'ai-consulting': {
-    title: 'AI Consultation and Implementation | KDCI.ai',
-    description: 'From AI consulting to hands-on implementation, KDCI.ai audits, designs, and builds your AI stack all within 6 weeks— with 30-day monitored handoff.',
-    canonical: `${BASE}/solutions/ai-implementation-services/`,
+    title: 'AI Consulting and Strategy Services | KDCI.ai',
+    description: 'End-to-end AI consulting and strategy services, from readiness audit to live agent deployment within 42 days. KPI-backed. Built in-house. ROI-guaranteed.',
+    canonical: `${BASE}/solutions/ai-consultation-and-strategy/`,
   },
   'ai-agent-monitoring': {
-    title: 'AI Agent Operations | KDCI.ai',
-    description: 'Managed AI agent operations so you detect anomalies, ensure reliability, and maintain performance across every workflow before your customers do.',
-    canonical: `${BASE}/solutions/ai-agent-monitoring/`,
+    title: 'AI Agent Operations for Always-On Performance | KDCI.ai',
+    description: 'KDCI.ai runs the full AI agent operations lifecycle, from setup and go-live to prompt tuning, and continuous improvement. Platform-agnostic. Always on.',
+    canonical: `${BASE}/solutions/ai-agent-operations/`,
   },
   'ai-outbound': {
-    title: 'AI-Powered Demand Generation Services | KDCI.ai',
-    description: 'Grow your lead pipeline with AI-driven demand generation. Target smarter, send out personalized content, and get higher conversion rates.',
+    title: 'AI Lead Generation - Inbound & Outbound Sales | KDCI.ai',
+    description: 'Grow your lead pipeline with AI-driven lead generation services. Target smarter, send out personalized content, and get higher conversion rates.',
     canonical: `${BASE}/solutions/ai-demand-generation/`,
   },
 
@@ -189,8 +189,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
   // ── Company & Other ───────────────────────────────────────────────────
   company: {
-    title: 'Who We Are | KDCI',
-    description: 'Learn how KDCI has been building elite offshore teams since 2011. Trusted by 500+ companies globally for our people-first culture, AI-enhanced operations, and outcome-obsessed delivery.',
+    title: 'AI Solutions Partner for Global Businesses | KDCI.ai',
+    description: 'KDCI.ai delivers AI solutions built on combining offshore specialists and agentic workflows to cut operational costs by up to 70% across 20+ industries.',
     canonical: `${BASE}/who-we-are/`,
   },
   contact: {
