@@ -194,7 +194,7 @@ export const AIGraphicDesignPage = ({ setView }: { setView: (v: ViewType) => voi
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
-                Easy Sell · AI Creative Studio
+                Deliver at Agency Quality
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
                 AI Graphic<br />Design Services
