@@ -204,7 +204,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/careers/`,
   },
   insights: {
-    title: 'AI Insights & Resource Hub | KDCI.ai',
+    title: 'AI Insights, Guides & Resource Hub | KDCI.ai',
     description: "Don't miss out on these resources in enterprise AI. Insights, e-books, guides, and emerging trends we see worth talking about. Published as we write them.",
     canonical: `${BASE}/insights/`,
   },
