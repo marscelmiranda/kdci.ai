@@ -189,8 +189,8 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
   // ── Company & Other ───────────────────────────────────────────────────
   company: {
-    title: 'AI Solutions Partner for Global Businesses | KDCI.ai',
-    description: 'KDCI.ai delivers AI solutions built on combining offshore specialists and agentic workflows to cut operational costs by up to 70% across 20+ industries.',
+    title: 'Your Dedicated AI Operations Partner | KDCI.ai',
+    description: 'KDCI.ai is your dedicated AI operations partner delivering intelligent and transformative AI solutions, from agent deployment to full integration.',
     canonical: `${BASE}/who-we-are/`,
   },
   contact: {
