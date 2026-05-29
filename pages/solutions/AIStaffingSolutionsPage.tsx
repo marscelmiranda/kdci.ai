@@ -126,8 +126,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 Global Recruitment Solutions
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-shine-white">AI-Ready Workforce.</span><br/>
-                <span className="text-[#FFFFFF]">Top Filipino Talents.</span>
+                <span className="text-shine-white">AI-Ready Workforce.</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Hire prompt engineers, AI ops specialists, data analysts, and AI-enabled virtual assistants from the Philippines — at a fraction of US hiring costs. Role live in 5–7 business days, fully managed by KDCI.ai.
