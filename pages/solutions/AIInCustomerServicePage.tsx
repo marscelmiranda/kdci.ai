@@ -113,8 +113,11 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             <div className="text-left flex flex-col justify-between py-2">
               <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
+                  Managed CX Service
+                </div>
                 <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
-                  AI-Augmented<br />CX Support
+                  AI Customer Service Agents
                 </h1>
                 <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                   We combine conversational AI customer service agents on first contact, with Philippine-based specialist escalation and continuous CX optimization, delivered as a managed service.

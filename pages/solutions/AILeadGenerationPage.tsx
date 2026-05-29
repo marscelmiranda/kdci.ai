@@ -92,7 +92,7 @@ export const AILeadGenerationPage = ({ setView }: { setView: (v: ViewType) => vo
                 Your Pipeline on Autopilot
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-white">AI-Powered Lead Generation</span>
+                AI-Powered<br />Lead Generation
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 KDCI.ai deploys AI agents for lead generation that research prospects, build enriched contact lists, and run personalized multi-touch sequences. First qualified meetings in four weeks.

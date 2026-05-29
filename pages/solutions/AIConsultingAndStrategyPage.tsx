@@ -141,6 +141,9 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
+                AI Strategy & Implementation
+              </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
                 AI Consulting and Implementation Services
               </h1>
