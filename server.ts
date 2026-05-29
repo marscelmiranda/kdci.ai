@@ -96,6 +96,15 @@ const app = express();
 const PORT = parseInt(process.env.PORT || '5000');
 const isDev = process.env.NODE_ENV !== 'production';
 
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  if (!isDev && host.startsWith('www.')) {
+    const target = `https://${host.slice(4)}${req.url}`;
+    return res.redirect(301, target);
+  }
+  next();
+});
+
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
