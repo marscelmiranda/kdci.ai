@@ -225,7 +225,7 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
           <div className="pt-20 border-t border-slate-100">
             <div className="text-center mb-24">
                <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Tech Ecosystem</div>
-               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI-powered support,<br />live inside your existing helpdesk</h2>
+               <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI agent support that lives<br />inside your existing helpdesk</h2>
                <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">We configure and manage intelligent support agents directly within your current stack. No new software, no migration headaches. Automated ticket resolution starts from day one, cutting costs and response times immediately.</p>
             </div>
             
