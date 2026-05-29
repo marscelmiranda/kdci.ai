@@ -123,10 +123,10 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
-                Global Recruitment Solutions
+                For future-ready teams
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-shine-white">AI-Ready Workforce.</span>
+                <span className="text-shine-white">AI Staffing Solutions</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Hire prompt engineers, AI ops specialists, data analysts, and AI-enabled virtual assistants from the Philippines — at a fraction of US hiring costs. Role live in 5–7 business days, fully managed by KDCI.ai.
