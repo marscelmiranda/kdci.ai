@@ -197,7 +197,7 @@ export const AIGraphicDesignPage = ({ setView }: { setView: (v: ViewType) => voi
                 Easy Sell · AI Creative Studio
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                AI-Enabled Creative Design Services
+                AI Graphic<br />Design Services
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Our dedicated design team pairs human creative talent with advanced AI production tools to deliver your brand assets faster and more affordably. Our AI graphic design services give high-growth brands an unfair production advantage.
