@@ -203,7 +203,7 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Deliver</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">CX support powered by AI agents and human specialists</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">CX support powered by AI agents<br />and human specialists</h2>
             <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium">Our managed service layers intelligent virtual agents, trained human escalation, and monthly performance optimization into one seamless support operation.</p>
           </div>
 
