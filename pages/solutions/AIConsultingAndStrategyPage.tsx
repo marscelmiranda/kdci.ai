@@ -145,7 +145,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                 Real Solutions, Rapid Impact.
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
-                AI Consulting and Strategy
+                AI Consulting<br />and Strategy
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 Our AI consulting and strategy services identify opportunities for AI integration and deployment, mapping a clear path to ROI.
