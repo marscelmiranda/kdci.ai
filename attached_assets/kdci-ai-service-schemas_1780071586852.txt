@@ -1,0 +1,388 @@
+<!-- ============================================================
+     KDCI.ai — Service Schema Markup
+     6 Solution Pages | JSON-LD | Schema.org/Service
+     ============================================================ -->
+
+
+<!-- ✅ 1. AI Agent Operations -->
+<!-- Page: https://kdci.ai/solutions/ai-agent-operations/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-agent-operations/#service",
+  "name": "AI Agent Operations",
+  "alternateName": "Agentic AI Operations Management",
+  "url": "https://kdci.ai/solutions/ai-agent-operations/",
+  "description": "KDCI.ai designs, deploys, and manages custom AI agent operations that automate end-to-end business workflows. From multi-agent orchestration to human-in-the-loop oversight, our managed AI operations reduce manual effort and drive measurable efficiency across 20+ industry verticals.",
+  "serviceType": "AI Managed Services",
+  "category": "Agentic AI Solutions",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-agent-operations/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Agent Operations Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Multi-Agent Workflow Orchestration"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Agent Deployment & Integration"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Human-in-the-Loop Operations Management"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Performance Monitoring & Optimization"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+<!-- ✅ 2. AI Consulting & Strategy -->
+<!-- Page: https://kdci.ai/solutions/ai-consulting-and-strategy/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-consulting-and-strategy/#service",
+  "name": "AI Consulting and Strategy",
+  "alternateName": "AI Strategy Advisory Services",
+  "url": "https://kdci.ai/solutions/ai-consulting-and-strategy/",
+  "description": "KDCI.ai provides expert AI consulting and strategy services to help businesses identify, plan, and implement AI transformation roadmaps. Our advisors assess your current operations, define AI use cases, and design agentic solutions purpose-built for your industry vertical.",
+  "serviceType": "AI Consulting",
+  "category": "AI Strategy & Advisory",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-consulting-and-strategy/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Consulting & Strategy Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Readiness Assessment"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Transformation Roadmap Development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Use Case Identification & Prioritization"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Agentic Architecture Design"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+<!-- ✅ 3. AI Customer Service Agents (CX Automation) -->
+<!-- Page: https://kdci.ai/solutions/ai-customer-service-agents/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-customer-service-agents/#service",
+  "name": "AI Customer Service Agents",
+  "alternateName": "CX Automation | AI-Powered Customer Support",
+  "url": "https://kdci.ai/solutions/ai-customer-service-agents/",
+  "description": "KDCI.ai delivers AI customer service agents that automate customer experience (CX) across voice, chat, email, and digital channels. Our agentic CX solutions resolve inquiries, reduce handle times, and elevate customer satisfaction — all managed end-to-end by KDCI.ai.",
+  "serviceType": "AI Customer Experience Automation",
+  "category": "CX Automation | Customer Service AI",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-customer-service-agents/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Customer Service Agent Solutions",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Chat & Messaging Agents"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Voice Customer Support"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Email & Ticket Automation"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Omnichannel CX Automation"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+<!-- ✅ 4. AI Graphic Design -->
+<!-- Page: https://kdci.ai/solutions/ai-graphic-design/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-graphic-design/#service",
+  "name": "AI Graphic Design",
+  "alternateName": "AI-Powered Creative Design Services",
+  "url": "https://kdci.ai/solutions/ai-graphic-design/",
+  "description": "KDCI.ai combines skilled creative professionals with AI-powered design tools to deliver high-volume, brand-consistent graphic design at scale. Our AI graphic design service accelerates production timelines, reduces overhead by up to 70%, and covers everything from digital assets to marketing collateral.",
+  "serviceType": "AI-Augmented Creative Services",
+  "category": "AI Graphic Design | Creative Automation",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-graphic-design/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Graphic Design Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI-Assisted Digital Asset Creation"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Brand Template Automation"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Marketing Collateral & Ad Creative Production"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "High-Volume Batch Design Services"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+<!-- ✅ 5. AI Lead Generation -->
+<!-- Page: https://kdci.ai/solutions/ai-lead-generation/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-lead-generation/#service",
+  "name": "AI Lead Generation",
+  "alternateName": "AI-Powered Demand Generation Services",
+  "url": "https://kdci.ai/solutions/ai-lead-generation/",
+  "description": "KDCI.ai delivers AI-driven lead generation and demand generation solutions that identify, engage, and qualify prospects at scale. Our agentic approach combines data intelligence, automated outreach, and human expertise to fill your pipeline with high-intent leads across your target markets.",
+  "serviceType": "AI Demand Generation",
+  "category": "AI Lead Generation | Sales Pipeline Automation",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-lead-generation/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Lead Generation Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Prospect Identification & List Building"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Automated Outreach & Nurture Sequences"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI-Powered Lead Qualification"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "CRM Integration & Pipeline Management"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+<!-- ✅ 6. AI Staffing Solutions -->
+<!-- Page: https://kdci.ai/solutions/ai-staffing-solutions/ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://kdci.ai/solutions/ai-staffing-solutions/#service",
+  "name": "AI Staffing Solutions",
+  "alternateName": "AI-Augmented Staff Augmentation Services",
+  "url": "https://kdci.ai/solutions/ai-staffing-solutions/",
+  "description": "KDCI.ai provides AI-augmented staff augmentation solutions that connect businesses with skilled remote professionals trained in AI tools and workflows. Purpose-built for 20+ industry verticals, our staffing model reduces time-to-hire and operational overhead while delivering enterprise-grade output.",
+  "serviceType": "AI Staff Augmentation",
+  "category": "AI Staffing | Remote Talent Solutions",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://kdci.ai/#organization",
+    "name": "KDCI.ai",
+    "url": "https://kdci.ai"
+  },
+  "areaServed": ["US", "AU", "GB", "CA", "SG", "AE", "DE", "NZ", "IE"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://kdci.ai/solutions/ai-staffing-solutions/",
+    "servicePhone": "+16504121400",
+    "availableLanguage": "English"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "AI Staffing Solutions",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI-Trained Remote Staff Placement"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Dedicated Offshore Team Building"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Staff Augmentation for 20+ Industry Verticals"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Rapid Onboarding & AI Workflow Integration"
+        }
+      }
+    ]
+  }
+}
+</script>
