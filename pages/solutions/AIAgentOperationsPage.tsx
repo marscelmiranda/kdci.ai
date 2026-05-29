@@ -147,10 +147,10 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
-                Always-on AI performance
+                Providing real business results
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl" style={{color:'#FFFFFF'}}>
-                AI Agent Operations
+                AI Solutions Partner
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 KDCI.ai is the managed AI agent operations layer your stack is missing. We sit on top of the platforms you've already built on, and make them work the way they're supposed to.
