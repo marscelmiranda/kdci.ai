@@ -89,10 +89,10 @@ export const AILeadGenerationPage = ({ setView }: { setView: (v: ViewType) => vo
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
-                High Demand · AI Outbound & Lead Generation
+                Your Pipeline on Autopilot
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
-                <span className="text-white">AI-Powered Demand Generation</span>
+                <span className="text-white">AI-Powered Lead Generation</span>
               </h1>
               <p className="text-lg md:text-xl text-white/80 font-medium leading-relaxed mb-8">
                 KDCI.ai deploys AI agents for lead generation that research prospects, build enriched contact lists, and run personalized multi-touch sequences. First qualified meetings in four weeks.
