@@ -48,7 +48,7 @@ const URL_PATHS: Record<string, string> = {
 
 export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   home: {
-    title: 'AI Managed Services Provider | KDCI.ai',
+    title: 'End-to-End AI Managed Services Provider | KDCI.ai',
     description: 'KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries.',
     canonical: `${BASE}/`,
   },
@@ -164,7 +164,7 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   auto: {
     title: 'Automotive Offshore Operations | KDCI',
     description: "Dealer success powered by KDCI's automotive ops. Offshore customer care and dealer support purpose-built for the modern automotive ecosystem.",
-    canonical: `${BASE}/industries/auto/`,
+    canonical: `${BASE}/industries/automotive/`,
   },
   fashion: {
     title: 'Fashion & Apparel Offshore Operations | KDCI',
@@ -194,48 +194,53 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
     canonical: `${BASE}/who-we-are/`,
   },
   contact: {
-    title: 'Contact Us | KDCI',
-    description: 'Ready to build your offshore team? Contact KDCI today. Speak with an outsourcing specialist and get a custom staffing solution tailored to your business goals.',
+    title: 'Contact KDCI.ai | Start Your Agentic AI Journey',
+    description: 'Connect with our architects at KDCI.ai for AI agent setups, integrations, and deployment. Accelerate your business outcomes with agentic AI applications.',
     canonical: `${BASE}/contact-us/`,
   },
   careers: {
-    title: 'Careers at KDCI | Join the Elite Intelligence',
-    description: "Join KDCI's team of elite offshore professionals. Explore career opportunities in AI, software engineering, creative design, customer support, and more in the Philippines.",
+    title: 'Careers at KDCI.ai | Join the Agentic AI Revolution',
+    description: 'Be part of KDCI.ai. Grow your career with us and transform how leading organizations operate and thrive by adopting cutting-edge AI solutions.',
     canonical: `${BASE}/careers/`,
   },
+  insights: {
+    title: 'AI Insights & Resource Hub | KDCI.ai',
+    description: "Don't miss out on these resources in enterprise AI. Insights, e-books, guides, and emerging trends we see worth talking about. Published as we write them.",
+    canonical: `${BASE}/insights/`,
+  },
   blog: {
-    title: 'Blog | Offshore Staffing & AI Insights — KDCI',
-    description: "Explore KDCI's blog for expert insights on offshore staffing, AI operations, business process outsourcing, and the future of work from the Philippines.",
+    title: 'AI Blogs, Insights, Trends & Best Practices | KDCI.ai',
+    description: "Explore KDCI.ai's blog for expert perspectives on enterprise AI, agentic automation, and real-world implementation strategies. Stay ahead of the curve.",
     canonical: `${BASE}/blogs/`,
   },
   'case-studies': {
-    title: 'Case Studies | Real Results — KDCI',
-    description: 'See how KDCI has helped 500+ companies reduce costs and scale operations. Real-world case studies across e-commerce, fintech, healthcare, and more industries.',
+    title: 'Case Studies on Agentic and Enterprise AI | KDCI.ai',
+    description: 'See how enterprises are achieving measurable results with agentic AI. Browse KDCI.ai\'s case studies on AI-driven automation, integration, and operations.',
     canonical: `${BASE}/case-studies/`,
   },
   guides: {
     title: 'Guides | Offshore Staffing Resources — KDCI',
     description: "Download KDCI's expert guides on offshore staffing, AI implementation, and business process outsourcing. Practical resources for scaling your business effectively.",
-    canonical: `${BASE}/resources/guides/`,
+    canonical: `${BASE}/guides/`,
   },
   webinars: {
     title: 'Webinars | KDCI',
     description: "Join KDCI's live and on-demand webinars. Expert sessions on AI operations, offshore staffing, and operational excellence for modern business leaders.",
-    canonical: `${BASE}/resources/webinars/`,
+    canonical: `${BASE}/webinars/`,
   },
   ebooks: {
-    title: 'Ebooks | Free Outsourcing Resources — KDCI',
-    description: 'Free ebooks from KDCI on offshore staffing, AI-powered operations, and business growth strategies. Download now and start building smarter, leaner teams.',
-    canonical: `${BASE}/resources/ebooks/`,
+    title: 'Free AI Resources, eBooks & Guides | KDCI.ai',
+    description: 'Download free eBooks and practical guides on agentic AI, enterprise automation, and digital transformation — curated by KDCI.ai\'s research team.',
+    canonical: `${BASE}/ebooks/`,
   },
   faqs: {
-    title: 'Frequently Asked Questions | KDCI',
-    description: "Get clear answers to common questions about KDCI's offshore staffing, all-in pricing, onboarding timeline, replacement guarantee, and AI-enhanced operations.",
+    title: 'Frequently Asked Questions About Agentic AI | KDCI.ai',
+    description: 'Got questions about agentic AI and enterprise automation? Find clear, expert answers to the most common questions about KDCI.ai\'s solutions and approach.',
     canonical: `${BASE}/faqs/`,
   },
   glossary: {
-    title: 'Outsourcing & AI Glossary | KDCI',
-    description: 'A complete glossary of offshore staffing, BPO, and AI operations terms. Learn the language of modern outsourcing with KDCI.',
+    title: 'Automation and AI Operations Glossary | KDCI.ai',
+    description: 'Your reference for AI and automation terminology. We break down key concepts in agentic AI, operations, and enterprise technology in plain language.',
     canonical: `${BASE}/glossary/`,
   },
   'privacy-policy': {

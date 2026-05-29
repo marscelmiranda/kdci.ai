@@ -1,0 +1,63 @@
+Page: Insights
+
+Url: https://kdci.ai/insights/
+
+Meta Title: AI Insights & Resource Hub | KDCI.ai
+
+Meta Description: Don't miss out on these resources in enterprise AI. Insights, e-books, guides, and emerging trends we see worth talking about. Published as we write them.
+
+Page: Blogs
+
+Url: https://kdci.ai/blogs/
+
+Meta Title: AI Blogs, Insights, Trends & Best Practices | KDCI.ai
+
+Meta Description: Explore KDCI.ai's blog for expert perspectives on enterprise AI, agentic automation, and real-world implementation strategies. Stay ahead of the curve.
+
+Page: Case Studies
+
+Url: https://kdci.ai/case-studies/
+
+Meta Title: Case Studies on Agentic and Enterprise AI | KDCI.ai
+
+Meta Description: See how enterprises are achieving measurable results with agentic AI. Browse KDCI.ai's case studies on AI-driven automation, integration, and operations.
+
+Page: EBooks
+
+Url: https://kdci.ai/ebooks/
+
+Meta Title: Free AI Resources, eBooks & Guides | KDCI.ai
+
+Meta Description: Download free eBooks and practical guides on agentic AI, enterprise automation, and digital transformation — curated by KDCI.ai's research team.
+
+Page: FAQs
+
+Url: https://kdci.ai/faqs/
+
+Meta Title: Frequently Asked Questions About Agentic AI | KDCI.ai
+
+Meta Description: Got questions about agentic AI and enterprise automation? Find clear, expert answers to the most common questions about KDCI.ai's solutions and approach.
+
+Page: Glossary
+
+Url: https://kdci.ai/glossary/
+
+Meta Title: Automation and AI Operations Glossary | KDCI.ai
+
+Meta Description: Your reference for AI and automation terminology. We break down key concepts in agentic AI, operations, and enterprise technology in plain language.
+
+Page: Careers
+
+Url: https://kdci.ai/careers/
+
+Meta Title: Careers at KDCI.ai | Join the Agentic AI Revolution
+
+Meta Description: Be part of KDCI.ai. Grow your career with us and transform how leading organizations operate and thrive by adopting cutting-edge AI solutions.
+
+Page: Contact Us
+
+Url: https://kdci.ai/contact-us/
+
+Meta Title: Contact KDCI.ai | Start Your Agentic AI Journey
+
+Meta Description: Connect with our architects at KDCI.ai for AI agent setups, integrations, and deployment. Accelerate your business outcomes with agentic AI applications.
