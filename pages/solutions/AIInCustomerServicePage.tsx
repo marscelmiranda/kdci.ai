@@ -244,7 +244,7 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <div className="text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">Vertical Specialization</div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Agents that speak your industry's language</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">Intelligent assistants that speak your industry's language</h2>
             <p className="text-slate-500 text-xl max-w-3xl mx-auto font-medium leading-relaxed">Our AI agents are trained on your helpdesk toolset, product vocabulary, and support workflows, helping you deliver accurate, on-brand responses without a lengthy ramp-up.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
