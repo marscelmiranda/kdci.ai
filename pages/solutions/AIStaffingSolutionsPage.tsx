@@ -419,7 +419,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI staffing and professional services built for your industry.</h2>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI staffing and professional services built<br />for your industry.</h2>
             <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
               Our AI-trained specialists understand your vertical's unique demands — covering 20+ industries with pre-built role playbooks and tool configurations.
             </p>
