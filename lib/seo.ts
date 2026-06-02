@@ -49,7 +49,7 @@ const URL_PATHS: Record<string, string> = {
 export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
   home: {
     title: 'End-to-End AI Managed Services Provider | KDCI.ai',
-    description: 'AI-managed operations and offshore staffing for mid-market and enterprise teams. KDCI.ai handles your AI agent ops, CX automation, and staffing — end to end.',
+    description: 'KDCI.ai is an end-to-end AI managed services provider handling AI monitoring, consulting, workforce augmentation, and CX support across 20+ industries.',
     canonical: `${BASE}/`,
   },
 
