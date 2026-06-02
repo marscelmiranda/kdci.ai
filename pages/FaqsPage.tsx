@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Plus, Minus, Search, ArrowRight, Users, Monitor, Cpu, Palette, TrendingUp, UserCheck } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
@@ -115,6 +115,26 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [activeCategory, setActiveCategory] = useState('ai-monitoring');
   const [openIndex, setOpenIndex]           = useState<number | null>(null);
   const [searchQuery, setSearchQuery]       = useState('');
+
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": SERVICE_CATEGORIES.flatMap(cat =>
+        cat.questions.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": { "@type": "Answer", "text": item.a }
+        }))
+      )
+    };
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'faq-schema';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+    return () => { document.getElementById('faq-schema')?.remove(); };
+  }, []);
 
   const currentCategory = SERVICE_CATEGORIES.find(c => c.id === activeCategory)!;
 
