@@ -73,6 +73,12 @@
 
   <!-- ── Resources ─────────────────────────────────────────────────────── -->
   <url>
+    <loc>https://kdci.ai/insights/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://kdci.ai/blogs/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>

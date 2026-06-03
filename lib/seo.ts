@@ -275,8 +275,11 @@ export function applySEO(view: string): void {
   setMeta('meta[name="twitter:description"]', 'content', meta.description);
 
   let canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-  if (canonicalEl) {
-    canonicalEl.href = meta.canonical;
+  if (!canonicalEl) {
+    canonicalEl = document.createElement('link');
+    canonicalEl.rel = 'canonical';
+    document.head.appendChild(canonicalEl);
   }
+  canonicalEl.href = meta.canonical;
 
 }
