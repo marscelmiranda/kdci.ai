@@ -1172,8 +1172,13 @@ if (isDev) {
 } else {
   const distPath = path.join(__dirname, 'dist');
   app.use(express.static(distPath));
+  // Non-pre-rendered routes (dynamic slugs, CMS, etc.) get the clean SPA shell
+  // so the client renders the correct page without a hydration mismatch against
+  // the pre-rendered home markup. Falls back to index.html if the shell is absent.
+  const spaShell = path.join(distPath, 'spa-shell.html');
+  const fallbackHtml = fs.existsSync(spaShell) ? spaShell : path.join(distPath, 'index.html');
   app.get('*splat', (_req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
+    res.sendFile(fallbackHtml);
   });
 }
 

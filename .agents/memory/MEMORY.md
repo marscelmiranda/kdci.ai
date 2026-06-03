@@ -1,0 +1,1 @@
+- [react-snap pre-rendering](react-snap-prerender.md) — CSR-SPA crawlability fix; NixOS Chromium resolution, spa-shell fallback to avoid hydration mismatch, include/sitemap sync.
