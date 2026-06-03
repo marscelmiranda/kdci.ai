@@ -1066,13 +1066,6 @@ app.get('/api/media', requireAuth, (_req, res) => {
   } catch { res.json([]); }
 });
 
-// ===== robots.txt — block crawlers from private portals =====
-app.get('/robots.txt', (_req, res) => {
-  res.type('text/plain').send(
-    'User-agent: *\nDisallow: /portal/\nDisallow: /midgard/\n'
-  );
-});
-
 // ===== Frontend: Dev proxy / Prod static =====
 // Midgard portal — always served as pre-built static files (no proxy)
 const midgardDist = path.join(__dirname, 'midgard', 'dist');
