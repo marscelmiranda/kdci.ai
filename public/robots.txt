@@ -8,6 +8,9 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
+# Block all industry pages
+Disallow: /industries/
+
 # Block Midgard employee portal
 Disallow: /midgard/
 
