@@ -277,7 +277,7 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     </div>
                     <div>
                       <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Email</div>
-                      <a href="mailto:info@kdci.co" className="text-sm font-bold text-foreground hover:text-primary transition-colors">info@kdci.co</a>
+                      <a href="mailto:info@kdci.ai" className="text-sm font-bold text-foreground hover:text-primary transition-colors">info@kdci.ai</a>
                     </div>
                   </div>
                   <div className="flex gap-4 items-center group">

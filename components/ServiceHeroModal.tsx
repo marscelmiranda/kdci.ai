@@ -71,7 +71,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
       if (!res.ok) throw new Error('Failed');
       setDone(true);
     } catch {
-      setError('Something went wrong. Please try again or email us at info@kdci.co.');
+      setError('Something went wrong. Please try again or email us at info@kdci.ai.');
     } finally {
       setSubmitting(false);
     }

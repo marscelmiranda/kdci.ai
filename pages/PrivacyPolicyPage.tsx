@@ -97,7 +97,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             <p>We use cookies and similar tracking technologies to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our <a href="#">Cookie Policy</a>.</p>
 
             <h2 id="contact" className="mt-12 text-2xl md:text-3xl font-heading font-bold text-slate-900">7. Contact Us</h2>
-            <p>If you have questions or comments about this policy, you may email us at <a href="mailto:info@kdci.co">info@kdci.co</a> or by post to:</p>
+            <p>If you have questions or comments about this policy, you may email us at <a href="mailto:info@kdci.ai">info@kdci.ai</a> or by post to:</p>
             <address className="not-italic bg-slate-50 p-6 rounded-2xl border border-slate-200 text-sm font-medium text-slate-700">
               <strong>KDCI Operations</strong><br />
               3008 One Corporate Centre<br />

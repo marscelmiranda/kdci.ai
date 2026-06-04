@@ -359,7 +359,7 @@ app.post('/api/contact', async (req, res) => {
 
   if (!smtpHost || !smtpUser || !smtpPass) {
     console.error('[contact] SMTP credentials not configured');
-    res.status(500).json({ error: 'Email service not configured. Please contact us directly at info@kdci.co.' });
+    res.status(500).json({ error: 'Email service not configured. Please contact us directly at info@kdci.ai.' });
     return;
   }
 
@@ -411,7 +411,7 @@ app.post('/api/contact', async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"KDCI Website" <${smtpUser}>`,
-      to: 'info@kdci.co',
+      to: 'info@kdci.ai',
       replyTo: email,
       subject: `[Website Inquiry] ${resolvedType} — ${resolvedName} (${company})`,
       html,
@@ -420,7 +420,7 @@ app.post('/api/contact', async (req, res) => {
     res.json({ success: true });
   } catch (err: any) {
     console.error('[contact] Send error:', err.message);
-    res.status(500).json({ error: 'Failed to send your message. Please try again or email us directly at info@kdci.co.' });
+    res.status(500).json({ error: 'Failed to send your message. Please try again or email us directly at info@kdci.ai.' });
   }
 });
 
