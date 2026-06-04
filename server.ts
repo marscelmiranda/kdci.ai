@@ -110,9 +110,24 @@ app.get('/robots.txt', (_req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   res.sendFile(path.join(__dirname, 'public', 'robots.txt'));
 });
-app.get('/sitemap.xml', (_req, res) => {
-  res.setHeader('Content-Type', 'application/xml');
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+app.get('/sitemap.xml', async (_req, res) => {
+  try {
+    const staticXml = fs.readFileSync(path.join(__dirname, 'public', 'sitemap.xml'), 'utf8');
+    const { rows: blogs } = await pool.query(
+      `SELECT slug, updated_at FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC NULLS LAST`
+    );
+    const today = new Date().toISOString().slice(0, 10);
+    const blogEntries = blogs.map((b: any) => {
+      const lastmod = b.updated_at ? new Date(b.updated_at).toISOString().slice(0, 10) : today;
+      return `  <url>\n    <loc>https://kdci.ai/blogs/${b.slug}/</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+    }).join('\n');
+    const merged = staticXml.replace('</urlset>', `\n  <!-- ── Blog Posts ──────────────────────────────────────────────────── -->\n${blogEntries}\n\n</urlset>`);
+    res.setHeader('Content-Type', 'application/xml');
+    res.send(merged);
+  } catch {
+    res.setHeader('Content-Type', 'application/xml');
+    res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+  }
 });
 
 app.use(cors({
@@ -1170,6 +1185,47 @@ if (isDev) {
   // the pre-rendered home markup. Falls back to index.html if the shell is absent.
   const spaShell = path.join(distPath, 'spa-shell.html');
   const fallbackHtml = fs.existsSync(spaShell) ? spaShell : path.join(distPath, 'index.html');
+
+  // Blog post pages: inject correct meta tags so Googlebot sees proper title/canonical
+  app.get('/blogs/:slug/', async (req, res) => {
+    try {
+      const { rows } = await pool.query(
+        `SELECT title, excerpt, slug, cover_image FROM blog_posts WHERE slug = $1 AND status = 'published'`,
+        [req.params.slug]
+      );
+      if (!rows.length) return res.sendFile(fallbackHtml);
+      const post = rows[0];
+      const canonical = `https://kdci.ai/blogs/${post.slug}/`;
+      const title = `${post.title} | KDCI.ai`;
+      const desc = (post.excerpt || '').replace(/"/g, '&quot;').slice(0, 160);
+      const img = post.cover_image || 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp';
+      let html = fs.readFileSync(fallbackHtml, 'utf8');
+      html = html
+        .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+        .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}" />`)
+        .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`)
+        .replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${img}" />`)
+        .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${title}" />`)
+        .replace(/<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${img}" />`);
+      if (desc) {
+        html = html
+          .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${desc}" />`)
+          .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${desc}" />`)
+          .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${desc}" />`);
+      }
+      // Inject or replace canonical
+      if (html.includes('<link rel="canonical"')) {
+        html = html.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`);
+      } else {
+        html = html.replace('</head>', `  <link rel="canonical" href="${canonical}" />\n</head>`);
+      }
+      res.setHeader('Content-Type', 'text/html');
+      res.send(html);
+    } catch {
+      res.sendFile(fallbackHtml);
+    }
+  });
+
   app.get('*splat', (_req, res) => {
     res.sendFile(fallbackHtml);
   });
