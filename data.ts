@@ -164,14 +164,14 @@ export const TOP_SERVICES = [
     desc: 'We handle the full cycle management of your AI Agents: setup, deployment, monitoring and optimization, and catch errors before your customers do.',
     benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
   },
-  {
-    id: 'ai-consulting',
-    name: 'AI Consulting and Strategy',
-    tag: 'AI Strategy & Build',
-    icon: Cpu,
-    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
-    desc: 'End-to-end AI strategy and deployment, from roadmap design to agentic workflow integration across your existing tech stack.',
-    benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
+  { 
+    id: 'agentic-recruitment',
+    name: 'AI Staffing Solutions', 
+    tag: 'Talent Sourcing',
+    icon: Target,
+    image: IMG_RECRUITMENT_HERO,
+    desc: 'Embed AI-trained specialists directly into your operations. Get intelligent managed talent that scales on demand.',
+    benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
   { 
     id: 'customer-support',
@@ -193,6 +193,15 @@ export const TOP_SERVICES = [
     benefits: ['5-Day Turnaround', 'AI-Powered Output', 'Full Brand Consistency']
   },
   {
+    id: 'ai-consulting',
+    name: 'AI Consulting and Strategy',
+    tag: 'AI Strategy & Build',
+    icon: Cpu,
+    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
+    desc: 'End-to-end AI strategy and deployment, from roadmap design to agentic workflow integration across your existing tech stack.',
+    benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
+  },
+  {
     id: 'ai-outbound',
     name: 'AI Lead Generation',
     tag: 'Pipeline on Demand',
@@ -200,15 +209,6 @@ export const TOP_SERVICES = [
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
     desc: 'Agentic demand generation pipelines that research, personalize, sequence, and qualify leads. Convert your inbound and outbound activities into predictable revenue!',
     benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
-  },
-  { 
-    id: 'agentic-recruitment',
-    name: 'AI Staffing Solutions', 
-    tag: 'Talent Sourcing',
-    icon: Target,
-    image: IMG_RECRUITMENT_HERO,
-    desc: 'Embed AI-trained specialists directly into your operations. Get intelligent managed talent that scales on demand.',
-    benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
   },
 ];
 
