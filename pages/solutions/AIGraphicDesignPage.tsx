@@ -110,30 +110,6 @@ export const AIGraphicDesignPage = ({ setView }: { setView: (v: ViewType) => voi
     return () => window.removeEventListener('keydown', handler);
   }, [lightboxSrc, closeLightbox]);
 
-  useEffect(() => {
-    const ldId = 'ld-faq-graphic-design';
-    let ld = document.getElementById(ldId);
-    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'url': 'https://kdci.ai/solutions/ai-graphic-design/',
-      'mainEntity': [
-        { '@type': 'Question', 'name': "What makes KDCI's AI Creative Studio different from a traditional design agency?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'Our Manila team runs AI tools — Midjourney, Adobe Firefly, Runway ML, CapCut AI — at every stage of production. That means faster delivery, lower cost per asset, and consistent brand output without sacrificing quality. Traditional agencies bill hourly and have slower turnaround cycles. We operate on a production cadence model.' } },
-        { '@type': 'Question', 'name': "What's included in each pricing tier?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'Content Pack ($2,500/mo + $1K setup): 20 social posts, 4 carousels, and monthly brand assets — ideal for brands that need consistent social output. Creative Retainer ($4,500/mo + $1.5K setup): dedicated designer, unlimited requests, 5-day turnaround. Full Studio ($7,500/mo + $2.5K setup): full team covering brand, ads, video, and social with a 3-day priority SLA.' } },
-        { '@type': 'Question', 'name': 'How quickly can we get started?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We begin brand discovery within 48 hours of sign-off. Your first content batch is delivered by the end of Week 2. Full production cadence is live by Month 1. We\'re structured to move fast without skipping brand alignment.' } },
-        { '@type': 'Question', 'name': "How does AI-generated imagery work without going off-brand?", 'acceptedAnswer': { '@type': 'Answer', 'text': "We build a brand prompt library in Week 1 — documenting your colour palette, visual style, subject matter rules, and tone. Every AI image generated goes through a brand consistency review before delivery. You'll never receive outputs that don't match your visual identity." } },
-        { '@type': 'Question', 'name': 'Can you handle video and motion content?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. Our Full Studio tier includes a dedicated motion and video team. We use Runway ML for AI-assisted video, CapCut AI for short-form editing, and Adobe Premiere/After Effects for polished cuts. ElevenLabs handles voiceover where required.' } },
-        { '@type': 'Question', 'name': "What's the minimum commitment?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'All plans require a 3-month minimum. This ensures we have enough runway to complete onboarding, establish a production rhythm, and deliver measurable results. Most clients stay well beyond the minimum — our average engagement is over 18 months.' } },
-        { '@type': 'Question', 'name': 'Can we start on a Content Pack and upgrade later?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Absolutely — and this is the most common path. Many clients start with the Content Pack to validate quality and cadence, then move to the Creative Retainer or Full Studio as their creative needs scale. The upgrade is seamless because your brand guide and team are already in place.' } },
-        { '@type': 'Question', 'name': 'What industries do you specialise in?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Our highest-volume verticals are E-Commerce & Retail, Real Estate, SaaS & Tech, Hospitality, Professional Services, and Startups. We have pre-built template systems and production playbooks for each that accelerate onboarding significantly.' } },
-        { '@type': 'Question', 'name': 'How do we manage revisions and feedback loops?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We use a structured feedback process — Frame.io for video reviews, Figma comments for design assets, and a shared project board (Asana, ClickUp, or Notion) for all task tracking. Revision requests submitted before 12pm Manila time are typically turned around within the same business day.' } },
-        { '@type': 'Question', 'name': 'What design tools does your team use?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Our team works in Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign, Premiere Pro, After Effects), Canva Pro, Midjourney, Adobe Firefly, Runway ML, and CapCut AI. We adapt to whatever\'s already in your workflow and can operate within your existing DAM or asset library.' } },
-      ],
-    });
-    return () => { document.getElementById(ldId)?.remove(); };
-  }, []);
-
   const creativeTools = [
     { name: "Midjourney", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900915/mj_logo_zggxbt.png" },
     { name: "Adobe Firefly", logo: "https://res.cloudinary.com/dqkwcbbe5/image/upload/v1773900300/fi_logo_jxaqfa.png" },

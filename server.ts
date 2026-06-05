@@ -1226,7 +1226,6 @@ if (isDev) {
     }
   });
 
-
   app.get('*splat', (_req, res) => {
     res.sendFile(fallbackHtml);
   });

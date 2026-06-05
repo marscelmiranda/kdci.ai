@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   ArrowRight, CheckCircle2, Activity, ShieldCheck, BarChart3,
   RefreshCw, Settings, Users, Zap, AlertCircle, Bell,
@@ -126,30 +126,6 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
   const [showHeroModal, setShowHeroModal] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
-
-  useEffect(() => {
-    const ldId = 'ld-faq-agent-ops';
-    let ld = document.getElementById(ldId);
-    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'url': 'https://kdci.ai/solutions/ai-agent-operations/',
-      'mainEntity': [
-        { '@type': 'Question', 'name': "What exactly counts as an 'AI agent' for monitoring purposes?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'Any automated system using a large language model (LLM) to handle customer interactions, internal queries, data processing, or decision support — including chatbots, voice agents, email bots, support agents on Intercom or Zendesk, and custom-built LLM workflows.' } },
-        { '@type': 'Question', 'name': 'How do you detect prompt drift?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We run daily automated evaluation benchmarks against a set of baseline test cases established at kickoff. When accuracy scores fall below threshold — or when hallucination rates, escalation rates, or latency spikes are detected — our system flags the agent for human review and retraining.' } },
-        { '@type': 'Question', 'name': "What's the response time when an issue is detected?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'Critical issues (agent failures, integration outages) are escalated within 4 business hours. Performance drift triggers a review within one business day, with optimization executed and tested within the same week.' } },
-        { '@type': 'Question', 'name': 'Do you need admin access to our AI platforms?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We need read access to your agent configurations and, for optimization, the ability to update prompt templates. We document every change and require client approval for any structural modifications to an agent\'s logic.' } },
-        { '@type': 'Question', 'name': 'What AI platforms and helpdesks do you support?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We support agents built on OpenAI, Anthropic, Google Gemini, and most LLM platforms. For integrations, we work with Intercom, Zendesk, Freshdesk, HubSpot, Salesforce, and custom API-based setups.' } },
-        { '@type': 'Question', 'name': 'How is pricing calculated — is it per agent?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Pricing is tier-based, not strictly per-agent. Each tier covers a range (1–2, 3–5, or unlimited agents) and includes a standard set of services. For high-volume deployments, we build custom pricing around the complexity of your stack.' } },
-        { '@type': 'Question', 'name': 'What happens if an agent goes down completely?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Full agent failures are treated as critical incidents. Your AI Ops Specialist is notified immediately via PagerDuty, investigates root cause, and coordinates with your team or vendor to restore service. You receive an incident report within 24 hours.' } },
-        { '@type': 'Question', 'name': 'Can you monitor voice AI agents (e.g. Retell AI, Vapi)?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. We monitor voice agents for call completion rate, resolution rate, transfer rate, and sentiment patterns. We also review call transcripts to catch accuracy issues that automated scoring may miss.' } },
-        { '@type': 'Question', 'name': 'How is sensitive customer data handled during monitoring?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'All monitoring is conducted on anonymized or aggregated performance data wherever possible. If transcript review is required, we follow your data handling policy and can operate under NDA and DPA agreements.' } },
-        { '@type': 'Question', 'name': "What's included in the monthly scorecard?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'The monthly scorecard includes: agent-by-agent accuracy scores, drift trend charts, escalation rate analysis, integration health status, prompt optimization summary, benchmark comparisons to your industry baseline, and a prioritized recommendation list for the next 30 days.' } },
-      ],
-    });
-    return () => { document.getElementById(ldId)?.remove(); };
-  }, []);
 
   return (
     <div className="min-h-screen bg-white">

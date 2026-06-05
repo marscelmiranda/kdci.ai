@@ -81,30 +81,6 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    const ldId = 'ld-faq-staffing';
-    let ld = document.getElementById(ldId);
-    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      'url': 'https://kdci.ai/solutions/ai-staffing-solutions/',
-      'mainEntity': [
-        { '@type': 'Question', 'name': 'What makes KDCI.ai specialists different from a typical VA or offshore hire?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Every specialist in our talent pool is AI-trained before placement — they arrive proficient in Claude, GPT-4o, Zapier, Midjourney, HubSpot, Notion AI, and other tools relevant to your role. You\'re not training someone on AI from scratch; you\'re embedding someone who already uses these tools in their daily workflow.' } },
-        { '@type': 'Question', 'name': 'How fast can a specialist be live and productive?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Our standard onboarding timeline runs 5–7 business days from role brief to first productive day. Day 1–2: brief call and KPI definition. Day 3–5: candidate matching from our talent pool. Day 6–7: your interviews and hire confirmation. Week 2: full onboarding and setup. Week 3: first productive week with daily check-ins.' } },
-        { '@type': 'Question', 'name': 'What does the 2-week replacement guarantee mean?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'If a placed specialist isn\'t the right fit for any reason within the first 3 months, we find and onboard a replacement within 2 weeks at zero additional cost. No conditions, no rebooking fees.' } },
-        { '@type': 'Question', 'name': "What's included in the monthly fee?", 'acceptedAnswer': { '@type': 'Answer', 'text': "Everything. The flat monthly rate covers the specialist's salary, HR administration, payroll processing, Philippine statutory benefits, compliance documentation, and KDCI.ai's management layer. There are no hidden markups or additional HR costs on your end." } },
-        { '@type': 'Question', 'name': "What's the difference between Part-Time and Full-Time plans?", 'acceptedAnswer': { '@type': 'Answer', 'text': 'Part-Time ($2,000/mo) gives you 20 hours per week at a fixed schedule — ideal for focused AI ops or research roles. Full-Time ($3,500/mo) is a fully embedded team member at 40 hours per week. Both plans include all AI tools, HR management, and the 2-week replacement guarantee.' } },
-        { '@type': 'Question', 'name': 'How does the Team (3+ seats) plan work?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Team pricing starts at $2,800/seat/month for 3 or more dedicated specialists, offering a volume discount over the individual full-time rate. At 5+ seats, a dedicated team lead is included to coordinate output, run daily standups, and manage KPI reporting across the team.' } },
-        { '@type': 'Question', 'name': 'What types of roles can we hire for?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Our most in-demand AI-augmented roles include: Prompt Engineers, AI Ops Specialists, Data Analysts, AI-Enabled Executive VAs, Content Ops Managers, Social Media AI Specialists, CRM Admins (HubSpot/Salesforce), Research Analysts, and Catalog & Listing Managers. If your role isn\'t listed, contact us — we likely have a match in our talent pool.' } },
-        { '@type': 'Question', 'name': 'Is there a minimum commitment?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'All plans require a 3-month minimum. This ensures we have time to complete onboarding, validate performance, and deliver measurable results. Our average placement tenure is 14 months — most clients scale to additional seats well before the minimum expires.' } },
-        { '@type': 'Question', 'name': 'Do specialists work exclusively for our company?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. Every KDCI.ai specialist is 100% dedicated to your account. They work your hours, use your tools, follow your processes, and represent your brand. They are not shared across multiple clients — they are effectively your employee, just managed and supported by KDCI.ai.' } },
-        { '@type': 'Question', 'name': 'Can we conduct our own interviews before confirming a hire?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Absolutely. We present a shortlist of 3–5 pre-screened, AI-proficiency-tested candidates. You conduct your own interviews, ask your own questions, and make the final hire decision. We handle the offer, onboarding, HR setup, and ongoing management from there.' } },
-      ],
-    });
-    return () => { document.getElementById(ldId)?.remove(); };
-  }, []);
-
   return (
     <div className="min-h-screen bg-white">
 
