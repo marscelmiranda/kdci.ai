@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, BrainCircuit, Workflow, ShieldCheck, BarChart3, CheckCircle2, Cpu, Zap, Users, Target, Globe, HeartPulse, ShoppingCart, Truck, Scale, GraduationCap, Megaphone, Building2, Landmark, ChevronRight, Shield, Star } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
@@ -121,6 +121,30 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showHeroModal, setShowHeroModal] = useState(false);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
+
+  useEffect(() => {
+    const ldId = 'ld-faq-consulting';
+    let ld = document.getElementById(ldId);
+    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      'url': 'https://kdci.ai/solutions/ai-consulting-and-strategy/',
+      'mainEntity': [
+        { '@type': 'Question', 'name': 'What does AI Consulting & Implementation actually include?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'It covers the full lifecycle: discovery and process audit, AI strategy design, custom agent or workflow builds, integration into your existing systems, staff training, and ongoing optimisation. We don\'t just advise — we build and run the solution alongside your team until outcomes are proven.' } },
+        { '@type': 'Question', 'name': 'How long does it take to go from consultation to a live AI solution?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Most clients are live with their first AI workflow within 21 business days. Discovery and scoping takes 3–5 days, build and configuration takes 10–14 days, and deployment with UAT takes 3–5 days. Complex multi-agent systems may take 4–6 weeks depending on integration depth.' } },
+        { '@type': 'Question', 'name': 'Do we need an existing AI strategy before KDCI can help us?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'No. Most clients come to us without one. Our first step is always a free 2-hour Operations Audit where we map your current workflows, identify the highest-ROI automation opportunities, and present a prioritised AI roadmap before any contract is signed.' } },
+        { '@type': 'Question', 'name': 'What AI platforms and frameworks does KDCI work with?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We work with OpenAI (GPT-4o), Anthropic (Claude), Google Gemini, Mistral, and open-source LLMs. For agentic frameworks we use LangChain, CrewAI, n8n, Make, and Zapier. We also integrate with your existing stack — CRMs, ERPs, helpdesks, and data warehouses.' } },
+        { '@type': 'Question', 'name': 'Can KDCI build custom AI agents for our specific workflows?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. Our AI engineering team designs and deploys purpose-built agents for tasks like automated research, document classification, outreach sequencing, data extraction, report generation, and first-response triage. Every agent is built to your specific data schema and approval requirements.' } },
+        { '@type': 'Question', 'name': 'How do you handle hallucinations and accuracy in automated workflows?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We implement human-in-the-loop checkpoints at every critical decision point. AI agents generate outputs that are reviewed by trained human operators before execution. We also run accuracy benchmarks weekly and retrain or reprompt when performance drifts below agreed thresholds.' } },
+        { '@type': 'Question', 'name': 'What business processes are most suited for AI augmentation?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'High-volume, rule-based tasks with structured inputs deliver the fastest ROI: document classification, data extraction, content generation at scale, email routing, lead scoring, invoice processing, and first-response support triage. We also handle complex multi-step research and synthesis workflows.' } },
+        { '@type': 'Question', 'name': 'How is AI performance monitored after implementation?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'We track accuracy rates, task completion rates, processing speed, and error rates through a monthly AI performance report. Dashboards are delivered weekly during the first 90 days. Models are retrained or updated as your data evolves or new LLM versions outperform the current stack.' } },
+        { '@type': 'Question', 'name': 'Is agentic AI safe to deploy in regulated industries like Fintech or Healthcare?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes, with the right safeguards. We implement strict data governance, encrypted pipelines, audit logs, and human approval gates for any sensitive outputs. We have deployed AI solutions in HIPAA-compliant healthcare environments and SOC-2 certified Fintech infrastructure.' } },
+        { '@type': 'Question', 'name': 'What ROI should we expect and over what timeframe?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Most clients see measurable ROI within 60–90 days of go-live. Typical outcomes: 40–80% reduction in manual processing time, 30–50% cost reduction versus purely human teams, and near-zero error rates on automated tasks. We define success metrics at kickoff and report against them monthly.' } },
+      ],
+    });
+    return () => { document.getElementById(ldId)?.remove(); };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
