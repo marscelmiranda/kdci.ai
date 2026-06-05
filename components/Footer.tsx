@@ -38,17 +38,6 @@ const YoutubeIcon = ({ size = 18, className = "" }: { size?: number, className?:
   </svg>
 );
 
-const BehanceIcon = ({ size = 18, className = "" }: { size?: number, className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M22 7h-9c0 0-.109 4.196.065 5.565.174 1.369 1.674 1.435 1.674 1.435h5.457v-1.957h-3.413v-.369h5.174v2.543c0 2.218-1.543 3.783-5.261 3.783-3.609 0-5.761-2.022-5.696-5.87.065-3.848 2.065-5.152 4.935-5.152 2.87 0 5.065 1.304 5.065 1.304v-1.282zm-20.065-2h6.739c3.022 0 4.174 1.283 4.174 3.326 0 1.761-.848 2.543-1.891 2.826 1.217.261 2.283 1.261 2.283 3.391 0 3.304-2.826 4.457-6.391 4.457h-6.913v-14zm2.13 5.348h3.913c1.37 0 2.13-.587 2.13-1.63 0-1.283-.913-1.696-2.391-1.696h-3.652v3.326zm0 6.63h4.413c1.5 0 2.5-.565 2.5-1.978 0-1.63-1.348-1.826-2.587-1.826h-4.326v3.804zm12.935-11.978h5v2h-5v-2z"/>
-  </svg>
-);
-
-const AdobePortfolioIcon = ({ size = 18, className = "" }: { size?: number, className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0c6.627 0 12 5.373 12 12s-5.373 12-12 12-12-5.373-12-12 5.373-12 12-12zm-3.5 6.5v11h2v-4h1c2.5 0 4-1.5 4-3.5s-1.5-3.5-4-3.5h-3zm2 2h1.5c1.1 0 1.5.8 1.5 1.5s-.4 1.5-1.5 1.5h-1.5v-3zm6.5 2v5h2v-5h.5c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-2.5zm1 2v-1h-1v1h1z"/>
-  </svg>
-);
 
 const SERVICE_LINES = [
   'AI Agent Operations',
@@ -172,8 +161,6 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                 { icon: FacebookIcon, href: "https://www.facebook.com/kdciai/" },
                 { icon: TiktokIcon, href: "https://www.tiktok.com/@kdci_outsourcing" },
                 { icon: YoutubeIcon, href: "https://www.youtube.com/@kdci_ai" },
-                { icon: BehanceIcon, href: "https://www.behance.net/kdcico" },
-                { icon: AdobePortfolioIcon, href: "https://kdci.myportfolio.com/" }
               ].map((social, i) => (
                 <a 
                   key={i} 
