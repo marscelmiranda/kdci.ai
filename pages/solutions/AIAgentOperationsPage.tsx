@@ -614,7 +614,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 ))}
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+              <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its AI agent stack</p>
                 <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
