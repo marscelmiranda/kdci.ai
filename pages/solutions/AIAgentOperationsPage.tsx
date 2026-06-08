@@ -562,7 +562,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           {/* ── Desktop layout: sidebar list + detail panel ── */}
           <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-stretch">
             {/* Left: vertical list */}
-            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm flex flex-col h-[560px]">
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm flex flex-col h-[520px]">
               <div className="space-y-0.5 overflow-y-auto flex-1 pr-1" style={{ scrollbarWidth: 'thin' }}>
                 {WHO_WE_SERVE.map((v, i) => (
                   <button
@@ -582,7 +582,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             </div>
 
             {/* Right: detail panel */}
-            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white h-[560px] flex flex-col">
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={30} className="text-white" />
