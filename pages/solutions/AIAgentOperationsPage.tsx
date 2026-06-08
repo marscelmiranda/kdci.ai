@@ -4,7 +4,7 @@ import {
   ArrowRight, CheckCircle2, Activity, ShieldCheck, BarChart3,
   RefreshCw, Settings, Users, Zap, AlertCircle, Bell,
   ShoppingCart, HeartPulse, Scale, Landmark, Home,
-  Monitor, Clock, TrendingUp, Target, BarChart, Shield
+  Monitor, Clock, TrendingUp, Target, BarChart, Shield, Package
 } from 'lucide-react';
 import { ViewType } from '../../types';
 import { Breadcrumbs } from '../../components/Shared';
@@ -64,6 +64,81 @@ const INDUSTRIES = [
   { icon: HeartPulse,   name: 'Healthcare',               desc: 'AI oversight in healthcare isn\'t optional — it\'s regulatory. We provide the audit trail and human review layer compliance teams need.' },
   { icon: Landmark,     name: 'Financial Services',       desc: 'Regulators are watching AI deployments in finance. Our managed oversight model gives you documented monitoring at every step.' },
   { icon: Scale,        name: 'Insurance',                desc: 'Complex products and long journeys mean insurance agents drift and hallucinate more. We run continuous correction so agents stay accurate.' },
+];
+
+const WHO_WE_SERVE = [
+  {
+    icon: ShoppingCart,
+    name: 'E-commerce & Retail',
+    sub: 'Customer & catalog ops',
+    color: '#F59E0B',
+    bg: 'bg-amber-500',
+    agents: [
+      { label: 'Order & Returns', tools: ['Gorgias', 'Tidio (Lyro)', 'Yuma AI', 'Ada', 'Sierra AI', 'Kore.ai'] },
+      { label: 'Product Data Enrichment', tools: ['Feedonomics', 'Hypotenuse AI', 'Shopify Magic', 'Salsify', 'Constructor'] },
+      { label: 'Abandoned Cart Recovery', tools: ['Klaviyo AI', 'Omnisend', 'Attentive', 'Tidio (Lyro)', 'Drip'] },
+    ],
+  },
+  {
+    icon: Landmark,
+    name: 'Financial Services & Fintech',
+    sub: 'Compliance & payments',
+    color: '#3B82F6',
+    bg: 'bg-blue-500',
+    agents: [
+      { label: 'Document Processing', tools: ['Kognitos', 'WorkFusion', 'Hyperscience', 'Kore.ai', 'Ema'] },
+      { label: 'KYC / Onboarding', tools: ['Zowie', 'Kore.ai', 'WorkFusion', 'Jumio', 'Onfido'] },
+      { label: 'Collections & Payment Follow-Up', tools: ['Kognitos', 'Beam AI', 'TrueAccord', 'Invoiced', 'Gaviti'] },
+    ],
+  },
+  {
+    icon: HeartPulse,
+    name: 'Healthcare & Medical Admin',
+    sub: 'Patient & billing ops',
+    color: '#10B981',
+    bg: 'bg-emerald-500',
+    agents: [
+      { label: 'Patient Intake & Scheduling', tools: ['Prosper AI', 'Notable Health', 'Hyro', 'Replicant', 'Assort Health'] },
+      { label: 'Prior Authorization', tools: ['Prosper AI', 'SuperDial', 'Infinitus', 'Droidal', 'OmniMD'] },
+      { label: 'Medical Billing & Claims', tools: ['Thoughtful AI', 'Beam AI', 'Droidal', 'Replicant', 'Availity'] },
+    ],
+  },
+  {
+    icon: Home,
+    name: 'Real Estate & Property Mgmt',
+    sub: 'Leads & listings',
+    color: '#8B5CF6',
+    bg: 'bg-violet-500',
+    agents: [
+      { label: 'Lead Qualification', tools: ['Structurely', 'Lofty', 'Smith.ai', 'Ylopo', 'Perspective AI'] },
+      { label: 'Tenant Communications', tools: ['AppFolio Realm-X', 'Buildium AI', 'Knock CRM', 'Elise AI', 'Entrata'] },
+      { label: 'Listing Data Management', tools: ['Hypotenuse AI', 'Rechat', 'Zillow Premier Agent', 'RealScout', 'Listings AI'] },
+    ],
+  },
+  {
+    icon: Scale,
+    name: 'Legal & Professional Services',
+    sub: 'Intake & compliance',
+    color: '#6366F1',
+    bg: 'bg-indigo-500',
+    agents: [
+      { label: 'Client Intake', tools: ['Lawmatics', 'Clio AI', 'Monday.com Legal', 'Smith.ai', 'Activepieces'] },
+      { label: 'Contract Review & Extraction', tools: ['Luminance', 'Ironclad', 'HyperStart CLM', 'ContractPodAI', 'Spellbook'] },
+      { label: 'Deadline & Compliance Monitoring', tools: ['Clio AI', 'Sirion', 'ContractWorks', 'Ironclad', 'Monday.com Legal'] },
+    ],
+  },
+  {
+    icon: Package,
+    name: 'Logistics & Supply Chain',
+    sub: 'Freight & vendor ops',
+    color: '#14B8A6',
+    bg: 'bg-teal-500',
+    agents: [
+      { label: 'Shipment Tracking & Exception', tools: ['FourKites', 'Project44', 'Flexport', 'Emerge', 'Cargobase'] },
+      { label: 'Vendor & Freight Comms', tools: ['Emerge', 'Wisor.ai', 'FreightMynd', 'Loadsmart', 'Project44'] },
+      { label: 'Invoice Reconciliation', tools: ['Kognitos', 'Emerge', 'FreightMynd', 'Expedock', 'Hypatos'] },
+    ],
+  },
 ];
 
 const TOOLS = [
@@ -418,29 +493,62 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       </section>
 
       {/* ── SECTION 7 — WHO WE SERVE ──────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-14 text-center">
+          <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Who We Serve
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
-              Industries where <span className="text-[#E61739]">AI agent <br/> operations</span> isn't optional
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">
+              AI agents built for<br />your industry.
             </h2>
-            <p className="text-[#86868b] text-lg font-medium max-w-xl mx-auto">We specialize in verticals where AI agents touch customer outcomes and model failures have real consequences.</p>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              Purpose-built AI agent operations across six high-stakes verticals — each with dedicated agent roles, specialist tools, and managed oversight.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {INDUSTRIES.map((ind, i) => (
-              <div key={i} className="flex items-start gap-4 p-6 rounded-2xl border border-slate-100 bg-slate-50 hover:border-[#E61739]/20 hover:bg-white hover:shadow-sm transition-all">
-                <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
-                  <ind.icon size={18} className="text-[#E61739]" />
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {WHO_WE_SERVE.map((vertical, vi) => (
+              <div key={vi} className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+                {/* Card header */}
+                <div className="flex items-center gap-4 px-7 py-5" style={{ backgroundColor: vertical.color }}>
+                  <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
+                    <vertical.icon size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-white leading-tight">{vertical.name}</h3>
+                    <p className="text-white/70 text-[11px] font-bold uppercase tracking-widest mt-0.5">{vertical.sub}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-black text-[#1D1D1F] text-sm mb-1">{ind.name}</h4>
-                  <p className="text-[#86868b] text-xs font-medium leading-relaxed">{ind.desc}</p>
+
+                {/* Agent columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 px-2 py-2">
+                  {vertical.agents.map((agent, ai) => (
+                    <div key={ai} className="px-4 py-5 flex flex-col gap-3">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: vertical.color }}>
+                          Agent {ai + 1}
+                        </span>
+                      </div>
+                      <p className="text-sm font-black text-slate-800 leading-tight">{agent.label}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {agent.tools.map((tool, ti) => (
+                          <span key={ti} className="text-[10px] font-semibold text-slate-500 bg-slate-100 rounded-full px-2.5 py-1 leading-none">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <button onClick={() => setView('contact')} className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all shadow-sm">
+              Deploy agents in your vertical <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>

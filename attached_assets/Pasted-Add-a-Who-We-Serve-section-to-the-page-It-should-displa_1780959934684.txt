@@ -1,0 +1,37 @@
+Add a "Who We Serve" section to the page. It should display 6 industry vertical blocks, each containing 3 agents with their service name and tools.
+
+Layout: A section with a heading "Who We Serve" and a subheading like "AI agents built for your industry." Display the 6 verticals as cards in a 2-column grid (1 column on mobile). Each card has a colored header with an icon and industry name, then 3 agent columns inside showing the agent number, service name, and tool pills.
+
+Use this data:
+
+1. 🛒 E-commerce & Retail (Customer & catalog ops)
+   - Agent 1 — Order & Returns: Gorgias, Tidio (Lyro), Yuma AI, Ada, Sierra AI, Kore.ai
+   - Agent 2 — Product Data Enrichment: Feedonomics, Hypotenuse AI, Shopify Magic, Salsify, Constructor
+   - Agent 3 — Abandoned Cart Recovery: Klaviyo AI, Omnisend, Attentive, Tidio (Lyro), Drip
+
+2. 💳 Financial Services & Fintech (Compliance & payments)
+   - Agent 1 — Document Processing: Kognitos, WorkFusion, Hyperscience, Kore.ai, Ema
+   - Agent 2 — KYC / Onboarding: Zowie, Kore.ai, WorkFusion, Jumio, Onfido
+   - Agent 3 — Collections & Payment Follow-Up: Kognitos, Beam AI, TrueAccord, Invoiced, Gaviti
+
+3. 🏥 Healthcare & Medical Admin (Patient & billing ops)
+   - Agent 1 — Patient Intake & Scheduling: Prosper AI, Notable Health, Hyro, Replicant, Assort Health
+   - Agent 2 — Prior Authorization: Prosper AI, SuperDial, Infinitus, Droidal, OmniMD
+   - Agent 3 — Medical Billing & Claims: Thoughtful AI, Beam AI, Droidal, Replicant, Availity
+
+4. 🏘️ Real Estate & Property Mgmt (Leads & listings)
+   - Agent 1 — Lead Qualification: Structurely, Lofty, Smith.ai, Ylopo, Perspective AI
+   - Agent 2 — Tenant Communications: AppFolio Realm-X, Buildium AI, Knock CRM, Elise AI, Entrata
+   - Agent 3 — Listing Data Management: Hypotenuse AI, Rechat, Zillow Premier Agent, RealScout, Listings AI
+
+5. ⚖️ Legal & Professional Services (Intake & compliance)
+   - Agent 1 — Client Intake: Lawmatics, Clio AI, Monday.com Legal, Smith.ai, Activepieces
+   - Agent 2 — Contract Review & Extraction: Luminance, Ironclad, HyperStart CLM, ContractPodAI, Spellbook
+   - Agent 3 — Deadline & Compliance Monitoring: Clio AI, Sirion, ContractWorks, Ironclad, Monday.com Legal
+
+6. 📦 Logistics & Supply Chain (Freight & vendor ops)
+   - Agent 1 — Shipment Tracking & Exception: FourKites, Project44, Flexport, Emerge, Cargobase
+   - Agent 2 — Vendor & Freight Comms: Emerge, Wisor.ai, FreightMynd, Loadsmart, Project44
+   - Agent 3 — Invoice Reconciliation: Kognitos, Emerge, FreightMynd, Expedock, Hypatos
+
+Each vertical should have its own accent color. Tool names should appear as small rounded pill tags. Match the existing site's font and spacing. Make the section responsive.
