@@ -524,7 +524,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
 
             <div className="bg-slate-900 rounded-3xl p-6 text-white flex flex-col">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg" style={{ backgroundColor: selectedVertical.color }}>
+                <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={24} className="text-white" />
                 </div>
                 <div>
@@ -537,8 +537,8 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 {selectedVertical.agents.map((agent, ai) => (
                   <div key={ai} className="bg-white/5 rounded-2xl px-4 py-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: selectedVertical.color + '33' }}>
-                        <span className="text-[10px] font-black" style={{ color: selectedVertical.color }}>0{ai + 1}</span>
+                      <div className="w-6 h-6 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                        <span className="text-[10px] font-black text-[#E61739]">0{ai + 1}</span>
                       </div>
                       <span className="text-sm font-black text-white leading-tight">{agent.label}</span>
                     </div>
@@ -574,7 +574,6 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                         : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
-                    <v.icon size={15} className={selectedVertical.name === v.name ? 'text-white' : 'text-[#E61739]'} />
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold leading-tight">{v.name}</span>
                       <span className={`text-[10px] font-medium leading-tight mt-0.5 ${selectedVertical.name === v.name ? 'text-white/60' : 'text-slate-400'}`}>{v.sub}</span>
@@ -587,7 +586,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             {/* Right: detail panel */}
             <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-lg" style={{ backgroundColor: selectedVertical.color }}>
+                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={30} className="text-white" />
                 </div>
                 <div>
@@ -600,13 +599,13 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 {selectedVertical.agents.map((agent, ai) => (
                   <div key={ai} className="bg-white/5 hover:bg-white/10 transition-colors rounded-2xl p-5 border border-white/5 flex flex-col gap-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: selectedVertical.color + '33' }}>
-                        <span className="text-xs font-black" style={{ color: selectedVertical.color }}>0{ai + 1}</span>
+                      <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                        <span className="text-xs font-black text-[#E61739]">0{ai + 1}</span>
                       </div>
                       <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Agent {ai + 1}</span>
                     </div>
                     <p className="text-sm font-black text-white leading-tight">{agent.label}</p>
-                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                    <div className="flex flex-wrap gap-1.5">
                       {agent.tools.map((tool, ti) => (
                         <span key={ti} className="text-[10px] font-semibold text-white/50 bg-white/10 rounded-full px-2.5 py-1 leading-none">{tool}</span>
                       ))}
