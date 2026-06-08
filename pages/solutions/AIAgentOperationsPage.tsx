@@ -574,10 +574,8 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                         : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold leading-tight">{v.name}</span>
-                      <span className={`text-[10px] font-medium leading-tight mt-0.5 ${selectedVertical.name === v.name ? 'text-white/60' : 'text-slate-400'}`}>{v.sub}</span>
-                    </div>
+                    <v.icon size={16} className={selectedVertical.name === v.name ? 'text-white shrink-0' : 'text-[#E61739] shrink-0'} />
+                    <span className="text-sm font-semibold leading-tight">{v.name}</span>
                   </button>
                 ))}
               </div>
