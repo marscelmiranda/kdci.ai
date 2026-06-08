@@ -199,6 +199,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showHeroModal, setShowHeroModal] = useState(false);
+  const [selectedVertical, setSelectedVertical] = useState(WHO_WE_SERVE[0]);
   const captchaRef = useRef<CaptchaHandle>(null);
   const inp = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E61739]/60 transition-colors";
 
@@ -496,59 +497,131 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-24 bg-[#F9F9F9] border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
-              Who We Serve
-            </div>
-            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">
-              AI agents built for<br />your industry.
-            </h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold text-slate-900 mb-6">AI agent operations<br />built for your industry.</h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textWrap: 'balance' }}>
               Purpose-built AI agent operations across six high-stakes verticals — each with dedicated agent roles, specialist tools, and managed oversight.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {WHO_WE_SERVE.map((vertical, vi) => (
-              <div key={vi} className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
-                {/* Card header */}
-                <div className="flex items-center gap-4 px-7 py-5" style={{ backgroundColor: vertical.color }}>
-                  <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
-                    <vertical.icon size={20} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-black text-white leading-tight">{vertical.name}</h3>
-                    <p className="text-white/70 text-[11px] font-bold uppercase tracking-widest mt-0.5">{vertical.sub}</p>
-                  </div>
-                </div>
+          {/* ── Mobile layout: horizontal pill strip + panel below ── */}
+          <div className="lg:hidden">
+            <div className="flex gap-2 overflow-x-auto pb-3 mb-4" style={{ scrollbarWidth: 'none' }}>
+              {WHO_WE_SERVE.map((v, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedVertical(v)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
+                    selectedVertical.name === v.name
+                      ? 'bg-[#E61739] text-white shadow-sm'
+                      : 'bg-white border border-black/10 text-slate-600'
+                  }`}
+                >
+                  <v.icon size={13} className={selectedVertical.name === v.name ? 'text-white' : 'text-[#E61739]'} />
+                  {v.name}
+                </button>
+              ))}
+            </div>
 
-                {/* Agent columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 px-2 py-2">
-                  {vertical.agents.map((agent, ai) => (
-                    <div key={ai} className="px-4 py-5 flex flex-col gap-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: vertical.color }}>
-                          Agent {ai + 1}
-                        </span>
-                      </div>
-                      <p className="text-sm font-black text-slate-800 leading-tight">{agent.label}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {agent.tools.map((tool, ti) => (
-                          <span key={ti} className="text-[10px] font-semibold text-slate-500 bg-slate-100 rounded-full px-2.5 py-1 leading-none">
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+            <div className="bg-slate-900 rounded-3xl p-6 text-white flex flex-col">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg" style={{ backgroundColor: selectedVertical.color }}>
+                  <selectedVertical.icon size={24} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-black leading-tight">{selectedVertical.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">{selectedVertical.sub}</p>
                 </div>
               </div>
-            ))}
+
+              <div className="flex flex-col gap-4">
+                {selectedVertical.agents.map((agent, ai) => (
+                  <div key={ai} className="bg-white/5 rounded-2xl px-4 py-4 border border-white/5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: selectedVertical.color + '33' }}>
+                        <span className="text-[10px] font-black" style={{ color: selectedVertical.color }}>0{ai + 1}</span>
+                      </div>
+                      <span className="text-sm font-black text-white leading-tight">{agent.label}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {agent.tools.map((tool, ti) => (
+                        <span key={ti} className="text-[10px] font-semibold text-white/50 bg-white/10 rounded-full px-2.5 py-1 leading-none">{tool}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
+                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                  Deploy agents in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-10 text-center">
-            <button onClick={() => setView('contact')} className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all shadow-sm">
-              Deploy agents in your vertical <ArrowRight size={16} />
-            </button>
+          {/* ── Desktop layout: sidebar list + detail panel ── */}
+          <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-start">
+            {/* Left: vertical list */}
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
+              <div className="space-y-0.5">
+                {WHO_WE_SERVE.map((v, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedVertical(v)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
+                      selectedVertical.name === v.name
+                        ? 'bg-[#E61739] text-white shadow-sm'
+                        : 'hover:bg-slate-50 text-slate-600'
+                    }`}
+                  >
+                    <v.icon size={15} className={selectedVertical.name === v.name ? 'text-white' : 'text-[#E61739]'} />
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold leading-tight">{v.name}</span>
+                      <span className={`text-[10px] font-medium leading-tight mt-0.5 ${selectedVertical.name === v.name ? 'text-white/60' : 'text-slate-400'}`}>{v.sub}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: detail panel */}
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+              <div className="flex items-center gap-5 mb-8">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-lg" style={{ backgroundColor: selectedVertical.color }}>
+                  <selectedVertical.icon size={30} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black leading-tight">{selectedVertical.name}</h3>
+                  <p className="text-white/40 text-xs font-black uppercase tracking-widest mt-1">{selectedVertical.sub}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 flex-grow content-start">
+                {selectedVertical.agents.map((agent, ai) => (
+                  <div key={ai} className="bg-white/5 hover:bg-white/10 transition-colors rounded-2xl p-5 border border-white/5 flex flex-col gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: selectedVertical.color + '33' }}>
+                        <span className="text-xs font-black" style={{ color: selectedVertical.color }}>0{ai + 1}</span>
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Agent {ai + 1}</span>
+                    </div>
+                    <p className="text-sm font-black text-white leading-tight">{agent.label}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {agent.tools.map((tool, ti) => (
+                        <span key={ti} className="text-[10px] font-semibold text-white/50 bg-white/10 rounded-full px-2.5 py-1 leading-none">{tool}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                <p className="text-white/30 text-xs font-medium">Select any industry to explore its AI agent stack</p>
+                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                  Deploy agents in this vertical <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
