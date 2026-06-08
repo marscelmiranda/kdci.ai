@@ -552,7 +552,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
-                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
@@ -560,10 +560,10 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           </div>
 
           {/* ── Desktop layout: sidebar list + detail panel ── */}
-          <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-start">
+          <div className="hidden lg:grid lg:grid-cols-3 gap-6 items-stretch">
             {/* Left: vertical list */}
-            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm">
-              <div className="space-y-0.5">
+            <div className="bg-white rounded-3xl border border-black/5 p-3 shadow-sm flex flex-col h-[560px]">
+              <div className="space-y-0.5 overflow-y-auto flex-1 pr-1" style={{ scrollbarWidth: 'thin' }}>
                 {WHO_WE_SERVE.map((v, i) => (
                   <button
                     key={i}
@@ -584,7 +584,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             </div>
 
             {/* Right: detail panel */}
-            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
+            <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white h-[560px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={30} className="text-white" />
@@ -616,7 +616,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
 
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its AI agent stack</p>
-                <button onClick={() => setView('contact')} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
