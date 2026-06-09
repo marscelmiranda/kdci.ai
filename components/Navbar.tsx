@@ -95,17 +95,17 @@ export const Navbar = ({
     setTimeout(() => setIsSearchVisible(true), 10);
     if (!blogsFetched.current) {
       blogsFetched.current = true;
-      fetch('/api/blog')
-        .then(r => r.ok ? r.json() : [])
-        .then((posts: any[]) => {
-          setDynamicItems(posts.map(p => ({
-            title: p.title,
-            type: 'Blog Post',
-            view: 'blog-detail',
-            slug: p.slug || String(p.id),
-          })));
-        })
-        .catch(() => {});
+      Promise.all([
+        fetch('/api/blog').then(r => r.ok ? r.json() : []),
+        fetch('/api/ebooks').then(r => r.ok ? r.json() : []),
+        fetch('/api/cases').then(r => r.ok ? r.json() : []),
+      ]).then(([posts, ebooks, cases]) => {
+        setDynamicItems([
+          ...(posts as any[]).map(p => ({ title: p.title, type: 'Blog Post', view: 'blog-detail', slug: p.slug || String(p.id) })),
+          ...(ebooks as any[]).map(e => ({ title: e.title, type: 'Ebook', view: 'ebook-detail', slug: e.slug || String(e.id) })),
+          ...(cases as any[]).map(c => ({ title: c.title, type: 'Case Study', view: 'case-study-detail', slug: c.slug || String(c.id) })),
+        ]);
+      }).catch(() => {});
     }
   };
 
@@ -118,10 +118,11 @@ export const Navbar = ({
   };
 
   const handleSearchNav = (view: string, slug?: string) => {
-    if (slug && view === 'blog-detail') {
+    if (slug) {
       handleCloseSearch();
-      window.location.href = `/blogs/${slug}/`;
-      return;
+      if (view === 'blog-detail')        { window.location.href = `/blogs/${slug}/`; return; }
+      if (view === 'ebook-detail')       { window.location.href = `/ebooks/${slug}/`; return; }
+      if (view === 'case-study-detail')  { window.location.href = `/case-studies/${slug}/`; return; }
     }
     setView(view as ViewType);
     handleCloseSearch();
