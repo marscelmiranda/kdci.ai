@@ -12,30 +12,52 @@ import {
 import { ViewType } from "../types";
 import { TOP_SERVICES, INDUSTRIES, RESOURCES } from "../data";
 import { Logo } from "./Logo";
-import { getPath } from "../lib/routes";
+import { getPath, VIEW_TO_PATH } from "../lib/routes";
 
 const UNLISTED_RESOURCE_IDS = new Set(["webinars", "guides"]);
 const NAV_RESOURCES = RESOURCES.filter((r) => !UNLISTED_RESOURCE_IDS.has(r.id));
 
 type SearchItem = { title: string; type: string; view: string; slug?: string };
 
-const STATIC_SEARCH_ITEMS: SearchItem[] = [
-  ...TOP_SERVICES.map((s) => ({ title: s.name, type: "Service", view: s.id })),
-  ...INDUSTRIES.map((i) => ({
-    title: `${i.name} Operations`,
-    type: "Industry",
-    view: i.id,
-  })),
-  ...NAV_RESOURCES.map((r) => ({
-    title: r.name,
-    type: "Resource",
-    view: r.id,
-  })),
-  { title: "Careers & Jobs", type: "Page", view: "careers" },
-  { title: "About Company", type: "Page", view: "company" },
-  { title: "Contact Us", type: "Page", view: "contact" },
-  { title: "Publisher Dashboard", type: "Portal", view: "login" },
-];
+// Human-readable labels for views not covered by data arrays
+const VIEW_LABELS: Partial<Record<ViewType, { title: string; type: string }>> = {
+  'home':                 { title: 'Home',                      type: 'Page' },
+  'solutions-hub':        { title: 'Solutions Hub',             type: 'Page' },
+  'outcome-models':       { title: 'Outcome Models',            type: 'Service' },
+  'insights':             { title: 'Insights',                  type: 'Resource' },
+  'blog':                 { title: 'Blog',                      type: 'Resource' },
+  'case-studies':         { title: 'Case Studies',              type: 'Resource' },
+  'guides':               { title: 'Guides & Playbooks',        type: 'Resource' },
+  'webinars':             { title: 'Webinars & Events',         type: 'Resource' },
+  'ebooks':               { title: 'Ebooks & Whitepapers',      type: 'Resource' },
+  'faqs':                 { title: 'FAQs',                      type: 'Resource' },
+  'glossary':             { title: 'Glossary',                  type: 'Resource' },
+  'company':              { title: 'Who We Are',                type: 'Page' },
+  'contact':              { title: 'Contact Us',                type: 'Page' },
+  'careers':              { title: 'Careers & Jobs',            type: 'Page' },
+  'privacy-policy':       { title: 'Privacy Policy',            type: 'Page' },
+  'terms-and-conditions': { title: 'Terms & Conditions',        type: 'Page' },
+  'login':                { title: 'Login / Publisher Portal',  type: 'Portal' },
+  'publisher-dashboard':  { title: 'Publisher Dashboard',       type: 'Portal' },
+};
+
+// Build lookup maps from data arrays
+const serviceMap = new Map(TOP_SERVICES.map(s => [s.id, { title: s.name, type: 'Service' }]));
+const industryMap = new Map(INDUSTRIES.map(i => [i.id, { title: `${i.name} Operations`, type: 'Industry' }]));
+const resourceMap = new Map(RESOURCES.map(r => [r.id, { title: r.name, type: 'Resource' }]));
+
+// Auto-generate from every routable view — nothing to manually maintain
+const STATIC_SEARCH_ITEMS: SearchItem[] = (Object.keys(VIEW_TO_PATH) as ViewType[])
+  .map(view => {
+    const meta =
+      serviceMap.get(view) ??
+      industryMap.get(view) ??
+      resourceMap.get(view) ??
+      VIEW_LABELS[view];
+    if (!meta) return null;
+    return { title: meta.title, type: meta.type, view };
+  })
+  .filter(Boolean) as SearchItem[];
 
 const POPULAR_SEARCHES = [
   { label: "Generative AI", view: "solutions-hub" },
