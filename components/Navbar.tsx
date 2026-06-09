@@ -17,7 +17,9 @@ import { getPath } from "../lib/routes";
 const UNLISTED_RESOURCE_IDS = new Set(["webinars", "guides"]);
 const NAV_RESOURCES = RESOURCES.filter((r) => !UNLISTED_RESOURCE_IDS.has(r.id));
 
-const SEARCH_ITEMS = [
+type SearchItem = { title: string; type: string; view: string; slug?: string };
+
+const STATIC_SEARCH_ITEMS: SearchItem[] = [
   ...TOP_SERVICES.map((s) => ({ title: s.name, type: "Service", view: s.id })),
   ...INDUSTRIES.map((i) => ({
     title: `${i.name} Operations`,
@@ -70,6 +72,8 @@ export const Navbar = ({
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [dynamicItems, setDynamicItems] = useState<SearchItem[]>([]);
+  const blogsFetched = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -89,6 +93,20 @@ export const Navbar = ({
   const handleOpenSearch = () => {
     setIsSearchMounted(true);
     setTimeout(() => setIsSearchVisible(true), 10);
+    if (!blogsFetched.current) {
+      blogsFetched.current = true;
+      fetch('/api/blog')
+        .then(r => r.ok ? r.json() : [])
+        .then((posts: any[]) => {
+          setDynamicItems(posts.map(p => ({
+            title: p.title,
+            type: 'Blog Post',
+            view: 'blog-detail',
+            slug: p.slug || String(p.id),
+          })));
+        })
+        .catch(() => {});
+    }
   };
 
   const handleCloseSearch = () => {
@@ -99,7 +117,12 @@ export const Navbar = ({
     }, 300);
   };
 
-  const handleSearchNav = (view: string) => {
+  const handleSearchNav = (view: string, slug?: string) => {
+    if (slug && view === 'blog-detail') {
+      handleCloseSearch();
+      window.location.href = `/blogs/${slug}/`;
+      return;
+    }
     setView(view as ViewType);
     handleCloseSearch();
   };
@@ -112,9 +135,10 @@ export const Navbar = ({
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isSearchMounted]);
 
-  const filteredResults = SEARCH_ITEMS.filter((item) =>
+  const allSearchItems = [...STATIC_SEARCH_ITEMS, ...dynamicItems];
+  const filteredResults = allSearchItems.filter((item) =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  ).slice(0, 6);
+  ).slice(0, 8);
 
   const isDarkHero = !isScrolled && !isSearchMounted;
 
@@ -446,7 +470,7 @@ export const Navbar = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && filteredResults.length > 0) {
-                    handleSearchNav(filteredResults[0].view);
+                    handleSearchNav(filteredResults[0].view, filteredResults[0].slug);
                   }
                 }}
                 placeholder="Type keywords..."
@@ -473,8 +497,8 @@ export const Navbar = ({
                     filteredResults.map((result, idx) => (
                       <a
                         key={idx}
-                        href={getPath(result.view as ViewType)}
-                        onClick={e => { e.preventDefault(); handleSearchNav(result.view); }}
+                        href={result.slug ? `/blogs/${result.slug}/` : getPath(result.view as ViewType)}
+                        onClick={e => { e.preventDefault(); handleSearchNav(result.view, result.slug); }}
                         className="flex items-center justify-between p-6 rounded-2xl hover:bg-white/5 border border-transparent hover:border-white/10 group transition-all text-left"
                       >
                         <div>
