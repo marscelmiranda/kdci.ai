@@ -444,10 +444,19 @@ export const Navbar = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && filteredResults.length > 0) {
+                    handleSearchNav(filteredResults[0].view);
+                  }
+                }}
                 placeholder="Type keywords..."
                 className="w-full bg-transparent border-b-2 border-white/20 py-6 text-3xl md:text-5xl font-medium text-white placeholder:text-white/20 focus:outline-none focus:border-[#E61739] transition-all text-center"
               />
-              <button className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#E61739] transition-colors">
+              <button
+                type="button"
+                onClick={() => filteredResults.length > 0 ? handleSearchNav(filteredResults[0].view) : undefined}
+                className="absolute right-0 top-1/2 -translate-y-1/2 text-white/40 hover:text-[#E61739] transition-colors"
+              >
                 <Search size={32} />
               </button>
             </div>
