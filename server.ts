@@ -1267,7 +1267,62 @@ if (isDev) {
   const spaShell = path.join(distPath, 'spa-shell.html');
   const fallbackHtml = fs.existsSync(spaShell) ? spaShell : path.join(distPath, 'index.html');
 
-  // Blog post pages: inject correct meta tags so Googlebot sees proper title/canonical
+  // ── Shared OG-tag injection helper ──────────────────────────────────────────
+  // The HTML template uses multi-line <meta> tags, so we must use \s+ (not a
+  // literal space) between "meta" and the attribute name, and [\s\S]*? to match
+  // content spread across lines. We also inject twitter:image (absent from the
+  // template) and flip og:type to "article" for blog / ebook / case-study pages.
+  const FALLBACK_IMG = 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp';
+
+  function injectOgTags(baseHtml: string, opts: {
+    title: string; desc: string; url: string; img: string; type?: string;
+  }): string {
+    const { title, desc, url, img, type = 'article' } = opts;
+    let h = baseHtml;
+
+    // <title> is always single-line in our template
+    h = h.replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
+
+    // Multi-line OG / Twitter tags: use \s+ between attributes
+    h = h.replace(/<meta\s+property="og:type"[\s\S]*?\/>/,   `<meta property="og:type" content="${type}" />`);
+    h = h.replace(/<meta\s+property="og:title"[\s\S]*?\/>/,  `<meta property="og:title" content="${title}" />`);
+    h = h.replace(/<meta\s+property="og:url"[\s\S]*?\/>/,    `<meta property="og:url" content="${url}" />`);
+    h = h.replace(/<meta\s+property="og:image"[\s\S]*?\/>/,  `<meta property="og:image" content="${img}" />`);
+    h = h.replace(/<meta\s+property="og:description"[\s\S]*?\/>/,
+                  `<meta property="og:description" content="${desc}" />`);
+    h = h.replace(/<meta\s+name="description"[\s\S]*?\/>/,
+                  `<meta name="description" content="${desc}" />`);
+    h = h.replace(/<meta\s+name="twitter:title"[\s\S]*?\/>/,
+                  `<meta name="twitter:title" content="${title}" />`);
+    h = h.replace(/<meta\s+name="twitter:description"[\s\S]*?\/>/,
+                  `<meta name="twitter:description" content="${desc}" />`);
+
+    // twitter:image may not exist in the template — replace or inject before </head>
+    if (/<meta\s+name="twitter:image"[\s\S]*?\/>/.test(h)) {
+      h = h.replace(/<meta\s+name="twitter:image"[\s\S]*?\/>/, `<meta name="twitter:image" content="${img}" />`);
+    } else {
+      h = h.replace('</head>', `  <meta name="twitter:image" content="${img}" />\n</head>`);
+    }
+
+    // canonical — replace or inject
+    if (h.includes('<link rel="canonical"')) {
+      h = h.replace(/<link\s+rel="canonical"[\s\S]*?\/>/, `<link rel="canonical" href="${url}" />`);
+    } else {
+      h = h.replace('</head>', `  <link rel="canonical" href="${url}" />\n</head>`);
+    }
+
+    return h;
+  }
+
+  function absImg(raw: string | null | undefined): string {
+    if (!raw) return FALLBACK_IMG;
+    if (raw.startsWith('http')) return raw;
+    return `https://kdci.ai${raw.startsWith('/') ? '' : '/'}${raw}`;
+  }
+
+  function esc(s: string) { return s.replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+  // ── /blogs/:slug/ ────────────────────────────────────────────────────────────
   app.get('/blogs/:slug/', async (req, res) => {
     try {
       const { rows } = await pool.query(
@@ -1275,36 +1330,60 @@ if (isDev) {
         [req.params.slug]
       );
       if (!rows.length) return res.sendFile(fallbackHtml);
-      const post = rows[0];
-      const canonical = `https://kdci.ai/blogs/${post.slug}/`;
-      const title = `${post.title} | KDCI.ai`;
-      const desc = (post.excerpt || '').replace(/"/g, '&quot;').slice(0, 160);
-      const img = post.cover_image || 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp';
-      let html = fs.readFileSync(fallbackHtml, 'utf8');
-      html = html
-        .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
-        .replace(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${title}" />`)
-        .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`)
-        .replace(/<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${img}" />`)
-        .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${title}" />`)
-        .replace(/<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${img}" />`);
-      if (desc) {
-        html = html
-          .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${desc}" />`)
-          .replace(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${desc}" />`)
-          .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${desc}" />`);
-      }
-      // Inject or replace canonical
-      if (html.includes('<link rel="canonical"')) {
-        html = html.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`);
-      } else {
-        html = html.replace('</head>', `  <link rel="canonical" href="${canonical}" />\n</head>`);
-      }
+      const p = rows[0];
+      const base = fs.readFileSync(fallbackHtml, 'utf8');
+      const html = injectOgTags(base, {
+        title: esc(`${p.title} | KDCI.ai`),
+        desc:  esc((p.excerpt || '').slice(0, 160)),
+        url:   `https://kdci.ai/blogs/${p.slug}/`,
+        img:   absImg(p.cover_image),
+      });
       res.setHeader('Content-Type', 'text/html');
       res.send(html);
-    } catch {
-      res.sendFile(fallbackHtml);
-    }
+    } catch { res.sendFile(fallbackHtml); }
+  });
+
+  // ── /ebooks/:slug/ ───────────────────────────────────────────────────────────
+  app.get('/ebooks/:slug/', async (req, res) => {
+    try {
+      const { rows } = await pool.query(
+        `SELECT title, description, slug, cover_image FROM ebooks WHERE slug = $1 AND status = 'published'`,
+        [req.params.slug]
+      );
+      if (!rows.length) return res.sendFile(fallbackHtml);
+      const p = rows[0];
+      const base = fs.readFileSync(fallbackHtml, 'utf8');
+      const html = injectOgTags(base, {
+        title: esc(`${p.title} | KDCI.ai`),
+        desc:  esc((p.description || '').slice(0, 160)),
+        url:   `https://kdci.ai/ebooks/${p.slug}/`,
+        img:   absImg(p.cover_image),
+      });
+      res.setHeader('Content-Type', 'text/html');
+      res.send(html);
+    } catch { res.sendFile(fallbackHtml); }
+  });
+
+  // ── /case-studies/:slug/ ─────────────────────────────────────────────────────
+  app.get('/case-studies/:slug/', async (req, res) => {
+    try {
+      const { rows } = await pool.query(
+        `SELECT title, subtitle, slug, hero_image_url, og_title, og_image_url FROM case_studies WHERE slug = $1 AND status = 'published'`,
+        [req.params.slug]
+      );
+      if (!rows.length) return res.sendFile(fallbackHtml);
+      const p = rows[0];
+      const base = fs.readFileSync(fallbackHtml, 'utf8');
+      const rawTitle = (p.og_title && p.og_title.trim()) ? p.og_title : p.title;
+      const html = injectOgTags(base, {
+        title: esc(`${rawTitle} | KDCI.ai`),
+        desc:  esc((p.subtitle || '').slice(0, 160)),
+        url:   `https://kdci.ai/case-studies/${p.slug}/`,
+        img:   absImg(p.og_image_url || p.hero_image_url),
+      });
+      res.setHeader('Content-Type', 'text/html');
+      res.send(html);
+    } catch { res.sendFile(fallbackHtml); }
   });
 
   app.get('*splat', (_req, res) => {
