@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, MessageSquare, TrendingUp, FileText, BookOpen, Video, CircleHelp, FileJson, BrainCircuit, Loader2 } from 'lucide-react';
+import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
+import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -74,6 +76,7 @@ export const InsightsPage = ({
   const [cases, setCases]   = useState<LiveCard[]>([]);
   const [ebooks, setEbooks] = useState<LiveCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const avatarMap = useAuthorAvatars();
 
   useEffect(() => {
     Promise.all([
@@ -158,6 +161,14 @@ export const InsightsPage = ({
         <div className="p-7 flex flex-col flex-1">
           {(item.byline || item.date) && (
             <div className="flex items-center gap-2 mb-3">
+              {item.byline && (
+                <AuthorAvatar
+                  name={item.byline}
+                  avatarUrl={getAvatarUrl(avatarMap, item.byline)}
+                  size={24}
+                  theme="light"
+                />
+              )}
               {item.byline && <span className="font-bold text-slate-500 text-xs">{item.byline}</span>}
               {item.byline && item.date && <span className="text-slate-300">·</span>}
               {item.date && <span className="text-xs text-slate-400">{item.date}</span>}

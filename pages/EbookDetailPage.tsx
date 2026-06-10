@@ -4,6 +4,8 @@ import {
   ArrowRight, Download, ChevronLeft, FileText, BookOpen,
   Loader2, AlertCircle, Link as LinkIcon, CheckCircle2, X, Mail
 } from 'lucide-react';
+import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
+import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 
 // ── Inline breadcrumb (Resources / title) ──────────────────────────────────
@@ -387,6 +389,7 @@ export const EbookDetailPage = ({
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [showAccessModal, setShowAccessModal] = useState(false);
+  const avatarMap = useAuthorAvatars();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -474,9 +477,12 @@ export const EbookDetailPage = ({
                 {/* Author + meta */}
                 <div className="flex items-center gap-6 mb-10 pb-10 border-b border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#E61739]/20 border border-[#E61739]/30 flex items-center justify-center text-[#E61739] font-bold text-sm shrink-0">
-                      {(ebook.author || 'K')[0].toUpperCase()}
-                    </div>
+                    <AuthorAvatar
+                      name={ebook.author || 'KDCI Research'}
+                      avatarUrl={getAvatarUrl(avatarMap, ebook.author || '')}
+                      size={40}
+                      theme="dark"
+                    />
                     <div>
                       <div className="text-white font-bold text-sm">{ebook.author || 'KDCI Research'}</div>
                       {pubMonth && <div className="text-white/40 text-xs mt-0.5">{pubMonth}</div>}

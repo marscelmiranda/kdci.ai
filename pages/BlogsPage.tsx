@@ -1,6 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, X, Plus, ChevronDown, FileText, BrainCircuit, Globe, Terminal, Loader2, Search } from 'lucide-react';
+import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
+import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 
@@ -116,6 +118,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
   const [livePosts, setLivePosts] = useState<BlogCard[]>([]);
   const [loading, setLoading]     = useState(true);
   const filterRef = useRef<HTMLDivElement>(null);
+  const avatarMap = useAuthorAvatars();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -295,6 +298,12 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
                     {/* Content */}
                     <div className="p-8 flex flex-col flex-1">
                       <div className="flex items-center gap-2 mb-3">
+                        <AuthorAvatar
+                          name={card.source}
+                          avatarUrl={getAvatarUrl(avatarMap, card.source)}
+                          size={24}
+                          theme="light"
+                        />
                         <span className="font-bold text-slate-500 text-xs">{card.source}</span>
                         <span className="text-slate-300">·</span>
                         <span className="text-xs text-slate-400">{card.metrics[1].value}</span>

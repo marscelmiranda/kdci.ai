@@ -36,6 +36,7 @@ const upload = multer({ storage: uploadStorage, limits: { fileSize: 15 * 1024 * 
     'ADD COLUMN IF NOT EXISTS deny_reason TEXT',
     'ADD COLUMN IF NOT EXISTS secret_question TEXT',
     'ADD COLUMN IF NOT EXISTS secret_answer TEXT',
+    'ADD COLUMN IF NOT EXISTS avatar_url TEXT',
   ];
   for (const col of cols) {
     await pool.query(`ALTER TABLE users ${col}`).catch(() => {});
@@ -219,6 +220,26 @@ app.post('/api/auth/login', async (req, res) => {
     const displayName = user.full_name || user.name;
     const token = jwt.sign({ id: user.id, email: user.email, name: displayName, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
     res.json({ token, user: { id: user.id, email: user.email, name: displayName, role: user.role } });
+  } catch (err: any) { res.status(500).json({ error: err.message }); }
+});
+
+// Public: list all users who have set a profile avatar (name → avatar_url map)
+app.get('/api/authors', async (_req, res) => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT COALESCE(full_name, name) AS name, avatar_url FROM users WHERE avatar_url IS NOT NULL AND avatar_url <> ''`
+    );
+    res.json(rows);
+  } catch { res.json([]); }
+});
+
+// Authenticated: save avatar_url for the logged-in user
+app.put('/api/users/me/avatar', requireAuth, async (req: any, res: any) => {
+  try {
+    const { avatar_url } = req.body;
+    if (!avatar_url) { res.status(400).json({ error: 'avatar_url required' }); return; }
+    await pool.query('UPDATE users SET avatar_url = $1 WHERE id = $2', [avatar_url, req.user.id]);
+    res.json({ ok: true });
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 

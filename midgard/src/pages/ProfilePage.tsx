@@ -162,9 +162,34 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const setD = <K extends keyof ProfileData>(k: K, v: ProfileData[K]) =>
     setDraft(prev => ({ ...prev, [k]: v }));
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, field: 'avatarImage'|'coverImage'|'idPhotoImage') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: 'avatarImage'|'coverImage'|'idPhotoImage') => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (field === 'avatarImage') {
+      try {
+        const token = localStorage.getItem('midgard_token');
+        const fd = new FormData();
+        fd.append('file', file);
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+          body: fd,
+        });
+        if (uploadRes.ok) {
+          const { url } = await uploadRes.json();
+          await fetch('/api/users/me/avatar', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({ avatar_url: url }),
+          });
+          persist({ ...profile, avatarImage: url });
+          return;
+        }
+      } catch { /* fall through to base64 */ }
+    }
     const reader = new FileReader();
     reader.onload = () => persist({ ...profile, [field]: reader.result as string });
     reader.readAsDataURL(file);

@@ -6,6 +6,8 @@ import {
   ChevronLeft, Sparkles, BrainCircuit, Users, Database,
   TrendingUp, ShieldCheck, Loader2, AlertCircle, FileText, Globe, Terminal
 } from 'lucide-react';
+import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
+import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { AUTHOR_1, IMG_BLOG_HERO, IMG_BLOG_1, IMG_BLOG_3 } from '../data';
@@ -144,6 +146,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
   const [post, setPost] = useState<LivePost | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const avatarMap = useAuthorAvatars();
 
   const identifier = blogSlug || blogId;
 
@@ -208,9 +211,12 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
               )}
               <div className="flex flex-wrap items-center gap-8 border-t border-white/10 pt-10 text-white/50 text-xs font-bold uppercase tracking-[0.15em]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#E61739]/20 border border-[#E61739]/30 flex items-center justify-center text-[#E61739] font-black text-sm">
-                    {(post.author || 'K').charAt(0).toUpperCase()}
-                  </div>
+                  <AuthorAvatar
+                    name={post.author || 'KDCI Editorial'}
+                    avatarUrl={getAvatarUrl(avatarMap, post.author || '')}
+                    size={40}
+                    theme="dark"
+                  />
                   <div>
                     <div className="text-white">{post.author || 'KDCI Editorial'}</div>
                     <div className="text-[9px] opacity-60">KDCI Operations</div>
