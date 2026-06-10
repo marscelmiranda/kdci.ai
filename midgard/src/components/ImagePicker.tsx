@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link as LinkIcon, Upload, LayoutGrid, X, Loader2, Check, AlertCircle } from 'lucide-react';
+import { getToken } from '../lib/api';
 
 interface MediaFile {
   url: string;
@@ -43,7 +44,10 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
     if (libLoaded) return;
     setLibLoading(true);
     try {
-      const r = await fetch('/api/media', { credentials: 'include' });
+      const token = getToken();
+      const r = await fetch('/api/media', {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
       if (r.ok) setLibrary(await r.json());
     } catch {}
     setLibLoading(false);
@@ -58,10 +62,18 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
     setUploading(true);
     setUploadErr(null);
     try {
+      const token = getToken();
       const fd = new FormData();
       fd.append('file', file);
-      const r = await fetch('/api/upload', { method: 'POST', body: fd, credentials: 'include' });
-      if (!r.ok) throw new Error('Upload failed');
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        body: fd,
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        throw new Error(err.error || `Upload failed (${r.status})`);
+      }
       const { url } = await r.json();
       onChange(url);
       setLibLoaded(false);
