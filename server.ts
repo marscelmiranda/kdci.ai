@@ -1260,7 +1260,6 @@ if (isDev) {
   );
 } else {
   const distPath = path.join(__dirname, 'dist');
-  app.use(express.static(distPath));
   // Non-pre-rendered routes (dynamic slugs, CMS, etc.) get the clean SPA shell
   // so the client renders the correct page without a hydration mismatch against
   // the pre-rendered home markup. Falls back to index.html if the shell is absent.
@@ -1272,6 +1271,10 @@ if (isDev) {
   // literal space) between "meta" and the attribute name, and [\s\S]*? to match
   // content spread across lines. We also inject twitter:image (absent from the
   // template) and flip og:type to "article" for blog / ebook / case-study pages.
+  //
+  // IMPORTANT: OG injection routes must be registered BEFORE express.static so
+  // they intercept slug URLs before react-snap pre-rendered files (e.g.
+  // dist/blogs/index.html) are served with generic homepage meta tags.
   const FALLBACK_IMG = 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp';
 
   function injectOgTags(baseHtml: string, opts: {
@@ -1385,6 +1388,11 @@ if (isDev) {
       res.send(html);
     } catch { res.sendFile(fallbackHtml); }
   });
+
+  // Static assets served AFTER the OG injection routes so slug URLs (e.g.
+  // /blogs/my-post/) are intercepted above before react-snap's pre-rendered
+  // dist/blogs/index.html is returned with the wrong generic meta tags.
+  app.use(express.static(distPath));
 
   app.get('*splat', (_req, res) => {
     res.sendFile(fallbackHtml);
