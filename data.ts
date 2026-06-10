@@ -155,15 +155,6 @@ export const RESOURCES = [
 ];
 
 export const TOP_SERVICES = [
-  {
-    id: 'ai-agent-monitoring',
-    name: 'AI Agent Operations',
-    tag: 'Managed AI Ops',
-    icon: Monitor,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'We handle the full cycle management of your AI Agents: setup, deployment, monitoring and optimization, and catch errors before your customers do.',
-    benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
-  },
   { 
     id: 'agentic-recruitment',
     name: 'AI Staffing Solutions', 
@@ -172,6 +163,15 @@ export const TOP_SERVICES = [
     image: IMG_RECRUITMENT_HERO,
     desc: 'Embed AI-trained specialists directly into your operations. Get intelligent managed talent that scales on demand.',
     benefits: ['70% Faster Hiring', 'AI-Powered Sourcing', 'Expert Vetting']
+  },
+  {
+    id: 'ai-agent-monitoring',
+    name: 'AI Agent Operations',
+    tag: 'Managed AI Ops',
+    icon: Monitor,
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=420',
+    desc: 'We handle the full cycle management of your AI Agents: setup, deployment, monitoring and optimization, and catch errors before your customers do.',
+    benefits: ['Daily Monitoring', 'Drift Detection', 'Dedicated AI Ops Specialist']
   },
   { 
     id: 'customer-support',
