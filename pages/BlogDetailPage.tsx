@@ -87,6 +87,51 @@ const renderBlocks = (contentStr: string) => {
             )}
           </div>
         );
+      case 'video': {
+        const vc = block.content || {};
+        const ar = vc.aspectRatio === '4/3' ? '75%' : vc.aspectRatio === '1/1' ? '100%' : vc.aspectRatio === 'custom'
+          ? `${(((vc.customAspectH || 9) / (vc.customAspectW || 16)) * 100).toFixed(2)}%` : '56.25%';
+        const alignClass = vc.alignment === 'left' ? 'mr-auto' : vc.alignment === 'right' ? 'ml-auto' : 'mx-auto';
+        const shadow = vc.boxShadow ? 'shadow-2xl' : '';
+        const radius = `${vc.borderRadius ?? 8}px`;
+        const maxW = vc.maxWidth || '100%';
+        const embedParams = (sourceType: string, videoId: string) => {
+          const p = new URLSearchParams({
+            ...(vc.autoplay ? { autoplay: '1', ...(sourceType === 'youtube' ? { mute: '1' } : { muted: '1' }) } : {}),
+            ...(vc.loop ? sourceType === 'youtube' ? { loop: '1', playlist: videoId } : { loop: '1' } : {}),
+            controls: vc.showControls === false ? '0' : '1',
+            ...(sourceType === 'youtube' ? { rel: '0' } : { byline: '0', portrait: '0', title: '0' }),
+          });
+          const base = sourceType === 'youtube'
+            ? `https://www.youtube.com/embed/${videoId}`
+            : `https://player.vimeo.com/video/${videoId}`;
+          return `${base}?${p}`;
+        };
+        if (vc.sourceType === 'file' && vc.fileObjectUrl) {
+          return (
+            <div key={i} className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
+              <video src={vc.fileObjectUrl} poster={vc.posterUrl || vc.thumbnailDataUrl}
+                autoPlay={vc.autoplay} loop={!!vc.loop} muted={vc.autoplay || !!vc.muted}
+                controls={vc.showControls !== false} playsInline
+                className={`w-full ${shadow}`} style={{ borderRadius: radius }} />
+              {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
+            </div>
+          );
+        }
+        if ((vc.sourceType === 'youtube' || vc.sourceType === 'vimeo') && vc.videoId) {
+          return (
+            <div key={i} className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
+              <div className={`relative overflow-hidden ${shadow}`} style={{ paddingTop: ar, borderRadius: radius }}>
+                <iframe src={embedParams(vc.sourceType, vc.videoId)}
+                  className="absolute inset-0 w-full h-full" frameBorder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen title="Video" />
+              </div>
+              {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
+            </div>
+          );
+        }
+        return null;
+      }
       case 'divider':
         return <hr key={i} className="my-10 border-slate-100" />;
       default:

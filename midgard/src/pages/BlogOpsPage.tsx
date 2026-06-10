@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
 import { ImagePicker } from '../components/ImagePicker';
+import { VideoEmbedEditor, VideoBlockRenderer } from '../components/VideoEmbedEditor';
 
 interface BlogPost {
   id: string;
@@ -92,6 +93,13 @@ const renderPreviewBlocks = (blocks: Block[]) =>
                 {block.content.buttonText}
               </a>
             )}
+          </div>
+        );
+      case 'video':
+        return (
+          <div key={i} className="my-8">
+            <VideoBlockRenderer content={block.content} />
+            {block.content?.caption && <p className="text-center text-sm text-slate-400 mt-3">{block.content.caption}</p>}
           </div>
         );
       case 'divider':
@@ -377,6 +385,13 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
             <p className="text-[9px] font-mono text-white/30 mt-2 truncate max-w-full">{block.content.buttonUrl || '/contact'}</p>
           </div>
         </div>
+      );
+      case 'video': return (
+        <VideoEmbedEditor
+          key={block.id}
+          content={block.content || {}}
+          onChange={c => updateBlock(block.id, c)}
+        />
       );
       case 'divider': return <hr className="border-white/10" />;
       case 'table': return (
