@@ -118,7 +118,7 @@ const emptyForm = () => ({
   title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', imageAlt: '', status: 'draft',
   blocks: [] as Block[],
   metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
-  hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
+  hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: ''
 });
 
 export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -131,6 +131,8 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const [editorTab, setEditorTab] = useState<'content' | 'seo' | 'hubspot'>('content');
   const [searchQuery, setSearchQuery] = useState('');
   const [formData, setFormData] = useState(emptyForm());
+  const [hsFormGuid, setHsFormGuid] = useState<string>('');
+  const [hsGuidLoaded, setHsGuidLoaded] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#0a0a0a';
@@ -142,6 +144,21 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       setFormData(prev => ({ ...prev, slug: prev.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') }));
     }
   }, [formData.title]);
+
+  useEffect(() => {
+    if (formData.slug) {
+      setFormData(prev => ({ ...prev, utmCampaign: prev.slug }));
+    }
+  }, [formData.slug]);
+
+  useEffect(() => {
+    if (editorTab === 'hubspot' && !hsGuidLoaded) {
+      fetch('/api/settings')
+        .then(r => r.json())
+        .then(d => { setHsFormGuid(d.hubspotFormGuid || ''); setHsGuidLoaded(true); })
+        .catch(() => setHsGuidLoaded(true));
+    }
+  }, [editorTab, hsGuidLoaded]);
 
   const loadPosts = () => {
     setLoading(true);
@@ -193,7 +210,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
         metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
         canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
-        jsonLd: '', noIndex: false, hubspotEventName: '', hubspotFormGuid: '', utmSource: '', utmMedium: '', utmCampaign: ''
+        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
       });
     } catch {
       setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
@@ -750,13 +767,52 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
               {editorTab === 'hubspot' && (
                 <div className="space-y-6">
+
+                  {/* Global Form GUID banner */}
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-[#ff7a59] mb-1">Global HubSpot Form GUID</div>
+                        <p className="text-xs text-white/40 leading-relaxed">One shared form for all blog posts. Set the <code className="bg-white/10 px-1 py-0.5 rounded text-white/60 font-mono text-[10px]">HUBSPOT_FORM_GUID</code> secret in your Replit environment to configure this.</p>
+                      </div>
+                      <Activity size={18} className="text-[#ff7a59] shrink-0 mt-0.5" />
+                    </div>
+                    {hsFormGuid ? (
+                      <div className="flex items-center gap-3 bg-black/30 border border-white/10 rounded-xl px-4 py-3">
+                        <Check size={14} className="text-green-400 shrink-0" />
+                        <code className="text-sm font-mono text-white/80 truncate flex-1">{hsFormGuid}</code>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-green-400 shrink-0">Configured</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-3 bg-amber-500/5 border border-amber-500/20 rounded-xl px-4 py-3">
+                        <AlertCircle size={14} className="text-amber-400 shrink-0" />
+                        <span className="text-xs text-amber-400/80">No Form GUID set. Add <code className="font-mono">HUBSPOT_FORM_GUID</code> to your Replit secrets.</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* UTM Campaign — auto-synced from slug */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">UTM Campaign <span className="text-[#E61739]">· Unique per post</span></label>
+                      <span className="text-[9px] font-bold text-white/25 bg-white/5 px-2 py-0.5 rounded-full">auto-synced from slug</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={formData.utmCampaign}
+                      onChange={e => setFormData(p => ({ ...p, utmCampaign: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-[#E61739]/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm"
+                      placeholder="auto-populated from slug"
+                    />
+                    <p className="text-[10px] text-white/25 leading-relaxed">This value identifies which blog post a HubSpot form submission came from. It mirrors the slug but can be overridden.</p>
+                  </div>
+
+                  {/* Remaining UTM + event fields */}
                   <div className="grid grid-cols-2 gap-6">
                     {[
-                      { key: 'hubspotEventName', label: 'HubSpot Event Name', placeholder: 'blog_view' },
-                      { key: 'hubspotFormGuid', label: 'HubSpot Form GUID', placeholder: 'xxxxxxxx-xxxx-...' },
                       { key: 'utmSource', label: 'UTM Source', placeholder: 'newsletter' },
                       { key: 'utmMedium', label: 'UTM Medium', placeholder: 'email' },
-                      { key: 'utmCampaign', label: 'UTM Campaign', placeholder: 'q4-2024' },
+                      { key: 'hubspotEventName', label: 'HubSpot Event Name', placeholder: 'blog_view' },
                     ].map(f => (
                       <div key={f.key} className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-widest text-white/40">{f.label}</label>
@@ -765,6 +821,25 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       </div>
                     ))}
                   </div>
+
+                  {/* Embed snippet preview */}
+                  {hsFormGuid && (
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Embed Snippet Preview</label>
+                      <pre className="bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-[10px] text-green-400 font-mono overflow-x-auto whitespace-pre-wrap break-all leading-relaxed">{`hbspt.forms.create({
+  portalId: "YOUR_PORTAL_ID",
+  formId: "${hsFormGuid}",
+  onFormSubmit: function() {
+    window._hsq = window._hsq || [];
+    window._hsq.push(['trackEvent', {
+      id: '${formData.hubspotEventName || 'blog_view'}',
+      value: { utm_campaign: '${formData.utmCampaign || formData.slug}' }
+    }]);
+  }
+});`}</pre>
+                    </div>
+                  )}
+
                 </div>
               )}
             </div>

@@ -1062,6 +1062,13 @@ app.delete('/api/webinars/:id', requireAuth, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
+// ===== GLOBAL SETTINGS (public config) =====
+app.get('/api/settings', (_req, res) => {
+  res.json({
+    hubspotFormGuid: process.env.HUBSPOT_FORM_GUID || '',
+  });
+});
+
 // ===== FILE UPLOAD =====
 app.use('/uploads', express.static(uploadsDir));
 
