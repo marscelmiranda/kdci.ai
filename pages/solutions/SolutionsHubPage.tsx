@@ -101,12 +101,8 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             {INDUSTRIES.map((ind, i) => (
               <div
                 key={i}
-                onClick={ind.id === 'ecommerce' ? () => setView('ecommerce') : undefined}
-                className={`bg-white p-8 rounded-[2rem] border shadow-sm flex flex-col items-center text-center transition-all duration-200 ${
-                  ind.id === 'ecommerce'
-                    ? 'border-[#E61739]/30 cursor-pointer hover:border-[#E61739] hover:shadow-md hover:-translate-y-0.5'
-                    : 'border-slate-100'
-                }`}
+                onClick={() => setView(ind.id as ViewType)}
+                className="bg-white p-8 rounded-[2rem] border border-[#E61739]/20 shadow-sm flex flex-col items-center text-center transition-all duration-200 cursor-pointer hover:border-[#E61739] hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] mb-4">
                   <ind.icon size={24} />
