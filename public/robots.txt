@@ -11,6 +11,10 @@ Allow: /
 # Block all industry pages
 Disallow: /industries/
 
+# Parked service pages — not publicly discoverable
+Disallow: /solutions/ai-graphic-design/
+Disallow: /solutions/ai-lead-generation/
+
 # Block Midgard employee portal
 Disallow: /midgard/
 

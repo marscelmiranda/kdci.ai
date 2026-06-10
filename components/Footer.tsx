@@ -43,8 +43,7 @@ const SERVICE_LINES = [
   'AI Agent Operations',
   'AI Consulting and Strategy',
   'AI in Customer Service',
-  'AI Graphic Design Services',
-  'AI Lead Generation',
+
   'AI Staffing Solutions',
 ];
 

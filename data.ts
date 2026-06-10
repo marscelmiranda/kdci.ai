@@ -183,15 +183,6 @@ export const TOP_SERVICES = [
     desc: 'Intelligent customer service operations powered by AI Agents. Deliver faster resolution, smarter personalization, and always-on support.',
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
-  { 
-    id: 'creative-prod',
-    name: 'AI Graphic Design Services', 
-    tag: 'AI-Native Design',
-    icon: Sparkles,
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'Branded content and design powered by AI. Produce at scale with human creative direction and quality control, at a cost no traditional design agency can replicate.',
-    benefits: ['5-Day Turnaround', 'AI-Powered Output', 'Full Brand Consistency']
-  },
   {
     id: 'ai-consulting',
     name: 'AI Consulting and Strategy',
@@ -200,15 +191,6 @@ export const TOP_SERVICES = [
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
     desc: 'End-to-end AI strategy and deployment, from roadmap design to agentic workflow integration across your existing tech stack.',
     benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
-  },
-  {
-    id: 'ai-outbound',
-    name: 'AI Lead Generation',
-    tag: 'Pipeline on Demand',
-    icon: TrendingUp,
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'Agentic demand generation pipelines that research, personalize, sequence, and qualify leads. Convert your inbound and outbound activities into predictable revenue!',
-    benefits: ['500–3K Contacts/Wk', 'Meeting Booking Included', '6-Week Ramp'],
   },
 ];
 

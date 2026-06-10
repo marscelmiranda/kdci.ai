@@ -61,7 +61,7 @@ const STATIC_SEARCH_ITEMS: SearchItem[] = (Object.keys(VIEW_TO_PATH) as ViewType
 
 const POPULAR_SEARCHES = [
   { label: "Generative AI", view: "solutions-hub" },
-  { label: "AI Lead Generation", view: "ai-outbound" },
+
   { label: "Customer Experience", view: "customer-support" },
 ];
 
