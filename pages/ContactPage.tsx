@@ -7,7 +7,6 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  Upload, 
   Globe2,
   AlertCircle
 } from 'lucide-react';
@@ -18,40 +17,28 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
 
 interface FormData {
-  inquiryType: string;
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
-  company: string;
-  role: string;
-  country: string;
-  message: string;
+  notes: string;
 }
 
 const EMPTY: FormData = {
-  inquiryType: '',
   firstName: '',
   lastName: '',
   email: '',
-  phone: '',
-  company: '',
-  role: '',
-  country: '',
-  message: '',
+  notes: '',
 };
 
 export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [fileName, setFileName] = useState<string | null>(null);
   const [form, setForm] = useState<FormData>(EMPTY);
   const captchaRef = useRef<CaptchaHandle>(null);
 
-  const set = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+  const set = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,7 +52,7 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, source: 'Contact Page' }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');
@@ -76,32 +63,14 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) setFileName(e.target.files[0].name);
-  };
-
   const handleReset = () => {
     setForm(EMPTY);
-    setFileName(null);
     setErrorMsg('');
     setFormState('idle');
   };
 
   const labelClasses = "text-[11px] font-black uppercase tracking-widest text-muted-foreground ml-1 mb-1.5 block";
   const requiredAsterisk = <span className="text-primary ml-0.5">*</span>;
-
-  const inquiryOptions = [
-    "Prospective Client / New Business",
-    "Current Client Support",
-    "Careers & Job Applications",
-    "Employee Support (HR / IT)",
-    "Partnerships & Alliances",
-    "Vendors & Procurement",
-    "Investors & Analysts",
-    "Media & Press",
-    "Research & Academia",
-    "Former Employees or Clients"
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -116,7 +85,7 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
             Get in <span className="text-primary">Touch.</span>
           </h1>
           <p className="text-white/40 text-base md:text-lg font-medium max-w-xl mx-auto">
-            Thanks for your interest in KDCI Operations. Select an option below, and we'll connect you with the right team.
+            Thanks for your interest in KDCI Operations. Fill in the form below and we'll connect you with the right team.
           </p>
         </div>
       </section>
@@ -149,25 +118,6 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       </div>
                     )}
 
-                    {/* Inquiry Type */}
-                    <div>
-                      <label className={labelClasses}>What best describes your inquiry?{requiredAsterisk}</label>
-                      <div className="relative">
-                        <select
-                          required
-                          value={form.inquiryType}
-                          onChange={set('inquiryType')}
-                          className="flex h-14 w-full items-center justify-between rounded-xl border border-input bg-background px-5 py-3 text-sm font-bold placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
-                        >
-                          <option value="" disabled>Select an option</option>
-                          {inquiryOptions.map(o => <option key={o} value={o}>{o}</option>)}
-                        </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-50">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Name */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
@@ -180,52 +130,16 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       </div>
                     </div>
 
-                    {/* Email + Phone */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label className={labelClasses}>Work Email Address{requiredAsterisk}</label>
-                        <Input required type="email" placeholder="jane@company.com" value={form.email} onChange={set('email')} />
-                      </div>
-                      <div>
-                        <label className={labelClasses}>Phone Number</label>
-                        <Input type="tel" placeholder="+1 (555) 000-0000" value={form.phone} onChange={set('phone')} />
-                      </div>
-                    </div>
-
-                    {/* Company + Role */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label className={labelClasses}>Company/Organization{requiredAsterisk}</label>
-                        <Input required type="text" placeholder="Company Inc." value={form.company} onChange={set('company')} />
-                      </div>
-                      <div>
-                        <label className={labelClasses}>Your Role/Function</label>
-                        <Input type="text" placeholder="e.g. VP Operations" value={form.role} onChange={set('role')} />
-                      </div>
-                    </div>
-
-                    {/* Country */}
+                    {/* Email */}
                     <div>
-                      <label className={labelClasses}>Country/Region{requiredAsterisk}</label>
-                      <Input required type="text" placeholder="United States" value={form.country} onChange={set('country')} />
+                      <label className={labelClasses}>Work Email Address{requiredAsterisk}</label>
+                      <Input required type="email" placeholder="jane@company.com" value={form.email} onChange={set('email')} />
                     </div>
 
-                    {/* Message */}
+                    {/* Notes */}
                     <div>
-                      <label className={labelClasses}>How can we help you?{requiredAsterisk}</label>
-                      <Textarea required placeholder="Briefly describe your requirements..." value={form.message} onChange={set('message')} />
-                    </div>
-
-                    {/* File Attachment */}
-                    <div className="relative group">
-                      <Input type="file" onChange={handleFileChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                      <div className="flex items-center justify-between px-5 py-4 bg-slate-50 border border-dashed border-input rounded-xl group-hover:border-primary/40 group-hover:bg-slate-100/50 transition-all">
-                        <div className="flex items-center gap-3">
-                          <Upload size={18} className="text-muted-foreground group-hover:text-primary" />
-                          <span className="text-xs font-bold text-muted-foreground">{fileName || 'Attach Document (Optional)'}</span>
-                        </div>
-                        <Badge variant="secondary" className="group-hover:bg-white">Browse</Badge>
-                      </div>
+                      <label className={labelClasses}>Additional Notes{requiredAsterisk}</label>
+                      <Textarea required placeholder="Briefly describe your requirements or how we can help…" value={form.notes} onChange={set('notes')} />
                     </div>
 
                     {/* Consent */}

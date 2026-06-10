@@ -65,6 +65,20 @@ const upload = multer({ storage: uploadStorage, limits: { fileSize: 15 * 1024 * 
       status VARCHAR(20) DEFAULT 'active'
     )
   `).catch(() => {});
+  // Contact submissions log table
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS contact_submissions (
+      id SERIAL PRIMARY KEY,
+      first_name TEXT,
+      last_name TEXT,
+      email TEXT NOT NULL,
+      notes TEXT,
+      source TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `).catch(() => {});
+  // Notes column on marketing_subscribers (migration safety)
+  await pool.query(`ALTER TABLE marketing_subscribers ADD COLUMN IF NOT EXISTS notes TEXT`).catch(() => {});
   // Manpower requests — add metric columns if missing
   await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_total INTEGER DEFAULT 0`).catch(() => {});
   await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_processed INTEGER DEFAULT 0`).catch(() => {});
@@ -349,25 +363,54 @@ app.get('/api/health', (_req, res) => {
 // ----- CONTACT FORM -----
 app.post('/api/contact', async (req, res) => {
   const {
-    // Full contact page fields
-    inquiryType, firstName, lastName, country, message,
-    // Service page fields (some use 'name' instead of first/last)
-    name, notes, service, source,
-    // Common across all forms
-    email, phone, company, role,
-    // Extra service-specific fields
-    agents, agentCount, department, channel, channels, meetingTarget,
+    firstName, lastName, email, notes,
+    // legacy / backward-compat fields
+    name, message, source, inquiryType, service,
   } = req.body;
 
-  const resolvedName = name || [firstName, lastName].filter(Boolean).join(' ') || '';
-  const resolvedMessage = message || notes || '';
-  const resolvedType = inquiryType || service || source || 'Website Inquiry';
+  const resolvedFirst = firstName || (name ? name.split(' ')[0] : '') || '';
+  const resolvedLast  = lastName  || (name ? name.split(' ').slice(1).join(' ') : '') || '';
+  const resolvedName  = [resolvedFirst, resolvedLast].filter(Boolean).join(' ') || name || '';
+  const resolvedMsg   = notes || message || '';
+  const resolvedType  = inquiryType || service || source || 'Website Inquiry';
+  const resolvedSrc   = source || resolvedType;
 
-  if (!email || !resolvedName || !company) {
-    res.status(400).json({ error: 'Missing required fields (name, email, company).' });
+  if (!email || !resolvedName) {
+    res.status(400).json({ error: 'Name and email are required.' });
     return;
   }
 
+  // Persist to DB
+  try {
+    await pool.query(
+      `INSERT INTO contact_submissions (first_name, last_name, email, notes, source) VALUES ($1, $2, $3, $4, $5)`,
+      [resolvedFirst, resolvedLast, email, resolvedMsg, resolvedSrc]
+    );
+  } catch (dbErr: any) {
+    console.error('[contact] DB save error:', dbErr.message);
+  }
+
+  // HubSpot Forms API (non-blocking)
+  const hsPortalId = process.env.HUBSPOT_PORTAL_ID;
+  const hsFormGuid = process.env.HUBSPOT_FORM_GUID;
+  if (hsPortalId && hsFormGuid) {
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${hsPortalId}/${hsFormGuid}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fields: [
+          { name: 'firstname', value: resolvedFirst },
+          { name: 'lastname',  value: resolvedLast  },
+          { name: 'email',     value: email          },
+          { name: 'message',   value: resolvedMsg    },
+        ],
+        context: { pageUri: resolvedSrc, pageName: resolvedType },
+      }),
+    }).then(() => console.log(`[contact] HubSpot submitted: ${email}`))
+      .catch((e: any) => console.error('[contact] HubSpot error:', e.message));
+  }
+
+  // Email notification
   const smtpHost = process.env.SMTP_HOST;
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
@@ -401,21 +444,12 @@ app.post('/api/contact', async (req, res) => {
         <table style="width:100%;border-collapse:collapse">
           ${row('Name', resolvedName)}
           ${row('Email', `<a href="mailto:${email}" style="color:#E61739">${email}</a>`)}
-          ${row('Phone', phone)}
-          ${row('Company', company)}
-          ${row('Role', role)}
-          ${row('Country', country)}
-          ${row('Service', service && service !== resolvedType ? service : null)}
-          ${row('Source Page', source)}
-          ${row('No. of AI Agents', agents || agentCount)}
-          ${row('Department', department)}
-          ${row('Support Channels', channel || channels)}
-          ${row('Monthly Meeting Target', meetingTarget)}
+          ${row('Source Page', resolvedSrc)}
         </table>
-        ${resolvedMessage ? `
+        ${resolvedMsg ? `
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid #e5e5e5">
-          <div style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Message / Notes</div>
-          <p style="white-space:pre-wrap;line-height:1.7;margin:0;color:#333">${esc(resolvedMessage)}</p>
+          <div style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Additional Notes</div>
+          <p style="white-space:pre-wrap;line-height:1.7;margin:0;color:#333">${esc(resolvedMsg)}</p>
         </div>` : ''}
       </div>
       <div style="padding:14px 32px;background:#111;color:#555;font-size:11px">
@@ -428,7 +462,7 @@ app.post('/api/contact', async (req, res) => {
       from: `"KDCI Website" <${smtpUser}>`,
       to: 'info@kdci.ai',
       replyTo: email,
-      subject: `[Website Inquiry] ${resolvedType} — ${resolvedName} (${company})`,
+      subject: `[Website Inquiry] ${resolvedType} — ${resolvedName}`,
       html,
     });
     console.log(`[contact] Email sent: ${email} — ${resolvedType}`);
@@ -441,24 +475,43 @@ app.post('/api/contact', async (req, res) => {
 
 // ----- MARKETING SUBSCRIBE -----
 app.post('/api/subscribe', async (req, res) => {
-  const { email, fullName, contactNumber, serviceInterests, marketingConsent } = req.body;
+  const { firstName, lastName, email, notes, marketingConsent } = req.body;
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
   if (!email || !fullName || !marketingConsent) {
-    res.status(400).json({ error: 'Email, full name and marketing consent are required.' });
+    res.status(400).json({ error: 'First name, email and marketing consent are required.' });
     return;
   }
   try {
     await pool.query(
-      `INSERT INTO marketing_subscribers (email, full_name, contact_number, service_interests, marketing_consent)
-       VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO marketing_subscribers (email, full_name, notes, marketing_consent)
+       VALUES ($1, $2, $3, $4)
        ON CONFLICT (email) DO UPDATE
          SET full_name = EXCLUDED.full_name,
-             contact_number = EXCLUDED.contact_number,
-             service_interests = EXCLUDED.service_interests,
+             notes = EXCLUDED.notes,
              marketing_consent = EXCLUDED.marketing_consent,
              subscribed_at = NOW(),
              status = 'active'`,
-      [email, fullName, contactNumber || null, serviceInterests || [], true]
+      [email, fullName, notes || null, true]
     );
+    // HubSpot (non-blocking)
+    const hsPortalId = process.env.HUBSPOT_PORTAL_ID;
+    const hsFormGuid = process.env.HUBSPOT_FORM_GUID;
+    if (hsPortalId && hsFormGuid) {
+      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${hsPortalId}/${hsFormGuid}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { name: 'firstname', value: firstName || '' },
+            { name: 'lastname',  value: lastName  || '' },
+            { name: 'email',     value: email          },
+            { name: 'message',   value: notes    || '' },
+          ],
+          context: { pageUri: 'footer-newsletter', pageName: 'Scale Insights Newsletter' },
+        }),
+      }).then(() => console.log(`[subscribe] HubSpot submitted: ${email}`))
+        .catch((e: any) => console.error('[subscribe] HubSpot error:', e.message));
+    }
     console.log(`[subscribe] New subscriber: ${email}`);
     res.json({ success: true });
   } catch (err: any) {

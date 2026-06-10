@@ -10,7 +10,7 @@ import IMG_CX_HERO from '@/attached_assets/kdci-filipino-cx-support-agent.webp';
 import IMG_CX_CONTACT from '@/attached_assets/kdci-ai-cx-support-team.webp';
 
 export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', channel: '', notes: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -463,27 +463,17 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
                 }} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Full Name</label>
-                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name</label>
+                      <input required className={inp} placeholder="Jane" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company</label>
-                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email</label>
-                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
-                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Last Name</label>
+                      <input required className={inp} placeholder="Smith" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Support Channels Needed</label>
-                    <input required className={inp} placeholder="e.g. Live Chat, Email, Voice, Social Media" value={form.channel} onChange={e => setForm(f => ({ ...f, channel: e.target.value }))} />
+                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email</label>
+                    <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                   </div>
                   <div>
                     <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>

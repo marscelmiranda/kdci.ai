@@ -50,9 +50,8 @@ const SERVICE_LINES = [
 interface ModalForm {
   firstName: string;
   lastName: string;
-  company: string;
-  contactNumber: string;
-  serviceInterests: string[];
+  email: string;
+  notes: string;
   marketingConsent: boolean;
 }
 
@@ -87,17 +86,8 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
     if (!email) return;
     setDone(false);
     setError('');
-    setModalForm({ firstName: '', lastName: '', company: '', contactNumber: '', serviceInterests: [], marketingConsent: false });
+    setModalForm({ firstName: '', lastName: '', email, notes: '', marketingConsent: false });
     setShowModal(true);
-  };
-
-  const toggleService = (s: string) => {
-    setModalForm(f => ({
-      ...f,
-      serviceInterests: f.serviceInterests.includes(s)
-        ? f.serviceInterests.filter(x => x !== s)
-        : [...f.serviceInterests, s],
-    }));
   };
 
   const handleModalSubmit = async (e: React.FormEvent) => {
@@ -113,11 +103,10 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email,
-          fullName: `${modalForm.firstName} ${modalForm.lastName}`.trim(),
-          company: modalForm.company,
-          contactNumber: modalForm.contactNumber,
-          serviceInterests: modalForm.serviceInterests,
+          firstName: modalForm.firstName,
+          lastName: modalForm.lastName,
+          email: modalForm.email || email,
+          notes: modalForm.notes,
           marketingConsent: modalForm.marketingConsent,
         }),
       });
@@ -368,76 +357,34 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                     </div>
                   </div>
 
-                  {/* Company */}
+                  {/* Work Email (pre-filled, editable) */}
                   <div>
                     <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
-                      Company <span className="text-[#E61739]">*</span>
+                      Work Email <span className="text-[#E61739]">*</span>
                     </label>
                     <input
                       required
-                      type="text"
-                      placeholder="Acme Inc. or N/A"
-                      value={modalForm.company}
-                      onChange={e => setModalForm(f => ({ ...f, company: e.target.value }))}
+                      type="email"
+                      placeholder="jane@company.com"
+                      value={modalForm.email}
+                      onChange={e => setModalForm(f => ({ ...f, email: e.target.value }))}
                       className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
                     />
                   </div>
 
-                  {/* Contact Number */}
+                  {/* Additional Notes */}
                   <div>
                     <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
-                      Contact Number{' '}
+                      Additional Notes{' '}
                       <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(optional)</span>
                     </label>
-                    <input
-                      type="tel"
-                      placeholder="+1 555 000 0000"
-                      value={modalForm.contactNumber}
-                      onChange={e => setModalForm(f => ({ ...f, contactNumber: e.target.value }))}
-                      className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                    <textarea
+                      rows={3}
+                      placeholder="What topics are you most interested in? Any specific challenges we can help with?"
+                      value={modalForm.notes}
+                      onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))}
+                      className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium resize-none"
                     />
-                  </div>
-
-                  {/* Service Interests */}
-                  <div>
-                    <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-3">
-                      Services of Interest{' '}
-                      <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(select all that apply)</span>
-                    </label>
-                    <div className="space-y-2">
-                      {SERVICE_LINES.map(svc => {
-                        const checked = modalForm.serviceInterests.includes(svc);
-                        return (
-                          <label
-                            key={svc}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all select-none ${
-                              checked
-                                ? 'bg-[#E61739]/10 border-[#E61739]/40 text-slate-900'
-                                : 'bg-white border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700'
-                            }`}
-                          >
-                            <span
-                              className={`w-4 h-4 rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all ${
-                                checked ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent'
-                              }`}
-                            >
-                              {checked && (
-                                <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                                  <path d="M1 3.5L3.5 6L8 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                              )}
-                            </span>
-                            <input
-                              type="checkbox"
-                              className="sr-only"
-                              checked={checked}
-                              onChange={() => toggleService(svc)}
-                            />
-                            <span className="text-[13px] font-bold">{svc}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
                   </div>
 
                   {/* Marketing Consent */}

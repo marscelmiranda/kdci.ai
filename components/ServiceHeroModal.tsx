@@ -8,11 +8,6 @@ export interface ServiceHeroModalConfig {
   subtitle: string;
   inquiryType: string;
   source: string;
-  specificField?: {
-    label: string;
-    placeholder: string;
-    fieldKey: string;
-  };
   notesPlaceholder: string;
   submitLabel: string;
   successTitle: string;
@@ -25,7 +20,7 @@ interface Props {
 }
 
 export const ServiceHeroModal = ({ config, onClose }: Props) => {
-  const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', phone: '', specific: '', notes: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', notes: '' });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
@@ -50,18 +45,14 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
     if (captchaRef.current?.isBot()) return;
     setSubmitting(true);
     setError('');
-    const payload: Record<string, string> = {
-      name: `${form.firstName} ${form.lastName}`.trim(),
-      company: form.company,
+    const payload = {
+      firstName: form.firstName,
+      lastName: form.lastName,
       email: form.email,
-      phone: form.phone,
       notes: form.notes,
       inquiryType: config.inquiryType,
       source: config.source,
     };
-    if (config.specificField && form.specific) {
-      payload[config.specificField.fieldKey] = form.specific;
-    }
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -146,53 +137,17 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Company <span className="text-[#E61739]">*</span></label>
-                  <input
-                    required
-                    className={lightInp}
-                    placeholder="Acme Inc. or N/A"
-                    value={form.company}
-                    onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
-                  <input
-                    required
-                    type="email"
-                    className={lightInp}
-                    placeholder="jane@company.com"
-                    value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  />
-                </div>
+              <div>
+                <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
+                <input
+                  required
+                  type="email"
+                  className={lightInp}
+                  placeholder="jane@company.com"
+                  value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
-                  <input
-                    className={lightInp}
-                    placeholder="+1 555 000 0000"
-                    value={form.phone}
-                    onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-                  />
-                </div>
-              </div>
-              {config.specificField && (
-                <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">
-                    {config.specificField.label}
-                  </label>
-                  <input
-                    className={lightInp}
-                    placeholder={config.specificField.placeholder}
-                    value={form.specific}
-                    onChange={e => setForm(f => ({ ...f, specific: e.target.value }))}
-                  />
-                </div>
-              )}
               <div>
                 <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                 <textarea
