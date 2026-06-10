@@ -57,7 +57,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group flex flex-col bg-white/5 rounded-[2.5rem] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-2xl transition-all duration-500 p-7">
                 <div className="flex items-center justify-between mb-5">

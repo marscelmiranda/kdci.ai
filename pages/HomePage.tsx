@@ -114,7 +114,7 @@ export const HomePage = ({
             <h2 className="text-4xl md:text-6xl font-heading font-bold text-[#1D1D1F] mb-6 tracking-tight">AI Managed Services Built for Measurable Outcomes</h2>
             <p className="text-[#86868b] text-xl font-medium max-w-2xl mx-auto">Explore our full suite of managed AI services and see how each capability is designed to turn operational complexity into a scalable competitive edge.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group flex flex-col bg-white rounded-[20px] border border-black/[0.04] hover:shadow-2xl transition-all duration-500 p-7">
                 <div className="flex items-center justify-between mb-5">
