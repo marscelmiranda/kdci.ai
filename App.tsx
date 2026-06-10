@@ -304,7 +304,7 @@ const App = () => {
         {activeView === 'ai-outbound' && <AILeadGenerationPage setView={setView} />}
         
         {/* Industries */}
-        {activeView === 'ecommerce' && <ComingSoonPage setView={setView} />}
+        {activeView === 'ecommerce' && <ECommercePage setView={setView} />}
         {activeView === 'fintech' && <FintechPage setView={setView} />}
         {activeView === 'healthcare' && <HealthcarePage setView={setView} />}
         {activeView === 'marketing-ad' && <MarketingPage setView={setView} />}
