@@ -6,7 +6,6 @@ import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { ServiceHeroModal } from '../../components/ServiceHeroModal';
 import { TOP_SERVICES, INDUSTRIES } from '../../data';
-import { getPath } from '../../lib/routes';
 import IMG_CONTACT from '../../attached_assets/kdci-offshore-staffing-consultation.webp';
 
 export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }) => {
@@ -100,17 +99,15 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
             {INDUSTRIES.map((ind, i) => (
-              <a
+              <div
                 key={i}
-                href={getPath(ind.id as ViewType)}
-                onClick={e => { e.preventDefault(); setView(ind.id as ViewType); }}
-                className="bg-white p-8 rounded-[2rem] border border-[#E61739]/20 shadow-sm flex flex-col items-center text-center transition-all duration-200 cursor-pointer hover:border-[#E61739] hover:shadow-md hover:-translate-y-0.5 no-underline"
+                className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center"
               >
                 <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] mb-4">
                   <ind.icon size={24} />
                 </div>
                 <h4 className="text-[13px] font-bold text-slate-900 leading-tight">{ind.name}</h4>
-              </a>
+              </div>
             ))}
           </div>
         </div>
