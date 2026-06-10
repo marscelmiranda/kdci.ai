@@ -184,15 +184,6 @@ export const TOP_SERVICES = [
     benefits: ['Sub-1s Resolution', 'Omnichannel Help', '60% Cost Reduction']
   },
   {
-    id: 'creative-prod',
-    name: 'AI Graphic Design',
-    tag: 'Creative Production',
-    icon: Sparkles,
-    image: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=800&h=420',
-    desc: 'Full-service AI-powered graphic design and creative production. On-brand assets, faster turnaround, and a lower cost than a traditional agency.',
-    benefits: ['First Delivery in 2 Weeks', 'Brand-Consistent Output', 'Unlimited Revisions']
-  },
-  {
     id: 'ai-consulting',
     name: 'AI Consulting and Strategy',
     tag: 'AI Strategy & Build',
@@ -200,15 +191,6 @@ export const TOP_SERVICES = [
     image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1778556766/AI-Consulting_onxfb8.png',
     desc: 'End-to-end AI strategy and deployment, from roadmap design to agentic workflow integration across your existing tech stack.',
     benefits: ['Live in 21 Days', 'KPI-Backed SLAs', 'Human Oversight']
-  },
-  {
-    id: 'ai-outbound',
-    name: 'AI Lead Generation',
-    tag: 'Outbound & Demand Gen',
-    icon: Target,
-    image: 'https://res.cloudinary.com/dqkwcbbe5/image/upload/v1779920399/ai-lead-gen-dashboard_1779920399111.webp',
-    desc: 'AI-driven outbound campaigns that find, qualify, and engage your ideal buyers — so your sales team closes, not cold-calls.',
-    benefits: ['3× Pipeline Growth', 'AI-Personalized Outreach', 'CRM-Native Integration']
   },
 ];
 
