@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { RichTextEditor } from '../components/RichTextEditor';
+import { TableBuilder, generateTableHTML } from '../components/TableBuilder';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, BookMarked,
   Image as ImageIcon, Search, Plus, LogOut, Settings,
   ChevronLeft, Edit2, Trash2, Save, X, User, Check,
   ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2,
   Quote, AppWindow, Minus, Activity, Loader2, AlertCircle, Users, UserCircle2,
-  Eye, Sparkles, Calendar
+  Eye, Sparkles, Calendar, Table2
 } from 'lucide-react';
 import { getAllPosts, createPost, updatePost, deletePost } from '../lib/api';
 import { ImagePicker } from '../components/ImagePicker';
@@ -22,7 +23,7 @@ interface BlogPost {
   date: string;
 }
 
-type BlockType = 'rich_text' | 'html' | 'image' | 'video' | 'two_columns' | 'cta' | 'pull_quote' | 'embed' | 'divider';
+type BlockType = 'rich_text' | 'html' | 'image' | 'video' | 'two_columns' | 'cta' | 'pull_quote' | 'embed' | 'divider' | 'table';
 
 interface Block {
   id: string;
@@ -41,6 +42,7 @@ const BLOCK_TYPES: { type: BlockType; label: string; icon: React.ReactNode }[] =
   { type: 'pull_quote', label: 'Pull Quote', icon: <Quote size={14} /> },
   { type: 'embed', label: 'Embed', icon: <AppWindow size={14} /> },
   { type: 'divider', label: 'Divider', icon: <Minus size={14} /> },
+  { type: 'table', label: 'Table', icon: <Table2 size={14} /> },
 ];
 
 const renderPreviewBlocks = (blocks: Block[]) =>
@@ -94,6 +96,19 @@ const renderPreviewBlocks = (blocks: Block[]) =>
         );
       case 'divider':
         return <hr key={i} className="my-10 border-slate-100" />;
+      case 'table': {
+        try {
+          const tableData = typeof block.content?.tableData === 'string'
+            ? JSON.parse(block.content.tableData)
+            : block.content?.tableData;
+          if (!tableData?.rows) return null;
+          return (
+            <div key={i} className="my-8 overflow-x-auto">
+              <div dangerouslySetInnerHTML={{ __html: generateTableHTML(tableData) }} />
+            </div>
+          );
+        } catch { return null; }
+      }
       default:
         return null;
     }
@@ -347,6 +362,15 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         </div>
       );
       case 'divider': return <hr className="border-white/10" />;
+      case 'table': return (
+        <TableBuilder
+          key={block.id}
+          value={typeof block.content?.tableData === 'object'
+            ? JSON.stringify(block.content.tableData)
+            : (block.content?.tableData || '')}
+          onChange={json => updateBlock(block.id, { ...block.content, tableData: JSON.parse(json) })}
+        />
+      );
       default: return <div className="text-white/30 text-sm p-4 text-center">Block editor for "{block.type}" coming soon.</div>;
     }
   };
