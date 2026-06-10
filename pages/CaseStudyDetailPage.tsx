@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, Quote, Linkedin, Twitter, Link as LinkIcon } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { useCaseStudies, CmsStudy } from '../store/caseStudiesStore';
+import { applyDetailSEO } from '../lib/seo';
 
 const DEFAULT_HERO = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=800";
 
@@ -446,6 +447,17 @@ export const CaseStudyDetailPage = ({ setView, studyId, studySlug }: { setView: 
     : studyId?.startsWith('cms-')
       ? studies.find(s => `cms-${s.id}` === studyId)
       : null;
+
+  useEffect(() => {
+    if (!cmsStudy) return;
+    const rawTitle = (cmsStudy.ogTitle && cmsStudy.ogTitle.trim()) ? cmsStudy.ogTitle : cmsStudy.title;
+    applyDetailSEO({
+      title: rawTitle,
+      description: (cmsStudy.subtitle || '').slice(0, 160),
+      url: `https://kdci.ai/case-studies/${cmsStudy.slug}/`,
+      image: cmsStudy.ogImageUrl || cmsStudy.heroImageUrl || undefined,
+    });
+  }, [cmsStudy]);
 
   if (cmsStudy) {
     return <CmsStudyDetail study={cmsStudy} setView={setView} />;

@@ -11,6 +11,7 @@ import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { AUTHOR_1, IMG_BLOG_HERO, IMG_BLOG_1, IMG_BLOG_3 } from '../data';
+import { applyDetailSEO } from '../lib/seo';
 
 interface LivePost {
   id: number;
@@ -156,7 +157,15 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
     setError(null);
     fetch(`/api/blog/${identifier}`)
       .then(r => r.ok ? r.json() : Promise.reject('Post not found'))
-      .then(setPost)
+      .then((data) => {
+        setPost(data);
+        applyDetailSEO({
+          title: data.title,
+          description: (data.excerpt || '').slice(0, 160),
+          url: `https://kdci.ai/blogs/${data.slug}/`,
+          image: data.cover_image || undefined,
+        });
+      })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
   }, [identifier]);

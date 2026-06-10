@@ -7,6 +7,7 @@ import {
 import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
 import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
+import { applyDetailSEO } from '../lib/seo';
 
 // ── Inline breadcrumb (Resources / title) ──────────────────────────────────
 const EbookBreadcrumb = ({
@@ -402,6 +403,12 @@ export const EbookDetailPage = ({
           : data.find(e => e.id === ebookId);
         if (!found) throw new Error('This ebook could not be found.');
         setEbook(found);
+        applyDetailSEO({
+          title: found.title,
+          description: (found.description || '').slice(0, 160),
+          url: `https://kdci.ai/ebooks/${found.slug}/`,
+          image: found.cover_image || undefined,
+        });
       })
       .catch(e => setError(e.message))
       .finally(() => setLoading(false));

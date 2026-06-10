@@ -257,7 +257,14 @@ export const SEO_CONFIG: Partial<Record<string, SEOMeta>> = {
 
 export const DEFAULT_SEO: SEOMeta = SEO_CONFIG['home']!;
 
+// Detail pages (blog, ebook, case-study) manage their own meta via applyDetailSEO.
+// Skipping them here prevents applySEO from overwriting the server-injected OG tags
+// with the homepage fallback on every route change.
+const DETAIL_VIEWS = new Set(['blog-detail', 'ebook-detail', 'case-study-detail']);
+
 export function applySEO(view: string): void {
+  if (DETAIL_VIEWS.has(view)) return;
+
   const meta = SEO_CONFIG[view] ?? DEFAULT_SEO;
 
   document.title = meta.title;
@@ -281,5 +288,51 @@ export function applySEO(view: string): void {
     document.head.appendChild(canonicalEl);
   }
   canonicalEl.href = meta.canonical;
+}
 
+export interface DetailSEO {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+}
+
+export function applyDetailSEO({ title, description, url, image }: DetailSEO): void {
+  const fullTitle = title.includes('KDCI') ? title : `${title} | KDCI.ai`;
+  const img = image || 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp';
+
+  document.title = fullTitle;
+
+  const setMeta = (selector: string, value: string) => {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute('content', value);
+  };
+
+  setMeta('meta[name="description"]',            description);
+  setMeta('meta[property="og:title"]',           fullTitle);
+  setMeta('meta[property="og:description"]',     description);
+  setMeta('meta[property="og:url"]',             url);
+  setMeta('meta[property="og:image"]',           img);
+  setMeta('meta[property="og:type"]',            'article');
+  setMeta('meta[name="twitter:title"]',          fullTitle);
+  setMeta('meta[name="twitter:description"]',    description);
+
+  // twitter:image may not exist — replace or inject
+  const twImg = document.querySelector('meta[name="twitter:image"]');
+  if (twImg) {
+    twImg.setAttribute('content', img);
+  } else {
+    const m = document.createElement('meta');
+    m.setAttribute('name', 'twitter:image');
+    m.setAttribute('content', img);
+    document.head.appendChild(m);
+  }
+
+  let canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+  if (!canonicalEl) {
+    canonicalEl = document.createElement('link');
+    canonicalEl.rel = 'canonical';
+    document.head.appendChild(canonicalEl);
+  }
+  canonicalEl.href = url;
 }
