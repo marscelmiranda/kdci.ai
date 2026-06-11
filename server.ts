@@ -1260,6 +1260,10 @@ if (isDev) {
   );
 } else {
   const distPath = path.join(__dirname, 'dist');
+
+  // Industry pages are disabled — redirect any direct URL access to home
+  app.get('/industries/*splat', (_req, res) => res.redirect(301, '/'));
+
   // Non-pre-rendered routes (dynamic slugs, CMS, etc.) get the clean SPA shell
   // so the client renders the correct page without a hydration mismatch against
   // the pre-rendered home markup. Falls back to index.html if the shell is absent.

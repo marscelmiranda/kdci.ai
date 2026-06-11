@@ -175,10 +175,24 @@ const BLOG_SLUG_RE        = /^\/blogs\/([^/]+)\/?$/;
 const CASE_STUDY_SLUG_RE  = /^\/case-studies\/([^/]+)\/?$/;
 const EBOOK_SLUG_RE       = /^\/ebooks\/([^/]+)\/?$/;
 
+// Industry pages are currently disabled — direct URL access redirects to home
+const DISABLED_INDUSTRY_VIEWS = new Set<ViewType>([
+  'ecommerce', 'fintech', 'healthcare', 'marketing-ad', 'retail',
+  'logistics', 'travel', 'edtech', 'legal', 'insurance', 'media',
+  'consumer-tech', 'telecom', 'auto', 'fashion', 'energy',
+  'prof-services', 'gov',
+]);
+
 const App = () => {
   const [activeView, setActiveView] = useState<ViewType>(() => {
     const view = pathToView(window.location.pathname);
-    if (view) return view;
+    if (view) {
+      if (DISABLED_INDUSTRY_VIEWS.has(view)) {
+        window.history.replaceState({}, '', '/');
+        return 'home';
+      }
+      return view;
+    }
     if (BLOG_SLUG_RE.test(window.location.pathname))       return 'blog-detail';
     if (CASE_STUDY_SLUG_RE.test(window.location.pathname)) return 'case-study-detail';
     if (EBOOK_SLUG_RE.test(window.location.pathname))      return 'ebook-detail';
@@ -203,6 +217,7 @@ const App = () => {
 
   // Navigate: update both React state and browser URL
   const setView = useCallback((view: ViewType) => {
+    if (DISABLED_INDUSTRY_VIEWS.has(view)) return;
     const path = VIEW_TO_PATH[view];
     if (path && window.location.pathname !== path) {
       window.history.pushState({ view }, '', path);
@@ -214,7 +229,15 @@ const App = () => {
   useEffect(() => {
     const onPop = () => {
       const view = pathToView(window.location.pathname);
-      if (view) { setActiveView(view); return; }
+      if (view) {
+        if (DISABLED_INDUSTRY_VIEWS.has(view)) {
+          window.history.replaceState({}, '', '/');
+          setActiveView('home');
+          return;
+        }
+        setActiveView(view);
+        return;
+      }
       const bm = window.location.pathname.match(BLOG_SLUG_RE);
       if (bm) { setSelectedBlogSlug(bm[1]); setActiveView('blog-detail'); return; }
       const cm = window.location.pathname.match(CASE_STUDY_SLUG_RE);
