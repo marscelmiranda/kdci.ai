@@ -27,6 +27,12 @@ interface LivePost {
   published_at: string;
 }
 
+function wrapTables(html: string): string {
+  return html
+    .replace(/<table/gi, '<div class="rte-table-wrapper"><table')
+    .replace(/<\/table>/gi, '</table></div>');
+}
+
 const renderBlocks = (contentStr: string) => {
   let blocks: any[] = [];
   try {
@@ -43,7 +49,7 @@ const renderBlocks = (contentStr: string) => {
         return (
           <div key={i}
             className="rte-content"
-            dangerouslySetInnerHTML={{ __html: block.content?.text || '' }}
+            dangerouslySetInnerHTML={{ __html: wrapTables(block.content?.text || '') }}
           />
         );
       case 'html':
@@ -74,7 +80,7 @@ const renderBlocks = (contentStr: string) => {
                   {col.caption && <p className="text-center text-xs text-slate-400 mt-2">{col.caption}</p>}
                 </div>
               ) : null;
-              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: col.text || '' }} />;
+              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: wrapTables(col.text || '') }} />;
             })}
           </div>
         );

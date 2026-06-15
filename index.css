@@ -293,3 +293,32 @@
   border-top: 1px solid #e2e8f0;
   margin: 2em 0;
 }
+
+/* Tables — scrollable wrapper prevents horizontal page overflow on mobile */
+.rte-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  margin: 1.25em 0;
+}
+
+.rte-content table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.rte-content th,
+.rte-content td {
+  padding: 0.6em 0.9em;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.rte-content thead th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #1e293b;
+}
