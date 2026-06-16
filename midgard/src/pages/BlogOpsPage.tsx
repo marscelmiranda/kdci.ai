@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ViewType } from '../types';
-import { Logo } from '../components/Logo';
+import { PortalTopNav } from '../components/PortalTopNav';
 import { RichTextEditor } from '../components/RichTextEditor';
 import { TableBuilder, generateTableHTML } from '../components/TableBuilder';
 import {
@@ -452,34 +452,8 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const filteredPosts = posts.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
-      <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
-        <div className="p-8 pb-4">
-          <Logo isDarkHero={true} />
-          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">Publisher Portal</div>
-        </div>
-        <nav className="flex-grow px-4 py-6 space-y-1">
-          {[
-            { id: 'overview',     label: 'Overview',           icon: LayoutGrid  },
-            { id: 'careers',      label: 'Career Ops',         icon: Briefcase   },
-            { id: 'blog',         label: 'Blogs & Insights',   icon: FileText    },
-            { id: 'case-studies', label: 'Case Studies',       icon: BookMarked  },
-            { id: 'resources',    label: 'Resources',          icon: BookOpen    },
-            { id: 'portfolio',    label: 'Creative Portfolio', icon: ImageIcon   },
-            { id: 'admin',        label: 'User Approvals',     icon: Users       },
-            { id: 'profile',      label: 'My Profile',         icon: UserCircle2 },
-          ].map((item) => (
-            <button key={item.id} onClick={() => handleNavClick(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${item.id === 'blog' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white hover:bg-white/5'}`}>
-              <item.icon size={18} />{item.label}
-            </button>
-          ))}
-        </nav>
-        <div className="p-4 border-t border-white/5">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-white/40 hover:text-white hover:bg-white/5 transition-all mb-2"><Settings size={18} /> Settings</button>
-          <button onClick={() => setView('login')} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"><LogOut size={18} /> Sign Out</button>
-        </div>
-      </aside>
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans">
+      <PortalTopNav setView={setView} activeNav="blog-ops" />
 
       <main className="flex-grow flex flex-col min-h-screen">
         {viewState === 'list' && (
