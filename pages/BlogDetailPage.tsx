@@ -257,14 +257,17 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
     const seoUrl = post.canonical_url || `https://kdci.ai/blogs/${post.slug}/`;
     const seoImg = post.og_image_url || post.cover_image;
 
+    // Always idempotently set/reset robots meta — prevents noindex leaking across SPA routes
+    let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
     if (post.no_index) {
-      let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
       if (!robotsMeta) {
         robotsMeta = document.createElement('meta');
         robotsMeta.setAttribute('name', 'robots');
         document.head.appendChild(robotsMeta);
       }
       robotsMeta.setAttribute('content', 'noindex, nofollow');
+    } else if (robotsMeta) {
+      robotsMeta.remove();
     }
 
     const schema = post.json_ld || JSON.stringify({
@@ -282,7 +285,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
         name: 'KDCI.ai',
         logo: { '@type': 'ImageObject', url: 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp' },
       },
-      keywords: (post.tags || []).join(', '),
+      keywords: post.keywords || (post.tags || []).join(', '),
     });
 
     let el = document.getElementById('blog-posting-jsonld') as HTMLScriptElement | null;
@@ -294,7 +297,10 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
     }
     el.textContent = schema;
 
-    return () => { document.getElementById('blog-posting-jsonld')?.remove(); };
+    return () => {
+      document.getElementById('blog-posting-jsonld')?.remove();
+      document.querySelector('meta[name="robots"]')?.remove();
+    };
   }, [post]);
 
   if (loading) {

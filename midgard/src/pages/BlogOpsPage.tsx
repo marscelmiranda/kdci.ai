@@ -467,18 +467,39 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
   const focusKeyword = formData.keywords.split(',')[0]?.trim().toLowerCase() || '';
   const firstRichText = formData.blocks.find(b => b.type === 'rich_text')?.content?.text?.toLowerCase() || '';
-  const seoChecklist = [
-    { label: 'Meta title 30–60 chars', done: formData.metaTitle.length >= 30 && formData.metaTitle.length <= 60 },
-    { label: 'Meta description 120–160 chars', done: formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160 },
-    { label: 'Focus keyword in meta title', done: !!focusKeyword && formData.metaTitle.toLowerCase().includes(focusKeyword) },
-    { label: 'Focus keyword in meta description', done: !!focusKeyword && formData.metaDescription.toLowerCase().includes(focusKeyword) },
-    { label: 'Focus keyword in first paragraph', done: !!focusKeyword && firstRichText.includes(focusKeyword) },
-    { label: 'Focus keyword in slug', done: !!focusKeyword && formData.slug.toLowerCase().replace(/-/g, ' ').includes(focusKeyword) },
-    { label: 'Keywords specified', done: formData.keywords.length > 0 },
-    { label: 'Slug populated', done: formData.slug.length > 0 },
-    { label: 'Open Graph fields filled', done: formData.ogTitle.length > 0 && formData.ogDescription.length > 0 },
-    { label: 'Cover image added', done: formData.imageUrl.length > 0 },
-    { label: 'Cover image alt text set', done: formData.imageAlt.length > 0 },
+  type CheckStatus = 'pass' | 'warn' | 'fail';
+  const metaTitleLen2 = formData.metaTitle.length;
+  const metaDescLen2 = formData.metaDescription.length;
+  const seoChecklist: { label: string; status: CheckStatus }[] = [
+    {
+      label: 'Meta title 30–60 chars',
+      status: metaTitleLen2 >= 30 && metaTitleLen2 <= 60 ? 'pass' : metaTitleLen2 > 60 ? 'fail' : metaTitleLen2 > 0 ? 'warn' : 'fail',
+    },
+    {
+      label: 'Meta description 120–160 chars',
+      status: metaDescLen2 >= 120 && metaDescLen2 <= 160 ? 'pass' : metaDescLen2 > 160 ? 'fail' : metaDescLen2 > 0 ? 'warn' : 'fail',
+    },
+    {
+      label: 'Focus keyword in meta title',
+      status: !focusKeyword ? 'warn' : formData.metaTitle.toLowerCase().includes(focusKeyword) ? 'pass' : 'fail',
+    },
+    {
+      label: 'Focus keyword in meta description',
+      status: !focusKeyword ? 'warn' : formData.metaDescription.toLowerCase().includes(focusKeyword) ? 'pass' : 'fail',
+    },
+    {
+      label: 'Focus keyword in first paragraph',
+      status: !focusKeyword ? 'warn' : firstRichText.includes(focusKeyword) ? 'pass' : 'fail',
+    },
+    {
+      label: 'Focus keyword in slug',
+      status: !focusKeyword ? 'warn' : formData.slug.toLowerCase().replace(/-/g, ' ').includes(focusKeyword) ? 'pass' : 'fail',
+    },
+    { label: 'Keywords specified', status: formData.keywords.length > 0 ? 'pass' : 'fail' },
+    { label: 'Slug populated', status: formData.slug.length > 0 ? 'pass' : 'fail' },
+    { label: 'Open Graph fields filled', status: formData.ogTitle.length > 0 && formData.ogDescription.length > 0 ? 'pass' : 'fail' },
+    { label: 'Cover image added', status: formData.imageUrl.length > 0 ? 'pass' : 'fail' },
+    { label: 'Cover image alt text set', status: formData.imageAlt.length > 0 ? 'pass' : 'fail' },
   ];
 
   const statusBadge = (status: string) => {
@@ -828,7 +849,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 const ogImgSrc = formData.ogImageUrl || formData.imageUrl;
                 const ogTitleDisp = formData.ogTitle || formData.title || 'Your OG Title';
                 const ogDescDisp = formData.ogDescription || formData.metaDescription || 'Your OG description';
-                const passCount = seoChecklist.filter(i => i.done).length;
+                const passCount = seoChecklist.filter(i => i.status === 'pass').length;
                 const scoreColor = passCount >= 9 ? 'text-green-400' : passCount >= 6 ? 'text-amber-400' : 'text-red-400';
                 const metaTitleLen = formData.metaTitle.length;
                 const metaDescLen = formData.metaDescription.length;
@@ -857,14 +878,27 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                         <span className={`text-sm font-black ${scoreColor}`}>{passCount}/{seoChecklist.length} checks passed</span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {seoChecklist.map(item => (
-                          <div key={item.label} className="flex items-center gap-2.5">
-                            <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-green-500/20 text-green-400' : 'bg-white/5 text-white/15'}`}>
-                              <Check size={9} />
+                        {seoChecklist.map(item => {
+                          const iconCls = item.status === 'pass'
+                            ? 'bg-green-500/20 text-green-400'
+                            : item.status === 'warn'
+                            ? 'bg-amber-500/20 text-amber-400'
+                            : 'bg-red-500/15 text-red-400';
+                          const labelCls = item.status === 'pass'
+                            ? 'text-white/70'
+                            : item.status === 'warn'
+                            ? 'text-amber-400/70'
+                            : 'text-white/30';
+                          const Icon = item.status === 'pass' ? Check : item.status === 'warn' ? AlertCircle : X;
+                          return (
+                            <div key={item.label} className="flex items-center gap-2.5">
+                              <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${iconCls}`}>
+                                <Icon size={9} />
+                              </div>
+                              <span className={`text-xs font-semibold ${labelCls}`}>{item.label}</span>
                             </div>
-                            <span className={`text-xs font-semibold ${item.done ? 'text-white/70' : 'text-white/30'}`}>{item.label}</span>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
 
