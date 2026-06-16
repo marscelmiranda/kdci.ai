@@ -1,12 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
-import { 
+import {
   Briefcase, FileText, BookOpen, Award,
-  Image as ImageIcon, Bell, Search, LogOut,
-  ChevronRight, Mail, Phone, Key, Edit3, Menu, X
+  Image as ImageIcon, Bell, LogOut, ChevronRight,
+  Mail, Phone, Key, Edit3, Menu, X, LayoutDashboard,
+  ChevronDown, Settings, ExternalLink,
 } from 'lucide-react';
+
+// ── Types ────────────────────────────────────────────────────────────────────
 
 interface DashboardCardProps {
   title: string;
@@ -17,9 +20,11 @@ interface DashboardCardProps {
   onClick: () => void;
 }
 
+// ── Dashboard Card ────────────────────────────────────────────────────────────
+
 const DashboardCard = ({ title, description, icon, actionText, color, onClick }: DashboardCardProps) => (
   <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-6 flex flex-col h-full hover:bg-[#222] transition-all group relative overflow-hidden">
-    <div className={`absolute top-0 right-0 p-20 ${color} opacity-5 blur-[80px] rounded-full pointer-events-none`}></div>
+    <div className={`absolute top-0 right-0 p-20 ${color} opacity-5 blur-[80px] rounded-full pointer-events-none`} />
     <div className="relative z-10 flex flex-col h-full">
       <div className="flex items-center gap-4 mb-4">
         <div className="w-12 h-12 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-white/70 border border-white/5 group-hover:scale-110 group-hover:text-white transition-all duration-500">
@@ -27,10 +32,8 @@ const DashboardCard = ({ title, description, icon, actionText, color, onClick }:
         </div>
         <h3 className="text-xl font-heading font-bold text-white">{title}</h3>
       </div>
-      <p className="text-white/50 text-sm mb-8 flex-grow leading-relaxed">
-        {description}
-      </p>
-      <button 
+      <p className="text-white/50 text-sm mb-8 flex-grow leading-relaxed">{description}</p>
+      <button
         onClick={onClick}
         className="w-full mt-auto py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-white/60 hover:bg-[#E61739] hover:text-white hover:border-[#E61739] transition-all flex items-center justify-center gap-2"
       >
@@ -41,198 +44,233 @@ const DashboardCard = ({ title, description, icon, actionText, color, onClick }:
   </div>
 );
 
-export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+// ── Nav items config ──────────────────────────────────────────────────────────
 
+const NAV_ITEMS = [
+  { id: 'overview',       label: 'Dashboard',    icon: <LayoutDashboard size={15} /> },
+  { id: 'careers',        label: 'Career Ops',   icon: <Briefcase size={15} /> },
+  { id: 'blog',           label: 'Blogs',        icon: <FileText size={15} /> },
+  { id: 'resources',      label: 'Resources',    icon: <BookOpen size={15} /> },
+  { id: 'portfolio',      label: 'Portfolio',    icon: <ImageIcon size={15} /> },
+  { id: 'case-studies',   label: 'Case Studies', icon: <Award size={15} /> },
+];
+
+// ── Main Component ────────────────────────────────────────────────────────────
+
+export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [activeTab, setActiveTab]           = useState('overview');
+  const [isMobileMenuOpen, setMobileMenu]   = useState(false);
+  const [isProfileOpen, setProfileOpen]     = useState(false);
+  const profileRef                          = useRef<HTMLDivElement>(null);
+
+  // Dark background for portal feel
   useEffect(() => {
-    const originalBg = document.body.style.backgroundColor;
+    const prev = document.body.style.backgroundColor;
     document.body.style.backgroundColor = '#0a0a0a';
-    return () => {
-      document.body.style.backgroundColor = originalBg;
-    };
+    return () => { document.body.style.backgroundColor = prev; };
   }, []);
 
-  // Lock body scroll when sidebar drawer is open on mobile
+  // Lock scroll when mobile menu is open
   useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [isSidebarOpen]);
+  }, [isMobileMenuOpen]);
 
-  const closeSidebar = () => setIsSidebarOpen(false);
-
-  const handleCreate = (type: string) => {
-    if (type === 'Job Posting') {
-      setView('cms-career-ops');
-    } else if (type === 'Blog Post') {
-      setView('cms-blog-ops');
-    } else if (type === 'Case Study') {
-      setView('cms-case-studies-ops');
-    } else {
-      alert(`This would open the ${type} creation modal/form.`);
-    }
-  };
+  // Close profile dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const handleNavClick = (id: string) => {
-    closeSidebar();
-    if (id === 'careers') {
-      setView('cms-career-ops');
-    } else if (id === 'blog') {
-      setView('cms-blog-ops');
-    } else if (id === 'resources') {
-      setView('cms-resources-ops');
-    } else if (id === 'portfolio') {
-      setView('cms-portfolio-ops');
-    } else if (id === 'case-studies') {
-      setView('cms-case-studies-ops');
-    } else {
-      setActiveTab(id);
-    }
+    setMobileMenu(false);
+    setProfileOpen(false);
+    if (id === 'careers')      { setView('cms-career-ops');     return; }
+    if (id === 'blog')         { setView('cms-blog-ops');        return; }
+    if (id === 'resources')    { setView('cms-resources-ops');   return; }
+    if (id === 'portfolio')    { setView('cms-portfolio-ops');   return; }
+    if (id === 'case-studies') { setView('cms-case-studies-ops');return; }
+    setActiveTab(id);
   };
 
-  const SidebarContent = () => (
-    <>
-      <div className="p-6 pb-4 flex items-center justify-between">
-        <div>
-          <button onClick={() => { closeSidebar(); setView('home'); }} className="block hover:opacity-80 transition-opacity" title="Back to website">
-            <Logo isDarkHero={true} />
-          </button>
-          <div className="mt-3 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
-            Publisher Portal
-          </div>
-        </div>
-        {/* Close button — below lg only */}
-        <button
-          onClick={closeSidebar}
-          className="lg:hidden w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all"
-          aria-label="Close sidebar"
-        >
-          <X size={18} />
-        </button>
-      </div>
-
-      <div className="flex-grow px-6 py-4 flex flex-col gap-6 overflow-y-auto">
-        {/* Profile */}
-        <div className="flex flex-col items-center flex-shrink-0">
-          <div className="w-20 h-20 rounded-full bg-[#1a1a1a] border-2 border-white/10 mb-4 overflow-hidden relative group">
-            <img loading="lazy"
-              src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1777595870/468598394_10162265374063293_2142667036521414352_n_krsqc5.jpg?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
-              <Edit3 size={16} className="text-white" />
-            </div>
-          </div>
-          <h2 className="text-base font-bold text-white text-center">Marscel Cruz</h2>
-          <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mt-1">Operations Manager</p>
-        </div>
-
-        {/* Contact Details */}
-        <div className="space-y-4">
-          <div>
-            <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">
-              <Mail size={11} /> Email Address
-            </div>
-            <div className="text-sm font-medium text-white/80">marscel@kdci.co</div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">
-              <Phone size={11} /> Contact Number
-            </div>
-            <div className="text-sm font-medium text-white/80">+1 (555) 123-4567</div>
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="space-y-2">
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
-            <Edit3 size={14} /> Edit Profile
-          </button>
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all">
-            <Key size={14} /> Change Password
-          </button>
-        </div>
-      </div>
-
-      <div className="p-4 border-t border-white/5">
-        <button
-          onClick={() => { closeSidebar(); setView('home'); }}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
-        >
-          <LogOut size={18} /> Sign Out
-        </button>
-      </div>
-    </>
-  );
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans flex flex-col">
 
-      {/* ── Desktop Sidebar (always visible lg+) ── */}
-      <aside className="hidden lg:flex w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex-col bg-[#0a0a0a]">
-        <SidebarContent />
-      </aside>
+      {/* ═══════════════════════════════════════════════════════
+          TOP NAVBAR
+      ═══════════════════════════════════════════════════════ */}
+      <nav className="sticky top-0 z-50 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
 
-      {/* ── Sidebar Backdrop (below lg) ── */}
-      {isSidebarOpen && (
-        <div
-          className="lg:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
-          onClick={closeSidebar}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* ── Sidebar Drawer (below lg) ── */}
-      <aside
-        className={`lg:hidden fixed top-0 left-0 z-50 h-full w-72 max-w-[85vw] bg-[#0a0a0a] border-r border-white/5 flex flex-col transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-        aria-label="Sidebar navigation"
-      >
-        <SidebarContent />
-      </aside>
-
-      {/* ── Main Content ── */}
-      <main className="flex-grow min-w-0 p-5 md:p-8 lg:p-12 overflow-y-auto">
-
-        {/* Top Header */}
-        <header className="flex items-center justify-between gap-4 mb-8 md:mb-12">
-          <div className="flex items-center gap-3 min-w-0">
-            {/* Hamburger — below lg only */}
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden w-10 h-10 rounded-xl bg-[#1a1a1a] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 transition-all shrink-0"
-              aria-label="Open sidebar"
-            >
-              <Menu size={20} />
+          {/* ── Left: Logo + badge ── */}
+          <div className="flex items-center gap-3 shrink-0">
+            <button onClick={() => setView('home')} className="hover:opacity-80 transition-opacity">
+              <Logo isDarkHero={true} />
             </button>
-            <div className="min-w-0">
-              <h1 className="text-xl md:text-3xl font-heading font-bold truncate">Welcome back, Editor.</h1>
-              <p className="text-white/40 text-xs md:text-sm font-medium mt-0.5 hidden sm:block">Manage your content pipeline and talent acquisition.</p>
-            </div>
+            <span className="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
+              Publisher Portal
+            </span>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
-            {/* Search — hidden on small mobile, visible sm+ */}
-            <div className="relative hidden sm:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={15} />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="bg-[#1a1a1a] border border-white/10 rounded-full pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-[#E61739] transition-colors w-40 md:w-56"
-              />
-            </div>
-            <button className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#1a1a1a] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 transition-all">
+          {/* ── Center: Desktop nav links ── */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_ITEMS.map(item => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-semibold transition-all ${
+                  activeTab === item.id
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {item.icon}
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ── Right: Actions + Profile ── */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Bell */}
+            <button className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all">
               <Bell size={16} />
             </button>
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#E61739] to-purple-600 border-2 border-[#0a0a0a] shrink-0"></div>
+
+            {/* Live site link — desktop */}
+            <a
+              href="/"
+              onClick={e => { e.preventDefault(); setView('home'); }}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-white/50 hover:text-white hover:border-white/20 transition-all"
+            >
+              <ExternalLink size={13} /> View Site
+            </a>
+
+            {/* Profile avatar + dropdown */}
+            <div className="relative" ref={profileRef}>
+              <button
+                onClick={() => setProfileOpen(prev => !prev)}
+                className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
+                aria-label="Profile menu"
+              >
+                <img
+                  src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1777595870/468598394_10162265374063293_2142667036521414352_n_krsqc5.jpg?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt="Profile"
+                  className="w-7 h-7 rounded-full object-cover border border-white/10"
+                />
+                <span className="hidden sm:block text-xs font-semibold text-white/70 group-hover:text-white transition-colors">Marscel</span>
+                <ChevronDown
+                  size={13}
+                  className={`text-white/40 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Profile Dropdown */}
+              {isProfileOpen && (
+                <div className="absolute right-0 top-full mt-2 w-72 bg-[#161616] border border-white/10 rounded-2xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.6)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+                  {/* Profile header */}
+                  <div className="p-5 flex items-center gap-4 border-b border-white/5">
+                    <div className="relative shrink-0">
+                      <img
+                        src="https://res.cloudinary.com/dqkwcbbe5/image/upload/v1777595870/468598394_10162265374063293_2142667036521414352_n_krsqc5.jpg?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt="Profile"
+                        className="w-14 h-14 rounded-2xl object-cover border-2 border-white/10"
+                      />
+                      <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-[#161616]" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-bold text-white text-sm">Marscel Cruz</div>
+                      <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mt-0.5">Operations Manager</div>
+                      <div className="text-white/40 text-xs mt-1 truncate">marscel@kdci.co</div>
+                    </div>
+                  </div>
+
+                  {/* Contact details */}
+                  <div className="px-5 py-3 space-y-2.5 border-b border-white/5">
+                    <div className="flex items-center gap-2.5 text-xs text-white/50">
+                      <Mail size={13} className="text-white/30 shrink-0" />
+                      marscel@kdci.co
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-white/50">
+                      <Phone size={13} className="text-white/30 shrink-0" />
+                      +1 (555) 123-4567
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="p-2">
+                    <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all text-left">
+                      <Edit3 size={15} className="shrink-0" /> Edit Profile
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all text-left">
+                      <Settings size={15} className="shrink-0" /> Change Password
+                    </button>
+                    <button
+                      onClick={() => { setProfileOpen(false); setView('home'); }}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#E61739] hover:bg-[#E61739]/10 transition-all text-left mt-1 border-t border-white/5 pt-2.5"
+                    >
+                      <LogOut size={15} className="shrink-0" /> Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMobileMenu(prev => !prev)}
+              className="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
-        </header>
+        </div>
+
+        {/* ── Mobile nav drawer ── */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-white/5 bg-[#0d0d0d] px-4 py-3 flex flex-col gap-1 animate-in slide-in-from-top-2 duration-150">
+            {NAV_ITEMS.map(item => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left w-full transition-all ${
+                  activeTab === item.id
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {item.icon}
+                {item.label}
+              </button>
+            ))}
+            <div className="h-px bg-white/5 my-1" />
+            <a
+              href="/"
+              onClick={e => { e.preventDefault(); setView('home'); }}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-white/50 hover:text-white hover:bg-white/5 transition-all"
+            >
+              <ExternalLink size={15} /> View Live Site
+            </a>
+          </div>
+        )}
+      </nav>
+
+      {/* ═══════════════════════════════════════════════════════
+          MAIN CONTENT
+      ═══════════════════════════════════════════════════════ */}
+      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 md:py-12">
+
+        {/* Page header */}
+        <div className="mb-8 md:mb-10">
+          <h1 className="text-2xl md:text-4xl font-heading font-bold">Welcome back, Editor.</h1>
+          <p className="text-white/40 text-sm font-medium mt-2">Manage your content pipeline and talent acquisition.</p>
+        </div>
 
         {/* Employee Portal Banner */}
         <a
@@ -251,8 +289,8 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
           <ChevronRight size={18} className="text-[#E61739] group-hover:translate-x-1 transition-transform shrink-0" />
         </a>
 
-        {/* Navigation Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 mb-8 md:mb-12">
+        {/* Dashboard Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
           <DashboardCard
             title="Career Ops"
             description="Manage all open job requisitions, view active applicant pipelines, and publish new roles."
@@ -294,7 +332,6 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             onClick={() => handleNavClick('case-studies')}
           />
         </div>
-
       </main>
     </div>
   );
