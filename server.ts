@@ -83,21 +83,6 @@ const upload = multer({ storage: uploadStorage, limits: { fileSize: 15 * 1024 * 
   // Manpower requests — add metric columns if missing
   await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_total INTEGER DEFAULT 0`).catch(() => {});
   await pool.query(`ALTER TABLE manpower_requests ADD COLUMN IF NOT EXISTS applicants_processed INTEGER DEFAULT 0`).catch(() => {});
-  // Blog posts — SEO columns
-  const blogSEOCols = [
-    'ADD COLUMN IF NOT EXISTS meta_title TEXT',
-    'ADD COLUMN IF NOT EXISTS meta_description TEXT',
-    'ADD COLUMN IF NOT EXISTS keywords TEXT',
-    'ADD COLUMN IF NOT EXISTS canonical_url TEXT',
-    'ADD COLUMN IF NOT EXISTS og_title TEXT',
-    'ADD COLUMN IF NOT EXISTS og_description TEXT',
-    'ADD COLUMN IF NOT EXISTS og_image_url TEXT',
-    'ADD COLUMN IF NOT EXISTS json_ld TEXT',
-    'ADD COLUMN IF NOT EXISTS no_index BOOLEAN DEFAULT FALSE',
-  ];
-  for (const col of blogSEOCols) {
-    await pool.query(`ALTER TABLE blog_posts ${col}`).catch(() => {});
-  }
   // Manpower requests table
   await pool.query(`
     CREATE TABLE IF NOT EXISTS manpower_requests (
@@ -809,18 +794,12 @@ app.get('/api/blog/:id', async (req, res) => {
 });
 
 app.post('/api/blog', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status,
-    meta_title, meta_description, keywords, canonical_url, og_title, og_description, og_image_url, json_ld, no_index } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO blog_posts
-        (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at,
-         meta_title,meta_description,keywords,canonical_url,og_title,og_description,og_image_url,json_ld,no_index)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW(),$12,$13,$14,$15,$16,$17,$18,$19,$20) RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status,
-       status === 'published' ? new Date() : null,
-       meta_title || '', meta_description || '', keywords || '', canonical_url || '',
-       og_title || '', og_description || '', og_image_url || '', json_ld || '', no_index || false]
+      `INSERT INTO blog_posts (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, status === 'published' ? new Date() : null]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) {
@@ -829,20 +808,11 @@ app.post('/api/blog', requireAuth, async (req, res) => {
 });
 
 app.put('/api/blog/:id', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status,
-    meta_title, meta_description, keywords, canonical_url, og_title, og_description, og_image_url, json_ld, no_index } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
   try {
     const { rows } = await pool.query(
-      `UPDATE blog_posts SET
-        title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,tags=$9,status=$10,
-        meta_title=$12,meta_description=$13,keywords=$14,canonical_url=$15,
-        og_title=$16,og_description=$17,og_image_url=$18,json_ld=$19,no_index=$20,
-        updated_at=NOW()
-       WHERE id=$11 RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status,
-       req.params.id,
-       meta_title || '', meta_description || '', keywords || '', canonical_url || '',
-       og_title || '', og_description || '', og_image_url || '', json_ld || '', no_index || false]
+      `UPDATE blog_posts SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);
@@ -1363,21 +1333,17 @@ if (isDev) {
   app.get('/blogs/:slug/', async (req, res) => {
     try {
       const { rows } = await pool.query(
-        `SELECT title, excerpt, slug, cover_image, meta_title, meta_description, og_title, og_description, og_image_url
-         FROM blog_posts WHERE slug = $1 AND status = 'published'`,
+        `SELECT title, excerpt, slug, cover_image FROM blog_posts WHERE slug = $1 AND status = 'published'`,
         [req.params.slug]
       );
       if (!rows.length) return res.sendFile(fallbackHtml);
       const p = rows[0];
-      const rawTitle = (p.og_title?.trim() || p.meta_title?.trim() || p.title).trim();
-      const rawDesc  = (p.og_description?.trim() || p.meta_description?.trim() || p.excerpt || '').slice(0, 160);
-      const rawImg   = p.og_image_url || p.cover_image;
       const base = fs.readFileSync(fallbackHtml, 'utf8');
       const html = injectOgTags(base, {
-        title: esc(rawTitle.includes('KDCI') ? rawTitle : `${rawTitle} | KDCI.ai`),
-        desc:  esc(rawDesc),
+        title: esc(`${p.title} | KDCI.ai`),
+        desc:  esc((p.excerpt || '').slice(0, 160)),
         url:   `https://kdci.ai/blogs/${p.slug}/`,
-        img:   absImg(rawImg),
+        img:   absImg(p.cover_image),
       });
       res.setHeader('Content-Type', 'text/html');
       res.send(html);

@@ -25,15 +25,6 @@ interface LivePost {
   tags: string[];
   status: string;
   published_at: string;
-  meta_title?: string;
-  meta_description?: string;
-  keywords?: string;
-  canonical_url?: string;
-  og_title?: string;
-  og_description?: string;
-  og_image_url?: string;
-  json_ld?: string;
-  no_index?: boolean;
 }
 
 function wrapTables(html: string): string {
@@ -238,70 +229,16 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
       .then(r => r.ok ? r.json() : Promise.reject('Post not found'))
       .then((data) => {
         setPost(data);
-        const seoUrl = data.canonical_url || `https://kdci.ai/blogs/${data.slug}/`;
         applyDetailSEO({
-          title: data.og_title || data.meta_title || data.title,
-          description: (data.og_description || data.meta_description || data.excerpt || '').slice(0, 160),
-          url: seoUrl,
-          image: data.og_image_url || data.cover_image || undefined,
+          title: data.title,
+          description: (data.excerpt || '').slice(0, 160),
+          url: `https://kdci.ai/blogs/${data.slug}/`,
+          image: data.cover_image || undefined,
         });
       })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
   }, [identifier]);
-
-  useEffect(() => {
-    if (!post) return;
-    const seoTitle = post.meta_title || post.title;
-    const seoDesc = (post.meta_description || post.excerpt || '').slice(0, 160);
-    const seoUrl = post.canonical_url || `https://kdci.ai/blogs/${post.slug}/`;
-    const seoImg = post.og_image_url || post.cover_image;
-
-    // Always idempotently set/reset robots meta — prevents noindex leaking across SPA routes
-    let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
-    if (post.no_index) {
-      if (!robotsMeta) {
-        robotsMeta = document.createElement('meta');
-        robotsMeta.setAttribute('name', 'robots');
-        document.head.appendChild(robotsMeta);
-      }
-      robotsMeta.setAttribute('content', 'noindex, nofollow');
-    } else if (robotsMeta) {
-      robotsMeta.remove();
-    }
-
-    const schema = post.json_ld || JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: seoTitle,
-      description: seoDesc,
-      url: seoUrl,
-      ...(seoImg ? { image: seoImg } : {}),
-      datePublished: post.published_at,
-      dateModified: post.published_at,
-      author: { '@type': 'Person', name: post.author || 'KDCI Editorial' },
-      publisher: {
-        '@type': 'Organization',
-        name: 'KDCI.ai',
-        logo: { '@type': 'ImageObject', url: 'https://kdci.ai/KDCI.AI_Logo_D01_No_Tagline.webp' },
-      },
-      keywords: post.keywords || (post.tags || []).join(', '),
-    });
-
-    let el = document.getElementById('blog-posting-jsonld') as HTMLScriptElement | null;
-    if (!el) {
-      el = document.createElement('script');
-      el.type = 'application/ld+json';
-      el.id = 'blog-posting-jsonld';
-      document.head.appendChild(el);
-    }
-    el.textContent = schema;
-
-    return () => {
-      document.getElementById('blog-posting-jsonld')?.remove();
-      document.querySelector('meta[name="robots"]')?.remove();
-    };
-  }, [post]);
 
   if (loading) {
     return (
