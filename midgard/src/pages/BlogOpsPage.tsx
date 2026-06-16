@@ -457,17 +457,19 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
       <main className="flex-grow flex flex-col min-h-screen">
         {viewState === 'list' && (
-          <div className="p-8 md:p-12 overflow-y-auto flex-grow">
-            <div className="flex justify-between items-center mb-10">
+          <div className="p-4 sm:p-8 md:p-12 overflow-y-auto flex-grow">
+
+            {/* ── Header ── */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 sm:mb-10">
               <div>
                 <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-2">
                   <span onClick={() => setView('dashboard')} className="hover:text-white cursor-pointer transition-colors">Dashboard</span>
                   <ChevronLeft size={10} className="rotate-180" />
                   <span className="text-[#E61739]">Blogs & Insights</span>
                 </div>
-                <h1 className="text-3xl font-heading font-bold text-white">Blogs & Insights</h1>
+                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-white">Blogs & Insights</h1>
               </div>
-              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+              <button onClick={handleCreateNew} className="self-start sm:self-auto px-5 py-2.5 sm:px-6 sm:py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red whitespace-nowrap">
                 <Plus size={16} /> Write Article
               </button>
             </div>
@@ -478,48 +480,88 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               </div>
             )}
 
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative flex-grow max-w-md">
+            {/* ── Search ── */}
+            <div className="mb-6">
+              <div className="relative w-full sm:max-w-md">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={16} />
                 <input type="text" placeholder="Search articles..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                   className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
               </div>
             </div>
 
-            <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
-                    <th className="px-8 py-5">Article Title</th><th className="px-8 py-5">Category</th><th className="px-8 py-5">Author</th><th className="px-8 py-5">Status</th><th className="px-8 py-5">Published</th><th className="px-8 py-5 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {loading ? (
-                    <tr><td colSpan={6} className="px-8 py-16 text-center">
-                      <Loader2 size={24} className="animate-spin text-[#E61739]/60 mx-auto" />
-                    </td></tr>
-                  ) : filteredPosts.length === 0 ? (
-                    <tr><td colSpan={6} className="px-8 py-16 text-center text-white/30 text-sm">
-                      No articles yet. Click "Write Article" to create your first post.
-                    </td></tr>
-                  ) : filteredPosts.map((post) => (
-                    <tr key={post.id} className="hover:bg-white/5 transition-colors group">
-                      <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{post.title}</div></td>
-                      <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{post.category}</span></td>
-                      <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{post.author || '—'}</div></td>
-                      <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${statusBadge(post.status)}`}>{post.status}</span></td>
-                      <td className="px-8 py-5 text-sm text-white/40 font-mono">{post.date}</td>
-                      <td className="px-8 py-5 text-right">
-                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button onClick={() => handleEdit(post)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
-                          <button onClick={() => handleDelete(post.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
-                        </div>
-                      </td>
+            {/* ── Loading / Empty ── */}
+            {loading && (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 size={28} className="animate-spin text-[#E61739]/60" />
+              </div>
+            )}
+            {!loading && filteredPosts.length === 0 && (
+              <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl px-8 py-16 text-center text-white/30 text-sm">
+                No articles yet. Click "Write Article" to create your first post.
+              </div>
+            )}
+
+            {/* ── Mobile: card list (hidden md+) ── */}
+            {!loading && filteredPosts.length > 0 && (
+              <div className="md:hidden flex flex-col gap-3">
+                {filteredPosts.map(post => (
+                  <div key={post.id} className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 flex flex-col gap-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="font-bold text-white text-sm leading-snug line-clamp-2 flex-1">{post.title}</div>
+                      <span className={`shrink-0 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${statusBadge(post.status)}`}>{post.status}</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs text-white/50">
+                      <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 font-semibold text-white/70">{post.category}</span>
+                      <span className="flex items-center gap-1"><User size={11} className="text-white/30" />{post.author || '—'}</span>
+                      <span className="font-mono text-white/30">{post.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2 pt-1 border-t border-white/5">
+                      <button onClick={() => handleEdit(post)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-[#E61739] text-xs font-semibold transition-all">
+                        <Edit2 size={13} /> Edit
+                      </button>
+                      <button onClick={() => handleDelete(post.id)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-red-500/10 text-white/60 hover:text-red-400 text-xs font-semibold transition-all">
+                        <Trash2 size={13} /> Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* ── Desktop: table (hidden below md) ── */}
+            {!loading && filteredPosts.length > 0 && (
+              <div className="hidden md:block bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
+                      <th className="px-8 py-5">Article Title</th>
+                      <th className="px-8 py-5">Category</th>
+                      <th className="px-8 py-5">Author</th>
+                      <th className="px-8 py-5">Status</th>
+                      <th className="px-8 py-5">Published</th>
+                      <th className="px-8 py-5 text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {filteredPosts.map((post) => (
+                      <tr key={post.id} className="hover:bg-white/5 transition-colors group">
+                        <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1 max-w-xs">{post.title}</div></td>
+                        <td className="px-8 py-5"><span className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-bold text-white/70">{post.category}</span></td>
+                        <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{post.author || '—'}</div></td>
+                        <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${statusBadge(post.status)}`}>{post.status}</span></td>
+                        <td className="px-8 py-5 text-sm text-white/40 font-mono">{post.date}</td>
+                        <td className="px-8 py-5 text-right">
+                          <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={() => handleEdit(post)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
+                            <button onClick={() => handleDelete(post.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 
