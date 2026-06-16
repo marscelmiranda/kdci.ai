@@ -105,10 +105,10 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             Publisher Portal
           </div>
         </div>
-        {/* Close button — mobile only */}
+        {/* Close button — below lg only */}
         <button
           onClick={closeSidebar}
-          className="md:hidden w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all"
+          className="lg:hidden w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all"
           aria-label="Close sidebar"
         >
           <X size={18} />
@@ -173,23 +173,23 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
 
-      {/* ── Desktop Sidebar (always visible md+) ── */}
-      <aside className="hidden md:flex w-64 lg:w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex-col bg-[#0a0a0a]">
+      {/* ── Desktop Sidebar (always visible lg+) ── */}
+      <aside className="hidden lg:flex w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex-col bg-[#0a0a0a]">
         <SidebarContent />
       </aside>
 
-      {/* ── Mobile Sidebar Backdrop ── */}
+      {/* ── Sidebar Backdrop (below lg) ── */}
       {isSidebarOpen && (
         <div
-          className="md:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
           onClick={closeSidebar}
           aria-hidden="true"
         />
       )}
 
-      {/* ── Mobile Sidebar Drawer ── */}
+      {/* ── Sidebar Drawer (below lg) ── */}
       <aside
-        className={`md:hidden fixed top-0 left-0 z-50 h-full w-72 max-w-[85vw] bg-[#0a0a0a] border-r border-white/5 flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 left-0 z-50 h-full w-72 max-w-[85vw] bg-[#0a0a0a] border-r border-white/5 flex flex-col transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Sidebar navigation"
@@ -203,10 +203,10 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
         {/* Top Header */}
         <header className="flex items-center justify-between gap-4 mb-8 md:mb-12">
           <div className="flex items-center gap-3 min-w-0">
-            {/* Hamburger — mobile only */}
+            {/* Hamburger — below lg only */}
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="md:hidden w-10 h-10 rounded-xl bg-[#1a1a1a] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 transition-all shrink-0"
+              className="lg:hidden w-10 h-10 rounded-xl bg-[#1a1a1a] border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 transition-all shrink-0"
               aria-label="Open sidebar"
             >
               <Menu size={20} />
