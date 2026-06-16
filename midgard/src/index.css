@@ -168,3 +168,80 @@
   color: #a5f3fc; font-size: 0.875em; line-height: 1.6;
 }
 .rte-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 2em 0; }
+
+/* Tables — scrollable wrapper prevents horizontal page overflow on mobile */
+.rte-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  margin: 1.25em 0;
+}
+
+.rte-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.rte-content th,
+.rte-content td {
+  padding: 0.6em 0.9em;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.rte-content thead th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Video / iframe embeds inside rich text */
+.rte-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding-top: 56.25%;
+  margin: 1.25em 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rte-video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+}
+
+.rte-content iframe,
+.rte-content .video-wrapper,
+.rte-content [style*="padding-bottom"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.rte-content > iframe {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 12px;
+  margin: 1.25em 0;
+}
+
+.rte-content video {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.25em 0;
+}

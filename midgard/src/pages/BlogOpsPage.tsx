@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ViewType } from '../types';
 import { Logo } from '../components/Logo';
 import { RichTextEditor } from '../components/RichTextEditor';
@@ -141,11 +141,36 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const [formData, setFormData] = useState(emptyForm());
   const [hsFormGuid, setHsFormGuid] = useState<string>('');
   const [hsGuidLoaded, setHsGuidLoaded] = useState(false);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#0a0a0a';
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
+
+  // Wrap tables and iframes in the preview for mobile responsiveness
+  useEffect(() => {
+    if (viewState !== 'preview' || !previewRef.current) return;
+    const container = previewRef.current;
+
+    // Wrap bare <table> elements not already inside .rte-table-wrapper
+    container.querySelectorAll<HTMLTableElement>('.rte-content table').forEach(table => {
+      if (table.parentElement?.classList.contains('rte-table-wrapper')) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'rte-table-wrapper';
+      table.parentNode?.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+
+    // Wrap bare <iframe> elements not already inside .rte-video-wrapper
+    container.querySelectorAll<HTMLIFrameElement>('.rte-content iframe').forEach(iframe => {
+      if (iframe.parentElement?.classList.contains('rte-video-wrapper')) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'rte-video-wrapper';
+      iframe.parentNode?.insertBefore(wrapper, iframe);
+      wrapper.appendChild(iframe);
+    });
+  }, [viewState, formData.blocks]);
 
   useEffect(() => {
     if (formData.title && !editingId) {
@@ -598,7 +623,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 ) : (
                   <div className="grid lg:grid-cols-12 gap-16">
                     {/* Article body */}
-                    <div className="lg:col-span-8 max-w-3xl">
+                    <div className="lg:col-span-8 max-w-3xl" ref={previewRef}>
                       <div className="text-lg text-slate-600 leading-loose space-y-6">
                         {renderPreviewBlocks(formData.blocks)}
                       </div>
