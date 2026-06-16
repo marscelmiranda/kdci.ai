@@ -8,7 +8,24 @@ import {
   Search,
   TrendingUp,
   ArrowUpRight,
+  Users,
+  Briefcase,
+  Mail,
 } from "lucide-react";
+
+const WaffleIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+    <rect x="0"  y="0"  width="4" height="4" rx="1"/>
+    <rect x="7"  y="0"  width="4" height="4" rx="1"/>
+    <rect x="14" y="0"  width="4" height="4" rx="1"/>
+    <rect x="0"  y="7"  width="4" height="4" rx="1"/>
+    <rect x="7"  y="7"  width="4" height="4" rx="1"/>
+    <rect x="14" y="7"  width="4" height="4" rx="1"/>
+    <rect x="0"  y="14" width="4" height="4" rx="1"/>
+    <rect x="7"  y="14" width="4" height="4" rx="1"/>
+    <rect x="14" y="14" width="4" height="4" rx="1"/>
+  </svg>
+);
 import { ViewType } from "../types";
 import { TOP_SERVICES, INDUSTRIES, RESOURCES } from "../data";
 import { Logo } from "./Logo";
@@ -89,6 +106,8 @@ export const Navbar = ({
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileInsightsOpen, setIsMobileInsightsOpen] = useState(false);
+  const [isAppsOpen, setIsAppsOpen] = useState(false);
+  const appsRef = useRef<HTMLDivElement>(null);
 
   const [isSearchMounted, setIsSearchMounted] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -152,11 +171,25 @@ export const Navbar = ({
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isSearchMounted) handleCloseSearch();
+      if (e.key === "Escape") {
+        if (isSearchMounted) handleCloseSearch();
+        if (isAppsOpen) setIsAppsOpen(false);
+      }
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, [isSearchMounted]);
+  }, [isSearchMounted, isAppsOpen]);
+
+  useEffect(() => {
+    if (!isAppsOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (appsRef.current && !appsRef.current.contains(e.target as Node)) {
+        setIsAppsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [isAppsOpen]);
 
   const allSearchItems = [...STATIC_SEARCH_ITEMS, ...dynamicItems];
   const filteredResults = allSearchItems.filter((item) =>
@@ -333,6 +366,95 @@ export const Navbar = ({
             >
               Careers
             </a>
+
+            {/* Apps (Waffle) */}
+            <div className="relative" ref={appsRef}>
+              <button
+                onClick={() => setIsAppsOpen(!isAppsOpen)}
+                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${isAppsOpen ? (isDarkHero ? "bg-white/15 text-white" : "bg-black/8 text-[#E61739]") : isDarkHero ? "hover:bg-white/10 text-white" : "hover:bg-black/5 text-[#1D1D1F]"}`}
+                aria-label="All apps"
+              >
+                <WaffleIcon />
+              </button>
+
+              {isAppsOpen && (
+                <div className="absolute top-[calc(100%+12px)] right-0 w-[340px] bg-white rounded-[1.5rem] border border-black/8 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.22)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                  {/* Solutions section */}
+                  <div className="px-4 pt-4 pb-2">
+                    <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#86868b] mb-2 px-1">Solutions</p>
+                    <div className="grid grid-cols-3 gap-0.5">
+                      {TOP_SERVICES.map((item) => (
+                        <a
+                          key={item.id}
+                          href={getPath(item.id as ViewType)}
+                          onClick={e => nav(e, item.id as ViewType, () => setIsAppsOpen(false))}
+                          className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-[#F5F5F7] transition-colors group/app text-center"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-[#F5F5F7] group-hover/app:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/app:text-[#E61739] transition-all shrink-0">
+                            <item.icon size={22} />
+                          </div>
+                          <span className="text-[10.5px] font-semibold text-[#1D1D1F] group-hover/app:text-[#E61739] leading-tight transition-colors line-clamp-2">
+                            {item.name}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mx-4 border-t border-black/5 my-1" />
+
+                  {/* Resources section */}
+                  <div className="px-4 py-2">
+                    <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#86868b] mb-2 px-1">Insights</p>
+                    <div className="grid grid-cols-3 gap-0.5">
+                      {NAV_RESOURCES.map((res) => (
+                        <a
+                          key={res.id}
+                          href={getPath(res.id as ViewType)}
+                          onClick={e => nav(e, res.id as ViewType, () => setIsAppsOpen(false))}
+                          className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-[#F5F5F7] transition-colors group/app text-center"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-[#F5F5F7] group-hover/app:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/app:text-[#E61739] transition-all shrink-0">
+                            <res.icon size={22} />
+                          </div>
+                          <span className="text-[10.5px] font-semibold text-[#1D1D1F] group-hover/app:text-[#E61739] leading-tight transition-colors line-clamp-2">
+                            {res.name}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mx-4 border-t border-black/5 my-1" />
+
+                  {/* Company section */}
+                  <div className="px-4 pb-4 pt-2">
+                    <p className="text-[9px] font-black uppercase tracking-[0.14em] text-[#86868b] mb-2 px-1">Company</p>
+                    <div className="grid grid-cols-3 gap-0.5">
+                      {([
+                        { id: 'company',  label: 'Who We Are', Icon: Users     },
+                        { id: 'careers',  label: 'Careers',    Icon: Briefcase },
+                        { id: 'contact',  label: 'Contact Us', Icon: Mail      },
+                      ] as const).map(({ id, label, Icon }) => (
+                        <a
+                          key={id}
+                          href={getPath(id as ViewType)}
+                          onClick={e => nav(e, id as ViewType, () => setIsAppsOpen(false))}
+                          className="flex flex-col items-center gap-2 p-3 rounded-2xl hover:bg-[#F5F5F7] transition-colors group/app text-center"
+                        >
+                          <div className="w-12 h-12 rounded-2xl bg-[#F5F5F7] group-hover/app:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/app:text-[#E61739] transition-all shrink-0">
+                            <Icon size={22} />
+                          </div>
+                          <span className="text-[10.5px] font-semibold text-[#1D1D1F] group-hover/app:text-[#E61739] leading-tight transition-colors">
+                            {label}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Search Trigger */}
             <button
