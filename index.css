@@ -303,8 +303,11 @@
 }
 
 .rte-content table {
-  width: 100%;
-  min-width: 600px;
+  display: block;          /* required — overflow-x is ignored on display:table */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  min-width: 600px;        /* keeps table readable when scrolling */
   border-collapse: collapse;
   font-size: 0.9rem;
 }
@@ -327,6 +330,7 @@
 .rte-video-wrapper {
   position: relative;
   width: 100%;
+  max-width: 100%;
   padding-top: 56.25%; /* 16:9 default */
   margin: 1.25em 0;
   border-radius: 12px;
@@ -339,6 +343,27 @@
   width: 100% !important;
   height: 100% !important;
   border: none;
+}
+
+/* Catch TipTap-generated inline-style wrappers (padding-bottom aspect-ratio trick)
+   and any other video/embed containers — force them to respect the column width */
+.rte-content iframe,
+.rte-content .video-wrapper,
+.rte-content [style*="padding-bottom"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Bare iframes (no wrapper) also need responsive sizing */
+.rte-content > iframe {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 12px;
+  margin: 1.25em 0;
 }
 
 /* Native <video> tags inside rich text */
