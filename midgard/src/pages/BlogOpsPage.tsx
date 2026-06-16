@@ -231,6 +231,26 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     setError(null);
   };
 
+  const handlePreview = async (post: BlogPost) => {
+    setEditingId(post.id);
+    setError(null);
+    try {
+      const full: any = await (await fetch(`/api/blog/${post.id}`)).json();
+      setFormData({
+        title: full.title || '', slug: full.slug || '', category: full.category || 'AI Operations',
+        author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
+        status: full.status || 'draft',
+        blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
+        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
+        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
+        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
+      });
+    } catch {
+      setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
+    }
+    setViewState('preview');
+  };
+
   const handleEdit = async (post: BlogPost) => {
     setEditingId(post.id);
     setError(null);
@@ -516,6 +536,9 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <span className="font-mono text-white/30">{post.date}</span>
                     </div>
                     <div className="flex items-center gap-2 pt-1 border-t border-white/5">
+                      <button onClick={() => handlePreview(post)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-semibold transition-all">
+                        <Eye size={13} /> Preview
+                      </button>
                       <button onClick={() => handleEdit(post)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-[#E61739] text-xs font-semibold transition-all">
                         <Edit2 size={13} /> Edit
                       </button>
@@ -551,9 +574,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                         <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${statusBadge(post.status)}`}>{post.status}</span></td>
                         <td className="px-8 py-5 text-sm text-white/40 font-mono">{post.date}</td>
                         <td className="px-8 py-5 text-right">
-                          <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onClick={() => handleEdit(post)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
-                            <button onClick={() => handleDelete(post.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
+                          <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={() => handlePreview(post)} title="Preview" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white"><Eye size={16} /></button>
+                            <button onClick={() => handleEdit(post)} title="Edit" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
+                            <button onClick={() => handleDelete(post.id)} title="Delete" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
                           </div>
                         </td>
                       </tr>
