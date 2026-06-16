@@ -33,6 +33,12 @@ function wrapTables(html: string): string {
     .replace(/<\/table>/gi, '</table></div>');
 }
 
+function wrapIframes(html: string): string {
+  return html
+    .replace(/<iframe([^>]*)>/gi, '<div class="rte-video-wrapper"><iframe$1>')
+    .replace(/<\/iframe>/gi, '</iframe></div>');
+}
+
 const renderBlocks = (contentStr: string) => {
   let blocks: any[] = [];
   try {
@@ -49,7 +55,7 @@ const renderBlocks = (contentStr: string) => {
         return (
           <div key={i}
             className="rte-content"
-            dangerouslySetInnerHTML={{ __html: wrapTables(block.content?.text || '') }}
+            dangerouslySetInnerHTML={{ __html: wrapIframes(wrapTables(block.content?.text || '')) }}
           />
         );
       case 'html':
@@ -80,7 +86,7 @@ const renderBlocks = (contentStr: string) => {
                   {col.caption && <p className="text-center text-xs text-slate-400 mt-2">{col.caption}</p>}
                 </div>
               ) : null;
-              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: wrapTables(col.text || '') }} />;
+              return <div key={side} className="rte-content" dangerouslySetInnerHTML={{ __html: wrapIframes(wrapTables(col.text || '')) }} />;
             })}
           </div>
         );
