@@ -211,7 +211,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
   // Sub-components
   const ViewRow = ({ label, value, span }: { label: string; value?: string|null; span?: boolean }) => (
-    <div className={span ? 'col-span-2' : ''}>
+    <div className={span ? 'col-span-full' : ''}>
       <div className={lCls}>{label}</div>
       <div className="text-sm text-white font-medium min-h-[20px]">
         {value?.trim() ? value : <span className="text-white/20 italic">—</span>}
@@ -232,7 +232,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
   );
 
   const SaveCancel = ({ sectionKey, validate }: { sectionKey: string; validate?: () => boolean }) => (
-    <div className="flex gap-3 mt-6 pt-5 border-t border-white/5 col-span-2">
+    <div className="flex gap-3 mt-6 pt-5 border-t border-white/5 col-span-full">
       <button onClick={() => { if (!validate || validate()) save(sectionKey); }}
         className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E61739] text-white text-xs font-black hover:bg-[#c51431] transition-all">
         <Check size={14} /> Save Changes
@@ -269,7 +269,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
             </label>
           </div>
           {/* Avatar */}
-          <div className="absolute left-10" style={{ bottom: '-68px' }}>
+          <div className="absolute left-4 sm:left-10" style={{ bottom: '-68px' }}>
             <div className="w-32 h-32 rounded-full border-4 border-[#0a0a0a] bg-[#111] overflow-hidden relative group cursor-pointer shadow-xl">
               {profile.avatarImage
                 ? <img src={profile.avatarImage} alt="Avatar" className="w-full h-full object-cover" />
@@ -284,8 +284,8 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
         </div>
 
         {/* Hero info strip */}
-        <div className="pt-24 px-10 pb-8 border-b border-white/5">
-          <div className="flex justify-between items-start gap-6">
+        <div className="pt-24 px-4 sm:px-10 pb-8 border-b border-white/5">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
             <div>
               <h1 className="text-3xl font-heading font-bold text-white leading-tight">
                 {profile.firstName} {profile.lastName}
@@ -311,14 +311,14 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
               )}
             </div>
             <button onClick={() => startEdit('hero', { firstName:profile.firstName, lastName:profile.lastName, city:profile.city, state:profile.state })}
-              className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 text-xs font-black hover:bg-white/5 hover:text-white transition-all">
+              className="self-start sm:self-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 text-xs font-black hover:bg-white/5 hover:text-white transition-all">
               <Pencil size={13}/> Edit Profile
             </button>
           </div>
 
           {editing['hero'] && (
             <div className="mt-6 bg-black/20 border border-white/5 rounded-2xl p-6">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label className={lCls}>First Name</label><input className={iCls} value={d('firstName')} onChange={e => setD('firstName', e.target.value)} /></div>
                 <div><label className={lCls}>Last Name</label><input className={iCls} value={d('lastName')} onChange={e => setD('lastName', e.target.value)} /></div>
                 <div><label className={lCls}>City</label><input className={iCls} value={d('city')} onChange={e => setD('city', e.target.value)} /></div>
@@ -341,17 +341,17 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
         </div>
 
-        <div className="px-10 py-8 space-y-6">
+        <div className="px-4 sm:px-10 py-8 space-y-6">
 
           {/* ── WORK INFORMATION ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8 group">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8 group">
             <CardHeader title="Work Information" sectionKey="work" editData={{
               positionTitle:profile.positionTitle, rank:profile.rank, department:profile.department,
               hireDate:profile.hireDate, employeeId:profile.employeeId, employmentType:profile.employmentType,
               workLocation:profile.workLocation, reportsTo:profile.reportsTo,
             }} />
             {!editing['work'] ? (
-              <div className="grid grid-cols-2 gap-x-10 gap-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                 <ViewRow label="Position Title"   value={profile.positionTitle} />
                 <ViewRow label="Rank"             value={profile.rank} />
                 <ViewRow label="Department"       value={profile.department} />
@@ -363,7 +363,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 <ViewRow label="Reports To"       value={profile.reportsTo} />
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label className={lCls}>Position Title</label><input className={iCls} value={d('positionTitle')} onChange={e => setD('positionTitle', e.target.value)} /></div>
                 <div>
                   <label className={lCls}>Rank</label>
@@ -413,7 +413,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
 
           {/* ── ORG CHART ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8 group">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8 group">
             <CardHeader title="Company Structure" sectionKey="org" editData={{
               reportsTo: profile.reportsTo,
               directReports: JSON.parse(JSON.stringify(profile.directReports)),
@@ -493,20 +493,20 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-2"><SaveCancel sectionKey="org" /></div>
+                <SaveCancel sectionKey="org" />
               </div>
             )}
           </div>
 
           {/* ── PERSONAL INFORMATION ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8 group">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8 group">
             <CardHeader title="Personal Information" sectionKey="personal" editData={{
               firstName:profile.firstName, lastName:profile.lastName, middleName:profile.middleName,
               dateOfBirth:profile.dateOfBirth, gender:profile.gender, pronouns:profile.pronouns,
               nationality:profile.nationality, maritalStatus:profile.maritalStatus,
             }} />
             {!editing['personal'] ? (
-              <div className="grid grid-cols-2 gap-x-10 gap-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                 <ViewRow label="First Name"     value={profile.firstName} />
                 <ViewRow label="Last Name"      value={profile.lastName} />
                 <ViewRow label="Middle Name"    value={profile.middleName} />
@@ -517,7 +517,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 <ViewRow label="Marital Status" value={profile.maritalStatus} />
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label className={lCls}>First Name</label><input className={iCls} value={d('firstName')} onChange={e => setD('firstName', e.target.value)} /></div>
                 <div><label className={lCls}>Last Name</label><input className={iCls} value={d('lastName')} onChange={e => setD('lastName', e.target.value)} /></div>
                 <div><label className={lCls}>Middle Name</label><input className={iCls} value={d('middleName')} onChange={e => setD('middleName', e.target.value)} /></div>
@@ -555,14 +555,14 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
 
           {/* ── CONTACT INFORMATION ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8 group">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8 group">
             <CardHeader title="Contact Information" sectionKey="contact" editData={{
               personalEmail:profile.personalEmail, workPhone:profile.workPhone, mobilePhone:profile.mobilePhone,
               officeLocation:profile.officeLocation, linkedinUrl:profile.linkedinUrl,
               workAddress:{ ...profile.workAddress },
             }} />
             {!editing['contact'] ? (
-              <div className="grid grid-cols-2 gap-x-10 gap-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                 <div>
                   <div className={lCls}>Work Email</div>
                   <div className="flex items-center gap-2 text-sm text-white font-medium">
@@ -581,7 +581,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={lCls}>Work Email (Read-Only)</label>
                   <input className={`${iCls} opacity-40 cursor-not-allowed`} readOnly value={user?.email??''} />
@@ -607,9 +607,9 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </div>
                 <div><label className={lCls}>Office Location / Room</label><input className={iCls} value={d('officeLocation')} onChange={e => setD('officeLocation', e.target.value)} /></div>
                 <div><label className={lCls}>LinkedIn URL</label><input className={iCls} value={d('linkedinUrl')} placeholder="https://linkedin.com/in/..." onChange={e => setD('linkedinUrl', e.target.value)} /></div>
-                <div className="col-span-2">
+                <div className="col-span-full">
                   <label className={lCls}>Work Address</label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {(['street','city','state','zip'] as const).map(k => (
                       <input key={k} className={iCls} placeholder={k.charAt(0).toUpperCase()+k.slice(1)}
                         value={(d('workAddress') as ProfileData['workAddress'])[k]}
@@ -626,7 +626,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
 
           {/* ── EMERGENCY CONTACTS ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8 group">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8 group">
             <CardHeader title="Emergency Contacts" sectionKey="emergency" editData={{
               emergencyContacts: JSON.parse(JSON.stringify(profile.emergencyContacts)),
             }} />
@@ -641,7 +641,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <Shield size={13} className="text-[#E61739]"/>
                       <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Contact {i+1}</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-10 gap-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                       <ViewRow label="Full Name"       value={c.name} />
                       <ViewRow label="Relationship"    value={c.relationship} />
                       <ViewRow label="Primary Phone"   value={c.primaryPhone} />
@@ -666,7 +666,7 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                         </button>
                       )}
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {(['name','primaryPhone','secondaryPhone','email'] as const).map(k => {
                         const labels: Record<string,string> = { name:'Full Name', primaryPhone:'Primary Phone', secondaryPhone:'Secondary Phone', email:'Email' };
                         return (
@@ -701,15 +701,15 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     <Plus size={12}/> Add Second Contact
                   </button>
                 )}
-                <div className="grid grid-cols-2"><SaveCancel sectionKey="emergency" /></div>
+                <SaveCancel sectionKey="emergency" />
               </div>
             )}
           </div>
 
           {/* ── DOCUMENTS ── */}
-          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-8">
+          <div className="bg-[#141414] border border-white/5 rounded-[2rem] p-4 sm:p-8">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-6">Profile Photo &amp; Documents</h2>
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10">
               <div>
                 <label className={lCls}>Profile Photo</label>
                 <div className="flex items-center gap-4 mt-2">
