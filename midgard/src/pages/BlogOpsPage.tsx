@@ -52,7 +52,7 @@ const renderPreviewBlocks = (blocks: Block[]) =>
       case 'rich_text':
         return <div key={i} className="rte-content" dangerouslySetInnerHTML={{ __html: block.content?.text || '' }} />;
       case 'html':
-        return <div key={i} dangerouslySetInnerHTML={{ __html: block.content?.code || '' }} />;
+        return <div key={i} className="max-w-full overflow-x-auto [&_img]:max-w-full [&_table]:max-w-full [&_iframe]:max-w-full" dangerouslySetInnerHTML={{ __html: block.content?.code || '' }} />;
       case 'image':
         return block.content?.url ? (
           <div key={i} className="my-8">
