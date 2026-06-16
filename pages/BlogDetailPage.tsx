@@ -39,6 +39,53 @@ function wrapIframes(html: string): string {
     .replace(/<\/iframe>/gi, '</iframe></div>');
 }
 
+function generateTableHTML(data: any): string {
+  if (!data?.rows) return '';
+  const ts = data.tableStyles || {};
+  const border = (ts.borderStyle && ts.borderStyle !== 'none')
+    ? `${ts.borderWidth || 1}px ${ts.borderStyle || 'solid'} ${ts.borderColor || '#cbd5e1'}`
+    : 'none';
+  const tableStyle = `width:${ts.width || '100%'};border-collapse:collapse;font-size:${ts.fontSize || 14}px;`;
+  const headerRows: any[] = data.rows.filter((r: any) => r.isHeader);
+  const bodyRows: any[] = data.rows.filter((r: any) => !r.isHeader);
+
+  const renderCell = (cell: any, rowIdx: number) => {
+    if (cell.colSpan === 0) return '';
+    const tag = cell.isHeader ? 'th' : 'td';
+    const cs = cell.style || {};
+    const padding = cs.padding ? `${cs.padding}px` : '8px';
+    const styles = [
+      `border:${border}`,
+      `padding:${padding}`,
+      `text-align:${cs.textAlign || 'left'}`,
+      `font-weight:${cs.fontWeight || (cell.isHeader ? 'bold' : 'normal')}`,
+      cs.fontSize ? `font-size:${cs.fontSize}px` : '',
+      cs.bgColor ? `background:${cs.bgColor}` : '',
+      cs.color ? `color:${cs.color}` : '',
+    ].filter(Boolean).join(';');
+    const colSpanAttr = cell.colSpan > 1 ? ` colspan="${cell.colSpan}"` : '';
+    return `    <${tag}${colSpanAttr} style="${styles}">${cell.content}</${tag}>`;
+  };
+
+  const renderRow = (row: any, rowIdx: number) => {
+    const isZebra = ts.zebraStripe && !row.isHeader && rowIdx % 2 === 1;
+    const rowBg = row.bgColor || (isZebra ? (ts.zebraColor || '#f8fafc') : '');
+    const rowStyle = rowBg ? ` style="background:${rowBg}"` : '';
+    const cells = row.cells.map((c: any, ci: number) => renderCell(c, ci)).filter(Boolean).join('\n');
+    return `  <tr${rowStyle}>\n${cells}\n  </tr>`;
+  };
+
+  const stickyStyle = ts.stickyHeader ? ' style="position:sticky;top:0;z-index:1"' : '';
+  const thead = headerRows.length > 0
+    ? `<thead${stickyStyle}>\n${headerRows.map((r: any, i: number) => renderRow(r, i)).join('\n')}\n</thead>`
+    : '';
+  const tbody = bodyRows.length > 0
+    ? `<tbody>\n${bodyRows.map((r: any, i: number) => renderRow(r, i)).join('\n')}\n</tbody>`
+    : '';
+
+  return `<table style="${tableStyle}">\n${thead}\n${tbody}\n</table>`;
+}
+
 const renderBlocks = (contentStr: string) => {
   let blocks: any[] = [];
   try {
@@ -146,6 +193,17 @@ const renderBlocks = (contentStr: string) => {
           );
         }
         return null;
+      }
+      case 'table': {
+        const tableData = typeof block.content?.tableData === 'string'
+          ? JSON.parse(block.content.tableData)
+          : block.content?.tableData;
+        if (!tableData?.rows) return null;
+        return (
+          <div key={i} className="my-6 overflow-x-auto max-w-full">
+            <div dangerouslySetInnerHTML={{ __html: generateTableHTML(tableData) }} />
+          </div>
+        );
       }
       case 'divider':
         return <hr key={i} className="my-10 border-slate-100" />;
