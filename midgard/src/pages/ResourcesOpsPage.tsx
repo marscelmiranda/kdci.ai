@@ -3,7 +3,7 @@ import { ViewType } from '../types';
 import { PortalTopNav } from '../components/PortalTopNav';
 import { RichTextEditor } from '../components/RichTextEditor';
 import {
-  ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
+  ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Eye, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
   Save, Check, ChevronUp, ChevronDown, GripVertical, Type, Code, Youtube, Columns, MousePointer2, Quote, AppWindow, Minus, Activity, User,
   Users, UserCircle2, Loader2, AlertCircle, BookMarked, Download, Tag, Calendar
 } from 'lucide-react';
@@ -309,37 +309,39 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
         {/* ─── LIST VIEW ─── */}
         {viewState === 'list' && (
-          <div className="p-8 md:p-12 overflow-y-auto flex-grow">
-            <div className="flex justify-between items-center mb-10">
+          <div className="p-4 sm:p-8 md:p-12 overflow-y-auto flex-grow">
+
+            {/* ── Header ── */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 sm:mb-10">
               <div>
                 <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-2">
                   <span onClick={() => setView('dashboard')} className="hover:text-white cursor-pointer transition-colors">Dashboard</span>
                   <ChevronLeft size={10} className="rotate-180" />
                   <span className="text-[#E61739]">Resources</span>
                 </div>
-                <h1 className="text-3xl font-heading font-bold text-white">Resources Library</h1>
+                <h1 className="text-2xl sm:text-3xl font-heading font-bold text-white">Resources Library</h1>
               </div>
               <button
                 onClick={activeTab === 'ebooks' ? handleCreateEbook : handleCreateNew}
-                className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg"
+                className="self-start sm:self-auto px-5 py-2.5 sm:px-6 sm:py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg whitespace-nowrap"
               >
                 <Plus size={16} /> {activeTab === 'ebooks' ? 'New Ebook' : 'Create Resource'}
               </button>
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-4 mb-8 border-b border-white/5">
+            <div className="flex gap-1 sm:gap-4 mb-6 border-b border-white/5 overflow-x-auto">
               {[{ id: 'ebooks', label: 'Ebooks', icon: BookOpen }, { id: 'cases', label: 'Case Studies', icon: TrendingUp }, { id: 'webinars', label: 'Webinars', icon: Presentation }].map((tab) => (
                 <button key={tab.id} onClick={() => { setActiveTab(tab.id as any); setViewState('list'); }}
-                  className={`flex items-center gap-2 px-6 py-4 text-sm font-bold border-b-2 transition-all ${activeTab === tab.id ? 'border-[#E61739] text-[#E61739]' : 'border-transparent text-white/40 hover:text-white/80'}`}>
-                  <tab.icon size={18} />{tab.label}
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-4 text-sm font-bold border-b-2 transition-all whitespace-nowrap shrink-0 ${activeTab === tab.id ? 'border-[#E61739] text-[#E61739]' : 'border-transparent text-white/40 hover:text-white/80'}`}>
+                  <tab.icon size={16} />{tab.label}
                 </button>
               ))}
             </div>
 
             {/* Search */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative flex-grow max-w-md">
+            <div className="mb-6">
+              <div className="relative w-full sm:max-w-md">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" size={16} />
                 <input type="text" placeholder={`Search ${activeTab}...`} className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739]" />
               </div>
@@ -347,99 +349,185 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
             {/* ── Ebooks List (API) ── */}
             {activeTab === 'ebooks' && (
-              <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
-                {ebooksLoading ? (
+              <>
+                {ebooksLoading && (
                   <div className="flex items-center justify-center py-20">
                     <Loader2 className="animate-spin text-[#E61739]" size={32} />
                   </div>
-                ) : ebooksError ? (
+                )}
+                {!ebooksLoading && ebooksError && (
                   <div className="flex flex-col items-center justify-center py-16 gap-3 text-white/30">
                     <AlertCircle size={32} />
                     <p className="text-sm font-medium">{ebooksError}</p>
                     <button onClick={loadEbooks} className="text-[#E61739] text-xs font-bold hover:underline">Retry</button>
                   </div>
-                ) : dbEbooks.length === 0 ? (
-                  <div className="p-16 text-center">
+                )}
+                {!ebooksLoading && !ebooksError && dbEbooks.length === 0 && (
+                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-16 text-center">
                     <BookOpen size={40} className="text-white/10 mx-auto mb-4" />
                     <p className="text-white/30 font-medium mb-2">No ebooks yet.</p>
                     <button onClick={handleCreateEbook} className="text-[#E61739] text-sm font-bold hover:underline">Create your first ebook →</button>
                   </div>
-                ) : (
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
-                        <th className="px-8 py-5">Title</th>
-                        <th className="px-6 py-5">Category</th>
-                        <th className="px-6 py-5">Author</th>
-                        <th className="px-6 py-5">Status</th>
-                        <th className="px-6 py-5">Published</th>
-                        <th className="px-6 py-5 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {dbEbooks.map(ebook => (
-                        <tr key={ebook.id} className="hover:bg-white/5 transition-colors group">
-                          <td className="px-8 py-5">
-                            <div className="font-bold text-white line-clamp-1 max-w-xs">{ebook.title}</div>
-                            <div className="text-white/30 text-xs font-mono mt-0.5">/{ebook.slug}</div>
-                          </td>
-                          <td className="px-6 py-5 text-sm text-white/50">{ebook.category || '—'}</td>
-                          <td className="px-6 py-5 text-sm text-white/70">
-                            <div className="flex items-center gap-2"><User size={12} className="text-white/30" />{ebook.author || '—'}</div>
-                          </td>
-                          <td className="px-6 py-5">
-                            <span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${ebook.status === 'published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : ebook.status === 'draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>
-                              {ebook.status}
-                            </span>
-                          </td>
-                          <td className="px-6 py-5 text-sm text-white/40 font-mono">
-                            {ebook.published_at ? new Date(ebook.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
-                          </td>
-                          <td className="px-6 py-5 text-right">
-                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button onClick={() => handleEditEbook(ebook)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
-                              <button onClick={() => handleDeleteEbook(ebook.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
                 )}
-              </div>
+                {/* Mobile cards */}
+                {!ebooksLoading && !ebooksError && dbEbooks.length > 0 && (
+                  <div className="md:hidden flex flex-col gap-3">
+                    {dbEbooks.map(ebook => {
+                      const ebookStatus = ebook.status === 'published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : ebook.status === 'draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20';
+                      return (
+                        <div key={ebook.id} className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 flex flex-col gap-3">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="font-bold text-white text-sm leading-snug line-clamp-2">{ebook.title}</div>
+                              <div className="text-white/30 text-[11px] font-mono mt-0.5">/{ebook.slug}</div>
+                            </div>
+                            <span className={`shrink-0 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${ebookStatus}`}>{ebook.status}</span>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-xs text-white/50">
+                            {ebook.category && <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 font-semibold text-white/70">{ebook.category}</span>}
+                            <span className="flex items-center gap-1"><User size={11} className="text-white/30" />{ebook.author || '—'}</span>
+                            <span className="font-mono text-white/30">{ebook.published_at ? new Date(ebook.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}</span>
+                          </div>
+                          <div className="flex items-center gap-2 pt-1 border-t border-white/5">
+                            {ebook.download_url && (
+                              <button onClick={() => window.open(ebook.download_url, '_blank')} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-semibold transition-all">
+                                <Eye size={13} /> Preview
+                              </button>
+                            )}
+                            <button onClick={() => handleEditEbook(ebook)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-[#E61739] text-xs font-semibold transition-all">
+                              <Edit2 size={13} /> Edit
+                            </button>
+                            <button onClick={() => handleDeleteEbook(ebook.id)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-red-500/10 text-white/60 hover:text-red-400 text-xs font-semibold transition-all">
+                              <Trash2 size={13} /> Delete
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {/* Desktop table */}
+                {!ebooksLoading && !ebooksError && dbEbooks.length > 0 && (
+                  <div className="hidden md:block bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
+                          <th className="px-8 py-5">Title</th>
+                          <th className="px-6 py-5">Category</th>
+                          <th className="px-6 py-5">Author</th>
+                          <th className="px-6 py-5">Status</th>
+                          <th className="px-6 py-5">Published</th>
+                          <th className="px-6 py-5 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {dbEbooks.map(ebook => (
+                          <tr key={ebook.id} className="hover:bg-white/5 transition-colors group">
+                            <td className="px-8 py-5">
+                              <div className="font-bold text-white line-clamp-1 max-w-xs">{ebook.title}</div>
+                              <div className="text-white/30 text-xs font-mono mt-0.5">/{ebook.slug}</div>
+                            </td>
+                            <td className="px-6 py-5 text-sm text-white/50">{ebook.category || '—'}</td>
+                            <td className="px-6 py-5 text-sm text-white/70">
+                              <div className="flex items-center gap-2"><User size={12} className="text-white/30" />{ebook.author || '—'}</div>
+                            </td>
+                            <td className="px-6 py-5">
+                              <span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${ebook.status === 'published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : ebook.status === 'draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>
+                                {ebook.status}
+                              </span>
+                            </td>
+                            <td className="px-6 py-5 text-sm text-white/40 font-mono">
+                              {ebook.published_at ? new Date(ebook.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
+                            </td>
+                            <td className="px-6 py-5 text-right">
+                              <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                {ebook.download_url && <button onClick={() => window.open(ebook.download_url, '_blank')} title="Preview" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white"><Eye size={16} /></button>}
+                                <button onClick={() => handleEditEbook(ebook)} title="Edit" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
+                                <button onClick={() => handleDeleteEbook(ebook.id)} title="Delete" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </>
             )}
 
             {/* ── Cases / Webinars List (Mock) ── */}
             {activeTab !== 'ebooks' && (
-              <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
-                {filteredResources.length > 0 ? (
-                  <table className="w-full text-left">
-                    <thead>
-                      <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
-                        <th className="px-8 py-5">Title</th><th className="px-8 py-5">Author</th><th className="px-8 py-5">Status</th><th className="px-8 py-5">Published</th><th className="px-8 py-5 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-white/5">
-                      {filteredResources.map((resource) => (
-                        <tr key={resource.id} className="hover:bg-white/5 transition-colors group">
-                          <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1">{resource.title}</div></td>
-                          <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{resource.author}</div></td>
-                          <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${resource.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : resource.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{resource.status}</span></td>
-                          <td className="px-8 py-5 text-sm text-white/40 font-mono">{resource.date}</td>
-                          <td className="px-8 py-5 text-right">
-                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button onClick={() => handleEdit(resource)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
-                              <button onClick={() => handleDelete(resource.id)} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="p-16 text-center text-white/30 font-medium">No {activeTab} found. Create one to get started.</div>
+              <>
+                {filteredResources.length === 0 && (
+                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-16 text-center text-white/30 font-medium">
+                    No {activeTab} found. Create one to get started.
+                  </div>
                 )}
-              </div>
+                {/* Mobile cards */}
+                {filteredResources.length > 0 && (
+                  <div className="md:hidden flex flex-col gap-3">
+                    {filteredResources.map(resource => {
+                      const resBadge = resource.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : resource.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20';
+                      return (
+                        <div key={resource.id} className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-4 flex flex-col gap-3">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="font-bold text-white text-sm leading-snug line-clamp-2 flex-1">{resource.title}</div>
+                            <span className={`shrink-0 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${resBadge}`}>{resource.status}</span>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-2 text-xs text-white/50">
+                            <span className="flex items-center gap-1"><User size={11} className="text-white/30" />{resource.author}</span>
+                            <span className="font-mono text-white/30">{resource.date}</span>
+                          </div>
+                          <div className="flex items-center gap-2 pt-1 border-t border-white/5">
+                            <button onClick={() => handleEdit(resource)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white text-xs font-semibold transition-all">
+                              <Eye size={13} /> Preview
+                            </button>
+                            <button onClick={() => handleEdit(resource)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-[#E61739] text-xs font-semibold transition-all">
+                              <Edit2 size={13} /> Edit
+                            </button>
+                            <button onClick={() => handleDelete(resource.id)} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-white/5 hover:bg-red-500/10 text-white/60 hover:text-red-400 text-xs font-semibold transition-all">
+                              <Trash2 size={13} /> Delete
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+                {/* Desktop table */}
+                {filteredResources.length > 0 && (
+                  <div className="hidden md:block bg-[#1a1a1a] border border-white/5 rounded-[2rem] overflow-hidden">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-widest text-white/40 bg-white/[0.02]">
+                          <th className="px-8 py-5">Title</th>
+                          <th className="px-8 py-5">Author</th>
+                          <th className="px-8 py-5">Status</th>
+                          <th className="px-8 py-5">Published</th>
+                          <th className="px-8 py-5 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {filteredResources.map((resource) => (
+                          <tr key={resource.id} className="hover:bg-white/5 transition-colors group">
+                            <td className="px-8 py-5"><div className="font-bold text-white line-clamp-1 max-w-xs">{resource.title}</div></td>
+                            <td className="px-8 py-5 text-sm text-white/70"><div className="flex items-center gap-2"><User size={12} className="text-white/30" />{resource.author}</div></td>
+                            <td className="px-8 py-5"><span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border ${resource.status === 'Published' ? 'bg-green-500/10 text-green-500 border-green-500/20' : resource.status === 'Draft' ? 'bg-white/5 text-white/50 border-white/10' : 'bg-red-500/10 text-red-500 border-red-500/20'}`}>{resource.status}</span></td>
+                            <td className="px-8 py-5 text-sm text-white/40 font-mono">{resource.date}</td>
+                            <td className="px-8 py-5 text-right">
+                              <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onClick={() => handleEdit(resource)} title="Preview" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white"><Eye size={16} /></button>
+                                <button onClick={() => handleEdit(resource)} title="Edit" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-[#E61739]"><Edit2 size={16} /></button>
+                                <button onClick={() => handleDelete(resource.id)} title="Delete" className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-red-500"><Trash2 size={16} /></button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
