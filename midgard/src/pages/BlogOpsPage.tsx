@@ -241,9 +241,11 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
-        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
-        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
-        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
+        metaTitle: full.meta_title || full.title || '', metaDescription: full.meta_description || full.excerpt || '',
+        keywords: full.keywords || (full.tags || []).join(', '),
+        canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || full.title || '',
+        ogDescription: full.og_description || full.excerpt || '', ogImageUrl: full.og_image_url || full.cover_image || '',
+        jsonLd: full.json_ld || '', noIndex: full.no_index || false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
       });
     } catch {
       setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
@@ -261,9 +263,11 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
-        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
-        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
-        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
+        metaTitle: full.meta_title || full.title || '', metaDescription: full.meta_description || full.excerpt || '',
+        keywords: full.keywords || (full.tags || []).join(', '),
+        canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || full.title || '',
+        ogDescription: full.og_description || full.excerpt || '', ogImageUrl: full.og_image_url || full.cover_image || '',
+        jsonLd: full.json_ld || '', noIndex: full.no_index || false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
       });
     } catch {
       setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
@@ -291,6 +295,15 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         cover_image_alt: formData.imageAlt,
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
         status: formData.status,
+        meta_title: formData.metaTitle,
+        meta_description: formData.metaDescription,
+        keywords: formData.keywords,
+        canonical_url: formData.canonicalUrl,
+        og_title: formData.ogTitle,
+        og_description: formData.ogDescription,
+        og_image_url: formData.ogImageUrl,
+        json_ld: formData.jsonLd,
+        no_index: formData.noIndex,
       };
       if (editingId) {
         await updatePost(editingId, payload);
@@ -452,15 +465,20 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     }
   };
 
+  const focusKeyword = formData.keywords.split(',')[0]?.trim().toLowerCase() || '';
+  const firstRichText = formData.blocks.find(b => b.type === 'rich_text')?.content?.text?.toLowerCase() || '';
   const seoChecklist = [
-    { label: 'Meta title ≤ 60 chars', done: formData.metaTitle.length > 0 && formData.metaTitle.length <= 60 },
+    { label: 'Meta title 30–60 chars', done: formData.metaTitle.length >= 30 && formData.metaTitle.length <= 60 },
     { label: 'Meta description 120–160 chars', done: formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160 },
+    { label: 'Focus keyword in meta title', done: !!focusKeyword && formData.metaTitle.toLowerCase().includes(focusKeyword) },
+    { label: 'Focus keyword in meta description', done: !!focusKeyword && formData.metaDescription.toLowerCase().includes(focusKeyword) },
+    { label: 'Focus keyword in first paragraph', done: !!focusKeyword && firstRichText.includes(focusKeyword) },
+    { label: 'Focus keyword in slug', done: !!focusKeyword && formData.slug.toLowerCase().replace(/-/g, ' ').includes(focusKeyword) },
     { label: 'Keywords specified', done: formData.keywords.length > 0 },
     { label: 'Slug populated', done: formData.slug.length > 0 },
-    { label: 'Canonical URL set', done: formData.canonicalUrl.length > 0 },
-    { label: 'Open Graph populated', done: formData.ogTitle.length > 0 && formData.ogDescription.length > 0 },
-    { label: 'Featured image added', done: formData.imageUrl.length > 0 },
-    { label: 'JSON-LD included', done: formData.jsonLd.length > 0 },
+    { label: 'Open Graph fields filled', done: formData.ogTitle.length > 0 && formData.ogDescription.length > 0 },
+    { label: 'Cover image added', done: formData.imageUrl.length > 0 },
+    { label: 'Cover image alt text set', done: formData.imageAlt.length > 0 },
   ];
 
   const statusBadge = (status: string) => {
@@ -803,47 +821,168 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                 </>
               )}
 
-              {editorTab === 'seo' && (
-                <div className="space-y-6">
-                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white/40 mb-4">SEO Checklist</h3>
-                    <div className="space-y-2">
-                      {seoChecklist.map(item => (
-                        <div key={item.label} className="flex items-center gap-3">
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-green-500/20 text-green-500' : 'bg-white/5 text-white/20'}`}>
-                            <Check size={10} />
+              {editorTab === 'seo' && (() => {
+                const snippetTitle = formData.metaTitle || formData.title || 'Your Meta Title';
+                const snippetUrl = formData.canonicalUrl || `https://kdci.ai/blogs/${formData.slug || 'your-slug'}/`;
+                const snippetDesc = formData.metaDescription || 'Your meta description will appear here. Aim for 120–160 characters.';
+                const ogImgSrc = formData.ogImageUrl || formData.imageUrl;
+                const ogTitleDisp = formData.ogTitle || formData.title || 'Your OG Title';
+                const ogDescDisp = formData.ogDescription || formData.metaDescription || 'Your OG description';
+                const passCount = seoChecklist.filter(i => i.done).length;
+                const scoreColor = passCount >= 9 ? 'text-green-400' : passCount >= 6 ? 'text-amber-400' : 'text-red-400';
+                const metaTitleLen = formData.metaTitle.length;
+                const metaDescLen = formData.metaDescription.length;
+                return (
+                  <div className="space-y-6">
+                    {/* ── Google Snippet Preview ── */}
+                    <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                      <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">Google Snippet Preview</h3>
+                      <div className="bg-white rounded-xl p-5 max-w-xl shadow-sm">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 rounded-full bg-slate-200 flex items-center justify-center text-[8px] font-black text-slate-500">K</div>
+                          <div>
+                            <div className="text-xs font-semibold text-slate-800 leading-none">kdci.ai</div>
+                            <div className="text-[10px] text-[#3C4043] leading-none truncate max-w-xs">{snippetUrl}</div>
                           </div>
-                          <span className={`text-xs font-bold ${item.done ? 'text-white/70' : 'text-white/30'}`}>{item.label}</span>
                         </div>
-                      ))}
+                        <div className="text-[#1558D6] text-lg font-medium leading-snug hover:underline cursor-pointer line-clamp-1">{snippetTitle}</div>
+                        <div className="text-sm text-[#4D5156] mt-1 leading-snug line-clamp-2">{snippetDesc}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-6">
+
+                    {/* ── SEO Score + Checklist ── */}
+                    <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40">SEO Checklist</h3>
+                        <span className={`text-sm font-black ${scoreColor}`}>{passCount}/{seoChecklist.length} checks passed</span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {seoChecklist.map(item => (
+                          <div key={item.label} className="flex items-center gap-2.5">
+                            <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-green-500/20 text-green-400' : 'bg-white/5 text-white/15'}`}>
+                              <Check size={9} />
+                            </div>
+                            <span className={`text-xs font-semibold ${item.done ? 'text-white/70' : 'text-white/30'}`}>{item.label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* ── Meta Fields ── */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Title</label>
+                        <input type="text" value={formData.metaTitle} onChange={e => setFormData(p => ({ ...p, metaTitle: e.target.value }))}
+                          className={`w-full bg-[#1a1a1a] border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] ${metaTitleLen > 60 ? 'border-red-500/40' : metaTitleLen >= 30 ? 'border-green-500/30' : 'border-white/10'}`}
+                          placeholder="SEO title (30–60 chars)..." />
+                        <p className={`text-[10px] ${metaTitleLen > 60 ? 'text-red-400' : metaTitleLen >= 30 ? 'text-green-400' : 'text-white/30'}`}>{metaTitleLen}/60 chars</p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Canonical URL</label>
+                        <input type="text" value={formData.canonicalUrl} onChange={e => setFormData(p => ({ ...p, canonicalUrl: e.target.value }))}
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder="https://kdci.ai/blogs/…" />
+                        <p className="text-[10px] text-white/25">Leave blank → auto-generates from slug</p>
+                      </div>
+                    </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Title</label>
-                      <input type="text" value={formData.metaTitle} onChange={e => setFormData(p => ({ ...p, metaTitle: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="SEO title..." />
-                      <p className="text-[10px] text-white/30">{formData.metaTitle.length}/60 chars</p>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Description</label>
+                      <textarea value={formData.metaDescription} onChange={e => setFormData(p => ({ ...p, metaDescription: e.target.value }))}
+                        className={`w-full bg-[#1a1a1a] border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[80px] ${metaDescLen > 160 ? 'border-red-500/40' : metaDescLen >= 120 ? 'border-green-500/30' : 'border-white/10'}`}
+                        placeholder="120–160 char description for search engines..." />
+                      <p className={`text-[10px] ${metaDescLen > 160 ? 'text-red-400' : metaDescLen >= 120 ? 'text-green-400' : 'text-white/30'}`}>{metaDescLen}/160 chars</p>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Canonical URL</label>
-                      <input type="text" value={formData.canonicalUrl} onChange={e => setFormData(p => ({ ...p, canonicalUrl: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Keywords <span className="text-white/25 normal-case tracking-normal">· first is focus keyword for checklist</span></label>
+                      <input type="text" value={formData.keywords} onChange={e => setFormData(p => ({ ...p, keywords: e.target.value }))}
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="agentic AI, offshore ops, AI staffing…" />
+                    </div>
+
+                    {/* ── Open Graph Fields ── */}
+                    <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6 space-y-4">
+                      <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40">Open Graph / Social Sharing</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Title</label>
+                          <input type="text" value={formData.ogTitle} onChange={e => setFormData(p => ({ ...p, ogTitle: e.target.value }))}
+                            className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder={formData.title || 'Defaults to post title'} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Image URL</label>
+                          <input type="text" value={formData.ogImageUrl} onChange={e => setFormData(p => ({ ...p, ogImageUrl: e.target.value }))}
+                            className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder={formData.imageUrl || 'Defaults to cover image'} />
+                        </div>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Description</label>
+                        <textarea value={formData.ogDescription} onChange={e => setFormData(p => ({ ...p, ogDescription: e.target.value }))}
+                          className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[70px]"
+                          placeholder={formData.metaDescription || 'Defaults to meta description'} />
+                      </div>
+                    </div>
+
+                    {/* ── Social Card Preview ── */}
+                    <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                      <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">Social Card Preview</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Facebook */}
+                        <div>
+                          <p className="text-[9px] font-black uppercase tracking-widest text-white/25 mb-2">Facebook / LinkedIn</p>
+                          <div className="rounded-xl overflow-hidden border border-[#dddfe2] bg-white max-w-sm">
+                            {ogImgSrc ? (
+                              <img src={ogImgSrc} alt="" className="w-full aspect-[1.91/1] object-cover" onError={e => { (e.target as HTMLImageElement).style.display='none'; }} />
+                            ) : (
+                              <div className="w-full aspect-[1.91/1] bg-slate-100 flex items-center justify-center text-slate-300 text-xs">No image set</div>
+                            )}
+                            <div className="p-3 border-t border-[#dddfe2]">
+                              <p className="text-[10px] uppercase text-[#8a8d91] font-medium mb-0.5">kdci.ai</p>
+                              <p className="font-bold text-[#1c1e21] text-sm leading-snug line-clamp-2">{ogTitleDisp}</p>
+                              <p className="text-[#606770] text-xs mt-0.5 line-clamp-1">{ogDescDisp}</p>
+                            </div>
+                          </div>
+                        </div>
+                        {/* Twitter / X */}
+                        <div>
+                          <p className="text-[9px] font-black uppercase tracking-widest text-white/25 mb-2">Twitter / X</p>
+                          <div className="rounded-2xl overflow-hidden border border-[#2f3336] max-w-sm">
+                            {ogImgSrc ? (
+                              <img src={ogImgSrc} alt="" className="w-full aspect-[1.91/1] object-cover" onError={e => { (e.target as HTMLImageElement).style.display='none'; }} />
+                            ) : (
+                              <div className="w-full aspect-[1.91/1] bg-[#1d1d1d] flex items-center justify-center text-white/20 text-xs">No image set</div>
+                            )}
+                            <div className="px-3 py-2 bg-black">
+                              <p className="font-bold text-white text-sm leading-snug line-clamp-1">{ogTitleDisp}</p>
+                              <p className="text-[#71767b] text-xs mt-0.5 line-clamp-1">{ogDescDisp}</p>
+                              <p className="text-[#71767b] text-[10px] mt-1">kdci.ai</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ── Advanced ── */}
+                    <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6 space-y-4">
+                      <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40">Advanced</h3>
+                      <label className="flex items-center gap-3 cursor-pointer select-none">
+                        <div className={`w-10 h-5 rounded-full transition-colors relative ${formData.noIndex ? 'bg-[#E61739]' : 'bg-white/10'}`}
+                          onClick={() => setFormData(p => ({ ...p, noIndex: !p.noIndex }))}>
+                          <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${formData.noIndex ? 'translate-x-5' : 'translate-x-0.5'}`} />
+                        </div>
+                        <div>
+                          <span className="text-sm font-bold text-white/70">No-Index</span>
+                          <p className="text-[10px] text-white/30">Prevents search engines from indexing this post</p>
+                        </div>
+                      </label>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40">JSON-LD Override <span className="normal-case tracking-normal text-white/25">· replaces auto-generated BlogPosting schema</span></label>
+                        <textarea value={formData.jsonLd} onChange={e => setFormData(p => ({ ...p, jsonLd: e.target.value }))}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-green-400 font-mono text-xs focus:outline-none focus:border-[#E61739] min-h-[120px]"
+                          placeholder={'{\n  "@context": "https://schema.org",\n  "@type": "BlogPosting",\n  …\n}'} />
+                        <p className="text-[10px] text-white/25">Leave blank to auto-generate from post data</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Description</label>
-                    <textarea value={formData.metaDescription} onChange={e => setFormData(p => ({ ...p, metaDescription: e.target.value }))}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[80px]" placeholder="160 char description..." />
-                    <p className="text-[10px] text-white/30">{formData.metaDescription.length}/160 chars</p>
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Keywords</label>
-                    <input type="text" value={formData.keywords} onChange={e => setFormData(p => ({ ...p, keywords: e.target.value }))}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="keyword1, keyword2..." />
-                  </div>
-                </div>
-              )}
+                );
+              })()}
 
               {editorTab === 'hubspot' && (
                 <div className="space-y-6">
