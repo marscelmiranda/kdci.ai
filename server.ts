@@ -9,6 +9,7 @@ import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import multer from 'multer';
 import fs from 'fs';
+import { ReplitConnectors } from '@replit/connectors-sdk';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -501,25 +502,58 @@ app.post('/api/contact', async (req, res) => {
     console.error('[contact] DB save error:', dbErr.message);
   }
 
-  // HubSpot Forms API (non-blocking)
-  const hsPortalId = process.env.HUBSPOT_PORTAL_ID;
-  const hsFormGuid = process.env.HUBSPOT_FORM_GUID;
-  if (hsPortalId && hsFormGuid) {
-    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${hsPortalId}/${hsFormGuid}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: [
-          { name: 'firstname', value: resolvedFirst },
-          { name: 'lastname',  value: resolvedLast  },
-          { name: 'email',     value: email          },
-          { name: 'message',   value: resolvedMsg    },
-        ],
-        context: { pageUri: resolvedSrc, pageName: resolvedType },
-      }),
-    }).then(() => console.log(`[contact] HubSpot submitted: ${email}`))
-      .catch((e: any) => console.error('[contact] HubSpot error:', e.message));
-  }
+  // HubSpot CRM API via Replit Connector (non-blocking)
+  ;(async () => {
+    try {
+      const connectors = new ReplitConnectors();
+
+      // Check if contact already exists
+      const searchRes = await connectors.proxy('hubspot', '/crm/v3/objects/contacts/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ', value: email }] }],
+          properties: ['email', 'hs_object_id'],
+          limit: 1,
+        }),
+      });
+      const searchData: any = await searchRes.json();
+      const existingId: string | null = searchData?.results?.[0]?.id ?? null;
+
+      const properties: Record<string, string> = {
+        firstname:        resolvedFirst,
+        lastname:         resolvedLast,
+        email:            email,
+        ...(req.body.company ? { company: req.body.company }          : {}),
+        ...(req.body.phone   ? { phone:   req.body.phone }            : {}),
+        ...(req.body.volume  ? { monthly_lead_volume: req.body.volume }: {}),
+        ...(resolvedMsg      ? { message: resolvedMsg }               : {}),
+        source_page:      resolvedSrc,
+        lifecyclestage:   'lead',
+      };
+
+      if (existingId) {
+        // Update existing contact
+        await connectors.proxy('hubspot', `/crm/v3/objects/contacts/${existingId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ properties }),
+        });
+        console.log(`[contact] HubSpot contact updated: ${email} (id=${existingId})`);
+      } else {
+        // Create new contact
+        const createRes = await connectors.proxy('hubspot', '/crm/v3/objects/contacts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ properties }),
+        });
+        const createData: any = await createRes.json();
+        console.log(`[contact] HubSpot contact created: ${email} (id=${createData?.id})`);
+      }
+    } catch (e: any) {
+      console.error('[contact] HubSpot CRM error:', e.message);
+    }
+  })();
 
   // Email notification
   const smtpHost = process.env.SMTP_HOST;

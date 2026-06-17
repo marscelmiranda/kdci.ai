@@ -18,7 +18,10 @@
     "inlineCss": false,
     "saveAs": "html",
     "skipThirdPartyRequests": true,
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "include": [
       "/",
       "/who-we-are/",
@@ -45,6 +48,8 @@
   },
   "dependencies": {
     "@google/genai": "^1.38.0",
+    "@hubspot/api-client": "^13.5.0",
+    "@replit/connectors-sdk": "^0.4.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
