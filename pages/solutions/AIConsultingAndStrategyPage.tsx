@@ -532,7 +532,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, inquiryType: 'AI Consulting', source: 'ai-consulting-page' }),
+                      body: JSON.stringify({ ...form, inquiryType: 'AI Consulting', source: 'ai-consulting-page', pageUrl: window.location.href }),
                     });
                   } catch {}
                   setSubmitted(true);

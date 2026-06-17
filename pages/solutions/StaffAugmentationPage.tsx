@@ -53,7 +53,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, inquiryType: 'Offshore Staffing', source: 'offshore-staffing-page' }),
+        body: JSON.stringify({ ...form, inquiryType: 'Offshore Staffing', source: 'offshore-staffing-page', pageUrl: window.location.href }),
       });
     } catch {}
     setSubmitted(true);
@@ -70,7 +70,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...modalForm, inquiryType: 'Offshore Staffing', source: 'offshore-staffing-modal' }),
+        body: JSON.stringify({ ...modalForm, inquiryType: 'Offshore Staffing', source: 'offshore-staffing-modal', pageUrl: window.location.href }),
       });
     } catch {}
     setModalSubmitted(true);

@@ -52,7 +52,7 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, source: 'Contact Page' }),
+        body: JSON.stringify({ ...form, source: 'Contact Page', pageUrl: window.location.href }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Something went wrong.');

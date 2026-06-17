@@ -50,7 +50,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...modalForm, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-modal' }),
+        body: JSON.stringify({ ...modalForm, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-modal', pageUrl: window.location.href }),
       });
     } catch {}
     setModalSubmitted(true);
@@ -63,7 +63,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-page' }),
+        body: JSON.stringify({ ...form, inquiryType: 'AI Workforce / Agentic Recruitment', source: 'ai-workforce-page', pageUrl: window.location.href }),
       });
     } catch {}
     setSubmitted(true);

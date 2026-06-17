@@ -456,7 +456,7 @@ export const AIInCustomerServicePage = ({ setView }: { setView: (v: ViewType) =>
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, inquiryType: 'Customer Experience Ops', source: 'cx-ops-page' }),
+                      body: JSON.stringify({ ...form, inquiryType: 'Customer Experience Ops', source: 'cx-ops-page', pageUrl: window.location.href }),
                     });
                   } catch {}
                   setSubmitted(true);

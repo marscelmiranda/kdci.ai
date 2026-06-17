@@ -20,7 +20,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, name: `${form.firstName} ${form.lastName}`.trim(), inquiryType: 'Solutions Hub Inquiry', source: 'solutions-hub-page' }),
+        body: JSON.stringify({ ...form, name: `${form.firstName} ${form.lastName}`.trim(), inquiryType: 'Solutions Hub Inquiry', source: 'solutions-hub-page', pageUrl: window.location.href }),
       });
     } catch {}
     setSubmitted(true);

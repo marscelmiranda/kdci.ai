@@ -52,6 +52,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
       notes: form.notes,
       inquiryType: config.inquiryType,
       source: config.source,
+      pageUrl: window.location.href,
     };
     try {
       const res = await fetch('/api/contact', {

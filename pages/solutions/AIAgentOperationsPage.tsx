@@ -716,7 +716,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, service: 'AI Agent Operations', source: 'ai-agent-monitoring-page' }),
+                      body: JSON.stringify({ ...form, service: 'AI Agent Operations', source: 'ai-agent-monitoring-page', pageUrl: window.location.href }),
                     });
                   } catch {}
                   setSubmitted(true);

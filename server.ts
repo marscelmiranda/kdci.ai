@@ -477,7 +477,7 @@ app.post('/api/contact', async (req, res) => {
   const {
     firstName, lastName, email, notes,
     // legacy / backward-compat fields
-    name, message, source, inquiryType, service,
+    name, message, source, inquiryType, service, pageUrl,
   } = req.body;
 
   const resolvedFirst = firstName || (name ? name.split(' ')[0] : '') || '';
@@ -528,8 +528,9 @@ app.post('/api/contact', async (req, res) => {
         lifecyclestage: 'lead',
         ...(req.body.company ? { company: req.body.company } : {}),
         ...(req.body.phone   ? { phone:   req.body.phone }   : {}),
-        ...(resolvedMsg ? { message:     resolvedMsg } : {}),
-        ...(resolvedSrc ? { source_page: resolvedSrc } : {}),
+        hs_analytics_source: 'DIRECT_TRAFFIC',
+        ...(resolvedMsg                    ? { message:     resolvedMsg             } : {}),
+        ...(pageUrl || resolvedSrc         ? { source_page: pageUrl || resolvedSrc  } : {}),
       };
 
       if (existingId) {

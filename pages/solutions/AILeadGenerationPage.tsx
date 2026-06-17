@@ -538,7 +538,7 @@ export const AILeadGenerationPage = ({ setView }: { setView: (v: ViewType) => vo
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, service: 'AI Outbound', source: 'ai-outbound-page' }),
+                      body: JSON.stringify({ ...form, service: 'AI Outbound', source: 'ai-outbound-page', pageUrl: window.location.href }),
                     });
                   } catch {}
                   setSubmitted(true);

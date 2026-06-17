@@ -535,7 +535,7 @@ export const AIGraphicDesignPage = ({ setView }: { setView: (v: ViewType) => voi
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ ...form, inquiryType: 'AI Creative Design Services', source: 'graphic-design-page' }),
+                      body: JSON.stringify({ ...form, inquiryType: 'AI Creative Design Services', source: 'graphic-design-page', pageUrl: window.location.href }),
                     });
                   } catch {}
                   setSubmitted(true);
