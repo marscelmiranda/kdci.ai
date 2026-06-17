@@ -22,9 +22,20 @@ interface LivePost {
   author: string;
   category: string;
   cover_image: string;
+  cover_image_alt: string;
   tags: string[];
   status: string;
   published_at: string;
+  updated_at: string;
+  meta_title: string;
+  meta_description: string;
+  keywords: string;
+  canonical_url: string;
+  og_title: string;
+  og_description: string;
+  og_image_url: string;
+  json_ld: string;
+  no_index: boolean;
 }
 
 function wrapTables(html: string): string {
@@ -229,12 +240,63 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
       .then(r => r.ok ? r.json() : Promise.reject('Post not found'))
       .then((data) => {
         setPost(data);
+        const canonicalUrl = (data.canonical_url || '').trim() || `https://kdci.ai/blogs/${data.slug}/`;
+        const metaTitle = (data.meta_title || data.title || '').trim();
+        const metaDesc = (data.meta_description || data.excerpt || '').slice(0, 160);
+        const ogImg = (data.og_image_url || data.cover_image || '').trim() || undefined;
+        const ogTitle = (data.og_title || data.title || '').trim();
+        const ogDesc = (data.og_description || metaDesc).trim();
+
         applyDetailSEO({
-          title: data.title,
-          description: (data.excerpt || '').slice(0, 160),
-          url: `https://kdci.ai/blogs/${data.slug}/`,
-          image: data.cover_image || undefined,
+          title: metaTitle,
+          description: metaDesc,
+          url: canonicalUrl,
+          image: ogImg,
         });
+
+        // Override OG title/desc with dedicated fields if set
+        const setMeta = (sel: string, val: string) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+        if (ogTitle) setMeta('meta[property="og:title"]', ogTitle.includes('KDCI') ? ogTitle : `${ogTitle} | KDCI.ai`);
+        if (ogDesc) setMeta('meta[property="og:description"]', ogDesc);
+
+        // noIndex
+        let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+        if (data.no_index) {
+          if (!robotsMeta) {
+            robotsMeta = document.createElement('meta');
+            robotsMeta.setAttribute('name', 'robots');
+            document.head.appendChild(robotsMeta);
+          }
+          robotsMeta.setAttribute('content', 'noindex, nofollow');
+        } else if (robotsMeta) {
+          robotsMeta.remove();
+        }
+
+        // JSON-LD BlogPosting
+        document.querySelector('script[type="application/ld+json"][data-blog]')?.remove();
+        let schema: object;
+        if ((data.json_ld || '').trim()) {
+          try { schema = JSON.parse(data.json_ld); } catch { schema = {}; }
+        } else {
+          schema = {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: metaTitle || data.title,
+            description: metaDesc,
+            author: { '@type': 'Person', name: data.author || 'KDCI' },
+            datePublished: data.published_at,
+            dateModified: data.updated_at || data.published_at,
+            image: ogImg,
+            url: canonicalUrl,
+            publisher: { '@type': 'Organization', name: 'KDCI.ai', url: 'https://kdci.ai' },
+            keywords: data.keywords || (data.tags || []).join(', '),
+          };
+        }
+        const ldScript = document.createElement('script');
+        ldScript.type = 'application/ld+json';
+        ldScript.setAttribute('data-blog', '1');
+        ldScript.textContent = JSON.stringify(schema);
+        document.head.appendChild(ldScript);
       })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));

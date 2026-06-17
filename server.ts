@@ -105,6 +105,20 @@ const upload = multer({ storage: uploadStorage, limits: { fileSize: 15 * 1024 * 
       updated_at TIMESTAMPTZ DEFAULT NOW()
     )
   `).catch(() => {});
+  // Blog posts SEO columns
+  for (const col of [
+    'ADD COLUMN IF NOT EXISTS meta_title TEXT',
+    'ADD COLUMN IF NOT EXISTS meta_description TEXT',
+    'ADD COLUMN IF NOT EXISTS keywords TEXT',
+    'ADD COLUMN IF NOT EXISTS canonical_url TEXT',
+    'ADD COLUMN IF NOT EXISTS og_title TEXT',
+    'ADD COLUMN IF NOT EXISTS og_description TEXT',
+    'ADD COLUMN IF NOT EXISTS og_image_url TEXT',
+    'ADD COLUMN IF NOT EXISTS json_ld TEXT',
+    'ADD COLUMN IF NOT EXISTS no_index BOOLEAN DEFAULT FALSE',
+  ]) {
+    await pool.query(`ALTER TABLE blog_posts ${col}`).catch(() => {});
+  }
 })();
 
 const app = express();
@@ -870,12 +884,18 @@ app.get('/api/blog/:id', async (req, res) => {
 });
 
 app.post('/api/blog', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status,
+          meta_title, meta_description, keywords, canonical_url, og_title, og_description, og_image_url, json_ld, no_index } = req.body;
   try {
     const { rows } = await pool.query(
-      `INSERT INTO blog_posts (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW()) RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, status === 'published' ? new Date() : null]
+      `INSERT INTO blog_posts
+         (title,slug,excerpt,content,author,category,cover_image,cover_image_alt,tags,status,published_at,created_at,updated_at,
+          meta_title,meta_description,keywords,canonical_url,og_title,og_description,og_image_url,json_ld,no_index)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW(),NOW(),$12,$13,$14,$15,$16,$17,$18,$19,$20) RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status,
+       status === 'published' ? new Date() : null,
+       meta_title || '', meta_description || '', keywords || '', canonical_url || '',
+       og_title || '', og_description || '', og_image_url || '', json_ld || '', no_index || false]
     );
     res.status(201).json(rows[0]);
   } catch (err: any) {
@@ -884,11 +904,24 @@ app.post('/api/blog', requireAuth, async (req, res) => {
 });
 
 app.put('/api/blog/:id', requireAuth, async (req, res) => {
-  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status } = req.body;
+  const { title, slug, excerpt, content, author, category, cover_image, cover_image_alt, tags, status,
+          meta_title, meta_description, keywords, canonical_url, og_title, og_description, og_image_url, json_ld, no_index } = req.body;
   try {
+    const existing = await pool.query(`SELECT published_at, status FROM blog_posts WHERE id=$1`, [req.params.id]);
+    const prevStatus = existing.rows[0]?.status;
+    const prevPublishedAt = existing.rows[0]?.published_at;
+    const publishedAt = status === 'published' && prevStatus !== 'published' ? new Date() : prevPublishedAt;
     const { rows } = await pool.query(
-      `UPDATE blog_posts SET title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,tags=$9,status=$10,updated_at=NOW() WHERE id=$11 RETURNING *`,
-      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, req.params.id]
+      `UPDATE blog_posts SET
+         title=$1,slug=$2,excerpt=$3,content=$4,author=$5,category=$6,cover_image=$7,cover_image_alt=$8,
+         tags=$9,status=$10,updated_at=NOW(),published_at=$11,
+         meta_title=$12,meta_description=$13,keywords=$14,canonical_url=$15,
+         og_title=$16,og_description=$17,og_image_url=$18,json_ld=$19,no_index=$20
+       WHERE id=$21 RETURNING *`,
+      [title, slug, excerpt, content, author, category, cover_image, cover_image_alt || '', tags || [], status, publishedAt,
+       meta_title || '', meta_description || '', keywords || '', canonical_url || '',
+       og_title || '', og_description || '', og_image_url || '', json_ld || '', no_index || false,
+       req.params.id]
     );
     if (!rows[0]) { res.status(404).json({ error: 'Not found' }); return; }
     res.json(rows[0]);

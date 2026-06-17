@@ -241,9 +241,9 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
-        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
-        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
-        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
+        metaTitle: full.meta_title || '', metaDescription: full.meta_description || '', keywords: full.keywords || '',
+        canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || '', ogDescription: full.og_description || '', ogImageUrl: full.og_image_url || '',
+        jsonLd: full.json_ld || '', noIndex: full.no_index || false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
       });
     } catch {
       setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
@@ -261,9 +261,9 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
-        metaTitle: full.title || '', metaDescription: full.excerpt || '', keywords: (full.tags || []).join(', '),
-        canonicalUrl: '', ogTitle: full.title || '', ogDescription: full.excerpt || '', ogImageUrl: full.cover_image || '',
-        jsonLd: '', noIndex: false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
+        metaTitle: full.meta_title || '', metaDescription: full.meta_description || '', keywords: full.keywords || '',
+        canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || '', ogDescription: full.og_description || '', ogImageUrl: full.og_image_url || '',
+        jsonLd: full.json_ld || '', noIndex: full.no_index || false, hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: full.slug || ''
       });
     } catch {
       setFormData({ ...emptyForm(), title: post.title, category: post.category, author: post.author, status: post.status });
@@ -291,6 +291,15 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         cover_image_alt: formData.imageAlt,
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
         status: formData.status,
+        meta_title: formData.metaTitle,
+        meta_description: formData.metaDescription,
+        keywords: formData.keywords,
+        canonical_url: formData.canonicalUrl,
+        og_title: formData.ogTitle,
+        og_description: formData.ogDescription,
+        og_image_url: formData.ogImageUrl,
+        json_ld: formData.jsonLd,
+        no_index: formData.noIndex,
       };
       if (editingId) {
         await updatePost(editingId, payload);
@@ -452,16 +461,23 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     }
   };
 
-  const seoChecklist = [
-    { label: 'Meta title ≤ 60 chars', done: formData.metaTitle.length > 0 && formData.metaTitle.length <= 60 },
-    { label: 'Meta description 120–160 chars', done: formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160 },
-    { label: 'Keywords specified', done: formData.keywords.length > 0 },
-    { label: 'Slug populated', done: formData.slug.length > 0 },
-    { label: 'Canonical URL set', done: formData.canonicalUrl.length > 0 },
-    { label: 'Open Graph populated', done: formData.ogTitle.length > 0 && formData.ogDescription.length > 0 },
-    { label: 'Featured image added', done: formData.imageUrl.length > 0 },
-    { label: 'JSON-LD included', done: formData.jsonLd.length > 0 },
+  const focusKw = formData.keywords.split(',')[0]?.trim().toLowerCase() || '';
+  const firstRichText = formData.blocks.find((b: Block) => b.type === 'rich_text');
+  const firstBlockText = (firstRichText?.content?.text || '').toLowerCase().replace(/<[^>]+>/g, '');
+  const metaTitleLower = formData.metaTitle.toLowerCase();
+  const metaDescLower = formData.metaDescription.toLowerCase();
+  const kwInSlug = focusKw ? focusKw.split(/\s+/).every((w: string) => formData.slug.toLowerCase().includes(w)) : false;
+  type SeoStatus = 'pass' | 'warn' | 'fail';
+  const seoChecklist: { label: string; status: SeoStatus; detail?: string }[] = [
+    { label: 'Focus keyword in meta title', status: !focusKw ? 'warn' : metaTitleLower.includes(focusKw) ? 'pass' : 'fail', detail: !focusKw ? 'add keyword first' : undefined },
+    { label: 'Focus keyword in meta description', status: !focusKw ? 'warn' : metaDescLower.includes(focusKw) ? 'pass' : 'fail' },
+    { label: 'Focus keyword in first paragraph', status: !focusKw ? 'warn' : firstBlockText.includes(focusKw) ? 'pass' : 'fail' },
+    { label: 'Meta title 30–60 chars', status: formData.metaTitle.length >= 30 && formData.metaTitle.length <= 60 ? 'pass' : formData.metaTitle.length > 0 ? 'warn' : 'fail', detail: formData.metaTitle.length > 0 ? `${formData.metaTitle.length} chars` : undefined },
+    { label: 'Meta description 120–160 chars', status: formData.metaDescription.length >= 120 && formData.metaDescription.length <= 160 ? 'pass' : formData.metaDescription.length > 0 ? 'warn' : 'fail', detail: formData.metaDescription.length > 0 ? `${formData.metaDescription.length} chars` : undefined },
+    { label: 'Slug contains focus keyword', status: !focusKw ? 'warn' : kwInSlug ? 'pass' : 'fail' },
+    { label: 'Cover image alt text filled', status: formData.imageAlt.length > 0 ? 'pass' : 'fail' },
   ];
+  const seoScore = Math.round((seoChecklist.filter(i => i.status === 'pass').length / seoChecklist.length) * 100);
 
   const statusBadge = (status: string) => {
     if (status === 'published') return 'bg-green-500/10 text-green-500 border-green-500/20';
@@ -805,43 +821,148 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
               {editorTab === 'seo' && (
                 <div className="space-y-6">
+
+                  {/* Score + Checklist */}
                   <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white/40 mb-4">SEO Checklist</h3>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-black uppercase tracking-widest text-white/40">SEO Score</h3>
+                      <div className={`text-2xl font-black ${seoScore >= 80 ? 'text-green-400' : seoScore >= 50 ? 'text-amber-400' : 'text-red-400'}`}>{seoScore}%</div>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/5 rounded-full mb-5 overflow-hidden">
+                      <div className={`h-full rounded-full transition-all duration-500 ${seoScore >= 80 ? 'bg-green-500' : seoScore >= 50 ? 'bg-amber-400' : 'bg-red-500'}`} style={{ width: `${seoScore}%` }} />
+                    </div>
                     <div className="space-y-2">
                       {seoChecklist.map(item => (
                         <div key={item.label} className="flex items-center gap-3">
-                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-green-500/20 text-green-500' : 'bg-white/5 text-white/20'}`}>
-                            <Check size={10} />
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-black
+                            ${item.status === 'pass' ? 'bg-green-500/20 text-green-400' : item.status === 'warn' ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/15 text-red-400'}`}>
+                            {item.status === 'pass' ? '✓' : item.status === 'warn' ? '~' : '✗'}
                           </div>
-                          <span className={`text-xs font-bold ${item.done ? 'text-white/70' : 'text-white/30'}`}>{item.label}</span>
+                          <span className={`text-xs font-bold flex-1 ${item.status === 'pass' ? 'text-white/70' : item.status === 'warn' ? 'text-amber-400/70' : 'text-white/30'}`}>{item.label}</span>
+                          {item.detail && <span className="text-[10px] text-white/25 font-mono">{item.detail}</span>}
                         </div>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Core SEO fields */}
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Focus Keywords <span className="text-white/20 normal-case tracking-normal font-normal">(first keyword = focus keyword)</span></label>
+                    <input type="text" value={formData.keywords} onChange={e => setFormData(p => ({ ...p, keywords: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder="agentic ai, offshore staffing, ai automation..." />
                   </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Title</label>
                       <input type="text" value={formData.metaTitle} onChange={e => setFormData(p => ({ ...p, metaTitle: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="SEO title..." />
-                      <p className="text-[10px] text-white/30">{formData.metaTitle.length}/60 chars</p>
+                        className={`w-full bg-[#1a1a1a] border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] ${formData.metaTitle.length > 60 ? 'border-amber-500/50' : 'border-white/10'}`} placeholder="SEO title (30–60 chars)..." />
+                      <p className={`text-[10px] ${formData.metaTitle.length > 60 ? 'text-amber-400' : formData.metaTitle.length >= 30 ? 'text-green-400' : 'text-white/30'}`}>{formData.metaTitle.length}/60 chars</p>
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Canonical URL</label>
                       <input type="text" value={formData.canonicalUrl} onChange={e => setFormData(p => ({ ...p, canonicalUrl: e.target.value }))}
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="https://..." />
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder={`https://kdci.ai/blogs/${formData.slug || 'post-slug'}/`} />
                     </div>
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Meta Description</label>
                     <textarea value={formData.metaDescription} onChange={e => setFormData(p => ({ ...p, metaDescription: e.target.value }))}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[80px]" placeholder="160 char description..." />
-                    <p className="text-[10px] text-white/30">{formData.metaDescription.length}/160 chars</p>
+                      className={`w-full bg-[#1a1a1a] border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[80px] ${formData.metaDescription.length > 160 ? 'border-amber-500/50' : 'border-white/10'}`} placeholder="120–160 char description..." />
+                    <p className={`text-[10px] ${formData.metaDescription.length > 160 ? 'text-amber-400' : formData.metaDescription.length >= 120 ? 'text-green-400' : 'text-white/30'}`}>{formData.metaDescription.length}/160 chars</p>
+                  </div>
+
+                  {/* Google Snippet Preview */}
+                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                    <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">Google Snippet Preview</h3>
+                    <div className="bg-white rounded-xl p-4 space-y-1 font-sans">
+                      <div className="text-[18px] text-[#1a0dab] font-normal leading-snug truncate">
+                        {formData.metaTitle || formData.title || <span className="text-[#1a0dab]/30 italic text-sm">Article title</span>}
+                      </div>
+                      <div className="text-[14px] text-[#006621] truncate">
+                        {(formData.canonicalUrl || `https://kdci.ai/blogs/${formData.slug || 'post-slug'}/`).replace(/^https?:\/\//, '')}
+                      </div>
+                      <div className="text-[14px] text-[#545454] leading-snug" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {formData.metaDescription || formData.blocks.filter((b: Block) => b.type === 'rich_text').map((b: Block) => (b.content?.text || '').replace(/<[^>]+>/g, '')).join(' ').slice(0, 160) || 'Meta description will appear here. Add a meta description to control this snippet.'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* OG / Social fields */}
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Title</label>
+                      <input type="text" value={formData.ogTitle} onChange={e => setFormData(p => ({ ...p, ogTitle: e.target.value }))}
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder={formData.title || 'Defaults to post title'} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Image URL</label>
+                      <input type="text" value={formData.ogImageUrl} onChange={e => setFormData(p => ({ ...p, ogImageUrl: e.target.value }))}
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder={formData.imageUrl || 'Defaults to cover image'} />
+                    </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Keywords</label>
-                    <input type="text" value={formData.keywords} onChange={e => setFormData(p => ({ ...p, keywords: e.target.value }))}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739]" placeholder="keyword1, keyword2..." />
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">OG Description</label>
+                    <textarea value={formData.ogDescription} onChange={e => setFormData(p => ({ ...p, ogDescription: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] min-h-[60px]" placeholder={formData.metaDescription || 'Defaults to meta description'} />
                   </div>
+
+                  {/* Social Card Previews */}
+                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+                    <h3 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">Social Card Previews</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      {/* Facebook OG */}
+                      <div className="space-y-1.5">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-white/25">Facebook / LinkedIn</p>
+                        <div className="rounded-lg overflow-hidden border border-[#dddfe2] bg-[#f0f2f5] font-sans">
+                          {(formData.ogImageUrl || formData.imageUrl) ? (
+                            <img src={formData.ogImageUrl || formData.imageUrl} alt="" className="w-full h-32 object-cover" />
+                          ) : (
+                            <div className="w-full h-32 bg-[#dddfe2] flex items-center justify-center">
+                              <span className="text-[10px] text-[#90949c] uppercase tracking-widest">No image</span>
+                            </div>
+                          )}
+                          <div className="px-3 py-2 bg-white border-t border-[#dddfe2]">
+                            <p className="text-[9px] uppercase text-[#90949c] tracking-wide truncate">kdci.ai</p>
+                            <p className="text-[12px] font-bold text-[#1d2129] leading-snug line-clamp-2">{formData.ogTitle || formData.title || 'Article title'}</p>
+                            <p className="text-[11px] text-[#606770] leading-snug line-clamp-2 mt-0.5">{formData.ogDescription || formData.metaDescription || formData.blocks.filter((b: Block) => b.type === 'rich_text').map((b: Block) => (b.content?.text || '').replace(/<[^>]+>/g, '')).join(' ').slice(0, 120)}</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Twitter Card */}
+                      <div className="space-y-1.5">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-white/25">Twitter / X</p>
+                        <div className="rounded-2xl overflow-hidden border border-[#cfd9de] bg-white font-sans">
+                          {(formData.ogImageUrl || formData.imageUrl) ? (
+                            <img src={formData.ogImageUrl || formData.imageUrl} alt="" className="w-full h-32 object-cover" />
+                          ) : (
+                            <div className="w-full h-32 bg-[#e7e7e7] flex items-center justify-center">
+                              <span className="text-[10px] text-[#8899a6] uppercase tracking-widest">No image</span>
+                            </div>
+                          )}
+                          <div className="px-3 py-2">
+                            <p className="text-[12px] font-bold text-[#0f1419] leading-snug line-clamp-1">{formData.ogTitle || formData.title || 'Article title'}</p>
+                            <p className="text-[11px] text-[#536471] leading-snug line-clamp-2">{formData.ogDescription || formData.metaDescription || ''}</p>
+                            <p className="text-[10px] text-[#536471] mt-1">kdci.ai</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* noIndex + JSON-LD */}
+                  <div className="flex items-center gap-3 bg-[#1a1a1a] border border-white/5 rounded-xl px-4 py-3">
+                    <input type="checkbox" id="noIndex" checked={formData.noIndex} onChange={e => setFormData(p => ({ ...p, noIndex: e.target.checked }))}
+                      className="w-4 h-4 accent-[#E61739]" />
+                    <label htmlFor="noIndex" className="text-xs font-bold text-white/50 cursor-pointer select-none">
+                      No-index this post <span className="text-white/25 font-normal">(adds &lt;meta name="robots" content="noindex, nofollow"&gt;)</span>
+                    </label>
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">JSON-LD Override <span className="text-white/20 normal-case tracking-normal font-normal">(optional — replaces auto-generated BlogPosting schema)</span></label>
+                    <textarea value={formData.jsonLd} onChange={e => setFormData(p => ({ ...p, jsonLd: e.target.value }))}
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-green-400 focus:outline-none focus:border-[#E61739] min-h-[120px] font-mono text-xs" placeholder={'{\n  "@context": "https://schema.org",\n  "@type": "BlogPosting",\n  ...\n}'} />
+                  </div>
+
                 </div>
               )}
 

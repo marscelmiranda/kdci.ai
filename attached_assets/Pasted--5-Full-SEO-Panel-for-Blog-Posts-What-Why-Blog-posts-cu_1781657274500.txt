@@ -1,0 +1,33 @@
+#5 - Full SEO Panel for Blog Posts
+What & Why
+Blog posts currently have no dedicated SEO fields in the database — the live site falls back to the post title and excerpt for all meta tags, and there is no structured data (JSON-LD) on blog detail pages. Case studies already have a complete SEO schema; this task mirrors that pattern for blogs, completes the Midgard SEO tab so it actually saves and loads, adds a live SEO score/checklist and previews inside the CMS, and injects a BlogPosting JSON-LD schema on the live site.
+
+Done looks like
+A blog post saved in Midgard with custom metaTitle, metaDescription, focus keywords, canonicalUrl, ogTitle, ogDescription, ogImageUrl, noIndex, and raw jsonLd fields persists those values and reloads them correctly when the post is reopened for editing
+The Midgard SEO tab shows a live SEO score checklist covering: focus keyword present in title, meta description, and first paragraph; meta title length (30–60 chars); meta description length (120–160 chars); slug contains keyword; cover image has alt text
+The Midgard SEO tab shows a Google snippet preview (title + URL breadcrumb + description) that updates in real time as the editor types
+The Midgard SEO tab shows a social card preview (Facebook OG and Twitter card) using the OG fields, falling back to the post title/excerpt/cover when the OG fields are empty
+On the live site, each published blog post's <head> is populated from the new dedicated SEO fields (not just title/excerpt), with correct og:* and twitter:* tags
+Each published blog detail page injects a BlogPosting JSON-LD script in <head> containing: headline, description, author (Person), datePublished, dateModified, image, url, publisher (Organization — KDCI.ai), and keywords
+A post with noIndex: true renders <meta name="robots" content="noindex, nofollow">
+If a canonicalUrl is set, the <link rel="canonical"> uses it; otherwise it falls back to the existing slug-based URL
+If a jsonLd override is provided, it replaces the auto-generated BlogPosting schema
+Out of scope
+Sitemap regeneration (sitemap already auto-builds from published posts in server.ts)
+SEO panels for case studies, ebooks, or webinars (they are separate content types)
+Readability scoring (passive voice, sentence length analysis)
+Keyword rank tracking or external API integrations
+Steps
+DB migration — Add SEO columns to the blog_posts table: meta_title, meta_description, keywords, canonical_url, og_title, og_description, og_image_url, json_ld (text), no_index (boolean, default false). Mirror the exact column names and types already used on case_studies.
+API updates — Update server.ts so that POST /api/blog, PUT /api/blog/:id, and GET /api/blog/:id (and the list endpoint) persist and return all new SEO fields. Use the case studies routes as a direct reference for the pattern.
+Midgard wiring — In BlogOpsPage.tsx, connect the existing SEO tab form fields (metaTitle, metaDescription, keywords, canonicalUrl, ogTitle, ogDescription, ogImageUrl, jsonLd, noIndex) to the API — they are already in form state but not sent or loaded. Update emptyForm, handleEdit, handleSave, and the save/update API calls in midgard/src/lib/api.ts.
+Live SEO score checklist — Inside the Midgard SEO tab, add a real-time checklist panel that evaluates the current form state: focus keyword in title, in meta description, in first rich-text block; title length (30–60 chars warning); meta description length (120–160 chars warning); slug contains keyword; cover image alt text filled. Show pass/fail indicators (green check / amber warning / red cross) for each item.
+Google snippet preview — Add a snippet preview component in the SEO tab showing a mock Google result card (title in blue, URL breadcrumb in green, description in grey) that re-renders live from metaTitle/canonicalUrl/metaDescription form values.
+Social card preview — Add OG/Twitter card preview tiles in the SEO tab that render a mock Facebook card and Twitter card using ogTitle, ogDescription, ogImageUrl (falling back to post title, excerpt, cover image when those fields are empty).
+Live site meta + JSON-LD — Update BlogDetailPage.tsx so applyDetailSEO uses the new dedicated SEO fields from the API response. Inject a <script type="application/ld+json"> BlogPosting schema on mount, built from the post data. If noIndex is true, add a noindex robots meta tag. Use canonicalUrl for the canonical link if set.
+Relevant files
+server.ts
+midgard/src/pages/BlogOpsPage.tsx
+midgard/src/lib/api.ts
+pages/BlogDetailPage.tsx
+lib/seo.ts
