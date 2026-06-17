@@ -23,7 +23,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
         <div className="p-8 pb-4">
           <Logo isDarkHero={true} />
-          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
+          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
             Publisher Portal
           </div>
         </div>
@@ -42,7 +42,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
               onClick={() => handleNavClick(item.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
                 item.id === 'portfolio' 
-                  ? 'bg-[#E61739] text-white shadow-lg shadow-[#E61739]/20' 
+                  ? 'bg-[#ad1457] text-white shadow-lg shadow-[#E61739]/20' 
                   : 'text-white/40 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -58,7 +58,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
           </button>
           <button 
             onClick={() => setView('home')} 
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#ad1457]/10 transition-all"
           >
             <LogOut size={18} /> Sign Out
           </button>
@@ -77,7 +77,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
             <h1 className="text-3xl font-heading font-bold text-white">Manage Creative Portfolio</h1>
           </div>
           
-          <button className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+          <button className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
             <Plus size={16} /> Create Entry
           </button>
         </div>

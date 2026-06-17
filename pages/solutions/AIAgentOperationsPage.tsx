@@ -246,7 +246,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -319,7 +319,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               What We Deliver
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
@@ -330,7 +330,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid md:grid-cols-2 gap-5">
             {DELIVERABLES.map((s, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
-                <div className="w-12 h-12 bg-[#E61739]/15 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#E61739]/25 transition-all">
+                <div className="w-12 h-12 bg-[#ad1457]/15 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#ad1457]/25 transition-all">
                   <s.icon size={22} className="text-[#E61739]" />
                 </div>
                 <h3 className="text-xl font-black text-white mb-3">{s.title}</h3>
@@ -345,7 +345,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
@@ -357,7 +357,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
               {STEPS.map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#ad1457] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
                     {s.n}
                   </div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
@@ -369,7 +369,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           </div>
           <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 bg-[#ad1457]/10 rounded-xl flex items-center justify-center shrink-0">
                 <Clock size={18} className="text-[#E61739]" />
               </div>
               <div>
@@ -377,7 +377,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 <p className="text-[#86868b] text-sm font-medium">Daily monitoring · weekly check-ins · monthly performance reports</p>
               </div>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all flex items-center gap-2">
               Start Your 7-Day Onboarding <ArrowRight size={16} />
             </button>
           </div>
@@ -390,7 +390,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
             <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
                 Our Difference
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
@@ -446,7 +446,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-24 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
@@ -457,7 +457,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             {PRICING.map((plan, i) => (
               <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
                 {plan.featured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ad1457] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
                 )}
                 <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
                 <div className="flex items-end gap-1 mb-1">
@@ -476,7 +476,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     ))}
                   </ul>
                 </div>
-                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
                   {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
                 </button>
               </div>
@@ -512,7 +512,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                   onClick={() => setSelectedVertical(v)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
                     selectedVertical.name === v.name
-                      ? 'bg-[#E61739] text-white shadow-sm'
+                      ? 'bg-[#ad1457] text-white shadow-sm'
                       : 'bg-white border border-black/10 text-slate-600'
                   }`}
                 >
@@ -524,7 +524,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
 
             <div className="bg-slate-900 rounded-3xl p-6 text-white flex flex-col">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                <div className="w-12 h-12 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={24} className="text-white" />
                 </div>
                 <div>
@@ -537,7 +537,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 {selectedVertical.agents.map((agent, ai) => (
                   <div key={ai} className="bg-white/5 rounded-2xl px-4 py-4 border border-white/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-6 h-6 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 bg-[#ad1457]/20 rounded-lg flex items-center justify-center shrink-0">
                         <span className="text-[10px] font-black text-[#E61739]">0{ai + 1}</span>
                       </div>
                       <span className="text-sm font-black text-white leading-tight">{agent.label}</span>
@@ -552,7 +552,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
-                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
@@ -570,7 +570,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     onClick={() => setSelectedVertical(v)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
                       selectedVertical.name === v.name
-                        ? 'bg-[#E61739] text-white shadow-sm'
+                        ? 'bg-[#ad1457] text-white shadow-sm'
                         : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
@@ -584,7 +584,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             {/* Right: detail panel */}
             <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
-                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedVertical.icon size={30} className="text-white" />
                 </div>
                 <div>
@@ -597,7 +597,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 {selectedVertical.agents.map((agent, ai) => (
                   <div key={ai} className="bg-white/5 hover:bg-white/10 transition-colors rounded-2xl p-5 border border-white/5 flex flex-col gap-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <div className="w-7 h-7 bg-[#ad1457]/20 rounded-lg flex items-center justify-center shrink-0">
                         <span className="text-xs font-black text-[#E61739]">0{ai + 1}</span>
                       </div>
                       <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Agent {ai + 1}</span>
@@ -614,7 +614,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
 
               <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its AI agent stack</p>
-                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
@@ -627,7 +627,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Our Stack
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
@@ -638,7 +638,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {TOOLS.map((tool, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center text-center hover:bg-white/10 transition-all">
-                <div className="w-10 h-10 bg-[#E61739]/15 rounded-xl flex items-center justify-center mb-3">
+                <div className="w-10 h-10 bg-[#ad1457]/15 rounded-xl flex items-center justify-center mb-3">
                   <Zap size={16} className="text-[#E61739]" />
                 </div>
                 <div className="text-sm font-black text-white leading-tight mb-1">{tool.name}</div>
@@ -693,7 +693,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="flex-1 p-10 md:p-14">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
-                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle2 size={32} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
@@ -702,7 +702,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
             ) : (
               <>
                 <div className="mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Discovery Call
                   </div>
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Book a Free AI Agent Health Check</h2>
@@ -736,7 +736,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>
@@ -775,7 +775,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                   className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
-                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#ad1457] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
                     <ArrowRight size={12} className="-rotate-45" />
                   </span>
                 </button>

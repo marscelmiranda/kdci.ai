@@ -215,7 +215,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
         <div className="p-8 pb-4">
           <Logo isDarkHero={true} />
-          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
+          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
             Publisher Portal
           </div>
         </div>
@@ -250,7 +250,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
           </button>
           <button 
             onClick={() => setView('home')} 
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#ad1457]/10 transition-all"
           >
             <LogOut size={18} /> Sign Out
           </button>
@@ -275,7 +275,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
             {viewState === 'list' && (
               <button 
                 onClick={handleCreateNew}
-                className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red"
+                className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red"
               >
                 <Plus size={16} /> Create Job Post
               </button>
@@ -289,7 +289,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
             onClick={() => setViewState('list')}
             className={`bg-[#1a1a1a] border ${viewState === 'list' ? 'border-[#E61739]/50' : 'border-white/5'} rounded-2xl p-6 flex items-center gap-5 group hover:border-[#E61739]/30 transition-all cursor-pointer`}
           >
-            <div className="w-14 h-14 rounded-xl bg-[#E61739]/10 flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform">
+            <div className="w-14 h-14 rounded-xl bg-[#ad1457]/10 flex items-center justify-center text-[#E61739] group-hover:scale-110 transition-transform">
               <Briefcase size={28} />
             </div>
             <div>
@@ -702,7 +702,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                                 </td>
                                 <td className="px-8 py-5 text-right">
                                   <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button className="px-4 py-2 rounded-lg bg-white/5 hover:bg-[#E61739] text-white text-xs font-bold transition-all whitespace-nowrap">
+                                    <button className="px-4 py-2 rounded-lg bg-white/5 hover:bg-[#ad1457] text-white text-xs font-bold transition-all whitespace-nowrap">
                                       View
                                     </button>
                                   </div>
@@ -788,7 +788,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                     <div className="text-[10px] text-white/40 uppercase tracking-wide">Moved to next stage</div>
                   </div>
                   <div className="bg-[#1a1a1a] border border-white/5 rounded-[2rem] p-8">
-                    <div className="w-12 h-12 rounded-full bg-[#E61739]/10 text-[#E61739] flex items-center justify-center mb-6">
+                    <div className="w-12 h-12 rounded-full bg-[#ad1457]/10 text-[#E61739] flex items-center justify-center mb-6">
                       <UserX size={24} />
                     </div>
                     <div className="text-4xl font-black text-white mb-2">18</div>
@@ -884,7 +884,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                       key={ft}
                       onClick={() => setAnalyticsFilter(ft as any)}
                       className={`px-4 py-1.5 rounded-lg text-xs font-bold capitalize transition-all ${
-                        analyticsFilter === ft ? 'bg-[#E61739] text-white shadow-lg' : 'text-white/40 hover:text-white/80'
+                        analyticsFilter === ft ? 'bg-[#ad1457] text-white shadow-lg' : 'text-white/40 hover:text-white/80'
                       }`}
                     >
                       {ft}
@@ -1139,7 +1139,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                   </button>
                   <button 
                     type="submit"
-                    className="px-8 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"
+                    className="px-8 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"
                   >
                     <Save size={16} /> Save Job Post
                   </button>

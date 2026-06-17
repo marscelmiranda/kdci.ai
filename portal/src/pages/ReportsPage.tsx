@@ -594,7 +594,7 @@ export const ReportsPage = ({ setView, user }: Props) => {
         {/* ── SCHEDULED DELIVERY ────────── always visible footer ── */}
         <div className="mt-10 bg-white rounded-[40px] border border-slate-100 shadow-sm overflow-hidden">
           <div className="px-8 pt-8 pb-5 border-b border-slate-50 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-2xl bg-[#E61739]/10 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-2xl bg-[#ad1457]/10 flex items-center justify-center">
               <Mail size={15} className="text-[#E61739]" />
             </div>
             <div>

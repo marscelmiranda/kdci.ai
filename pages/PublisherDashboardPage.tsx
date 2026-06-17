@@ -35,7 +35,7 @@ const DashboardCard = ({ title, description, icon, actionText, color, onClick }:
       <p className="text-white/50 text-sm mb-8 flex-grow leading-relaxed">{description}</p>
       <button
         onClick={onClick}
-        className="w-full mt-auto py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-white/60 hover:bg-[#E61739] hover:text-white hover:border-[#E61739] transition-all flex items-center justify-center gap-2"
+        className="w-full mt-auto py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-black uppercase tracking-widest text-white/60 hover:bg-[#ad1457] hover:text-white hover:border-[#E61739] transition-all flex items-center justify-center gap-2"
       >
         <span className="group-hover:translate-x-1 transition-transform">{actionText}</span>
         <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -112,7 +112,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
             <button onClick={() => setView('home')} className="hover:opacity-80 transition-opacity">
               <Logo isDarkHero={true} />
             </button>
-            <span className="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
+            <span className="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
               Publisher Portal
             </span>
           </div>
@@ -212,7 +212,7 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
                     </button>
                     <button
                       onClick={() => { setProfileOpen(false); setView('home'); }}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#E61739] hover:bg-[#E61739]/10 transition-all text-left mt-1 border-t border-white/5 pt-2.5"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#E61739] hover:bg-[#ad1457]/10 transition-all text-left mt-1 border-t border-white/5 pt-2.5"
                     >
                       <LogOut size={15} className="shrink-0" /> Sign Out
                     </button>
@@ -275,10 +275,10 @@ export const PublisherDashboardPage = ({ setView }: { setView: (v: ViewType) => 
         {/* Employee Portal Banner */}
         <a
           href="/midgard/"
-          className="flex items-center justify-between mb-8 md:mb-10 p-4 md:p-5 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 hover:bg-[#E61739]/15 transition-all group"
+          className="flex items-center justify-between mb-8 md:mb-10 p-4 md:p-5 rounded-2xl bg-[#ad1457]/10 border border-[#E61739]/20 hover:bg-[#ad1457]/15 transition-all group"
         >
           <div className="flex items-center gap-3 md:gap-4 min-w-0">
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-[#E61739] flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-[#ad1457] flex items-center justify-center shrink-0">
               <Key size={16} className="text-white" />
             </div>
             <div className="min-w-0">

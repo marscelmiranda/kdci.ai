@@ -42,7 +42,7 @@ export const AuthorAvatar = ({ name, avatarUrl, size = 40, theme = 'dark', class
       title={name}
       className={`rounded-full flex items-center justify-center font-black shrink-0 ${
         theme === 'dark'
-          ? 'bg-[#E61739]/20 border border-[#E61739]/30 text-[#E61739]'
+          ? 'bg-[#ad1457]/20 border border-[#E61739]/30 text-[#E61739]'
           : 'bg-red-50 border border-red-100 text-[#E61739]'
       } ${className}`}
       style={{ ...style, fontSize: size * 0.35 }}

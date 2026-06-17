@@ -30,7 +30,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
             Customer retention and technical provisioning for ISPs and mobile carriers.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Get Started <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -87,7 +87,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           </div>
           <div className="mt-12 p-10 rounded-[3rem] bg-slate-900 text-white flex flex-col md:flex-row items-center gap-8 shadow-2xl relative overflow-hidden">
              <div className="mesh-container opacity-20"><div className="blob blob-purple"></div></div>
-             <div className="relative z-10 w-16 h-16 shrink-0 bg-[#E61739] rounded-2xl flex items-center justify-center">
+             <div className="relative z-10 w-16 h-16 shrink-0 bg-[#ad1457] rounded-2xl flex items-center justify-center">
                <Network size={32} />
              </div>
              <div className="relative z-10">
@@ -169,7 +169,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                        { title: "Auto-Billing", desc: "Automating routine billing inquiries and payment processing." }
                      ].map((feat, idx) => (
                        <div key={idx} className="flex gap-6">
-                          <div className="w-10 h-10 shrink-0 bg-[#E61739]/20 rounded-xl flex items-center justify-center text-[#E61739] border border-[#E61739]/30">
+                          <div className="w-10 h-10 shrink-0 bg-[#ad1457]/20 rounded-xl flex items-center justify-center text-[#E61739] border border-[#E61739]/30">
                             <CheckCircle2 size={20} />
                           </div>
                           <div>
@@ -185,7 +185,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                      <div className="space-y-6">
                         <div className="flex justify-between items-end">
                            <div className="h-4 w-32 bg-white/10 rounded-full"></div>
-                           <div className="h-8 w-20 bg-[#E61739]/40 rounded-lg"></div>
+                           <div className="h-8 w-20 bg-[#ad1457]/40 rounded-lg"></div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                            <div className="h-32 bg-white/5 rounded-3xl border border-white/5"></div>
@@ -194,7 +194,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                         <div className="h-48 bg-white/5 rounded-3xl border border-white/5"></div>
                      </div>
                   </div>
-                  <div className="absolute -bottom-10 -right-10 bg-[#E61739] p-8 rounded-[3rem] shadow-2xl hidden md:block">
+                  <div className="absolute -bottom-10 -right-10 bg-[#ad1457] p-8 rounded-[3rem] shadow-2xl hidden md:block">
                      <div className="text-3xl font-black mb-1 text-center">AI</div>
                      <div className="text-[10px] font-black uppercase tracking-widest opacity-80">Churn Prevention</div>
                   </div>
@@ -225,7 +225,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                   <span className="text-[10px] font-bold text-slate-400 uppercase">/ MONTH</span>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed mb-10 flex-grow font-medium">{plan.desc}</p>
-                <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#E61739] hover:text-white transition-all">Select Role</button>
+                <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#ad1457] hover:text-white transition-all">Select Role</button>
               </div>
             ))}
           </div>
@@ -254,7 +254,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
               { icon: Network, title: "Tech Certified", desc: "Agents with networking certifications (Cisco, etc.)." }
             ].map((item, i) => (
               <div key={i} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 bg-[#F5F5F7] rounded-3xl flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
+                <div className="w-16 h-16 bg-[#F5F5F7] rounded-3xl flex items-center justify-center text-[#E61739] mb-8 group-hover:scale-110 group-hover:bg-[#ad1457] group-hover:text-white transition-all shadow-sm">
                   <item.icon size={32} />
                 </div>
                 <h4 className="text-lg font-bold text-[#1D1D1F] mb-3">{item.title}</h4>
@@ -278,7 +278,7 @@ export const TelecomPage = ({ setView }: { setView: (v: ViewType) => void }) => 
            <div className="relative z-10 max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Connect Your <br/><span className="text-shine-red">Customers.</span></h2>
               <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Book a consultation with our telecom operations specialists.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
                  Request Telecom Quote <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
            </div>

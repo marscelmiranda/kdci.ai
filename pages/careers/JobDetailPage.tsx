@@ -51,7 +51,7 @@ const Section = ({ title, content }: { title: string; content: string }) => {
     return (
       <div className="mb-10">
         <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-          <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
+          <span className="w-1 h-5 bg-[#ad1457] rounded-full inline-block"></span>
           {title}
         </h3>
         <div className="rte-content text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: content }} />
@@ -63,7 +63,7 @@ const Section = ({ title, content }: { title: string; content: string }) => {
   return (
     <div className="mb-10">
       <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-        <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
+        <span className="w-1 h-5 bg-[#ad1457] rounded-full inline-block"></span>
         {title}
       </h3>
       {isBullet ? (
@@ -199,7 +199,7 @@ export const JobDetailPage = ({
             {/* Benefits — always shown */}
             <div className="mb-2">
               <h3 className="text-lg font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <span className="w-1 h-5 bg-[#E61739] rounded-full inline-block"></span>
+                <span className="w-1 h-5 bg-[#ad1457] rounded-full inline-block"></span>
                 Benefits
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
@@ -274,7 +274,7 @@ export const JobDetailPage = ({
             </p>
             <button
               onClick={() => setView('contact')}
-              className="w-full px-6 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all glow-red flex items-center justify-center gap-2 group"
+              className="w-full px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all glow-red flex items-center justify-center gap-2 group"
             >
               Apply Now <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>

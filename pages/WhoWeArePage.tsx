@@ -53,7 +53,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch mt-8">
             {/* Left — copy */}
             <div className="text-left flex flex-col py-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8 w-fit">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-8 w-fit">
                 Providing Real business results
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-7xl font-heading font-bold text-white mb-6 md:mb-8 tracking-tight leading-[1.1] drop-shadow-2xl">
@@ -101,7 +101,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
       </section>
 
       {/* 2. Stats Bar */}
-      <section className="bg-[#E61739] py-10 px-6">
+      <section className="bg-[#ad1457] py-10 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {STATS.map((stat, i) => (
             <div key={i}>
@@ -146,7 +146,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
       <section className="py-32 bg-[#F5F5F7]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Our History
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">The KDCI Story.</h2>
@@ -161,7 +161,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                 { year: '2025', title: 'AI-Powered Operations', desc: 'Serving 50+ global clients with 300+ specialists, now fully integrating AI into every workflow.' },
               ].map((milestone, idx) => (
                 <div key={idx} className="relative flex flex-col items-start md:items-center text-left md:text-center">
-                  <div className="w-14 h-14 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                  <div className="w-14 h-14 rounded-full bg-[#ad1457] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
                     {milestone.year.slice(2)}
                   </div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{milestone.year}</p>
@@ -223,7 +223,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
               },
             ].map((item, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-10 hover:bg-white/10 transition-all">
-                <div className="w-10 h-10 bg-[#E61739]/20 rounded-xl flex items-center justify-center mb-6">
+                <div className="w-10 h-10 bg-[#ad1457]/20 rounded-xl flex items-center justify-center mb-6">
                   <item.icon size={20} className="text-[#E61739]" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
@@ -307,7 +307,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                   </div>
                 </div>
                 <div className="flex gap-6 items-start">
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg"><MapPin size={20} /></div>
+                  <div className="w-12 h-12 bg-[#ad1457] rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg"><MapPin size={20} /></div>
                   <div>
                     <h4 className="text-lg font-bold text-slate-900 mb-1">Philippine HQ</h4>
                     <p className="text-slate-500 text-sm font-medium">3008 One Corporate Centre, Julia Vargas Avenue, Ortigas Center, Pasig City 1605, Metro Manila, Philippines.</p>
@@ -394,7 +394,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
                   { icon: LifeBuoy, title: "Ongoing Development", desc: "Our teams undergo continuous training to keep up with the latest AI tools, agentic technologies, and industry best practices." },
                 ].map((feat, idx) => (
                   <div key={idx} className="flex gap-4 group">
-                    <div className="w-10 h-10 shrink-0 bg-white rounded-xl flex items-center justify-center text-[#E61739] border border-slate-200 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
+                    <div className="w-10 h-10 shrink-0 bg-white rounded-xl flex items-center justify-center text-[#E61739] border border-slate-200 group-hover:bg-[#ad1457] group-hover:text-white transition-all shadow-sm">
                       <feat.icon size={20} />
                     </div>
                     <div>
@@ -433,7 +433,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
             <p className="text-white/30 text-sm font-medium mb-12 uppercase tracking-widest">Trusted Since 2011 · 50+ Global Clients · 300+ Team Members</p>
             <button
               onClick={() => setView('contact')}
-              className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto"
+              className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto"
             >
               Partner with KDCI <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>

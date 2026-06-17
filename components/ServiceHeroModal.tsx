@@ -98,7 +98,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
         <div className="px-8 py-8 bg-slate-50/60">
           {done ? (
             <div className="flex flex-col items-center text-center gap-5 py-10">
-              <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+              <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shadow-xl">
                 <CheckCircle2 size={30} className="text-white" />
               </div>
               <h3 className="text-xl font-black text-slate-900">{config.successTitle}</h3>
@@ -171,7 +171,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] disabled:opacity-60 transition-all shadow-lg flex items-center justify-center gap-2 group"
+                  className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] disabled:opacity-60 transition-all shadow-lg flex items-center justify-center gap-2 group"
                 >
                   {submitting
                     ? <><Loader2 size={16} className="animate-spin" /> Sending…</>

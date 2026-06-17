@@ -90,7 +90,7 @@ export const JobPost = ({ setView, title, department, location, type, descriptio
               <ul className="space-y-6">
                 {responsibilities.map((item, i) => (
                   <li key={i} className="flex gap-4 items-start">
-                    <div className="w-6 h-6 rounded-full bg-[#E61739]/10 text-[#E61739] flex items-center justify-center shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-[#ad1457]/10 text-[#E61739] flex items-center justify-center shrink-0 mt-1">
                       <Check size={14} strokeWidth={3} />
                     </div>
                     <span className="text-slate-600 font-medium leading-relaxed">{item}</span>
@@ -185,7 +185,7 @@ export const JobPost = ({ setView, title, department, location, type, descriptio
                       </div>
                     </div>
 
-                    <button className="w-full py-4 bg-[#E61739] text-white rounded-xl font-bold mt-4 hover:bg-[#c51431] transition-all shadow-lg glow-red flex justify-center items-center gap-2">
+                    <button className="w-full py-4 bg-[#ad1457] text-white rounded-xl font-bold mt-4 hover:bg-[#8e1049] transition-all shadow-lg glow-red flex justify-center items-center gap-2">
                       Submit Application <ArrowRight size={16} />
                     </button>
                   </form>

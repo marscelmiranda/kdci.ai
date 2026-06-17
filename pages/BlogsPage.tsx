@@ -316,7 +316,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
                         ))}
                         <span className="px-3 py-1 bg-[#F5F5F7] rounded-full text-[10px] font-bold text-[#E61739] uppercase tracking-wide">{card.metrics[2].value}</span>
                       </div>
-                      <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn">
+                      <button className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#ad1457] transition-all flex items-center justify-center gap-2 group/btn">
                         Read Article <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
                       </button>
                     </div>
@@ -345,7 +345,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
               </p>
               <div>
                 <button onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta">
+                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta">
                   Consult an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
                 </button>
               </div>

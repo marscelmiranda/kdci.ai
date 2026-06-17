@@ -69,7 +69,7 @@ const STORIES = [
 ];
 
 const TYPE_META = {
-  'Blog':       { icon: BookOpen,    bg: 'bg-[#E61739]/10', text: 'text-[#E61739]',   view: 'blog'          as ViewType },
+  'Blog':       { icon: BookOpen,    bg: 'bg-[#ad1457]/10', text: 'text-[#E61739]',   view: 'blog'          as ViewType },
   'Case Study': { icon: Briefcase,   bg: 'bg-blue-500/10',  text: 'text-blue-400',    view: 'case-studies'  as ViewType },
   'Ebook':      { icon: BookMarked,  bg: 'bg-purple-500/10',text: 'text-purple-400',  view: 'ebooks'        as ViewType },
 };
@@ -180,7 +180,7 @@ export const HomePageV2 = ({
           </h1>
           <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">KDCI.ai is an AI-managed services provider delivering custom agentic solutions across CX, creative, demand generation, and staff augmentation purpose-built for 20+ industry verticals.</p>
           <div className="flex flex-col items-center">
-            <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#E61739] hover:bg-[#c51431] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
+            <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
               See Our Solutions <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -355,7 +355,7 @@ export const HomePageV2 = ({
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group flex flex-col bg-white rounded-[20px] border border-black/[0.04] hover:shadow-2xl transition-all duration-500 p-7">
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-all duration-300">
+                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#ad1457] group-hover:text-white transition-all duration-300">
                     <s.icon size={22} />
                   </div>
                   <span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">
@@ -374,7 +374,7 @@ export const HomePageV2 = ({
                     ))}
                   </div>
                 </div>
-                <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2">
+                <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#ad1457] transition-all flex items-center justify-center gap-2">
                   Explore Solution <ArrowRight size={14} />
                 </button>
               </div>
@@ -400,7 +400,7 @@ export const HomePageV2 = ({
                 <div className="text-3xl font-bold text-[#1D1D1F] mb-1">60%</div>
                 <div className="text-[10px] font-black uppercase text-[#86868b] tracking-widest">OpEx Reduction</div>
               </div>
-              <div className="p-8 bg-[#E61739] rounded-[20px] shadow-lg">
+              <div className="p-8 bg-[#ad1457] rounded-[20px] shadow-lg">
                 <div className="text-3xl font-bold text-white mb-1">24h</div>
                 <div className="text-[10px] font-black uppercase text-white/70 tracking-widest">Setup Potential</div>
               </div>
@@ -441,7 +441,7 @@ export const HomePageV2 = ({
 
             {/* Big featured card */}
             <div className="lg:col-span-2 bg-[#1D1D1F] rounded-[20px] p-10 md:p-14 flex flex-col justify-between relative overflow-hidden min-h-[380px]">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-[#E61739]/8 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-72 h-72 bg-[#ad1457]/8 rounded-full blur-3xl pointer-events-none" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                   <Quote size={36} className="text-[#E61739] opacity-60" />
@@ -506,7 +506,7 @@ export const HomePageV2 = ({
                 onClick={() => setActiveStory(i)}
                 className={`rounded-full transition-all duration-300 ${
                   i === activeStory
-                    ? 'w-8 h-2.5 bg-[#E61739]'
+                    ? 'w-8 h-2.5 bg-[#ad1457]'
                     : 'w-2.5 h-2.5 bg-black/15 hover:bg-black/30'
                 }`}
               />
@@ -537,7 +537,7 @@ export const HomePageV2 = ({
                     Talk to our solutions architect today to get solutions built around your growth goals. Design an AI service strategy that combines agentic workflows with elite AI-trained operations talent.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                     <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
+                     <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
                         Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                      </button>
                      <button onClick={() => setView('contact')} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">

@@ -167,7 +167,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -239,7 +239,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               What we do
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight max-w-3xl">
@@ -250,7 +250,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICES.map((s, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all group">
-                <div className="w-12 h-12 bg-[#E61739]/15 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#E61739]/25 transition-all">
+                <div className="w-12 h-12 bg-[#ad1457]/15 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#ad1457]/25 transition-all">
                   <s.icon size={22} className="text-[#E61739]" />
                 </div>
                 <h3 className="text-xl font-black text-white mb-3">{s.title}</h3>
@@ -265,7 +265,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
       <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Our Process
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight">
@@ -277,7 +277,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
               {STEPS.map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#ad1457] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
                     {s.n}
                   </div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
@@ -297,7 +297,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
 
             {/* Content */}
             <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-6 self-start">
                 Our Difference
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight mb-10">
@@ -356,7 +356,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
       <section className="py-24 bg-[#080808]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-3">Transparent tiers. No surprises.</h2>
@@ -367,7 +367,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
             {PRICING.map((plan, i) => (
               <div key={i} className={`rounded-3xl p-8 flex flex-col relative ${plan.featured ? 'bg-white/5 border-2 border-[#E61739]' : 'bg-white/5 border border-white/10'}`}>
                 {plan.featured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ad1457] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
                 )}
                 <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">{plan.name}</p>
                 <div className="flex items-end gap-1 mb-1">
@@ -385,7 +385,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                     ))}
                   </ul>
                 </div>
-                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
                   {plan.cta}
                 </button>
               </div>
@@ -406,7 +406,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-14 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Who We Serve
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] mb-4">
@@ -417,7 +417,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
             {INDUSTRIES.map((ind, i) => (
               <div key={i} className="flex items-start gap-4 p-6 rounded-2xl border border-slate-100 bg-slate-50 hover:border-[#E61739]/20 hover:bg-white hover:shadow-sm transition-all">
-                <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 bg-[#ad1457]/10 rounded-xl flex items-center justify-center shrink-0">
                   <ind.icon size={18} className="text-[#E61739]" />
                 </div>
                 <div>
@@ -431,7 +431,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
             <p className="text-[10px] font-black uppercase tracking-widest text-[#86868b] mb-5">Departments We Automate</p>
             <div className="flex flex-wrap gap-2.5">
               {DEPARTMENTS.map((dep, i) => (
-                <span key={i} className="px-4 py-2 bg-slate-100 rounded-xl text-sm font-semibold text-[#1D1D1F] border border-slate-200 hover:border-[#E61739]/30 hover:text-[#E61739] hover:bg-[#E61739]/5 transition-all cursor-default">
+                <span key={i} className="px-4 py-2 bg-slate-100 rounded-xl text-sm font-semibold text-[#1D1D1F] border border-slate-200 hover:border-[#E61739]/30 hover:text-[#E61739] hover:bg-[#ad1457]/5 transition-all cursor-default">
                   {dep}
                 </span>
               ))}
@@ -444,7 +444,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
       <section className="py-24 bg-[#080808]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Our Stack
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 max-w-2xl">
@@ -455,7 +455,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {TOOLS.map((tool, i) => (
               <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center text-center hover:bg-white/10 transition-all">
-                <div className="w-10 h-10 bg-[#E61739]/15 rounded-xl flex items-center justify-center mb-3">
+                <div className="w-10 h-10 bg-[#ad1457]/15 rounded-xl flex items-center justify-center mb-3">
                   <Zap size={16} className="text-[#E61739]" />
                 </div>
                 <div className="text-sm font-black text-white leading-tight mb-1">{tool.name}</div>
@@ -510,7 +510,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
           <div className="flex-1 p-10 md:p-14">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
-                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle2 size={32} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
@@ -519,7 +519,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
             ) : (
               <>
                 <div className="mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Discovery Call
                   </div>
                   <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2 leading-tight">Ready to Build AI that Works?</h2>
@@ -552,7 +552,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>
@@ -592,7 +592,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                   className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
-                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#ad1457] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
                     <ArrowRight size={12} className="-rotate-45" />
                   </span>
                 </button>

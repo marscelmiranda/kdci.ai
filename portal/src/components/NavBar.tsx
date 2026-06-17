@@ -31,7 +31,7 @@ export const NavBar = ({ setView, user }: Props) => {
           </button>
 
           <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10">
-            <div className="w-7 h-7 rounded-lg bg-[#E61739] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-[#ad1457] flex items-center justify-center shrink-0">
               <User size={14} className="text-white" />
             </div>
             <div className="hidden sm:block">
@@ -42,7 +42,7 @@ export const NavBar = ({ setView, user }: Props) => {
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-white/40 hover:text-[#E61739] hover:bg-[#E61739]/10 transition-all text-xs font-bold"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-white/40 hover:text-[#E61739] hover:bg-[#ad1457]/10 transition-all text-xs font-bold"
           >
             <LogOut size={15} />
             <span className="hidden sm:inline">Sign Out</span>

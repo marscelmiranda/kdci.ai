@@ -223,7 +223,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
         <div className="p-8 pb-4">
           <Logo isDarkHero={true} />
-          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
+          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
             Publisher Portal
           </div>
         </div>
@@ -245,7 +245,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-white/40 hover:text-white hover:bg-white/5 transition-all mb-2">
             <Settings size={18} /> Settings
           </button>
-          <button onClick={() => setView('home')} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all">
+          <button onClick={() => setView('home')} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#ad1457]/10 transition-all">
             <LogOut size={18} /> Sign Out
           </button>
         </div>
@@ -266,7 +266,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
                 <h1 className="text-3xl font-heading font-bold text-white">Case Studies</h1>
               </div>
-              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
                 <Plus size={16} /> New Case Study
               </button>
             </div>
@@ -341,7 +341,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                   <option value="Published">Published</option>
                   <option value="Archived">Archived</option>
                 </select>
-                <button type="button" onClick={() => handleSave()} className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 hover:bg-[#c51431] transition-colors"><Save size={16} /> Save</button>
+                <button type="button" onClick={() => handleSave()} className="px-6 py-2 bg-[#ad1457] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 hover:bg-[#8e1049] transition-colors"><Save size={16} /> Save</button>
               </div>
             </header>
 
@@ -367,7 +367,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                       {/* Hero Section */}
                       <div className={sectionCls}>
                         <div className="flex items-center gap-3 mb-2">
-                          <div className="w-7 h-7 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><ImageIcon size={14} /></div>
+                          <div className="w-7 h-7 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><ImageIcon size={14} /></div>
                           <h3 className="text-sm font-bold text-white/80 uppercase tracking-widest">Hero Section</h3>
                         </div>
                         <div className="space-y-2">
@@ -488,7 +488,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                       {/* Outcome */}
                       <div className={sectionCls}>
                         <div className="flex items-center gap-3 mb-2">
-                          <div className="w-7 h-7 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><BarChart2 size={14} /></div>
+                          <div className="w-7 h-7 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><BarChart2 size={14} /></div>
                           <h3 className="text-sm font-bold text-white/80 uppercase tracking-widest">Outcome Section</h3>
                         </div>
                         <div className="space-y-2">

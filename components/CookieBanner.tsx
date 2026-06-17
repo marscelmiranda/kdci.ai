@@ -45,7 +45,7 @@ export const CookieBanner = ({ setView }: CookieBannerProps) => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 sm:p-6">
 
           {/* Icon */}
-          <div className="shrink-0 w-10 h-10 rounded-xl bg-[#E61739]/15 border border-[#E61739]/20 flex items-center justify-center">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-[#ad1457]/15 border border-[#E61739]/20 flex items-center justify-center">
             <Cookie size={18} className="text-[#E61739]" />
           </div>
 
@@ -74,7 +74,7 @@ export const CookieBanner = ({ setView }: CookieBannerProps) => {
             </button>
             <button
               onClick={() => dismiss('accepted')}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-[13px] font-bold bg-[#E61739] text-white hover:bg-[#c51431] transition-all shadow-lg shadow-[#E61739]/20"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-[13px] font-bold bg-[#ad1457] text-white hover:bg-[#8e1049] transition-all shadow-lg shadow-[#E61739]/20"
             >
               <ShieldCheck size={14} />
               Accept All

@@ -218,7 +218,7 @@ export const Navbar = ({
                           onClick={e => nav(e, item.id as ViewType, () => setIsSolutionsOpen(false))}
                           className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/sol"
                         >
-                          <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/sol:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
+                          <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/sol:bg-[#ad1457]/10 flex items-center justify-center text-[#86868b] group-hover/sol:text-[#E61739] transition-all">
                             <item.icon size={14} />
                           </div>
                           <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/sol:text-[#E61739] transition-colors">
@@ -274,7 +274,7 @@ export const Navbar = ({
                             onClick={e => nav(e, res.id as ViewType, () => setIsResourcesOpen(false))}
                             className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
                           >
-                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
+                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#ad1457]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
                               <res.icon size={14} />
                             </div>
                             <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">
@@ -292,7 +292,7 @@ export const Navbar = ({
                             onClick={e => nav(e, res.id as ViewType, () => setIsResourcesOpen(false))}
                             className="w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 hover:bg-[#F5F5F7] transition-colors group/res"
                           >
-                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
+                            <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover/res:bg-[#ad1457]/10 flex items-center justify-center text-[#86868b] group-hover/res:text-[#E61739] transition-all">
                               <res.icon size={14} />
                             </div>
                             <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover/res:text-[#E61739] transition-colors">
@@ -346,7 +346,7 @@ export const Navbar = ({
             <a
               href="/contact-us/"
               onClick={e => nav(e, "contact")}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-lg ${isDarkHero ? "bg-white text-black hover:bg-white/90" : "bg-[#E61739] text-white hover:bg-[#c51431]"}`}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md hover:shadow-lg ${isDarkHero ? "bg-white text-black hover:bg-white/90" : "bg-[#ad1457] text-white hover:bg-[#8e1049]"}`}
             >
               Contact Us
             </a>
@@ -391,7 +391,7 @@ export const Navbar = ({
                       onClick={e => nav(e, item.id as ViewType, () => setIsMobileMenuOpen(false))}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
                     >
-                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
+                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#ad1457]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
                         <item.icon size={14} />
                       </div>
                       <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">
@@ -422,7 +422,7 @@ export const Navbar = ({
                       onClick={e => nav(e, res.id as ViewType, () => { setIsMobileMenuOpen(false); setIsMobileInsightsOpen(false); })}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] text-left w-full group"
                     >
-                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#E61739]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
+                      <div className="w-7 h-7 shrink-0 rounded-lg bg-[#F5F5F7] group-hover:bg-[#ad1457]/10 flex items-center justify-center text-[#86868b] group-hover:text-[#E61739] transition-all">
                         <res.icon size={14} />
                       </div>
                       <span className="text-[13px] font-semibold text-[#1D1D1F] group-hover:text-[#E61739] transition-colors">
@@ -450,7 +450,7 @@ export const Navbar = ({
               <a
                 href="/contact-us/"
                 onClick={e => nav(e, "contact", () => setIsMobileMenuOpen(false))}
-                className="mt-4 w-full bg-[#E61739] text-white py-4 rounded-xl font-bold flex items-center justify-center"
+                className="mt-4 w-full bg-[#ad1457] text-white py-4 rounded-xl font-bold flex items-center justify-center"
               >
                 Contact Us
               </a>

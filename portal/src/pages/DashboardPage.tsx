@@ -24,10 +24,10 @@ export const DashboardPage = ({ setView, user }: Props) => {
 
         {/* Welcome banner */}
         <div className="bg-[#020202] rounded-[40px] px-10 py-10 mb-8 relative overflow-hidden">
-          <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] bg-[#E61739]/20 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] bg-[#ad1457]/20 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute bottom-[-60px] left-[20%] w-[200px] h-[200px] bg-purple-600/15 rounded-full blur-[60px] pointer-events-none" />
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
               <LayoutDashboard size={10} /> Dashboard
             </div>
             <h1 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2">
@@ -63,7 +63,7 @@ export const DashboardPage = ({ setView, user }: Props) => {
 
         {/* Support banner */}
         <div className="bg-white rounded-[40px] border border-slate-100 p-8 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <div className="w-12 h-12 rounded-2xl bg-[#E61739]/10 flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-[#ad1457]/10 flex items-center justify-center shrink-0">
             <MessageSquare size={22} className="text-[#E61739]" />
           </div>
           <div className="flex-1">

@@ -351,7 +351,7 @@ export const CareersPage = ({ setView, onSelectJob }: { setView: (v: ViewType) =
           <div className="relative z-10 max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Don't see <br/><span className="text-shine-red">your role?</span></h2>
             <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">We are always looking for exceptional talent. Submit a general application and we'll keep you on file for future elite pods.</p>
-            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+            <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
               Submit General Application <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

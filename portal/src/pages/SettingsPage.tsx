@@ -167,7 +167,7 @@ export const SettingsPage = ({ setView, user }: Props) => {
             {/* User details */}
             <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm p-8">
               <div className="flex items-center gap-3 mb-7">
-                <div className="w-10 h-10 rounded-[14px] bg-[#E61739]/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-[14px] bg-[#ad1457]/10 flex items-center justify-center">
                   <User size={18} className="text-[#E61739]" />
                 </div>
                 <div>
@@ -339,7 +339,7 @@ export const SettingsPage = ({ setView, user }: Props) => {
 
             <div className="space-y-5">
               <div className="bg-[#020202] rounded-[40px] p-7 relative overflow-hidden">
-                <div className="absolute top-[-40px] right-[-40px] w-[150px] h-[150px] bg-[#E61739]/20 rounded-full blur-[50px]" />
+                <div className="absolute top-[-40px] right-[-40px] w-[150px] h-[150px] bg-[#ad1457]/20 rounded-full blur-[50px]" />
                 <div className="relative z-10">
                   <Shield size={22} className="text-[#E61739] mb-4" />
                   <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Total Contract Value</p>
@@ -433,7 +433,7 @@ export const SettingsPage = ({ setView, user }: Props) => {
             {/* Agent count cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
               <div className="bg-[#020202] rounded-[40px] p-8 relative overflow-hidden col-span-2 sm:col-span-1">
-                <div className="absolute bottom-[-40px] right-[-40px] w-[150px] h-[150px] bg-[#E61739]/20 rounded-full blur-[60px]" />
+                <div className="absolute bottom-[-40px] right-[-40px] w-[150px] h-[150px] bg-[#ad1457]/20 rounded-full blur-[60px]" />
                 <div className="relative z-10">
                   <TrendingUp size={22} className="text-[#E61739] mb-4" />
                   <p className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">Total Agents</p>
@@ -477,7 +477,7 @@ export const SettingsPage = ({ setView, user }: Props) => {
                 {filteredAgents.map(agent => (
                   <div key={agent.name} className="flex items-center justify-between p-4 bg-slate-50 rounded-[20px] border border-slate-100 hover:border-slate-200 transition-all">
                     <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${agent.status === 'active' ? 'bg-[#E61739]/10' : 'bg-slate-200'}`}>
+                      <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 ${agent.status === 'active' ? 'bg-[#ad1457]/10' : 'bg-slate-200'}`}>
                         <User size={16} className={agent.status === 'active' ? 'text-[#E61739]' : 'text-slate-400'} />
                       </div>
                       <div>
@@ -524,7 +524,7 @@ export const SettingsPage = ({ setView, user }: Props) => {
                   </div>
                 </div>
                 <div className="bg-gradient-to-br from-[#1D1D1F] to-[#2d2d30] rounded-[24px] p-6 relative overflow-hidden mb-5">
-                  <div className="absolute top-[-20px] right-[-20px] w-[100px] h-[100px] bg-[#E61739]/20 rounded-full blur-[30px]" />
+                  <div className="absolute top-[-20px] right-[-20px] w-[100px] h-[100px] bg-[#ad1457]/20 rounded-full blur-[30px]" />
                   <div className="relative z-10 flex justify-between items-start">
                     <div>
                       <p className="text-white/40 text-[10px] font-black uppercase tracking-widest">Bank Wire / ACH</p>

@@ -52,7 +52,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
             End-to-end e-commerce management. We handle listing, support, and logistics using elite offshore talent and agentic AI systems.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Book a Strategy Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -199,7 +199,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                 }
               ].map((plan, i) => (
                 <div key={i} className={`p-10 rounded-[3.5rem] relative transition-all ${plan.highlight ? 'bg-slate-900 text-white shadow-2xl scale-105 border-0' : 'bg-white border border-slate-100 shadow-sm hover:shadow-xl'}`}>
-                  {plan.badge && <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#E61739] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">{plan.badge}</div>}
+                  {plan.badge && <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#ad1457] text-white text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2 rounded-full shadow-xl">{plan.badge}</div>}
                   <h4 className={`text-xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h4>
                   <div className="flex items-baseline gap-1 mb-4">
                     <span className="text-4xl font-black">{plan.price}</span>
@@ -213,7 +213,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                       </li>
                     ))}
                   </ul>
-                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#E61739] text-white hover:bg-[#c51431] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
+                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
                     {plan.name === "Growth Engine" ? "Request Custom Quote" : "Request Plan"}
                   </button>
                 </div>
@@ -235,7 +235,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                     <span className="text-[10px] font-bold text-slate-400 uppercase">/ MONTH</span>
                   </div>
                   <p className="text-xs text-slate-500 leading-relaxed mb-10 flex-grow font-medium">{plan.desc}</p>
-                  <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#E61739] hover:text-white transition-all">Select Role</button>
+                  <button onClick={() => setView('contact')} className="w-full py-4 bg-slate-50 text-slate-900 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#ad1457] hover:text-white transition-all">Select Role</button>
                 </div>
               ))}
             </div>
@@ -312,7 +312,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
            <div className="relative z-10 max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Let's Build Your <br/><span className="text-shine-red">E-commerce Machine.</span></h2>
               <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Talk to us about building an e-commerce ops solution tailored to your brand and workload.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#E61739] text-white rounded-[2rem] font-bold text-xl hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
                  Book a Free Consultation <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
            </div>

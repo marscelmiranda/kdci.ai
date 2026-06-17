@@ -253,7 +253,7 @@ export const InsightsPage = ({
             </div>
             <button
               onClick={() => setView('blog')}
-              className="shrink-0 flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all"
+              className="shrink-0 flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-2xl font-bold text-sm hover:bg-[#ad1457] transition-all"
             >
               Explore All Articles <ArrowRight size={14} />
             </button>
@@ -262,7 +262,7 @@ export const InsightsPage = ({
             <div className="flex justify-center py-16"><Loader2 size={32} className="animate-spin text-[#E61739]/40" /></div>
           ) : blogs.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {blogs.map((item, i) => renderCard(item, i, 'blog', 'Blog', 'bg-[#E61739]/90 text-white border-transparent backdrop-blur-sm'))}
+              {blogs.map((item, i) => renderCard(item, i, 'blog', 'Blog', 'bg-[#ad1457]/90 text-white border-transparent backdrop-blur-sm'))}
             </div>
           ) : (
             <div className="text-center py-16 text-slate-400 font-medium">No published articles yet — check back soon.</div>
@@ -373,7 +373,7 @@ export const InsightsPage = ({
                     <p className="text-[#86868b] text-sm font-medium leading-relaxed flex-grow mb-6">{sec.desc}</p>
                     <button
                       onClick={() => setView(sec.view)}
-                      className="w-full py-3.5 bg-[#1D1D1F] text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"
+                      className="w-full py-3.5 bg-[#1D1D1F] text-white rounded-2xl font-bold text-sm hover:bg-[#ad1457] transition-all flex items-center justify-center gap-2 group/btn"
                     >
                       Explore {sec.label} <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
                     </button>
@@ -403,7 +403,7 @@ export const InsightsPage = ({
               <div>
                 <button
                   onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
+                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
                 >
                   Talk to an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
                 </button>

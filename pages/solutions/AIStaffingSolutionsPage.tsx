@@ -148,7 +148,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Request a Specialist <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -225,7 +225,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               { icon: RefreshCw,    title: "2-week replacement guarantee", desc: "Wrong fit? We find and onboard a replacement AI staffing specialist within two weeks — at zero additional cost." },
             ].map((cap, i) => (
               <div key={i} className="p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-500 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-[#E61739]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
+                <div className="w-14 h-14 rounded-2xl bg-[#ad1457]/10 border border-[#E61739]/20 flex items-center justify-center text-[#E61739] mb-8"><cap.icon size={26} /></div>
                 <h3 className="text-xl font-bold text-white mb-4">{cap.title}</h3>
                 <p className="text-white/40 font-medium leading-relaxed">{cap.desc}</p>
               </div>
@@ -247,7 +247,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-            <div className="bg-[#E61739] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
+            <div className="bg-[#ad1457] rounded-3xl p-8 flex items-center gap-6" style={{ animation: 'pulseRing 2.8s ease-in-out 2s infinite' }}>
               <div className="shrink-0">
                 <div className="text-[4.5rem] font-black text-white leading-none">2</div>
                 <div className="text-sm font-black text-white/70 uppercase tracking-widest -mt-1">Week<br />Guarantee</div>
@@ -289,7 +289,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
       <section id="how-it-works" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Onboarding Timeline
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] leading-tight text-left">
@@ -311,7 +311,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 { n: '06', period: 'Month 2+', title: 'Full Integration',     desc: 'Full integration and monthly KPI review. Scale up additional seats as needs grow.' },
               ].map((s, i) => (
                 <div key={i} className="relative flex flex-col items-start md:items-center text-left md:text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#E61739] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#ad1457] text-white flex items-center justify-center font-black text-sm mb-5 relative z-10 shrink-0 shadow-lg">
                     {s.n}
                   </div>
                   <p className="text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-1">{s.period}</p>
@@ -323,7 +323,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
           </div>
           <div className="mt-16 p-8 bg-white border border-slate-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-[#E61739]/10 rounded-xl flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 bg-[#ad1457]/10 rounded-xl flex items-center justify-center shrink-0">
                 <Clock size={18} className="text-[#E61739]" />
               </div>
               <div>
@@ -331,7 +331,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 <p className="text-[#86868b] text-sm font-medium">Monthly KPI reviews · 2-week replacement guarantee · scale seats as you grow</p>
               </div>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all flex items-center gap-2">
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all flex items-center gap-2">
               Request Your First Specialist <ArrowRight size={16} />
             </button>
           </div>
@@ -342,7 +342,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
       <section className="py-24 bg-[#0A0A0A]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Pricing
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">Simple, Transparent Pricing</h2>
@@ -371,7 +371,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
             </div>
 
             <div className="bg-white/5 border-2 border-[#E61739] rounded-3xl p-8 flex flex-col relative shadow-2xl">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E61739] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ad1457] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>
               <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-3">Full-Time</p>
               <div className="text-4xl font-black text-white mb-1">$3,500<span className="text-xl text-white/40">/mo</span></div>
               <p className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">$750 setup · 40 hrs/wk</p>
@@ -385,7 +385,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                   ))}
                 </ul>
               </div>
-              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-[#E61739] text-white font-bold text-sm hover:bg-[#c51431] transition-all shadow-lg">
+              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-[#ad1457] text-white font-bold text-sm hover:bg-[#8e1049] transition-all shadow-lg">
                 Request a Specialist
               </button>
             </div>
@@ -434,7 +434,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                   onClick={() => setSelectedInd(ind)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
                     selectedInd.id === ind.id
-                      ? 'bg-[#E61739] text-white shadow-sm'
+                      ? 'bg-[#ad1457] text-white shadow-sm'
                       : 'bg-white border border-black/10 text-slate-600'
                   }`}
                 >
@@ -446,7 +446,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
 
             <div className="bg-slate-900 rounded-3xl p-6 text-white flex flex-col">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                <div className="w-12 h-12 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedInd.icon size={24} className="text-white" />
                 </div>
                 <div>
@@ -458,7 +458,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
                   <div key={idx} className="flex items-center gap-4 bg-white/5 rounded-2xl px-4 py-3 border border-white/5">
-                    <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 bg-[#ad1457]/20 rounded-lg flex items-center justify-center shrink-0">
                       <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
                     </div>
                     <span className="text-sm font-semibold text-white leading-tight">{role}</span>
@@ -469,7 +469,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -488,7 +488,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                     onClick={() => setSelectedInd(ind)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
                       selectedInd.id === ind.id
-                        ? 'bg-[#E61739] text-white shadow-sm'
+                        ? 'bg-[#ad1457] text-white shadow-sm'
                         : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
@@ -502,7 +502,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
             {/* Right: detail panel */}
             <div className="lg:col-span-2 bg-slate-900 rounded-3xl p-10 text-white min-h-[520px] flex flex-col">
               <div className="flex items-center gap-5 mb-8">
-                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedInd.icon size={30} className="text-white" />
                 </div>
                 <div>
@@ -514,7 +514,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-grow content-start">
                 {(INDUSTRY_ROLES[selectedInd.id] ?? []).map((role, idx) => (
                   <div key={idx} className="flex items-center gap-4 bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
-                    <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 bg-[#ad1457]/20 rounded-lg flex items-center justify-center shrink-0">
                       <span className="text-[#E61739] text-xs font-black">0{idx + 1}</span>
                     </div>
                     <span className="text-sm font-semibold text-white leading-tight">{role}</span>
@@ -526,7 +526,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its top AI-augmented roles</p>
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -546,7 +546,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-12 left-12 right-12 bg-white/90 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/5">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0">
                       <TrendingDown size={22} className="text-white" />
                     </div>
                     <div>
@@ -567,7 +567,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                   { title: "Healthcare", desc: "Data processing, scheduling, and admin AI support — compliant, accurate, and deeply trained on healthcare workflows.", icon: HeartPulse },
                 ].map((item, idx) => (
                   <div key={idx} className="flex gap-6 group">
-                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 group-hover:bg-[#E61739] group-hover:text-white transition-all shadow-sm">
+                    <div className="w-12 h-12 bg-[#F5F5F7] rounded-2xl shrink-0 flex items-center justify-center text-[#E61739] group-hover:scale-110 group-hover:bg-[#ad1457] group-hover:text-white transition-all shadow-sm">
                       <item.icon size={24} />
                     </div>
                     <div>
@@ -612,7 +612,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
           <div className="flex-1 p-10 md:p-14 flex flex-col justify-center">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center gap-5 py-12">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                  <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shadow-xl">
                     <CheckCircle2 size={30} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-black text-white">Message received!</h3>
@@ -638,7 +638,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                  <button type="submit" className="w-full py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
                     Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
@@ -676,7 +676,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                   className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-sm font-bold text-slate-900 pr-6">{item.q}</span>
-                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#E61739] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
+                  <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? 'bg-[#ad1457] text-white rotate-45' : 'bg-slate-100 text-slate-400'}`}>
                     <ArrowRight size={12} className="-rotate-45" />
                   </span>
                 </button>
@@ -718,7 +718,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
             <div className="px-8 py-8 bg-slate-50/60">
               {modalSubmitted ? (
                 <div className="flex flex-col items-center text-center gap-5 py-10">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                  <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shadow-xl">
                     <CheckCircle2 size={30} className="text-white" />
                   </div>
                   <h3 className="text-xl font-black text-slate-900">Brief received!</h3>
@@ -750,7 +750,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group">
+                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>

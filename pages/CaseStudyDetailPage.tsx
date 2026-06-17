@@ -145,7 +145,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                 {/* Pull Quote */}
                 {study.quoteText && (
                   <div className="my-16 relative not-prose">
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#E61739]" />
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ad1457]" />
                     <div className="pl-10">
                       <Quote size={40} className="text-slate-200 mb-6" />
                       <p className="text-3xl font-heading font-bold text-slate-900 leading-tight mb-6">
@@ -202,7 +202,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">
                       Our solutions architects can design a custom operational model for your specific needs.
                     </p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#E61739] hover:bg-[#c51431] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#8e1049] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
                       Talk to an Architect <ArrowRight size={16} />
                     </button>
                   </div>
@@ -306,7 +306,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
             </p>
             <button
               onClick={() => setView('contact')}
-              className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3"
+              className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3"
             >
               Consult an Architect <ArrowRight size={20} />
             </button>
@@ -371,7 +371,7 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
                 <p className="text-slate-500 leading-loose mb-8">KDCI didn't just supply headcount; we architected a scalable support ecosystem with a <strong>Pod Structure</strong> — 10 agents, 1 QA specialist, and 1 Team Lead operating as an autonomous unit.</p>
                 <p className="text-slate-500 leading-loose mb-12">Simultaneously, we deployed our <strong>AI Triage Layer</strong>, intercepting inbound tickets, categorizing by intent, and routing to the right pod.</p>
                 <div className="my-16 relative not-prose">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#E61739]" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ad1457]" />
                   <div className="pl-10">
                     <Quote size={40} className="text-slate-200 mb-6" />
                     <p className="text-3xl font-heading font-bold text-slate-900 leading-tight mb-6">"KDCI mirrored our internal culture so perfectly that our customers couldn't tell the difference."</p>
@@ -393,7 +393,7 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
                   <div className="relative z-10">
                     <h4 className="text-xl font-bold mb-4">Scale Your Own Team</h4>
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">See how our managed pods can reduce your burn rate while improving CSAT.</p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#E61739] hover:bg-[#c51431] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
+                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#8e1049] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
                   </div>
                 </div>
                 <div className="p-8 rounded-[2rem] border border-slate-100 bg-white">

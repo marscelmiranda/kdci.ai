@@ -171,7 +171,7 @@ const AccessModal = ({
         <div className="px-8 py-8 max-h-[70vh] overflow-y-auto bg-slate-50/60">
           {done ? (
             <div className="flex flex-col items-center justify-center text-center gap-5 py-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#E61739] flex items-center justify-center shadow-xl">
+              <div className="w-16 h-16 rounded-2xl bg-[#ad1457] flex items-center justify-center shadow-xl">
                 <CheckCircle2 size={30} className="text-white" />
               </div>
               <h3 className="text-xl font-black text-slate-900">You're all set!</h3>
@@ -185,7 +185,7 @@ const AccessModal = ({
                   href={ebook.download_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all inline-flex items-center gap-2 shadow-lg shadow-[#E61739]/20"
+                  className="mt-2 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg shadow-[#E61739]/20"
                 >
                   Download PDF <Download size={16} />
                 </a>
@@ -291,13 +291,13 @@ const AccessModal = ({
                         key={svc}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all select-none ${
                           checked
-                            ? 'bg-[#E61739]/10 border-[#E61739]/40 text-slate-900'
+                            ? 'bg-[#ad1457]/10 border-[#E61739]/40 text-slate-900'
                             : 'bg-white border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700'
                         }`}
                       >
                         <span
                           className={`w-4 h-4 rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all ${
-                            checked ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent'
+                            checked ? 'bg-[#ad1457] border-[#E61739]' : 'border-slate-300 bg-transparent'
                           }`}
                         >
                           {checked && (
@@ -324,7 +324,7 @@ const AccessModal = ({
                 <label className="flex items-start gap-3 cursor-pointer group select-none">
                   <span
                     className={`mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                      form.marketingConsent ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
+                      form.marketingConsent ? 'bg-[#ad1457] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
                     }`}
                   >
                     {form.marketingConsent && (
@@ -356,7 +356,7 @@ const AccessModal = ({
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
+                className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
               >
                 {submitting ? (
                   <><Loader2 size={16} className="animate-spin" /> Submitting…</>
@@ -462,7 +462,7 @@ export const EbookDetailPage = ({
                 {/* Category + tags */}
                 <div className="flex flex-wrap items-center gap-2 mb-7">
                   {ebook.category && (
-                    <span className="px-4 py-1.5 bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest rounded-full">
+                    <span className="px-4 py-1.5 bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest rounded-full">
                       {ebook.category}
                     </span>
                   )}
@@ -507,7 +507,7 @@ export const EbookDetailPage = ({
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => setShowAccessModal(true)}
-                    className="px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all inline-flex items-center gap-2 shadow-lg group"
+                    className="px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg group"
                   >
                     Read the Report <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -586,7 +586,7 @@ export const EbookDetailPage = ({
               </div>
               <button
                 onClick={() => setShowAccessModal(true)}
-                className="shrink-0 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all inline-flex items-center gap-2 shadow-lg"
+                className="shrink-0 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg"
               >
                 Read the Report <ArrowRight size={16} />
               </button>

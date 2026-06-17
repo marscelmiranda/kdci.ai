@@ -196,7 +196,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                         onClick={() => handleCategoryChange(cat.id)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
                           active
-                            ? 'bg-[#E61739] text-white shadow-md'
+                            ? 'bg-[#ad1457] text-white shadow-md'
                             : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                       >
@@ -230,7 +230,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
               {/* Category header */}
               <div className="flex items-center gap-4 mb-6">
                 {(() => { const Icon = currentCategory.icon; return (
-                  <div className="w-12 h-12 bg-[#E61739] rounded-2xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-12 h-12 bg-[#ad1457] rounded-2xl flex items-center justify-center text-white shrink-0">
                     <Icon size={22} />
                   </div>
                 ); })()}
@@ -261,7 +261,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
                           <span className={`text-base font-bold leading-snug pt-0.5 ${isOpen ? 'text-[#E61739]' : 'text-slate-900'}`}>
                             {item.q}
                           </span>
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors ${isOpen ? 'bg-[#E61739] text-white' : 'bg-slate-100 text-slate-500'}`}>
+                          <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors ${isOpen ? 'bg-[#ad1457] text-white' : 'bg-slate-100 text-slate-500'}`}>
                             {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                           </div>
                         </button>
@@ -296,7 +296,7 @@ export const FaqsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
               <div>
                 <button
                   onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
+                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
                 >
                   Talk to Our Team <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
                 </button>

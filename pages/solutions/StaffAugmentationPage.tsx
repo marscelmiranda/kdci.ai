@@ -175,7 +175,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -257,7 +257,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               {/* floating stat badge */}
-              <div className="absolute top-8 left-8 bg-[#E61739] rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
+              <div className="absolute top-8 left-8 bg-[#ad1457] rounded-2xl shadow-xl px-6 py-3 flex items-center gap-3 whitespace-nowrap">
                 <div className="w-9 h-9 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
                   <Star size={18} className="text-white" />
                 </div>
@@ -271,7 +271,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             {/* RIGHT — content column */}
             <div className="lg:w-[54%] flex flex-col justify-center">
               <div className="mb-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                   How It Works
                 </div>
                 <h2 className="md:text-5xl font-heading font-bold text-[#1D1D1F] mb-5 tracking-tight text-[47px]">One outsourcing partner for all your staffing needs.</h2>
@@ -286,7 +286,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   { title: 'Scale up or down with 30 days notice', body: 'No long-term lock-in. Add roles as you grow or reduce headcount as your needs change, and we adjust accordingly— no penalties, no friction.' },
                 ].map((p, i) => (
                   <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-[#F5F5F7] border border-black/[0.03]">
-                    <div className="w-6 h-6 rounded-full bg-[#E61739] flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-[#ad1457] flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 size={13} className="text-white" />
                     </div>
                     <div>
@@ -315,7 +315,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                 Onboarding Timeline
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight leading-none mr-[15px]">Get started with outsourced services in four steps.</h2>
@@ -331,12 +331,12 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               { day: 'Day 11–14', num: '04', icon: Activity,  title: 'Go Live',         desc: 'Equipment and system access set up, integrated into your tools, AI monitoring activated.' },
             ].map((s, idx) => (
               <div key={idx} className="group flex items-center gap-0 border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/[0.14] transition-all duration-300">
-                <div className="w-20 md:w-28 shrink-0 flex flex-col items-center justify-center self-stretch bg-white/[0.03] border-r border-white/[0.07] group-hover:bg-[#E61739]/10 group-hover:border-[#E61739]/20 transition-all duration-300 py-6">
+                <div className="w-20 md:w-28 shrink-0 flex flex-col items-center justify-center self-stretch bg-white/[0.03] border-r border-white/[0.07] group-hover:bg-[#ad1457]/10 group-hover:border-[#E61739]/20 transition-all duration-300 py-6">
                   <span className="text-3xl md:text-4xl font-black text-white/30 group-hover:text-[#E61739]/60 transition-colors leading-none">{s.num}</span>
                 </div>
                 <div className="flex flex-1 flex-col md:flex-row md:items-center gap-5 md:gap-10 px-6 md:px-10 py-6">
                   <div className="flex items-center gap-4 md:w-56 shrink-0">
-                    <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center text-white/70 group-hover:bg-[#E61739]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center text-white/70 group-hover:bg-[#ad1457]/15 group-hover:border-[#E61739]/30 group-hover:text-[#E61739] transition-all shrink-0">
                       <s.icon size={18} />
                     </div>
                     <div>
@@ -422,7 +422,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                       </div>
                       <span className="flex-1 text-sm font-semibold text-[#1D1D1F] leading-tight">{r.role}</span>
                       {r.tag && (
-                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#E61739]/8 text-[#E61739]">{r.tag}</span>
+                        <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#ad1457]/8 text-[#E61739]">{r.tag}</span>
                       )}
                       <span className="text-sm font-black text-slate-900 shrink-0">{r.rate}</span>
                     </div>
@@ -445,7 +445,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Why Hire From the Philippines
             </div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight mb-4">
@@ -525,7 +525,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   >
                     <card.icon size={20} style={{ color: card.color }} strokeWidth={1.75} />
                   </div>
-                  <span className="text-[11px] font-black text-[#E61739] uppercase tracking-wider bg-[#E61739]/8 px-2.5 py-1 rounded-full">{card.stat}</span>
+                  <span className="text-[11px] font-black text-[#E61739] uppercase tracking-wider bg-[#ad1457]/8 px-2.5 py-1 rounded-full">{card.stat}</span>
                 </div>
                 <h4 className="text-base font-bold text-[#1D1D1F] mb-3">{card.title}</h4>
                 <p className="text-sm text-slate-500 leading-relaxed font-medium">{card.body}</p>
@@ -582,7 +582,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     onClick={() => setSelectedInd(ind)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 ${
                       selectedInd.id === ind.id
-                        ? 'bg-[#E61739] text-white shadow-sm'
+                        ? 'bg-[#ad1457] text-white shadow-sm'
                         : 'hover:bg-slate-50 text-slate-600'
                     }`}
                   >
@@ -598,7 +598,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
               {/* Panel header */}
               <div className="flex items-center gap-5 mb-8">
-                <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
                   <selectedInd.icon size={30} className="text-white" />
                 </div>
                 <div>
@@ -618,7 +618,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 {(INDUSTRY_SAVINGS[selectedInd.id] ?? []).map((row, idx) => (
                   <div key={idx} className="grid grid-cols-12 items-center bg-white/5 hover:bg-white/10 transition-colors rounded-2xl px-5 py-4 border border-white/5">
                     <div className="col-span-6 flex items-center gap-3">
-                      <div className="w-7 h-7 bg-[#E61739]/20 rounded-lg flex items-center justify-center shrink-0">
+                      <div className="w-7 h-7 bg-[#ad1457]/20 rounded-lg flex items-center justify-center shrink-0">
                         <span className="text-[#E61739] text-[10px] font-black">0{idx + 1}</span>
                       </div>
                       <span className="text-sm font-semibold text-white leading-tight">{row.role}</span>
@@ -640,7 +640,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <p className="text-white/30 text-xs font-medium">Indicative monthly rate ranges (junior–senior) · all-in, no hidden fees</p>
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#E61739] rounded-2xl text-white text-sm font-bold hover:bg-[#c51431] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -656,7 +656,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
         <div className="max-w-5xl mx-auto px-6">
 
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
               Transparent Pricing
             </div>
             <h2 className="text-3xl md:text-5xl font-heading font-bold tracking-tight mb-4">One rate. Everything included.</h2>
@@ -714,7 +714,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/8 border border-[#E61739]/15 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-5">
                 Client Results
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#1D1D1F] tracking-tight leading-tight">Dedicated offshore teams.<br/>Measurable outcomes.</h2>
@@ -827,7 +827,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
 
           <div className="mt-8 text-center">
             <button onClick={() => setView('contact')}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E61739] text-white rounded-full font-bold text-sm hover:bg-[#c41230] transition-colors">
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#ad1457] text-white rounded-full font-bold text-sm hover:bg-[#c41230] transition-colors">
               Start your success story <ArrowRight size={16} />
             </button>
           </div>
@@ -864,7 +864,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
           <div className="flex-1 p-10 md:p-14">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
-                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle2 size={32} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
@@ -873,7 +873,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             ) : (
               <>
                 <div className="mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Consultation
                   </div>
                   <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Build Your Offshore Team Today</h2>
@@ -895,7 +895,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>
@@ -954,7 +954,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   className="w-full flex items-center justify-between px-7 py-5 text-left hover:bg-[#F5F5F7] transition-colors group"
                 >
                   <span className="font-bold text-[#1D1D1F] text-base pr-4">{item.q}</span>
-                  <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all ${openFaq === i ? 'bg-[#E61739] border-[#E61739] text-white rotate-45' : 'border-slate-300 text-slate-400 group-hover:border-[#E61739] group-hover:text-[#E61739]'}`}>
+                  <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all ${openFaq === i ? 'bg-[#ad1457] border-[#E61739] text-white rotate-45' : 'border-slate-300 text-slate-400 group-hover:border-[#E61739] group-hover:text-[#E61739]'}`}>
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
                   </span>
                 </button>
@@ -970,7 +970,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <p className="text-slate-400 text-sm font-medium mb-4">Still have questions?</p>
             <button
               onClick={() => setView('contact')}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-bold text-sm hover:bg-[#E61739] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#1D1D1F] text-white rounded-full font-bold text-sm hover:bg-[#ad1457] transition-colors"
             >
               Talk to our team <ArrowRight size={14} />
             </button>
@@ -986,7 +986,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             if (el) el.scrollIntoView({ behavior: 'smooth' });
             else setView('contact');
           }}
-          className="flex items-center gap-3 px-6 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#c51431] hover:scale-105 transition-all group"
+          className="flex items-center gap-3 px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#8e1049] hover:scale-105 transition-all group"
           style={{ boxShadow: '0 8px 32px rgba(230,23,57,0.45)' }}
         >
           <div className="w-2 h-2 bg-white rounded-full animate-pulse shrink-0" />
@@ -1023,7 +1023,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             <div className="px-8 py-8 bg-slate-50/60">
               {modalSubmitted ? (
                 <div className="flex flex-col items-center text-center gap-5 py-10">
-                  <div className="w-16 h-16 bg-[#E61739] rounded-2xl flex items-center justify-center shadow-xl">
+                  <div className="w-16 h-16 bg-[#ad1457] rounded-2xl flex items-center justify-center shadow-xl">
                     <CheckCircle2 size={30} className="text-white" />
                   </div>
                   <h3 className="text-xl font-black text-slate-900">You're on our radar!</h3>
@@ -1054,7 +1054,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" className="flex-[2] py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-lg flex items-center justify-center gap-2 group">
+                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>

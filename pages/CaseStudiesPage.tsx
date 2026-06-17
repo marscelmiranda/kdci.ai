@@ -456,7 +456,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
                         if (onStudyClick) onStudyClick(study.id.toString(), study.slug);
                         else setView('case-study-detail');
                       }}
-                      className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#E61739] transition-all flex items-center justify-center gap-2 group/btn"
+                      className="mt-auto w-full py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-[#ad1457] transition-all flex items-center justify-center gap-2 group/btn"
                     >
                       Read Case Study <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
                     </button>
@@ -487,7 +487,7 @@ export const CaseStudiesPage = ({ setView, onStudyClick }: { setView: (v: ViewTy
               <div>
                 <button
                   onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#E61739] text-white rounded-[2rem] font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
+                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta"
                 >
                   Consult an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
                 </button>

@@ -48,7 +48,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
               We help companies scale operations across support, design, development, and recruitment — tailored to the needs of 20+ industries.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="#industries" className="px-12 py-5 bg-[#E61739] text-white rounded-2xl font-bold text-lg hover:bg-[#c51431] transition-all glow-red shadow-2xl">
+              <a href="#industries" className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl">
                 Find Your Industry Fit
               </a>
               <button onClick={() => setShowHeroModal(true)} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">
@@ -61,7 +61,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             {TOP_SERVICES.map((s, i) => (
               <div key={i} className="group flex flex-col bg-white/5 rounded-[2.5rem] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 hover:shadow-2xl transition-all duration-500 p-7">
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#E61739] group-hover:text-white transition-all duration-300 border border-white/10">
+                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-[#E61739] group-hover:bg-[#ad1457] group-hover:text-white transition-all duration-300 border border-white/10">
                     <s.icon size={22} />
                   </div>
                   <span className="px-3 py-1 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-white/50">
@@ -80,7 +80,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                     ))}
                   </div>
                 </div>
-                <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-white/10 text-white rounded-2xl font-bold text-sm border border-white/10 hover:bg-[#E61739] hover:border-transparent transition-all flex items-center justify-center gap-2">
+                <button onClick={() => setView(s.id as ViewType)} className="mt-auto w-full py-3.5 bg-white/10 text-white rounded-2xl font-bold text-sm border border-white/10 hover:bg-[#ad1457] hover:border-transparent transition-all flex items-center justify-center gap-2">
                   Explore Solution <ArrowRight size={14} />
                 </button>
               </div>
@@ -141,7 +141,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
           <div className="flex-1 p-10 md:p-14">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
-                <div className="w-16 h-16 bg-[#E61739] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
+                <div className="w-16 h-16 bg-[#ad1457] rounded-3xl flex items-center justify-center mb-6 shadow-lg">
                   <CheckCircle2 size={32} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-black text-white mb-3">We'll be in touch!</h3>
@@ -150,7 +150,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
             ) : (
               <>
                 <div className="mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E61739]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ad1457]/15 border border-[#E61739]/25 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-4">
                     Free Consultation
                   </div>
                   <h2 className="md:text-3xl font-heading font-bold text-white mb-2 text-[32px]">Talk to a Solutions Architect</h2>
@@ -185,7 +185,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>

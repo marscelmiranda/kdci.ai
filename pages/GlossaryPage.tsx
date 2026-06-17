@@ -178,7 +178,7 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
                      onClick={() => setActiveLetter(letter)}
                      className={`w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-xs font-bold transition-all ${
                        activeLetter === letter 
-                         ? 'bg-[#E61739] text-white shadow-lg scale-110' 
+                         ? 'bg-[#ad1457] text-white shadow-lg scale-110' 
                          : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-900'
                      }`}
                    >
@@ -206,7 +206,7 @@ export const GlossaryPage = ({ setView }: { setView: (v: ViewType) => void }) =>
               <div key={idx} className="group p-8 rounded-[2.5rem] bg-[#F5F5F7] border border-black/[0.03] hover:bg-white hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#E61739] transition-colors">{t.term}</h3>
-                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-300 text-xs font-black shadow-sm group-hover:bg-[#E61739] group-hover:text-white transition-colors">
+                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-300 text-xs font-black shadow-sm group-hover:bg-[#ad1457] group-hover:text-white transition-colors">
                       {t.term.charAt(0)}
                    </div>
                 </div>

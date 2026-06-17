@@ -4,7 +4,7 @@ import { ViewType } from '../types';
 import { getPath } from '../lib/routes';
 
 export const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
     {children}
   </div>
 );
@@ -28,7 +28,7 @@ export const Card = ({ children, className = '' }: { children: React.ReactNode, 
 );
 
 export const Tag = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-block px-3 py-1 rounded-full bg-[#E61739]/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
+  <span className="inline-block px-3 py-1 rounded-full bg-[#ad1457]/10 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
     {children}
   </span>
 );

@@ -153,7 +153,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                 <a 
                   key={i} 
                   href={social.href} 
-                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#E61739] hover:border-transparent transition-all shadow-sm"
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-[#ad1457] hover:border-transparent transition-all shadow-sm"
                   aria-label="Social Link"
                 >
                   <social.icon size={20} />
@@ -244,7 +244,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                   placeholder="Work email"
                   className="bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-2 text-xs w-full focus:outline-none focus:border-[#E61739]/50 transition-all font-bold placeholder:text-slate-600"
                 />
-                <button type="submit" className="bg-[#E61739] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#c51431] transition-all shrink-0">
+                <button type="submit" className="bg-[#ad1457] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#8e1049] transition-all shrink-0">
                   Join
                 </button>
               </form>
@@ -309,7 +309,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
             <div className="px-8 py-8 max-h-[70vh] overflow-y-auto bg-slate-50/60">
               {done ? (
                 <div className="flex flex-col items-center justify-center text-center gap-5 py-10">
-                  <div className="w-16 h-16 rounded-2xl bg-[#E61739] flex items-center justify-center shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#ad1457] flex items-center justify-center shadow-xl">
                     <CheckCircle2 size={30} className="text-white" />
                   </div>
                   <h3 className="text-xl font-black text-slate-900">You're in!</h3>
@@ -379,7 +379,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                     <label className="flex items-start gap-3 cursor-pointer group select-none">
                       <span
                         className={`mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                          modalForm.marketingConsent ? 'bg-[#E61739] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
+                          modalForm.marketingConsent ? 'bg-[#ad1457] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
                         }`}
                       >
                         {modalForm.marketingConsent && (
@@ -414,7 +414,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
                   >
                     {submitting ? (
                       <><Loader2 size={16} className="animate-spin" /> Subscribing…</>

@@ -244,9 +244,9 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
             <input type="text" value={block.content.buttonText || ''} onChange={e => updateBlock(block.id, { ...block.content, buttonText: e.target.value })} placeholder="Button Text" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
             <input type="text" value={block.content.buttonUrl || ''} onChange={e => updateBlock(block.id, { ...block.content, buttonUrl: e.target.value })} placeholder="Button URL or Hubspot Form GUID" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
           </div>
-          <div className="p-4 bg-[#E61739]/10 border border-[#E61739]/20 rounded-xl flex flex-col items-center justify-center text-center">
+          <div className="p-4 bg-[#ad1457]/10 border border-[#E61739]/20 rounded-xl flex flex-col items-center justify-center text-center">
             <h4 className="font-bold text-lg mb-4">{block.content.headline || 'Your Headline Here'}</h4>
-            <button type="button" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold shadow-lg shadow-[#E61739]/20">{block.content.buttonText || 'Click Here'}</button>
+            <button type="button" className="px-6 py-2 bg-[#ad1457] text-white rounded-lg font-bold shadow-lg shadow-[#E61739]/20">{block.content.buttonText || 'Click Here'}</button>
           </div>
         </div>
       );
@@ -297,7 +297,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
       <aside className="w-72 shrink-0 border-r border-white/5 h-screen sticky top-0 flex flex-col bg-[#0a0a0a]">
         <div className="p-8 pb-4">
           <Logo isDarkHero={true} />
-          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
+          <div className="mt-4 px-3 py-1.5 rounded-lg bg-[#ad1457]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest w-fit">
             Publisher Portal
           </div>
         </div>
@@ -332,7 +332,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
           </button>
           <button 
             onClick={() => setView('home')} 
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#E61739]/10 transition-all"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-[#E61739] hover:bg-[#ad1457]/10 transition-all"
           >
             <LogOut size={18} /> Sign Out
           </button>
@@ -353,7 +353,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
                 <h1 className="text-3xl font-heading font-bold text-white">Resources Library</h1>
               </div>
-              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#E61739] hover:bg-[#c51431] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
                 <Plus size={16} /> Create Resource
               </button>
             </div>
@@ -455,7 +455,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                      <option value="Published">Published</option>
                      <option value="Archived">Archived</option>
                   </select>
-                  <button type="submit" className="px-6 py-2 bg-[#E61739] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2"><Save size={16}/> Save</button>
+                  <button type="submit" className="px-6 py-2 bg-[#ad1457] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2"><Save size={16}/> Save</button>
                </div>
             </header>
 
@@ -519,7 +519,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                                  ].map(btn => (
                                    <button 
                                      key={btn.type} type="button" onClick={() => addBlock(btn.type as BlockType)}
-                                     className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-white/10 hover:border-[#E61739] hover:bg-[#E61739]/5 text-white/60 hover:text-[#E61739] transition-all group"
+                                     className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-white/10 hover:border-[#E61739] hover:bg-[#ad1457]/5 text-white/60 hover:text-[#E61739] transition-all group"
                                    >
                                       <btn.icon size={24} className="group-hover:scale-110 transition-transform" />
                                       <span className="text-[10px] font-bold uppercase tracking-wider">{btn.label}</span>

@@ -37,7 +37,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             </div>
 
             <h2 id="collection" className="flex items-center gap-3 text-2xl md:text-3xl font-heading font-bold text-slate-900">
-              <div className="w-8 h-8 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><Eye size={18} /></div>
+              <div className="w-8 h-8 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><Eye size={18} /></div>
               1. Information We Collect
             </h2>
             <p>We may collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services, when you participate in activities on the Website, or otherwise when you contact us.</p>
@@ -49,7 +49,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             </ul>
 
             <h2 id="use" className="flex items-center gap-3 mt-12 text-2xl md:text-3xl font-heading font-bold text-slate-900">
-              <div className="w-8 h-8 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><Server size={18} /></div>
+              <div className="w-8 h-8 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><Server size={18} /></div>
               2. How We Use Your Information
             </h2>
             <p>We use personal information collected via our Website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.</p>
@@ -62,7 +62,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             </ul>
 
             <h2 id="sharing" className="flex items-center gap-3 mt-12 text-2xl md:text-3xl font-heading font-bold text-slate-900">
-              <div className="w-8 h-8 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><FileText size={18} /></div>
+              <div className="w-8 h-8 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><FileText size={18} /></div>
               3. Sharing of Information
             </h2>
             <p>We do not sell your personal information. We may share your data with:</p>
@@ -73,7 +73,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             </ul>
 
             <h2 id="security" className="flex items-center gap-3 mt-12 text-2xl md:text-3xl font-heading font-bold text-slate-900">
-              <div className="w-8 h-8 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><Lock size={18} /></div>
+              <div className="w-8 h-8 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><Lock size={18} /></div>
               4. Data Security
             </h2>
             <p>
@@ -81,7 +81,7 @@ export const PrivacyPolicyPage = ({ setView }: { setView: (v: ViewType) => void 
             </p>
 
             <h2 id="rights" className="flex items-center gap-3 mt-12 text-2xl md:text-3xl font-heading font-bold text-slate-900">
-              <div className="w-8 h-8 rounded-lg bg-[#E61739]/10 flex items-center justify-center text-[#E61739]"><ShieldCheck size={18} /></div>
+              <div className="w-8 h-8 rounded-lg bg-[#ad1457]/10 flex items-center justify-center text-[#E61739]"><ShieldCheck size={18} /></div>
               5. Your Privacy Rights
             </h2>
             <p>Depending on your location (e.g., GDPR for EU residents, CCPA for California residents), you may have certain rights regarding your personal information, including:</p>

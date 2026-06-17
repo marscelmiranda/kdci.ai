@@ -8,8 +8,8 @@ export const NotFoundPage = ({ setView }: { setView: (v: ViewType) => void }) =>
     <div className="min-h-screen bg-[#020202] flex flex-col items-center justify-center px-6 relative overflow-hidden">
 
       {/* Background mesh blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#E61739]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#E61739]/4 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#ad1457]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#ad1457]/4 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 text-center max-w-xl mx-auto">
 
@@ -19,7 +19,7 @@ export const NotFoundPage = ({ setView }: { setView: (v: ViewType) => void }) =>
         </div>
 
         {/* Icon */}
-        <div className="w-16 h-16 bg-[#E61739]/15 border border-[#E61739]/25 rounded-2xl flex items-center justify-center mx-auto -mt-8 mb-8">
+        <div className="w-16 h-16 bg-[#ad1457]/15 border border-[#E61739]/25 rounded-2xl flex items-center justify-center mx-auto -mt-8 mb-8">
           <Search size={28} className="text-[#E61739]" />
         </div>
 
@@ -37,7 +37,7 @@ export const NotFoundPage = ({ setView }: { setView: (v: ViewType) => void }) =>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => setView('home')}
-            className="flex items-center gap-3 px-8 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all shadow-xl group"
+            className="flex items-center gap-3 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all shadow-xl group"
           >
             <Home size={16} />
             Back to Home
