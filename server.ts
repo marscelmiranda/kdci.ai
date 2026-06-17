@@ -528,11 +528,8 @@ app.post('/api/contact', async (req, res) => {
         lifecyclestage: 'lead',
         ...(req.body.company ? { company: req.body.company } : {}),
         ...(req.body.phone   ? { phone:   req.body.phone }   : {}),
-        // Custom properties — uncomment after creating them in HubSpot:
-        // Settings → Properties → Contact properties → Create property
-        // ...(resolvedMsg     ? { message:               resolvedMsg          } : {}),
-        // ...(resolvedSrc     ? { source_page:            resolvedSrc          } : {}),
-        // ...(req.body.volume ? { monthly_lead_volume:    req.body.volume      } : {}),
+        ...(resolvedMsg ? { message:     resolvedMsg } : {}),
+        ...(resolvedSrc ? { source_page: resolvedSrc } : {}),
       };
 
       if (existingId) {
