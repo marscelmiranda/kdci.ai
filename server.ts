@@ -376,6 +376,82 @@ app.put('/api/admin/users/:id/unlock', requireAuth, async (req, res) => {
   } catch (err: any) { res.status(500).json({ error: err.message }); }
 });
 
+app.post('/api/admin/users/:id/send-reset', requireAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, email, full_name, name FROM users WHERE id = $1 AND status = 'active'",
+      [req.params.id]
+    );
+    if (!rows[0]) { res.status(404).json({ error: 'Active user not found.' }); return; }
+
+    const user = rows[0];
+    const email = user.email as string;
+    const displayName = (user.full_name || user.name || email) as string;
+
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+    const expires = new Date(Date.now() + 30 * 60 * 1000); // 30 min for admin-initiated
+    await pool.query('DELETE FROM reset_codes WHERE email = $1', [email.toLowerCase()]);
+    await pool.query('INSERT INTO reset_codes (email, code, expires_at) VALUES ($1, $2, $3)', [email.toLowerCase(), code, expires]);
+
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+
+    if (!smtpHost || !smtpUser || !smtpPass) {
+      res.status(500).json({ error: 'Email service not configured on the server.' }); return;
+    }
+
+    const smtpPort = parseInt(process.env.SMTP_PORT || '587');
+    const transporter = nodemailer.createTransport({
+      host: smtpHost, port: smtpPort, secure: smtpPort === 465,
+      auth: { user: smtpUser, pass: smtpPass },
+    });
+
+    const portalUrl = process.env.PORTAL_URL || 'https://kdci.co/midgard';
+
+    const html = `
+      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden">
+        <div style="background:#E61739;padding:28px 32px">
+          <h1 style="color:white;margin:0;font-size:20px;font-weight:700">Password Reset Request</h1>
+          <p style="color:rgba(255,255,255,0.75);margin:6px 0 0;font-size:13px">Midgard — KDCI Publisher Portal</p>
+        </div>
+        <div style="padding:32px;background:#fafafa">
+          <p style="margin:0 0 20px;color:#333;font-size:15px">Hi <strong>${displayName}</strong>,</p>
+          <p style="margin:0 0 24px;color:#555;font-size:14px;line-height:1.6">
+            An administrator has initiated a password reset for your account.
+            Use the code below on the Midgard portal's <em>Forgot Password</em> page to set a new password.
+            This code expires in <strong>30 minutes</strong>.
+          </p>
+          <div style="text-align:center;margin:28px 0">
+            <div style="display:inline-block;background:#111;color:#fff;font-size:32px;font-weight:900;letter-spacing:10px;padding:18px 36px;border-radius:12px;font-family:monospace">
+              ${code}
+            </div>
+          </div>
+          <p style="margin:24px 0 0;color:#888;font-size:12px;line-height:1.6">
+            If you did not expect this email, you can safely ignore it — your password will not change unless you use the code above.
+          </p>
+        </div>
+        <div style="padding:14px 32px;background:#111;color:#666;font-size:11px;display:flex;justify-content:space-between">
+          <span>KDCI Publisher Portal</span>
+          <span>${new Date().toUTCString()}</span>
+        </div>
+      </div>`;
+
+    await transporter.sendMail({
+      from: `"KDCI Portal" <${smtpUser}>`,
+      to: email,
+      subject: 'Your Midgard Password Reset Code',
+      html,
+    });
+
+    console.log(`[admin-reset] Reset email sent to ${email}`);
+    res.json({ message: `Reset email sent to ${email}.` });
+  } catch (err: any) {
+    console.error('[admin-reset] Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ----- HEALTH -----
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, ts: new Date().toISOString() });

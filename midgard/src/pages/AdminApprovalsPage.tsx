@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
 import { PortalTopBar } from '../components/PortalTopBar';
 import {
-  LayoutGrid, Briefcase, FileText, BookOpen, BookMarked, Image as ImageIcon,
-  LogOut, Settings, ChevronLeft, Check, X, Loader2, AlertCircle,
-  Users, Clock, CheckCircle2, XCircle, RefreshCw, Lock, Unlock,
-  ShieldCheck, ShieldAlert, User, Mail, Calendar, UserCircle2
+  ChevronLeft, Check, X, Loader2, AlertCircle,
+  Clock, CheckCircle2, XCircle, RefreshCw, Lock, Unlock,
+  ShieldCheck, KeyRound, Mail,
 } from 'lucide-react';
-import { getAdminUsers, approveUser, denyUser, unlockUser } from '../lib/api';
+import { getAdminUsers, approveUser, denyUser, unlockUser, adminSendPasswordReset } from '../lib/api';
 
 interface PortalUser {
   id: number;
@@ -24,24 +23,25 @@ interface PortalUser {
 
 type Tab = 'pending' | 'active' | 'denied';
 
-export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const [users, setUsers] = useState<PortalUser[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>('pending');
-  const [denyModal, setDenyModal] = useState<{ userId: number; name: string } | null>(null);
-  const [denyReason, setDenyReason] = useState('');
-  const [actionLoading, setActionLoading] = useState<number | null>(null);
+interface Toast {
+  type: 'success' | 'error';
+  msg: string;
+}
 
-  const handleNavClick = (id: string) => {
-    if (id === 'overview') setView('dashboard');
-    else if (id === 'careers') setView('career-ops');
-    else if (id === 'blog') setView('blog-ops');
-    else if (id === 'case-studies') setView('case-studies-ops');
-    else if (id === 'resources') setView('resources-ops');
-    else if (id === 'portfolio') setView('portfolio-ops');
-    else if (id === 'admin') setView('admin-approvals');
-    else if (id === 'profile') setView('profile');
+export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [users,         setUsers]         = useState<PortalUser[]>([]);
+  const [loading,       setLoading]       = useState(true);
+  const [error,         setError]         = useState<string | null>(null);
+  const [tab,           setTab]           = useState<Tab>('pending');
+  const [denyModal,     setDenyModal]     = useState<{ userId: number; name: string } | null>(null);
+  const [denyReason,    setDenyReason]    = useState('');
+  const [actionLoading, setActionLoading] = useState<number | null>(null);
+  const [resetLoading,  setResetLoading]  = useState<number | null>(null);
+  const [toast,         setToast]         = useState<Toast | null>(null);
+
+  const showToast = (t: Toast) => {
+    setToast(t);
+    setTimeout(() => setToast(null), 5000);
   };
 
   const load = () => {
@@ -85,24 +85,52 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
     finally { setActionLoading(null); }
   };
 
+  const handleSendReset = async (user: PortalUser) => {
+    setResetLoading(user.id);
+    try {
+      const res = await adminSendPasswordReset(user.id);
+      showToast({ type: 'success', msg: res.message || `Reset email sent to ${user.email}.` });
+    } catch (e: any) {
+      showToast({ type: 'error', msg: e.message || 'Failed to send reset email.' });
+    } finally {
+      setResetLoading(null);
+    }
+  };
+
   const filtered = users.filter(u => {
     if (tab === 'pending') return u.status === 'pending';
-    if (tab === 'active') return u.status === 'active';
-    if (tab === 'denied') return u.status === 'denied';
+    if (tab === 'active')  return u.status === 'active';
+    if (tab === 'denied')  return u.status === 'denied';
     return false;
   });
 
   const counts = {
     pending: users.filter(u => u.status === 'pending').length,
-    active: users.filter(u => u.status === 'active').length,
-    denied: users.filter(u => u.status === 'denied').length,
+    active:  users.filter(u => u.status === 'active').length,
+    denied:  users.filter(u => u.status === 'denied').length,
   };
 
   const fmt = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
       <PortalTopBar setView={setView} activeNav="admin-approvals" />
+
+      {/* Toast */}
+      {toast && (
+        <div className={`fixed top-20 left-1/2 -translate-x-1/2 z-[70] flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-2xl border text-sm font-semibold transition-all
+          ${toast.type === 'success'
+            ? 'bg-green-500/10 border-green-500/20 text-green-400'
+            : 'bg-red-500/10 border-red-500/20 text-red-400'}`}>
+          {toast.type === 'success'
+            ? <CheckCircle2 size={16} className="shrink-0" />
+            : <AlertCircle  size={16} className="shrink-0" />}
+          {toast.msg}
+          <button onClick={() => setToast(null)} className="ml-2 opacity-60 hover:opacity-100 transition-opacity">
+            <X size={13} />
+          </button>
+        </div>
+      )}
 
       <main className="p-8 md:p-12">
         <div className="flex justify-between items-center mb-10">
@@ -119,13 +147,15 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
           </button>
         </div>
 
+        {/* Stat cards */}
         <div className="grid grid-cols-3 gap-4 mb-8">
           {([
-            { key: 'pending', label: 'Pending',  icon: Clock,         color: 'text-amber-400',  bg: 'bg-amber-500/10 border-amber-500/20' },
-            { key: 'active',  label: 'Approved', icon: CheckCircle2,  color: 'text-green-400',  bg: 'bg-green-500/10 border-green-500/20' },
-            { key: 'denied',  label: 'Denied',   icon: XCircle,       color: 'text-red-400',    bg: 'bg-red-500/10 border-red-500/20' },
+            { key: 'pending', label: 'Pending',  icon: Clock,        color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+            { key: 'active',  label: 'Approved', icon: CheckCircle2, color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+            { key: 'denied',  label: 'Denied',   icon: XCircle,      color: 'text-red-400',   bg: 'bg-red-500/10 border-red-500/20'     },
           ] as const).map(({ key, label, icon: Icon, color, bg }) => (
-            <div key={key} className={`p-5 rounded-2xl border ${bg} flex items-center gap-4 cursor-pointer ${tab === key ? 'ring-2 ring-white/20' : ''}`}
+            <div key={key}
+              className={`p-5 rounded-2xl border ${bg} flex items-center gap-4 cursor-pointer ${tab === key ? 'ring-2 ring-white/20' : ''}`}
               onClick={() => setTab(key)}>
               <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center ${color}`}><Icon size={20} /></div>
               <div>
@@ -136,12 +166,15 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
           ))}
         </div>
 
+        {/* Tab pills */}
         <div className="flex gap-2 mb-6">
           {(['pending', 'active', 'denied'] as Tab[]).map(t => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${tab === t ? 'bg-white/10 text-white' : 'text-white/30 hover:text-white hover:bg-white/5'}`}>
               {t === 'active' ? 'Approved' : t.charAt(0).toUpperCase() + t.slice(1)}
-              {t === 'pending' && counts.pending > 0 && <span className="ml-2 px-1.5 py-0.5 rounded-full bg-[#E61739] text-[9px]">{counts.pending}</span>}
+              {t === 'pending' && counts.pending > 0 && (
+                <span className="ml-2 px-1.5 py-0.5 rounded-full bg-[#E61739] text-[9px]">{counts.pending}</span>
+              )}
             </button>
           ))}
         </div>
@@ -193,18 +226,25 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
                       <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-wide text-white/50">{user.role}</span>
                     </td>
                     <td className="px-8 py-5 text-white/40 text-sm font-mono">{fmt(user.created_at)}</td>
+
                     {tab === 'denied' && (
                       <td className="px-8 py-5 text-white/40 text-sm max-w-[200px]">{user.deny_reason || '—'}</td>
                     )}
+
                     {tab === 'active' && (
                       <td className="px-8 py-5">
                         {(user.failed_attempts ?? 0) >= 5 ? (
-                          <span className="flex items-center gap-1.5 text-[10px] font-black uppercase text-red-400"><Lock size={12} /> Locked</span>
+                          <span className="flex items-center gap-1.5 text-[10px] font-black uppercase text-red-400">
+                            <Lock size={12} /> Locked
+                          </span>
                         ) : (
-                          <span className="flex items-center gap-1.5 text-[10px] font-black uppercase text-green-400"><ShieldCheck size={12} /> Active</span>
+                          <span className="flex items-center gap-1.5 text-[10px] font-black uppercase text-green-400">
+                            <ShieldCheck size={12} /> Active
+                          </span>
                         )}
                       </td>
                     )}
+
                     {tab === 'pending' && (
                       <td className="px-8 py-5 text-right">
                         <div className="flex items-center justify-end gap-2">
@@ -219,14 +259,28 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
                         </div>
                       </td>
                     )}
+
                     {tab === 'active' && (
                       <td className="px-8 py-5 text-right">
-                        {(user.failed_attempts ?? 0) >= 5 && (
-                          <button onClick={() => handleUnlock(user.id)} disabled={actionLoading === user.id}
-                            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black hover:bg-amber-500/20 transition-all disabled:opacity-50 ml-auto">
-                            {actionLoading === user.id ? <Loader2 size={12} className="animate-spin" /> : <Unlock size={12} />} Unlock
+                        <div className="flex items-center justify-end gap-2">
+                          {(user.failed_attempts ?? 0) >= 5 && (
+                            <button onClick={() => handleUnlock(user.id)} disabled={actionLoading === user.id}
+                              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black hover:bg-amber-500/20 transition-all disabled:opacity-50">
+                              {actionLoading === user.id ? <Loader2 size={12} className="animate-spin" /> : <Unlock size={12} />} Unlock
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleSendReset(user)}
+                            disabled={resetLoading === user.id}
+                            title={`Send password reset email to ${user.email}`}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-black hover:bg-blue-500/20 transition-all disabled:opacity-50"
+                          >
+                            {resetLoading === user.id
+                              ? <Loader2 size={12} className="animate-spin" />
+                              : <KeyRound size={12} />}
+                            Send Reset
                           </button>
-                        )}
+                        </div>
                       </td>
                     )}
                   </tr>
@@ -237,16 +291,22 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
         </div>
       </main>
 
+      {/* Deny modal */}
       {denyModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-6">
           <div className="bg-[#1a1a1a] border border-white/10 rounded-[2rem] p-8 w-full max-w-md shadow-2xl">
             <h3 className="text-lg font-bold text-white mb-2">Deny Account</h3>
-            <p className="text-white/50 text-sm mb-6">Deny <span className="text-white font-bold">{denyModal.name}</span>? Optionally provide a reason.</p>
-            <textarea value={denyReason} onChange={e => setDenyReason(e.target.value)} rows={3} placeholder="Reason for denial (optional)..."
+            <p className="text-white/50 text-sm mb-6">
+              Deny <span className="text-white font-bold">{denyModal.name}</span>? Optionally provide a reason.
+            </p>
+            <textarea value={denyReason} onChange={e => setDenyReason(e.target.value)} rows={3}
+              placeholder="Reason for denial (optional)..."
               className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#E61739] placeholder:text-white/20 resize-none mb-5" />
             <div className="flex gap-3">
               <button onClick={() => { setDenyModal(null); setDenyReason(''); }}
-                className="flex-1 py-3 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:bg-white/5 transition-all">Cancel</button>
+                className="flex-1 py-3 rounded-xl border border-white/10 text-white/60 text-sm font-bold hover:bg-white/5 transition-all">
+                Cancel
+              </button>
               <button onClick={handleDenyConfirm} disabled={actionLoading === denyModal.userId}
                 className="flex-1 py-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 text-sm font-bold hover:bg-red-500/30 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
                 {actionLoading === denyModal.userId ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />} Confirm Deny

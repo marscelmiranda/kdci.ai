@@ -55,6 +55,7 @@ export const approveUser = (id: number) => request<any>(`/api/admin/users/${id}/
 export const denyUser = (id: number, reason?: string) =>
   request<any>(`/api/admin/users/${id}/deny`, { method: 'PUT', body: JSON.stringify({ reason }) });
 export const unlockUser = (id: number) => request<any>(`/api/admin/users/${id}/unlock`, { method: 'PUT' });
+export const adminSendPasswordReset = (id: number) => request<{ message: string }>(`/api/admin/users/${id}/send-reset`, { method: 'POST' });
 
 // ---- Jobs ----
 export const getPublishedJobs  = ()           => request('/api/jobs');
