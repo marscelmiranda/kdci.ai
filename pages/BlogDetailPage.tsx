@@ -97,6 +97,150 @@ function generateTableHTML(data: any): string {
   return `<table style="${tableStyle}">\n${thead}\n${tbody}\n</table>`;
 }
 
+const VideoBlockRenderer: React.FC<{ block: any }> = ({ block }) => {
+  const vc = block.content || {};
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFsChange);
+    return () => {
+      window.removeEventListener('resize', check);
+      document.removeEventListener('fullscreenchange', onFsChange);
+    };
+  }, []);
+
+  const getAspectPadding = (ar: string | undefined): string => {
+    if (ar === '4/3') return '75%';
+    if (ar === '1/1') return '100%';
+    if (ar === '9/16') return '177.78%';
+    if (ar === 'custom') return `${(((vc.customAspectH || 9) / (vc.customAspectW || 16)) * 100).toFixed(2)}%`;
+    return '56.25%';
+  };
+
+  const parseVideoUrl = (url: string): { sourceType: string; videoId: string } => {
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
+    if (ytMatch) return { sourceType: 'youtube', videoId: ytMatch[1] };
+    const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vimeoMatch) return { sourceType: 'vimeo', videoId: vimeoMatch[1] };
+    return { sourceType: '', videoId: '' };
+  };
+
+  let sourceType = vc.sourceType;
+  let videoId = vc.videoId;
+  if ((!sourceType || !videoId) && vc.url) {
+    const parsed = parseVideoUrl(vc.url);
+    sourceType = parsed.sourceType;
+    videoId = parsed.videoId;
+  }
+
+  const ar = getAspectPadding(isMobile ? (vc.mobileAspectRatio || vc.aspectRatio) : vc.aspectRatio);
+  const alignClass = vc.alignment === 'left' ? 'mr-auto' : vc.alignment === 'right' ? 'ml-auto' : 'mx-auto';
+  const shadow = vc.boxShadow ? 'shadow-2xl' : '';
+  const radius = `${vc.borderRadius ?? 8}px`;
+  const maxW = vc.maxWidth || '100%';
+  const tapEnabled = vc.tapToFullscreen !== false;
+
+  const isIOS = typeof navigator !== 'undefined' &&
+    (/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
+  const embedParams = (sType: string, vId: string): string => {
+    const p = new URLSearchParams({
+      ...(vc.autoplay ? { autoplay: '1', ...(sType === 'youtube' ? { mute: '1' } : { muted: '1' }) } : {}),
+      ...(vc.loop ? (sType === 'youtube' ? { loop: '1', playlist: vId } : { loop: '1' }) : {}),
+      controls: vc.showControls === false ? '0' : '1',
+      ...(sType === 'youtube' ? { rel: '0' } : { byline: '0', portrait: '0', title: '0' }),
+    });
+    const base = sType === 'youtube'
+      ? `https://www.youtube.com/embed/${vId}`
+      : `https://player.vimeo.com/video/${vId}`;
+    return `${base}?${p}`;
+  };
+
+  const handleFullscreen = () => {
+    if (!tapEnabled) return;
+    if (isIOS) {
+      if (sourceType === 'youtube' && videoId) {
+        window.location.href = `youtube://watch?v=${videoId}`;
+        setTimeout(() => window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank'), 500);
+      } else if (sourceType === 'vimeo' && videoId) {
+        window.open(`https://vimeo.com/${videoId}`, '_blank');
+      }
+      return;
+    }
+    if (containerRef.current) {
+      if (isFullscreen) document.exitFullscreen?.();
+      else containerRef.current.requestFullscreen?.();
+    }
+  };
+
+  if (vc.sourceType === 'file' && vc.fileObjectUrl) {
+    return (
+      <div className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
+        <video src={vc.fileObjectUrl} poster={vc.posterUrl || vc.thumbnailDataUrl}
+          autoPlay={vc.autoplay} loop={!!vc.loop} muted={vc.autoplay || !!vc.muted}
+          controls={vc.showControls !== false} playsInline
+          className={`w-full ${shadow}`} style={{ borderRadius: radius }} />
+        {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
+      </div>
+    );
+  }
+
+  if ((sourceType === 'youtube' || sourceType === 'vimeo') && videoId) {
+    const btnLabel = isIOS ? 'Open in App' : isFullscreen ? 'Exit' : 'Fullscreen';
+    return (
+      <div className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
+        <div
+          ref={containerRef}
+          className={`relative overflow-hidden ${shadow}`}
+          style={{ paddingTop: ar, borderRadius: radius }}
+        >
+          <iframe
+            src={embedParams(sourceType, videoId)}
+            className="absolute inset-0 w-full h-full"
+            frameBorder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            title="Video"
+          />
+          {isMobile && tapEnabled && (
+            <button
+              onClick={handleFullscreen}
+              className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg backdrop-blur-sm transition-all select-none"
+              aria-label={btnLabel}
+            >
+              {isIOS ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 3 21 3 21 9"/>
+                  <polyline points="9 21 3 21 3 15"/>
+                  <line x1="21" y1="3" x2="14" y2="10"/>
+                  <line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+              )}
+              {btnLabel}
+            </button>
+          )}
+        </div>
+        {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const renderBlocks = (contentStr: string) => {
   let blocks: any[] = [];
   try {
@@ -160,51 +304,8 @@ const renderBlocks = (contentStr: string) => {
             )}
           </div>
         );
-      case 'video': {
-        const vc = block.content || {};
-        const ar = vc.aspectRatio === '4/3' ? '75%' : vc.aspectRatio === '1/1' ? '100%' : vc.aspectRatio === 'custom'
-          ? `${(((vc.customAspectH || 9) / (vc.customAspectW || 16)) * 100).toFixed(2)}%` : '56.25%';
-        const alignClass = vc.alignment === 'left' ? 'mr-auto' : vc.alignment === 'right' ? 'ml-auto' : 'mx-auto';
-        const shadow = vc.boxShadow ? 'shadow-2xl' : '';
-        const radius = `${vc.borderRadius ?? 8}px`;
-        const maxW = vc.maxWidth || '100%';
-        const embedParams = (sourceType: string, videoId: string) => {
-          const p = new URLSearchParams({
-            ...(vc.autoplay ? { autoplay: '1', ...(sourceType === 'youtube' ? { mute: '1' } : { muted: '1' }) } : {}),
-            ...(vc.loop ? sourceType === 'youtube' ? { loop: '1', playlist: videoId } : { loop: '1' } : {}),
-            controls: vc.showControls === false ? '0' : '1',
-            ...(sourceType === 'youtube' ? { rel: '0' } : { byline: '0', portrait: '0', title: '0' }),
-          });
-          const base = sourceType === 'youtube'
-            ? `https://www.youtube.com/embed/${videoId}`
-            : `https://player.vimeo.com/video/${videoId}`;
-          return `${base}?${p}`;
-        };
-        if (vc.sourceType === 'file' && vc.fileObjectUrl) {
-          return (
-            <div key={i} className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
-              <video src={vc.fileObjectUrl} poster={vc.posterUrl || vc.thumbnailDataUrl}
-                autoPlay={vc.autoplay} loop={!!vc.loop} muted={vc.autoplay || !!vc.muted}
-                controls={vc.showControls !== false} playsInline
-                className={`w-full ${shadow}`} style={{ borderRadius: radius }} />
-              {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
-            </div>
-          );
-        }
-        if ((vc.sourceType === 'youtube' || vc.sourceType === 'vimeo') && vc.videoId) {
-          return (
-            <div key={i} className={`my-8 ${alignClass}`} style={{ maxWidth: maxW }}>
-              <div className={`relative overflow-hidden ${shadow}`} style={{ paddingTop: ar, borderRadius: radius }}>
-                <iframe src={embedParams(vc.sourceType, vc.videoId)}
-                  className="absolute inset-0 w-full h-full" frameBorder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen title="Video" />
-              </div>
-              {vc.caption && <p className="text-center text-sm text-slate-400 mt-3">{vc.caption}</p>}
-            </div>
-          );
-        }
-        return null;
-      }
+      case 'video':
+        return <VideoBlockRenderer key={i} block={block} />;
       case 'table': {
         const tableData = typeof block.content?.tableData === 'string'
           ? JSON.parse(block.content.tableData)

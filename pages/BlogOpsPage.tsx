@@ -227,12 +227,90 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
           {block.content.url && <div className="mt-4 p-2 border border-white/10 rounded-lg"><img loading="lazy" src={block.content.url} alt={block.content.alt} className="max-h-48 object-contain mx-auto" /></div>}
         </div>
       );
-      case 'video': return (
-        <div className="space-y-4">
-          <input type="text" value={block.content.url || ''} onChange={e => updateBlock(block.id, { ...block.content, url: e.target.value })} placeholder="YouTube or Vimeo URL" className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E61739] focus:outline-none" />
-          {block.content.url && <div className="mt-4 aspect-video bg-black/40 border border-white/10 rounded-lg flex items-center justify-center text-white/40 shadow-inner">Live Video Embedded Preview</div>}
-        </div>
-      );
+      case 'video': {
+        const parseVideoUrl = (url: string) => {
+          const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
+          if (ytMatch) return { sourceType: 'youtube', videoId: ytMatch[1] };
+          const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+          if (vimeoMatch) return { sourceType: 'vimeo', videoId: vimeoMatch[1] };
+          return { sourceType: '', videoId: '' };
+        };
+        const inp = "w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-[#ad1457] focus:outline-none";
+        const lbl = "block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1";
+        return (
+          <div className="space-y-4">
+            <div>
+              <label className={lbl}>YouTube or Vimeo URL</label>
+              <input
+                type="text"
+                value={block.content.url || ''}
+                onChange={e => {
+                  const { sourceType, videoId } = parseVideoUrl(e.target.value);
+                  updateBlock(block.id, { ...block.content, url: e.target.value, sourceType, videoId });
+                }}
+                placeholder="https://www.youtube.com/watch?v=..."
+                className={inp}
+              />
+              {block.content.videoId && (
+                <p className="mt-1 text-[11px] text-green-400/80 font-medium">
+                  ✓ Detected {block.content.sourceType === 'youtube' ? 'YouTube' : 'Vimeo'} · ID: {block.content.videoId}
+                </p>
+              )}
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={lbl}>Desktop Aspect Ratio</label>
+                <select
+                  value={block.content.aspectRatio || '16/9'}
+                  onChange={e => updateBlock(block.id, { ...block.content, aspectRatio: e.target.value })}
+                  className={inp}
+                >
+                  <option value="16/9">16:9 — Widescreen</option>
+                  <option value="4/3">4:3 — Standard</option>
+                  <option value="1/1">1:1 — Square</option>
+                </select>
+              </div>
+              <div>
+                <label className={lbl}>Mobile Aspect Ratio</label>
+                <select
+                  value={block.content.mobileAspectRatio || '16/9'}
+                  onChange={e => updateBlock(block.id, { ...block.content, mobileAspectRatio: e.target.value })}
+                  className={inp}
+                >
+                  <option value="16/9">16:9 — Widescreen</option>
+                  <option value="9/16">9:16 — Portrait (Shorts)</option>
+                  <option value="4/3">4:3 — Standard</option>
+                  <option value="1/1">1:1 — Square</option>
+                </select>
+              </div>
+            </div>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <div
+                className={`mt-0.5 w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-all ${block.content.tapToFullscreen !== false ? 'bg-[#ad1457] border-[#ad1457]' : 'border-white/30'}`}
+                onClick={() => updateBlock(block.id, { ...block.content, tapToFullscreen: block.content.tapToFullscreen === false ? true : false })}
+              >
+                {block.content.tapToFullscreen !== false && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                )}
+              </div>
+              <div onClick={() => updateBlock(block.id, { ...block.content, tapToFullscreen: block.content.tapToFullscreen === false ? true : false })}>
+                <span className="text-sm text-white font-medium">Tap to Fullscreen on Mobile</span>
+                <p className="text-[11px] text-white/40 mt-0.5">Android: native fullscreen · iOS: opens in YouTube / Vimeo app</p>
+              </div>
+            </label>
+            <div>
+              <label className={lbl}>Caption (optional)</label>
+              <input
+                type="text"
+                value={block.content.caption || ''}
+                onChange={e => updateBlock(block.id, { ...block.content, caption: e.target.value })}
+                placeholder="Caption shown below the video"
+                className={inp}
+              />
+            </div>
+          </div>
+        );
+      }
       case 'divider': return <div className="py-4"><hr className="border-white/10" /></div>;
       case 'pull_quote': return (
         <div className="space-y-4">
