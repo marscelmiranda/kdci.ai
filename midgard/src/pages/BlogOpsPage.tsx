@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ViewType } from '../types';
-import { PortalTopNav } from '../components/PortalTopNav';
+import { PortalSidebar } from '../components/PortalSidebar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import { TableBuilder, generateTableHTML } from '../components/TableBuilder';
 import {
@@ -472,10 +472,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const filteredPosts = posts.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans">
-      <PortalTopNav setView={setView} activeNav="blog-ops" />
+    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+      <PortalSidebar setView={setView} activeNav="blog-ops" />
 
-      <main className="flex-grow flex flex-col min-h-screen">
+      <main className="flex-1 min-w-0 overflow-y-auto pt-14 md:pt-0 flex flex-col">
         {viewState === 'list' && (
           <div className="p-4 sm:p-8 md:p-12 overflow-y-auto flex-grow">
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalTopNav } from '../components/PortalTopNav';
+import { PortalSidebar } from '../components/PortalSidebar';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, BookMarked, Image as ImageIcon,
   LogOut, Settings, ChevronLeft, Check, X, Loader2, AlertCircle,
@@ -101,10 +101,10 @@ export const AdminApprovalsPage = ({ setView }: { setView: (v: ViewType) => void
   const fmt = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans">
-      <PortalTopNav setView={setView} activeNav="admin-approvals" />
+    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+      <PortalSidebar setView={setView} activeNav="admin-approvals" />
 
-      <main className="flex-grow p-8 md:p-12 overflow-y-auto">
+      <main className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto pt-14 md:pt-12">
         <div className="flex justify-between items-center mb-10">
           <div>
             <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-2">

@@ -1,13 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ViewType } from '../types';
-import { Logo } from '../components/Logo';
+import { PortalSidebar } from '../components/PortalSidebar';
 import {
   Briefcase, FileText, BookOpen, BookMarked,
-  Image as ImageIcon, Bell, LogOut,
-  ChevronRight, Mail, Phone, Key, Edit3, Users, UserCircle2,
-  Building2, MapPin, Lock, Eye, EyeOff, Loader2, AlertCircle,
-  CheckCircle2, ShieldQuestion, X, ClipboardList, Menu, ChevronDown,
-  LayoutDashboard, Settings, ExternalLink,
+  Image as ImageIcon, Users, UserCircle2,
+  ChevronRight, Lock, Eye, EyeOff, Loader2, AlertCircle,
+  CheckCircle2, ShieldQuestion, X, ClipboardList,
 } from 'lucide-react';
 import { getMe, forgotPassword, verifySecret, resetPassword } from '../lib/api';
 
@@ -20,19 +18,6 @@ interface DashboardCardProps {
   actionText: string;
   color: string;
   onClick: () => void;
-}
-
-interface SidebarProfile {
-  avatarImage: string;
-  firstName: string;
-  lastName: string;
-  positionTitle: string;
-  rank: string;
-  department: string;
-  city: string;
-  state: string;
-  workPhone: string;
-  mobilePhone: string;
 }
 
 // ── Dashboard Card ────────────────────────────────────────────────────────────
@@ -63,11 +48,6 @@ const DashboardCard = ({ title, description, icon, actionText, color, onClick }:
 
 export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: ViewType) => void; userRole: string }) => {
   const [userEmail, setUserEmail] = useState('');
-  const [userName, setUserName]   = useState('');
-  const [profile, setProfile]     = useState<SidebarProfile | null>(null);
-  const [isMobileMenuOpen, setMobileMenu] = useState(false);
-  const [isProfileOpen, setProfileOpen]   = useState(false);
-  const profileRef = useRef<HTMLDivElement>(null);
 
   // Change-password modal state
   const [cpOpen, setCpOpen]                   = useState(false);
@@ -86,71 +66,13 @@ export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: Vie
     return () => { document.body.style.backgroundColor = ''; };
   }, []);
 
-  // Lock scroll when mobile menu is open
+  // Fetch user email for change-password flow
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileMenuOpen]);
-
-  // Close profile dropdown on outside click
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
-        setProfileOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    getMe().then(u => { setUserEmail(u.email); }).catch(() => {});
   }, []);
-
-  // Fetch user data
-  useEffect(() => {
-    getMe().then(u => {
-      setUserEmail(u.email);
-      setUserName(u.name || '');
-      const key = `userProfile_${u.email}`;
-      const stored = localStorage.getItem(key);
-      if (stored) {
-        try { setProfile(JSON.parse(stored)); return; } catch {}
-      }
-      const parts = (u.name || '').trim().split(/\s+/);
-      const initial: SidebarProfile = {
-        avatarImage: '', firstName: parts[0] || '', lastName: parts.slice(1).join(' ') || '',
-        positionTitle: '', rank: '', department: '', city: '', state: '',
-        workPhone: '', mobilePhone: '',
-      };
-      const fullInitial = {
-        coverImage: '', avatarImage: '', idPhotoImage: '',
-        city: '', state: '',
-        positionTitle: '', rank: '', department: '', hireDate: '',
-        employeeId: '', employmentType: '', workLocation: '', reportsTo: '',
-        directReports: [],
-        firstName: parts[0] || '', lastName: parts.slice(1).join(' ') || '', middleName: '',
-        dateOfBirth: '', gender: '', pronouns: '', nationality: '', maritalStatus: '',
-        personalEmail: '', workPhone: '', mobilePhone: '', officeLocation: '', linkedinUrl: '',
-        workAddress: { street: '', city: '', state: '', zip: '' },
-        emergencyContacts: [],
-      };
-      localStorage.setItem(key, JSON.stringify(fullInitial));
-      setProfile(initial);
-    }).catch(() => {});
-  }, []);
-
-  // Derived display values
-  const displayName     = profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') || userName : userName;
-  const displayTitle    = profile?.positionTitle || '';
-  const displayPhone    = profile?.workPhone || profile?.mobilePhone || '';
-  const displayAvatar   = profile?.avatarImage || '';
-  const displayLocation = profile ? [profile.city, profile.state].filter(Boolean).join(', ') : '';
-  const displayDept     = profile?.department || '';
-  const initials        = displayName
-    ? displayName.split(' ').map((p: string) => p[0]).join('').slice(0, 2).toUpperCase()
-    : (userEmail[0] || '?').toUpperCase();
-  const firstName       = displayName.split(' ')[0] || 'Editor';
 
   // Change-password modal helpers
   const openChangePassword = async () => {
-    setProfileOpen(false);
     setCpError(null); setCpStep(1); setCpSecretAnswer('');
     setCpNewPassword(''); setCpConfirmPassword(''); setCpCode(''); setCpSecretQuestion('');
     setCpLoading(true); setCpOpen(true);
@@ -203,203 +125,17 @@ export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: Vie
     return !['approvals', 'manpower'].includes(card);
   };
 
-  // Filtered nav items based on role
-  const ALL_NAV = [
-    { id: 'dashboard',          label: 'Dashboard',          view: 'dashboard'          as ViewType, icon: <LayoutDashboard size={15} />, card: null },
-    { id: 'career-ops',         label: 'Career Ops',         view: 'career-ops'         as ViewType, icon: <Briefcase size={15} />,       card: 'careers'     },
-    { id: 'manpower-requests',  label: 'Manpower',           view: 'manpower-requests'  as ViewType, icon: <ClipboardList size={15} />,    card: 'manpower'    },
-    { id: 'blog-ops',           label: 'Blogs',              view: 'blog-ops'           as ViewType, icon: <FileText size={15} />,         card: 'blogs'       },
-    { id: 'resources-ops',      label: 'Resources',          view: 'resources-ops'      as ViewType, icon: <BookOpen size={15} />,         card: 'resources'   },
-    { id: 'portfolio-ops',      label: 'Portfolio',          view: 'portfolio-ops'      as ViewType, icon: <ImageIcon size={15} />,        card: 'portfolio'   },
-    { id: 'case-studies-ops',   label: 'Case Studies',       view: 'case-studies-ops'   as ViewType, icon: <BookMarked size={15} />,       card: 'casestudies' },
-    { id: 'admin-approvals',    label: 'User Approvals',     view: 'admin-approvals'    as ViewType, icon: <Users size={15} />,            card: 'approvals'   },
-    { id: 'profile',            label: 'My Profile',         view: 'profile'            as ViewType, icon: <UserCircle2 size={15} />,      card: 'profile'     },
-  ] as const;
-
-  const navItems = ALL_NAV.filter(item => item.card === null || show(item.card as any));
-
-  const handleNavClick = (view: ViewType) => {
-    setMobileMenu(false);
-    setProfileOpen(false);
-    setView(view);
-  };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans flex flex-col">
+    <div className="h-screen bg-[#0a0a0a] text-white font-sans flex overflow-hidden">
+      <PortalSidebar setView={setView} activeNav="dashboard" />
 
-      {/* ═══════════════════════════════════════════════════════
-          TOP NAVBAR
-      ═══════════════════════════════════════════════════════ */}
-      <nav className="sticky top-0 z-50 bg-[#0d0d0d]/95 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-
-          {/* Left: Logo + badge */}
-          <div className="flex items-center gap-3 shrink-0">
-            <a href="/" className="hover:opacity-80 transition-opacity">
-              <Logo isDarkHero={true} />
-            </a>
-            <span className="hidden sm:inline-flex px-2.5 py-1 rounded-lg bg-[#E61739]/10 border border-[#E61739]/20 text-[#E61739] text-[10px] font-black uppercase tracking-widest">
-              Publisher Portal
-            </span>
-          </div>
-
-          {/* Center: Desktop nav links (scrollable on mid-size screens) */}
-          <div className="hidden md:flex items-center gap-0.5 overflow-x-auto no-scrollbar">
-            {navItems.map(item => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.view)}
-                className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl text-[12px] font-semibold whitespace-nowrap transition-all text-white/50 hover:text-white hover:bg-white/5"
-              >
-                {item.icon}
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Right: Bell + Profile avatar */}
-          <div className="flex items-center gap-2 shrink-0">
-            <button className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/20 transition-all">
-              <Bell size={16} />
-            </button>
-
-            {/* Profile avatar dropdown */}
-            <div className="relative" ref={profileRef}>
-              <button
-                onClick={() => setProfileOpen(prev => !prev)}
-                className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
-                aria-label="Profile menu"
-              >
-                {displayAvatar ? (
-                  <img src={displayAvatar} alt="Avatar" className="w-7 h-7 rounded-full object-cover border border-white/10" />
-                ) : (
-                  <div className="w-7 h-7 rounded-full bg-[#E61739]/20 border border-[#E61739]/30 flex items-center justify-center text-[11px] font-black text-[#E61739] select-none">
-                    {initials}
-                  </div>
-                )}
-                <span className="hidden sm:block text-xs font-semibold text-white/70 group-hover:text-white transition-colors max-w-[80px] truncate">
-                  {firstName}
-                </span>
-                <ChevronDown
-                  size={13}
-                  className={`text-white/40 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`}
-                />
-              </button>
-
-              {/* Dropdown */}
-              {isProfileOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 bg-[#161616] border border-white/10 rounded-2xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.7)] overflow-hidden z-50">
-
-                  {/* Profile header */}
-                  <div className="p-5 flex items-center gap-4 border-b border-white/5">
-                    <div className="relative shrink-0">
-                      {displayAvatar ? (
-                        <img src={displayAvatar} alt="Avatar" className="w-14 h-14 rounded-2xl object-cover border-2 border-white/10" />
-                      ) : (
-                        <div className="w-14 h-14 rounded-2xl bg-[#E61739]/15 border-2 border-[#E61739]/20 flex items-center justify-center text-xl font-black text-[#E61739] select-none">
-                          {initials}
-                        </div>
-                      )}
-                      <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-[#161616]" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="font-bold text-white text-sm truncate">
-                        {displayName || <span className="text-white/30 italic">No name set</span>}
-                      </div>
-                      {displayTitle && (
-                        <div className="text-[#E61739] text-[10px] font-black uppercase tracking-widest mt-0.5">{displayTitle}</div>
-                      )}
-                      {displayDept && (
-                        <div className="flex items-center gap-1 text-white/30 text-[11px] mt-1">
-                          <Building2 size={10} />{displayDept}
-                        </div>
-                      )}
-                      {displayLocation && (
-                        <div className="flex items-center gap-1 text-white/30 text-[11px]">
-                          <MapPin size={10} />{displayLocation}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Contact details */}
-                  <div className="px-5 py-3 space-y-2 border-b border-white/5">
-                    <div className="flex items-center gap-2.5 text-xs text-white/50">
-                      <Mail size={13} className="text-white/30 shrink-0" />
-                      <span className="truncate">{userEmail || '—'}</span>
-                    </div>
-                    {displayPhone && (
-                      <div className="flex items-center gap-2.5 text-xs text-white/50">
-                        <Phone size={13} className="text-white/30 shrink-0" />
-                        {displayPhone}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="p-2">
-                    <button
-                      onClick={() => { setProfileOpen(false); setView('profile'); }}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all text-left"
-                    >
-                      <Edit3 size={15} className="shrink-0" /> Edit Profile
-                    </button>
-                    <button
-                      onClick={openChangePassword}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all text-left"
-                    >
-                      <Settings size={15} className="shrink-0" /> Change Password
-                    </button>
-                    <div className="border-t border-white/5 mt-1 pt-1">
-                      <button
-                        onClick={() => { setProfileOpen(false); setView('login'); }}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#E61739] hover:bg-[#E61739]/10 transition-all text-left"
-                      >
-                        <LogOut size={15} className="shrink-0" /> Sign Out
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Hamburger — mobile only */}
-            <button
-              onClick={() => setMobileMenu(prev => !prev)}
-              className="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile nav drawer */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-white/5 bg-[#0d0d0d] px-4 py-3 flex flex-col gap-1">
-            {navItems.map(item => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.view)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left w-full text-white/50 hover:text-white hover:bg-white/5 transition-all"
-              >
-                {item.icon}
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
-
-      {/* ═══════════════════════════════════════════════════════
-          MAIN CONTENT
-      ═══════════════════════════════════════════════════════ */}
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 md:py-12">
+      <main className="flex-1 min-w-0 overflow-y-auto p-8 md:p-12">
 
         {/* Page header */}
         <div className="mb-8 md:mb-10">
           <h1 className="text-2xl md:text-4xl font-heading font-bold">
-            Welcome back, {firstName}.
+            Welcome to your portal.
           </h1>
           <p className="text-white/40 text-sm font-medium mt-2">
             Manage your content pipeline and talent acquisition.

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalTopNav } from '../components/PortalTopNav';
+import { PortalSidebar } from '../components/PortalSidebar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import {
   getMe,
@@ -143,9 +143,9 @@ export const ManpowerRequestsPage = ({
     s ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-sans">
-      <PortalTopNav setView={setView} activeNav="manpower-requests" />
-      <main className="flex-grow p-8 md:p-12 overflow-y-auto">
+    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+      <PortalSidebar setView={setView} activeNav="manpower-requests" />
+      <main className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto pt-14 md:pt-12">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-10">
