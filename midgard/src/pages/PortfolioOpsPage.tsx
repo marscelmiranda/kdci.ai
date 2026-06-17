@@ -1,14 +1,14 @@
 import React from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import { ChevronLeft, Plus } from 'lucide-react';
 
 export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="portfolio-ops" />
+      <PortalTopBar setView={setView} activeNav="portfolio-ops" />
 
-      <main className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto pt-14 md:pt-12">
+      <main className="p-8 md:p-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-10">
             <div>

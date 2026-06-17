@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ImagePicker } from '../components/ImagePicker';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, BookMarked,
@@ -250,9 +250,9 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="case-studies-ops" />
+      <PortalTopBar setView={setView} activeNav="case-studies-ops" />
 
-      <main className="flex-1 min-w-0 overflow-y-auto pt-14 md:pt-0 flex flex-col">
+      <main className="flex flex-col">
 
         {/* ── LIST VIEW ── */}
         {viewState === 'list' && (

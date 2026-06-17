@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import {
   Briefcase, FileText, BookOpen, BookMarked,
   Image as ImageIcon, Users, UserCircle2,
@@ -127,10 +127,10 @@ export const PublisherDashboardPage = ({ setView, userRole }: { setView: (v: Vie
 
 
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white font-sans flex overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="dashboard" />
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+      <PortalTopBar setView={setView} activeNav="dashboard" />
 
-      <main className="flex-1 min-w-0 overflow-y-auto p-8 md:p-12">
+      <main className="p-8 md:p-12">
 
         {/* Page header */}
         <div className="mb-8 md:mb-10">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import {
   getMe,
@@ -144,8 +144,8 @@ export const ManpowerRequestsPage = ({
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="manpower-requests" />
-      <main className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto pt-14 md:pt-12">
+      <PortalTopBar setView={setView} activeNav="manpower-requests" />
+      <main className="p-8 md:p-12">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-10">

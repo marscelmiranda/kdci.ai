@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import { getAllJobs, createJob, updateJob, deleteJob, getMe, getAllManpowerRequests, assignManpowerRequest, unassignManpowerRequest, publishManpowerRequest, updateManpowerRequest } from '../lib/api';
 import {
@@ -232,9 +232,9 @@ export const CareerOpsPage = ({ setView, userRole = '' }: { setView: (v: ViewTyp
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="career-ops" />
+      <PortalTopBar setView={setView} activeNav="career-ops" />
 
-      <main className="flex-1 min-w-0 p-8 md:p-12 overflow-y-auto pt-14 md:pt-12">
+      <main className="p-8 md:p-12">
         <div className="flex justify-between items-center mb-10">
           <div>
             <div className="flex items-center gap-2 text-white/40 text-[10px] font-black uppercase tracking-widest mb-2">

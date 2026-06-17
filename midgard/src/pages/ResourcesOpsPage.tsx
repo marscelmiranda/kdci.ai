@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import { RichTextEditor } from '../components/RichTextEditor';
 import {
   ChevronLeft, BookOpen, TrendingUp, Presentation, Plus, Search, Edit2, Eye, Trash2, LogOut, Settings, LayoutGrid, Briefcase, FileText, Image as ImageIcon,
@@ -303,9 +303,9 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar setView={setView} activeNav="resources-ops" />
+      <PortalTopBar setView={setView} activeNav="resources-ops" />
 
-      <main className="flex-1 min-w-0 overflow-y-auto pt-14 md:pt-0 flex flex-col relative">
+      <main className="flex flex-col relative">
 
         {/* ─── LIST VIEW ─── */}
         {viewState === 'list' && (

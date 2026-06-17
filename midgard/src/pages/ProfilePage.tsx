@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ViewType } from '../types';
-import { PortalSidebar } from '../components/PortalSidebar';
+import { PortalTopBar } from '../components/PortalTopBar';
 import {
   LayoutGrid, Briefcase, FileText, BookOpen, BookMarked, Image as ImageIcon,
   LogOut, Settings, Users, UserCircle2, Pencil, Camera, Plus, Trash2,
@@ -246,14 +246,14 @@ export const ProfilePage = ({ setView }: { setView: (v: ViewType) => void }) => 
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
-      <PortalSidebar
+      <PortalTopBar
         setView={setView}
         activeNav="profile"
         onSignOut={() => { if (hasUnsaved && !window.confirm('You have unsaved changes. Leave anyway?')) return; setView('login'); }}
       />
 
       {/* ── Main Content ── */}
-      <main className="flex-1 min-w-0 overflow-y-auto pt-14 md:pt-0 pb-20">
+      <main className="pb-20">
 
         {/* ── HERO ── */}
         <div className="relative">
