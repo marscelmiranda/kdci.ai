@@ -46,6 +46,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', notes: '' });
   const [submitted, setSubmitted] = useState(false);
   const captchaRef = useRef<CaptchaHandle>(null);
+  const modalCaptchaRef = useRef<CaptchaHandle>(null);
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (captchaRef.current?.isBot()) return;
@@ -66,6 +67,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
   const [modalSubmitted, setModalSubmitted] = useState(false);
   const handleModalForm = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (modalCaptchaRef.current?.isBot()) return;
     try {
       await fetch('/api/contact', {
         method: 'POST',
@@ -1050,6 +1052,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                   <div>
                     <textarea rows={3} className={lightInp + " resize-none"} placeholder="How can we help you?" value={modalForm.notes} onChange={e => setModalForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
+                  <Captcha ref={modalCaptchaRef} onVerify={() => {}} theme="light" />
                   <div className="flex gap-3 pt-2">
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
