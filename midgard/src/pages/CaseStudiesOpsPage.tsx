@@ -249,10 +249,10 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
   const sectionHeadingCls = "text-[10px] font-black uppercase tracking-widest text-[#E61739] mb-4 mt-8";
 
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col font-sans overflow-hidden">
       <PortalTopBar setView={setView} activeNav="case-studies-ops" />
 
-      <main className="flex flex-col">
+      <main className="flex-1 overflow-y-auto flex flex-col">
 
         {/* ── LIST VIEW ── */}
         {viewState === 'list' && (
@@ -372,7 +372,7 @@ export const CaseStudiesOpsPage = ({ setView }: { setView: (v: ViewType) => void
 
         {/* ── EDITOR VIEW ── */}
         {viewState === 'editor' && (
-          <form onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen">
+          <form onSubmit={handleSave} className="flex-grow flex flex-col">
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
               <div className="flex items-center gap-4">
                 <button type="button" onClick={() => setViewState('list')} className="p-2 text-white/40 hover:text-white hover:bg-white/5 rounded-lg"><ChevronLeft size={20} /></button>

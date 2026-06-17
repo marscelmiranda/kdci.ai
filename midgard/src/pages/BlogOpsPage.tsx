@@ -472,12 +472,12 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
   const filteredPosts = posts.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col font-sans overflow-hidden">
       <PortalTopBar setView={setView} activeNav="blog-ops" />
 
-      <main className="flex flex-col">
+      <main className="flex-1 overflow-y-auto flex flex-col">
         {viewState === 'list' && (
-          <div className="p-4 sm:p-8 md:p-12 overflow-y-auto flex-grow">
+          <div className="p-4 sm:p-8 md:p-12 flex-grow">
 
             {/* ── Header ── */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 sm:mb-10">
@@ -590,7 +590,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         )}
 
         {viewState === 'preview' && (
-          <div className="flex-grow flex flex-col min-h-screen overflow-y-auto bg-white">
+          <div className="flex-grow flex flex-col bg-white">
             {/* Preview banner */}
             <div className="sticky top-0 z-50 bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center gap-4 shrink-0">
               <button type="button" onClick={() => setViewState('editor')}
@@ -697,7 +697,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         )}
 
         {viewState === 'editor' && (
-          <form onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen">
+          <form onSubmit={handleSave} className="flex-grow flex flex-col">
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
               <div className="flex items-center gap-4">
                 <button type="button" onClick={() => setViewState('list')} className="p-2 text-white/40 hover:text-white hover:bg-white/5 rounded-lg"><ChevronLeft size={20} /></button>

@@ -5,10 +5,10 @@ import { ChevronLeft, Plus } from 'lucide-react';
 
 export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => {
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col font-sans overflow-hidden">
       <PortalTopBar setView={setView} activeNav="portfolio-ops" />
 
-      <main className="p-8 md:p-12">
+      <main className="flex-1 overflow-y-auto p-8 md:p-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-10">
             <div>

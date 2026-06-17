@@ -302,10 +302,10 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
   const lbl = "text-[10px] font-black uppercase tracking-widest text-white/40";
 
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex font-sans overflow-hidden">
+    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col font-sans overflow-hidden">
       <PortalTopBar setView={setView} activeNav="resources-ops" />
 
-      <main className="flex flex-col relative">
+      <main className="flex-1 overflow-y-auto flex flex-col relative">
 
         {/* ─── LIST VIEW ─── */}
         {viewState === 'list' && (
@@ -534,7 +534,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
         {/* ─── EBOOK EDITOR ─── */}
         {viewState === 'editor' && activeTab === 'ebooks' && (
-          <form onSubmit={handleSaveEbook} className="flex-grow flex flex-col min-h-screen">
+          <form onSubmit={handleSaveEbook} className="flex-grow flex flex-col">
             {/* Editor header */}
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
               <div className="flex items-center gap-4">
@@ -674,7 +674,7 @@ export const ResourcesOpsPage = ({ setView }: { setView: (v: ViewType) => void }
 
         {/* ─── GENERIC EDITOR (Cases / Webinars) ─── */}
         {viewState === 'editor' && activeTab !== 'ebooks' && (
-          <form onSubmit={handleSave} className="flex-grow flex flex-col min-h-screen">
+          <form onSubmit={handleSave} className="flex-grow flex flex-col">
             <header className="bg-[#1a1a1a] border-b border-white/5 p-4 flex justify-between items-center sticky top-0 z-20">
               <div className="flex items-center gap-4">
                 <button type="button" onClick={() => setViewState('list')} className="p-2 text-white/40 hover:text-white hover:bg-white/5 rounded-lg"><ChevronLeft size={20} /></button>
