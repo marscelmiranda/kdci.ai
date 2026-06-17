@@ -396,10 +396,10 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                         onChange={e => setModalForm(f => ({ ...f, marketingConsent: e.target.checked }))}
                       />
                       <span className="text-[13px] text-slate-500 font-medium leading-relaxed group-hover:text-slate-700 transition-colors">
-                        I agree to receive marketing emails from KDCI, including the Scale Insights newsletter, product updates, and promotions. I can unsubscribe at any time.{' '}
-                        <button type="button" onClick={closeModal} className="text-[#E61739] hover:underline font-semibold" tabIndex={-1}>
-                          Privacy Policy
-                        </button>
+                        I agree to the use or processing of my personal information by KDCI for the purpose of fulfilling this request and in accordance with KDCI's{' '}
+                        <button type="button" onClick={() => { closeModal(); setView('privacy-policy'); }} className="text-[#E61739] hover:underline font-black" tabIndex={-1}>
+                          Privacy Statement
+                        </button>.
                       </span>
                     </label>
                   </div>
