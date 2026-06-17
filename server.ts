@@ -520,35 +520,45 @@ app.post('/api/contact', async (req, res) => {
       const searchData: any = await searchRes.json();
       const existingId: string | null = searchData?.results?.[0]?.id ?? null;
 
+      // Standard HubSpot contact properties (always available)
       const properties: Record<string, string> = {
-        firstname:        resolvedFirst,
-        lastname:         resolvedLast,
-        email:            email,
-        ...(req.body.company ? { company: req.body.company }          : {}),
-        ...(req.body.phone   ? { phone:   req.body.phone }            : {}),
-        ...(req.body.volume  ? { monthly_lead_volume: req.body.volume }: {}),
-        ...(resolvedMsg      ? { message: resolvedMsg }               : {}),
-        source_page:      resolvedSrc,
-        lifecyclestage:   'lead',
+        firstname:      resolvedFirst,
+        lastname:       resolvedLast,
+        email:          email,
+        lifecyclestage: 'lead',
+        ...(req.body.company ? { company: req.body.company } : {}),
+        ...(req.body.phone   ? { phone:   req.body.phone }   : {}),
+        // Custom properties — uncomment after creating them in HubSpot:
+        // Settings → Properties → Contact properties → Create property
+        // ...(resolvedMsg     ? { message:               resolvedMsg          } : {}),
+        // ...(resolvedSrc     ? { source_page:            resolvedSrc          } : {}),
+        // ...(req.body.volume ? { monthly_lead_volume:    req.body.volume      } : {}),
       };
 
       if (existingId) {
-        // Update existing contact
-        await connectors.proxy('hubspot', `/crm/v3/objects/contacts/${existingId}`, {
+        const patchRes = await connectors.proxy('hubspot', `/crm/v3/objects/contacts/${existingId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ properties }),
         });
-        console.log(`[contact] HubSpot contact updated: ${email} (id=${existingId})`);
+        const patchData: any = await patchRes.json();
+        if (patchRes.status >= 400) {
+          console.error('[contact] HubSpot update failed:', JSON.stringify(patchData));
+        } else {
+          console.log(`[contact] HubSpot contact updated: ${email} (id=${existingId})`);
+        }
       } else {
-        // Create new contact
         const createRes = await connectors.proxy('hubspot', '/crm/v3/objects/contacts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ properties }),
         });
         const createData: any = await createRes.json();
-        console.log(`[contact] HubSpot contact created: ${email} (id=${createData?.id})`);
+        if (createRes.status >= 400) {
+          console.error('[contact] HubSpot create failed:', JSON.stringify(createData));
+        } else {
+          console.log(`[contact] HubSpot contact created: ${email} (id=${createData?.id})`);
+        }
       }
     } catch (e: any) {
       console.error('[contact] HubSpot CRM error:', e.message);
