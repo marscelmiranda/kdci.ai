@@ -246,7 +246,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -377,7 +377,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                 <p className="text-[#86868b] text-sm font-medium">Daily monitoring · weekly check-ins · monthly performance reports</p>
               </div>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all flex items-center gap-2">
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all flex items-center gap-2">
               Start Your 7-Day Onboarding <ArrowRight size={16} />
             </button>
           </div>
@@ -476,7 +476,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     ))}
                   </ul>
                 </div>
-                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
                   {plan.cta === 'Most Popular' ? 'Get Started' : plan.cta}
                 </button>
               </div>
@@ -552,7 +552,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
-                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
@@ -614,7 +614,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
 
               <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its AI agent stack</p>
-                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors">
+                <button onClick={() => setShowHeroModal(true)} className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors">
                   Deploy agents in this vertical <ArrowRight size={14} />
                 </button>
               </div>
@@ -736,7 +736,7 @@ export const AIAgentOperationsPage = ({ setView }: { setView: (v: ViewType) => v
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all group mt-2">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>

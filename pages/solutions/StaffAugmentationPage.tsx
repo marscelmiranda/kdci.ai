@@ -175,7 +175,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -640,7 +640,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                 <p className="text-white/30 text-xs font-medium">Indicative monthly rate ranges (junior–senior) · all-in, no hidden fees</p>
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -895,7 +895,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>
@@ -986,7 +986,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
             if (el) el.scrollIntoView({ behavior: 'smooth' });
             else setView('contact');
           }}
-          className="flex items-center gap-3 px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#8e1049] hover:scale-105 transition-all group"
+          className="flex items-center gap-3 px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm shadow-2xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] hover:scale-105 transition-all group"
           style={{ boxShadow: '0 8px 32px rgba(230,23,57,0.45)' }}
         >
           <div className="w-2 h-2 bg-white rounded-full animate-pulse shrink-0" />
@@ -1054,7 +1054,7 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-lg flex items-center justify-center gap-2 group">
+                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>

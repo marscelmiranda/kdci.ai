@@ -266,7 +266,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                 </div>
                 <h1 className="text-3xl font-heading font-bold text-white">Case Studies</h1>
               </div>
-              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+              <button onClick={handleCreateNew} className="px-6 py-3 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
                 <Plus size={16} /> New Case Study
               </button>
             </div>
@@ -341,7 +341,7 @@ export const CaseStudyOpsPage = ({ setView }: { setView: (v: ViewType) => void }
                   <option value="Published">Published</option>
                   <option value="Archived">Archived</option>
                 </select>
-                <button type="button" onClick={() => handleSave()} className="px-6 py-2 bg-[#ad1457] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 hover:bg-[#8e1049] transition-colors"><Save size={16} /> Save</button>
+                <button type="button" onClick={() => handleSave()} className="px-6 py-2 bg-[#ad1457] text-white rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors"><Save size={16} /> Save</button>
               </div>
             </header>
 

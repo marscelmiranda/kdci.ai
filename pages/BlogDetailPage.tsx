@@ -154,7 +154,7 @@ const renderBlocks = (contentStr: string) => {
             <h3 className="text-2xl font-bold text-white mb-4">{block.content?.headline || ''}</h3>
             {block.content?.buttonText && (
               <a href={block.content?.buttonUrl || '/contact'} target={block.content?.buttonUrl?.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
-                className="inline-block px-8 py-3 bg-[#ad1457] text-white rounded-xl font-bold hover:bg-[#8e1049] transition-colors">
+                className="inline-block px-8 py-3 bg-[#ad1457] text-white rounded-xl font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors">
                 {block.content.buttonText}
               </a>
             )}
@@ -410,7 +410,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
                       <p className="text-white/50 text-sm mb-10 leading-relaxed font-medium">
                         Whether you're a startup finding your footing or an enterprise ready to scale, our architects are ready to walk you through the right agentic AI solutions for your team.
                       </p>
-                      <button onClick={() => setView('contact')} className="w-full py-5 bg-[#ad1457] hover:bg-[#8e1049] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">
+                      <button onClick={() => setView('contact')} className="w-full py-5 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">
                         Send us your inquiry <ArrowRight size={18} />
                       </button>
                     </div>
@@ -525,7 +525,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
                      <div className="relative z-10">
                         <h4 className="text-2xl font-heading font-bold mb-4">Let us know what you're building.</h4>
                         <p className="text-white/50 text-sm mb-10 leading-relaxed font-medium">Whether you're a startup finding your footing or an enterprise ready to scale, our architects are ready to walk you through the right agentic AI solutions for your team.</p>
-                        <button onClick={() => setView('contact')} className="w-full py-5 bg-[#ad1457] hover:bg-[#8e1049] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">Send us your inquiry <ArrowRight size={18} /></button>
+                        <button onClick={() => setView('contact')} className="w-full py-5 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-2xl font-bold transition-all flex items-center justify-center gap-2 shadow-xl glow-red">Send us your inquiry <ArrowRight size={18} /></button>
                      </div>
                   </div>
                   <div className="p-8 rounded-[3rem] border border-slate-200 bg-[#F5F5F7] group cursor-pointer hover:bg-white hover:shadow-xl transition-all">

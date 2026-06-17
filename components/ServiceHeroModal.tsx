@@ -171,7 +171,7 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] disabled:opacity-60 transition-all shadow-lg flex items-center justify-center gap-2 group"
+                  className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] disabled:opacity-60 transition-all shadow-lg flex items-center justify-center gap-2 group"
                 >
                   {submitting
                     ? <><Loader2 size={16} className="animate-spin" /> Sending…</>

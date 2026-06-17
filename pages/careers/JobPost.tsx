@@ -185,7 +185,7 @@ export const JobPost = ({ setView, title, department, location, type, descriptio
                       </div>
                     </div>
 
-                    <button className="w-full py-4 bg-[#ad1457] text-white rounded-xl font-bold mt-4 hover:bg-[#8e1049] transition-all shadow-lg glow-red flex justify-center items-center gap-2">
+                    <button className="w-full py-4 bg-[#ad1457] text-white rounded-xl font-bold mt-4 hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-lg glow-red flex justify-center items-center gap-2">
                       Submit Application <ArrowRight size={16} />
                     </button>
                   </form>

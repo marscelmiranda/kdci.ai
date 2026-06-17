@@ -148,7 +148,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Request a Specialist <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -331,7 +331,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 <p className="text-[#86868b] text-sm font-medium">Monthly KPI reviews · 2-week replacement guarantee · scale seats as you grow</p>
               </div>
             </div>
-            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all flex items-center gap-2">
+            <button onClick={() => setView('contact')} className="shrink-0 px-8 py-3.5 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all flex items-center gap-2">
               Request Your First Specialist <ArrowRight size={16} />
             </button>
           </div>
@@ -385,7 +385,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                   ))}
                 </ul>
               </div>
-              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-[#ad1457] text-white font-bold text-sm hover:bg-[#8e1049] transition-all shadow-lg">
+              <button onClick={() => setView('contact')} className="mt-auto w-full py-3.5 rounded-2xl bg-[#ad1457] text-white font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-lg">
                 Request a Specialist
               </button>
             </div>
@@ -469,7 +469,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
               <div className="mt-6 pt-5 border-t border-white/10 flex justify-end">
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -526,7 +526,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                 <p className="text-white/30 text-xs font-medium">Select any industry to explore its top AI-augmented roles</p>
                 <button
                   onClick={() => setView('contact')}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#8e1049] transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#ad1457] rounded-2xl text-white text-sm font-bold hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-colors"
                 >
                   Hire in this vertical <ArrowRight size={14} />
                 </button>
@@ -638,7 +638,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
+                  <button type="submit" className="w-full py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">
                     Send My Brief <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p className="text-white/20 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
@@ -750,7 +750,7 @@ export const AIStaffingSolutionsPage = ({ setView }: { setView: (v: ViewType) =>
                     <button type="button" onClick={closeModal} className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all">
                       Cancel
                     </button>
-                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#8e1049] transition-all shadow-lg flex items-center justify-center gap-2 group">
+                    <button type="submit" className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-lg flex items-center justify-center gap-2 group">
                       Send My Brief <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>

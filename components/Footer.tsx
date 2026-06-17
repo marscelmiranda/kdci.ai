@@ -244,7 +244,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                   placeholder="Work email"
                   className="bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-2 text-xs w-full focus:outline-none focus:border-[#E61739]/50 transition-all font-bold placeholder:text-slate-600"
                 />
-                <button type="submit" className="bg-[#ad1457] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#8e1049] transition-all shrink-0">
+                <button type="submit" className="bg-[#ad1457] text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shrink-0">
                   Join
                 </button>
               </form>
@@ -414,7 +414,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
                   >
                     {submitting ? (
                       <><Loader2 size={16} className="animate-spin" /> Subscribing…</>

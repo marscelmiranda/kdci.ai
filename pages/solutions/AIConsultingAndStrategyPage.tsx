@@ -167,7 +167,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 md:mb-0">
-                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+                <button onClick={() => setShowHeroModal(true)} className="w-full sm:w-auto px-10 py-4 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
                   Book a Discovery Call <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
@@ -385,7 +385,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                     ))}
                   </ul>
                 </div>
-                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
+                <button onClick={() => setView('contact')} className={`mt-auto w-full py-3.5 rounded-2xl font-bold text-sm transition-all ${plan.featured ? 'bg-[#ad1457] text-white hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] shadow-lg' : 'bg-white/10 border border-white/10 text-white hover:bg-white/20'}`}>
                   {plan.cta}
                 </button>
               </div>
@@ -552,7 +552,7 @@ export const AIConsultingAndStrategyPage = ({ setView }: { setView: (v: ViewType
                     <textarea rows={3} className={`${inp} resize-none`} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all group mt-2">
                     Book a Discovery Call <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 2 business hours</p>

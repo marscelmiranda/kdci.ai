@@ -48,7 +48,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
               We help companies scale operations across support, design, development, and recruitment — tailored to the needs of 20+ industries.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="#industries" className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl">
+              <a href="#industries" className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl">
                 Find Your Industry Fit
               </a>
               <button onClick={() => setShowHeroModal(true)} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">
@@ -185,7 +185,7 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                     <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
-                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all group mt-2">
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all group mt-2">
                     Request Free Consultation <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <p className="text-[10px] text-white/20 text-center font-medium">No commitment required · Response within 1 business day</p>

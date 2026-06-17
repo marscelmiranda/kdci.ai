@@ -202,7 +202,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">
                       Our solutions architects can design a custom operational model for your specific needs.
                     </p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#8e1049] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
                       Talk to an Architect <ArrowRight size={16} />
                     </button>
                   </div>
@@ -306,7 +306,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
             </p>
             <button
               onClick={() => setView('contact')}
-              className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3"
+              className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl inline-flex items-center gap-3"
             >
               Consult an Architect <ArrowRight size={20} />
             </button>
@@ -393,7 +393,7 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
                   <div className="relative z-10">
                     <h4 className="text-xl font-bold mb-4">Scale Your Own Team</h4>
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">See how our managed pods can reduce your burn rate while improving CSAT.</p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#8e1049] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
+                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
                   </div>
                 </div>
                 <div className="p-8 rounded-[2rem] border border-slate-100 bg-white">

@@ -274,7 +274,7 @@ export const JobDetailPage = ({
             </p>
             <button
               onClick={() => setView('contact')}
-              className="w-full px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all glow-red flex items-center justify-center gap-2 group"
+              className="w-full px-6 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red flex items-center justify-center gap-2 group"
             >
               Apply Now <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>

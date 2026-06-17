@@ -30,7 +30,7 @@ export const MediaPage = ({ setView }: { setView: (v: ViewType) => void }) => {
             Protecting your brand and scaling your content output with managed moderation and production teams.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Get Started <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -278,7 +278,7 @@ export const MediaPage = ({ setView }: { setView: (v: ViewType) => void }) => {
            <div className="relative z-10 max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Scale Your <br/><span className="text-shine-red">Media Ops.</span></h2>
               <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Book a consultation with our media operations specialists.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
                  Request Media Quote <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
            </div>

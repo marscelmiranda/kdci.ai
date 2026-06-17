@@ -79,7 +79,7 @@ export const HomePage = ({
           </h1>
           <p className="max-w-3xl mx-auto text-xl md:text-2xl text-white/80 mb-14 font-medium drop-shadow-lg leading-relaxed">KDCI.ai is an AI-managed services provider delivering custom agentic solutions across CX, creative, demand generation, and staff augmentation purpose-built for 20+ industry verticals.</p>
           <div className="flex flex-col items-center">
-            <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
+            <button onClick={() => setView('solutions-hub')} className="w-full sm:w-auto px-12 py-5 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] text-white rounded-2xl font-bold text-lg transition-all glow-red shadow-2xl flex items-center justify-center gap-2 group shadow-2xl">
               See Our Solutions <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -300,7 +300,7 @@ export const HomePage = ({
                     Talk to our solutions architect today to get solutions built around your growth goals. Design an AI service strategy that combines agentic workflows with elite AI-trained operations talent.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                     <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
+                     <button onClick={() => setView('solutions-hub')} className="px-12 py-5 bg-[#ad1457] text-white rounded-2xl font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group shadow-2xl">
                         Book a Free Consultation <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                      </button>
                      <button onClick={() => setView('contact')} className="px-12 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-md">

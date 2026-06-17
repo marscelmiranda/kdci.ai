@@ -52,7 +52,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
             End-to-end e-commerce management. We handle listing, support, and logistics using elite offshore talent and agentic AI systems.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
+            <button onClick={() => setView('contact')} className="px-14 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-3 group">
               Book a Strategy Call <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -213,7 +213,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
                       </li>
                     ))}
                   </ul>
-                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#ad1457] text-white hover:bg-[#8e1049] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
+                  <button onClick={() => setView('contact')} className={`w-full py-4 rounded-[2rem] font-bold text-lg transition-all ${plan.highlight ? 'bg-[#ad1457] text-white hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] shadow-xl' : 'bg-slate-900 text-white hover:bg-black'}`}>
                     {plan.name === "Growth Engine" ? "Request Custom Quote" : "Request Plan"}
                   </button>
                 </div>
@@ -312,7 +312,7 @@ export const ECommercePage = ({ setView }: { setView: (v: ViewType) => void }) =
            <div className="relative z-10 max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-7xl font-heading font-bold text-white mb-8 tracking-tight leading-tight">Let's Build Your <br/><span className="text-shine-red">E-commerce Machine.</span></h2>
               <p className="text-xl md:text-2xl text-white/60 mb-12 font-medium leading-relaxed">Talk to us about building an e-commerce ops solution tailored to your brand and workload.</p>
-              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
+              <button onClick={() => setView('contact')} className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto">
                  Book a Free Consultation <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
            </div>

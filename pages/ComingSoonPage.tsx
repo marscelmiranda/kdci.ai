@@ -42,7 +42,7 @@ export const ComingSoonPage = ({ setView }: { setView: (v: ViewType) => void }) 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={() => setView('home')}
-            className="flex items-center gap-3 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all shadow-xl group"
+            className="flex items-center gap-3 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-xl group"
           >
             <Home size={16} />
             Back to Home

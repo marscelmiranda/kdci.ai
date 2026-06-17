@@ -74,7 +74,7 @@ export const CookieBanner = ({ setView }: CookieBannerProps) => {
             </button>
             <button
               onClick={() => dismiss('accepted')}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-[13px] font-bold bg-[#ad1457] text-white hover:bg-[#8e1049] transition-all shadow-lg shadow-[#E61739]/20"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-[13px] font-bold bg-[#ad1457] text-white hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all shadow-lg shadow-[#E61739]/20"
             >
               <ShieldCheck size={14} />
               Accept All

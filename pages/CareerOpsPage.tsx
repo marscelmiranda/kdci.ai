@@ -275,7 +275,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
             {viewState === 'list' && (
               <button 
                 onClick={handleCreateNew}
-                className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red"
+                className="px-6 py-3 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red"
               >
                 <Plus size={16} /> Create Job Post
               </button>
@@ -1139,7 +1139,7 @@ export const CareerOpsPage = ({ setView }: { setView: (v: ViewType) => void }) =
                   </button>
                   <button 
                     type="submit"
-                    className="px-8 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"
+                    className="px-8 py-3 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] text-white rounded-xl font-bold text-sm transition-all shadow-lg flex items-center gap-2"
                   >
                     <Save size={16} /> Save Job Post
                   </button>

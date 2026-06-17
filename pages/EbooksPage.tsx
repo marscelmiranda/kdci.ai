@@ -241,7 +241,7 @@ export const EbooksPage = ({
               </p>
               <div>
                 <button onClick={() => setView('contact')}
-                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#8e1049] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta">
+                  className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl inline-flex items-center gap-3 group/cta">
                   Consult an Architect <ArrowRight size={20} className="group-hover/cta:translate-x-1 transition-transform" />
                 </button>
               </div>

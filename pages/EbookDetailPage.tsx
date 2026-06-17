@@ -185,7 +185,7 @@ const AccessModal = ({
                   href={ebook.download_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg shadow-[#E61739]/20"
+                  className="mt-2 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all inline-flex items-center gap-2 shadow-lg shadow-[#E61739]/20"
                 >
                   Download PDF <Download size={16} />
                 </a>
@@ -356,7 +356,7 @@ const AccessModal = ({
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
+                className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
               >
                 {submitting ? (
                   <><Loader2 size={16} className="animate-spin" /> Submitting…</>
@@ -507,7 +507,7 @@ export const EbookDetailPage = ({
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => setShowAccessModal(true)}
-                    className="px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg group"
+                    className="px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all inline-flex items-center gap-2 shadow-lg group"
                   >
                     Read the Report <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -586,7 +586,7 @@ export const EbookDetailPage = ({
               </div>
               <button
                 onClick={() => setShowAccessModal(true)}
-                className="shrink-0 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#8e1049] transition-all inline-flex items-center gap-2 shadow-lg"
+                className="shrink-0 px-8 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all inline-flex items-center gap-2 shadow-lg"
               >
                 Read the Report <ArrowRight size={16} />
               </button>

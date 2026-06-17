@@ -77,7 +77,7 @@ export const PortfolioOpsPage = ({ setView }: { setView: (v: ViewType) => void }
             <h1 className="text-3xl font-heading font-bold text-white">Manage Creative Portfolio</h1>
           </div>
           
-          <button className="px-6 py-3 bg-[#ad1457] hover:bg-[#8e1049] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
+          <button className="px-6 py-3 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] text-white rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg glow-red">
             <Plus size={16} /> Create Entry
           </button>
         </div>

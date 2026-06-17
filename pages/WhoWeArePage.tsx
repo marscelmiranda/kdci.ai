@@ -433,7 +433,7 @@ export const WhoWeArePage = ({ setView }: { setView: (v: ViewType) => void }) =>
             <p className="text-white/30 text-sm font-medium mb-12 uppercase tracking-widest">Trusted Since 2011 · 50+ Global Clients · 300+ Team Members</p>
             <button
               onClick={() => setView('contact')}
-              className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#8e1049] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto"
+              className="px-14 py-6 bg-[#ad1457] text-white rounded-[2rem] font-bold text-xl hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl flex items-center justify-center gap-4 group mx-auto"
             >
               Partner with KDCI <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
