@@ -1,15 +1,29 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Quote, Linkedin, Twitter, Link as LinkIcon } from 'lucide-react';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { useCaseStudies, CmsStudy } from '../store/caseStudiesStore';
 import { applyDetailSEO } from '../lib/seo';
+import { ServiceHeroModal } from '../components/ServiceHeroModal';
+
+const ARCHITECT_MODAL = {
+  tag: 'Solutions Architecture',
+  title: 'Talk to an Architect',
+  subtitle: 'Tell us about your challenge and we\'ll design a custom operational model for you.',
+  inquiryType: 'Solutions Architecture Inquiry',
+  source: 'Case Study Page',
+  notesPlaceholder: 'Describe your operational challenge or what you\'d like to solve...',
+  submitLabel: 'Request a Consultation',
+  successTitle: 'Request received!',
+  successMessage: 'One of our solutions architects will reach out within 1 business day.',
+};
 
 const DEFAULT_HERO = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=800";
 
 /* ─── Dynamic CMS Study Detail ─── */
 const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: ViewType) => void }) => {
+  const [showModal, setShowModal] = useState(false);
   const stats = [
     study.stat1Value ? { value: study.stat1Value, label: study.stat1Label } : null,
     study.stat2Value ? { value: study.stat2Value, label: study.stat2Label } : null,
@@ -32,7 +46,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
 
   const breadcrumbs = [study.category1, study.category2, study.category3].filter(Boolean);
 
-  return (
+  return (<>
     <div className="min-h-screen bg-white">
       {/* 1. Hero */}
       <section className="relative h-[85vh] flex items-center bg-[#020202] overflow-hidden">
@@ -202,7 +216,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">
                       Our solutions architects can design a custom operational model for your specific needs.
                     </p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                    <button onClick={() => setShowModal(true)} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">
                       Talk to an Architect <ArrowRight size={16} />
                     </button>
                   </div>
@@ -305,7 +319,7 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
               Let our solutions architects design an operational model tailored to your challenge.
             </p>
             <button
-              onClick={() => setView('contact')}
+              onClick={() => setShowModal(true)}
               className="px-10 py-5 bg-[#ad1457] text-white rounded-[2rem] font-bold text-lg hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] transition-all glow-red shadow-2xl inline-flex items-center gap-3"
             >
               Consult an Architect <ArrowRight size={20} />
@@ -314,13 +328,15 @@ const CmsStudyDetail = ({ study, setView }: { study: CmsStudy; setView: (v: View
         </div>
       </section>
     </div>
-  );
+    {showModal && <ServiceHeroModal config={ARCHITECT_MODAL} onClose={() => setShowModal(false)} />}
+  </>);
 };
 
 /* ─── Hardcoded fallback (legacy cards 1-12) ─── */
 const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) => {
+  const [showModal, setShowModal] = useState(false);
   const HERO_IMG = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=800";
-  return (
+  return (<>
     <div className="min-h-screen bg-white">
       <section className="relative h-[85vh] flex items-center bg-[#020202] overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -393,7 +409,7 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
                   <div className="relative z-10">
                     <h4 className="text-xl font-bold mb-4">Scale Your Own Team</h4>
                     <p className="text-white/60 text-sm mb-8 leading-relaxed">See how our managed pods can reduce your burn rate while improving CSAT.</p>
-                    <button onClick={() => setView('contact')} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
+                    <button onClick={() => setShowModal(true)} className="w-full py-4 bg-[#ad1457] hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] rounded-xl font-bold transition-all flex items-center justify-center gap-2">Talk to an Architect <ArrowRight size={16} /></button>
                   </div>
                 </div>
                 <div className="p-8 rounded-[2rem] border border-slate-100 bg-white">
@@ -435,7 +451,8 @@ const HardcodedStudyDetail = ({ setView }: { setView: (v: ViewType) => void }) =
         </div>
       </section>
     </div>
-  );
+    {showModal && <ServiceHeroModal config={ARCHITECT_MODAL} onClose={() => setShowModal(false)} />}
+  </>);
 };
 
 /* ─── Main export ─── */
