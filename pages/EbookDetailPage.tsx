@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
 import { AuthorAvatar } from '../components/AuthorAvatar';
+import { Captcha, CaptchaHandle } from '../components/Captcha';
 import { ViewType } from '../types';
 import { applyDetailSEO } from '../lib/seo';
 
@@ -42,25 +43,6 @@ interface Ebook {
   published_at: string;
 }
 
-interface AccessForm {
-  firstName: string;
-  lastName: string;
-  company: string;
-  email: string;
-  contactNumber: string;
-  serviceInterests: string[];
-  marketingConsent: boolean;
-}
-
-const SERVICE_LINES = [
-  'AI Agent Operations',
-  'AI Consulting and Strategy',
-  'AI in Customer Service',
-  'AI Graphic Design Services',
-  'AI Lead Generation',
-  'AI Staffing Solutions',
-];
-
 const parseTags = (tags: string | string[]): string[] => {
   if (Array.isArray(tags)) return tags.filter(Boolean);
   if (!tags) return [];
@@ -79,59 +61,48 @@ const AccessModal = ({
   ebook: Ebook;
   onClose: () => void;
 }) => {
-  const [form, setForm] = useState<AccessForm>({
-    firstName: '',
-    lastName: '',
-    company: '',
-    email: '',
-    contactNumber: '',
-    serviceInterests: [],
-    marketingConsent: false,
-  });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', company: '', phone: '' });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  const captchaRef = useRef<CaptchaHandle>(null);
+  const firstRef = useRef<HTMLInputElement>(null);
+
+  const inp = "w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm";
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    setTimeout(() => firstInputRef.current?.focus(), 80);
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-
-  const toggleService = (s: string) => {
-    setForm(f => ({
-      ...f,
-      serviceInterests: f.serviceInterests.includes(s)
-        ? f.serviceInterests.filter(x => x !== s)
-        : [...f.serviceInterests, s],
-    }));
-  };
+    setTimeout(() => firstRef.current?.focus(), 80);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.marketingConsent) {
-      setError('Please confirm you agree to receive marketing emails to continue.');
-      return;
-    }
+    if (captchaRef.current?.isBot()) return;
     setSubmitting(true);
     setError('');
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
           email: form.email,
-          fullName: `${form.firstName} ${form.lastName}`.trim(),
           company: form.company,
-          contactNumber: form.contactNumber,
-          serviceInterests: form.serviceInterests,
-          marketingConsent: form.marketingConsent,
+          phone: form.phone,
+          notes: `Requested access to ebook: ${ebook.title}`,
+          inquiryType: 'Ebook Access',
           source: `ebook:${ebook.slug}`,
+          pageUrl: window.location.href,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Submission failed.');
+      if (!res.ok) throw new Error('Submission failed.');
       setDone(true);
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
@@ -143,20 +114,20 @@ const AccessModal = ({
   return (
     <div
       className="fixed inset-0 z-[9998] flex items-center justify-center p-4"
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+      style={{ animation: 'fadeInUp 0.25s ease both' }}
     >
-      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="relative z-10 w-full max-w-2xl bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-2xl" style={{ maxHeight: '90vh', overflowY: 'auto' }}>
 
         {/* Header */}
         <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-slate-100">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-[#E61739] text-[10px] font-black uppercase tracking-widest mb-2">
               Read the Report
             </div>
-            <h2 className="text-xl font-black text-slate-900 leading-tight">Get instant access</h2>
-            <p className="text-slate-400 text-[13px] font-medium mt-1 line-clamp-1 max-w-[320px]">{ebook.title}</p>
+            <h2 className="text-2xl font-black text-slate-900 leading-tight">Get instant access</h2>
+            <p className="text-slate-400 text-sm font-medium mt-1 line-clamp-1 max-w-[380px]">{ebook.title}</p>
           </div>
           <button
             onClick={onClose}
@@ -168,9 +139,9 @@ const AccessModal = ({
         </div>
 
         {/* Body */}
-        <div className="px-8 py-8 max-h-[70vh] overflow-y-auto bg-slate-50/60">
+        <div className="px-8 py-8 bg-slate-50/60">
           {done ? (
-            <div className="flex flex-col items-center justify-center text-center gap-5 py-6">
+            <div className="flex flex-col items-center text-center gap-5 py-10">
               <div className="w-16 h-16 rounded-2xl bg-[#ad1457] flex items-center justify-center shadow-xl">
                 <CheckCircle2 size={30} className="text-white" />
               </div>
@@ -200,173 +171,71 @@ const AccessModal = ({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-
-              {/* Name Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                    First Name <span className="text-[#E61739]">*</span>
-                  </label>
-                  <input
-                    ref={firstInputRef}
-                    required
-                    type="text"
-                    placeholder="Jane"
-                    value={form.firstName}
-                    onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
-                    className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                    Last Name <span className="text-[#E61739]">*</span>
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Smith"
-                    value={form.lastName}
-                    onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
-                    className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
-                  />
-                </div>
-              </div>
-
-              {/* Company */}
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                  Company <span className="text-[#E61739]">*</span>
-                </label>
+                <input
+                  ref={firstRef}
+                  required
+                  className={inp}
+                  placeholder="First Name *"
+                  value={form.firstName}
+                  onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
+                />
                 <input
                   required
-                  type="text"
-                  placeholder="Acme Inc. or N/A"
-                  value={form.company}
-                  onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
-                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
+                  className={inp}
+                  placeholder="Last Name *"
+                  value={form.lastName}
+                  onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
                 />
               </div>
-
-              {/* Work Email */}
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                  Work Email <span className="text-[#E61739]">*</span>
-                </label>
-                <input
-                  required
-                  type="email"
-                  placeholder="jane@company.com"
-                  value={form.email}
-                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
-                />
-              </div>
-
-              {/* Contact Number */}
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-1.5">
-                  Contact Number{' '}
-                  <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(optional)</span>
-                </label>
-                <input
-                  type="tel"
-                  placeholder="+1 555 000 0000"
-                  value={form.contactNumber}
-                  onChange={e => setForm(f => ({ ...f, contactNumber: e.target.value }))}
-                  className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#E61739] focus:ring-2 focus:ring-[#E61739]/10 transition-all shadow-sm font-medium"
-                />
-              </div>
-
-              {/* Services of Interest */}
-              <div>
-                <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">
-                  Services of Interest{' '}
-                  <span className="text-slate-400 font-medium normal-case tracking-normal text-[11px]">(select all that apply)</span>
-                </label>
-                <div className="space-y-2">
-                  {SERVICE_LINES.map(svc => {
-                    const checked = form.serviceInterests.includes(svc);
-                    return (
-                      <label
-                        key={svc}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all select-none ${
-                          checked
-                            ? 'bg-[#ad1457]/10 border-[#E61739]/40 text-slate-900'
-                            : 'bg-white border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700'
-                        }`}
-                      >
-                        <span
-                          className={`w-4 h-4 rounded-[5px] border-2 flex items-center justify-center shrink-0 transition-all ${
-                            checked ? 'bg-[#ad1457] border-[#E61739]' : 'border-slate-300 bg-transparent'
-                          }`}
-                        >
-                          {checked && (
-                            <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                              <path d="M1 3.5L3.5 6L8 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          )}
-                        </span>
-                        <input
-                          type="checkbox"
-                          className="sr-only"
-                          checked={checked}
-                          onChange={() => toggleService(svc)}
-                        />
-                        <span className="text-[13px] font-bold">{svc}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Marketing Consent */}
-              <div className="pt-2 border-t border-slate-100">
-                <label className="flex items-start gap-3 cursor-pointer group select-none">
-                  <span
-                    className={`mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
-                      form.marketingConsent ? 'bg-[#ad1457] border-[#E61739]' : 'border-slate-300 bg-transparent group-hover:border-slate-400'
-                    }`}
-                  >
-                    {form.marketingConsent && (
-                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                        <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </span>
-                  <input
-                    type="checkbox"
-                    className="sr-only"
-                    checked={form.marketingConsent}
-                    onChange={e => setForm(f => ({ ...f, marketingConsent: e.target.checked }))}
-                  />
-                  <span className="text-[13px] text-slate-500 font-medium leading-relaxed group-hover:text-slate-700 transition-colors">
-                    I agree to receive marketing emails from KDCI, including the Scale Insights newsletter, product updates, and promotions. I can unsubscribe at any time.
-                  </span>
-                </label>
-              </div>
-
-              {/* Error */}
+              <input
+                required
+                type="email"
+                className={inp}
+                placeholder="Work Email *"
+                value={form.email}
+                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+              />
+              <input
+                required
+                className={inp}
+                placeholder="Company *"
+                value={form.company}
+                onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
+              />
+              <input
+                type="tel"
+                className={inp}
+                placeholder="Phone (optional)"
+                value={form.phone}
+                onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+              />
+              <Captcha ref={captchaRef} onVerify={() => {}} theme="light" />
               {error && (
                 <p className="text-red-500 text-[13px] font-semibold bg-red-50 border border-red-100 rounded-xl px-4 py-3">
                   {error}
                 </p>
               )}
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-sm hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg shadow-[#E61739]/20 group"
-              >
-                {submitting ? (
-                  <><Loader2 size={16} className="animate-spin" /> Submitting…</>
-                ) : (
-                  <>Read the Report <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
-                )}
-              </button>
-              <p className="text-slate-400 text-[11px] text-center font-medium">
-                No spam · Unsubscribe any time · GDPR compliant
-              </p>
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-sm hover:bg-slate-200 transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="flex-[2] py-4 bg-[#ad1457] text-white rounded-2xl font-bold text-base hover:bg-[#F5F5F7] hover:text-[#ad1457] hover:ring-1 hover:ring-[#ad1457] disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-lg flex items-center justify-center gap-2 group"
+                >
+                  {submitting
+                    ? <><Loader2 size={16} className="animate-spin" /> Submitting…</>
+                    : <>Read the Report <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" /></>
+                  }
+                </button>
+              </div>
+              <p className="text-slate-400 text-[11px] text-center font-medium">No commitment · Response within 24 hours</p>
             </form>
           )}
         </div>
