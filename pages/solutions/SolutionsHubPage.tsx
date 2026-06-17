@@ -159,37 +159,30 @@ export const SolutionsHubPage = ({ setView }: { setView: (v: ViewType) => void }
                 <form onSubmit={handleForm} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">First Name <span className="text-[#E61739]">*</span></label>
-                      <input required className={inp} placeholder="Jane" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
+                      <input required className={inp} placeholder="First Name *" value={form.firstName} onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Last Name <span className="text-[#E61739]">*</span></label>
-                      <input required className={inp} placeholder="Smith" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
+                      <input required className={inp} placeholder="Last Name *" value={form.lastName} onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Company <span className="text-[#E61739]">*</span></label>
-                      <input required className={inp} placeholder="Acme Inc. or N/A" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                      <input required className={inp} placeholder="Company *" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
-                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                      <input required type="email" className={inp} placeholder="Work Email *" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Phone (optional)</label>
-                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                      <input className={inp} placeholder="Phone (optional)" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Service of Interest</label>
-                    <input required className={inp} placeholder="e.g. Offshore Staffing, AI Consulting, Customer Support" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
+                    <input required className={inp} placeholder="Service of Interest" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-white/40 uppercase tracking-widest mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="Team size, timeline, budget range..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
                   <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 bg-[#E61739] text-white rounded-2xl font-bold text-sm hover:bg-[#c51431] transition-all group mt-2">

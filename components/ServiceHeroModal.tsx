@@ -116,44 +116,40 @@ export const ServiceHeroModal = ({ config, onClose }: Props) => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">First Name <span className="text-[#E61739]">*</span></label>
                   <input
                     ref={firstRef}
                     required
                     className={lightInp}
-                    placeholder="Jane"
+                    placeholder="First Name *"
                     value={form.firstName}
                     onChange={e => setForm(f => ({ ...f, firstName: e.target.value }))}
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Last Name <span className="text-[#E61739]">*</span></label>
                   <input
                     required
                     className={lightInp}
-                    placeholder="Smith"
+                    placeholder="Last Name *"
                     value={form.lastName}
                     onChange={e => setForm(f => ({ ...f, lastName: e.target.value }))}
                   />
                 </div>
               </div>
               <div>
-                <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Work Email <span className="text-[#E61739]">*</span></label>
                 <input
                   required
                   type="email"
                   className={lightInp}
-                  placeholder="jane@company.com"
+                  placeholder="Work Email *"
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-700 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
                 <textarea
                   rows={3}
                   className={lightInp + ' resize-none'}
-                  placeholder={config.notesPlaceholder}
+                  placeholder="How can we help you?"
                   value={form.notes}
                   onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                 />

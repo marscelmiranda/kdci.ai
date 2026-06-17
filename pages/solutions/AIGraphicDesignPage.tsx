@@ -543,31 +543,25 @@ export const AIGraphicDesignPage = ({ setView }: { setView: (v: ViewType) => voi
                   <h3 className="text-lg font-black text-white mb-6">Send us your brief</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Full Name</label>
-                      <input required className={inp} placeholder="Jane Smith" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+                      <input required className={inp} placeholder="Full Name *" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Company</label>
-                      <input required className={inp} placeholder="Acme Inc." value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
+                      <input required className={inp} placeholder="Company *" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Work Email</label>
-                      <input required type="email" className={inp} placeholder="jane@company.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                      <input required type="email" className={inp} placeholder="Work Email *" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Phone (optional)</label>
-                      <input className={inp} placeholder="+1 555 000 0000" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+                      <input className={inp} placeholder="Phone (optional)" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">AI Creative Studio Service</label>
-                    <input required className={inp} placeholder="e.g. Content Pack, Creative Retainer, Full Studio" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
+                    <input required className={inp} placeholder="AI Creative Studio Service" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))} />
                   </div>
                   <div>
-                    <label className="text-[10px] text-white/30 font-black uppercase tracking-widest block mb-1.5">Additional Notes</label>
-                    <textarea rows={3} className={inp + " resize-none"} placeholder="Volume, deadlines, brand guidelines, formats..." value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
+                    <textarea rows={3} className={inp + " resize-none"} placeholder="How can we help you?" value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
                   </div>
                   <Captcha ref={captchaRef} onVerify={() => {}} theme="dark" />
                   <button type="submit" className="w-full py-4 bg-[#E61739] text-white rounded-2xl font-bold text-base hover:bg-[#c51431] transition-all shadow-xl flex items-center justify-center gap-3 group mt-2">

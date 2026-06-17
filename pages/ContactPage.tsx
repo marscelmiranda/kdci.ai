@@ -121,25 +121,21 @@ export const ContactPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     {/* Name */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className={labelClasses}>First Name{requiredAsterisk}</label>
-                        <Input required type="text" placeholder="Jane" value={form.firstName} onChange={set('firstName')} />
+                        <Input required type="text" placeholder="First Name *" value={form.firstName} onChange={set('firstName')} />
                       </div>
                       <div>
-                        <label className={labelClasses}>Last Name{requiredAsterisk}</label>
-                        <Input required type="text" placeholder="Doe" value={form.lastName} onChange={set('lastName')} />
+                        <Input required type="text" placeholder="Last Name *" value={form.lastName} onChange={set('lastName')} />
                       </div>
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className={labelClasses}>Work Email Address{requiredAsterisk}</label>
-                      <Input required type="email" placeholder="jane@company.com" value={form.email} onChange={set('email')} />
+                      <Input required type="email" placeholder="Work Email Address *" value={form.email} onChange={set('email')} />
                     </div>
 
                     {/* Notes */}
                     <div>
-                      <label className={labelClasses}>Additional Notes{requiredAsterisk}</label>
-                      <Textarea required placeholder="Briefly describe your requirements or how we can help…" value={form.notes} onChange={set('notes')} />
+                      <Textarea required placeholder="How can we help you?" value={form.notes} onChange={set('notes')} />
                     </div>
 
                     {/* Consent */}
