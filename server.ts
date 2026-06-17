@@ -628,7 +628,7 @@ app.post('/api/contact', async (req, res) => {
 
 // ----- MARKETING SUBSCRIBE -----
 app.post('/api/subscribe', async (req, res) => {
-  const { firstName, lastName, email, notes, marketingConsent } = req.body;
+  const { firstName, lastName, email, notes, marketingConsent, pageUrl } = req.body;
   const fullName = [firstName, lastName].filter(Boolean).join(' ');
   if (!email || !fullName || !marketingConsent) {
     res.status(400).json({ error: 'First name, email and marketing consent are required.' });
@@ -646,25 +646,63 @@ app.post('/api/subscribe', async (req, res) => {
              status = 'active'`,
       [email, fullName, notes || null, true]
     );
-    // HubSpot (non-blocking)
-    const hsPortalId = process.env.HUBSPOT_PORTAL_ID;
-    const hsFormGuid = process.env.HUBSPOT_FORM_GUID;
-    if (hsPortalId && hsFormGuid) {
-      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${hsPortalId}/${hsFormGuid}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: [
-            { name: 'firstname', value: firstName || '' },
-            { name: 'lastname',  value: lastName  || '' },
-            { name: 'email',     value: email          },
-            { name: 'message',   value: notes    || '' },
-          ],
-          context: { pageUri: 'footer-newsletter', pageName: 'Scale Insights Newsletter' },
-        }),
-      }).then(() => console.log(`[subscribe] HubSpot submitted: ${email}`))
-        .catch((e: any) => console.error('[subscribe] HubSpot error:', e.message));
-    }
+
+    // HubSpot CRM via Replit Connector (non-blocking)
+    ;(async () => {
+      try {
+        const connectors = new ReplitConnectors();
+        const searchRes = await connectors.proxy('hubspot', '/crm/v3/objects/contacts/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ', value: email }] }],
+            properties: ['email', 'hs_object_id'],
+            limit: 1,
+          }),
+        });
+        const searchData: any = await searchRes.json();
+        const existingId: string | null = searchData?.results?.[0]?.id ?? null;
+
+        const properties: Record<string, string> = {
+          firstname:           firstName || '',
+          lastname:            lastName  || '',
+          email:               email,
+          lifecyclestage:      'lead',
+          hs_analytics_source: 'DIRECT_TRAFFIC',
+          ...(notes               ? { message:     notes                      } : {}),
+          ...(pageUrl || 'footer' ? { source_page: pageUrl || 'footer-subscribe' } : {}),
+        };
+
+        if (existingId) {
+          const patchRes = await connectors.proxy('hubspot', `/crm/v3/objects/contacts/${existingId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ properties }),
+          });
+          const patchData: any = await patchRes.json();
+          if (patchRes.status >= 400) {
+            console.error('[subscribe] HubSpot update failed:', JSON.stringify(patchData));
+          } else {
+            console.log(`[subscribe] HubSpot contact updated: ${email} (id=${existingId})`);
+          }
+        } else {
+          const createRes = await connectors.proxy('hubspot', '/crm/v3/objects/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ properties }),
+          });
+          const createData: any = await createRes.json();
+          if (createRes.status >= 400) {
+            console.error('[subscribe] HubSpot create failed:', JSON.stringify(createData));
+          } else {
+            console.log(`[subscribe] HubSpot contact created: ${email} (id=${createData?.id})`);
+          }
+        }
+      } catch (e: any) {
+        console.error('[subscribe] HubSpot CRM error:', e.message);
+      }
+    })();
+
     console.log(`[subscribe] New subscriber: ${email}`);
     res.json({ success: true });
   } catch (err: any) {

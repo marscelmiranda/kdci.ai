@@ -108,6 +108,7 @@ export const Footer = ({ setView }: { setView: (v: ViewType) => void }) => {
           email: modalForm.email || email,
           notes: modalForm.notes,
           marketingConsent: modalForm.marketingConsent,
+          pageUrl: window.location.href,
         }),
       });
       const data = await res.json();
