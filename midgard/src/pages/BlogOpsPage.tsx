@@ -122,6 +122,26 @@ const renderPreviewBlocks = (blocks: Block[]) =>
     }
   });
 
+const calcReadTime = (blocks: any[]): string => {
+  try {
+    const text = blocks
+      .map((b: any) => {
+        switch (b.type) {
+          case 'rich_text': return b.content?.text || '';
+          case 'pull_quote': return b.content?.quote || '';
+          case 'two_columns': return (b.content?.left?.text || '') + ' ' + (b.content?.right?.text || '');
+          case 'cta': return b.content?.headline || '';
+          default: return '';
+        }
+      })
+      .join(' ')
+      .replace(/<[^>]+>/g, '')
+      .trim();
+    const words = text.split(/\s+/).filter(Boolean).length;
+    return `${Math.max(1, Math.round(words / 200))} min`;
+  } catch { return '1 min'; }
+};
+
 const emptyForm = () => ({
   title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', imageAlt: '', status: 'draft',
   publishedDate: '',
@@ -660,6 +680,10 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       {formData.publishedDate
                         ? new Date(formData.publishedDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
                         : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock size={13} className="text-[#E61739]" />
+                      {calcReadTime(formData.blocks)} read
                     </div>
                   </div>
                 </div>

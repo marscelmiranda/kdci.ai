@@ -12,6 +12,7 @@ import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { AUTHOR_1, IMG_BLOG_HERO, IMG_BLOG_1, IMG_BLOG_3 } from '../data';
 import { applyDetailSEO } from '../lib/seo';
+import { calcReadTime } from '../lib/utils';
 
 interface LivePost {
   id: number;
@@ -470,6 +471,8 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
                     <div className="flex items-center gap-2"><Calendar size={14} className="text-[#E61739]" /> {pubDate}</div>
                   </>
                 )}
+                <div className="h-8 w-[1px] bg-white/10 hidden sm:block"></div>
+                <div className="flex items-center gap-2"><Clock size={14} className="text-[#E61739]" /> {calcReadTime(post.content)} read</div>
               </div>
             </div>
           </div>
@@ -570,7 +573,7 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
                </div>
                <div className="h-8 w-[1px] bg-white/10 hidden sm:block"></div>
                <div className="flex items-center gap-2"><Calendar size={14} className="text-[#E61739]" /> October 24, 2024</div>
-               <div className="flex items-center gap-2"><Clock size={14} className="text-[#E61739]" /> 8 Min Read</div>
+               <div className="flex items-center gap-2"><Clock size={14} className="text-[#E61739]" /> 8 min read</div>
             </div>
           </div>
         </div>

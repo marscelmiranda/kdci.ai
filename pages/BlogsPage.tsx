@@ -5,6 +5,7 @@ import { useAuthorAvatars, getAvatarUrl } from '../hooks/useAuthorAvatars';
 import { AuthorAvatar } from '../components/AuthorAvatar';
 import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
+import { calcReadTime } from '../lib/utils';
 
 interface BlogCard {
   id: number | string;
@@ -145,7 +146,7 @@ export const BlogsPage = ({ setView, onSelectBlog }: { setView: (v: ViewType) =>
           thumb: p.cover_image || FALLBACK_THUMBS[i % FALLBACK_THUMBS.length],
           isLive: true,
           metrics: [
-            { label: "Read Time", value: "5 min" },
+            { label: "Read Time", value: calcReadTime(p.content) },
             { label: "Published", value: p.published_at ? new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent' },
             { label: "Category", value: p.category || 'AI Operations' },
           ],
