@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Headphones, Palette, Code, UserCircle, Coins, UserPlus, Home, Database, Users, Workflow, Target, Search, Handshake, Activity, CheckCircle2, Globe, GraduationCap, Clock, TrendingDown, Star, MessageSquare, Building2, DollarSign, Shield, X } from 'lucide-react';
 import { ViewType } from '../../types';
+import { setPageSchema } from '../../lib/utils';
 import { Breadcrumbs } from '../../components/Shared';
 import { Captcha, CaptchaHandle } from '../../components/Captcha';
 import { IMG_STAFF_AUG_HERO, INDUSTRIES } from '../../data';
@@ -97,29 +98,25 @@ export const StaffAugmentationPage = ({ setView }: { setView: (v: ViewType) => v
     setMeta('og:title', 'Philippine Offshore Staffing | KDCI Outsourcing', 'property');
     setMeta('og:description', 'Build a dedicated offshore team in the Philippines. 200+ roles, all-in monthly pricing, 14–30 day onboarding. 500+ clients across North America, Australia & Europe.', 'property');
 
-    // JSON-LD for this specific page
-    const ldId = 'ld-staff-aug';
-    let ld = document.getElementById(ldId);
-    if (!ld) { ld = document.createElement('script'); ld.id = ldId; (ld as HTMLScriptElement).type = 'application/ld+json'; document.head.appendChild(ld); }
-    ld.textContent = JSON.stringify({
+    setPageSchema({
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: 'Philippine Offshore Staffing',
       description: desc,
-      url: 'https://kdci.co',
+      url: 'https://kdci.ai/solutions/ai-staffing-solutions/',
       breadcrumb: {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kdci.co' },
-          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://kdci.co/services' },
-          { '@type': 'ListItem', position: 3, name: 'Philippine Offshore Staffing', item: 'https://kdci.co/services/offshore-staffing' },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kdci.ai' },
+          { '@type': 'ListItem', position: 2, name: 'Solutions', item: 'https://kdci.ai/solutions/' },
+          { '@type': 'ListItem', position: 3, name: 'AI Staffing Solutions', item: 'https://kdci.ai/solutions/ai-staffing-solutions/' },
         ],
       },
     });
 
     return () => {
       document.title = prevTitle;
-      document.getElementById(ldId)?.remove();
+      setPageSchema(null);
     };
   }, []);
 

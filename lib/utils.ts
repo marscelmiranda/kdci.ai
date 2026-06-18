@@ -6,6 +6,23 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+const PAGE_SCHEMA_ID = 'active-page-ld';
+
+export function setPageSchema(schema: object | null): void {
+  let slot = document.getElementById(PAGE_SCHEMA_ID) as HTMLScriptElement | null;
+  if (schema === null) {
+    slot?.remove();
+    return;
+  }
+  if (!slot) {
+    slot = document.createElement('script');
+    slot.id = PAGE_SCHEMA_ID;
+    slot.type = 'application/ld+json';
+    document.head.appendChild(slot);
+  }
+  slot.textContent = JSON.stringify(schema);
+}
+
 export function calcReadTime(content: string): string {
   try {
     const blocks = JSON.parse(content || '[]');

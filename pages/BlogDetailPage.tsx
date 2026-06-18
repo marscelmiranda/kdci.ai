@@ -12,7 +12,7 @@ import { ViewType } from '../types';
 import { Breadcrumbs } from '../components/Shared';
 import { AUTHOR_1, IMG_BLOG_HERO, IMG_BLOG_1, IMG_BLOG_3 } from '../data';
 import { applyDetailSEO } from '../lib/seo';
-import { calcReadTime } from '../lib/utils';
+import { calcReadTime, setPageSchema } from '../lib/utils';
 
 interface LivePost {
   id: number;
@@ -375,7 +375,6 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
         }
 
         // JSON-LD BlogPosting
-        document.querySelector('script[type="application/ld+json"][data-blog]')?.remove();
         let schema: object;
         if ((data.json_ld || '').trim()) {
           try { schema = JSON.parse(data.json_ld); } catch { schema = {}; }
@@ -394,14 +393,11 @@ export const BlogDetailPage = ({ setView, blogId, blogSlug }: { setView: (v: Vie
             keywords: data.keywords || (data.tags || []).join(', '),
           };
         }
-        const ldScript = document.createElement('script');
-        ldScript.type = 'application/ld+json';
-        ldScript.setAttribute('data-blog', '1');
-        ldScript.textContent = JSON.stringify(schema);
-        document.head.appendChild(ldScript);
+        setPageSchema(schema);
       })
       .catch(() => setError('Could not load this article.'))
       .finally(() => setLoading(false));
+    return () => setPageSchema(null);
   }, [identifier]);
 
   if (loading) {
