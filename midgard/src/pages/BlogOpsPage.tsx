@@ -124,6 +124,7 @@ const renderPreviewBlocks = (blocks: Block[]) =>
 
 const emptyForm = () => ({
   title: '', slug: '', category: 'AI Operations', author: '', tags: '', imageUrl: '', imageAlt: '', status: 'draft',
+  publishedDate: '',
   blocks: [] as Block[],
   metaTitle: '', metaDescription: '', keywords: '', canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageUrl: '', jsonLd: '', noIndex: false,
   hubspotEventName: '', utmSource: '', utmMedium: '', utmCampaign: ''
@@ -231,6 +232,11 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
     setError(null);
   };
 
+  const toDateInput = (iso: string | null | undefined) => {
+    if (!iso) return '';
+    try { return new Date(iso).toISOString().split('T')[0]; } catch { return ''; }
+  };
+
   const handlePreview = async (post: BlogPost) => {
     setEditingId(post.id);
     setError(null);
@@ -240,6 +246,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         title: full.title || '', slug: full.slug || '', category: full.category || 'AI Operations',
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
+        publishedDate: toDateInput(full.published_at),
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
         metaTitle: full.meta_title || '', metaDescription: full.meta_description || '', keywords: full.keywords || '',
         canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || '', ogDescription: full.og_description || '', ogImageUrl: full.og_image_url || '',
@@ -260,6 +267,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         title: full.title || '', slug: full.slug || '', category: full.category || 'AI Operations',
         author: full.author || '', tags: (full.tags || []).join(', '), imageUrl: full.cover_image || '', imageAlt: full.cover_image_alt || '',
         status: full.status || 'draft',
+        publishedDate: toDateInput(full.published_at),
         blocks: (() => { try { return JSON.parse(full.content || '[]'); } catch { return [{ id: '1', type: 'rich_text' as BlockType, isCollapsed: false, content: { text: full.content || '' } }]; } })(),
         metaTitle: full.meta_title || '', metaDescription: full.meta_description || '', keywords: full.keywords || '',
         canonicalUrl: full.canonical_url || '', ogTitle: full.og_title || '', ogDescription: full.og_description || '', ogImageUrl: full.og_image_url || '',
@@ -291,6 +299,7 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
         cover_image_alt: formData.imageAlt,
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
         status: formData.status,
+        published_at: formData.publishedDate || undefined,
         meta_title: formData.metaTitle,
         meta_description: formData.metaDescription,
         keywords: formData.keywords,
@@ -648,7 +657,9 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                     )}
                     <div className="flex items-center gap-2">
                       <Calendar size={13} className="text-[#E61739]" />
-                      {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      {formData.publishedDate
+                        ? new Date(formData.publishedDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                        : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                     </div>
                   </div>
                 </div>
@@ -773,15 +784,28 @@ export const BlogOpsPage = ({ setView }: { setView: (v: ViewType) => void }) => 
                       <input type="text" value={formData.slug} onChange={e => setFormData(p => ({ ...p, slug: e.target.value }))}
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] font-mono text-sm" placeholder="url-slug" />
                     </div>
-                    <div>
-                      <ImagePicker
-                        label="Cover Image"
-                        value={formData.imageUrl}
-                        onChange={url => setFormData(p => ({ ...p, imageUrl: url }))}
-                        altText={formData.imageAlt}
-                        onAltChange={alt => setFormData(p => ({ ...p, imageAlt: alt }))}
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-white/40">
+                        Publish Date
+                        <span className="ml-2 text-white/25 font-medium normal-case tracking-normal text-[10px]">controls sort order</span>
+                      </label>
+                      <input
+                        type="date"
+                        value={formData.publishedDate}
+                        onChange={e => setFormData(p => ({ ...p, publishedDate: e.target.value }))}
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#E61739] [color-scheme:dark]"
                       />
+                      <p className="text-[10px] text-white/25 font-medium">Leave blank to auto-set on first publish</p>
                     </div>
+                  </div>
+                  <div>
+                    <ImagePicker
+                      label="Cover Image"
+                      value={formData.imageUrl}
+                      onChange={url => setFormData(p => ({ ...p, imageUrl: url }))}
+                      altText={formData.imageAlt}
+                      onAltChange={alt => setFormData(p => ({ ...p, imageAlt: alt }))}
+                    />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Tags (comma separated)</label>
